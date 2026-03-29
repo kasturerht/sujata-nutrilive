@@ -1,0 +1,73 @@
+---
+// src/components/CartDrawer.astro
+---
+{/* The Dark Overlay (Background blur) */}
+<div id="cart-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity duration-500 ease-out"></div>
+
+{/* The Premium Drawer (Slides from Right) */}
+<div id="cart-drawer" class="fixed top-0 right-0 w-full sm:w-[420px] h-[100svh] bg-[#FAF9F6] z-[70] translate-x-[100%] transition-transform duration-500 ease-[cubic-bezier(0.1,0,0,1)] shadow-2xl flex flex-col border-l border-black/5">
+  
+  {/* Drawer Header */}
+  <div class="px-6 py-6 border-b border-gray-100 flex items-center justify-between bg-white/50 backdrop-blur-md">
+    <div class="flex items-center gap-3">
+      <h2 class="text-xl font-['Playfair_Display'] font-black text-[#111827]">Your Routine</h2>
+      <span class="bg-[#166534] text-white text-[10px] font-bold px-2 py-0.5 rounded-full" id="cart-count-badge">1</span>
+    </div>
+    <button id="close-cart-btn" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+  </div>
+
+  {/* Cart Items Area (Scrollable) */}
+  <div class="flex-1 overflow-y-auto p-6" id="cart-items-container">
+    
+    {/* DUMMY ITEM (He JS dware dynamic hoil, sadhya demo sathi ahe) */}
+    <div class="flex gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-50 mb-4 animate-[fadeInUp_0.5s_ease-out]">
+      <div class="w-20 h-24 bg-[#f0fdf4] rounded-xl flex items-center justify-center p-2">
+        <img src="/spirulina-bottle.png" alt="Product" class="w-full h-full object-contain drop-shadow-md" id="cart-item-image"/>
+      </div>
+      <div class="flex-1 flex flex-col justify-between py-1">
+        <div>
+          <h4 class="text-sm font-bold text-[#111827] line-clamp-1" id="cart-item-title">Pure Spirulina Blend</h4>
+          <p class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mt-1">One-Time Purchase</p>
+        </div>
+        <div class="flex items-center justify-between mt-3">
+          {/* Quantity Selector */}
+          <div class="flex items-center gap-3 bg-gray-50 rounded-full px-2 py-1 border border-gray-100">
+            <button class="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-black">-</button>
+            <span class="text-xs font-bold text-[#111827]">1</span>
+            <button class="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-black">+</button>
+          </div>
+          <span class="text-sm font-black text-[#111827]" id="cart-item-price">₹1,299</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {/* Drawer Footer (Checkout Section) */}
+  <div class="px-6 py-8 bg-white border-t border-gray-100 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+    
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-gray-500 font-medium text-sm">Subtotal</span>
+      <span class="text-xl font-black text-[#111827]" id="cart-subtotal">₹1,299</span>
+    </div>
+    <p class="text-xs text-emerald-600 font-semibold mb-6 flex items-center gap-1.5">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+      Taxes and shipping calculated at checkout
+    </p>
+
+    <button class="w-full bg-[#111827] text-white font-bold text-sm uppercase tracking-widest px-8 py-5 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 hover:bg-[#166534] shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] hover:-translate-y-1 group">
+      Secure Checkout
+      <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+    </button>
+    
+    {/* Trust Badges */}
+    <div class="flex items-center justify-center gap-4 mt-6 opacity-60">
+      <span class="text-[9px] font-bold uppercase tracking-widest text-gray-500">Encrypted</span>
+      <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+      <span class="text-[9px] font-bold uppercase tracking-widest text-gray-500">SSL Secure</span>
+    </div>
+  </div>
+
+</div>

@@ -2,6 +2,8 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
+import StoreProducts from '../components/StoreProducts.astro';
+import CartDrawer from '../components/CartDrawer.astro';
 
 // १. तुझे Shopify डिटेल्स
 const shopifyDomain = 'skadas-headless-demo.myshopify.com'; 
@@ -58,6 +60,7 @@ const products = json.data?.products?.edges || [];
   
   <StoreHero />
   
+  <StoreProducts products={products} />
   <main class="bg-[#FAF9F6] relative z-10 pb-24 md:pb-40 overflow-hidden" id="product-ecosystem">
     
     <div class="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.02] pointer-events-none z-0"></div>
@@ -181,6 +184,8 @@ const products = json.data?.products?.edges || [];
       </div>
     </div>
   </main>
+
+  <CartDrawer />
 
   <script>
     // Original Silicon Valley Magnetic Script - Kept exactly intact
