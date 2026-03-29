@@ -1,10 +1,10 @@
 ---
 // src/components/StoreHero.astro
 ---
-{/* The Track: 400vh gives smooth scrolling time for both mobile swipe and desktop scroll */}
+{/* The Track */}
 <section id="scrolly-track" class="relative h-[400vh] w-full bg-[#022c22] font-['Inter'] selection:bg-emerald-900 selection:text-white">
   
-  {/* The Sticky Canvas: 100svh prevents jumping on mobile browsers (Safari/Chrome) */}
+  {/* The Sticky Canvas */}
   <div id="sticky-canvas" class="sticky top-0 h-[100svh] w-full overflow-hidden flex items-center justify-center transition-colors duration-700">
     
     {/* DYNAMIC BACKGROUND LAYER */}
@@ -13,42 +13,43 @@
     <div id="bg-grid" class="absolute inset-0 bg-[linear-gradient(to_right,#052e1608_1px,transparent_1px),linear-gradient(to_bottom,#052e1608_1px,transparent_1px)] bg-[size:32px_32px] opacity-0 z-0 transition-opacity duration-700"></div>
     <div class="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay z-0"></div>
 
-    {/* MOBILE FIX: Adjusted padding (pt-16 for mobile, pt-24 for desktop) to save space */}
-    <div class="max-w-[90rem] mx-auto px-5 md:px-6 lg:px-12 w-full relative z-10 flex flex-col lg:flex-row items-center justify-center h-full pt-16 lg:pt-24 pb-6 lg:pb-10">
+    {/* THE SAFE ZONE FIX: pt-24 (mobile) and pt-28 (desktop) ensures NOTHING goes behind the header */}
+    <div class="max-w-[90rem] mx-auto px-5 md:px-6 lg:px-12 w-full relative z-10 flex flex-col lg:flex-row items-center justify-center h-full pt-24 lg:pt-28 pb-8 lg:pb-12">
       
       {/* LEFT SIDE: Typography Container */}
-      {/* MOBILE FIX: Gave exact 40% height to text on mobile to ensure it doesn't push the bottle out */}
-      <div class="w-full lg:w-1/2 h-[45svh] lg:h-full relative flex flex-col justify-start lg:justify-center z-30">
+      {/* MOBILE FIX: Given exact 45% height. Text will center inside this, avoiding the header entirely */}
+      <div class="w-full lg:w-1/2 h-[45%] lg:h-full relative flex flex-col justify-center z-30">
         
         {/* NARRATIVE 1 */}
-        <div id="text-step-1" class="absolute left-0 top-4 lg:top-1/2 lg:-translate-y-1/2 w-full pr-2 lg:pr-8 transition-all duration-300">
+        {/* MOBILE & LAPTOP FIX: top-1/2 -translate-y-1/2 keeps it perfectly centered in its box */}
+        <div id="text-step-1" class="absolute left-0 top-1/2 -translate-y-1/2 w-full pr-2 lg:pr-8 transition-all duration-300">
           <p class="text-emerald-400 font-bold tracking-[0.2em] uppercase text-[9px] md:text-xs mb-2 md:mb-4">Phase 01: The Source</p>
-          {/* MOBILE FIX: text-[clamp(2.2rem...)] ensures it's small enough for 375px screens but huge on desktop */}
-          <h1 class="text-[clamp(2.2rem,9vw,5rem)] font-['Playfair_Display'] font-black leading-[1.05] text-white tracking-tighter drop-shadow-md">
+          {/* 14-INCH FIX: Reduced viewport width (vw) scaling slightly to fit small heights */}
+          <h1 class="text-[clamp(2.2rem,4vw,4.5rem)] lg:text-[clamp(3rem,4.5vw,5rem)] font-['Playfair_Display'] font-black leading-[1.05] text-white tracking-tighter drop-shadow-md">
             Born in <br/> <span class="italic text-emerald-300">Pure Waters.</span>
           </h1>
-          <p class="mt-3 md:mt-6 text-sm md:text-lg text-emerald-100/80 font-light max-w-md leading-relaxed">Deep in isolated, pristine aquatic farms, we cultivate the earth's oldest and most nutrient-dense living organism.</p>
+          <p class="mt-3 md:mt-5 text-sm md:text-lg text-emerald-100/80 font-light max-w-md leading-relaxed">Deep in isolated, pristine aquatic farms, we cultivate the earth's oldest and most nutrient-dense living organism.</p>
         </div>
 
         {/* NARRATIVE 2 */}
-        <div id="text-step-2" class="absolute left-0 top-4 lg:top-1/2 lg:-translate-y-1/2 w-full pr-2 lg:pr-8 opacity-0 translate-y-10 transition-all duration-300">
+        <div id="text-step-2" class="absolute left-0 top-1/2 -translate-y-1/2 w-full pr-2 lg:pr-8 opacity-0 translate-y-10 transition-all duration-300">
           <p class="text-teal-600 font-bold tracking-[0.2em] uppercase text-[9px] md:text-xs mb-2 md:mb-4">Phase 02: The Extraction</p>
-          <h1 class="text-[clamp(2.2rem,9vw,5rem)] font-['Playfair_Display'] font-black leading-[1.05] text-[#111827] tracking-tighter">
+          <h1 class="text-[clamp(2.2rem,4vw,4.5rem)] lg:text-[clamp(3rem,4.5vw,5rem)] font-['Playfair_Display'] font-black leading-[1.05] text-[#111827] tracking-tighter">
             Refined by <br/> <span class="italic text-teal-600">Cold Science.</span>
           </h1>
-          <p class="mt-3 md:mt-6 text-sm md:text-lg text-gray-600 font-light max-w-md leading-relaxed">Zero heat. Zero chemicals. Our advanced cold-press extraction preserves 100% of the active Phycocyanin and raw proteins.</p>
+          <p class="mt-3 md:mt-5 text-sm md:text-lg text-gray-600 font-light max-w-md leading-relaxed">Zero heat. Zero chemicals. Our advanced cold-press extraction preserves 100% of the active Phycocyanin and raw proteins.</p>
         </div>
 
         {/* NARRATIVE 3 */}
-        <div id="text-step-3" class="absolute left-0 top-4 lg:top-1/2 lg:-translate-y-1/2 w-full pr-2 lg:pr-8 opacity-0 translate-y-10 transition-all duration-300">
+        <div id="text-step-3" class="absolute left-0 top-1/2 -translate-y-1/2 w-full pr-2 lg:pr-8 opacity-0 translate-y-10 transition-all duration-300">
           <p class="text-[#166534] font-bold tracking-[0.2em] uppercase text-[9px] md:text-xs mb-2 md:mb-4">Phase 03: The Form</p>
-          <h1 class="text-[clamp(2.2rem,9vw,5rem)] font-['Playfair_Display'] font-black leading-[1.05] text-[#111827] tracking-tighter">
+          <h1 class="text-[clamp(2.2rem,4vw,4.5rem)] lg:text-[clamp(3rem,4.5vw,5rem)] font-['Playfair_Display'] font-black leading-[1.05] text-[#111827] tracking-tighter">
             Delivered for <br/> <span class="italic text-[#166534]">Your Focus.</span>
           </h1>
-          <p class="mt-3 md:mt-6 text-sm md:text-lg text-gray-600 font-light max-w-md leading-relaxed hidden sm:block">Absolute clinical purity in every serving. Ready to supercharge your cells, ignite your energy, and elevate your mind.</p>
-          <p class="mt-3 text-sm text-gray-600 font-light max-w-md leading-relaxed sm:hidden">Absolute clinical purity in every serving. Ignite your energy and elevate your mind.</p>
+          <p class="mt-3 md:mt-5 text-sm md:text-lg text-gray-600 font-light max-w-md leading-relaxed hidden sm:block">Absolute clinical purity in every serving. Ready to supercharge your cells, ignite your energy, and elevate your mind.</p>
+          <p class="mt-2 text-sm text-gray-600 font-light max-w-md leading-relaxed sm:hidden">Absolute clinical purity. Ignite your energy and elevate your mind.</p>
           
-          <div class="mt-5 md:mt-8">
+          <div class="mt-4 md:mt-8">
             <a href="#shop" class="group relative inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-[#111827] text-white rounded-full font-bold text-[11px] md:text-sm uppercase tracking-wider overflow-hidden transition-all hover:scale-105 shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]">
               <span class="relative z-10 flex items-center gap-2 md:gap-3">
                 Experience Sujata
@@ -62,11 +63,11 @@
       </div>
 
       {/* RIGHT SIDE: The Visual Journey */}
-      {/* MOBILE FIX: Gave 55svh to visual on mobile so bottle has room to breathe */}
-      <div class="w-full lg:w-1/2 h-[55svh] lg:h-full relative flex items-center justify-center mt-2 lg:mt-0 z-20">
+      {/* MOBILE FIX: Given remaining 55% height */}
+      <div class="w-full lg:w-1/2 h-[55%] lg:h-full relative flex items-center justify-center mt-2 lg:mt-0 z-20">
         
         {/* Visual 1: Raw Energy Orb */}
-        <div id="visual-orb" class="absolute w-[80vw] h-[80vw] lg:w-[35vw] lg:h-[35vw] rounded-full bg-gradient-to-tr from-emerald-500 to-teal-300 blur-[50px] md:blur-[80px] opacity-40 mix-blend-screen transition-transform duration-100 z-0"></div>
+        <div id="visual-orb" class="absolute w-[75vw] h-[75vw] lg:w-[35vw] lg:h-[35vw] rounded-full bg-gradient-to-tr from-emerald-500 to-teal-300 blur-[50px] md:blur-[80px] opacity-40 mix-blend-screen transition-transform duration-100 z-0"></div>
         
         {/* Visual 2: The Data Rings */}
         <div id="visual-rings" class="absolute inset-0 flex items-center justify-center opacity-0 scale-150 transition-transform duration-100 z-10">
@@ -77,22 +78,22 @@
         {/* Visual 3: THE PRODUCT BOTTLE */}
         <div id="visual-bottle-container" class="absolute inset-0 flex items-center justify-center scale-[0.85] transition-all duration-100 z-20">
           
-          <div id="bottle-shadow" class="absolute bottom-[5%] lg:bottom-[15%] w-[45%] h-5 md:h-8 bg-black/15 blur-xl rounded-[100%] opacity-0 transition-opacity duration-300"></div>
+          <div id="bottle-shadow" class="absolute bottom-[5%] lg:bottom-[15%] w-[45%] h-4 md:h-8 bg-black/15 blur-xl rounded-[100%] opacity-0 transition-opacity duration-300"></div>
           
-          {/* MOBILE FIX: max-h-[45svh] ensures bottle doesn't overflow its container on tiny phones */}
+          {/* 14-INCH & MOBILE FIX: strict max heights */}
           <img 
             src="/spirulina-bottle.png" 
             alt="Sujata Nutrilive Pure Spirulina" 
             id="the-bottle"
-            class="relative z-10 w-auto h-auto max-h-[45svh] lg:max-h-[55vh] max-w-[70%] lg:max-w-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] transition-all duration-300 animate-[float_6s_ease-in-out_infinite]"
+            class="relative z-10 w-auto h-auto max-h-[40svh] lg:max-h-[50vh] max-w-[70%] lg:max-w-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] transition-all duration-300 animate-[float_6s_ease-in-out_infinite]"
           />
 
-          {/* Premium Floating Badges - Closer to bottle on mobile */}
+          {/* Premium Floating Badges */}
           <div id="badge-1" class="absolute top-[10%] lg:top-[20%] left-0 lg:-left-10 bg-white/95 backdrop-blur-md px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl shadow-xl border border-gray-100 flex items-center gap-1.5 md:gap-2 opacity-0 translate-y-5 transition-all duration-500 z-30">
             <span class="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span class="text-[9px] md:text-xs font-bold text-gray-900 uppercase tracking-wider whitespace-nowrap">Lab Tested</span>
           </div>
-          <div id="badge-2" class="absolute bottom-[15%] lg:bottom-[25%] right-0 lg:-right-5 bg-white/95 backdrop-blur-md px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl shadow-xl border border-gray-100 flex items-center gap-1.5 md:gap-2 opacity-0 translate-y-5 transition-all duration-500 z-30">
+          <div id="badge-2" class="absolute bottom-[10%] lg:bottom-[25%] right-0 lg:-right-5 bg-white/95 backdrop-blur-md px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl shadow-xl border border-gray-100 flex items-center gap-1.5 md:gap-2 opacity-0 translate-y-5 transition-all duration-500 z-30">
             <span class="w-1.5 h-1.5 md:w-2.5 md:h-2.5 rounded-full bg-[#166534]"></span>
             <span class="text-[9px] md:text-xs font-bold text-gray-900 uppercase tracking-wider whitespace-nowrap">100% Pure</span>
           </div>
@@ -102,11 +103,11 @@
       </div>
     </div>
     
-    {/* THE "SCROLL TO DISCOVER" INDICATOR (Moved slightly up for mobile safe areas) */}
-    <div id="scroll-indicator" class="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 transition-opacity duration-500 z-50">
+    {/* THE "SCROLL TO DISCOVER" INDICATOR */}
+    <div id="scroll-indicator" class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 transition-opacity duration-500 z-50">
       <span class="text-emerald-300/80 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] whitespace-nowrap">Scroll to Discover</span>
-      <div class="w-3.5 h-6 md:w-5 md:h-8 border-2 border-emerald-300/50 rounded-full flex justify-center pt-1 md:pt-1.5">
-        <div class="w-1 h-1.5 md:h-2 bg-emerald-400 rounded-full animate-[bounce_1.5s_infinite]"></div>
+      <div class="w-3 h-5 md:w-5 md:h-8 border-2 border-emerald-300/50 rounded-full flex justify-center pt-1 md:pt-1.5">
+        <div class="w-1 h-1 md:h-2 bg-emerald-400 rounded-full animate-[bounce_1.5s_infinite]"></div>
       </div>
     </div>
 
@@ -118,7 +119,7 @@
 </style>
 
 <script>
-  // Script remains untouched! The magic is entirely in the CSS/Tailwind updates.
+  // Script logic exactly same, pure CSS fixes for layout.
   document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('scrolly-track');
     const bgOcean = document.getElementById('bg-ocean');
