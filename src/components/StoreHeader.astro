@@ -1,46 +1,41 @@
 ---
 // src/components/StoreHeader.astro
 ---
-<header id="store-header" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent py-4">
-  <div class="max-w-[90rem] mx-auto px-6 lg:px-12">
-    <div class="flex items-center justify-between h-16">
+<header id="store-header" class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out py-6 bg-transparent">
+  
+  {/* Top Announcement Bar */}
+  <div class="absolute top-0 left-0 w-full bg-[#111827] text-white text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase py-2 flex items-center justify-center z-50">
+    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-3 animate-pulse"></span>
+    Free Express Shipping on Orders Above ₹999
+  </div>
+
+  <div class="max-w-[90rem] mx-auto px-6 lg:px-12 mt-8">
+    <div class="flex items-center justify-between h-14 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full px-6 md:px-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
       
-      <a href="/store" class="text-2xl font-black tracking-tighter text-[#111827] hover:opacity-70 transition-opacity">
-        SKADAS<span class="text-[#166534]">.</span>
+      {/* Brand */}
+      <a href="/" class="text-xl md:text-2xl font-black tracking-tighter text-[#111827] relative z-10 group">
+        SUJATA<span class="text-[#166534] transition-all duration-300 group-hover:pl-1">.</span>
       </a>
 
+      {/* Navigation */}
       <nav class="hidden md:flex space-x-10">
-        <a href="#" class="text-sm font-medium text-[#111827] border-b-2 border-[#166534] pb-1">Shop Spirulina</a>
-        <a href="#" class="text-sm font-medium text-[#4B5563] hover:text-[#111827] transition-colors">The Science</a>
-        <a href="#" class="text-sm font-medium text-[#4B5563] hover:text-[#111827] transition-colors">Our Story</a>
+        <a href="#products" class="text-sm font-bold text-[#111827] border-b-2 border-[#166534] pb-0.5">Shop Spirulina</a>
+        <a href="#science" class="text-sm font-semibold text-[#6B7280] hover:text-[#111827] transition-colors">The Science</a>
+        <a href="#story" class="text-sm font-semibold text-[#6B7280] hover:text-[#111827] transition-colors">Our Story</a>
       </nav>
 
-      <div class="flex items-center gap-6">
-        <button class="text-[#4B5563] hover:text-[#166534] transition-colors" aria-label="Search">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      {/* Actions */}
+      <div class="flex items-center gap-4">
+        <button class="w-10 h-10 rounded-full flex items-center justify-center bg-white/60 hover:bg-white text-[#4B5563] hover:text-[#166534] transition-all shadow-sm border border-black/5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </button>
-        <button class="relative group flex items-center gap-2 text-[#111827] hover:text-[#166534] transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          <span class="absolute -top-1.5 -right-2 w-4 h-4 bg-[#166534] text-white text-[10px] font-bold flex items-center justify-center rounded-full">2</span>
+        <button class="relative flex items-center gap-2 bg-[#111827] hover:bg-[#166534] text-white px-5 py-2.5 rounded-full transition-all shadow-md group">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          <span class="text-xs font-bold uppercase tracking-wider">Cart</span>
+          <span class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#166534] border-2 border-white text-white text-[10px] font-bold flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">0</span>
         </button>
       </div>
 
     </div>
   </div>
 </header>
-
-<script>
-  // Elegant scroll effect for the header
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('store-header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        header.classList.remove('bg-transparent', 'py-4');
-        header.classList.add('bg-[#FAF9F6]/80', 'backdrop-blur-md', 'border-b', 'border-black/5', 'py-2');
-      } else {
-        header.classList.add('bg-transparent', 'py-4');
-        header.classList.remove('bg-[#FAF9F6]/80', 'backdrop-blur-md', 'border-b', 'border-black/5', 'py-2');
-      }
-    });
-  });
-</script>
