@@ -1,0 +1,230 @@
+---
+---
+<section id="architecture" class="py-24 relative z-10 bg-[#000000] overflow-hidden border-b border-white/5">
+  
+  <div class="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+    
+    <div class="text-center max-w-4xl mx-auto mb-16">
+      <h2 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-6">
+        Your architecture is <br class="md:hidden"/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-colors duration-500" id="title-state">the bottleneck.</span>
+      </h2>
+      <p class="text-slate-400 text-lg md:text-xl font-light max-w-2xl mx-auto">
+        Stop losing clients to micro-delays and ad-blockers. Compare the raw metrics of a standard CMS versus our engineered edge infrastructure.
+      </p>
+    </div>
+
+    <div class="flex justify-center mb-16 relative z-20">
+      <div class="bg-[#0a0a0a] p-1.5 rounded-2xl border border-white/10 flex items-center relative">
+        <div id="toggle-bg" class="absolute left-1.5 top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-slate-800/80 border border-white/5 rounded-xl transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1)"></div>
+        <button id="btn-trad" class="relative z-10 px-8 py-3 text-sm font-semibold text-white transition-colors duration-300 w-48 text-center rounded-xl tracking-wide">Legacy Setup</button>
+        <button id="btn-skadas" class="relative z-10 px-8 py-3 text-sm font-semibold text-slate-500 transition-colors duration-300 w-48 text-center rounded-xl tracking-wide">Skadas Edge</button>
+      </div>
+    </div>
+
+    <div class="relative w-full max-w-5xl mx-auto min-h-[500px]">
+      
+      <div id="grid-trad" class="absolute inset-0 bento-cards grid grid-cols-1 md:grid-cols-3 gap-4 transition-all duration-700 opacity-100 z-10">
+        
+        <div class="bento-card md:col-span-2 md:row-span-2 rounded-3xl bg-[#0a0a0a] flex flex-col justify-between p-10 relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-50"></div>
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/30 border border-red-500/20 text-xs text-red-400 font-mono mb-6">Monolithic Architecture</div>
+                <h3 class="text-4xl font-bold text-white tracking-tight mb-4">Heavy Client-Side Loads</h3>
+                <p class="text-slate-400 text-lg font-light max-w-md">WordPress themes and bloated plugins force the user's browser to do the heavy lifting, resulting in massive JS payloads and stuttering UX.</p>
+            </div>
+            <div class="mt-10">
+                <p class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-2">Average Page Payload</p>
+                <p class="text-5xl font-black text-slate-200">8.5 <span class="text-2xl text-slate-500 font-medium">MB</span></p>
+            </div>
+        </div>
+
+        <div class="bento-card rounded-3xl bg-[#0a0a0a] p-8 flex flex-col justify-center relative overflow-hidden">
+             <div class="absolute right-0 top-0 w-32 h-32 bg-red-500/10 blur-[50px] rounded-full"></div>
+             <p class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-3">Time to First Byte</p>
+             <p class="text-5xl font-black text-red-400 drop-shadow-[0_0_15px_rgba(239,68,68,0.3)]">1.8<span class="text-2xl font-medium opacity-70">s</span></p>
+             <p class="text-sm text-slate-400 mt-4 font-light">Database query latency</p>
+        </div>
+
+        <div class="bento-card rounded-3xl bg-[#0a0a0a] p-8 flex flex-col justify-center relative overflow-hidden">
+             <div class="absolute right-0 top-0 w-32 h-32 bg-orange-500/10 blur-[50px] rounded-full"></div>
+             <p class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-3">Data Captured</p>
+             <p class="text-5xl font-black text-orange-400 drop-shadow-[0_0_15px_rgba(249,115,22,0.3)]">~65<span class="text-2xl font-medium opacity-70">%</span></p>
+             <p class="text-sm text-slate-400 mt-4 font-light">Client-side pixel loss via Ad-blockers</p>
+        </div>
+      </div>
+
+      <div id="grid-skadas" class="absolute inset-0 bento-cards grid grid-cols-1 md:grid-cols-3 gap-4 transition-all duration-700 opacity-0 pointer-events-none z-0 scale-[0.98]">
+        
+        <div class="bento-card md:col-span-2 md:row-span-2 rounded-3xl bg-[#0a0a0a] flex flex-col justify-between p-10 relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-50"></div>
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-500/20 text-xs text-cyan-400 font-mono mb-6">Headless Infrastructure</div>
+                <h3 class="text-4xl font-bold text-white tracking-tight mb-4">Pre-Rendered Velocity</h3>
+                <p class="text-slate-400 text-lg font-light max-w-md">We completely decouple the frontend. Your site is pre-built using Astro and distributed across global Edge CDNs, delivering instant HTML with zero initial JavaScript.</p>
+            </div>
+            <div class="mt-10">
+                <p class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-2">Average Page Payload</p>
+                <p class="text-5xl font-black text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">150 <span class="text-2xl text-cyan-500/60 font-medium">KB</span></p>
+            </div>
+        </div>
+
+        <div class="bento-card rounded-3xl bg-[#0a0a0a] p-8 flex flex-col justify-center relative overflow-hidden">
+             <div class="absolute right-0 top-0 w-32 h-32 bg-blue-500/10 blur-[50px] rounded-full"></div>
+             <p class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-3">Time to First Byte</p>
+             <p class="text-5xl font-black text-white">45<span class="text-2xl font-medium text-slate-500">ms</span></p>
+             <p class="text-sm text-slate-400 mt-4 font-light">Instant Edge delivery</p>
+        </div>
+
+        <div class="bento-card rounded-3xl bg-[#0a0a0a] p-8 flex flex-col justify-center relative overflow-hidden">
+             <div class="absolute right-0 top-0 w-32 h-32 bg-cyan-500/10 blur-[50px] rounded-full"></div>
+             <p class="text-sm text-slate-500 font-mono uppercase tracking-widest mb-3">Data Captured</p>
+             <p class="text-5xl font-black text-white">99.9<span class="text-2xl font-medium text-slate-500">%</span></p>
+             <p class="text-sm text-slate-400 mt-4 font-light">Server-Side Tagging purity</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =========================================
+     THE MAGIC: REACTIVE BENTO CARDS
+     ========================================= */
+  
+  .bento-cards:hover > .bento-card::after {
+    opacity: 1;
+  }
+
+  .bento-card {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    /* transition: background-color 0.3s; */ /* Optional */
+  }
+
+  /* The outer glowing border effect on hover */
+  .bento-card::before,
+  .bento-card::after {
+    border-radius: inherit;
+    content: "";
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    transition: opacity 500ms;
+    width: 100%;
+  }
+
+  /* The actual border highlight */
+  .bento-card::before {
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y), 
+      rgba(255, 255, 255, 0.15),
+      transparent 40%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* The subtle internal card glow */
+  .bento-card::after {  
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y), 
+      rgba(255, 255, 255, 0.03),
+      transparent 40%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* We put all content in a slightly dark box over the before/after pseudo elements */
+  .bento-card > * {
+    z-index: 2;
+    position: relative;
+  }
+</style>
+
+<script is:inline>
+  function initRichArchitecture() {
+    const btnTrad = document.getElementById('btn-trad');
+    const btnSkadas = document.getElementById('btn-skadas');
+    const toggleBg = document.getElementById('toggle-bg');
+    const gridTrad = document.getElementById('grid-trad');
+    const gridSkadas = document.getElementById('grid-skadas');
+    const titleState = document.getElementById('title-state');
+
+    if (!btnTrad || !btnSkadas) return;
+
+    // --- MOUSE SPOTLIGHT ENGINE ---
+    const handleOnMouseMove = e => {
+      const { currentTarget: target } = e;
+      const rect = target.getBoundingClientRect(),
+            x = e.clientX - rect.left,
+            y = e.clientY - rect.top;
+
+      target.style.setProperty("--mouse-x", `${x}px`);
+      target.style.setProperty("--mouse-y", `${y}px`);
+    }
+
+    // Apply spotlight to all cards
+    for(const card of document.querySelectorAll('.bento-card')) {
+      card.onmousemove = e => handleOnMouseMove(e);
+    }
+
+    // --- TAB SWITCHING (Elegant Fades & Bulletproof Color Morphs) ---
+    function setSkadasState() {
+        toggleBg.style.transform = 'translateX(100%)';
+        btnTrad.classList.replace('text-white', 'text-slate-500');
+        btnSkadas.classList.replace('text-slate-500', 'text-white');
+
+        window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 
+      'event': 'edge_toggle_clicked',
+      'action': 'Viewed Skadas Edge'
+  });
+        
+        // 1. Title Text
+        titleState.innerText = "the competitive edge.";
+        
+        // 2. Remove Danger Colors
+        titleState.classList.remove('from-red-400', 'to-orange-500', 'drop-shadow-[0_0_15px_rgba(239,68,68,0.2)]');
+        // 3. Add Premium Brand Colors
+        titleState.classList.add('from-cyan-400', 'to-blue-500', 'drop-shadow-[0_0_15px_rgba(34,211,238,0.2)]');
+
+        // Cinematic Crossfade
+        gridTrad.classList.replace('opacity-100', 'opacity-0');
+        gridTrad.classList.add('pointer-events-none', 'z-0', 'scale-[0.98]');
+        gridSkadas.classList.replace('opacity-0', 'opacity-100');
+        gridSkadas.classList.remove('pointer-events-none', 'z-0', 'scale-[0.98]');
+    }
+
+    function setTradState() {
+        toggleBg.style.transform = 'translateX(0)';
+        btnSkadas.classList.replace('text-white', 'text-slate-500');
+        btnTrad.classList.replace('text-slate-500', 'text-white');
+        
+        // 1. Title Text
+        titleState.innerText = "the bottleneck.";
+        
+        // 2. Remove Premium Brand Colors
+        titleState.classList.remove('from-cyan-400', 'to-blue-500', 'drop-shadow-[0_0_15px_rgba(34,211,238,0.2)]');
+        // 3. Add Danger Colors back
+        titleState.classList.add('from-red-400', 'to-orange-500', 'drop-shadow-[0_0_15px_rgba(239,68,68,0.2)]');
+
+        // Cinematic Crossfade
+        gridSkadas.classList.replace('opacity-100', 'opacity-0');
+        gridSkadas.classList.add('pointer-events-none', 'z-0', 'scale-[0.98]');
+        gridTrad.classList.replace('opacity-0', 'opacity-100');
+        gridTrad.classList.remove('pointer-events-none', 'z-0', 'scale-[0.98]');
+    }
+
+    btnSkadas.addEventListener('click', setSkadasState);
+    btnTrad.addEventListener('click', setTradState);
+  }
+
+  document.addEventListener('astro:page-load', initRichArchitecture);
+  initRichArchitecture();
+</script>

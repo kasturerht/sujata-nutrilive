@@ -1,0 +1,15 @@
+---
+// src/layouts/StoreLayout.astro
+const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen relative overflow-x-hidden font-['Inter']">
+    <slot />
+  </body>
+</html>

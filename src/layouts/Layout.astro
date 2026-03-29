@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+
+// Ultra Pro Max Default Props for Enterprise SEO
+const { 
+  title = "Skadas | Enterprise Astro Agency & Headless CMS Migration Experts", 
+  description = "Elite technical growth squad. We engineer zero-latency headless commerce platforms, execute Shopify to Headless migrations, and deploy precise Server-Side tracking architecture.",
+  image = "/og-image.jpg", // Apan nantar ek real image public folder madhe taku
+  canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.skadas.com').href,
+} = Astro.props;
+
+// Google's Secret Weapon: Dynamic JSON-LD Graph Schema
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.skadas.com/#website",
+      "url": "https://www.skadas.com/",
+      "name": "Skadas",
+      "description": "Enterprise Technical Growth Squad & Headless Commerce Architects",
+      "publisher": {
+        "@id": "https://www.skadas.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.skadas.com/#organization",
+      "name": "Skadas",
+      "url": "https://www.skadas.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": new URL("/logo.png", Astro.site || 'https://www.skadas.com').href
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/skadas", // Tuze social links ithe tak
+        "https://twitter.com/skadas"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.skadas.com/#service",
+      "name": "Skadas Headless Commerce Migration",
+      "url": canonicalURL,
+      "image": new URL(image, Astro.site || 'https://www.skadas.com').href,
+      "description": description,
+      "provider": {
+        "@id": "https://www.skadas.com/#organization"
+      },
+      "areaServed": ["US", "AU", "UK"], 
+      "priceRange": "$$$$",
+      "knowsAbout": ["Headless CMS", "Astro JS", "Sanity CMS", "Server-Side Tagging", "Shopify Headless"]
+    }
+  ]
+};
+---
+
+<html lang="en" class="scroll-smooth bg-[#030712]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta name="theme-color" content="#030712" />
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <script type="text/partytown">
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W4XZSFX');
+    </script>
+    
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta name="keywords" content="Enterprise Astro Agency, Headless CMS Migration Experts, Server-Side Tracking Consultants, GA4 Advanced Analytics, Headless Commerce Development, Shopify to Headless, Custom React Architecture" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || 'https://www.skadas.com').href} />
+    <meta property="og:image:alt" content="Skadas - Enterprise Technical Growth Squad" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site || 'https://www.skadas.com').href} />
+    <meta property="twitter:image:alt" content="Skadas - Enterprise Technical Growth Squad" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  
+  <body class="bg-[#030712] text-slate-300 antialiased selection:bg-cyan-500/30 selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
+    
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4XZSFX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="fixed inset-0 z-[-2] min-h-screen w-full bg-[#030712] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(34,211,238,0.08),rgba(0,0,0,0))]"></div>
+    
+    <slot />
+    
+    <script>
+      // FIX: Changed back to DOMContentLoaded so the animations run properly!
+      document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.15 
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target); 
+            }
+          });
+        }, observerOptions);
+
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach((reveal) => observer.observe(reveal));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+---
+const stack = [
+  "Astro JS Framework",
+  "Vercel Edge Network",
+  "Sanity Headless CMS",
+  "GTM Server-Side Tagging",
+  "Google Cloud Platform",
+  "GA4 Advanced Telemetry",
+  "React Dynamic Components",
+  "Algorithmic SEO Architecture"
+];
+---
+
+<section class="py-8 border-y border-white/5 bg-slate-950 overflow-hidden relative flex items-center">
+  <div class="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"></div>
+  <div class="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"></div>
+
+  <div class="flex whitespace-nowrap animate-marquee">
+    {/* We map the array multiple times to ensure a seamless infinite loop */}
+    {[...stack, ...stack, ...stack, ...stack].map((tech) => (
+      <div class="flex items-center justify-center mx-6 md:mx-10">
+        <span class="flex items-center gap-3 text-slate-500 font-mono text-xs md:text-sm tracking-widest uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-500/50 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></span>
+          {tech}
+        </span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* Pure CSS Animation - Zero JS overhead */
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+    width: max-content;
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-25%); } /* Translates exactly one array length since we used 4 arrays */
+  }
+</style>

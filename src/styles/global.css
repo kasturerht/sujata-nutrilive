@@ -1,0 +1,30 @@
+/* 1. External Fonts ALWAYS go first */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* 2. Tailwind v3 Core (The right way) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base resets & Font Application */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll Reveal Utility Classes (Apple-like smooth easing) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
