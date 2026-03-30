@@ -11,7 +11,6 @@
     <div id="bg-ocean" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#064e3b_0%,#022c22_100%)] opacity-100 z-0 transition-opacity duration-300"></div>
     <div id="bg-clinical" class="absolute inset-0 bg-[#FAF9F6] opacity-0 z-0 transition-opacity duration-300"></div>
     <div id="bg-grid" class="absolute inset-0 bg-[linear-gradient(to_right,#052e1608_1px,transparent_1px),linear-gradient(to_bottom,#052e1608_1px,transparent_1px)] bg-[size:32px_32px] opacity-0 z-0 transition-opacity duration-700"></div>
-    <div class="absolute inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay z-0"></div>
 
     <div class="max-w-[90rem] mx-auto px-5 md:px-6 lg:px-12 w-full relative z-10 flex flex-col lg:flex-row items-center justify-center h-full pt-24 lg:pt-28 pb-8 lg:pb-12">
       
@@ -79,10 +78,12 @@
           <div id="bottle-shadow" class="absolute bottom-[5%] lg:bottom-[15%] w-[45%] h-4 md:h-8 bg-black/15 blur-xl rounded-[100%] opacity-0 transition-opacity duration-300"></div>
           
           {/* MOBILE FIX 4: max-h-[38svh] ensures it is small enough not to touch the button on small phones */}
-          <img 
-            src="/spirulina-bottle.png" 
-            alt="Sujata Nutrilive Pure Spirulina" 
+          <img
+            src="/spirulina-bottle.png"
+            alt="Sujata Nutrilive Pure Spirulina"
             id="the-bottle"
+            fetchpriority="high"
+            decoding="async"
             class="relative z-10 w-auto h-auto max-h-[38svh] lg:max-h-[50vh] max-w-[70%] lg:max-w-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] transition-all duration-300 animate-[float_6s_ease-in-out_infinite]"
           />
 

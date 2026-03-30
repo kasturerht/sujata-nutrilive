@@ -13,7 +13,7 @@
       <h2 class="text-xl font-['Playfair_Display'] font-black text-[#111827]">Your Routine</h2>
       <span class="bg-[#166534] text-white text-[10px] font-bold px-2 py-0.5 rounded-full" id="cart-count-badge">1</span>
     </div>
-    <button id="close-cart-btn" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+    <button id="close-cart-btn" aria-label="Close cart" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
   </div>
@@ -28,15 +28,15 @@
       </div>
       <div class="flex-1 flex flex-col justify-between py-1">
         <div>
-          <h4 class="text-sm font-bold text-[#111827] line-clamp-1" id="cart-item-title">Pure Spirulina Blend</h4>
-          <p class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mt-1">One-Time Purchase</p>
+          <h3 class="text-sm font-bold text-[#111827] line-clamp-1" id="cart-item-title">Pure Spirulina Blend</h3>
+          <p class="text-[10px] uppercase tracking-wider text-gray-600 font-semibold mt-1">One-Time Purchase</p>
         </div>
         <div class="flex items-center justify-between mt-3">
           {/* Quantity Selector */}
           <div class="flex items-center gap-3 bg-gray-50 rounded-full px-2 py-1 border border-gray-100">
-            <button class="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-black">-</button>
+            <button class="w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black">-</button>
             <span class="text-xs font-bold text-[#111827]">1</span>
-            <button class="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-black">+</button>
+            <button class="w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black">+</button>
           </div>
           <span class="text-sm font-black text-[#111827]" id="cart-item-price">₹1,299</span>
         </div>
