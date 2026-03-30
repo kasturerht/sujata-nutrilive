@@ -133,9 +133,12 @@ const getImageUrl = (product) => {
             <div class="absolute bottom-[10%] w-[60%] h-6 bg-black/10 blur-xl rounded-[100%] z-0"></div>
             
             {/* The Image */}
-            <img 
-              src={getImageUrl(heroProduct)} 
-              alt={heroProduct.title} 
+            {/* Hero image: fetchpriority=high for LCP */}
+            <img
+              src={getImageUrl(heroProduct)}
+              alt={heroProduct.title}
+              fetchpriority="high"
+              decoding="async"
               class="relative z-20 w-auto h-full max-h-[110%] md:max-h-[130%] object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.2)] group-hover/img:scale-105 group-hover/img:-translate-y-3 transition-all duration-700 ease-[cubic-bezier(0.1,0,0,1)]"
             />
           </div>
@@ -175,9 +178,11 @@ const getImageUrl = (product) => {
             </div>
 
             {/* Existing Image */}
-            <img 
-              src={getImageUrl(acceleratorProduct)} 
-              alt={acceleratorProduct.title} 
+            <img
+              src={getImageUrl(acceleratorProduct)}
+              alt={acceleratorProduct.title}
+              loading="lazy"
+              decoding="async"
               class="relative z-20 w-auto h-[180px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] group-hover/img:scale-105 group-hover/img:-translate-y-2 transition-transform duration-700 mb-0"
             />
           </div>
@@ -231,14 +236,18 @@ const getImageUrl = (product) => {
         <div class="group relative md:col-span-6 lg:col-span-6 bg-white rounded-[2rem] p-8 border border-black/[0.03] shadow-[0_15px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row items-center gap-6 h-[auto] min-h-[250px]">
           <div class="w-1/2 md:w-1/3 flex items-center justify-center relative">
             <div class="absolute inset-0 bg-gray-50 rounded-full blur-xl group-hover:bg-[#f0fdf4] transition-colors duration-500"></div>
-            <img src={getImageUrl(travelPack)} alt={travelPack.title} class="relative z-10 h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
+            <img src={getImageUrl(travelPack)} alt={travelPack.title} loading="lazy" decoding="async" class="relative z-10 h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
           </div>
           <div class="w-full md:w-2/3 flex flex-col text-center md:text-left">
             <h3 class="text-lg md:text-xl font-bold text-[#111827] mb-2">{travelPack.title}</h3>
             <p class="text-gray-500 text-sm mb-4 line-clamp-2">{travelPack.description || "Perfect for on-the-go energy."}</p>
             <div class="mt-auto flex items-center justify-center md:justify-start gap-4">
               <span class="text-lg font-black text-[#111827]">{formatPrice(travelPack.priceRange.minVariantPrice.amount)}</span>
-              <button class="text-[#166534] font-bold text-sm hover:text-[#111827] underline decoration-2 underline-offset-4 transition-colors">
+              <button class="add-to-cart-btn text-[#166534] font-bold text-sm hover:text-[#111827] underline decoration-2 underline-offset-4 transition-colors"
+                data-title={travelPack.title}
+                data-price={travelPack.priceRange.minVariantPrice.amount}
+                data-variant-id={travelPack.variants?.edges[0]?.node?.id}
+                data-image={getImageUrl(travelPack)}>
                 Add to Cart
               </button>
             </div>
@@ -253,14 +262,18 @@ const getImageUrl = (product) => {
         <div class="group relative md:col-span-6 lg:col-span-6 bg-white rounded-[2rem] p-8 border border-black/[0.03] shadow-[0_15px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row items-center gap-6 h-[auto] min-h-[250px]">
           <div class="w-1/2 md:w-1/3 flex items-center justify-center relative">
             <div class="absolute inset-0 bg-gray-50 rounded-full blur-xl group-hover:bg-[#f0fdf4] transition-colors duration-500"></div>
-            <img src={getImageUrl(ritualBundle)} alt={ritualBundle.title} class="relative z-10 h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
+            <img src={getImageUrl(ritualBundle)} alt={ritualBundle.title} loading="lazy" decoding="async" class="relative z-10 h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
           </div>
           <div class="w-full md:w-2/3 flex flex-col text-center md:text-left">
             <span class="text-[10px] font-bold uppercase tracking-wider text-[#166534] mb-1">Premium Option</span>
             <h3 class="text-lg md:text-xl font-bold text-[#111827] mb-2">{ritualBundle.title}</h3>
             <div class="mt-auto flex items-center justify-center md:justify-start gap-4 pt-4">
               <span class="text-lg font-black text-[#111827]">{formatPrice(ritualBundle.priceRange.minVariantPrice.amount)}</span>
-              <button class="text-[#166534] font-bold text-sm hover:text-[#111827] underline decoration-2 underline-offset-4 transition-colors">
+              <button class="add-to-cart-btn text-[#166534] font-bold text-sm hover:text-[#111827] underline decoration-2 underline-offset-4 transition-colors"
+                data-title={ritualBundle.title}
+                data-price={ritualBundle.priceRange.minVariantPrice.amount}
+                data-variant-id={ritualBundle.variants?.edges[0]?.node?.id}
+                data-image={getImageUrl(ritualBundle)}>
                 Add to Cart
               </button>
             </div>
@@ -272,32 +285,6 @@ const getImageUrl = (product) => {
   </div>
 </section>
 
-<style is:global>
-  /* ... existing keyframes ... */
-
-  /* The Orbital Animation (Slow Rotation) */
-  @keyframes orbit {
-    0% { transform: rotate(0deg) translateY(-2px) rotate(0deg); }
-    50% { transform: rotate(180deg) translateY(2px) rotate(-180deg); }
-    100% { transform: rotate(360deg) translateY(-2px) rotate(-360deg); }
-  }
-
-  @keyframes orbit-reverse {
-    0% { transform: rotate(360deg) translateY(-2px) rotate(-360deg); }
-    50% { transform: rotate(180deg) translateY(2px) rotate(-180deg); }
-    100% { transform: rotate(0deg) translateY(-2px) rotate(0deg); }
-  }
-
-  /* Assigning the animations on hover */
-  .animate-orbit {
-    /* Full cycle in 15s (very slow and premium) */
-    animation: orbit 15s linear infinite;
-  }
-
-  .animate-orbit-reverse {
-    animation: orbit-reverse 15s linear infinite;
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
