@@ -4,6 +4,7 @@ import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
 import StoreProducts from '../components/StoreProducts.astro';
 import CartDrawer from '../components/CartDrawer.astro';
+import ExitPopup from '../components/ExitPopup.astro';
 
 // १. तुझे Shopify डिटेल्स
 const shopifyDomain = 'skadas-headless-demo.myshopify.com'; 
@@ -194,6 +195,7 @@ const products = json.data?.products?.edges || [];
   </main>
 
   <CartDrawer />
+  <ExitPopup />
 
   <script>
     // Original Silicon Valley Magnetic Script - Kept exactly intact

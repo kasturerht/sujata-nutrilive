@@ -1,0 +1,196 @@
+---
+// src/components/ExitPopup.astro
+---
+
+{/* 🌟 1. THE OVERLAY (Background Blur) */}
+<div id="exit-popup-overlay" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.1,0,0,1)] bg-black/40 backdrop-blur-md px-4">
+  
+  {/* 🌟 2. THE POPUP CARD */}
+  <div id="exit-popup-card" class="relative w-full max-w-3xl bg-white rounded-[2rem] shadow-[0_40px_80px_rgba(0,0,0,0.2)] overflow-hidden transform scale-95 translate-y-4 transition-all duration-700 delay-100 flex flex-col sm:flex-row">
+    
+    {/* Close Button */}
+    <button id="close-exit-popup" class="absolute top-4 right-4 z-50 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+
+    {/* LEFT SIDE: Visual Hook (Image & Glowing Background) */}
+    <div class="hidden sm:flex sm:w-2/5 bg-[#f0fdf4] relative overflow-hidden items-center justify-center p-8">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#166534_0%,transparent_70%)] opacity-10"></div>
+      <div class="absolute w-[150%] h-[150%] bg-white rounded-full blur-[60px] opacity-60"></div>
+      
+      {/* Floating Product Image */}
+      <img src="/spirulina-bottle.png" alt="Sujata Nutrilive" class="relative z-10 w-full max-w-[180px] object-contain drop-shadow-2xl animate-[float_4s_ease-in-out_infinite]"/>
+      
+      {/* Premium Badge */}
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-white flex items-center gap-2 w-max">
+        <div class="flex items-center gap-0.5">
+          {[...Array(5)].map((_) => (
+            <svg class="w-3 h-3 text-[#F59E0B] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          ))}
+        </div>
+        <span class="text-[9px] font-bold text-gray-900 uppercase tracking-widest">10k+ Customers</span>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE: The Offer & Form */}
+    <div class="w-full sm:w-3/5 p-8 sm:p-12 flex flex-col justify-center">
+      
+      <span class="text-[#166534] text-[10px] font-black uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        Wait! Don't leave your peak behind.
+      </span>
+      
+      <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.1] mb-4">
+        Take <span class="text-[#166534] italic">10% OFF</span> your first routine.
+      </h2>
+      
+      <p class="text-gray-500 text-sm mb-8 leading-relaxed max-w-sm">
+        Join the elite group of high-performers. Enter your email below to instantly unlock your exclusive VIP discount code.
+      </p>
+
+      {/* The Form */}
+      <div id="promo-form-container">
+        <form id="promo-form" class="flex flex-col gap-3">
+          <input 
+            type="email" 
+            id="promo-email"
+            placeholder="Enter your best email address" 
+            required
+            class="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl px-5 py-4 focus:ring-2 focus:ring-[#166534] focus:border-transparent outline-none transition-all"
+          />
+          <button type="submit" id="unlock-btn" class="w-full bg-[#111827] text-white font-bold text-sm uppercase tracking-widest px-8 py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 hover:bg-[#166534] shadow-[0_10px_20px_rgba(0,0,0,0.1)] group">
+            <span class="btn-text">Reveal My Code</span>
+            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+        </form>
+        
+        {/* The 'No Thanks' link (Classic Psychology) */}
+        <div class="text-center mt-4">
+          <button id="decline-offer" class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold hover:text-gray-800 underline decoration-gray-300 underline-offset-4 transition-colors">
+            No thanks, I prefer paying full price
+          </button>
+        </div>
+      </div>
+
+      {/* SUCCESS STATE (Hidden by default) */}
+      <div id="promo-success-container" class="hidden flex-col items-center justify-center text-center py-4">
+        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold text-[#111827] mb-2">You're In!</h3>
+        <p class="text-sm text-gray-500 mb-6">Use this exact code at checkout:</p>
+        
+        <div class="border-2 border-dashed border-[#166534] bg-[#f0fdf4] px-8 py-4 rounded-xl cursor-pointer hover:bg-emerald-100 transition-colors group" id="copy-code-btn">
+          <span class="text-2xl font-black text-[#166534] tracking-widest group-hover:hidden" id="the-code">PEAK10</span>
+          <span class="text-sm font-bold text-[#166534] uppercase tracking-widest hidden group-hover:block">Click to Copy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{/* CSS for the floating bottle */}
+<style is:global>
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+</style>
+
+{/* 🌟 3. THE SMART JAVASCRIPT ENGINE */}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('exit-popup-overlay');
+    const card = document.getElementById('exit-popup-card');
+    const closeBtn = document.getElementById('close-exit-popup');
+    const declineBtn = document.getElementById('decline-offer');
+    
+    const formContainer = document.getElementById('promo-form-container');
+    const successContainer = document.getElementById('promo-success-container');
+    const form = document.getElementById('promo-form');
+    const unlockBtn = document.getElementById('unlock-btn');
+    const copyBtn = document.getElementById('copy-code-btn');
+
+    let popupShown = false;
+
+    // Check Memory (Has this user seen it before?)
+    // Comment this line out if you want to test it multiple times!
+    const hasSeenPopup = localStorage.getItem('sujata_exit_popup_shown'); 
+
+    const showPopup = () => {
+      // Don't show if already shown in this session or stored in memory
+      if (popupShown || hasSeenPopup) return; 
+
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      overlay.classList.add('opacity-100');
+      
+      card.classList.remove('scale-95', 'translate-y-4');
+      card.classList.add('scale-100', 'translate-y-0');
+      
+      popupShown = true;
+      localStorage.setItem('sujata_exit_popup_shown', 'true'); // Save to memory
+    };
+
+    const hidePopup = () => {
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      
+      card.classList.remove('scale-100', 'translate-y-0');
+      card.classList.add('scale-95', 'translate-y-4');
+    };
+
+    // 🌟 THE TRIGGER: Listen for Exit Intent (Mouse moving up to close tab)
+    // We add a 2-second delay so it doesn't trigger immediately on load if mouse is at top
+    setTimeout(() => {
+      document.addEventListener('mouseout', (e) => {
+        // If mouse moves out of the window viewport towards the top
+        if (e.clientY < 20 || e.relatedTarget == null) {
+          showPopup();
+        }
+      });
+    }, 2000);
+
+    // Close Events
+    closeBtn?.addEventListener('click', hidePopup);
+    declineBtn?.addEventListener('click', hidePopup);
+    overlay?.addEventListener('click', (e) => {
+      if (e.target === overlay) hidePopup();
+    });
+
+    // Form Submission (Fake API for lead capture)
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const btnText = unlockBtn.querySelector('.btn-text');
+      const btnIcon = unlockBtn.querySelector('.btn-icon');
+      
+      // Loading State
+      unlockBtn.classList.add('pointer-events-none', '!bg-[#166534]');
+      btnText.innerText = 'GENERATING...';
+      btnIcon.classList.add('hidden');
+
+      // Simulate API call to save email (1 second delay)
+      setTimeout(() => {
+        formContainer.classList.add('hidden');
+        successContainer.classList.remove('hidden');
+        successContainer.classList.add('flex', 'animate-[fadeInUp_0.5s_ease-out]');
+      }, 1000);
+    });
+
+    // Copy Code Feature
+    copyBtn?.addEventListener('click', () => {
+      const code = document.getElementById('the-code').innerText;
+      navigator.clipboard.writeText(code);
+      
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = `<span class="text-sm font-bold text-[#166534] uppercase tracking-widest">✔ COPIED!</span>`;
+      
+      setTimeout(() => {
+        hidePopup(); // Auto hide after copying
+      }, 1500);
+    });
+
+  });
+</script>

@@ -373,32 +373,80 @@ const getImageUrl = (product) => {
       }
     `;
 
-    // 🌟 2. RENDER CART (Draws the UI dynamically)
+    // 🌟 4. RENDER CART DYNAMICALLY (Upgraded with AOV Maximizer)
     function renderCartUI(cart) {
       if (!cart) return;
 
-      // Update Badges & Subtotal
       const count = cart.totalQuantity || 0;
       if (drawerCartBadge) drawerCartBadge.innerText = count;
       if (headerCartBadge) {
         headerCartBadge.innerText = count;
-        // Optional: Hide badge if 0
         headerCartBadge.style.display = count > 0 ? 'flex' : 'none';
       }
 
-      const formatPrice = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(cart.cost?.totalAmount?.amount || 0);
+      const currentTotal = cart.cost?.totalAmount?.amount || 0;
+      const formatPrice = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(currentTotal);
       if (cartSubtotal) cartSubtotal.innerText = formatPrice;
 
-      // Attach Checkout URL
       if (checkoutBtn && cart.checkoutUrl) checkoutBtn.onclick = () => window.location.href = cart.checkoutUrl;
 
-      // Render Items
       cartItemsContainer.innerHTML = '';
       if (count === 0) {
         cartItemsContainer.innerHTML = `<div class="text-center py-10 text-gray-400 font-medium">Your routine is empty.</div>`;
         return;
       }
 
+      // 🌟 NEW: THE FREE SHIPPING PROGRESS BAR (Gamification)
+      const shippingThreshold = 2000; // ₹2000 ला फ्री शिपिंग
+      const amountRemaining = shippingThreshold - currentTotal;
+      const progressPercent = Math.min((currentTotal / shippingThreshold) * 100, 100);
+      
+      let shippingHTML = '';
+      if (amountRemaining > 0) {
+        // Not reached yet
+        shippingHTML = `
+          <div class="mb-5 bg-gray-50 p-4 rounded-2xl border border-gray-100 relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 translate-x-[-100%] group-hover:animate-[shimmer_1.5s_infinite]"></div>
+            <p class="text-[11px] font-bold text-gray-800 text-center mb-3 tracking-wide">
+              You're only <span class="text-[#166534] text-sm font-black">₹${amountRemaining}</span> away from <span class="uppercase tracking-widest border-b border-[#166534]">Free Shipping</span> 🚚
+            </p>
+            <div class="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+              <div class="h-full bg-[#111827] rounded-full transition-all duration-700 ease-out relative" style="width: ${progressPercent}%">
+                 <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_25%,rgba(255,255,255,0.2)_50%,transparent_50%,transparent_75%,rgba(255,255,255,0.2)_75%,rgba(255,255,255,0.2)_100%)] bg-[length:1rem_1rem] animate-[stripe_1s_linear_infinite]"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Goal Reached!
+        shippingHTML = `
+          <div class="mb-5 bg-[#f0fdf4] p-4 rounded-2xl border border-emerald-200 animate-[pulse_2s_ease-in-out_1]">
+            <p class="text-xs font-black text-[#166534] text-center uppercase tracking-widest flex items-center justify-center gap-2">
+              <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+              Free Shipping Unlocked! 🎉
+            </p>
+            <div class="w-full h-1.5 bg-emerald-200 rounded-full overflow-hidden mt-3">
+              <div class="h-full bg-emerald-500 transition-all duration-700 ease-out" style="width: 100%"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      // ॲनिमेशनसाठी CSS लावणं (जर आधी नसेल तर)
+      if (!document.getElementById('shipping-styles')) {
+        const style = document.createElement('style');
+        style.id = 'shipping-styles';
+        style.innerHTML = `
+          @keyframes stripe { from { background-position: 1rem 0; } to { background-position: 0 0; } }
+          @keyframes shimmer { 100% { transform: translateX(100%); } }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // Insert Shipping Bar first
+      cartItemsContainer.insertAdjacentHTML('beforeend', shippingHTML);
+
+      // Loop through cart items
       cart.lines.edges.forEach(({ node }) => {
         const product = node.merchandise.product;
         const variant = node.merchandise;
@@ -419,13 +467,11 @@ const getImageUrl = (product) => {
                 <p class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mt-1">${variant.title !== 'Default Title' ? variant.title : 'Pure Form'}</p>
               </div>
               <div class="flex items-center justify-between mt-3">
-                
                 <div class="flex items-center gap-3 bg-gray-50 rounded-full px-2 py-1 border border-gray-100">
                   <button class="qty-btn w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black font-bold" data-line-id="${node.id}" data-action="decrease" data-current="${node.quantity}">-</button>
                   <span class="text-xs font-bold text-[#111827] w-3 text-center">${node.quantity}</span>
                   <button class="qty-btn w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black font-bold" data-line-id="${node.id}" data-action="increase" data-current="${node.quantity}">+</button>
                 </div>
-                
                 <span class="text-sm font-black text-[#111827]">${itemPrice}</span>
               </div>
             </div>
