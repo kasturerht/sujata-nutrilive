@@ -10,6 +10,7 @@ const shopifyDomain = 'skadas-headless-demo.myshopify.com';
 const storefrontToken = '32f678c5f8d1345e945ed48713d9cf2f'; 
 
 // २. संपूर्ण GraphQL Query
+// index.astro madhla tuza query block asa update kar:
 const query = `
   {
     products(first: 6) {
@@ -24,6 +25,13 @@ const query = `
             minVariantPrice {
               amount
               currencyCode
+            }
+          }
+          variants(first: 1) {
+            edges {
+              node {
+                id
+              }
             }
           }
           images(first: 2) {
