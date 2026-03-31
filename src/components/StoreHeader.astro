@@ -1,41 +1,95 @@
 ---
 // src/components/StoreHeader.astro
 ---
-<header id="store-header" class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out py-6 bg-transparent">
-  
+<header id="store-header" class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out py-4 md:py-6 bg-transparent">
+
   {/* Top Announcement Bar */}
-  <div class="absolute top-0 left-0 w-full bg-[#111827] text-white text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase py-2 flex items-center justify-center z-50">
-    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-3 animate-pulse"></span>
-    Free Express Shipping on Orders Above ₹999
+  <div class="absolute top-0 left-0 w-full bg-[#111827] text-white text-[9px] md:text-xs font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase py-2 flex items-center justify-center z-50 px-4 text-center leading-tight">
+    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2 md:mr-3 animate-pulse flex-shrink-0"></span>
+    <span>Free Express Shipping on Orders Above ₹999</span>
   </div>
 
-  <div class="max-w-[90rem] mx-auto px-6 lg:px-12 mt-8">
-    <div class="flex items-center justify-between h-14 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full px-6 md:px-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-      
+  <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 mt-7 md:mt-8">
+    <div class="flex items-center justify-between h-12 md:h-14 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full px-4 md:px-6 lg:px-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+
       {/* Brand */}
-      <a href="/" class="text-xl md:text-2xl font-black tracking-tighter text-[#111827] relative z-10 group">
+      <a href="/" class="text-lg md:text-xl lg:text-2xl font-black tracking-tighter text-[#111827] relative z-10 group flex-shrink-0">
         SUJATA<span class="text-[#166534] transition-all duration-300 group-hover:pl-1">.</span>
       </a>
 
-      {/* Navigation */}
-      <nav class="hidden md:flex space-x-10">
+      {/* Navigation — desktop only */}
+      <nav class="hidden md:flex space-x-6 lg:space-x-10">
         <a href="#products" class="text-sm font-bold text-[#111827] border-b-2 border-[#166534] pb-0.5">Shop Spirulina</a>
         <a href="#science" class="text-sm font-semibold text-[#6B7280] hover:text-[#111827] transition-colors">The Science</a>
         <a href="#story" class="text-sm font-semibold text-[#6B7280] hover:text-[#111827] transition-colors">Our Story</a>
       </nav>
 
       {/* Actions */}
-      <div class="flex items-center gap-4">
-        <button aria-label="Search" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/60 hover:bg-white text-[#4B5563] hover:text-[#166534] transition-all shadow-sm border border-black/5">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <div class="flex items-center gap-2 md:gap-4">
+        <button aria-label="Search" class="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center bg-white/60 hover:bg-white text-[#4B5563] hover:text-[#166534] transition-all shadow-sm border border-black/5">
+          <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </button>
-        <button id="cart-drawer-trigger" class="relative flex items-center gap-2 bg-[#111827] hover:bg-[#166534] text-white px-5 py-2.5 rounded-full transition-all shadow-md group">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          <span class="text-xs font-bold uppercase tracking-wider">Cart</span>
+        <button id="cart-drawer-trigger" class="relative flex items-center gap-1.5 md:gap-2 bg-[#111827] hover:bg-[#166534] text-white px-3.5 md:px-5 py-2 md:py-2.5 rounded-full transition-all shadow-md group">
+          <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          <span class="text-[10px] md:text-xs font-bold uppercase tracking-wider">Cart</span>
           <span id="header-cart-badge" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#166534] border-2 border-white text-white text-[10px] font-bold flex items-center justify-center rounded-full group-hover:scale-110 transition-transform">0</span>
+        </button>
+        {/* Hamburger — mobile only */}
+        <button id="mobile-menu-btn" aria-label="Open navigation menu" class="md:hidden w-9 h-9 rounded-full flex items-center justify-center bg-white/60 hover:bg-white text-[#111827] transition-all shadow-sm border border-black/5">
+          <svg id="hamburger-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          <svg id="close-menu-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
     </div>
   </div>
+
+  {/* Mobile Nav Drawer */}
+  <div id="mobile-nav" class="md:hidden absolute top-full left-0 w-full px-4 sm:px-6 overflow-hidden max-h-0 transition-[max-height] duration-500 ease-in-out" style="transition-timing-function: cubic-bezier(0.1,0,0,1);">
+    <nav class="bg-white/95 backdrop-blur-xl border border-black/[0.06] rounded-2xl shadow-xl mt-2 px-6 py-5 flex flex-col gap-1">
+      <a href="#products" class="text-sm font-bold text-[#111827] py-3 border-b border-gray-100 flex items-center justify-between" id="mobile-nav-link">
+        Shop Spirulina
+        <svg class="w-3.5 h-3.5 text-[#166534]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+      <a href="#science" class="text-sm font-semibold text-[#6B7280] py-3 border-b border-gray-100 flex items-center justify-between" id="mobile-nav-link">
+        The Science
+        <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+      <a href="#story" class="text-sm font-semibold text-[#6B7280] py-3 flex items-center justify-between" id="mobile-nav-link">
+        Our Story
+        <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </nav>
+  </div>
 </header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-menu-icon');
+  let isOpen = false;
+
+  menuBtn?.addEventListener('click', () => {
+    isOpen = !isOpen;
+    if (isOpen) {
+      mobileNav!.style.maxHeight = mobileNav!.scrollHeight + 'px';
+      hamburgerIcon!.classList.add('hidden');
+      closeIcon!.classList.remove('hidden');
+    } else {
+      mobileNav!.style.maxHeight = '0';
+      hamburgerIcon!.classList.remove('hidden');
+      closeIcon!.classList.add('hidden');
+    }
+  });
+
+  // Close on nav link click
+  document.querySelectorAll('#mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      isOpen = false;
+      mobileNav!.style.maxHeight = '0';
+      hamburgerIcon!.classList.remove('hidden');
+      closeIcon!.classList.add('hidden');
+    });
+  });
+</script>

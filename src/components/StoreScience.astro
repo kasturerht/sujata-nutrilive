@@ -2,7 +2,7 @@
 // src/components/StoreScience.astro
 ---
 
-<section id="lux-scanner-section" class="relative bg-[#030303] w-full font-['Inter'] selection:bg-emerald-900 selection:text-white" style="height: 400vh;">
+<section id="lux-scanner-section" class="relative bg-[#030303] w-full h-[400vh] font-['Inter'] selection:bg-emerald-900 selection:text-white">
   
   <div class="sticky top-0 h-[100svh] w-full overflow-hidden flex items-center justify-center bg-[#020202]">
     
@@ -27,21 +27,21 @@
 
     {/* 4. STAGGERED TYPOGRAPHY */}
     <div class="absolute inset-0 z-30 pointer-events-none flex flex-col justify-center px-6 md:px-24">
-      <div id="text-1" class="absolute left-6 md:left-24 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-[800ms] ease-out w-full md:w-1/3 text-left">
-        <p class="text-emerald-400 text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold mb-4 drop-shadow-lg">Phase 01 / Absorption</p>
-        <h2 class="text-4xl md:text-6xl text-white font-['Playfair_Display'] font-black leading-[1.1] drop-shadow-2xl">
+      <div id="text-1" class="absolute left-4 md:left-24 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-[800ms] ease-out w-[90%] sm:w-3/4 md:w-1/3 text-left">
+        <p class="text-emerald-400 text-[9px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold mb-3 md:mb-4 drop-shadow-lg">Phase 01 / Absorption</p>
+        <h2 class="text-[clamp(2rem,5vw,3.75rem)] text-white font-['Playfair_Display'] font-black leading-[1.1] drop-shadow-2xl">
           60% Bio-Active<br/><span class="italic text-gray-400 font-light">Protein.</span>
         </h2>
       </div>
-      <div id="text-2" class="absolute right-6 md:right-24 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-[800ms] ease-out w-full md:w-1/3 text-right">
-        <p class="text-emerald-400 text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold mb-4 drop-shadow-lg">Phase 02 / Preservation</p>
-        <h2 class="text-4xl md:text-6xl text-white font-['Playfair_Display'] font-black leading-[1.1] drop-shadow-2xl">
+      <div id="text-2" class="absolute right-4 md:right-24 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-[800ms] ease-out w-[90%] sm:w-3/4 md:w-1/3 text-right">
+        <p class="text-emerald-400 text-[9px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold mb-3 md:mb-4 drop-shadow-lg">Phase 02 / Preservation</p>
+        <h2 class="text-[clamp(2rem,5vw,3.75rem)] text-white font-['Playfair_Display'] font-black leading-[1.1] drop-shadow-2xl">
           Cold Pressed.<br/><span class="italic text-gray-400 font-light">Live Enzymes.</span>
         </h2>
       </div>
-      <div id="text-3" class="absolute left-6 md:left-24 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-[800ms] ease-out w-full md:w-1/3 text-left">
-        <p class="text-emerald-400 text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold mb-4 drop-shadow-lg">Phase 03 / Standard</p>
-        <h2 class="text-4xl md:text-6xl text-white font-['Playfair_Display'] font-black leading-[1.1] drop-shadow-2xl">
+      <div id="text-3" class="absolute left-4 md:left-24 top-1/2 -translate-y-1/2 opacity-0 transition-all duration-[800ms] ease-out w-[90%] sm:w-3/4 md:w-1/3 text-left">
+        <p class="text-emerald-400 text-[9px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold mb-3 md:mb-4 drop-shadow-lg">Phase 03 / Standard</p>
+        <h2 class="text-[clamp(2rem,5vw,3.75rem)] text-white font-['Playfair_Display'] font-black leading-[1.1] drop-shadow-2xl">
           Triple Lab<br/><span class="italic text-gray-400 font-light">Tested.</span>
         </h2>
       </div>
@@ -53,7 +53,7 @@
     </div>
 
     {/* 6. THE MAGIC X-RAY LENS */}
-    <div id="scanner-lens" class="absolute z-20 w-[95%] md:w-[700px] h-[220px] md:h-[280px] border-t border-b border-white/20 bg-black/30 backdrop-blur-[16px] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center will-change-transform -translate-y-[150vh]">
+    <div id="scanner-lens" class="absolute z-20 w-[95%] md:w-[min(700px,90vw)] h-[180px] sm:h-[220px] md:h-[280px] border-t border-b border-white/20 bg-black/30 backdrop-blur-[16px] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center will-change-transform -translate-y-[150vh]">
       <div id="lens-inner" class="absolute w-screen h-[100svh] flex items-center justify-center will-change-transform translate-y-[150vh]">
         <img id="fg-bottle" src="/spirulina-bottle.png" class="absolute h-[60vh] md:h-[75vh] object-contain drop-shadow-[0_0_50px_rgba(16,185,129,0.2)] scale-[1.02]" style="clip-path: inset(0% 0% 0% 0%);" />
         <img id="fg-powder" src="/spirulina-powder.png" class="absolute h-[60vh] md:h-[75vh] object-contain drop-shadow-[0_0_50px_rgba(16,185,129,0.2)] scale-[1.02]" style="clip-path: inset(0% 0% 100% 0%);" />

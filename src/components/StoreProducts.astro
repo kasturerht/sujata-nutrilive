@@ -52,11 +52,11 @@ const getImageUrl = (product) => {
       {/* BENTO ITEM 1: THE ANCHOR PRODUCT (Hero Product - Upgraded with Social Proof) */}
       {/* -------------------------------------------------------------------------------- */}
       {heroProduct && (
-        <div class="group relative md:col-span-12 lg:col-span-8 bg-white rounded-[2rem] p-8 md:p-12 border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_60px_rgba(22,101,52,0.08)] transition-all duration-700 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 h-auto md:h-[480px]">
+        <div class="group relative md:col-span-12 lg:col-span-8 bg-white rounded-[2rem] p-8 md:p-10 lg:p-12 border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_60px_rgba(22,101,52,0.08)] transition-all duration-700 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0 h-auto md:h-[420px] lg:h-[480px]">
           
           <div class="absolute inset-0 bg-gradient-to-br from-[#166534]/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"></div>
 
-          <div class="relative z-10 w-full md:w-[55%] flex flex-col h-full justify-center order-2 md:order-1 pr-0 md:pr-10">
+          <div class="relative z-10 w-full md:w-[55%] flex flex-col h-full justify-center order-2 md:order-1 pr-0 md:pr-8 lg:pr-10">
             
             {/* Tag & Social Proof (E-commerce Feel) */}
             <div class="flex items-center gap-4 mb-4">
@@ -104,7 +104,7 @@ const getImageUrl = (product) => {
           </div>
 
         {/* RIGHT SIDE: Product Image */}
-          <div class="relative z-10 w-full md:w-[45%] h-[300px] md:h-full flex items-center justify-center order-1 md:order-2 group/img">
+          <div class="relative z-10 w-full md:w-[45%] h-[260px] md:h-full flex items-center justify-center order-1 md:order-2 group/img">
             
             {/* 🌟 NEW: THE FERRIS-WHEEL ORBIT */}
             {/* Outer wrapper controls hover visibility */}
@@ -149,7 +149,7 @@ const getImageUrl = (product) => {
       {/* BENTO ITEM 2: THE ACCELERATOR (Dark Card - Completely Redesigned for E-comm) */}
       {/* -------------------------------------------------------------------------------- */}
       {acceleratorProduct && (
-        <div class="group relative md:col-span-6 lg:col-span-4 bg-[#111827] rounded-[2rem] p-8 shadow-[0_20px_40px_rgba(17,24,39,0.2)] transition-all duration-700 overflow-hidden flex flex-col h-[480px] border border-white/5 hover:border-[#166534]/30">
+        <div class="group relative md:col-span-6 lg:col-span-4 bg-[#111827] rounded-[2rem] p-8 shadow-[0_20px_40px_rgba(17,24,39,0.2)] transition-all duration-700 overflow-hidden flex flex-col h-auto min-h-[420px] md:h-[420px] lg:h-[480px] border border-white/5 hover:border-[#166534]/30">
           
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#166534_0%,transparent_70%)] opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
 
@@ -234,11 +234,11 @@ const getImageUrl = (product) => {
       {/* -------------------------------------------------------------------------------- */}
       {travelPack && (
         <div class="group relative md:col-span-6 lg:col-span-6 bg-white rounded-[2rem] p-8 border border-black/[0.03] shadow-[0_15px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row items-center gap-6 h-[auto] min-h-[250px]">
-          <div class="w-1/2 md:w-1/3 flex items-center justify-center relative">
+          <div class="w-2/5 sm:w-1/3 md:w-1/3 flex-shrink-0 flex items-center justify-center relative">
             <div class="absolute inset-0 bg-gray-50 rounded-full blur-xl group-hover:bg-[#f0fdf4] transition-colors duration-500"></div>
-            <img src={getImageUrl(travelPack)} alt={travelPack.title} loading="lazy" decoding="async" class="relative z-10 h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
+            <img src={getImageUrl(travelPack)} alt={travelPack.title} loading="lazy" decoding="async" class="relative z-10 h-[110px] md:h-[130px] lg:h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
           </div>
-          <div class="w-full md:w-2/3 flex flex-col text-center md:text-left">
+          <div class="flex-1 min-w-0 flex flex-col text-center md:text-left">
             <h3 class="text-lg md:text-xl font-bold text-[#111827] mb-2">{travelPack.title}</h3>
             <p class="text-gray-500 text-sm mb-4 line-clamp-2">{travelPack.description || "Perfect for on-the-go energy."}</p>
             <div class="mt-auto flex items-center justify-center md:justify-start gap-4">
@@ -260,11 +260,11 @@ const getImageUrl = (product) => {
       {/* -------------------------------------------------------------------------------- */}
       {ritualBundle && (
         <div class="group relative md:col-span-6 lg:col-span-6 bg-white rounded-[2rem] p-8 border border-black/[0.03] shadow-[0_15px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row items-center gap-6 h-[auto] min-h-[250px]">
-          <div class="w-1/2 md:w-1/3 flex items-center justify-center relative">
+          <div class="w-2/5 sm:w-1/3 md:w-1/3 flex-shrink-0 flex items-center justify-center relative">
             <div class="absolute inset-0 bg-gray-50 rounded-full blur-xl group-hover:bg-[#f0fdf4] transition-colors duration-500"></div>
-            <img src={getImageUrl(ritualBundle)} alt={ritualBundle.title} loading="lazy" decoding="async" class="relative z-10 h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
+            <img src={getImageUrl(ritualBundle)} alt={ritualBundle.title} loading="lazy" decoding="async" class="relative z-10 h-[110px] md:h-[130px] lg:h-[150px] object-contain group-hover:-translate-y-1 transition-transform duration-500"/>
           </div>
-          <div class="w-full md:w-2/3 flex flex-col text-center md:text-left">
+          <div class="flex-1 min-w-0 flex flex-col text-center md:text-left">
             <span class="text-[10px] font-bold uppercase tracking-wider text-[#166534] mb-1">Premium Option</span>
             <h3 class="text-lg md:text-xl font-bold text-[#111827] mb-2">{ritualBundle.title}</h3>
             <div class="mt-auto flex items-center justify-center md:justify-start gap-4 pt-4">

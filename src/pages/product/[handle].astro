@@ -143,10 +143,10 @@ const hasPriceRange = price !== maxPrice;
       </nav>
 
       <!-- Two-column layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_520px] gap-10 lg:gap-20 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_340px] lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_520px] gap-8 md:gap-10 lg:gap-20 items-start">
 
         <!-- LEFT: Image Gallery -->
-        <div class="lg:sticky lg:top-24 space-y-4">
+        <div class="md:sticky md:top-20 lg:top-24 space-y-4">
 
           <!-- Hero Image -->
           <div id="hero-image-container" class="relative w-full aspect-square bg-white rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.04)] border border-white group">
@@ -275,7 +275,7 @@ const hasPriceRange = price !== maxPrice;
           </div>
 
           <!-- Trust Badges -->
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
               { icon: '🌿', label: '100% Organic', sub: 'USDA Certified' },
               { icon: '🧬', label: 'Vegan Protein', sub: 'Plant-based' },

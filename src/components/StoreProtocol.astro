@@ -13,8 +13,8 @@
       <div class="absolute inset-0 opacity-[0.05] mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
       
       {/* 2. Constant Floating Micro-Orbs (They stay on screen!) */}
-      <div class="absolute top-[15%] left-[5%] w-[45vw] h-[45vw] bg-emerald-500/10 rounded-full blur-[100px] orb-1"></div>
-      <div class="absolute bottom-[10%] right-[10%] w-[55vw] h-[55vw] bg-teal-500/10 rounded-full blur-[120px] orb-2"></div>
+      <div class="absolute top-[15%] left-[5%] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-emerald-500/10 rounded-full blur-[100px] orb-1"></div>
+      <div class="absolute bottom-[10%] right-[10%] w-[55vw] h-[55vw] max-w-[550px] max-h-[550px] bg-teal-500/10 rounded-full blur-[120px] orb-2"></div>
       <div class="absolute top-[40%] right-[30%] w-12 h-12 bg-emerald-400/20 rounded-full blur-[10px] orb-3"></div>
       <div class="absolute bottom-[30%] left-[20%] w-8 h-8 bg-teal-600/15 rounded-full blur-[5px] orb-4"></div>
 
@@ -40,7 +40,7 @@
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot"></span>
         <span class="text-emerald-800 text-[9px] font-black uppercase tracking-[0.3em]">The Protocol</span>
       </div>
-      <h2 class="text-5xl md:text-6xl lg:text-7xl font-black font-['Playfair_Display'] leading-[1.1] mb-6 text-[#111827]">
+      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] lg:text-7xl font-black font-['Playfair_Display'] leading-[1.1] mb-6 text-[#111827]">
         Your 30-Day<br/><span class="italic text-gray-400 font-light">Rebirth.</span>
       </h2>
       <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-sm">
@@ -52,10 +52,10 @@
     <div class="w-full md:w-7/12 relative pb-[10vh]" id="cards-container">
       
       {/* CARD 1 */}
-      <div class="protocol-card sticky top-[15vh] w-full h-[55vh] md:h-[60vh] bg-white/95 backdrop-blur-2xl rounded-[2rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[1]" data-index="0">
+      <div class="protocol-card sticky top-[15vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-white/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[1]" data-index="0">
         <div class="absolute top-8 right-8 text-emerald-50 text-6xl md:text-8xl font-black font-['Playfair_Display'] pointer-events-none">01</div>
         <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Day 1 - 7</span>
-        <h3 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-[#111827]">The Awakening.</h3>
+        <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-['Playfair_Display'] font-bold mb-4 md:mb-6 text-[#111827]">The Awakening.</h3>
         <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-md mb-8">
           The highly bio-available B-vitamins and raw iron flood your bloodstream. The first thing you'll notice? The 3 PM afternoon crash completely vanishes.
         </p>
@@ -66,10 +66,10 @@
       </div>
 
       {/* CARD 2 */}
-      <div class="protocol-card sticky top-[18vh] w-full h-[55vh] md:h-[60vh] bg-[#F3F4F1]/95 backdrop-blur-2xl rounded-[2rem] p-8 md:p-12 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[2] mt-[10vh] md:mt-[20vh]" data-index="1">
+      <div class="protocol-card sticky top-[18vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#F3F4F1]/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[2] mt-[10vh] md:mt-[20vh]" data-index="1">
         <div class="absolute top-8 right-8 text-white text-6xl md:text-8xl font-black font-['Playfair_Display'] pointer-events-none drop-shadow-sm">02</div>
         <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Day 14 - 21</span>
-        <h3 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-[#111827]">Gut Rebalance.</h3>
+        <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-['Playfair_Display'] font-bold mb-4 md:mb-6 text-[#111827]">Gut Rebalance.</h3>
         <p class="text-gray-600 text-sm md:text-base leading-relaxed max-w-md mb-8">
           As the cold-pressed enzymes compound, your micro-biome shifts. Digestion optimizes effortlessly. You will experience a significant reduction in bloating.
         </p>
@@ -80,10 +80,10 @@
       </div>
 
       {/* CARD 3 */}
-      <div class="protocol-card sticky top-[21vh] w-full h-[55vh] md:h-[60vh] bg-[#064E3B] text-white rounded-[2rem] p-8 md:p-12 shadow-[0_-20px_60px_rgba(6,78,59,0.5)] border border-emerald-700/50 flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[3] mt-[10vh] md:mt-[20vh]" data-index="2">
+      <div class="protocol-card sticky top-[21vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#064E3B] text-white rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_60px_rgba(6,78,59,0.5)] border border-emerald-700/50 flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[3] mt-[10vh] md:mt-[20vh]" data-index="2">
         <div class="absolute top-8 right-8 text-emerald-800 text-6xl md:text-8xl font-black font-['Playfair_Display'] pointer-events-none">03</div>
         <span class="text-emerald-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Day 30 & Beyond</span>
-        <h3 class="text-3xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-white">Cellular Peak.</h3>
+        <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-['Playfair_Display'] font-bold mb-4 md:mb-6 text-white">Cellular Peak.</h3>
         <p class="text-emerald-100/80 text-sm md:text-base leading-relaxed max-w-md mb-8">
           A full cycle of Phycocyanin antioxidants completes. The results are now visible externally: clearer skin, fortified immune defense, and a sustained state of mental clarity.
         </p>
