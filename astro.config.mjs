@@ -1,14 +1,16 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-// vercel import काढून टाकला आहे
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://skadas.com',
-  // output आणि adapter काढून टाकले आहेत, कारण आपल्याला साईट 'Static' ठेवायची आहे.
-  
+  // 'server' mode: enables SSR for dynamic routes (e.g. /product/[handle])
+  // while still allowing individual pages to opt-in to prerendering.
+  output: 'server',
+  adapter: vercel(),
   integrations: [
     tailwind(),
-    react()
+    react(),
   ],
 });
