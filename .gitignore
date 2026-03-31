@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# Vercel build output — never commit this; stale output causes ERR_MODULE_NOT_FOUND
+.vercel/output/
+
 # dependencies
 node_modules/
 

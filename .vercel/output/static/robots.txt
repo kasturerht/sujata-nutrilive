@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://skadas.com/sitemap-index.xml
