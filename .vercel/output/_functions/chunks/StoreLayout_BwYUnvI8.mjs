@@ -1,6 +1,6 @@
-import { c as createComponent } from './astro-component_MpF3f0r4.mjs';
+import { c as createComponent } from './astro-component_DEPAHf3t.mjs';
 import 'piccolore';
-import { o as renderHead, n as renderSlot, r as renderTemplate } from './entrypoint_BsvHG05z.mjs';
+import { o as renderHead, n as renderSlot, r as renderTemplate } from './entrypoint_RmKIHCmT.mjs';
 import 'clsx';
 
 const $$StoreLayout = createComponent(($$result, $$props, $$slots) => {

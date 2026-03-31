@@ -1,12 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel'; 
+// vercel import काढून टाकला आहे
 
 export default defineConfig({
   site: 'https://skadas.com',
-  output: 'server',
-  adapter: vercel(), 
+  // output आणि adapter काढून टाकले आहेत, कारण आपल्याला साईट 'Static' ठेवायची आहे.
   
   integrations: [
     tailwind(),

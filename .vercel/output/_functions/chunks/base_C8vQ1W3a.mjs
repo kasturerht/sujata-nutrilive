@@ -1,4 +1,4 @@
-import { p as createRenderInstruction } from './entrypoint_BsvHG05z.mjs';
+import { p as createRenderInstruction } from './entrypoint_RmKIHCmT.mjs';
 
 async function renderScript(result, id) {
   const inlined = result.inlinedScripts.get(id);
