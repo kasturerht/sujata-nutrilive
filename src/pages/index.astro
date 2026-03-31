@@ -4,6 +4,8 @@ import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
 import StoreProducts from '../components/StoreProducts.astro';
 import StoreScience from '../components/StoreScience.astro';
+import StoreTrust from '../components/StoreTrust.astro';
+import StoreProtocol from '../components/StoreProtocol.astro';
 import CartDrawer from '../components/CartDrawer.astro';
 import ExitPopup from '../components/ExitPopup.astro';
 
@@ -75,6 +77,10 @@ const products = json.data?.products?.edges || [];
   
   {/* 🌟 3. The Micro-Science Anatomy (Idea 1) will go here soon! */}
   <StoreScience />
+
+  <StoreProtocol />
+
+  <StoreTrust />
 
   {/* Background Services */}
   <CartDrawer />

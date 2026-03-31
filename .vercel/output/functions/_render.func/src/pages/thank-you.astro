@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+// Jar Header/Footer component nasatil tar varche don line kadhun tak ani direct <Layout> vapar
+---
+
+<Layout title="Thank You | Skadas" description="Your message has been received successfully.">
+  
+  <main class="pt-32 pb-24 flex items-center justify-center min-h-[80vh] relative z-10">
+    <div class="text-center px-6 max-w-2xl mx-auto reveal">
+      
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-8 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Transmission <span class="text-cyan-400">Successful.</span></h1>
+      
+      <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
+        We have received your request. One of our growth architects will analyze your requirements and reach out to you shortly.
+      </p>
+
+      <a href="/" class="inline-flex items-center gap-2 bg-white text-slate-950 font-bold py-4 px-8 rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300">
+        Return to Homepage
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      </a>
+      
+    </div>
+  </main>
+
+</Layout>

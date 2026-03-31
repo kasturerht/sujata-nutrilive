@@ -1,0 +1,153 @@
+---
+// src/components/StoreTrust.astro
+---
+
+<section id="trust-engine" class="relative bg-[#020202] py-24 md:py-40 font-['Inter'] overflow-hidden selection:bg-emerald-900 selection:text-white">
+  
+  {/* Subtle Ambient Background */}
+  <div class="absolute inset-0 z-0 pointer-events-none opacity-30">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.15)_0%,transparent_70%)]"></div>
+  </div>
+
+  <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
+    
+    
+
+    {/* =========================================
+        PART 2: THE EDITORIAL SOCIAL PROOF
+        Psychology: Massive authority, builds elite cult status.
+    ========================================= */}
+    <div class="mb-32 md:mb-48 text-center max-w-5xl mx-auto reveal-up">
+      <div class="inline-flex justify-center mb-10">
+        {[1, 2, 3, 4, 5].map(() => (
+          <svg class="w-6 h-6 text-emerald-500 mx-1 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+        ))}
+      </div>
+      <h2 class="text-3xl md:text-5xl lg:text-7xl text-white font-['Playfair_Display'] leading-[1.2] md:leading-[1.1] font-black italic mb-12 drop-shadow-xl">
+        "I swapped my morning coffee for Sujata Spirulina. The afternoon crashes are gone, and my mental clarity is sharper than ever."
+      </h2>
+      <div class="flex flex-col items-center justify-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gray-800 border border-emerald-500/30 overflow-hidden">
+          {/* You can replace this src with an actual portrait later */}
+          <img src="https://ui-avatars.com/api/?name=Dr+Anjali&background=064e3b&color=fff" alt="Authority" class="w-full h-full object-cover grayscale" />
+        </div>
+        <p class="text-white font-bold tracking-widest uppercase text-[10px] md:text-xs">Dr. Anjali M.</p>
+        <p class="text-emerald-500/80 font-mono tracking-widest uppercase text-[9px] md:text-[10px]">Clinical Nutritionist & Marathoner</p>
+      </div>
+    </div>
+
+    {/* =========================================
+        PART 3: THE AUTHORITY HALLMARKS
+        Psychology: The ultimate safety net. Kills all objections before checkout.
+    ========================================= */}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 reveal-up">
+      
+      {/* Hallmark 1 */}
+      <div class="group p-6 md:p-8 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/40 hover:bg-emerald-900/10 transition-all duration-500 flex flex-col items-center text-center">
+        <div class="w-12 h-12 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h4 class="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-2">100% Vegan</h4>
+        <p class="text-gray-500 text-[10px] md:text-xs">Plant-based & Non-GMO</p>
+      </div>
+
+      {/* Hallmark 2 */}
+      <div class="group p-6 md:p-8 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/40 hover:bg-emerald-900/10 transition-all duration-500 flex flex-col items-center text-center">
+        <div class="w-12 h-12 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+        </div>
+        <h4 class="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-2">Zero Toxins</h4>
+        <p class="text-gray-500 text-[10px] md:text-xs">Heavy Metal Free</p>
+      </div>
+
+      {/* Hallmark 3 */}
+      <div class="group p-6 md:p-8 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/40 hover:bg-emerald-900/10 transition-all duration-500 flex flex-col items-center text-center">
+        <div class="w-12 h-12 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+        </div>
+        <h4 class="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-2">Cold Pressed</h4>
+        <p class="text-gray-500 text-[10px] md:text-xs">100% Live Enzymes</p>
+      </div>
+
+      {/* Hallmark 4 */}
+      <div class="group p-6 md:p-8 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/40 hover:bg-emerald-900/10 transition-all duration-500 flex flex-col items-center text-center">
+        <div class="w-12 h-12 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+        </div>
+        <h4 class="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-2">GMP Certified</h4>
+        <p class="text-gray-500 text-[10px] md:text-xs">Strict Lab Standards</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{/* =========================================
+    THE INTERACTIVE & REVEAL ENGINE
+========================================= */}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Interactive Protocol Tabs Logic
+    const tabs = document.querySelectorAll('.trust-tab-btn');
+    const contents = document.querySelectorAll('.trust-tab-content');
+    const activeLine = document.getElementById('active-tab-line');
+
+    tabs.forEach(tab => {
+      // You can change 'click' to 'mouseenter' if you want it to change just by hovering!
+      tab.addEventListener('click', () => {
+        // Remove active states from all
+        tabs.forEach(t => {
+          t.classList.remove('active', 'text-white');
+          t.classList.add('text-gray-500');
+        });
+        contents.forEach(c => {
+          c.classList.remove('opacity-100', 'translate-y-0', 'z-20');
+          c.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none', 'z-10');
+        });
+
+        // Add active state to clicked
+        tab.classList.add('active', 'text-white');
+        tab.classList.remove('text-gray-500');
+        
+        const targetId = tab.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId);
+        
+        targetContent.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none', 'z-10');
+        targetContent.classList.add('opacity-100', 'translate-y-0', 'z-20');
+
+        // Move the glowing line indicator
+        const index = parseInt(tab.getAttribute('data-index'));
+        activeLine.style.transform = `translateY(${index * 100}%)`;
+      });
+    });
+
+    // 2. Cinematic Scroll Reveal Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // observer.unobserve(entry.target); // Uncomment if you only want it to reveal once
+        }
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -100px 0px" });
+
+    document.querySelectorAll('.reveal-up').forEach((el) => {
+      observer.observe(el);
+    });
+  });
+</script>
+
+<style>
+  /* Cinematic Fade In Up */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
