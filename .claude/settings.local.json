@@ -4,7 +4,8 @@
       "Bash(npm run:*)",
       "Bash(grep -v \"^\\\\.$\")",
       "Bash(grep -v \"^\\\\.\\\\.$\")",
-      "Bash(node -e \"const pkg = require\\(''./package.json''\\); console.log\\(''@astrojs/vercel:'', pkg.dependencies[''@astrojs/vercel'']\\); console.log\\(''astro:'', pkg.dependencies[''astro'']\\);\")"
+      "Bash(node -e \"const pkg = require\\(''./package.json''\\); console.log\\(''@astrojs/vercel:'', pkg.dependencies[''@astrojs/vercel'']\\); console.log\\(''astro:'', pkg.dependencies[''astro'']\\);\")",
+      "Bash(node -e \"const p=require\\(''F:/RK/Sujata Nutrilive/sujata-nutrilive/node_modules/@astrojs/vercel/package.json''\\); console.log\\(p.version\\)\")"
     ]
   }
 }
