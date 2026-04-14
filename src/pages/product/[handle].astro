@@ -6,7 +6,7 @@ const storefrontToken = '32f678c5f8d1345e945ed48713d9cf2f';
 
 const { handle } = Astro.params;
 
-// 🌟 THE FIX: Updated Metafield Keys based on your Shopify Screenshot!
+// 🌟 Updated Metafield Keys based on your Shopify Admin
 const productQuery = `
   query ProductByHandle($handle: String!) {
     product(handle: $handle) {
@@ -31,23 +31,17 @@ const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
 const data = await res.json();
 const product = data.data?.product;
 
-// 🔍 DIAGNOSTIC LOG (Tujhya VS Code chya terminal madhe disel)
-console.log("--- SHOPIFY DATA DEBUG ---");
-console.log("Product Title:", product?.title);
-console.log("Metafield Ingredients:", product?.ingredients);
-console.log("Metafield Timeline:", product?.timeline);
-console.log("--------------------------");
-
 if (!product) return Astro.redirect('/store');
 
 const images = product.images.edges.map((e: any) => e.node);
 const variants = product.variants.edges.map((e: any) => e.node);
 const primaryImage = images[0];
+
 const price = parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2);
 const maxPrice = parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2);
 const hasPriceRange = price !== maxPrice;
 
-// 🌟 NEW: Metafields cha JSON string la Object madhe convert karne (Fallback sobat)
+// JSON Parsing with Fallbacks
 const ingredientsData = product.ingredients?.value ? JSON.parse(product.ingredients.value) : [];
 const timelineData = product.timeline?.value ? JSON.parse(product.timeline.value) : [];
 const labReportUrl = product.labReport?.value || null;
@@ -92,7 +86,7 @@ const labReportUrl = product.labReport?.value || null;
           <div id="premium-3d-track" class="relative w-full aspect-[4/5] md:aspect-square bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.02] flex items-center justify-center cursor-none" style="perspective: 1500px;">
             <div id="ambient-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-emerald-500/40 rounded-full pointer-events-none transition-transform duration-150 ease-out will-change-transform blur-[90px]"></div>
             <div id="image-skeleton" class="absolute inset-0 bg-[#f8faf9] animate-pulse z-10 flex items-center justify-center transition-opacity duration-700">
-               <div class="w-8 h-8 border-2 border-[#166534]/20 border-t-[#166534] rounded-full animate-spin"></div>
+              <div class="w-8 h-8 border-2 border-[#166534]/20 border-t-[#166534] rounded-full animate-spin"></div>
             </div>
             <div id="bottle-3d-wrapper" class="relative z-20 w-[70%] h-[70%] flex items-center justify-center transition-transform duration-300 ease-out will-change-transform">
                 <img id="main-pdp-image" src={primaryImage?.url || '/spirulina-bottle.png'} alt={product.title} class="relative z-20 w-full h-full object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out" onload="document.getElementById('image-skeleton').style.opacity='0'; document.getElementById('image-skeleton').style.pointerEvents='none';" />
@@ -138,7 +132,7 @@ const labReportUrl = product.labReport?.value || null;
               <div class="flex flex-col">
                 <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 mb-1">Formulation Investment</span>
                 <div class="flex items-baseline gap-1">
-                  <span class="text-3xl font-black text-[#111827]">₹{hasPriceRange ? `${price} - ${maxPrice}` : price}</span>
+                  <span id="dynamic-price" class="text-3xl font-black text-[#111827] transition-all duration-300 inline-block">₹{price}</span>
                 </div>
               </div>
               <div class="text-right flex flex-col items-end">
@@ -150,9 +144,13 @@ const labReportUrl = product.labReport?.value || null;
             {variants.length > 1 && (
               <div class="mb-6 border-t border-gray-50 pt-5">
                 <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size</span>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2" id="variant-selector">
                   {variants.map((v: any, i: number) => (
-                    <button class={`variant-btn px-5 py-2.5 rounded-lg border-2 text-xs font-bold transition-all duration-300 ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}>
+                    <button 
+                      class={`variant-btn px-5 py-2.5 rounded-lg border-2 text-xs font-bold transition-all duration-300 ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                      data-variant-id={v.id}
+                      data-price={v.price.amount}
+                    >
                       {v.title}
                     </button>
                   ))}
@@ -161,12 +159,22 @@ const labReportUrl = product.labReport?.value || null;
             )}
 
             <div class="relative w-full h-14" id="magnetic-btn-wrapper">
-              <button id="add-to-cart-btn" class="absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform">
+              <button 
+                id="add-to-cart-btn" 
+                type="button"
+                data-domain={shopifyDomain} 
+                data-token={storefrontToken}
+                data-default-variant={variants[0]?.id}
+                class="absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed"
+              >
                 <div class="absolute inset-0 bg-gradient-to-r from-[#166534] to-[#042f17] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.1,0,0,1)] z-0"></div>
-                <span class="relative z-10 text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-2">
-                  Add to Routine
+                
+                <span id="btn-text" class="relative z-10 text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-2 transition-opacity duration-300">
+                  Secure Checkout
                   <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>
+
+                <svg id="btn-spinner" class="absolute z-10 w-5 h-5 text-white animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
               </button>
             </div>
           </div>
@@ -338,7 +346,6 @@ const labReportUrl = product.labReport?.value || null;
     <div class="w-full aspect-video bg-white/5 border border-white/10 rounded-xl relative overflow-hidden flex flex-col items-center justify-center">
            <svg class="w-16 h-16 text-emerald-500/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
            <span class="text-gray-500 text-[10px] uppercase tracking-widest">[ PDF REPORT LOADED ]</span>
-           
            {labReportUrl ? (
              <a href={labReportUrl} target="_blank" class="mt-4 px-6 py-2 bg-emerald-500 text-black text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-emerald-400 transition-colors z-20 relative">
                Open Full PDF
@@ -346,7 +353,6 @@ const labReportUrl = product.labReport?.value || null;
            ) : (
              <span class="mt-4 text-emerald-500/50 text-[10px] uppercase tracking-widest">Document Secured</span>
            )}
-           
            <div class="absolute top-0 w-full h-[2px] bg-emerald-500 shadow-[0_0_20px_#10b981] opacity-50 animate-[scan_3s_linear_infinite]"></div>
         </div>
   </div>
@@ -364,9 +370,9 @@ const labReportUrl = product.labReport?.value || null;
     @keyframes wave { 0%, 100% { height: 4px; } 50% { height: 24px; } }
   </style>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      
+  <script is:inline>
+    // All code is wrapped in an init function to handle Astro's ViewTransitions and page loads
+    function initProductPage() {
       // Cinematic Reveal
       setTimeout(() => {
         const reveal = document.getElementById('cinematic-reveal');
@@ -435,19 +441,19 @@ const labReportUrl = product.labReport?.value || null;
 
       // Magnetic Button
       const btnWrapper = document.getElementById('magnetic-btn-wrapper');
-      const btn = document.getElementById('add-to-cart-btn');
+      const atcBtn = document.getElementById('add-to-cart-btn');
 
-      if (btnWrapper && btn) {
+      if (btnWrapper && atcBtn) {
         btnWrapper.addEventListener('mousemove', (e) => {
           const rect = btnWrapper.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
           const pullX = (x - rect.width / 2) * 0.3;
           const pullY = (y - rect.height / 2) * 0.3;
-          btn.style.transform = `translate(${pullX}px, ${pullY}px)`;
+          atcBtn.style.transform = `translate(${pullX}px, ${pullY}px)`;
         });
         btnWrapper.addEventListener('mouseleave', () => {
-          btn.style.transform = `translate(0px, 0px)`;
+          atcBtn.style.transform = `translate(0px, 0px)`;
         });
       }
 
@@ -529,26 +535,23 @@ const labReportUrl = product.labReport?.value || null;
         }, { passive: true });
       }
 
-      // Lab Modal
+      // Lab Modal (100% FIXED & CRASH-PROOF)
       const labModal = document.getElementById('lab-modal');
-      const labCard = document.getElementById('lab-modal-card');
       const openLabBtn = document.getElementById('open-lab-report');
       const closeLabBtn = document.getElementById('close-lab-modal');
 
       if(labModal && openLabBtn) {
-        openLabBtn.addEventListener('click', () => {
-          labModal.classList.remove('opacity-0', 'pointer-events-none');
-          labCard.classList.remove('scale-95');
-          labCard.classList.add('scale-100');
-          document.body.style.overflow = 'hidden'; 
-        });
         const closeModal = () => {
           labModal.classList.add('opacity-0', 'pointer-events-none');
-          labCard.classList.add('scale-95');
-          labCard.classList.remove('scale-100');
           document.body.style.overflow = '';
         };
-        closeLabBtn.addEventListener('click', closeModal);
+        openLabBtn.addEventListener('click', () => {
+          labModal.classList.remove('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = 'hidden'; 
+        });
+        if (closeLabBtn) {
+            closeLabBtn.addEventListener('click', closeModal);
+        }
         labModal.addEventListener('click', (e) => {
           if(e.target === labModal) closeModal();
         });
@@ -600,7 +603,128 @@ const labReportUrl = product.labReport?.value || null;
         }, Math.floor(Math.random() * 10000) + 20000);
       }
 
-    });
+      // ==========================================
+      // PHASE 4: THE CONVERSION ENGINE (BULLETPROOF)
+      // ==========================================
+      const priceDisplay = document.getElementById('dynamic-price');
+      const variantBtns = document.querySelectorAll('.variant-btn');
+
+      // 1. Variant Switching Logic (जर २-३ साईझ असतील तर)
+      variantBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          variantBtns.forEach(b => {
+            b.classList.remove('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
+            b.classList.add('border-gray-200', 'text-gray-500');
+          });
+
+          const target = e.currentTarget;
+          target.classList.remove('border-gray-200', 'text-gray-500');
+          target.classList.add('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
+
+          const newPrice = parseFloat(target.getAttribute('data-price')).toFixed(2);
+          if(priceDisplay) {
+            priceDisplay.style.opacity = '0';
+            priceDisplay.style.transform = 'translateY(-5px)';
+            setTimeout(() => {
+              priceDisplay.innerText = `₹${newPrice}`;
+              priceDisplay.style.opacity = '1';
+              priceDisplay.style.transform = 'translateY(0)';
+            }, 150);
+          }
+        });
+      });
+
+      // 2. Add To Cart -> Instant Checkout (१००% Safe Logic)
+      if(atcBtn) {
+        atcBtn.addEventListener('click', async function(e) {
+          e.preventDefault(); 
+          e.stopPropagation(); 
+          console.log("--- SECURE CHECKOUT INITIATED ---");
+
+          const domain = atcBtn.getAttribute('data-domain');
+          const token = atcBtn.getAttribute('data-token');
+          const defaultVariantId = atcBtn.getAttribute('data-default-variant');
+
+          // बटण दाबल्याच्या अचूक क्षणी Variant ID शोधणे
+          const activeVariantBtn = document.querySelector('.variant-btn.selected-variant');
+          const finalVariantId = activeVariantBtn ? activeVariantBtn.getAttribute('data-variant-id') : defaultVariantId;
+
+          console.log("Final Variant ID:", finalVariantId);
+
+          if(!finalVariantId || finalVariantId === 'undefined') {
+            alert("⚠️ Error: Product Variant ID is missing! Cannot create cart.");
+            return;
+          }
+
+          const btnText = document.getElementById('btn-text');
+          const btnSpinner = document.getElementById('btn-spinner');
+
+          // ॲनिमेशन चालू करणे
+          atcBtn.disabled = true;
+          if(btnText) btnText.style.opacity = '0';
+          if(btnSpinner) btnSpinner.classList.remove('hidden');
+
+          const query = `
+            mutation cartCreate($input: CartInput!) {
+              cartCreate(input: $input) {
+                cart { checkoutUrl }
+                userErrors { message }
+              }
+            }
+          `;
+          
+          const variables = {
+            input: { lines: [{ merchandiseId: finalVariantId, quantity: 1 }] }
+          };
+
+          try {
+            const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Storefront-Access-Token': token
+              },
+              body: JSON.stringify({ query, variables })
+            });
+
+            const data = await response.json();
+            console.log("Shopify API Response:", data);
+
+            const checkoutUrl = data.data?.cartCreate?.cart?.checkoutUrl;
+
+            if(checkoutUrl) {
+              console.log("✅ Cart Created! Redirecting...");
+              window.location.href = checkoutUrl; 
+            } else {
+              const errorMsg = data.data?.cartCreate?.userErrors[0]?.message || "Unknown API Error";
+              console.error("Cart Errors:", errorMsg);
+              alert("❌ Checkout Error: " + errorMsg);
+              resetButton();
+            }
+          } catch (error) {
+            console.error("Network/API Error:", error);
+            alert("❌ Network error. Please check your connection and try again.");
+            resetButton();
+          }
+
+          function resetButton() {
+            atcBtn.disabled = false;
+            if(btnText) btnText.style.opacity = '1';
+            if(btnSpinner) btnSpinner.classList.add('hidden');
+          }
+        });
+      }
+    } // End of initProductPage
+
+    // Guarantee execution regardless of Astro's router state
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProductPage);
+    } else {
+      initProductPage();
+    }
+    
+    // Fallback for Astro ViewTransitions
+    document.addEventListener('astro:page-load', initProductPage);
   </script>
 
 </StoreLayout>
