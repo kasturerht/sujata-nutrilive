@@ -1,147 +1,275 @@
 ---
-// src/components/StoreHeader.astro
+// src/components/StoreHero.astro
 ---
 
-<header id="main-header" class="fixed top-0 w-full z-[100] transition-all duration-300">
+<section id="d2c-performance-hero" class="relative w-full bg-white font-['Inter'] pt-24 md:pt-32 overflow-hidden border-b border-gray-200">
   
-  {/* 1. DYNAMIC ANNOUNCEMENT BAR (Urgency Engine) */}
-  <div class="w-full bg-[#111827] text-white overflow-hidden py-2 border-b border-white/5">
-    <div class="flex whitespace-nowrap animate-[marquee_25s_linear_infinite] hover:pause">
-      <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-8 border-r border-white/10 flex items-center gap-2">
-        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-        FLASH SALE: BUY 2 GET 1 FREE ON SPIRULINA POWDER
-      </span>
-      <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-8 border-r border-white/10">
-        🚀 FREE EXPRESS DELIVERY ABOVE ₹999
-      </span>
-      <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-8 border-r border-white/10">
-        🌿 100% PURE COLD-PRESSED FORMULATIONS
-      </span>
-      {/* Repeat for seamless loop */}
-      <span class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-8 border-r border-white/10 flex items-center gap-2">
-        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-        FLASH SALE: BUY 2 GET 1 FREE ON SPIRULINA POWDER
-      </span>
+  {/* THE OFFER SLIDER CONTAINER */}
+  <div class="relative w-full overflow-hidden" id="hero-slider">
+    
+    {/* ==========================================
+        SLIDE 1: THE BIG DISCOUNT (Energy/Gym Focus)
+        ========================================== */}
+    <div class="slide absolute inset-0 w-full h-full transition-transform duration-500 ease-in-out translate-x-0" data-index="0">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#f8fafc] to-[#f0fdf4] z-0"></div>
+      
+      <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 h-full py-12 md:py-20 flex flex-col md:flex-row items-center justify-between">
+        
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-20">
+          <h2 class="text-xl md:text-3xl font-light text-gray-800 mb-2 font-['Playfair_Display']">Peak Energy Made Affordable</h2>
+          
+          <div class="flex flex-col items-center md:items-start mb-6">
+            <span class="text-[#D97706] text-[clamp(4rem,8vw,6rem)] font-black leading-none tracking-tighter drop-shadow-sm">SAVE ₹500</span>
+            <span class="text-xl md:text-2xl font-medium text-gray-600 mt-2">on 30-Day Spirulina Powder Kit</span>
+          </div>
+
+          <div class="flex items-center gap-4 mb-8">
+            <span class="text-xl md:text-2xl text-gray-400 font-bold line-through decoration-red-500/50 decoration-2">₹1,999</span>
+            <span class="text-4xl md:text-5xl font-black text-[#111827]">₹1,499</span>
+          </div>
+
+          <button class="bg-[#4D7C0F] hover:bg-[#3F6212] text-white text-lg md:text-xl font-bold uppercase tracking-wider px-10 py-4 md:py-5 rounded shadow-[0_10px_20px_rgba(77,124,15,0.3)] transition-all transform hover:scale-105 w-full sm:w-auto">
+            SHOP NOW
+          </button>
+        </div>
+
+        <div class="w-full md:w-1/2 h-[300px] md:h-[450px] relative mt-10 md:mt-0 flex items-center justify-center">
+          <img src="/spirulina-powder.png" alt="Spirulina Powder Kit" class="relative z-10 h-full max-h-[110%] object-contain drop-shadow-2xl" fetchpriority="high"/>
+          <div class="absolute bottom-10 -left-4 bg-white/95 px-4 py-2 rounded shadow-lg border border-gray-100 flex flex-col z-20">
+            <span class="text-xs font-bold text-gray-500 uppercase">Net Qty.</span>
+            <span class="text-sm font-black text-[#111827]">250g (30 Days)</span>
+          </div>
+        </div>
+      </div>
     </div>
+
+    {/* ==========================================
+        SLIDE 2: THE BUNDLE OFFER (Immunity Focus)
+        ========================================== */}
+    <div class="slide absolute inset-0 w-full h-full transition-transform duration-500 ease-in-out translate-x-full" data-index="1">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#eff6ff] to-[#f0f9ff] z-0"></div>
+      
+      <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 h-full py-12 md:py-20 flex flex-col md:flex-row items-center justify-between">
+        
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-20">
+          <h2 class="text-xl md:text-3xl font-light text-gray-800 mb-2 font-['Playfair_Display']">Complete Cellular Immunity</h2>
+          
+          <div class="flex flex-col items-center md:items-start mb-6">
+            <span class="text-[#0369A1] text-[clamp(3.5rem,7vw,5.5rem)] font-black leading-none tracking-tighter drop-shadow-sm uppercase">Buy 2 Get 1</span>
+            <span class="text-xl md:text-3xl font-black text-[#0284C7] uppercase mt-1">Absolutely Free</span>
+            <span class="text-lg md:text-xl font-medium text-gray-600 mt-2">on Pure Spirulina Capsules</span>
+          </div>
+
+          <button class="bg-[#0369A1] hover:bg-[#0284C7] text-white text-lg md:text-xl font-bold uppercase tracking-wider px-10 py-4 md:py-5 rounded shadow-[0_10px_20px_rgba(3,105,161,0.3)] transition-all transform hover:scale-105 w-full sm:w-auto mt-4">
+            CLAIM BUNDLE
+          </button>
+        </div>
+
+        <div class="w-full md:w-1/2 h-[300px] md:h-[450px] relative mt-10 md:mt-0 flex items-center justify-center gap-2">
+          <img src="/spirulina-bottle.png" alt="Bottle 1" class="relative z-10 h-[70%] object-contain drop-shadow-xl -rotate-6 scale-90"/>
+          <img src="/spirulina-bottle.png" alt="Bottle 2" class="relative z-20 h-[90%] object-contain drop-shadow-2xl z-20"/>
+          <img src="/spirulina-bottle.png" alt="Bottle 3 (Free)" class="relative z-10 h-[70%] object-contain drop-shadow-xl rotate-6 scale-90 opacity-90"/>
+          
+          <div class="absolute top-1/2 right-10 bg-red-600 text-white px-3 py-1 text-sm font-black uppercase tracking-widest rounded shadow-lg -rotate-12 z-30 animate-pulse">
+            FREE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ==========================================
+        SLIDE 3: THE COMBO PACK (Powder + Bottle)
+        ========================================== */}
+    <div class="slide absolute inset-0 w-full h-full transition-transform duration-500 ease-in-out translate-x-full" data-index="2">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#fefce8] to-[#fffbeb] z-0"></div>
+      
+      <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 h-full py-12 md:py-20 flex flex-col md:flex-row items-center justify-between">
+        
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-20">
+          <h2 class="text-xl md:text-3xl font-light text-gray-800 mb-2 font-['Playfair_Display']">The Ultimate Protocol</h2>
+          
+          <div class="flex flex-col items-center md:items-start mb-6">
+            <span class="text-[#B45309] text-[clamp(3.5rem,7vw,5.5rem)] font-black leading-none tracking-tighter drop-shadow-sm uppercase">FLAT 30% OFF</span>
+            <span class="text-lg md:text-xl font-medium text-gray-600 mt-2">Powder + Capsules Dual Pack</span>
+          </div>
+
+          <button class="bg-[#B45309] hover:bg-[#92400E] text-white text-lg md:text-xl font-bold uppercase tracking-wider px-10 py-4 md:py-5 rounded shadow-[0_10px_20px_rgba(180,83,9,0.3)] transition-all transform hover:scale-105 w-full sm:w-auto mt-4">
+            SHOP THE COMBO
+          </button>
+        </div>
+
+        <div class="w-full md:w-1/2 h-[300px] md:h-[450px] relative mt-10 md:mt-0 flex items-center justify-center">
+          {/* Using BOTH images for the combo */}
+          <img src="/spirulina-powder.png" alt="Spirulina Powder" class="relative z-10 h-[80%] object-contain drop-shadow-2xl"/>
+          <img src="/spirulina-bottle.png" alt="Spirulina Bottle" class="relative z-20 h-[60%] object-contain drop-shadow-xl -ml-12 md:-ml-20 mt-12"/>
+          
+          <div class="absolute top-10 left-10 md:left-20 bg-black text-[#F59E0B] px-4 py-2 text-sm font-black uppercase tracking-widest rounded shadow-lg -rotate-6 z-30">
+            BEST VALUE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ==========================================
+        SLIDE 4: THE LOW-BARRIER TRIAL (Powder)
+        ========================================== */}
+    <div class="slide absolute inset-0 w-full h-full transition-transform duration-500 ease-in-out translate-x-full" data-index="3">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#fdf4ff] to-[#f5f3ff] z-0"></div>
+      
+      <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 relative z-10 h-full py-12 md:py-20 flex flex-col md:flex-row items-center justify-between">
+        
+        <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left z-20">
+          <h2 class="text-xl md:text-3xl font-light text-gray-800 mb-2 font-['Playfair_Display']">New to Spirulina?</h2>
+          
+          <div class="flex flex-col items-center md:items-start mb-6">
+            <span class="text-[#7E22CE] text-[clamp(3.5rem,7vw,5.5rem)] font-black leading-none tracking-tighter drop-shadow-sm uppercase">7-DAY TRIAL</span>
+            <span class="text-xl md:text-3xl font-black text-[#6B21A8] uppercase mt-1">AT JUST ₹499</span>
+            <span class="text-lg md:text-xl font-medium text-gray-600 mt-2">Experience the energy shift. No commitments.</span>
+          </div>
+
+          <button class="bg-[#7E22CE] hover:bg-[#6B21A8] text-white text-lg md:text-xl font-bold uppercase tracking-wider px-10 py-4 md:py-5 rounded shadow-[0_10px_20px_rgba(126,34,206,0.3)] transition-all transform hover:scale-105 w-full sm:w-auto mt-4">
+            START TRIAL
+          </button>
+        </div>
+
+        <div class="w-full md:w-1/2 h-[300px] md:h-[450px] relative mt-10 md:mt-0 flex items-center justify-center">
+          {/* Scaled down powder image for "Trial" feel */}
+          <img src="/spirulina-powder.png" alt="Trial Pack" class="relative z-10 h-[75%] object-contain drop-shadow-xl"/>
+          
+          <div class="absolute bottom-1/4 right-4 md:right-16 bg-[#7E22CE] text-white px-3 py-1.5 text-xs md:text-sm font-black uppercase tracking-widest rounded shadow-lg rotate-12 z-30">
+            BEGINNER FRIENDLY
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* SLIDER CONTROLS (Dots - Now 4 dots) */}
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+      <button class="slider-dot w-3 h-3 rounded-full bg-gray-800 transition-colors shadow-sm" data-index="0" aria-label="Slide 1"></button>
+      <button class="slider-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 transition-colors shadow-sm" data-index="1" aria-label="Slide 2"></button>
+      <button class="slider-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 transition-colors shadow-sm" data-index="2" aria-label="Slide 3"></button>
+      <button class="slider-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 transition-colors shadow-sm" data-index="3" aria-label="Slide 4"></button>
+    </div>
+
   </div>
 
-  {/* 2. THE UTILITY HEADER (Kapiva Style Details) */}
-  <nav class="bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 md:px-8 py-3">
-    <div class="max-w-[95rem] mx-auto flex items-center justify-between gap-4 md:gap-8">
+  {/* ==========================================
+      THE KAPIVA-STYLE "SELECT CONCERN" BAR
+      ========================================== */}
+  <div class="w-full bg-white border-t border-gray-200 shadow-md relative z-40">
+    <div class="max-w-[90rem] mx-auto px-4 py-3 flex items-center gap-4 overflow-x-auto no-scrollbar">
       
-      {/* Logo */}
-      <a href="/" class="flex-shrink-0">
-        <h1 class="text-xl md:text-2xl font-black text-[#111827] tracking-tighter">
-          SUJATA<span class="text-[#166534]">.</span>
-        </h1>
+      <div class="flex items-center gap-2 flex-shrink-0 border-r border-gray-200 pr-4">
+        <svg class="w-5 h-5 text-[#4D7C0F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+        <span class="text-sm font-black text-gray-800 uppercase tracking-widest whitespace-nowrap">Select Concern:</span>
+      </div>
+
+      <a href="#product-ecosystem" class="flex-shrink-0 flex items-center gap-2 px-4 py-1.5 border border-[#4D7C0F] bg-[#f7fee7] rounded hover:bg-[#ecfccb] transition-colors">
+        <span class="w-5 h-5 rounded-full bg-[#4D7C0F] text-white flex items-center justify-center text-[10px]">⚡</span>
+        <span class="text-xs font-bold text-[#4D7C0F]">Energy & Focus</span>
+      </a>
+      
+      <a href="#product-ecosystem" class="flex-shrink-0 flex items-center gap-2 px-4 py-1.5 border border-gray-200 rounded hover:border-gray-300 hover:bg-gray-50 transition-colors">
+        <span class="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[10px]">🛡️</span>
+        <span class="text-xs font-bold text-gray-700">Immunity</span>
       </a>
 
-      {/* Pincode Tracker (Trust Element) */}
-      <div class="hidden lg:flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 cursor-pointer hover:bg-white transition-all group relative" id="pincode-trigger">
-        <svg class="w-4 h-4 text-[#166534]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        <div class="flex flex-col">
-          <span class="text-[9px] uppercase font-bold text-gray-400">Deliver to</span>
-          <span class="text-[11px] font-black text-[#111827]" id="display-pincode">Check Pincode</span>
-        </div>
-        
-        {/* Pincode Mini-Popup (Hidden by default) */}
-        <div id="pincode-popup" class="absolute top-[110%] left-0 w-64 bg-white shadow-2xl rounded-2xl p-5 border border-gray-100 opacity-0 pointer-events-none transition-all scale-95 z-50">
-          <p class="text-xs font-bold text-[#111827] mb-3">Verify Pincode for Accuracy</p>
-          <div class="flex gap-2">
-            <input type="text" id="pincode-input" maxlength="6" placeholder="Enter Pincode" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs focus:ring-1 focus:ring-[#166534] outline-none" />
-            <button id="verify-btn" class="bg-[#111827] text-white px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-[#166534]">Verify</button>
-          </div>
-          <p id="pincode-status" class="text-[9px] mt-2 hidden"></p>
-        </div>
-      </div>
+      <a href="#product-ecosystem" class="flex-shrink-0 flex items-center gap-2 px-4 py-1.5 border border-gray-200 rounded hover:border-gray-300 hover:bg-gray-50 transition-colors">
+        <span class="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[10px]">✨</span>
+        <span class="text-xs font-bold text-gray-700">Skin & Hair</span>
+      </a>
 
-      {/* Main Search Bar (Intent Capture) */}
-      <div class="flex-1 max-w-xl relative group">
-        <input 
-          type="text" 
-          placeholder="Search for 'Hair Oil', 'Spirulina Capsules'..." 
-          class="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-[#166534]/10 focus:border-[#166534] outline-none transition-all pl-12"
-        />
-        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-[#166534] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-      </div>
-
-      {/* Action Icons */}
-      <div class="flex items-center gap-2 md:gap-5">
-        <a href="/account" class="hidden sm:flex flex-col items-center gap-1 group">
-          <svg class="w-5 h-5 text-gray-600 group-hover:text-[#166534] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-          <span class="text-[9px] font-bold uppercase text-gray-500 group-hover:text-[#166534]">Profile</span>
-        </a>
-        <button id="cart-drawer-trigger" class="relative bg-[#111827] text-white p-3 md:px-5 md:py-3 rounded-2xl flex items-center gap-3 hover:bg-[#166534] transition-all shadow-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          <span class="hidden md:block text-xs font-bold uppercase tracking-widest">Cart</span>
-          <span id="header-cart-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-[#166534] border-2 border-white text-[10px] font-black rounded-full flex items-center justify-center">0</span>
-        </button>
-      </div>
+      <a href="#product-ecosystem" class="flex-shrink-0 flex items-center gap-2 px-4 py-1.5 border border-gray-200 rounded hover:border-gray-300 hover:bg-gray-50 transition-colors">
+        <span class="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-[10px]">🦠</span>
+        <span class="text-xs font-bold text-gray-700">Gut Health</span>
+      </a>
 
     </div>
-  </nav>
-</header>
+  </div>
+</section>
 
-<style is:global>
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-</style>
-
+{/* SLIDER JAVASCRIPT */}
 <script>
-  // TASK 1 LOGIC ENGINE
   document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+
+    // Set dynamic height
+    const sliderContainer = document.getElementById('hero-slider');
+    const setHeight = () => {
+      setTimeout(() => {
+        let maxH = 0;
+        slides.forEach(s => {
+          const h = s.scrollHeight;
+          if(h > maxH) maxH = h;
+        });
+        const minHeight = window.innerWidth < 768 ? 600 : 550;
+        sliderContainer.style.height = `${Math.max(maxH, minHeight)}px`;
+      }, 100);
+    };
     
-    // 1. Pincode Popup Toggle
-    const trigger = document.getElementById('pincode-trigger');
-    const popup = document.getElementById('pincode-popup');
-    const input = document.getElementById('pincode-input') as HTMLInputElement;
-    const verifyBtn = document.getElementById('verify-btn');
-    const status = document.getElementById('pincode-status');
-    const displayPincode = document.getElementById('display-pincode');
+    window.addEventListener('resize', setHeight);
+    setHeight();
 
-    trigger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      popup?.classList.toggle('opacity-0');
-      popup?.classList.toggle('pointer-events-none');
-      popup?.classList.toggle('translate-y-2');
+    function goToSlide(index) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.style.transform = 'translateX(0)';
+          slide.style.zIndex = '10';
+        } else if (i < index) {
+          slide.style.transform = 'translateX(-100%)';
+          slide.style.zIndex = '0';
+        } else {
+          slide.style.transform = 'translateX(100%)';
+          slide.style.zIndex = '0';
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('bg-gray-400');
+          dot.classList.add('bg-gray-800');
+        } else {
+          dot.classList.remove('bg-gray-800');
+          dot.classList.add('bg-gray-400');
+        }
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % totalSlides;
+      goToSlide(next);
+    }
+
+    const startAutoSlide = () => {
+      autoSlideInterval = setInterval(nextSlide, 4000); // 4 seconds per slide
+    };
+
+    const stopAutoSlide = () => {
+      clearInterval(autoSlideInterval);
+    };
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        stopAutoSlide();
+        goToSlide(index);
+        startAutoSlide();
+      });
     });
 
-    // 2. Logic Hook (Ready for API integration)
-    verifyBtn?.addEventListener('click', () => {
-      const pin = input.value;
-      if(pin.length === 6) {
-        status!.innerText = "🔍 Checking availability...";
-        status!.classList.remove('hidden', 'text-red-500');
-        status!.classList.add('text-gray-500');
-
-        // SIMULATED BACKEND LOGIC (Apan nantar ithe API call taku)
-        setTimeout(() => {
-          status!.innerText = "✅ Deliverable to " + pin;
-          status!.classList.replace('text-gray-500', 'text-[#166534]');
-          displayPincode!.innerText = pin;
-          
-          // Save to memory
-          localStorage.setItem('user_pincode', pin);
-          
-          setTimeout(() => {
-             popup?.classList.add('opacity-0', 'pointer-events-none');
-          }, 1500);
-        }, 1000);
-
-      } else {
-        status!.innerText = "❌ Invalid Pincode";
-        status!.classList.remove('hidden');
-        status!.classList.add('text-red-500');
-      }
-    });
-
-    // Close popup on click outside
-    document.addEventListener('click', () => {
-      popup?.classList.add('opacity-0', 'pointer-events-none');
-    });
-    popup?.addEventListener('click', (e) => e.stopPropagation());
-
+    goToSlide(0);
+    startAutoSlide();
+    
+    sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+    sliderContainer.addEventListener('mouseleave', startAutoSlide);
   });
 </script>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
