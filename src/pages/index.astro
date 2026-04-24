@@ -2,6 +2,7 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
+import StoreGoals from '../components/StoreGoals.astro';
 import StoreProducts from '../components/StoreProducts.astro';
 import StoreScience from '../components/StoreScience.astro';
 import StoreTrust from '../components/StoreTrust.astro';
@@ -71,6 +72,9 @@ const products = json.data?.products?.edges || [];
   
   {/* 1. The Hook */}
   <StoreHero />
+
+  {/* 🌟 NEW: 1.5 The Guidance (व्हिजिटरला दिशा दाखवणारा सेक्शन) */}
+  <StoreGoals />
   
   {/* 2. The Product (Bento Box) */}
   <StoreProducts products={products} />
