@@ -1,156 +1,152 @@
 ---
 // src/components/StoreSocialProof.astro
 
-// D2C Pro-Tip: Clean Data Structure
 const reviews = [
   {
     id: 1,
     name: "Vikram Desai",
-    category: "Energy",
+    category: "⚡ Energy",
     highlight: "No more 3 PM energy crashes.",
-    text: "I used to rely on pre-workouts and coffee, but nothing feels this clean. The midday brain fog is completely gone. Definitely the best addition to my morning routine.",
+    text: "I used to rely on pre-workouts and coffee, but nothing feels this clean. The midday brain fog is completely gone. Best addition to my routine.",
     avatar: "https://i.pravatar.cc/150?u=vikram",
     rating: 5,
-    verified: true,
     purchaseDate: "2 weeks ago"
   },
   {
     id: 2,
     name: "Priya Sharma",
-    category: "Immunity",
+    category: "🛡️ Immunity",
     highlight: "Haven't fallen sick this season.",
-    text: "The cold-pressed quality is real. My digestion has never been smoother, and I actually feel an internal shift in my immunity within 3 weeks of starting this.",
+    text: "The cold-pressed quality is real. My digestion has never been smoother, and I actually feel an internal shift in my immunity within 3 weeks.",
     avatar: "https://i.pravatar.cc/150?u=priya",
     rating: 5,
-    verified: true,
     purchaseDate: "1 month ago"
   },
   {
     id: 3,
     name: "Dr. Rohan M.",
-    category: "Gut Health",
+    category: "✨ Gut Health",
     highlight: "Zero fishy taste! Finally.",
-    text: "As a physician, I check heavy metal reports. Sujata is the only brand I trust. Plus, it mixes seamlessly without that awful swampy smell typical of ordinary spirulina.",
+    text: "As a physician, I check heavy metal reports. Sujata is the only brand I trust. Plus, it mixes seamlessly without that awful swampy smell.",
     avatar: "https://i.pravatar.cc/150?u=rohan",
     rating: 5,
-    verified: true,
     purchaseDate: "2 months ago"
   }
 ];
 ---
 
-<section id="social-proof-engine" class="relative bg-[#FCFBF7] py-24 lg:py-32 font-['Inter'] selection:bg-[#166534] selection:text-white border-t border-gray-100 z-10 overflow-hidden">
+<section id="social-proof-engine" class="relative bg-[#FCFBF7] py-20 lg:py-28 font-['Inter'] selection:bg-[#166534] selection:text-white border-t border-gray-100 z-10">
   
-  {/* Ambient Texture */}
-  <div class="absolute inset-0 pointer-events-none opacity-50 z-0">
-    <div class="absolute top-0 right-0 w-1/2 h-[500px] bg-gradient-to-bl from-amber-50 to-transparent"></div>
-    <div class="absolute bottom-0 left-0 w-1/2 h-[500px] bg-gradient-to-tr from-emerald-50 to-transparent"></div>
-  </div>
-
-  <div class="max-w-[85rem] mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+  <div class="max-w-[90rem] mx-auto px-5 md:px-6 lg:px-12 relative z-10">
     
     {/* ==========================================
-        ZONE 1: THE INDIAN TRUST HEADER (Ratings & Numbers)
+        ZONE 1: THE CLEAN HEADER (No Khichadi)
         ========================================== */}
-    <div class="flex flex-col items-center text-center mb-12">
-      <div class="flex gap-1 mb-4">
-        {[...Array(5)].map(() => (
-          <svg class="w-6 h-6 md:w-8 md:h-8 text-[#D97706] drop-shadow-sm" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        ))}
-      </div>
-      <div class="flex items-center justify-center gap-4 mb-2">
-        <h2 class="text-4xl md:text-5xl font-black text-[#111827] tracking-tight">4.9/5.0</h2>
-        <div class="h-10 w-px bg-gray-200"></div>
-        <div class="flex flex-col text-left">
-           <span class="text-lg md:text-xl font-bold text-[#166534]">50,000+</span>
-           <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Active Routines</span>
-        </div>
-      </div>
-      <p class="text-gray-500 text-sm md:text-base max-w-lg mt-2">
-        We didn't just build a supplement. We built India's most trusted daily energy and immunity protocol.
-      </p>
-    </div>
-
-    {/* ==========================================
-        ZONE 2: CONCERN FILTERS (The Familiar E-commerce UX)
-        ========================================== */}
-    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-16">
-      <button class="px-5 py-2.5 rounded-full bg-[#111827] text-white text-xs font-bold shadow-md transition-all">All Reviews</button>
-      <button class="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all flex items-center gap-1.5"><span class="text-amber-500">⚡</span> Energy</button>
-      <button class="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all flex items-center gap-1.5"><span class="text-blue-500">🛡️</span> Immunity</button>
-      <button class="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all flex items-center gap-1.5"><span class="text-emerald-500">✨</span> Skin & Gut</button>
-    </div>
-
-    {/* ==========================================
-        ZONE 3 & 4: THE HYBRID GRID (Cards + Video)
-        ========================================== */}
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 mb-16">
+    <div class="flex flex-col items-center text-center mb-10">
       
-      {/* LEFT: The "Masonry-style" Review Cards (Span 7) */}
-      <div class="lg:col-span-7 flex flex-col gap-6 md:gap-8">
-        
-        {reviews.map((review, index) => (
-          <div class={`bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(22,101,52,0.06)] transition-shadow duration-500 relative ${index === 1 ? 'md:ml-10' : ''}`}>
-            
-            {/* Verified Badge */}
-            <div class="absolute -top-3 right-6 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1.5 shadow-sm">
-               <svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-               Verified Purchase
-            </div>
-
-            {/* Stars & Category */}
-            <div class="flex items-center justify-between mb-4 mt-2">
-              <div class="flex gap-0.5">
-                {[...Array(review.rating)].map(() => (
-                  <svg class="w-4 h-4 text-[#D97706]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                ))}
-              </div>
-              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{review.category}</span>
-            </div>
-
-            {/* Text */}
-            <h4 class="text-lg md:text-xl font-bold text-[#111827] mb-2 leading-tight">"{review.highlight}"</h4>
-            <p class="text-gray-500 text-sm leading-relaxed mb-6">{review.text}</p>
-            
-            {/* User Info */}
-            <div class="flex items-center gap-3 pt-5 border-t border-gray-50">
-              <img src={review.avatar} alt={review.name} class="w-10 h-10 rounded-full bg-gray-100 object-cover" />
-              <div class="flex flex-col">
-                <span class="text-[#111827] font-bold text-sm">{review.name}</span>
-                <span class="text-gray-400 text-xs">{review.purchaseDate}</span>
-              </div>
-            </div>
-
-          </div>
-        ))}
-
+      {/* Stars & Rating (Simplified) */}
+      <div class="flex items-center gap-3 mb-4 bg-white px-5 py-2 rounded-full shadow-sm border border-gray-100">
+        <div class="flex gap-1">
+          {[...Array(5)].map(() => (
+            <svg class="w-4 h-4 text-[#D97706]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          ))}
+        </div>
+        <span class="text-sm font-black text-[#111827]">4.9/5.0</span>
+        <div class="w-1 h-1 bg-gray-300 rounded-full"></div>
+        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">50,000+ Reviews</span>
       </div>
 
-      {/* RIGHT: The Spotlight Auto-play Video (Span 5) */}
-      <div class="lg:col-span-5 relative flex items-center justify-center">
-        {/* Subtle Glow Behind Video */}
-        <div class="absolute inset-0 bg-[#166534]/5 rounded-[3rem] blur-[60px] pointer-events-none"></div>
-        
-        <div class="relative w-full max-w-[320px] lg:max-w-full aspect-[9/16] rounded-[2.5rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.1)] border-4 border-white group cursor-pointer">
-          {/* Note: Use a real video loop here, fallback is an image with an overlay */}
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10"></div>
-          <img src="/spirulina-bottle.png" alt="Customer Video" class="absolute inset-0 w-full h-full object-cover scale-110 opacity-80 group-hover:scale-100 transition-transform duration-700 blur-sm bg-[#111827]" />
-          
-          {/* Play Button Element */}
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div class="relative flex items-center justify-center">
-              <div class="absolute inset-0 bg-white/30 rounded-full animate-ping"></div>
-              <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full border border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </div>
+      <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-[#111827] tracking-tight mb-6">
+        Real People. <span class="italic text-[#166534]">Real Results.</span>
+      </h2>
 
-          <div class="absolute bottom-6 left-6 right-6 z-20">
-             <div class="bg-black/40 backdrop-blur-md border border-white/10 text-white p-3 rounded-xl">
-               <p class="text-xs font-bold leading-tight line-clamp-2">"This completely replaced my morning pre-workout. The energy is insane!"</p>
-               <span class="text-[9px] font-medium text-gray-300 mt-1 block">— Real Customer Review</span>
-             </div>
+      {/* Concern Filters */}
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <button class="px-5 py-2 rounded-full bg-[#111827] text-white text-xs font-bold shadow-md">All Reviews</button>
+        <button class="px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all">⚡ Energy</button>
+        <button class="px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all">🛡️ Immunity</button>
+      </div>
+
+    </div>
+
+    {/* ==========================================
+        ZONE 2: THE LOGICAL 4-COLUMN GRID (Video integrated smoothly)
+        ========================================== */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
+      
+      {/* Card 1: Text Review */}
+      <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative">
+        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
+           <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Verified
+        </div>
+        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[0].category}</span>
+        <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[0].highlight}"</h4>
+        <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[0].text}</p>
+        <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
+          <img src={reviews[0].avatar} alt={reviews[0].name} class="w-9 h-9 rounded-full object-cover" />
+          <div class="flex flex-col">
+            <span class="text-[#111827] font-bold text-xs">{reviews[0].name}</span>
+            <span class="text-gray-400 text-[10px]">{reviews[0].purchaseDate}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Card 2: Text Review */}
+      <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative">
+        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
+           <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Verified
+        </div>
+        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[1].category}</span>
+        <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[1].highlight}"</h4>
+        <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[1].text}</p>
+        <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
+          <img src={reviews[1].avatar} alt={reviews[1].name} class="w-9 h-9 rounded-full object-cover" />
+          <div class="flex flex-col">
+            <span class="text-[#111827] font-bold text-xs">{reviews[1].name}</span>
+            <span class="text-gray-400 text-[10px]">{reviews[1].purchaseDate}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Card 3: THE VIDEO REEL CARD (Fits perfectly in the grid) */}
+      <div class="relative bg-black rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] group cursor-pointer aspect-[3/4] lg:aspect-auto lg:h-full border border-gray-100">
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10"></div>
+        <img src="/spirulina-bottle.png" alt="Video Review" class="absolute inset-0 w-full h-full object-cover opacity-80 scale-105 group-hover:scale-100 transition-transform duration-700 blur-[2px]" />
+        
+        {/* Play Button */}
+        <div class="absolute inset-0 flex items-center justify-center z-20">
+          <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full border border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+
+        {/* Video Tags */}
+        <div class="absolute top-4 left-4 z-20">
+          <span class="bg-black/40 backdrop-blur-md border border-white/20 text-white px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Video
+          </span>
+        </div>
+        
+        {/* Quote */}
+        <div class="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
+          <p class="text-white text-xs font-bold leading-tight mb-1">"The energy is insane!"</p>
+          <span class="text-gray-300 text-[10px]">Siddharth J.</span>
+        </div>
+      </div>
+
+      {/* Card 4: Text Review */}
+      <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative">
+        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
+           <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Verified
+        </div>
+        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[2].category}</span>
+        <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[2].highlight}"</h4>
+        <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[2].text}</p>
+        <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
+          <img src={reviews[2].avatar} alt={reviews[2].name} class="w-9 h-9 rounded-full object-cover" />
+          <div class="flex flex-col">
+            <span class="text-[#111827] font-bold text-xs">{reviews[2].name}</span>
+            <span class="text-gray-400 text-[10px]">{reviews[2].purchaseDate}</span>
           </div>
         </div>
       </div>
@@ -158,16 +154,15 @@ const reviews = [
     </div>
 
     {/* ==========================================
-        ZONE 5: THE FINAL CTA CLOSER
+        ZONE 3: THE FINAL CTA CLOSER
         ========================================== */}
-    <div class="mt-8 text-center border-t border-gray-100 pt-16">
-      <h3 class="text-2xl md:text-3xl font-bold text-[#111827] mb-8 font-['Playfair_Display']">Ready to upgrade your daily baseline?</h3>
-      <a href="#product-ecosystem" class="inline-flex flex-col items-center justify-center w-full sm:w-auto bg-[#111827] hover:bg-[#166534] text-white px-10 py-4 md:py-5 rounded-2xl shadow-[0_20px_40px_rgba(17,24,39,0.15)] transition-all transform hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(22,101,52,0.25)] group">
+    <div class="text-center pt-8 border-t border-gray-100/50">
+      <a href="#product-ecosystem" class="inline-flex flex-col items-center justify-center bg-[#111827] hover:bg-[#166534] text-white px-10 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 group">
         <div class="flex items-center gap-3 mb-1">
-          <span class="font-black text-xs md:text-sm uppercase tracking-[0.2em]">Start Your Routine</span>
+          <span class="font-black text-xs uppercase tracking-[0.2em]">Start Your Routine</span>
           <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </div>
-        <span class="text-gray-300 text-[10px] font-medium">7-Day Trial Packs start at just ₹499</span>
+        <span class="text-gray-300 text-[10px] font-medium">Trial Packs start at just ₹499</span>
       </a>
     </div>
 

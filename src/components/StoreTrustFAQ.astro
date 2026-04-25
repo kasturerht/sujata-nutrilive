@@ -1,0 +1,229 @@
+---
+// src/components/StoreTrustFAQ.astro
+
+const faqs = [
+  {
+    question: "When will I start seeing results?",
+    answer: "Most customers report a noticeable shift in energy and digestion within 7-10 days. Skin and hair benefits typically compound over 3-4 weeks of consistent daily use."
+  },
+  {
+    question: "Do you offer Cash on Delivery (COD)?",
+    answer: "Yes! We offer free Cash on Delivery (COD) across 25,000+ pin codes in India. No hidden charges or extra fees."
+  },
+  {
+    question: "Are these products safe for daily use?",
+    answer: "Absolutely. Our formulations are 100% plant-based, triple lab-tested for heavy metals, and FSSAI certified. They are safe and recommended for daily lifestyle use."
+  },
+  {
+    question: "How fast is the shipping?",
+    answer: "We process all orders within 24 hours. With our Express Shipping, your package will arrive at your doorstep within 2 to 4 business days."
+  }
+];
+---
+
+<section id="trust-faq-vault" class="relative bg-[#FBFBF9] py-20 md:py-28 font-['Inter'] selection:bg-[#166534] selection:text-white border-t border-gray-200 z-10 overflow-hidden">
+  
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,rgba(22,101,52,0.03)_0%,transparent_70%)]"></div>
+    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(180,83,9,0.03)_0%,transparent_70%)]"></div>
+  </div>
+
+  <div class="max-w-[85rem] mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+    
+    {/* ==========================================
+        PART 1: THE FLAWLESS SPINNING MEDALLIONS (Fixed SVG Overlap)
+        ========================================== */}
+    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-24 mb-24 lg:mb-32">
+      
+      {/* Medallion 1 */}
+      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#166534] group">
+        {/* Increased viewBox and radius to prevent overlap, using single textPath */}
+        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_12s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity">
+          <path id="circle1" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
+          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
+            <textPath href="#circle1" startOffset="0%">100% PURE & NATURAL • 100% PURE & NATURAL • </textPath>
+          </text>
+        </svg>
+        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(22,101,52,0.15)] border border-emerald-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        </div>
+      </div>
+
+      {/* Medallion 2 */}
+      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#B45309] group">
+        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite_reverse] opacity-60 group-hover:opacity-100 transition-opacity">
+          <path id="circle2" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
+          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
+            <textPath href="#circle2" startOffset="0%">TRIPLE LAB TESTED • TRIPLE LAB TESTED • </textPath>
+          </text>
+        </svg>
+        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(180,83,9,0.15)] border border-amber-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+        </div>
+      </div>
+
+      {/* Medallion 3 */}
+      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#1D4ED8] group">
+        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_12s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity">
+          <path id="circle3" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
+          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
+            <textPath href="#circle3" startOffset="0%">ZERO HEAVY METALS • ZERO HEAVY METALS • </textPath>
+          </text>
+        </svg>
+        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(29,78,216,0.15)] border border-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        </div>
+      </div>
+
+      {/* Medallion 4 */}
+      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#047857] group">
+        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite_reverse] opacity-60 group-hover:opacity-100 transition-opacity">
+          <path id="circle4" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
+          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
+            <textPath href="#circle4" startOffset="0%">FSSAI CERTIFIED • FSSAI CERTIFIED • </textPath>
+          </text>
+        </svg>
+        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(4,120,87,0.15)] border border-emerald-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+      </div>
+
+    </div>
+
+    {/* ==========================================
+        PART 2: THE EDITORIAL FAQ & LUXURY VAULT CARD
+        ========================================== */}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      
+      {/* LEFT: Editorial FAQ (UNTOUCHED AS REQUESTED) */}
+      <div class="lg:col-span-7 flex flex-col">
+        <div class="mb-10">
+          <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-[#111827] tracking-tight mb-4">
+            Clarity <span class="italic text-[#166534] font-normal">&</span> Confidence.
+          </h2>
+          <p class="text-gray-500 text-sm md:text-base">Everything you need to know before upgrading your daily routine.</p>
+        </div>
+        
+        <div class="flex flex-col border-t border-gray-200">
+          {faqs.map((faq, index) => (
+            <div class={`faq-item border-b border-gray-200`}>
+              <button class="faq-button w-full text-left py-6 md:py-8 flex items-start gap-6 group focus:outline-none transition-colors">
+                <span class="text-xs font-black text-gray-300 group-hover:text-[#166534] transition-colors mt-1 tracking-widest">0{index + 1}</span>
+                <div class="flex-1">
+                  <span class="text-[#111827] text-base md:text-lg font-bold group-hover:text-[#166534] transition-colors block pr-4">{faq.question}</span>
+                  <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] mt-0">
+                    <div class="overflow-hidden">
+                      <p class="text-gray-500 text-sm leading-relaxed pt-4 pr-8">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="shrink-0 text-gray-300 group-hover:text-[#166534] transition-colors mt-1">
+                  <svg class="w-5 h-5 faq-icon transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </div>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* RIGHT: THE "BLACK CARD" LUXURY VAULT (Replaced the generic timeline) */}
+      <div class="lg:col-span-5 flex flex-col pt-4">
+        
+        <div class="bg-[#0B130F] rounded-[2.5rem] p-8 md:p-10 shadow-[0_30px_60px_rgba(0,0,0,0.2)] border border-[#166534]/30 relative overflow-hidden group">
+          
+          {/* Glowing Ambient Core */}
+          <div class="absolute -top-10 -right-10 w-48 h-48 bg-[#166534]/40 rounded-full blur-[60px] pointer-events-none group-hover:bg-[#166534]/60 transition-colors duration-700"></div>
+
+          <h3 class="text-white text-2xl md:text-3xl font-['Playfair_Display'] font-black mb-8 relative z-10">
+            The Sujata <br/><span class="italic text-emerald-400">Black Card Guarantee.</span>
+          </h3>
+
+          <div class="flex flex-col gap-6 relative z-10">
+            
+            {/* Benefit 1: Secure Pay */}
+            <div class="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
+              <div class="w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-white font-bold text-sm md:text-base">100% Encrypted Checkout</h4>
+                <div class="flex gap-2 mt-1.5 opacity-60">
+                  <span class="text-[9px] font-bold tracking-widest border border-white/20 px-1.5 py-0.5 rounded">UPI</span>
+                  <span class="text-[9px] font-bold tracking-widest border border-white/20 px-1.5 py-0.5 rounded">VISA</span>
+                  <span class="text-[9px] font-bold tracking-widest border border-white/20 px-1.5 py-0.5 rounded">RUPAY</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Benefit 2: Express Delivery */}
+            <div class="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors">
+              <div class="w-12 h-12 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-gray-300 shrink-0">
+                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-white font-bold text-sm md:text-base">Priority Dispatch</h4>
+                <p class="text-gray-400 text-xs mt-1">Ships in 24 hours. Arrives in 2-4 days.</p>
+              </div>
+            </div>
+
+            {/* Benefit 3: The Golden COD (Highest Visual Hierarchy) */}
+            <div class="flex items-center gap-5 p-5 rounded-2xl bg-gradient-to-r from-[#166534] to-[#064E3B] border border-emerald-500/50 shadow-[0_10px_30px_rgba(22,101,52,0.3)] mt-2">
+              <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center text-[#166534] shrink-0 shadow-inner">
+                <span class="text-2xl font-black">₹</span>
+              </div>
+              <div>
+                <h4 class="text-white font-black text-lg tracking-wide uppercase">Cash On Delivery</h4>
+                <p class="text-emerald-100/80 text-xs font-medium tracking-wide uppercase mt-1">Available Free Of Cost</p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Premium CTA */}
+          <a href="#product-ecosystem" class="mt-8 w-full inline-flex items-center justify-center bg-white text-[#0B130F] px-8 py-5 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 hover:bg-emerald-50 group relative z-10">
+            <span class="font-black text-sm uppercase tracking-[0.2em]">Unlock Your Trial</span>
+            <svg class="w-4 h-4 ml-3 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{/* Premium Accordion Script */}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqButtons = document.querySelectorAll('.faq-button');
+
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const answerBox = button.querySelector('.faq-answer');
+        const icon = button.querySelector('.faq-icon');
+        
+        const isOpen = answerBox.classList.contains('grid-rows-[1fr]');
+
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach(ans => {
+           ans.classList.remove('grid-rows-[1fr]');
+           ans.classList.add('grid-rows-[0fr]');
+           ans.parentElement.parentElement.classList.remove('pb-4');
+        });
+        document.querySelectorAll('.faq-icon').forEach(ic => {
+           ic.style.transform = 'rotate(0deg)';
+        });
+
+        // Open clicked
+        if (!isOpen) {
+          answerBox.classList.remove('grid-rows-[0fr]');
+          answerBox.classList.add('grid-rows-[1fr]');
+          icon.style.transform = 'rotate(45deg)';
+          button.parentElement.classList.add('pb-4');
+        }
+      });
+    });
+  });
+</script>
