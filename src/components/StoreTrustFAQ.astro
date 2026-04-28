@@ -31,71 +31,65 @@ const faqs = [
   <div class="max-w-[85rem] mx-auto px-5 md:px-8 lg:px-12 relative z-10">
     
     {/* ==========================================
-        PART 1: THE FLAWLESS SPINNING MEDALLIONS (Fixed SVG Overlap)
+        PART 1: THE AUTHENTIC TRUST SEALS (Zero Spinning, 100% Trust)
+        Matches exact Official Certification aesthetic
         ========================================== */}
-    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-24 mb-24 lg:mb-32">
+    <div class="flex flex-wrap items-start justify-center gap-6 md:gap-12 lg:gap-20 mb-24 lg:mb-32">
       
-      {/* Medallion 1 */}
-      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#166534] group">
-        {/* Increased viewBox and radius to prevent overlap, using single textPath */}
-        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_12s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity">
-          <path id="circle1" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
-          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
-            <textPath href="#circle1" startOffset="0%">100% PURE & NATURAL • 100% PURE & NATURAL • </textPath>
-          </text>
-        </svg>
-        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(22,101,52,0.15)] border border-emerald-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+      {/* Badge 1: 100% Natural */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300">
+          <div class="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(4,120,87,0.12)]"></div>
+          <div class="absolute inset-0 rounded-full border border-[#047857]/20"></div>
+          <div class="absolute inset-[5px] md:inset-[6px] rounded-full border-[1.5px] border-dashed border-[#047857]/40"></div>
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#047857] relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
         </div>
+        <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">100% <br/>Natural</span>
       </div>
 
-      {/* Medallion 2 */}
-      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#B45309] group">
-        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite_reverse] opacity-60 group-hover:opacity-100 transition-opacity">
-          <path id="circle2" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
-          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
-            <textPath href="#circle2" startOffset="0%">TRIPLE LAB TESTED • TRIPLE LAB TESTED • </textPath>
-          </text>
-        </svg>
-        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(180,83,9,0.15)] border border-amber-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+      {/* Badge 2: Lab Tested */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300">
+          <div class="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(180,83,9,0.12)]"></div>
+          <div class="absolute inset-0 rounded-full border border-[#B45309]/20"></div>
+          <div class="absolute inset-[5px] md:inset-[6px] rounded-full border-[1.5px] border-dashed border-[#B45309]/40"></div>
+          {/* Authentic Flask/Beaker Icon */}
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#B45309] relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3v4.6l-4.2 6.8c-.8 1.3.1 3 1.7 3h9c1.6 0 2.5-1.7 1.7-3L14 7.6V3m-4 0h4"></path></svg>
         </div>
+        <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">Lab <br/>Tested</span>
       </div>
 
-      {/* Medallion 3 */}
-      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#1D4ED8] group">
-        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_12s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity">
-          <path id="circle3" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
-          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
-            <textPath href="#circle3" startOffset="0%">ZERO HEAVY METALS • ZERO HEAVY METALS • </textPath>
-          </text>
-        </svg>
-        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(29,78,216,0.15)] border border-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+      {/* Badge 3: Heavy Metals */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300">
+          <div class="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(29,78,216,0.12)]"></div>
+          <div class="absolute inset-0 rounded-full border border-[#1D4ED8]/20"></div>
+          <div class="absolute inset-[5px] md:inset-[6px] rounded-full border-[1.5px] border-dashed border-[#1D4ED8]/40"></div>
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#1D4ED8] relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
         </div>
+        <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">Zero Heavy <br/>Metals</span>
       </div>
 
-      {/* Medallion 4 */}
-      <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center text-[#047857] group">
-        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite_reverse] opacity-60 group-hover:opacity-100 transition-opacity">
-          <path id="circle4" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
-          <text font-size="9" font-weight="800" fill="currentColor" letter-spacing="2.5" class="uppercase">
-            <textPath href="#circle4" startOffset="0%">FSSAI CERTIFIED • FSSAI CERTIFIED • </textPath>
-          </text>
-        </svg>
-        <div class="relative z-10 w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_30px_rgba(4,120,87,0.15)] border border-emerald-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      {/* Badge 4: FSSAI Certified */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300">
+          <div class="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(4,120,87,0.12)]"></div>
+          <div class="absolute inset-0 rounded-full border border-[#047857]/20"></div>
+          <div class="absolute inset-[5px] md:inset-[6px] rounded-full border-[1.5px] border-dashed border-[#047857]/40"></div>
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#047857] relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
+        <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">FSSAI <br/>Certified</span>
       </div>
 
     </div>
 
     {/* ==========================================
         PART 2: THE EDITORIAL FAQ & LUXURY VAULT CARD
+        (UNTOUCHED AS PER INSTRUCTIONS)
         ========================================== */}
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
       
-      {/* LEFT: Editorial FAQ (UNTOUCHED AS REQUESTED) */}
+      {/* LEFT: Editorial FAQ */}
       <div class="lg:col-span-7 flex flex-col">
         <div class="mb-10">
           <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-[#111827] tracking-tight mb-4">
@@ -126,7 +120,7 @@ const faqs = [
         </div>
       </div>
 
-      {/* RIGHT: THE "BLACK CARD" LUXURY VAULT (Replaced the generic timeline) */}
+      {/* RIGHT: THE "BLACK CARD" LUXURY VAULT */}
       <div class="lg:col-span-5 flex flex-col pt-4">
         
         <div class="bg-[#0B130F] rounded-[2.5rem] p-8 md:p-10 shadow-[0_30px_60px_rgba(0,0,0,0.2)] border border-[#166534]/30 relative overflow-hidden group">

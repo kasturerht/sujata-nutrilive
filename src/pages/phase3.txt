@@ -1,0 +1,14 @@
+The "Phase 3" Roadmap (पुढील प्रवास)
+आपल्याला आता तुकड्या-तुकड्यात काम न करता पूर्ण वेबसाईटला 'One Single Brain' बनवायचं आहे.
+
+Step १: The Global Layout Shift (Foundation): आपला 'Cart Drawer' आणि तो 'Master Engine Script' (जो मी मागच्या मेसेजमध्ये दिला होता) तो आपल्याला index.astro मधून काढून थेट StoreLayout.astro मध्ये टाकायचा आहे.
+फायदा: यामुळे कार्ट ड्रॉवर होमपेज, प्रॉडक्ट पेज, आणि कलेक्शन पेज अशा प्रत्येक पानावर आपोआप दिसेल आणि कुठेही 'Add' दाबलं तरी एकाच पिशवीत (Cart) आयटम जमा होतील.
+
+Step २: PDP ([handle].astro) Synchronization:
+प्रॉडक्ट पेजवरील 'Secure Checkout' बटणचा window.location.href चा जुना कोड उडवून, त्याला ग्लोबल addProductToCart() फंक्शनशी जोडायचं. आणि बटणखाली 'UPI + WhatsApp' चे छोटे ट्रस्ट बॅजेस लावायचे.
+
+Step ३: Header Activation (StoreHeader.astro):
+हेडरमधील कार्ट आयकॉनला ग्लोबल इंजिनशी सिंक करायचं, जेणेकरून कोणत्याही पानावर ग्राहक असला तरी 'Cart' वर क्लिक केल्यावर उजवीकडून ड्रॉवर बाहेर येईल आणि बॅजवरील आकडा (उदा. 🔴 2) लाईव्ह अपडेट होईल.
+
+Step ४: The Meta / GTM Pixel Hooks:
+सगळ्यात शेवटी, ॲड चालवण्यासाठी आपल्याला DataLayer Events (view_item, add_to_cart) सेट करावे लागतील, जेणेकरून तुझा ROAS (Return on Ad Spend) ट्रॅक होईल.
