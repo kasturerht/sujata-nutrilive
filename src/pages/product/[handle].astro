@@ -22,23 +22,32 @@ const productQuery = `
   }
 `;
 
-const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
-  body: JSON.stringify({ query: productQuery, variables: { handle } }),
-});
+let product = null;
+try {
+  if (shopifyDomain && storefrontToken) {
+    const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+      body: JSON.stringify({ query: productQuery, variables: { handle } }),
+    });
 
-const data = await res.json();
-const product = data.data?.product;
+    const data = await res.json();
+    product = data.data?.product;
+  } else {
+    console.warn("⚠️ Shopify credentials missing! Please configure PUBLIC_SHOPIFY_STOREFRONT_DOMAIN and PUBLIC_SHOPIFY_STOREFRONT_TOKEN.");
+  }
+} catch (error) {
+  console.error("❌ Failed to fetch product details from Shopify:", error);
+}
 
-if (!product) return Astro.redirect('/store');
+if (!product) return Astro.redirect('/');
 
-const images = product.images.edges.map((e: any) => e.node);
-const variants = product.variants.edges.map((e: any) => e.node);
+const images = product.images?.edges.map((e: any) => e.node) || [];
+const variants = product.variants?.edges.map((e: any) => e.node) || [];
 const primaryImage = images[0];
 
-const price = parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2);
-const maxPrice = parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2);
+const price = product.priceRange ? parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2) : "0.00";
+const maxPrice = product.priceRange ? parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2) : "0.00";
 const hasPriceRange = price !== maxPrice;
 
 // JSON Parsing with Fallbacks
