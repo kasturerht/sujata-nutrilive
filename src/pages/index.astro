@@ -15,8 +15,8 @@ import CartDrawer from '../components/CartDrawer.astro';
 import ExitPopup from '../components/ExitPopup.astro';
 
 // १. तुझे Shopify डिटेल्स
-const shopifyDomain = 'skadas-headless-demo.myshopify.com'; 
-const storefrontToken = '32f678c5f8d1345e945ed48713d9cf2f'; 
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN; 
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN; 
 
 // २. संपूर्ण GraphQL Query
 const query = `

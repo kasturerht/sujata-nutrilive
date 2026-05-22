@@ -72,11 +72,11 @@
 
 </div>
 
-<script is:inline>
+<script>
   console.log("🚀 Master Cart Engine Loading...");
 
-  const domain = 'skadas-headless-demo.myshopify.com';
-  const storefrontToken = '32f678c5f8d1345e945ed48713d9cf2f';
+  const domain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN;
+  const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
 
   window.openSujataCart = () => {
     console.log("🟢 openSujataCart Triggered");
@@ -255,29 +255,79 @@
 
         if(!variantId) { alert("Product unavailable"); return; }
 
-        const originalHTML = atcBtn.innerHTML;
-        atcBtn.disabled = true;
-        atcBtn.classList.add('pointer-events-none', '!bg-[#166534]');
-        atcBtn.innerHTML = `<svg class="animate-spin h-4 w-4 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> AUTHORIZING...`;
+        const btnText = atcBtn.querySelector('#btn-text, .btn-text');
+        const btnSpinner = atcBtn.querySelector('#btn-spinner, .btn-spinner');
+        
+        let hasCustomSpinner = btnText && btnSpinner;
+        let originalHTML = '';
+        
+        if (hasCustomSpinner) {
+          atcBtn.disabled = true;
+          atcBtn.classList.add('pointer-events-none');
+          btnText.style.opacity = '0';
+          btnSpinner.classList.remove('hidden');
+        } else {
+          originalHTML = atcBtn.innerHTML;
+          atcBtn.disabled = true;
+          atcBtn.classList.add('pointer-events-none', '!bg-[#166534]');
+          atcBtn.innerHTML = `<svg class="animate-spin h-4 w-4 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> AUTHORIZING...`;
+        }
 
         try {
           const cart = await window.addProductToCart(variantId);
           console.log("📦 Cart Updated: ", cart);
           window.renderCartUI(cart);
-          atcBtn.innerHTML = `ADDED TO ROUTINE`;
-          setTimeout(() => {
-            window.openSujataCart();
-            setTimeout(() => { atcBtn.innerHTML = originalHTML; atcBtn.classList.remove('pointer-events-none', '!bg-[#166534]'); atcBtn.disabled = false; }, 1000);
-          }, 500);
+          
+          if (hasCustomSpinner) {
+            const oldText = btnText.innerHTML;
+            btnText.innerHTML = `ADDED TO ROUTINE`;
+            btnSpinner.classList.add('hidden');
+            btnText.style.opacity = '1';
+            
+            setTimeout(() => {
+              window.openSujataCart();
+              setTimeout(() => {
+                btnText.innerHTML = oldText;
+                atcBtn.classList.remove('pointer-events-none');
+                atcBtn.disabled = false;
+              }, 1000);
+            }, 500);
+          } else {
+            atcBtn.innerHTML = `ADDED TO ROUTINE`;
+            setTimeout(() => {
+              window.openSujataCart();
+              setTimeout(() => { 
+                atcBtn.innerHTML = originalHTML; 
+                atcBtn.classList.remove('pointer-events-none', '!bg-[#166534]'); 
+                atcBtn.disabled = false; 
+              }, 1000);
+            }, 500);
+          }
         } catch (error) {
           console.error("❌ Cart Error: ", error);
-          atcBtn.innerHTML = `ERROR`;
-          setTimeout(() => { atcBtn.innerHTML = originalHTML; atcBtn.classList.remove('pointer-events-none', '!bg-[#166534]'); atcBtn.disabled = false; }, 2000);
+          if (hasCustomSpinner) {
+            const oldText = btnText.innerHTML;
+            btnText.innerHTML = `ERROR`;
+            btnSpinner.classList.add('hidden');
+            btnText.style.opacity = '1';
+            setTimeout(() => {
+              btnText.innerHTML = oldText;
+              atcBtn.classList.remove('pointer-events-none');
+              atcBtn.disabled = false;
+            }, 2000);
+          } else {
+            atcBtn.innerHTML = `ERROR`;
+            setTimeout(() => { 
+              atcBtn.innerHTML = originalHTML; 
+              atcBtn.classList.remove('pointer-events-none', '!bg-[#166534]'); 
+              atcBtn.disabled = false; 
+            }, 2000);
+          }
         }
     }
   });
 
-  document.addEventListener('DOMContentLoaded', async () => {
+  const initCart = async () => {
     console.log("🔄 Fetching initial cart...");
     const cartId = localStorage.getItem('sujata_cart_id');
     if (cartId) {
@@ -285,5 +335,11 @@
       if (res.data?.cart) window.renderCartUI(res.data.cart);
       else localStorage.removeItem('sujata_cart_id');
     }
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCart);
+  } else {
+    initCart();
+  }
 </script>
