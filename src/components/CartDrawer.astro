@@ -198,16 +198,86 @@
 
   window.addProductToCart = async (variantId) => {
     let cartId = localStorage.getItem('sujata_cart_id');
+    let cart;
     if (!cartId) {
       const res = await window.shopifyFetch(`mutation cartCreate($input: CartInput!) { cartCreate(input: $input) { cart { ${cartFragment} } } }`, { input: { lines: [{ merchandiseId: variantId, quantity: 1 }] } });
       localStorage.setItem('sujata_cart_id', res.data.cartCreate.cart.id);
-      return res.data.cartCreate.cart;
+      cart = res.data.cartCreate.cart;
     } else {
       const res = await window.shopifyFetch(`mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ${cartFragment} } } }`, { cartId, lines: [{ merchandiseId: variantId, quantity: 1 }] });
       if (res.errors) { localStorage.removeItem('sujata_cart_id'); return window.addProductToCart(variantId); }
-      return res.data.cartLinesAdd.cart;
+      cart = res.data.cartLinesAdd.cart;
     }
+
+    // --- DataLayer Tracking & Custom DOM Event ---
+    try {
+      const addedLine = cart.lines.edges.find(({ node }) => node.merchandise.id === variantId);
+      if (addedLine) {
+        const item = addedLine.node.merchandise;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'sujata_add_to_cart',
+          ecommerce: {
+            items: [{
+              item_id: variantId,
+              item_name: item.product.title,
+              price: item.price.amount,
+              quantity: 1
+            }]
+          }
+        });
+      }
+      document.dispatchEvent(new CustomEvent('sujata:add_to_cart', { detail: { variantId, cart } }));
+    } catch (err) {
+      console.warn("Tracking error in addProductToCart:", err);
+    }
+
+    return cart;
   };
+
+  window.addMultipleProductsToCart = async (lines) => {
+    let cartId = localStorage.getItem('sujata_cart_id');
+    let cart;
+    const formattedLines = lines.map(line => ({ merchandiseId: line.variantId, quantity: line.quantity || 1 }));
+    if (!cartId) {
+      const res = await window.shopifyFetch(`mutation cartCreate($input: CartInput!) { cartCreate(input: $input) { cart { ${cartFragment} } } }`, { input: { lines: formattedLines } });
+      localStorage.setItem('sujata_cart_id', res.data.cartCreate.cart.id);
+      cart = res.data.cartCreate.cart;
+    } else {
+      const res = await window.shopifyFetch(`mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { ${cartFragment} } } }`, { cartId, lines: formattedLines });
+      if (res.errors) { localStorage.removeItem('sujata_cart_id'); return window.addMultipleProductsToCart(lines); }
+      cart = res.data.cartLinesAdd.cart;
+    }
+
+    try {
+      window.dataLayer = window.dataLayer || [];
+      const trackingItems = [];
+      lines.forEach(line => {
+        const addedLine = cart.lines.edges.find(({ node }) => node.merchandise.id === line.variantId);
+        if (addedLine) {
+          const item = addedLine.node.merchandise;
+          trackingItems.push({
+            item_id: line.variantId,
+            item_name: item.product.title,
+            price: item.price.amount,
+            quantity: line.quantity || 1
+          });
+        }
+      });
+      if (trackingItems.length > 0) {
+        window.dataLayer.push({
+          event: 'sujata_add_to_cart_multiple',
+          ecommerce: { items: trackingItems }
+        });
+      }
+      document.dispatchEvent(new CustomEvent('sujata:add_to_cart_multiple', { detail: { lines, cart } }));
+    } catch (err) {
+      console.warn("Tracking error in addMultipleProductsToCart:", err);
+    }
+
+    return cart;
+  };
+
 
   window.updateQuantity = async (lineId, newQuantity) => {
     const cartId = localStorage.getItem('sujata_cart_id');
@@ -225,7 +295,25 @@
     }
     const res = await window.shopifyFetch(query, variables);
     const cart = res.data.cartLinesUpdate?.cart || res.data.cartLinesRemove?.cart;
-    if (cart) window.renderCartUI(cart);
+    if (cart) {
+      window.renderCartUI(cart);
+      
+      // --- DataLayer Tracking & Custom DOM Event ---
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'sujata_cart_update',
+          ecommerce: {
+            cart_id: cart.id,
+            total_quantity: cart.totalQuantity,
+            value: cart.cost?.totalAmount?.amount
+          }
+        });
+        document.dispatchEvent(new CustomEvent('sujata:cart_update', { detail: { cart } }));
+      } catch (err) {
+        console.warn("Tracking error in updateQuantity:", err);
+      }
+    }
   };
 
   // Event Listener (Click Catching)
@@ -249,23 +337,40 @@
         console.log("🔘 Button Clicked!", atcBtn);
         if (atcBtn.disabled) return;
 
+        const variantIdsAttr = atcBtn.getAttribute('data-variant-ids');
         let variantId = atcBtn.getAttribute('data-variant-id') || atcBtn.getAttribute('data-default-variant');
-        const activeVariantBtn = document.querySelector('.variant-btn.selected-variant');
-        if (activeVariantBtn) variantId = activeVariantBtn.getAttribute('data-variant-id');
+        
+        // Scope the variant search to the local product container if possible
+        const parentContainer = atcBtn.closest('.product-card') || atcBtn.closest('.product-details-container');
+        if (parentContainer) {
+          const activeVariantBtn = parentContainer.querySelector('.variant-btn.selected-variant');
+          if (activeVariantBtn) variantId = activeVariantBtn.getAttribute('data-variant-id');
+        } else {
+          const activeVariantBtn = document.querySelector('.variant-btn.selected-variant');
+          if (activeVariantBtn) variantId = activeVariantBtn.getAttribute('data-variant-id');
+        }
 
-        if(!variantId) { alert("Product unavailable"); return; }
+        if (!variantIdsAttr && !variantId) { alert("Product unavailable"); return; }
 
         const btnText = atcBtn.querySelector('#btn-text, .btn-text');
         const btnSpinner = atcBtn.querySelector('#btn-spinner, .btn-spinner');
         
         let hasCustomSpinner = btnText && btnSpinner;
         let originalHTML = '';
+        let spinnerUsesHidden = false;
         
         if (hasCustomSpinner) {
           atcBtn.disabled = true;
           atcBtn.classList.add('pointer-events-none');
           btnText.style.opacity = '0';
-          btnSpinner.classList.remove('hidden');
+          
+          if (btnSpinner.classList.contains('hidden')) {
+            spinnerUsesHidden = true;
+            btnSpinner.classList.remove('hidden');
+          } else {
+            btnSpinner.classList.remove('opacity-0', 'pointer-events-none');
+            btnSpinner.classList.add('opacity-100');
+          }
         } else {
           originalHTML = atcBtn.innerHTML;
           atcBtn.disabled = true;
@@ -274,14 +379,26 @@
         }
 
         try {
-          const cart = await window.addProductToCart(variantId);
+          let cart;
+          if (variantIdsAttr) {
+            const lines = variantIdsAttr.split(',').map(id => ({ variantId: id.trim(), quantity: 1 }));
+            cart = await window.addMultipleProductsToCart(lines);
+          } else {
+            cart = await window.addProductToCart(variantId);
+          }
           console.log("📦 Cart Updated: ", cart);
           window.renderCartUI(cart);
           
           if (hasCustomSpinner) {
             const oldText = btnText.innerHTML;
             btnText.innerHTML = `ADDED TO ROUTINE`;
-            btnSpinner.classList.add('hidden');
+            
+            if (spinnerUsesHidden) {
+              btnSpinner.classList.add('hidden');
+            } else {
+              btnSpinner.classList.remove('opacity-100');
+              btnSpinner.classList.add('opacity-0', 'pointer-events-none');
+            }
             btnText.style.opacity = '1';
             
             setTimeout(() => {
@@ -308,7 +425,13 @@
           if (hasCustomSpinner) {
             const oldText = btnText.innerHTML;
             btnText.innerHTML = `ERROR`;
-            btnSpinner.classList.add('hidden');
+            
+            if (spinnerUsesHidden) {
+              btnSpinner.classList.add('hidden');
+            } else {
+              btnSpinner.classList.remove('opacity-100');
+              btnSpinner.classList.add('opacity-0', 'pointer-events-none');
+            }
             btnText.style.opacity = '1';
             setTimeout(() => {
               btnText.innerHTML = oldText;
@@ -321,7 +444,7 @@
               atcBtn.innerHTML = originalHTML; 
               atcBtn.classList.remove('pointer-events-none', '!bg-[#166534]'); 
               atcBtn.disabled = false; 
-            }, 2000);
+              }, 2000);
           }
         }
     }

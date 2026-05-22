@@ -1,0 +1,165 @@
+---
+// src/components/StoreProductBreakdown.astro
+import { Image } from 'astro:assets';
+---
+
+<section id="product-breakdown" class="relative bg-[#020202] py-20 lg:py-32 font-['Inter'] overflow-hidden text-white border-t border-white/5">
+  
+  {/* Ambient glowing backgrounds */}
+  <div class="absolute inset-0 z-0 pointer-events-none opacity-30">
+    <div class="absolute top-10 left-1/4 w-[40vw] h-[40vw] bg-emerald-900/20 rounded-full blur-[100px] animate-[pulse_10s_ease-in-out_infinite]"></div>
+    <div class="absolute bottom-10 right-1/4 w-[40vw] h-[40vw] bg-amber-900/10 rounded-full blur-[100px] animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
+  </div>
+
+  <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
+    
+    {/* Section Header - Bold, clear, benefit-oriented */}
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+      <span class="text-emerald-400 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Inside Sujata Spirulina</span>
+      <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-white leading-tight">
+        Pure Formulation, <span class="italic text-emerald-300">No Compromise.</span>
+      </h2>
+      <p class="text-gray-400 text-sm md:text-base mt-4">
+        Indian markets are flooded with cheap, open-pond spirulina containing heavy metals. Here is how Sujata sets the gold standard for your health.
+      </p>
+    </div>
+
+    {/* Two Column Layout (Capsules vs Powder) */}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      {/* COLUMN 1: CAPSULES - Zero taste, pure efficiency */}
+      <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10 hover:border-emerald-500/20 hover:bg-emerald-950/10 transition-all duration-500 flex flex-col md:flex-row gap-8 items-center group">
+        
+        {/* Left: Product Image */}
+        <div class="w-full md:w-1/2 flex justify-center relative">
+          <div class="absolute w-40 h-40 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors"></div>
+          <Image 
+            src="/spirulina-bottle.png" 
+            alt="Sujata Premium Capsules" 
+            width={300} 
+            height={400} 
+            class="relative z-10 max-h-[260px] md:max-h-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] group-hover:scale-105 transition-transform duration-500" 
+          />
+        </div>
+
+        {/* Right: Breakdown list */}
+        <div class="w-full md:w-1/2">
+          <div class="inline-block bg-emerald-950/60 border border-emerald-800/40 text-emerald-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+            Capsules Format
+          </div>
+          <h3 class="text-2xl font-['Playfair_Display'] font-black mb-6">Sujata Premium Capsules</h3>
+          
+          <ul class="space-y-5 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-emerald-950 flex items-center justify-center border border-emerald-800 text-emerald-400 mt-0.5 font-bold text-xs shrink-0">✓</span>
+              <div>
+                <strong class="text-white block font-bold">100% Taste-Free Routine</strong>
+                <span class="text-gray-400 text-xs">Easy to swallow. Zero seaweed smell or aftertaste issues.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-emerald-950 flex items-center justify-center border border-emerald-800 text-emerald-400 mt-0.5 font-bold text-xs shrink-0">✓</span>
+              <div>
+                <strong class="text-white block font-bold">Cold-Pressed Preservation</strong>
+                <span class="text-gray-400 text-xs">Raw, active plant enzymes intact for 100% cellular absorption.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-emerald-950 flex items-center justify-center border border-emerald-800 text-emerald-400 mt-0.5 font-bold text-xs shrink-0">✓</span>
+              <div>
+                <strong class="text-white block font-bold">Perfect for Busy Professionals</strong>
+                <span class="text-gray-400 text-xs">Carry anywhere. Fits perfectly into a high-stress daily work life.</span>
+              </div>
+            </li>
+          </ul>
+
+          <button 
+            class="add-to-cart-btn mt-8 w-full bg-white hover:bg-emerald-500 hover:text-white text-black py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300"
+            data-variant-id="gid://shopify/ProductVariant/59247880438094"
+          >
+            Add to Routine • ₹1,200
+          </button>
+        </div>
+
+      </div>
+
+      {/* COLUMN 2: POWDER - Ultimate versatility & bio-activity */}
+      <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10 hover:border-amber-500/20 hover:bg-amber-950/10 transition-all duration-500 flex flex-col md:flex-row gap-8 items-center group">
+        
+        {/* Left: Product Image */}
+        <div class="w-full md:w-1/2 flex justify-center relative">
+          <div class="absolute w-40 h-40 bg-amber-500/5 rounded-full blur-2xl group-hover:bg-amber-500/10 transition-colors"></div>
+          <Image 
+            src="/spirulina-powder.png" 
+            alt="Sujata Gold Standard Powder" 
+            width={300} 
+            height={400} 
+            class="relative z-10 max-h-[260px] md:max-h-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] group-hover:scale-105 transition-transform duration-500" 
+          />
+        </div>
+
+        {/* Right: Breakdown list */}
+        <div class="w-full md:w-1/2">
+          <div class="inline-block bg-amber-950/60 border border-amber-800/40 text-amber-400 text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+            Powder Format
+          </div>
+          <h3 class="text-2xl font-['Playfair_Display'] font-black mb-6">Sujata Premium Powder</h3>
+          
+          <ul class="space-y-5 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-amber-950 flex items-center justify-center border border-amber-800 text-amber-400 mt-0.5 font-bold text-xs shrink-0">✓</span>
+              <div>
+                <strong class="text-white block font-bold">Ultra-Versatile Mixing</strong>
+                <span class="text-gray-400 text-xs">Mix in green smoothies, juices, or flour for family meals.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-amber-950 flex items-center justify-center border border-amber-800 text-amber-400 mt-0.5 font-bold text-xs shrink-0">✓</span>
+              <div>
+                <strong class="text-white block font-bold">60% Active Plant Protein</strong>
+                <span class="text-gray-400 text-xs">Rich in phycocyanin & chlorophyll for cellular detox and energy.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-amber-950 flex items-center justify-center border border-amber-800 text-amber-400 mt-0.5 font-bold text-xs shrink-0">✓</span>
+              <div>
+                <strong class="text-white block font-bold">Maximum Bio-Availability</strong>
+                <span class="text-gray-400 text-xs">Instant digestion and release. No binders or fillers added.</span>
+              </div>
+            </li>
+          </ul>
+
+          <button 
+            class="add-to-cart-btn mt-8 w-full bg-white hover:bg-amber-500 hover:text-white text-black py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300"
+            data-variant-id="gid://shopify/ProductVariant/59276906103118"
+          >
+            Add to Routine • ₹600
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* Section Footer: Visual Credentials Grid */}
+    <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-white/10 pt-16">
+      <div>
+        <span class="text-3xl font-extrabold text-emerald-400 block mb-2">60%</span>
+        <span class="text-xs uppercase tracking-widest text-gray-500 font-bold block">Bio-Active Protein</span>
+      </div>
+      <div>
+        <span class="text-3xl font-extrabold text-emerald-400 block mb-2">0%</span>
+        <span class="text-xs uppercase tracking-widest text-gray-500 font-bold block">Heavy Metals & Toxins</span>
+      </div>
+      <div>
+        <span class="text-3xl font-extrabold text-emerald-400 block mb-2">100%</span>
+        <span class="text-xs uppercase tracking-widest text-gray-500 font-bold block">Cold-Pressed Extract</span>
+      </div>
+      <div>
+        <span class="text-3xl font-extrabold text-emerald-400 block mb-2">FSSAI</span>
+        <span class="text-xs uppercase tracking-widest text-gray-500 font-bold block">Approved Facility</span>
+      </div>
+    </div>
+
+  </div>
+</section>

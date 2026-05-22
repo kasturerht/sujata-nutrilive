@@ -1,0 +1,495 @@
+---
+// src/components/StoreQuiz.astro
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN;
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
+---
+
+<section id="apothecary-quiz" data-domain={shopifyDomain} data-token={storefrontToken} class="relative bg-[#022c22] py-24 lg:py-36 font-['Inter'] overflow-hidden border-t border-white/5 selection:bg-[#166534] selection:text-white">
+  
+  {/* Absolute Background Ambient Light */}
+  <div class="absolute inset-0 z-0 opacity-30 pointer-events-none">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.15)_0%,transparent_70%)] blur-[100px]"></div>
+    <div class="absolute top-0 right-0 w-[30vw] h-[30vw] bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.1)_0%,transparent_70%)] blur-[80px]"></div>
+  </div>
+
+  <div class="max-w-[70rem] mx-auto px-5 md:px-6 relative z-10">
+    
+    {/* Header */}
+    <div class="text-center mb-12 md:mb-16">
+      <span class="text-emerald-400 text-[10px] md:text-xs font-black tracking-[0.3em] uppercase mb-4 block">Apothecary Recommendation System</span>
+      <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-white leading-tight">
+        Find Your Custom <span class="italic text-emerald-300">Protocol.</span>
+      </h2>
+      <p class="text-emerald-100/70 text-xs md:text-sm mt-4 max-w-md mx-auto">Answer 3 clinical parameters to resolve which batch of pure, cold-pressed Spirulina matches your biological goals.</p>
+    </div>
+
+    {/* Quiz Card Container */}
+    <div class="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 md:p-14 shadow-[0_30px_60px_rgba(0,0,0,0.4)] relative min-h-[480px] flex flex-col justify-between overflow-hidden">
+      
+      {/* Dynamic Progress Indicator */}
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-white/5 overflow-hidden">
+        <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-amber-500 w-[33%] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"></div>
+      </div>
+
+      {/* Step 1: Health Concern */}
+      <div id="quiz-step-1" class="quiz-step opacity-100 transition-all duration-500 flex flex-col h-full">
+        <div>
+          <div class="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Parameter 01</span>
+            <span class="text-xs font-bold text-gray-500">1 of 3</span>
+          </div>
+          
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-6">What is your primary wellness objective?</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="energy" data-step="1">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Sustained Energy & Focus</h4>
+              <p class="text-emerald-100/50 text-xs">Eliminate midday brain fog and physical crashes without stimulant drops.</p>
+            </button>
+
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="immunity" data-step="1">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Gut Health & Immunity</h4>
+              <p class="text-emerald-100/50 text-xs">Deep cellular alkaline detoxification and gut microbiome balance.</p>
+            </button>
+
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="beauty" data-step="1">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Radiant Skin & Hair</h4>
+              <p class="text-emerald-100/50 text-xs">Fights oxidative stress and supplies essential amino acids for keratin.</p>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Step 2: Consumption Preference */}
+      <div id="quiz-step-2" class="quiz-step hidden opacity-0 transition-all duration-500 flex flex-col h-full">
+        <div>
+          <div class="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Parameter 02</span>
+            <span class="text-xs font-bold text-gray-500">2 of 3</span>
+          </div>
+          
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-6">How do you prefer to take your superfoods?</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="powder" data-step="2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Pure Active Powder</h4>
+              <p class="text-emerald-100/50 text-xs">Mixes smoothly into smoothies, breakfast bowls, or juices. Maximum bioavailability.</p>
+            </button>
+
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="tablets" data-step="2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Cold-Pressed Tablets</h4>
+              <p class="text-emerald-100/50 text-xs">Super convenient, taste-free, travel-friendly. Take on the go with water.</p>
+            </button>
+
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="combo" data-step="2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Complete Stack</h4>
+              <p class="text-emerald-100/50 text-xs">Optimize both options. Powder for morning smoothies + Tablets for mid-afternoon convenience.</p>
+            </button>
+
+          </div>
+        </div>
+        <div class="mt-8 flex justify-start">
+          <button id="quiz-back-2" class="text-emerald-400 hover:text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> Back
+          </button>
+        </div>
+      </div>
+
+      {/* Step 3: Lifestyle Parameter */}
+      <div id="quiz-step-3" class="quiz-step hidden opacity-0 transition-all duration-500 flex flex-col h-full">
+        <div>
+          <div class="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Parameter 03</span>
+            <span class="text-xs font-bold text-gray-500">3 of 3</span>
+          </div>
+          
+          <h3 class="text-xl md:text-2xl font-bold text-white mb-6">Describe your average daily energy expenditure:</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="cognitive" data-step="3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">High Cognitive Demand</h4>
+              <p class="text-emerald-100/50 text-xs">Working professional, screen-heavy, intense mental focus required daily.</p>
+            </button>
+
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="athletic" data-step="3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Athletic & Physically Active</h4>
+              <p class="text-emerald-100/50 text-xs">Gym, sports, marathon training. High demand for post-workout recovery.</p>
+            </button>
+
+            <button class="quiz-option group p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-950/20 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50" data-value="vitality" data-step="3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-950/50 flex items-center justify-center mb-4 border border-emerald-800/40 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-white mb-2">Balanced Wellness</h4>
+              <p class="text-emerald-100/50 text-xs">Yoga, walks, general vitality. Looking to build base layer nutrient-density.</p>
+            </button>
+
+          </div>
+        </div>
+        <div class="mt-8 flex justify-start">
+          <button id="quiz-back-3" class="text-emerald-400 hover:text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg> Back
+          </button>
+        </div>
+      </div>
+
+      {/* Analyzing/Processing Screen */}
+      <div id="quiz-analyzing" class="hidden flex-col items-center justify-center py-16 text-center">
+        <div class="relative w-24 h-24 mb-8">
+          <div class="absolute inset-0 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin"></div>
+          <div class="absolute inset-2 rounded-full border-4 border-amber-500/10 border-t-amber-500 animate-[spin_1.5s_linear_infinite_reverse]"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-8 h-8 text-emerald-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2 tracking-wide">Synthesizing Biological Data</h3>
+        <p class="text-emerald-100/60 text-xs max-w-xs" id="analyzing-status-text">Matching concerns with cold-pressed extraction parameters...</p>
+      </div>
+
+      {/* Step 4: Highly Premium Clinical Result Report */}
+      <div id="quiz-result" class="hidden opacity-0 transition-all duration-700 flex flex-col md:flex-row gap-8 lg:gap-12 h-full">
+        
+        {/* Left side: Clinical Prescription Dossier */}
+        <div class="w-full md:w-3/5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-6 bg-emerald-950/60 border border-emerald-500/30 px-4 py-1.5 rounded-full w-max">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-300">Optimal Match Identified</span>
+            </div>
+            
+            <h3 class="text-2xl md:text-3xl font-['Playfair_Display'] font-black text-white leading-tight mb-4">
+              Your Custom Protocol: <br class="hidden sm:inline"/><span class="italic text-emerald-300" id="recommendation-title">Sujata Premium Routine</span>
+            </h3>
+            
+            <div class="space-y-4 my-6 text-emerald-100/70 text-xs border-l border-emerald-500/20 pl-4 py-1">
+              <p id="recommendation-desc-1"></p>
+              <p id="recommendation-desc-2" class="font-medium text-white"></p>
+            </div>
+
+            {/* Micro Science metrics */}
+            <div class="grid grid-cols-3 gap-4 bg-white/[0.02] border border-white/5 p-4 rounded-xl mb-8">
+              <div>
+                <span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold block mb-1">Absorption</span>
+                <span class="text-sm font-black text-white" id="quiz-metric-absorption">98% Bioactive</span>
+              </div>
+              <div class="border-x border-white/5 px-4">
+                <span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold block mb-1">Purity</span>
+                <span class="text-sm font-black text-white">0% Heavy Metals</span>
+              </div>
+              <div class="pl-4">
+                <span class="text-[9px] uppercase tracking-widest text-emerald-400 font-bold block mb-1">Batch</span>
+                <span class="text-sm font-black text-white" id="quiz-metric-batch">#LIVE-0426</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button id="quiz-restart" class="text-emerald-400 hover:text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2 border border-emerald-500/20 hover:border-white/20 px-6 py-4 rounded-xl transition-all">
+              Retake Quiz
+            </button>
+          </div>
+        </div>
+
+        {/* Right side: Shopify Checkout Card */}
+        <div class="w-full md:w-2/5 bg-white rounded-3xl p-6 shadow-2xl flex flex-col justify-between border border-gray-100 relative overflow-hidden text-[#111827]">
+          
+          <div class="absolute -top-12 -right-12 w-32 h-32 bg-emerald-50 rounded-full blur-xl pointer-events-none"></div>
+
+          <div>
+            <div class="w-full h-44 bg-[#F8FAFC] rounded-2xl p-4 flex items-center justify-center relative overflow-hidden mb-5 border border-gray-50">
+              <div class="absolute top-3 left-3 bg-[#111827] text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded">
+                Prescribed
+              </div>
+              <img id="recommendation-img" src="/spirulina-bottle.png" alt="Product Recommended" class="h-full w-auto object-contain drop-shadow-md relative z-10 transition-transform duration-500 hover:scale-105" />
+            </div>
+
+            <div class="flex items-center gap-1 mb-2">
+              <div class="flex gap-0.5">
+                {[...Array(5)].map(() => (
+                  <svg class="w-3.5 h-3.5 text-[#D97706] fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                ))}
+              </div>
+              <span class="text-[9px] font-bold text-gray-400 mt-0.5 tracking-wider">4.9 ★ (1,240+)</span>
+            </div>
+
+            <h4 id="recommendation-prod-title" class="text-lg font-black text-[#111827] leading-tight mb-4">Sujata Premium Product</h4>
+            
+            <div class="flex items-center justify-between border-t border-gray-50 pt-4 mb-6">
+              <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">Price</span>
+              <span id="recommendation-price" class="text-2xl font-black text-[#111827]">₹1,200</span>
+            </div>
+          </div>
+
+          <button id="quiz-atc-btn" class="add-to-cart-btn w-full bg-[#111827] text-white py-4 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] shadow-lg hover:bg-[#166534] transition-all duration-300 group flex items-center justify-center gap-2"
+            data-variant-id=""
+            data-domain=""
+            data-token=""
+          >
+            <span class="btn-text">Add to Routine</span>
+            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function initQuizEngine() {
+    console.log("🧬 Apothecary Quiz Engine Initializing...");
+    
+    // Elements
+    const pBar = document.getElementById('quiz-progress-bar');
+    const step1 = document.getElementById('quiz-step-1');
+    const step2 = document.getElementById('quiz-step-2');
+    const step3 = document.getElementById('quiz-step-3');
+    const stepAnalyzing = document.getElementById('quiz-analyzing');
+    const stepResult = document.getElementById('quiz-result');
+    
+    const back2 = document.getElementById('quiz-back-2');
+    const back3 = document.getElementById('quiz-back-3');
+    const restart = document.getElementById('quiz-restart');
+    
+    const analyzingText = document.getElementById('analyzing-status-text');
+    
+    // Result elements
+    const recTitle = document.getElementById('recommendation-title');
+    const recDesc1 = document.getElementById('recommendation-desc-1');
+    const recDesc2 = document.getElementById('recommendation-desc-2');
+    const recProdTitle = document.getElementById('recommendation-prod-title');
+    const recPrice = document.getElementById('recommendation-price');
+    const recImg = document.getElementById('recommendation-img') as HTMLImageElement | null;
+    const quizAtcBtn = document.getElementById('quiz-atc-btn');
+    
+    // State storage
+    const quizData = {
+      concern: '',
+      style: '',
+      lifestyle: ''
+    };
+
+    if (!step1 || !step2 || !step3 || !stepAnalyzing || !stepResult) {
+      console.warn("⚠️ Quiz elements missing in DOM.");
+      return;
+    }
+
+    // Options click event
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        const step = opt.getAttribute('data-step');
+        const val = opt.getAttribute('data-value');
+        
+        if (step === '1') {
+          quizData.concern = val;
+          goToStep(2);
+        } else if (step === '2') {
+          quizData.style = val;
+          goToStep(3);
+        } else if (step === '3') {
+          quizData.lifestyle = val;
+          processResults();
+        }
+      });
+    });
+
+    // Navigation back buttons
+    back2?.addEventListener('click', () => goToStep(1));
+    back3?.addEventListener('click', () => goToStep(2));
+    restart?.addEventListener('click', () => {
+      // Reset variables
+      quizData.concern = '';
+      quizData.style = '';
+      quizData.lifestyle = '';
+      
+      // Hide results
+      stepResult.classList.remove('opacity-100');
+      stepResult.classList.add('hidden', 'opacity-0');
+      
+      // Go to 1
+      goToStep(1);
+    });
+
+    function goToStep(num: number) {
+      // Hide all
+      step1.classList.add('hidden');
+      step2.classList.add('hidden');
+      step3.classList.add('hidden');
+      stepAnalyzing.classList.add('hidden');
+      stepResult.classList.add('hidden');
+
+      // Reset step transitions
+      step1.classList.remove('opacity-100');
+      step2.classList.remove('opacity-100');
+      step3.classList.remove('opacity-100');
+
+      if (num === 1) {
+        step1.classList.remove('hidden');
+        setTimeout(() => step1.classList.add('opacity-100'), 50);
+        if (pBar) pBar.style.width = '33%';
+      } else if (num === 2) {
+        step2.classList.remove('hidden');
+        setTimeout(() => step2.classList.add('opacity-100'), 50);
+        if (pBar) pBar.style.width = '66%';
+      } else if (num === 3) {
+        step3.classList.remove('hidden');
+        setTimeout(() => step3.classList.add('opacity-100'), 50);
+        if (pBar) pBar.style.width = '100%';
+      }
+    }
+
+    const analyzingPhrases = [
+      "Analyzing biological profile and metabolic indicators...",
+      "Mapping phycocyanin targets to cellular antioxidant pathways...",
+      "Matching cold-pressed enzymology thresholds with digestion rates...",
+      "Custom protocol compiled successfully."
+    ];
+
+    function processResults() {
+      // Hide step 3
+      step3.classList.add('hidden', 'opacity-0');
+      stepAnalyzing.classList.remove('hidden');
+      if (pBar) pBar.style.width = '100%';
+
+      let phraseIndex = 0;
+      const interval = setInterval(() => {
+        if (phraseIndex < analyzingPhrases.length) {
+          if (analyzingText) analyzingText.innerText = analyzingPhrases[phraseIndex];
+          phraseIndex++;
+        } else {
+          clearInterval(interval);
+          displayClinicalResult();
+        }
+      }, 600);
+    }
+
+    function displayClinicalResult() {
+      stepAnalyzing.classList.add('hidden');
+      stepResult.classList.remove('hidden');
+      
+      setTimeout(() => {
+        stepResult.classList.remove('opacity-0');
+        stepResult.classList.add('opacity-100');
+      }, 50);
+
+      // Clinical recommendation engine mapping:
+      // Shopify products retrieved from store:
+      // 1. Tablets (gid://shopify/ProductVariant/59247880438094, price ₹1200)
+      // 2. Powder (gid://shopify/ProductVariant/59276906103118, price ₹600)
+      
+      let variantId = "gid://shopify/ProductVariant/59247880438094"; // default Tablets
+      let title = "Sujata Premium Tablets";
+      let price = "₹1,200";
+      let imgPath = "/spirulina-bottle.png";
+      let pName = "Spirulina Tablets";
+      
+      let concernLabel = "Cellular Optimization";
+      let desc1 = "";
+      let desc2 = "";
+      let absorption = "98% Bioactive";
+      let batchCode = "#TBL-0426";
+
+      // If user chooses powder specifically or combo
+      if (quizData.style === 'powder' || (quizData.concern === 'energy' && quizData.style !== 'tablets')) {
+        variantId = "gid://shopify/ProductVariant/59276906103118"; // Powder
+        title = "Sujata Live Enzyme Powder";
+        price = "₹600";
+        imgPath = "/spirulina-powder.png";
+        pName = "Spirulin Powder";
+        absorption = "99.4% Bioactive";
+        batchCode = "#PWD-0426";
+      }
+
+      // Generate personalized copy based on Q1
+      if (quizData.concern === 'energy') {
+        concernLabel = "Sustained Energy & Focus";
+        desc1 = "Based on your goal to combat fatigue, your biological profile indicates high efficiency response to cold-pressed phycocyanin compounds. This batch maximizes immediate cognitive oxygenation and sustained ATP mitochondrial release.";
+        desc2 = "Recommended usage: Consume in the morning or early afternoon. Avoid consuming within 3 hours of sleep to preserve natural melatonin pathways.";
+      } else if (quizData.concern === 'immunity') {
+        concernLabel = "Gut Health & Cellular Immunity";
+        desc1 = "Your objective for cellular defense and gut health matches our laboratory-grade pure aqua culture batch. Rich in bioavailable chlorophyll and essential trace elements, this routine triggers deep cellular detoxification and restores gut alkaline balance.";
+        desc2 = "Recommended usage: Take daily on an empty stomach. Standard protocols show maximum gastrointestinal microbiome alignment in 14-21 days.";
+      } else {
+        concernLabel = "Dermal & Follicular Rejuvenation";
+        desc1 = "To address skin elasticity and follicular strength, this protocol delivers heavy-metal-free, organic amino acids directly to your bloodstream. The high concentration of active Vitamin B12 and GLA stimulates natural collagen and keratin synthesis.";
+        desc2 = "Recommended usage: Make this a consistent part of your daily nutrition. Symmetrical results in hair density and skin glow are clinically validated at Day 30.";
+      }
+
+      // Update UI elements
+      if (recTitle) recTitle.innerHTML = `Your custom protocol: <br class="hidden sm:inline"/><span class="italic text-emerald-300">${concernLabel}</span>`;
+      if (recDesc1) recDesc1.innerText = desc1;
+      if (recDesc2) recDesc2.innerText = desc2;
+      if (recProdTitle) recProdTitle.innerText = pName;
+      if (recPrice) recPrice.innerText = price;
+      if (recImg) recImg.src = imgPath;
+      
+      const absMetric = document.getElementById('quiz-metric-absorption');
+      if (absMetric) absMetric.innerText = absorption;
+      const bchMetric = document.getElementById('quiz-metric-batch');
+      if (bchMetric) bchMetric.innerText = batchCode;
+
+      // Update Add to Cart Button attributes
+      if (quizAtcBtn) {
+        const quizContainer = document.getElementById('apothecary-quiz');
+        const shopDomain = quizContainer?.getAttribute('data-domain') || 'skadas-headless-demo.myshopify.com';
+        const storeToken = quizContainer?.getAttribute('data-token') || '32f678c5f8d1345e945ed48713d9cf2f';
+        quizAtcBtn.setAttribute('data-variant-id', variantId);
+        quizAtcBtn.setAttribute('data-domain', shopDomain);
+        quizAtcBtn.setAttribute('data-token', storeToken);
+      }
+    }
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initQuizEngine);
+  } else {
+    initQuizEngine();
+  }
+  
+  // Astro View Transitions compatibility
+  document.addEventListener('astro:page-load', initQuizEngine);
+</script>
+
+<style>
+  .quiz-option {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .quiz-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(16,185,129,0.1);
+  }
+</style>

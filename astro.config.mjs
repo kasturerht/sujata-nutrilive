@@ -13,4 +13,7 @@ export default defineConfig({
     tailwind(),
     react(),
   ],
+  image: {
+    domains: ['cdn.shopify.com'],
+  },
 });

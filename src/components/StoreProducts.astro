@@ -1,5 +1,6 @@
 ---
 // src/components/StoreProducts.astro
+import { Image } from 'astro:assets';
 
 // 1. Shopify API Configuration (Added for Direct Checkout)
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN;
@@ -121,7 +122,7 @@ const conversionData = [
           <div class="group relative bg-white rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(22,101,52,0.08)] transition-all duration-500 flex flex-col overflow-hidden border border-gray-100 hover:border-[#166534]/20 h-full">
             
             {/* TOP HALF: STUDIO IMAGE */}
-            <a href={`/product/${product.handle}`} class="relative w-full h-[280px] md:h-[320px] bg-[#F8FAFC] flex items-center justify-center p-6 block overflow-hidden">
+            <a href={`/product/${product.handle}`} class="relative w-full h-[280px] md:h-[320px] bg-[#F8FAFC] flex items-center justify-center p-6 overflow-hidden">
               
               <div class={`absolute top-4 md:top-5 left-4 md:left-5 ${meta.tagClass} backdrop-blur-md px-3 py-1.5 rounded-full border shadow-lg z-20 transition-transform group-hover:scale-105`}>
                 <span class="text-[9px] font-black uppercase tracking-[0.15em]">{meta.tag}</span>
@@ -134,10 +135,12 @@ const conversionData = [
               <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_70%)] z-0 pointer-events-none"></div>
               <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#166534]/5 rounded-full blur-[40px] group-hover:bg-[#166534]/15 transition-colors duration-500 z-0"></div>
 
-              <img 
+              <Image 
                 src={getImageUrl(product)} 
                 alt={product.title} 
-                class="relative z-10 w-auto h-full max-h-[85%] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] group-hover:scale-110 group-hover:-translate-y-3 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                width={400}
+                height={400}
+                class="relative z-10 w-auto h-[75%] max-h-[75%] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                 loading={index < 2 ? "eager" : "lazy"}
               />
             </a>

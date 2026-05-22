@@ -1,5 +1,6 @@
 ---
 // src/components/StoreConviction.astro
+import { Image } from 'astro:assets';
 ---
 
 <section id="conviction-engine" class="relative bg-[#FCFBF7] py-24 lg:py-32 overflow-hidden font-['Inter'] selection:bg-[#166534] selection:text-white">
@@ -54,7 +55,7 @@
         {/* Core Glow */}
         <div class="absolute inset-0 bg-gradient-to-tr from-[#166534]/10 to-[#B45309]/5 rounded-full blur-[80px] animate-pulse"></div>
         
-        {/* THE PRECISION ORBITAL RINGS (Will not overlap text) */}
+        {/* THE PRECISION ORBITAL RINGS */}
         <div class="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] pointer-events-none flex items-center justify-center">
           
           {/* Outer Dashed Ring (Slow Reverse Spin) */}
@@ -73,10 +74,12 @@
           </div>
         </div>
 
-        {/* Floating Product Image */}
-        <img 
+        {/* Floating Product Image optimized via Astro Image */}
+        <Image 
           src="/spirulina-bottle.png" 
           alt="Sujata Nutrilive Premium" 
+          width={320}
+          height={400}
           class="relative z-20 w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[320px] h-auto drop-shadow-[0_40px_80px_rgba(22,101,52,0.15)] product-float"
         />
       </div>
@@ -102,69 +105,177 @@
 
     </div>
 
-    {/* 3. THE LUXURY COMPARISON CHART (High-Conversion Logic) */}
+    {/* 3. THE LUXURY COMPARISON MATRIX (Side-by-Side Table & Cards) */}
     <div class="w-full max-w-5xl mx-auto relative z-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 bg-white rounded-[3rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.06)] border border-gray-100">
-        
-        {/* Column: Ordinary */}
-        <div class="p-10 lg:p-14 border-r border-gray-100 bg-[#F9FAFB]/50">
-          <div class="flex items-center gap-3 mb-10">
-            <span class="w-2 h-2 rounded-full bg-gray-300"></span>
-            <h5 class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">Ordinary Standards</h5>
-          </div>
-          <ul class="space-y-8">
-            <li class="flex items-start gap-4 opacity-50 hover:opacity-100 transition-opacity">
-              <svg class="w-5 h-5 text-gray-300 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <p class="text-gray-600 text-sm">Heat-Dried (Loses 40% nutrients)</p>
-            </li>
-            <li class="flex items-start gap-4 opacity-50 hover:opacity-100 transition-opacity">
-              <svg class="w-5 h-5 text-gray-300 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <p class="text-gray-600 text-sm">Synthetic Fillers & Preservatives</p>
-            </li>
-            <li class="flex items-start gap-4 opacity-50 hover:opacity-100 transition-opacity">
-              <svg class="w-5 h-5 text-gray-300 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-              <p class="text-gray-600 text-sm">Strong Fishy / Swampy Aftertaste</p>
-            </li>
-          </ul>
-        </div>
-
-        {/* Column: Sujata (The Hero) */}
-        <div class="p-10 lg:p-14 bg-gradient-to-br from-[#166534] to-[#064E3B] text-white relative">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-[50px]"></div>
-          <div class="flex items-center gap-3 mb-10">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <h5 class="text-xs font-bold text-emerald-400 uppercase tracking-[0.2em]">Sujata Gold Standard</h5>
-          </div>
-          <ul class="space-y-8">
-            <li class="flex items-start gap-4">
-              <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/30">
-                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-              </div>
-              <p class="text-white text-sm font-medium">100% Cold-Pressed (Live Nutrients)</p>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/30">
-                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-              </div>
-              <p class="text-white text-sm font-medium">Pure Farm-to-Bottle Traceability</p>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/30">
-                <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-              </div>
-              <p class="text-white text-sm font-medium">Naturally Neutral & Easy to Digest</p>
-            </li>
-          </ul>
-        </div>
-
+      
+      <div class="text-center mb-10">
+        <h3 class="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-[#111827]">
+          Sujata Gold Standard vs. Others
+        </h3>
+        <p class="text-xs md:text-sm text-gray-400 mt-2 uppercase tracking-widest font-bold">clinical verification comparison</p>
       </div>
 
-      {/* Trust Badges Footer */}
-      <div class="mt-16 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-         <img src="/fssai-logo.png" alt="FSSAI" class="h-8 md:h-10 w-auto object-contain" />
-         <img src="/gmp-logo.png" alt="GMP" class="h-8 md:h-10 w-auto object-contain" />
-         <img src="/organic-logo.png" alt="Organic" class="h-8 md:h-10 w-auto object-contain" />
-         <img src="/ayush-logo.png" alt="Ayush" class="h-8 md:h-10 w-auto object-contain" />
+      {/* TABLE (Hidden on mobile, visible on tablet/desktop) */}
+      <div class="hidden md:block overflow-hidden bg-white rounded-[2rem] border border-gray-100 shadow-[0_40px_100px_rgba(0,0,0,0.06)]">
+        <table class="w-full border-collapse text-left">
+          <thead>
+            <tr class="border-b border-gray-100">
+              <th class="p-6 text-xs font-bold text-gray-400 uppercase tracking-wider w-[30%]">Comparison Parameters</th>
+              <th class="p-6 bg-gradient-to-r from-[#064e3b] to-[#022c22] text-xs font-black text-amber-400 uppercase tracking-widest text-center w-[35%] relative shadow-md">
+                Sujata Gold Standard
+                <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-amber-500 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded tracking-widest shadow-lg">ELITE</span>
+              </th>
+              <th class="p-6 bg-gray-50/80 text-xs font-bold text-gray-400 uppercase tracking-wider text-center w-[35%]">Ordinary Brands</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-sm">
+            {/* Row 1 */}
+            <tr class="hover:bg-gray-50/50 transition-colors">
+              <td class="p-6 font-bold text-gray-700">Protein Concentration</td>
+              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
+                <div class="flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                  <span>60%+ Bio-Active Protein</span>
+                </div>
+              </td>
+              <td class="p-6 text-gray-500 text-center">40% Typical (Diluted Power)</td>
+            </tr>
+            {/* Row 2 */}
+            <tr class="hover:bg-gray-50/50 transition-colors">
+              <td class="p-6 font-bold text-gray-700">Cultivation Method</td>
+              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
+                <div class="flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Lab-Grade Aqua Culture</span>
+                </div>
+              </td>
+              <td class="p-6 text-gray-500 text-center">Open Industrial Ponds</td>
+            </tr>
+            {/* Row 3 */}
+            <tr class="hover:bg-gray-50/50 transition-colors">
+              <td class="p-6 font-bold text-gray-700">Extraction & Processing</td>
+              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
+                <div class="flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Zero-Heat Cold Pressed</span>
+                </div>
+              </td>
+              <td class="p-6 text-gray-500 text-center">High-Heat Spray Dried</td>
+            </tr>
+            {/* Row 4 */}
+            <tr class="hover:bg-gray-50/50 transition-colors">
+              <td class="p-6 font-bold text-gray-700">Toxin & Metal Screening</td>
+              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
+                <div class="flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Triple-Certified Heavy Metal Free</span>
+                </div>
+              </td>
+              <td class="p-6 text-gray-500 text-center">Unchecked/Vulnerable</td>
+            </tr>
+            {/* Row 5 */}
+            <tr class="hover:bg-gray-50/50 transition-colors">
+              <td class="p-6 font-bold text-gray-700">Chemical Binders/Fillers</td>
+              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
+                <div class="flex items-center justify-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                  <span>100% Pure Extract (Zero Fillers)</span>
+                </div>
+              </td>
+              <td class="p-6 text-gray-500 text-center">Synthetic Chemical Binders</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* CARDS FOR MOBILE VIEWS (Grid layout instead of wide table) */}
+      <div class="md:hidden space-y-6">
+        {[
+          { title: "Protein Concentration", sujata: "60%+ Bio-Active Protein", other: "40% Typical" },
+          { title: "Cultivation Method", sujata: "Lab-Grade Aqua Culture", other: "Open Industrial Ponds" },
+          { title: "Extraction & Processing", sujata: "Zero-Heat Cold Pressed", other: "High-Heat Spray Dried" },
+          { title: "Toxin & Metal Screening", sujata: "Triple-Certified Toxin Free", other: "Unchecked/Vulnerable" },
+          { title: "Chemical Binders/Fillers", sujata: "100% Pure (Zero Fillers)", other: "Synthetic Binders" }
+        ].map((item) => (
+          <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm space-y-3">
+            <h4 class="text-sm font-black text-gray-700 border-b border-gray-50 pb-2">{item.title}</h4>
+            
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="bg-emerald-50/40 p-3 rounded-xl border border-emerald-100 text-[#064e3b] font-bold space-y-1">
+                <span class="text-[9px] uppercase tracking-widest text-[#B45309]">Sujata</span>
+                <p class="leading-tight flex items-start gap-1">
+                  <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                  {item.sujata}
+                </p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-gray-500 space-y-1">
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">Others</span>
+                <p class="leading-tight flex items-start gap-1">
+                  <svg class="w-3.5 h-3.5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  {item.other}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Trust Badges Footer - Premium Scalable SVGs to avoid broken images */}
+      <div class="mt-16 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 hover:opacity-90 transition-all duration-700">
+        
+        {/* FSSAI Seal SVG */}
+        <div class="flex items-center gap-2 group cursor-default">
+          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
+            <path d="M30 52l12 12 28-28" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="50%" y="82%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="12" fill="currentColor">FSSAI</text>
+          </svg>
+          <div class="flex flex-col text-left">
+            <span class="text-[10px] font-black text-gray-800 uppercase tracking-widest leading-none">fssai</span>
+            <span class="text-[8px] font-medium text-gray-400">REGISTERED</span>
+          </div>
+        </div>
+
+        {/* GMP Seal SVG */}
+        <div class="flex items-center gap-2 group cursor-default">
+          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
+            <rect x="25" y="30" width="50" height="40" rx="3" stroke="currentColor" stroke-width="3"/>
+            <path d="M35 50h30M50 35v30" stroke="currentColor" stroke-width="3"/>
+            <text x="50%" y="82%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="12" fill="currentColor">GMP</text>
+          </svg>
+          <div class="flex flex-col text-left">
+            <span class="text-[10px] font-black text-gray-800 uppercase tracking-widest leading-none">gmp</span>
+            <span class="text-[8px] font-medium text-gray-400">CERTIFIED</span>
+          </div>
+        </div>
+
+        {/* 100% Organic Leaf SVG */}
+        <div class="flex items-center gap-2 group cursor-default">
+          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
+            <path d="M50 25c15 0 25 10 25 25S65 75 50 75s-25-10-25-25 10-25 25-25zm0 0v50" stroke="currentColor" stroke-width="3"/>
+            <path d="M50 40c8 0 12 5 12 10s-4 10-12 10" stroke="currentColor" stroke-width="3"/>
+          </svg>
+          <div class="flex flex-col text-left">
+            <span class="text-[10px] font-black text-gray-800 uppercase tracking-widest leading-none">organic</span>
+            <span class="text-[8px] font-medium text-gray-400">100% NATURAL</span>
+          </div>
+        </div>
+
+        {/* AYUSH Premium SVG */}
+        <div class="flex items-center gap-2 group cursor-default">
+          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
+            <path d="M50 22L30 45h40L50 22zm0 23v33" stroke="currentColor" stroke-width="3"/>
+            <circle cx="50" cy="78" r="3" fill="currentColor"/>
+          </svg>
+          <div class="flex flex-col text-left">
+            <span class="text-[10px] font-black text-gray-800 uppercase tracking-widest leading-none">ayush</span>
+            <span class="text-[8px] font-medium text-gray-400">COMPLIANT</span>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -179,4 +290,4 @@
   .product-float {
     animation: product-float 6s ease-in-out infinite;
   }
-</style>
+</style>

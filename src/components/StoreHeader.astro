@@ -58,7 +58,7 @@
       </div>
 
       {/* Main Search Bar - Dark Glass Pill */}
-      <div class="flex-1 max-w-xl relative group">
+      <div class="hidden md:block flex-1 max-w-xl relative group">
         <input 
           type="text" 
           placeholder="Search for 'Spirulina Powders', 'Hair Oil'..." 
@@ -78,7 +78,7 @@
         <button id="cart-drawer-trigger" class="relative group bg-emerald-800/50 border border-white/20 p-2.5 md:px-5 md:py-2.5 rounded-full flex items-center gap-2.5 hover:bg-white hover:border-white transition-all shadow-lg hover:shadow-xl">
           <svg class="w-4 h-4 text-white group-hover:text-[#064E3B] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
           <span class="hidden md:block text-[10px] font-bold uppercase tracking-widest text-white group-hover:text-[#064E3B] transition-colors">Cart</span>
-          <span id="header-cart-badge" class="absolute -top-1 -right-1 md:top-auto md:right-auto md:relative w-4 h-4 md:w-5 md:h-5 bg-amber-500 text-white text-[9px] md:text-[10px] font-black rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.4)]">0</span>
+          <span id="header-cart-badge" style="display: none;" class="absolute -top-1 -right-1 md:top-auto md:right-auto md:relative w-4 h-4 md:w-5 md:h-5 bg-amber-500 text-white text-[9px] md:text-[10px] font-black rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.4)]">0</span>
         </button>
       </div>
 
@@ -89,3 +89,107 @@
 <style is:global>
   @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 </style>
+
+<script>
+  function initPincode() {
+    console.log("📍 Pincode Engine Loading...");
+    const trigger = document.getElementById('pincode-trigger');
+    const popup = document.getElementById('pincode-popup');
+    const input = document.getElementById('pincode-input') as HTMLInputElement | null;
+    const verifyBtn = document.getElementById('verify-btn');
+    const status = document.getElementById('pincode-status');
+    const display = document.getElementById('display-pincode');
+
+    if (!trigger || !popup || !input || !verifyBtn || !status || !display) {
+      console.warn("⚠️ Pincode elements missing in DOM.");
+      return;
+    }
+
+    // Load saved pincode if exists
+    const savedPincode = localStorage.getItem('sujata_pincode');
+    if (savedPincode) {
+      display.innerText = `Deliver to ${savedPincode}`;
+      input.value = savedPincode;
+    }
+
+    const togglePopup = (show: boolean) => {
+      if (show) {
+        popup.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+        popup.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+        input.focus();
+      } else {
+        popup.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+        popup.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+      }
+    };
+
+    trigger.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('#pincode-popup')) {
+        return;
+      }
+      const isVisible = popup.classList.contains('opacity-100');
+      togglePopup(!isVisible);
+    });
+
+    // Close when clicking outside trigger/popup
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!trigger.contains(target)) {
+        togglePopup(false);
+      }
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        togglePopup(false);
+      }
+    });
+
+    const verifyPincode = () => {
+      const value = input.value.trim();
+      const isValid = /^\d{6}$/.test(value);
+
+      status.classList.remove('hidden', 'text-red-500', 'text-emerald-600');
+
+      if (!isValid) {
+        status.innerText = 'Please enter a valid 6-digit pincode.';
+        status.classList.add('text-red-500');
+      } else {
+        status.innerText = 'Serviceable! Express delivery available. 🚚';
+        status.classList.add('text-emerald-600');
+        localStorage.setItem('sujata_pincode', value);
+        display.innerText = `Deliver to ${value}`;
+        
+        // Auto-close after successful validation
+        setTimeout(() => {
+          togglePopup(false);
+          status.classList.add('hidden');
+        }, 1500);
+      }
+    };
+
+    verifyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      verifyPincode();
+    });
+
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.stopPropagation();
+        verifyPincode();
+      }
+    });
+  }
+
+  // Initialize pincode logic
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPincode);
+  } else {
+    initPincode();
+  }
+
+  // Handle page transitions in Astro
+  document.addEventListener('astro:page-load', initPincode);
+</script>

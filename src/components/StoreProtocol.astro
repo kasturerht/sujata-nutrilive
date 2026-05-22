@@ -52,7 +52,7 @@
     <div class="w-full md:w-7/12 relative pb-[10vh]" id="cards-container">
       
       {/* CARD 1 */}
-      <div class="protocol-card sticky top-[15vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-white/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[1]" data-index="0">
+      <div class="protocol-card relative md:sticky md:top-[15vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-white/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[1]" data-index="0">
         <div class="absolute top-8 right-8 text-emerald-50 text-6xl md:text-8xl font-black font-['Playfair_Display'] pointer-events-none">01</div>
         <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Day 1 - 7</span>
         <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-['Playfair_Display'] font-bold mb-4 md:mb-6 text-[#111827]">The Awakening.</h3>
@@ -66,7 +66,7 @@
       </div>
 
       {/* CARD 2 */}
-      <div class="protocol-card sticky top-[18vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#F3F4F1]/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[2] mt-[10vh] md:mt-[20vh]" data-index="1">
+      <div class="protocol-card relative md:sticky md:top-[18vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#F3F4F1]/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[2] mt-8 md:mt-[20vh]" data-index="1">
         <div class="absolute top-8 right-8 text-white text-6xl md:text-8xl font-black font-['Playfair_Display'] pointer-events-none drop-shadow-sm">02</div>
         <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Day 14 - 21</span>
         <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-['Playfair_Display'] font-bold mb-4 md:mb-6 text-[#111827]">Gut Rebalance.</h3>
@@ -80,7 +80,7 @@
       </div>
 
       {/* CARD 3 */}
-      <div class="protocol-card sticky top-[21vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#064E3B] text-white rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_60px_rgba(6,78,59,0.5)] border border-emerald-700/50 flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[3] mt-[10vh] md:mt-[20vh]" data-index="2">
+      <div class="protocol-card relative md:sticky md:top-[21vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#064E3B] text-white rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_60px_rgba(6,78,59,0.5)] border border-emerald-700/50 flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[3] mt-8 md:mt-[20vh]" data-index="2">
         <div class="absolute top-8 right-8 text-emerald-800 text-6xl md:text-8xl font-black font-['Playfair_Display'] pointer-events-none">03</div>
         <span class="text-emerald-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Day 30 & Beyond</span>
         <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-['Playfair_Display'] font-bold mb-4 md:mb-6 text-white">Cellular Peak.</h3>
@@ -125,12 +125,22 @@
 
 {/* 🌟 THE DOSSIER ENGINE (Only handles Card Stacking) */}
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initProtocolStack() {
     const cards = document.querySelectorAll('.protocol-card');
+    if (cards.length === 0) return;
+
     window.addEventListener('scroll', () => {
+      if (window.innerWidth < 768) {
+        cards.forEach(card => {
+          const cardEl = card as HTMLElement;
+          cardEl.style.transform = '';
+          cardEl.style.filter = '';
+        });
+        return;
+      }
       for (let i = 0; i < cards.length - 1; i++) {
-        const currentCard = cards[i];
-        const nextCard = cards[i + 1];
+        const currentCard = cards[i] as HTMLElement;
+        const nextCard = cards[i + 1] as HTMLElement;
         
         const currentRect = currentCard.getBoundingClientRect();
         const nextRect = nextCard.getBoundingClientRect();
@@ -150,5 +160,9 @@
         }
       }
     }, { passive: true });
-  });
+  }
+
+  // Bind for standard page load and client-side view transition
+  document.addEventListener('DOMContentLoaded', initProtocolStack);
+  document.addEventListener('astro:page-load', initProtocolStack);
 </script>

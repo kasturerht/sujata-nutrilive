@@ -24,7 +24,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
       
       {/* Goal 1: Pure Energy */}
-      <a href="#product-ecosystem" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full">
+      <a href="#apothecary-quiz" data-goal-select="energy" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#166534]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="w-16 h-16 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500 relative z-10">
           <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -32,13 +32,13 @@
         <h3 class="text-xl md:text-2xl font-bold text-white mb-3 relative z-10">Pure Energy & Focus</h3>
         <p class="text-emerald-100/60 text-sm mb-8 relative z-10">Beat the afternoon crash. Formulations designed for immediate cognitive clarity and sustained physical stamina.</p>
         <span class="mt-auto text-emerald-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all relative z-10">
-          Shop Powders & Tablets
+          Start Quiz Recommendation
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </span>
       </a>
 
       {/* Goal 2: Cellular Immunity */}
-      <a href="#product-ecosystem" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full">
+      <a href="#apothecary-quiz" data-goal-select="immunity" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#166534]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="w-16 h-16 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500 relative z-10">
           <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -46,13 +46,13 @@
         <h3 class="text-xl md:text-2xl font-bold text-white mb-3 relative z-10">Gut & Immunity</h3>
         <p class="text-emerald-100/60 text-sm mb-8 relative z-10">Deep cellular repair. Cold-pressed capsules that restore gut micro-biome and fortify your immune defense.</p>
         <span class="mt-auto text-emerald-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all relative z-10">
-          Shop Capsules
+          Start Quiz Recommendation
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </span>
       </a>
 
       {/* Goal 3: Skin & Hair */}
-      <a href="#product-ecosystem" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full">
+      <a href="#apothecary-quiz" data-goal-select="beauty" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#166534]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="w-16 h-16 rounded-full bg-emerald-950/50 flex items-center justify-center mb-6 border border-emerald-800/50 group-hover:scale-110 transition-transform duration-500 relative z-10">
           <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
@@ -60,7 +60,7 @@
         <h3 class="text-xl md:text-2xl font-bold text-white mb-3 relative z-10">Skin & Hair Health</h3>
         <p class="text-emerald-100/60 text-sm mb-8 relative z-10">External application meets internal purity. Stop hair fall and detoxify your skin with raw topical solutions.</p>
         <span class="mt-auto text-emerald-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all relative z-10">
-          Shop Care Range
+          Start Quiz Recommendation
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </span>
       </a>
@@ -68,3 +68,39 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const goalLinks = document.querySelectorAll('[data-goal-select]');
+    goalLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const goalValue = link.getAttribute('data-goal-select');
+        const targetQuiz = document.getElementById('apothecary-quiz');
+        if (targetQuiz) {
+          // Scroll smoothly to the quiz
+          targetQuiz.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          
+          // Wait briefly for scroll to finish, then select the quiz option
+          setTimeout(() => {
+            // Find option and click it
+            const quizOption = targetQuiz.querySelector(`.quiz-option[data-value="${goalValue}"][data-step="1"]`) as HTMLElement;
+            if (quizOption) {
+              const restartBtn = document.getElementById('quiz-restart') as HTMLElement;
+              const step2 = document.getElementById('quiz-step-2') as HTMLElement;
+              const step3 = document.getElementById('quiz-step-3') as HTMLElement;
+              const resultStep = document.getElementById('quiz-result') as HTMLElement;
+
+              if (restartBtn && (!step2.classList.contains('hidden') || !step3.classList.contains('hidden') || !resultStep.classList.contains('hidden'))) {
+                restartBtn.click();
+              }
+
+              // Click the selected option
+              quizOption.click();
+            }
+          }, 600);
+        }
+      });
+    });
+  });
+</script>

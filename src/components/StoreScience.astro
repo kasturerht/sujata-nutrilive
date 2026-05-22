@@ -1,5 +1,6 @@
 ---
 // src/components/StoreScience.astro
+import { Image } from 'astro:assets';
 ---
 
 <section id="lux-scanner-section" class="relative bg-[#030303] w-full h-[400vh] font-['Inter'] selection:bg-emerald-900 selection:text-white">
@@ -21,8 +22,8 @@
 
     {/* 3. THE DYNAMIC BACKGROUND PRODUCTS */}
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-      <img id="bg-bottle" src="/spirulina-bottle.png" alt="Sujata Capsules" class="absolute h-[60vh] md:h-[75vh] object-contain will-change-transform" style="opacity: 0.2; filter: grayscale(80%) blur(4px); clip-path: inset(0% 0% 0% 0%);" />
-      <img id="bg-powder" src="/spirulina-powder.png" alt="Sujata Powder" class="absolute h-[60vh] md:h-[75vh] object-contain will-change-transform" style="opacity: 0.2; filter: grayscale(80%) blur(4px); clip-path: inset(0% 0% 100% 0%);" />
+      <Image id="bg-bottle" src="/spirulina-bottle.png" alt="Sujata Capsules" width={600} height={800} class="absolute h-[60vh] md:h-[75vh] object-contain will-change-transform" style="opacity: 0.2; filter: grayscale(80%) blur(4px); clip-path: inset(0% 0% 0% 0%);" />
+      <Image id="bg-powder" src="/spirulina-powder.png" alt="Sujata Powder" width={600} height={800} class="absolute h-[60vh] md:h-[75vh] object-contain will-change-transform" style="opacity: 0.2; filter: grayscale(80%) blur(4px); clip-path: inset(0% 0% 100% 0%);" />
     </div>
 
     {/* 4. STAGGERED TYPOGRAPHY */}
@@ -55,8 +56,8 @@
     {/* 6. THE MAGIC X-RAY LENS */}
     <div id="scanner-lens" class="absolute z-20 w-[95%] md:w-[min(700px,90vw)] h-[180px] sm:h-[220px] md:h-[280px] border-t border-b border-white/20 bg-black/30 backdrop-blur-[16px] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.5)] flex items-center justify-center will-change-transform -translate-y-[150vh]">
       <div id="lens-inner" class="absolute w-screen h-[100svh] flex items-center justify-center will-change-transform translate-y-[150vh]">
-        <img id="fg-bottle" src="/spirulina-bottle.png" class="absolute h-[60vh] md:h-[75vh] object-contain drop-shadow-[0_0_50px_rgba(16,185,129,0.2)] scale-[1.02]" style="clip-path: inset(0% 0% 0% 0%);" />
-        <img id="fg-powder" src="/spirulina-powder.png" class="absolute h-[60vh] md:h-[75vh] object-contain drop-shadow-[0_0_50px_rgba(16,185,129,0.2)] scale-[1.02]" style="clip-path: inset(0% 0% 100% 0%);" />
+        <Image id="fg-bottle" src="/spirulina-bottle.png" alt="Sujata Capsules Foreground" width={600} height={800} class="absolute h-[60vh] md:h-[75vh] object-contain drop-shadow-[0_0_50px_rgba(16,185,129,0.2)] scale-[1.02]" style="clip-path: inset(0% 0% 0% 0%);" />
+        <Image id="fg-powder" src="/spirulina-powder.png" alt="Sujata Powder Foreground" width={600} height={800} class="absolute h-[60vh] md:h-[75vh] object-contain drop-shadow-[0_0_50px_rgba(16,185,129,0.2)] scale-[1.02]" style="clip-path: inset(0% 0% 100% 0%);" />
       </div>
       <div class="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent shadow-[0_0_20px_rgba(52,211,153,1)]"></div>
       <div class="absolute bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>

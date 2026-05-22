@@ -1,5 +1,6 @@
 ---
 // src/components/StoreSocialProof.astro
+import { Image } from 'astro:assets';
 
 const reviews = [
   {
@@ -83,7 +84,7 @@ const reviews = [
         <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[0].highlight}"</h4>
         <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[0].text}</p>
         <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
-          <img src={reviews[0].avatar} alt={reviews[0].name} class="w-9 h-9 rounded-full object-cover" />
+          <img src={reviews[0].avatar} alt={reviews[0].name} decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
           <div class="flex flex-col">
             <span class="text-[#111827] font-bold text-xs">{reviews[0].name}</span>
             <span class="text-gray-400 text-[10px]">{reviews[0].purchaseDate}</span>
@@ -100,7 +101,7 @@ const reviews = [
         <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[1].highlight}"</h4>
         <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[1].text}</p>
         <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
-          <img src={reviews[1].avatar} alt={reviews[1].name} class="w-9 h-9 rounded-full object-cover" />
+          <img src={reviews[1].avatar} alt={reviews[1].name} decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
           <div class="flex flex-col">
             <span class="text-[#111827] font-bold text-xs">{reviews[1].name}</span>
             <span class="text-gray-400 text-[10px]">{reviews[1].purchaseDate}</span>
@@ -111,7 +112,7 @@ const reviews = [
       {/* Card 3: THE VIDEO REEL CARD (Fits perfectly in the grid) */}
       <div class="relative bg-black rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] group cursor-pointer aspect-[3/4] lg:aspect-auto lg:h-full border border-gray-100">
         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10"></div>
-        <img src="/spirulina-bottle.png" alt="Video Review" class="absolute inset-0 w-full h-full object-cover opacity-80 scale-105 group-hover:scale-100 transition-transform duration-700 blur-[2px]" />
+        <Image src="/spirulina-bottle.png" alt="Video Review" width={300} height={400} class="absolute inset-0 w-full h-full object-cover opacity-80 scale-105 group-hover:scale-100 transition-transform duration-700 blur-[2px]" />
         
         {/* Play Button */}
         <div class="absolute inset-0 flex items-center justify-center z-20">
@@ -143,7 +144,7 @@ const reviews = [
         <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[2].highlight}"</h4>
         <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[2].text}</p>
         <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
-          <img src={reviews[2].avatar} alt={reviews[2].name} class="w-9 h-9 rounded-full object-cover" />
+          <img src={reviews[2].avatar} alt={reviews[2].name} decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
           <div class="flex flex-col">
             <span class="text-[#111827] font-bold text-xs">{reviews[2].name}</span>
             <span class="text-gray-400 text-[10px]">{reviews[2].purchaseDate}</span>
