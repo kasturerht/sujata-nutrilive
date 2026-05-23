@@ -1,31 +1,140 @@
 ---
-import Layout from '../layouts/Layout.astro';
-// Jar Header/Footer component nasatil tar varche don line kadhun tak ani direct <Layout> vapar
+// src/pages/thank-you.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+
+// Symmetrical dynamic variables
+const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
 ---
 
-<Layout title="Thank You | Skadas" description="Your message has been received successfully.">
+<StoreLayout title="Order Confirmed | Sujata Nutrilive">
   
-  <main class="pt-32 pb-24 flex items-center justify-center min-h-[80vh] relative z-10">
-    <div class="text-center px-6 max-w-2xl mx-auto reveal">
+  <StoreHeader />
+
+  <main class="min-h-screen bg-[#FAF9F6] pt-32 pb-24 md:pt-40 md:pb-32 font-['Inter'] flex flex-col items-center justify-center selection:bg-[#166534]/20 selection:text-[#166534]">
+    
+    <div class="max-w-2xl mx-auto px-6 w-full text-center flex flex-col items-center">
       
-      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-8 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-        </svg>
+      {/* 1. PULSING SUCCESS TICK MICRO-ANIMATION (Apple Style) */}
+      <div class="relative mb-8 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full bg-emerald-500/10 border border-emerald-500/20 animate-ping opacity-75"></div>
+        <div class="relative w-20 h-20 rounded-full bg-[#166534] border border-emerald-400/20 flex items-center justify-center text-white shadow-[0_10px_35px_rgba(22,101,52,0.3)] group hover:scale-105 transition-transform duration-500">
+          <svg class="w-10 h-10 animate-[drawTick_0.8s_ease-out_forwards]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
       </div>
 
-      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Transmission <span class="text-cyan-400">Successful.</span></h1>
+      {/* 2. HEADER TEXT */}
+      <h1 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-tight mb-4 tracking-tight">
+        Protocol <span class="italic text-[#166534]">Activated.</span>
+      </h1>
       
-      <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
-        We have received your request. One of our growth architects will analyze your requirements and reach out to you shortly.
+      <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg mb-10">
+        Your order is confirmed and registered under <span class="text-[#166534] font-bold">Batch #LIVE-0426</span>. Priority packaging is active. Your delivery will arrive at your doorstep shortly.
       </p>
 
-      <a href="/" class="inline-flex items-center gap-2 bg-white text-slate-950 font-bold py-4 px-8 rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300">
-        Return to Homepage
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      {/* 3. ENTERPRISE RECEIPT DOSSIER CARD */}
+      <div class="w-full bg-white rounded-3xl p-6 md:p-8 shadow-[0_15px_45px_rgba(0,0,0,0.03)] border border-gray-100/60 mb-10 text-left relative overflow-hidden group">
+        
+        {/* Glow corner detail */}
+        <div class="absolute -top-12 -right-12 w-24 h-24 bg-emerald-50 rounded-full blur-xl pointer-events-none opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
+        
+        <h3 class="text-xs font-black uppercase tracking-[0.25em] text-gray-400 border-b border-gray-100 pb-4 mb-5 flex items-center justify-between">
+          <span>Order Specifications</span>
+          <span class="text-[#166534] font-mono lowercase tracking-normal font-bold">registered ⚡</span>
+        </h3>
+
+        <div class="grid grid-cols-2 gap-y-5 gap-x-4 text-xs">
+          <div>
+            <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Receipt Number</span>
+            <span class="font-extrabold text-[#111827] font-mono">{orderNumber}</span>
+          </div>
+          <div>
+            <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Activation Date</span>
+            <span class="font-extrabold text-[#111827]">{today}</span>
+          </div>
+          <div>
+            <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Payment Channel</span>
+            <span class="font-extrabold text-[#111827]">Secure UPI / Card</span>
+          </div>
+          <div>
+            <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Shipping Speed</span>
+            <span class="font-extrabold text-emerald-700 flex items-center gap-1.5 font-bold">
+              Priority Express 🚚
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-dashed border-gray-100 flex items-center justify-between text-xs">
+          <span class="text-gray-400 font-bold uppercase tracking-wider">Dispatch Status</span>
+          <span class="bg-[#f0fdf4] text-[#166534] border border-emerald-100 px-3 py-1 rounded-full font-bold uppercase tracking-widest text-[9px] flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Dispatches in 24 Hours
+          </span>
+        </div>
+      </div>
+
+      {/* 4. PREMIUM WHATSAPP CLINICAL NUTRITIONIST BANNER */}
+      <div class="w-full bg-emerald-950 border border-emerald-900 rounded-[2.5rem] p-6 md:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl mb-10 relative overflow-hidden group">
+        
+        {/* Soft background light */}
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(52,211,153,0.15)_0%,transparent_70%)] blur-[40px] pointer-events-none"></div>
+
+        <div class="text-center md:text-left flex-1 relative z-10">
+          <span class="bg-[#166534] text-emerald-300 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-3 inline-block border border-emerald-400/20">
+            Exclusive VIP Onboarding
+          </span>
+          <h4 class="text-lg md:text-xl font-['Playfair_Display'] font-black mb-2 text-white">
+            Meet your Personal Nutritionist.
+          </h4>
+          <p class="text-emerald-100/60 text-xs font-light leading-relaxed max-w-sm">
+            Chat with a certified doctor to verify your optimal daily dose and receive a completely free, customized diet chart.
+          </p>
+        </div>
+
+        <a 
+          href={`https://wa.me/919999999999?text=Hello%20Sujata%20Nutrilive!%20My%20order%20is%20confirmed%20(Receipt%20ID:%20${orderNumber}).%20I%20want%20to%20activate%20my%20free%20doctor%20consultation%20and%20diet%20chart%20protocol.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-[#25D366] hover:bg-[#20ba5a] text-emerald-950 font-extrabold text-[11px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-[0_10px_25px_rgba(37,211,102,0.15)] hover:shadow-[0_15px_30px_rgba(37,211,102,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group/btn shrink-0 w-full md:w-auto relative z-10"
+        >
+          <svg class="w-4 h-4 fill-current transition-transform duration-300 group-hover/btn:scale-110" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.446L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.45 5.535 0 10.026-4.488 10.029-10.02.002-2.684-1.038-5.207-2.93-7.101C16.559 1.588 14.054.55 11.4.553 5.865.553 1.376 5.04 1.373 10.573c-.001 1.702.464 3.367 1.348 4.838l-.99 3.613 3.7-.971zm12.39-5.127c-.302-.15-1.786-.88-2.062-.98-.277-.1-.478-.15-.679.15-.201.3-.778.98-.954 1.18-.176.2-.352.225-.654.075-.302-.15-1.276-.47-2.43-1.498-.897-.8-1.502-1.787-1.678-2.087-.176-.3-.019-.462.13-.611.135-.134.302-.35.453-.525.15-.175.2-.3.302-.5.101-.2.05-.375-.025-.525-.075-.15-.679-1.635-.93-2.245-.244-.587-.49-.508-.679-.518-.176-.008-.377-.01-.578-.01-.201 0-.527.075-.803.375-.276.3-1.054 1.03-1.054 2.51 0 1.48 1.08 2.91 1.23 3.11.15.2 2.124 3.245 5.144 4.545.718.31 1.277.495 1.713.635.722.23 1.378.197 1.897.12.579-.085 1.786-.73 2.037-1.43.251-.7.251-1.3.176-1.43-.075-.13-.277-.205-.578-.355z"/>
+          </svg>
+          Activate Free Consult
+        </a>
+      </div>
+
+      {/* 5. APPLE-LIKE CTAS */}
+      <a href="/" class="w-full sm:w-auto bg-[#111827] text-white hover:bg-[#166534] font-bold text-xs uppercase tracking-[0.2em] px-10 py-5 rounded-xl transition-all duration-300 shadow-md hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] hover:-translate-y-0.5 flex items-center justify-center gap-2 group">
+        Continue Optimizing
+        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       </a>
-      
+
+      {/* 6. SYMMETRICAL TRUST AXIS */}
+      <div class="mt-16 pt-8 border-t border-gray-100 w-full flex flex-wrap justify-center items-center gap-6 md:gap-10 opacity-50 hover:opacity-85 transition-opacity duration-500">
+        <span class="text-[9px] font-black uppercase tracking-widest text-[#111827]">FSSAI Approved</span>
+        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+        <span class="text-[9px] font-black uppercase tracking-widest text-[#111827]">GMP Certified</span>
+        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+        <span class="text-[9px] font-black uppercase tracking-widest text-[#111827]">100% Organic Culture</span>
+        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+        <span class="text-[9px] font-black uppercase tracking-widest text-[#111827]">Triple Tested</span>
+      </div>
+
     </div>
   </main>
 
-</Layout>
+  <StoreFooter />
+
+</StoreLayout>
+
+<style is:global>
+  @keyframes drawTick {
+    0% { stroke-dasharray: 50; stroke-dashoffset: 50; }
+    100% { stroke-dasharray: 50; stroke-dashoffset: 0; }
+  }
+</style>
