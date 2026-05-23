@@ -200,7 +200,7 @@
     let cartId = localStorage.getItem('sujata_cart_id');
     let cart;
     if (!cartId) {
-      const res = await window.shopifyFetch(`mutation cartCreate($input: CartInput!) { cartCreate(input: $input) { cart { ${cartFragment} } } }`, { input: { lines: [{ merchandiseId: variantId, quantity: 1 }] } });
+      const res = await window.shopifyFetch(`mutation cartCreate($input: CartInput!) { cartCreate(input: $input) { cart { ${cartFragment} } } }`, { input: { lines: [{ merchandiseId: variantId, quantity: 1 }], buyerIdentity: { countryCode: "IN" } } });
       localStorage.setItem('sujata_cart_id', res.data.cartCreate.cart.id);
       cart = res.data.cartCreate.cart;
     } else {
@@ -240,7 +240,7 @@
     let cart;
     const formattedLines = lines.map(line => ({ merchandiseId: line.variantId, quantity: line.quantity || 1 }));
     if (!cartId) {
-      const res = await window.shopifyFetch(`mutation cartCreate($input: CartInput!) { cartCreate(input: $input) { cart { ${cartFragment} } } }`, { input: { lines: formattedLines } });
+      const res = await window.shopifyFetch(`mutation cartCreate($input: CartInput!) { cartCreate(input: $input) { cart { ${cartFragment} } } }`, { input: { lines: formattedLines, buyerIdentity: { countryCode: "IN" } } });
       localStorage.setItem('sujata_cart_id', res.data.cartCreate.cart.id);
       cart = res.data.cartCreate.cart;
     } else {
