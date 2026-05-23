@@ -188,36 +188,49 @@ import { Image } from 'astro:assets';
         </table>
       </div>
 
-      {/* CARDS FOR MOBILE VIEWS (Grid layout instead of wide table) */}
-      <div class="md:hidden space-y-6">
-        {[
-          { title: "Protein Concentration", sujata: "60%+ Bio-Active Protein", other: "40% Typical" },
-          { title: "Cultivation Method", sujata: "Lab-Grade Aqua Culture", other: "Open Industrial Ponds" },
-          { title: "Extraction & Processing", sujata: "Zero-Heat Cold Pressed", other: "High-Heat Spray Dried" },
-          { title: "Toxin & Metal Screening", sujata: "Triple-Certified Toxin Free", other: "Unchecked/Vulnerable" },
-          { title: "Chemical Binders/Fillers", sujata: "100% Pure (Zero Fillers)", other: "Synthetic Binders" }
-        ].map((item) => (
-          <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm space-y-3">
-            <h4 class="text-sm font-black text-gray-700 border-b border-gray-50 pb-2">{item.title}</h4>
-            
-            <div class="grid grid-cols-2 gap-3 text-xs">
-              <div class="bg-emerald-50/40 p-3 rounded-xl border border-emerald-100 text-[#064e3b] font-bold space-y-1">
-                <span class="text-[9px] uppercase tracking-widest text-[#B45309]">Sujata</span>
-                <p class="leading-tight flex items-start gap-1">
-                  <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                  {item.sujata}
-                </p>
-              </div>
-              <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-gray-500 space-y-1">
-                <span class="text-[9px] uppercase tracking-widest text-gray-400">Others</span>
-                <p class="leading-tight flex items-start gap-1">
-                  <svg class="w-3.5 h-3.5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                  {item.other}
-                </p>
+      {/* CARDS FOR MOBILE VIEWS (Collapsible panel to save space) */}
+      <div class="md:hidden space-y-4" id="mobile-comparison-container">
+        
+        {/* Toggle Button */}
+        <button 
+          id="toggle-comparison-btn"
+          class="w-full bg-white border border-gray-200 py-4 px-6 rounded-2xl font-bold text-xs uppercase tracking-wider text-gray-700 flex items-center justify-between shadow-sm cursor-pointer outline-none"
+        >
+          <span>Expand Specifications Matrix</span>
+          <svg id="toggle-comparison-icon" class="w-4 h-4 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        {/* Collapsible Content */}
+        <div id="collapsible-comparison-content" class="hidden space-y-4 pt-2 transition-all duration-300">
+          {[
+            { title: "Protein Concentration", sujata: "60%+ Bio-Active Protein", other: "40% Typical" },
+            { title: "Cultivation Method", sujata: "Lab-Grade Aqua Culture", other: "Open Industrial Ponds" },
+            { title: "Extraction & Processing", sujata: "Zero-Heat Cold Pressed", other: "High-Heat Spray Dried" },
+            { title: "Toxin & Metal Screening", sujata: "Triple-Certified Toxin Free", other: "Unchecked/Vulnerable" },
+            { title: "Chemical Binders/Fillers", sujata: "100% Pure (Zero Fillers)", other: "Synthetic Binders" }
+          ].map((item) => (
+            <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm space-y-3">
+              <h4 class="text-sm font-black text-gray-700 border-b border-gray-50 pb-2">{item.title}</h4>
+              
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div class="bg-emerald-50/40 p-3 rounded-xl border border-emerald-100 text-[#064e3b] font-bold space-y-1">
+                  <span class="text-[9px] uppercase tracking-widest text-[#B45309]">Sujata</span>
+                  <p class="leading-tight flex items-start gap-1">
+                    <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    {item.sujata}
+                  </p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-gray-500 space-y-1">
+                  <span class="text-[9px] uppercase tracking-widest text-gray-400">Others</span>
+                  <p class="leading-tight flex items-start gap-1">
+                    <svg class="w-3.5 h-3.5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    {item.other}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Trust Badges Footer - Premium Scalable SVGs to avoid broken images */}
@@ -281,6 +294,38 @@ import { Image } from 'astro:assets';
 
   </div>
 </section>
+
+<script>
+  function initCollapsibleComparison() {
+    const btn = document.getElementById('toggle-comparison-btn');
+    const content = document.getElementById('collapsible-comparison-content');
+    const icon = document.getElementById('toggle-comparison-icon');
+
+    if (!btn || !content || !icon) return;
+
+    // Reset state on load
+    content.classList.add('hidden');
+    icon.classList.remove('rotate-180');
+    btn.querySelector('span').innerText = 'Expand Specifications Matrix';
+
+    btn.addEventListener('click', () => {
+      const isHidden = content.classList.contains('hidden');
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+        btn.querySelector('span').innerText = 'Collapse Specifications Matrix';
+      } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+        btn.querySelector('span').innerText = 'Expand Specifications Matrix';
+      }
+    });
+  }
+
+  // Bind for DOMContentLoaded and Astro transitions
+  document.addEventListener('DOMContentLoaded', initCollapsibleComparison);
+  document.addEventListener('astro:page-load', initCollapsibleComparison);
+</script>
 
 <style is:global>
   @keyframes product-float {

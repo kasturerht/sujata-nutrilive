@@ -148,15 +148,33 @@ import { Image } from 'astro:assets';
       card.classList.add('scale-95', 'translate-y-4');
     };
 
-    // 🌟 THE TRIGGER: Listen for Exit Intent (Mouse moving up to close tab)
-    // We add a 2-second delay so it doesn't trigger immediately on load if mouse is at top
+    // 🌟 THE TRIGGER: Listen for Exit Intent or Mobile Scroll/Timer Triggers
     setTimeout(() => {
+      // Desktop trigger: Mouse leave
       document.addEventListener('mouseout', (e) => {
-        // If mouse moves out of the window viewport towards the top
         if (e.clientY < 20 || e.relatedTarget == null) {
           showPopup();
         }
       });
+
+      // Mobile / Scroll-Depth Trigger
+      const onScrollOrTouch = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+        if (scrollPercentage >= 75) {
+          showPopup();
+          window.removeEventListener('scroll', onScrollOrTouch);
+        }
+      };
+
+      window.addEventListener('scroll', onScrollOrTouch, { passive: true });
+
+      // Timer Trigger: After 20 seconds
+      setTimeout(() => {
+        showPopup();
+      }, 20000);
     }, 2000);
 
     // Close Events

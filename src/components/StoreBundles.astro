@@ -20,11 +20,11 @@ import { Image } from 'astro:assets';
       </p>
     </div>
 
-    {/* Bundles Grid */}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+    {/* Bundles Grid / Mobile Horizontal Slider */}
+    <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-8 -mx-6 px-6 md:mx-0 md:px-0 scroll-smooth">
       
       {/* BUNDLE 1: Starter Combo */}
-      <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full">
+      <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full w-[85vw] md:w-auto snap-center shrink-0">
         
         {/* Hot badge */}
         <div class="absolute -top-3.5 left-8 bg-[#166534] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-emerald-400/30 shadow-md">
@@ -74,7 +74,7 @@ import { Image } from 'astro:assets';
       </div>
 
       {/* BUNDLE 2: Double Capsules Pack */}
-      <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full">
+      <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full w-[85vw] md:w-auto snap-center shrink-0">
         
         {/* Hot badge */}
         <div class="absolute -top-3.5 left-8 bg-[#D97706] text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-amber-400/30 shadow-md">
@@ -123,7 +123,7 @@ import { Image } from 'astro:assets';
       </div>
 
       {/* BUNDLE 3: Double Powder Pack */}
-      <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full">
+      <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full w-[85vw] md:w-auto snap-center shrink-0">
         
         {/* Hot badge */}
         <div class="absolute -top-3.5 left-8 bg-purple-900 text-white text-[9px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-purple-400/30 shadow-md">
@@ -175,3 +175,8 @@ import { Image } from 'astro:assets';
 
   </div>
 </section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

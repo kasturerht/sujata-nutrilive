@@ -31,14 +31,15 @@ import { Image } from 'astro:assets';
       <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10 hover:border-emerald-500/20 hover:bg-emerald-950/10 transition-all duration-500 flex flex-col md:flex-row gap-8 items-center group">
         
         {/* Left: Product Image */}
-        <div class="w-full md:w-1/2 flex justify-center relative">
-          <div class="absolute w-40 h-40 bg-emerald-500/5 rounded-full blur-2xl group-hover:bg-emerald-500/10 transition-colors"></div>
+        <div class="w-full md:w-1/2 flex justify-center items-center relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-emerald-950/40 border border-white/5 p-6">
+          <Image src="/sujata_harvest_bioreactor.png" alt="Sujata Lab Cultivation" width={300} height={350} class="absolute inset-0 w-full h-full object-cover opacity-90 z-0 pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-5 pointer-events-none"></div>
           <Image 
             src="/spirulina-bottle.png" 
             alt="Sujata Premium Capsules" 
-            width={300} 
-            height={400} 
-            class="relative z-10 max-h-[260px] md:max-h-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] group-hover:scale-105 transition-transform duration-500" 
+            width={220} 
+            height={280} 
+            class="relative z-10 max-h-[180px] md:max-h-[220px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" 
           />
         </div>
 
@@ -87,14 +88,15 @@ import { Image } from 'astro:assets';
       <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10 hover:border-amber-500/20 hover:bg-amber-950/10 transition-all duration-500 flex flex-col md:flex-row gap-8 items-center group">
         
         {/* Left: Product Image */}
-        <div class="w-full md:w-1/2 flex justify-center relative">
-          <div class="absolute w-40 h-40 bg-amber-500/5 rounded-full blur-2xl group-hover:bg-amber-500/10 transition-colors"></div>
+        <div class="w-full md:w-1/2 flex justify-center items-center relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-amber-950/40 border border-white/5 p-6">
+          <Image src="/sujata_morning_vitality.png" alt="Sujata Active Morning Routine" width={300} height={350} class="absolute inset-0 w-full h-full object-cover opacity-90 z-0 pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-5 pointer-events-none"></div>
           <Image 
             src="/spirulina-powder.png" 
             alt="Sujata Gold Standard Powder" 
-            width={300} 
-            height={400} 
-            class="relative z-10 max-h-[260px] md:max-h-[320px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.4)] group-hover:scale-105 transition-transform duration-500" 
+            width={220} 
+            height={280} 
+            class="relative z-10 max-h-[180px] md:max-h-[220px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" 
           />
         </div>
 
