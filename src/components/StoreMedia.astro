@@ -2,41 +2,41 @@
 // src/components/StoreMedia.astro
 ---
 
-<section class="bg-black py-10 border-y border-white/5 overflow-hidden">
+<section class="bg-white py-10 border-y border-gray-200/50 overflow-hidden">
   <div class="max-w-[90rem] mx-auto px-6">
-    <p class="text-center text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-8">
+    <p class="text-center text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-8">
       Featured In & Trusted By
     </p>
     
     {/* Logos container: grid on desktop, smooth scrolling ticker on mobile */}
     <div class="relative w-full overflow-hidden">
       {/* Desktop Grid (md and up) */}
-      <div class="hidden md:flex flex-wrap items-center justify-around gap-12 opacity-40 hover:opacity-60 transition-opacity duration-300">
+      <div class="hidden md:flex flex-wrap items-center justify-around gap-12 opacity-50 hover:opacity-75 transition-opacity duration-300">
         {/* Forbes India */}
-        <span class="text-white font-['Playfair_Display'] font-black text-xl lg:text-2xl tracking-tight">Forbes <span class="text-xs font-sans align-top font-bold text-emerald-400">INDIA</span></span>
+        <span class="text-gray-900 font-['Playfair_Display'] font-black text-xl lg:text-2xl tracking-tight">Forbes <span class="text-xs font-sans align-top font-bold text-[#166534]">INDIA</span></span>
         {/* GQ */}
-        <span class="text-white font-serif font-black text-2xl lg:text-3xl tracking-widest">GQ</span>
+        <span class="text-gray-900 font-serif font-black text-2xl lg:text-3xl tracking-widest">GQ</span>
         {/* YourStory */}
-        <span class="text-white font-sans font-black text-lg lg:text-xl tracking-tighter">your<span class="text-emerald-400">story</span></span>
+        <span class="text-gray-900 font-sans font-black text-lg lg:text-xl tracking-tighter">your<span class="text-[#166534]">story</span></span>
         {/* Indian Express */}
-        <span class="text-white font-serif font-extrabold text-sm lg:text-base tracking-normal uppercase border-b-2 border-emerald-500 pb-0.5">The Indian Express</span>
+        <span class="text-gray-900 font-serif font-extrabold text-sm lg:text-base tracking-normal uppercase border-b-2 border-[#166534] pb-0.5">The Indian Express</span>
         {/* Mid-Day */}
-        <span class="text-white font-sans font-black text-lg lg:text-xl uppercase italic">mid-<span class="text-emerald-400">day</span></span>
+        <span class="text-gray-900 font-sans font-black text-lg lg:text-xl uppercase italic">mid-<span class="text-[#166534]">day</span></span>
       </div>
 
       {/* Mobile Scrolling Ticker (slides automatically) */}
       <div class="md:hidden flex overflow-x-auto no-scrollbar scroll-smooth gap-10 py-2 px-4 items-center snap-x snap-mandatory">
         <div class="flex gap-12 animate-ticker min-w-max">
-          <span class="text-white font-['Playfair_Display'] font-black text-lg tracking-tight">Forbes <span class="text-[10px] font-sans align-top font-bold text-emerald-400">INDIA</span></span>
-          <span class="text-white font-serif font-black text-xl tracking-widest">GQ</span>
-          <span class="text-white font-sans font-black text-base tracking-tighter">your<span class="text-emerald-400">story</span></span>
-          <span class="text-white font-serif font-extrabold text-xs tracking-normal uppercase border-b-2 border-emerald-500 pb-0.5">The Indian Express</span>
-          <span class="text-white font-sans font-black text-base uppercase italic">mid-<span class="text-emerald-400">day</span></span>
+          <span class="text-gray-900 font-['Playfair_Display'] font-black text-lg tracking-tight">Forbes <span class="text-[10px] font-sans align-top font-bold text-[#166534]">INDIA</span></span>
+          <span class="text-gray-900 font-serif font-black text-xl tracking-widest">GQ</span>
+          <span class="text-gray-900 font-sans font-black text-base tracking-tighter">your<span class="text-[#166534]">story</span></span>
+          <span class="text-gray-900 font-serif font-extrabold text-xs tracking-normal uppercase border-b-2 border-[#166534] pb-0.5">The Indian Express</span>
+          <span class="text-gray-900 font-sans font-black text-base uppercase italic">mid-<span class="text-[#166534]">day</span></span>
           
           {/* Duplicate for infinite feel scroll */}
-          <span class="text-white font-['Playfair_Display'] font-black text-lg tracking-tight">Forbes <span class="text-[10px] font-sans align-top font-bold text-emerald-400">INDIA</span></span>
-          <span class="text-white font-serif font-black text-xl tracking-widest">GQ</span>
-          <span class="text-white font-sans font-black text-base tracking-tighter">your<span class="text-emerald-400">story</span></span>
+          <span class="text-gray-900 font-['Playfair_Display'] font-black text-lg tracking-tight">Forbes <span class="text-[10px] font-sans align-top font-bold text-[#166534]">INDIA</span></span>
+          <span class="text-gray-900 font-serif font-black text-xl tracking-widest">GQ</span>
+          <span class="text-gray-900 font-sans font-black text-base tracking-tighter">your<span class="text-[#166534]">story</span></span>
         </div>
       </div>
     </div>
