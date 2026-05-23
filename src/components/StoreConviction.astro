@@ -1,10 +1,6 @@
 ---
 // src/components/StoreConviction.astro
 import { Image } from 'astro:assets';
-import imgElementProtein from '../assets/sujata_element_protein.png';
-import imgElementPurity from '../assets/sujata_element_purity.png';
-import imgElementColdpress from '../assets/sujata_element_coldpress.png';
-import imgElementOdourless from '../assets/sujata_element_odourless.png';
 ---
 
 <section id="conviction-engine" class="relative bg-[#FCFBF7] py-24 lg:py-32 overflow-hidden font-['Inter'] selection:bg-[#166534] selection:text-white">
@@ -39,7 +35,51 @@ import imgElementOdourless from '../assets/sujata_element_odourless.png';
       <div class="space-y-12 order-2 lg:order-1 relative z-20">
         <div class="flex flex-col lg:items-end lg:text-right group">
           <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <Image src={imgElementProtein} alt="Protein Bio-Matrix" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
+            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="sphere-green-main" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#a7f3d0"/>
+                  <stop offset="35%" stop-color="#10b981"/>
+                  <stop offset="70%" stop-color="#047857"/>
+                  <stop offset="100%" stop-color="#022c22"/>
+                </radialGradient>
+                <radialGradient id="sphere-gold-accent" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="35%" stop-color="#f59e0b"/>
+                  <stop offset="70%" stop-color="#b45309"/>
+                  <stop offset="100%" stop-color="#78350f"/>
+                </radialGradient>
+                <linearGradient id="bond-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#34d399" stop-opacity="0.6"/>
+                  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#064e3b" stop-opacity="0.6"/>
+                </linearGradient>
+                <filter id="soft-glow-pep" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <circle cx="32" cy="32" r="22" fill="#10b981" fill-opacity="0.08" filter="url(#soft-glow-pep)" />
+              <line x1="32" y1="32" x2="32" y2="14" stroke="url(#bond-grad)" stroke-width="4" stroke-linecap="round"/>
+              <line x1="32" y1="32" x2="16" y2="42" stroke="url(#bond-grad)" stroke-width="4" stroke-linecap="round"/>
+              <line x1="32" y1="32" x2="48" y2="42" stroke="url(#bond-grad)" stroke-width="4" stroke-linecap="round"/>
+              <line x1="32" y1="32" x2="16" y2="22" stroke="url(#bond-grad)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="32" y1="32" x2="48" y2="22" stroke="url(#bond-grad)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M32 14 L48 22 L48 42 L32 32 L16 42 L16 22 Z" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 3" stroke-opacity="0.4"/>
+              <circle cx="32" cy="14" r="7" fill="url(#sphere-green-main)" />
+              <circle cx="30" cy="12" r="2.5" fill="#ffffff" fill-opacity="0.4" />
+              <circle cx="16" cy="22" r="5.5" fill="url(#sphere-gold-accent)" />
+              <circle cx="14.5" cy="20.5" r="1.8" fill="#ffffff" fill-opacity="0.4" />
+              <circle cx="48" cy="22" r="5.5" fill="url(#sphere-green-main)" />
+              <circle cx="46.5" cy="20.5" r="1.8" fill="#ffffff" fill-opacity="0.4" />
+              <circle cx="16" cy="42" r="7.5" fill="url(#sphere-green-main)" />
+              <circle cx="14" cy="40" r="2.5" fill="#ffffff" fill-opacity="0.4" />
+              <circle cx="48" cy="42" r="7.5" fill="url(#sphere-gold-accent)" />
+              <circle cx="46" cy="40" r="2.5" fill="#ffffff" fill-opacity="0.4" />
+              <circle cx="32" cy="32" r="10" fill="url(#sphere-green-main)" filter="url(#soft-glow-pep)"/>
+              <path d="M29 27 C29 27, 33 25, 36 28 C34 26, 30 27, 29 27 Z" fill="#ffffff" fill-opacity="0.6" />
+              <circle cx="29.5" cy="29.5" r="3.2" fill="#ffffff" fill-opacity="0.5" />
+            </svg>
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">60% Protein Bio-Matrix</h4>
           <p class="text-gray-500 text-sm leading-relaxed">स्नायूंच्या बळकटीसाठी आणि दिवसभर टिकणाऱ्या ऊर्जेसाठी नैसर्गिक प्रोटिनचा सर्वात मोठा स्रोत.</p>
@@ -47,7 +87,33 @@ import imgElementOdourless from '../assets/sujata_element_odourless.png';
 
         <div class="flex flex-col lg:items-end lg:text-right group">
           <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <Image src={imgElementPurity} alt="Lab-Certified Purity" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
+            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffe082"/>
+                  <stop offset="30%" stop-color="#ffb300"/>
+                  <stop offset="55%" stop-color="#ff8f00"/>
+                  <stop offset="85%" stop-color="#ffb300"/>
+                  <stop offset="100%" stop-color="#8d6e63"/>
+                </linearGradient>
+                <linearGradient id="shield-green" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#065f46"/>
+                  <stop offset="100%" stop-color="#022c22"/>
+                </linearGradient>
+                <filter id="seal-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.15"/>
+                </filter>
+              </defs>
+              <circle cx="32" cy="32" r="24" fill="#fbbf24" fill-opacity="0.05" />
+              <path d="M32 6 L35 9 L39 7 L41 11 L45 10 L46 14 L50 15 L50 19 L53 21 L52 25 L54 28 L52 32 L54 36 L52 39 L53 43 L50 45 L50 49 L46 50 L45 54 L41 53 L39 57 L35 55 L32 58 L29 55 L25 57 L23 53 L19 54 L18 50 L14 49 L14 45 L11 43 L12 39 L10 36 L12 32 L10 28 L12 25 L11 21 L14 19 L14 15 L18 14 L19 10 L23 11 L25 7 L29 9 Z" fill="url(#gold-metallic)" filter="url(#seal-shadow)" />
+              <circle cx="32" cy="32" r="21" stroke="#fff8e1" stroke-width="1" stroke-opacity="0.6" />
+              <circle cx="32" cy="32" r="19" stroke="#ffe082" stroke-width="1.5" stroke-dasharray="2 2" />
+              <circle cx="32" cy="32" r="16" fill="url(#gold-metallic)" />
+              <path d="M32 20 C36 20, 39 22, 39 25 C39 31, 36 37, 32 41 C28 37, 25 31, 25 25 C25 22, 28 20, 32 20 Z" fill="url(#shield-green)" stroke="#ffe082" stroke-width="1.5" filter="url(#seal-shadow)" />
+              <path d="M32 24 C34 26, 35 29, 34 32 C33 35, 30 36, 29 34 C28 32, 28 29, 30 26 C31 25, 31 24, 32 24 Z" fill="url(#gold-metallic)" />
+              <path d="M32 28 C31 30, 30 31, 30 33 C31 33, 33 32, 33 30 C33 29, 32 28, 32 28 Z" fill="#fff8e1" />
+              <path d="M22 36 L25 46 L32 43 L39 46 L42 36 Z" fill="url(#gold-metallic)" filter="url(#seal-shadow)" stroke="#fff8e1" stroke-width="0.5" />
+            </svg>
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Lab-Certified Purity</h4>
           <p class="text-gray-500 text-sm leading-relaxed">प्रत्येक बॅचची ३ स्तरांवर चाचणी केली जाते—Heavy Metals आणि Toxins ची कोणतीही भीती नाही.</p>
@@ -92,7 +158,41 @@ import imgElementOdourless from '../assets/sujata_element_odourless.png';
       <div class="space-y-12 order-3 relative z-20">
         <div class="flex flex-col group">
           <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <Image src={imgElementColdpress} alt="Zero-Heat Cold Press" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
+            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="chrome-steel" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#b0bec5"/>
+                  <stop offset="35%" stop-color="#ffffff"/>
+                  <stop offset="65%" stop-color="#78909c"/>
+                  <stop offset="100%" stop-color="#37474f"/>
+                </linearGradient>
+                <radialGradient id="emerald-droplet" cx="30%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#a7f3d0"/>
+                  <stop offset="30%" stop-color="#34d399"/>
+                  <stop offset="70%" stop-color="#059669"/>
+                  <stop offset="100%" stop-color="#022c22"/>
+                </radialGradient>
+                <filter id="drop-shadow-dr" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                  <feOffset dx="0" dy="2" in="blur" result="offset"/>
+                  <feComposite in="SourceGraphic" in2="offset" operator="over"/>
+                </filter>
+              </defs>
+              <circle cx="32" cy="46" r="14" fill="#10b981" fill-opacity="0.08" />
+              <g transform="rotate(-30 32 32)">
+                <path d="M29 6 C29 6, 26 12, 29 16 C32 16, 32 16, 35 16 C38 12, 35 6, 35 6 Z" fill="#37474f" />
+                <path d="M30.5 7.5 C30.5 7.5, 29.5 10, 30.5 12" stroke="#78909c" stroke-width="0.8" stroke-linecap="round" />
+                <rect x="28" y="16" width="8" height="5" rx="1" fill="url(#chrome-steel)" stroke="#455a64" stroke-width="0.5" />
+                <line x1="28.5" y1="18.5" x2="35.5" y2="18.5" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.7"/>
+                <rect x="29" y="21" width="6" height="22" rx="0.5" fill="#ffffff" fill-opacity="0.15" stroke="#cfd8dc" stroke-width="0.8" />
+                <rect x="29.8" y="28" width="4.4" height="14" fill="#10b981" fill-opacity="0.4" />
+                <line x1="30" y1="22" x2="30" y2="42" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.6" stroke-linecap="round" />
+              </g>
+              <path d="M32 38 C32 38, 38 46, 38 50 C38 54.4, 34.4 58, 32 58 C29.6 58, 26 54.4, 26 50 C26 46, 32 38, 32 38 Z" fill="url(#emerald-droplet)" filter="url(#drop-shadow-dr)" />
+              <path d="M29 48.5 C28.5 50.5, 28.5 52, 29.5 53.5 C29 52, 28.8 50.5, 29.5 49 Z" fill="#ffffff" fill-opacity="0.6" />
+              <circle cx="30" cy="44" r="2" fill="#ffffff" fill-opacity="0.5" />
+              <circle cx="34.5" cy="51.5" r="1.2" fill="#ffffff" fill-opacity="0.4" />
+            </svg>
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Zero-Heat Cold Press</h4>
           <p class="text-gray-500 text-sm leading-relaxed">उष्णतेचा वापर न केल्यामुळे स्पिरुलिनामधील सर्व नैसर्गिक एन्झाईम्स आणि जीवनसत्त्वे जिवंत राहतात.</p>
@@ -100,7 +200,41 @@ import imgElementOdourless from '../assets/sujata_element_odourless.png';
 
         <div class="flex flex-col group">
           <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <Image src={imgElementOdourless} alt="Odourless & Fresh" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
+            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="swirl-mint" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#34d399"/>
+                  <stop offset="45%" stop-color="#10b981"/>
+                  <stop offset="100%" stop-color="#047857"/>
+                </linearGradient>
+                <linearGradient id="swirl-light" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a7f3d0"/>
+                  <stop offset="100%" stop-color="#34d399"/>
+                </linearGradient>
+                <radialGradient id="water-drop" cx="30%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#e0f2fe"/>
+                  <stop offset="85%" stop-color="#bae6fd"/>
+                  <stop offset="100%" stop-color="#0284c7"/>
+                </radialGradient>
+                <filter id="swirl-glow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+              </defs>
+              <path d="M12 28 C20 22, 44 22, 52 28" stroke="#34d399" stroke-width="1" stroke-opacity="0.2" stroke-linecap="round"/>
+              <path d="M10 36 C18 30, 46 30, 54 36" stroke="#34d399" stroke-width="1" stroke-opacity="0.15" stroke-linecap="round"/>
+              <path d="M14 42 C18 46, 26 48, 32 46 C42 42, 48 30, 42 22 C36 14, 24 16, 22 24 C20 32, 28 38, 34 36 C40 34, 42 28, 38 24 C35 21, 30 22, 29 25 C28 28, 31 30, 32 30" stroke="url(#swirl-mint)" stroke-width="5" stroke-linecap="round" fill="none" filter="url(#swirl-glow)" />
+              <path d="M16 40 C20 44, 26 45, 32 43 C40 39, 45 28, 40 21 C35 14, 25 16, 23 23 C21 30, 28 35, 33 33 C37 31, 38 27, 36 24 C34 22, 31 23, 30 25" stroke="url(#swirl-light)" stroke-width="1.8" stroke-linecap="round" fill="none" />
+              <circle cx="16" cy="18" r="4" fill="url(#water-drop)" filter="url(#swirl-glow)" />
+              <circle cx="14.8" cy="16.8" r="1" fill="#ffffff" fill-opacity="0.8" />
+              <circle cx="48" cy="44" r="5" fill="url(#water-drop)" filter="url(#swirl-glow)" />
+              <circle cx="46.5" cy="42.5" r="1.3" fill="#ffffff" fill-opacity="0.8" />
+              <circle cx="50" cy="20" r="3" fill="url(#water-drop)" />
+              <circle cx="49" cy="19" r="0.8" fill="#ffffff" fill-opacity="0.7" />
+              <path d="M26 12 L28 15 L31 16 L28 17 L26 20 L24 17 L21 16 L24 15 Z" fill="#ffe082" />
+              <path d="M42 38 L43.5 40 L45.5 40.5 L43.5 41 L42 43 L40.5 41 L38.5 40.5 L40.5 40 Z" fill="#ffe082" stroke="#fff8e1" stroke-width="0.3" />
+            </svg>
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Odourless & Fresh</h4>
           <p class="text-gray-500 text-sm leading-relaxed">बाजारातील इतर स्पिरुलिनासारखा घाणेरडा वास येत नाही. हे खाणे सोपे आणि चविष्ट आहे.</p>
