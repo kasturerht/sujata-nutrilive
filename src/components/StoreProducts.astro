@@ -3,8 +3,8 @@
 import { Image } from 'astro:assets';
 
 // 1. Shopify API Configuration (Added for Direct Checkout)
-const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN;
-const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
 
 // 2. Shopify Data
 const { products = [] } = Astro.props; 
