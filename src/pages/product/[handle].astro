@@ -466,7 +466,7 @@ const labReportUrl = product.labReport?.value || null;
         }, 1000);
       }
 
-      // 3D Hover & Glare
+      // 3D Hover & Glare (Performance optimized with requestAnimationFrame throttling)
       const track = document.getElementById('premium-3d-track');
       const wrapper = document.getElementById('bottle-3d-wrapper');
       const glow = document.getElementById('ambient-glow');
@@ -474,46 +474,73 @@ const labReportUrl = product.labReport?.value || null;
       const customCursor = document.getElementById('custom-cursor');
       const mainImg = document.getElementById('main-pdp-image');
 
+      let ticking3D = false;
+
       if (track && wrapper && glow && glare && customCursor) {
         track.addEventListener('mousemove', (e) => {
-          const rect = track.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const xPct = (x / rect.width) - 0.5;
-          const yPct = (y / rect.height) - 0.5;
+          if (!ticking3D) {
+            const rect = track.getBoundingClientRect();
+            const clientX = e.clientX;
+            const clientY = e.clientY;
 
-          wrapper.style.transform = `rotateX(${yPct * -20}deg) rotateY(${xPct * 20}deg) scale(1.05)`;
-          glow.style.transform = `translate(calc(-50% + ${xPct * 60}px), calc(-50% + ${yPct * 60}px))`;
-          glare.style.opacity = '1';
-          glare.style.transform = `translateX(${xPct * 200}%) translateY(${yPct * 200}%)`;
+            window.requestAnimationFrame(() => {
+              const x = clientX - rect.left;
+              const y = clientY - rect.top;
+              const xPct = (x / rect.width) - 0.5;
+              const yPct = (y / rect.height) - 0.5;
 
-          customCursor.style.opacity = '1';
-          customCursor.style.left = `${e.clientX}px`;
-          customCursor.style.top = `${e.clientY}px`;
+              wrapper.style.transform = `rotateX(${yPct * -20}deg) rotateY(${xPct * 20}deg) scale(1.05)`;
+              glow.style.transform = `translate(calc(-50% + ${xPct * 60}px), calc(-50% + ${yPct * 60}px))`;
+              glare.style.opacity = '1';
+              glare.style.transform = `translateX(${xPct * 200}%) translateY(${yPct * 200}%)`;
+
+              customCursor.style.opacity = '1';
+              customCursor.style.left = `${clientX}px`;
+              customCursor.style.top = `${clientY}px`;
+              ticking3D = false;
+            });
+            ticking3D = true;
+          }
         });
+
         track.addEventListener('mouseleave', () => {
-          wrapper.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
-          glow.style.transform = `translate(-50%, -50%)`;
-          glare.style.opacity = '0';
-          customCursor.style.opacity = '0';
+          window.requestAnimationFrame(() => {
+            wrapper.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            glow.style.transform = 'translate(-50%, -50%)';
+            glare.style.opacity = '0';
+            customCursor.style.opacity = '0';
+          });
         });
       }
 
-      // Magnetic Button
+      // Magnetic Button (Performance optimized with requestAnimationFrame throttling)
       const btnWrapper = document.getElementById('magnetic-btn-wrapper');
       const atcBtn = document.getElementById('add-to-cart-btn');
+      let btnTicking = false;
 
       if (btnWrapper && atcBtn) {
         btnWrapper.addEventListener('mousemove', (e) => {
-          const rect = btnWrapper.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const pullX = (x - rect.width / 2) * 0.3;
-          const pullY = (y - rect.height / 2) * 0.3;
-          atcBtn.style.transform = `translate(${pullX}px, ${pullY}px)`;
+          if (!btnTicking) {
+            const rect = btnWrapper.getBoundingClientRect();
+            const clientX = e.clientX;
+            const clientY = e.clientY;
+
+            window.requestAnimationFrame(() => {
+              const x = clientX - rect.left;
+              const y = clientY - rect.top;
+              const pullX = (x - rect.width / 2) * 0.3;
+              const pullY = (y - rect.height / 2) * 0.3;
+              atcBtn.style.transform = `translate(${pullX}px, ${pullY}px)`;
+              btnTicking = false;
+            });
+            btnTicking = true;
+          }
         });
+
         btnWrapper.addEventListener('mouseleave', () => {
-          atcBtn.style.transform = `translate(0px, 0px)`;
+          window.requestAnimationFrame(() => {
+            atcBtn.style.transform = 'translate(0px, 0px)';
+          });
         });
       }
 
