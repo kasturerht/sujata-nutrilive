@@ -1,6 +1,10 @@
 ---
 // src/components/StoreConviction.astro
 import { Image } from 'astro:assets';
+import imgElementProtein from '../assets/sujata_element_protein.png';
+import imgElementPurity from '../assets/sujata_element_purity.png';
+import imgElementColdpress from '../assets/sujata_element_coldpress.png';
+import imgElementOdourless from '../assets/sujata_element_odourless.png';
 ---
 
 <section id="conviction-engine" class="relative bg-[#FCFBF7] py-24 lg:py-32 overflow-hidden font-['Inter'] selection:bg-[#166534] selection:text-white">
@@ -34,16 +38,16 @@ import { Image } from 'astro:assets';
       {/* Left Callouts */}
       <div class="space-y-12 order-2 lg:order-1 relative z-20">
         <div class="flex flex-col lg:items-end lg:text-right group">
-          <div class="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-[#166534] group-hover:text-white transition-all duration-500">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
+            <Image src={imgElementProtein} alt="Protein Bio-Matrix" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">60% Protein Bio-Matrix</h4>
           <p class="text-gray-500 text-sm leading-relaxed">स्नायूंच्या बळकटीसाठी आणि दिवसभर टिकणाऱ्या ऊर्जेसाठी नैसर्गिक प्रोटिनचा सर्वात मोठा स्रोत.</p>
         </div>
 
         <div class="flex flex-col lg:items-end lg:text-right group">
-          <div class="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-[#166534] group-hover:text-white transition-all duration-500">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
+            <Image src={imgElementPurity} alt="Lab-Certified Purity" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Lab-Certified Purity</h4>
           <p class="text-gray-500 text-sm leading-relaxed">प्रत्येक बॅचची ३ स्तरांवर चाचणी केली जाते—Heavy Metals आणि Toxins ची कोणतीही भीती नाही.</p>
@@ -87,16 +91,16 @@ import { Image } from 'astro:assets';
       {/* Right Callouts */}
       <div class="space-y-12 order-3 relative z-20">
         <div class="flex flex-col group">
-          <div class="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-[#166534] group-hover:text-white transition-all duration-500">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
+            <Image src={imgElementColdpress} alt="Zero-Heat Cold Press" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Zero-Heat Cold Press</h4>
           <p class="text-gray-500 text-sm leading-relaxed">उष्णतेचा वापर न केल्यामुळे स्पिरुलिनामधील सर्व नैसर्गिक एन्झाईम्स आणि जीवनसत्त्वे जिवंत राहतात.</p>
         </div>
 
         <div class="flex flex-col group">
-          <div class="w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center mb-4 border border-gray-100 group-hover:bg-[#166534] group-hover:text-white transition-all duration-500">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
+            <Image src={imgElementOdourless} alt="Odourless & Fresh" width={56} height={56} class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" />
           </div>
           <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Odourless & Fresh</h4>
           <p class="text-gray-500 text-sm leading-relaxed">बाजारातील इतर स्पिरुलिनासारखा घाणेरडा वास येत नाही. हे खाणे सोपे आणि चविष्ट आहे.</p>
