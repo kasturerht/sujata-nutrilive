@@ -1,6 +1,8 @@
 ---
 // src/components/StoreProductBreakdown.astro
 import { Image } from 'astro:assets';
+import imgHarvestBioreactor from '../assets/sujata_harvest_bioreactor.png';
+import imgMorningVitality from '../assets/sujata_morning_vitality.png';
 ---
 
 <section id="product-breakdown" class="relative bg-[#020202] py-20 lg:py-32 font-['Inter'] overflow-hidden text-white border-t border-white/5">
@@ -147,7 +149,7 @@ import { Image } from 'astro:assets';
       {/* Card 1: Bioreactor Science */}
       <div class="group bg-white/[0.01] border border-white/5 rounded-[2.5rem] overflow-hidden flex flex-col hover:border-emerald-500/20 transition-all duration-500">
         <div class="relative aspect-[16/10] overflow-hidden w-full bg-emerald-950/10">
-          <Image src="/sujata_harvest_bioreactor.png" alt="Sujata Clinical Bioreactor Cultivation" width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
+          <Image src={imgHarvestBioreactor} alt="Sujata Clinical Bioreactor Cultivation" width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
           <span class="absolute bottom-6 left-8 bg-[#166534] border border-emerald-400/20 text-emerald-300 text-[9px] font-black uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full">
             Scientific-Grade Pond Cultivation
@@ -164,7 +166,7 @@ import { Image } from 'astro:assets';
       {/* Card 2: Active Lifestyle Vitality */}
       <div class="group bg-white/[0.01] border border-white/5 rounded-[2.5rem] overflow-hidden flex flex-col hover:border-amber-500/20 transition-all duration-500">
         <div class="relative aspect-[16/10] overflow-hidden w-full bg-amber-950/10">
-          <Image src="/sujata_morning_vitality.png" alt="Sujata Morning Wellness Routine" width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
+          <Image src={imgMorningVitality} alt="Sujata Morning Wellness Routine" width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
           <span class="absolute bottom-6 left-8 bg-[#D97706] border border-amber-400/20 text-amber-200 text-[9px] font-black uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full">
             Active Indian Lifestyle

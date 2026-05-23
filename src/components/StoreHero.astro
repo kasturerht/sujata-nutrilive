@@ -1,6 +1,7 @@
 ---
 // src/components/StoreHero.astro
 import { Image } from 'astro:assets';
+import imgMorningRoutine from '../assets/sujata_morning_routine.png';
 ---
 
 <section id="d2c-performance-hero" class="relative w-full font-['Inter'] z-20">
@@ -135,7 +136,7 @@ import { Image } from 'astro:assets';
         </div>
 
         <div class="w-full md:w-[45%] flex items-center justify-center relative h-[200px] sm:h-[240px] md:h-full">
-          <Image src="/sujata_morning_routine.png" alt="Trial Pack" width={500} height={500} class="relative z-10 w-auto h-[80%] lg:h-[85%] object-cover rounded-3xl shadow-2xl border border-[#064E3B]/10"/>
+          <Image src={imgMorningRoutine} alt="Trial Pack" width={500} height={500} class="relative z-10 w-auto h-[80%] lg:h-[85%] object-cover rounded-3xl shadow-2xl border border-[#064E3B]/10"/>
           
           <div class="absolute bottom-[15%] right-[5%] md:right-[15%] bg-[#064E3B] text-white px-3 py-1.5 md:px-4 md:py-2 text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] rounded shadow-xl rotate-6 z-30">
             BEGINNER FRIENDLY
