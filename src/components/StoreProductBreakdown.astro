@@ -30,16 +30,15 @@ import { Image } from 'astro:assets';
       {/* COLUMN 1: CAPSULES - Zero taste, pure efficiency */}
       <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10 hover:border-emerald-500/20 hover:bg-emerald-950/10 transition-all duration-500 flex flex-col md:flex-row gap-8 items-center group">
         
-        {/* Left: Product Image */}
-        <div class="w-full md:w-1/2 flex justify-center items-center relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-emerald-950/40 border border-white/5 p-6">
-          <Image src="/sujata_harvest_bioreactor.png" alt="Sujata Lab Cultivation" width={300} height={350} class="absolute inset-0 w-full h-full object-cover opacity-90 z-0 pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-5 pointer-events-none"></div>
+        {/* Left: Product Image with Clean Luxury Gradient */}
+        <div class="w-full md:w-1/2 flex justify-center items-center relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-gradient-to-tr from-emerald-950 to-black border border-white/5 p-6">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(52,211,153,0.12)_0%,transparent_70%)] pointer-events-none"></div>
           <Image 
             src="/spirulina-bottle.png" 
             alt="Sujata Premium Capsules" 
             width={220} 
             height={280} 
-            class="relative z-10 max-h-[180px] md:max-h-[220px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" 
+            class="relative z-10 max-h-[180px] md:max-h-[220px] object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" 
           />
         </div>
 
@@ -87,16 +86,15 @@ import { Image } from 'astro:assets';
       {/* COLUMN 2: POWDER - Ultimate versatility & bio-activity */}
       <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10 hover:border-amber-500/20 hover:bg-amber-950/10 transition-all duration-500 flex flex-col md:flex-row gap-8 items-center group">
         
-        {/* Left: Product Image */}
-        <div class="w-full md:w-1/2 flex justify-center items-center relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-amber-950/40 border border-white/5 p-6">
-          <Image src="/sujata_morning_vitality.png" alt="Sujata Active Morning Routine" width={300} height={350} class="absolute inset-0 w-full h-full object-cover opacity-90 z-0 pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-5 pointer-events-none"></div>
+        {/* Left: Product Image with Clean Luxury Gradient */}
+        <div class="w-full md:w-1/2 flex justify-center items-center relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-gradient-to-tr from-amber-950 to-black border border-white/5 p-6">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.12)_0%,transparent_70%)] pointer-events-none"></div>
           <Image 
             src="/spirulina-powder.png" 
             alt="Sujata Gold Standard Powder" 
             width={220} 
             height={280} 
-            class="relative z-10 max-h-[180px] md:max-h-[220px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" 
+            class="relative z-10 max-h-[180px] md:max-h-[220px] object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)] group-hover:scale-105 group-hover:-translate-y-1.5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" 
           />
         </div>
 
@@ -139,6 +137,45 @@ import { Image } from 'astro:assets';
           </button>
         </div>
 
+      </div>
+
+    </div>
+
+    {/* 🌟 NEW: Dedicated Editorial Science & Lifestyle Showcase (Uncluttered, glorious, 100% visible) */}
+    <div class="mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 text-left">
+      
+      {/* Card 1: Bioreactor Science */}
+      <div class="group bg-white/[0.01] border border-white/5 rounded-[2.5rem] overflow-hidden flex flex-col hover:border-emerald-500/20 transition-all duration-500">
+        <div class="relative aspect-[16/10] overflow-hidden w-full bg-emerald-950/10">
+          <Image src="/sujata_harvest_bioreactor.png" alt="Sujata Clinical Bioreactor Cultivation" width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <span class="absolute bottom-6 left-8 bg-[#166534] border border-emerald-400/20 text-emerald-300 text-[9px] font-black uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full">
+            Clinical-Grade Cultivation
+          </span>
+        </div>
+        <div class="p-8 lg:p-10 flex-1 flex flex-col justify-center">
+          <h3 class="text-xl lg:text-2xl font-['Playfair_Display'] font-black text-white mb-3">Aqua-Culture Bio-Reactor Purity</h3>
+          <p class="text-gray-400 text-xs lg:text-sm leading-relaxed font-light">
+            पारंपारिक तलावांमधील दूषित पाण्याच्या ऐवजी आम्ही अत्याधुनिक बंद काचेच्या बायो-रिएक्टरमध्ये (Glass Bioreactors) स्पिरुलिना कल्टिव्हेट करतो. यामुळे हवेतील घाण, धूळ आणि जड धातू (Heavy Metals) यांचा स्पर्शही होत नाही. भारतातील १00% सुरक्षित आणि शुद्ध स्पिरुलिना फक्त सुजाताद्वारे.
+          </p>
+        </div>
+      </div>
+
+      {/* Card 2: Active Lifestyle Vitality */}
+      <div class="group bg-white/[0.01] border border-white/5 rounded-[2.5rem] overflow-hidden flex flex-col hover:border-amber-500/20 transition-all duration-500">
+        <div class="relative aspect-[16/10] overflow-hidden w-full bg-amber-950/10">
+          <Image src="/sujata_morning_vitality.png" alt="Sujata Morning Wellness Routine" width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <span class="absolute bottom-6 left-8 bg-[#D97706] border border-amber-400/20 text-amber-200 text-[9px] font-black uppercase tracking-[0.2em] px-3.5 py-1.5 rounded-full">
+            Active Indian Lifestyle
+          </span>
+        </div>
+        <div class="p-8 lg:p-10 flex-1 flex flex-col justify-center">
+          <h3 class="text-xl lg:text-2xl font-['Playfair_Display'] font-black text-white mb-3">Sustained Morning Energy & Focus</h3>
+          <p class="text-gray-400 text-xs lg:text-sm leading-relaxed font-light">
+            सकाळच्या कोवळ्या उन्हात योगाभ्यास करताना आणि दिवसभर ॲक्टिव्ह राहण्यासाठी सुजाता स्पिरुलिना पावडरचा एक चमचा तुमच्या दिनक्रमाला नवीन ऊर्जा देतो. नैसर्गिक अमिनो ॲसिड, लोह आणि अँटी-ऑक्सिडंट्सचा हा समृद्ध स्रोत शरीराला अंतर्गत बळ प्रदान करतो, ज्यामुळे तुम्ही दररोज सर्वोत्तम कामगिरी करू शकता.
+          </p>
+        </div>
       </div>
 
     </div>
