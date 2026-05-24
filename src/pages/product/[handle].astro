@@ -115,6 +115,10 @@ const labReportUrl = product.labReport?.value || null;
                   <img src={img.url} alt="thumbnail" class="w-full h-full object-contain bg-white p-2" />
                 </button>
               ))}
+              {/* Extra Dynamic Texture Detail Card */}
+              <button class="thumb-btn flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30" data-src="/spirulina-texture.png">
+                <img src="/spirulina-texture.png" alt="Texture Closeup" class="w-full h-full object-cover bg-white" />
+              </button>
             </div>
           )}
         </div>
@@ -166,6 +170,42 @@ const labReportUrl = product.labReport?.value || null;
                 </div>
               </div>
             )}
+
+            {/* 🌟 Subscribe & Save 10% Option Widget */}
+            <div class="mb-6 border-t border-gray-50 pt-5">
+              <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Purchase Option</span>
+              <div class="flex flex-col gap-3">
+                {/* One-time Option */}
+                <div class="purchase-option-label relative flex items-center justify-between p-4 rounded-xl border-2 border-[#111827] bg-gray-50/50 cursor-pointer transition-all duration-300 group" id="opt-one-time">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="purchase_type" value="onetime" checked class="w-4 h-4 text-[#166534] focus:ring-[#166534] border-gray-300" />
+                    <div class="flex flex-col">
+                      <span class="text-xs font-bold text-[#111827] uppercase tracking-wider">One-time Purchase</span>
+                      <span class="text-[9px] text-gray-400 uppercase tracking-widest mt-0.5">Standard single shipment</span>
+                    </div>
+                  </div>
+                  <span class="text-sm font-black text-[#111827]" id="onetime-price-label">₹{price}</span>
+                </div>
+                
+                {/* Subscription Option */}
+                <div class="purchase-option-label relative flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 cursor-pointer transition-all duration-300 hover:border-[#111827] group" id="opt-subscribe">
+                  <div class="flex items-center gap-3">
+                    <input type="radio" name="purchase_type" value="subscribe" class="w-4 h-4 text-[#166534] focus:ring-[#166534] border-gray-300" />
+                    <div class="flex flex-col">
+                      <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-[#111827] uppercase tracking-wider">Subscribe & Save</span>
+                        <span class="text-[8px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Save 10%</span>
+                      </div>
+                      <span class="text-[9px] text-gray-400 uppercase tracking-widest mt-0.5">Auto-delivers every 30 days</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-end">
+                    <span class="text-sm font-black text-emerald-700" id="subscribe-price-label">₹{(parseFloat(price) * 0.9).toFixed(2)}</span>
+                    <span class="text-[8px] text-gray-400 line-through" id="subscribe-old-price">₹{price}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="relative w-full h-14" id="magnetic-btn-wrapper">
               <button 
@@ -224,17 +264,17 @@ const labReportUrl = product.labReport?.value || null;
                 </div>
               </div>
               
-              {/* WhatsApp Live Updates Opt-in Switch */}
+              {/* WhatsApp Live Updates Opt-in Checkbox Layout */}
               <div class="flex items-center justify-between bg-[#25D366]/5 hover:bg-[#25D366]/10 px-4 py-3 rounded-xl border border-[#25D366]/10 hover:border-[#25D366]/30 transition-all duration-300 cursor-pointer group" id="whatsapp-toggle-container">
                 <div class="flex items-center gap-2.5">
                   <svg class="w-5 h-5 text-[#25D366] transition-transform duration-300 group-hover:scale-110 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.042c0 2.124.553 4.195 1.604 6.012L.452 24l6.104-1.601a11.964 11.964 0 005.475 1.328h.005c6.645 0 12.031-5.388 12.031-12.042C24 5.388 18.677 0 12.031 0zm5.351 17.181c-.223.633-1.282 1.206-1.768 1.246-.445.038-.971.21-3.085-.666-2.545-1.054-4.161-3.666-4.288-3.834-.127-.168-1.026-1.365-1.026-2.605 0-1.24.634-1.85 1.026-2.261.353-.372.889-.486 1.185-.486.297 0 .593.004.851.015.275.011.644-.105.992.738.356.862 1.218 2.966 1.326 3.181.107.215.178.468.03.743-.148.275-.222.446-.445.714-.222.268-.466.586-.667.828-.222.268-.458.558-.201.996.258.438 1.144 1.884 2.456 3.051 1.693 1.506 3.093 1.97 3.538 2.185.445.215.707.19 1.002-.148.297-.338 1.282-1.488 1.626-2.001.344-.513.687-.428 1.088-.275.402.153 2.541 1.196 2.977 1.41.436.215.727.322.831.5.105.178.105 1.037-.118 1.67z"></path></svg>
                   <div class="flex flex-col">
-                    <span class="text-[9.5px] font-extrabold text-[#064E3B] uppercase tracking-wider">Live WhatsApp Updates</span>
+                    <span class="text-[9.5px] font-extrabold text-[#064E3B] uppercase tracking-wider">Get order updates on WhatsApp 📱</span>
                     <span class="text-[8px] text-[#064E3B]/70 uppercase tracking-widest font-bold mt-0.5">Receive order confirmation & delivery alerts</span>
                   </div>
                 </div>
-                <div class="relative w-8 h-4 bg-gray-200 rounded-full transition-colors duration-300 flex items-center p-0.5 group-hover:bg-gray-300" id="whatsapp-switch">
-                  <div class="w-3.5 h-3.5 bg-white rounded-full shadow-md transform transition-transform duration-300 translate-x-0" id="whatsapp-knob"></div>
+                <div class="w-5 h-5 rounded border-2 border-[#166534] flex items-center justify-center bg-white transition-all duration-300" id="whatsapp-checkbox">
+                  <svg class="w-3.5 h-3.5 text-white scale-0 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
                 </div>
               </div>
             </div>
@@ -258,6 +298,55 @@ const labReportUrl = product.labReport?.value || null;
       </div>
     </div>
   </main>
+
+  {/* 🌟 The Sujata Purity Moat Comparative Table Section */}
+  <section class="max-w-[85rem] mx-auto px-6 lg:px-12 py-16 border-t border-gray-100 z-20 relative bg-white">
+    <div class="mb-10 text-center sm:text-left">
+      <span class="text-emerald-800 text-[10px] font-black uppercase tracking-[0.2em] mb-2 block">The Sujata Purity Moat</span>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-['Playfair_Display'] font-black text-[#111827] tracking-tight">
+        Sujata Raw (Cold-Pressed) vs. Commercial (Heat-Processed)
+      </h2>
+    </div>
+    
+    <div class="overflow-x-auto rounded-2xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.015)]">
+      <table class="w-full text-left border-collapse bg-white">
+        <thead>
+          <tr class="bg-gray-50 border-b border-gray-100">
+            <th class="p-5 text-xs font-bold text-gray-500 uppercase tracking-widest">Active Metric</th>
+            <th class="p-5 text-xs font-black text-emerald-800 uppercase tracking-widest bg-emerald-50/50">Sujata (Raw & Cold-Pressed)</th>
+            <th class="p-5 text-xs font-bold text-gray-500 uppercase tracking-widest">Commercial Brands (Heat-Processed)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50 text-xs sm:text-sm">
+          <tr class="transition-colors hover:bg-gray-50/50">
+            <td class="p-5 font-bold text-gray-900">Extraction Temperature</td>
+            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">Zero Heat Cold-Pressing (&lt; 25°C)</td>
+            <td class="p-5 text-gray-500">High-Heat Spray Drying (80°C - 120°C)</td>
+          </tr>
+          <tr class="transition-colors hover:bg-gray-50/50">
+            <td class="p-5 font-bold text-gray-900">Phycocyanin Potency</td>
+            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">100% Active & Bio-Available</td>
+            <td class="p-5 text-gray-500">Thermally Degraded (Loss of &gt;50%)</td>
+          </tr>
+          <tr class="transition-colors hover:bg-gray-50/50">
+            <td class="p-5 font-bold text-gray-900">Chemical Binders & Fillers</td>
+            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">None (Pure Raw Formulation)</td>
+            <td class="p-5 text-gray-500">Silica, Starch, Binders & Artificial Flavorings</td>
+          </tr>
+          <tr class="transition-colors hover:bg-gray-50/50">
+            <td class="p-5 font-bold text-gray-900">Heavy Metal Contamination</td>
+            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">Double Filtered & NABL Certified Free</td>
+            <td class="p-5 text-gray-500">Often Untested / Trace Heavy Metals Present</td>
+          </tr>
+          <tr class="transition-colors hover:bg-gray-50/50">
+            <td class="p-5 font-bold text-gray-900">Cellular Absorption Rate</td>
+            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">Instant Cellular Osmosis (High)</td>
+            <td class="p-5 text-gray-500">Slow Digestibility (Partially Flushed)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
   <section id="science-dossier" class="relative bg-[#022c22] text-white py-20 md:py-24 overflow-hidden z-20 border-t border-emerald-900/30">
     <div class="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[radial-gradient(circle_at_50%_50%,#064e3b_0%,transparent_70%)] opacity-60 mix-blend-screen pointer-events-none blur-[100px]"></div>
@@ -418,10 +507,7 @@ const labReportUrl = product.labReport?.value || null;
         </div>
   </div>
 
-  <div id="live-toast" class="fixed bottom-6 left-6 z-[9999] bg-white/90 backdrop-blur-xl border border-black/[0.05] shadow-[0_20px_40px_rgba(0,0,0,0.08)] p-3 pr-6 rounded-2xl flex items-center gap-4 translate-y-[150%] opacity-0 transition-all duration-700 ease-[cubic-bezier(0.1,0,0,1)] pointer-events-none md:pointer-events-auto">
-    <div class="w-10 h-10 rounded-full bg-[#f0fdf4] border border-emerald-100 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-[#166534]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg></div>
-    <div class="flex flex-col"><span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Just Secured</span><span class="text-xs font-bold text-[#111827]" id="toast-name">Rahul from Mumbai</span><span class="text-[10px] text-[#166534] font-medium">optimized his protocol</span></div>
-  </div>
+
 
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -474,6 +560,8 @@ const labReportUrl = product.labReport?.value || null;
       const glare = document.getElementById('bottle-glare');
       const customCursor = document.getElementById('custom-cursor');
       const mainImg = document.getElementById('main-pdp-image');
+      const variantBtns = document.querySelectorAll('.variant-btn');
+      const priceDisplay = document.getElementById('dynamic-price');
 
       let ticking3D = false;
 
@@ -672,32 +760,7 @@ const labReportUrl = product.labReport?.value || null;
         odometerElements.forEach(el => observerOdometer.observe(el));
       }
 
-      // Live Toast
-      const toast = document.getElementById('live-toast');
-      const toastName = document.getElementById('toast-name');
-      const buyers = ["Rahul from Mumbai", "Neha from Pune", "Karan from Delhi", "Anjali from Bangalore", "Vikram from Hyderabad"];
-
-      if(toast && toastName) {
-        setTimeout(() => {
-          toastName.innerText = buyers[Math.floor(Math.random() * buyers.length)];
-          toast.classList.remove('translate-y-[150%]', 'opacity-0');
-          setTimeout(() => { toast.classList.add('translate-y-[150%]', 'opacity-0'); }, 4000);
-        }, 5000);
-
-        setInterval(() => {
-          toastName.innerText = buyers[Math.floor(Math.random() * buyers.length)];
-          toast.classList.remove('translate-y-[150%]', 'opacity-0');
-          setTimeout(() => { toast.classList.add('translate-y-[150%]', 'opacity-0'); }, 4000);
-        }, Math.floor(Math.random() * 10000) + 20000);
-      }
-
-      // ==========================================
-      // PHASE 4: THE CONVERSION ENGINE (BULLETPROOF)
-      // ==========================================
-      const priceDisplay = document.getElementById('dynamic-price');
-      const variantBtns = document.querySelectorAll('.variant-btn');
-
-      // 1. Variant Switching Logic (जर २-३ साईझ असतील तर)
+      // 1. Variant Switching Logic (Size switching)
       variantBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           variantBtns.forEach(b => {
@@ -715,12 +778,25 @@ const labReportUrl = product.labReport?.value || null;
             atcBtn.setAttribute('data-variant-id', selectedVariantId);
           }
 
-          const newPrice = parseFloat(target.getAttribute('data-price')).toFixed(2);
-          if(priceDisplay) {
+          // Update Subscription Widget Labels dynamically when size changes
+          const selectedPrice = parseFloat(target.getAttribute('data-price'));
+          const selectedPriceFormatted = selectedPrice.toFixed(2);
+          const discountedPriceFormatted = (selectedPrice * 0.9).toFixed(2);
+
+          const labelOnetime = document.getElementById('onetime-price-label');
+          const labelSubscribe = document.getElementById('subscribe-price-label');
+          const labelOldSubscribe = document.getElementById('subscribe-old-price');
+
+          if(labelOnetime) labelOnetime.innerText = `₹${selectedPriceFormatted}`;
+          if(labelSubscribe) labelSubscribe.innerText = `₹${discountedPriceFormatted}`;
+          if(labelOldSubscribe) labelOldSubscribe.innerText = `₹${selectedPriceFormatted}`;
+
+          // Update main display price with fade animation
+          if (priceDisplay) {
             priceDisplay.style.opacity = '0';
             priceDisplay.style.transform = 'translateY(-5px)';
             setTimeout(() => {
-              priceDisplay.innerText = `₹${newPrice}`;
+              updatePurchaseOptionUI();
               priceDisplay.style.opacity = '1';
               priceDisplay.style.transform = 'translateY(0)';
             }, 150);
@@ -728,50 +804,108 @@ const labReportUrl = product.labReport?.value || null;
         });
       });
 
-      // 2. WhatsApp Opt-in Toggle Interactive State
-      const waToggle = document.getElementById('whatsapp-toggle-container');
-      const waSwitch = document.getElementById('whatsapp-switch');
-      const waKnob = document.getElementById('whatsapp-knob');
-      
-      if (waToggle && waSwitch && waKnob) {
-        // Load initial state from localStorage
-        const isOptedIn = localStorage.getItem('sujata_whatsapp_optin') === 'true';
-        if (isOptedIn) {
-          waSwitch.classList.remove('bg-gray-200');
-          waSwitch.classList.add('bg-[#25D366]');
-          waKnob.classList.remove('translate-x-0');
-          waKnob.classList.add('translate-x-4');
+      // 1.5. Purchase Option (Subscription vs One-time) Selector Logic
+      const radioOnetime = document.querySelector('input[value="onetime"]');
+      const radioSubscribe = document.querySelector('input[value="subscribe"]');
+      const optOnetime = document.getElementById('opt-one-time');
+      const optSubscribe = document.getElementById('opt-subscribe');
+      const btnTextElement = document.getElementById('btn-text');
+
+      function updatePurchaseOptionUI() {
+        const activeVariant = document.querySelector('.variant-btn.selected-variant');
+        const basePrice = activeVariant ? parseFloat(activeVariant.getAttribute('data-price')) : 0;
+        
+        if (radioSubscribe && (radioSubscribe as HTMLInputElement).checked) {
+          const discountPrice = (basePrice * 0.9).toFixed(2);
+          if (priceDisplay) priceDisplay.innerText = `₹${discountPrice}`;
+          if (btnTextElement) {
+            btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+          }
+          if (atcBtn) atcBtn.setAttribute('data-purchase-type', 'subscribe');
+          optSubscribe?.classList.add('border-[#111827]', 'bg-gray-50/50');
+          optSubscribe?.classList.remove('border-gray-200');
+          optOnetime?.classList.add('border-gray-200');
+          optOnetime?.classList.remove('border-[#111827]', 'bg-gray-50/50');
+        } else {
+          const basePriceFormatted = basePrice.toFixed(2);
+          if (priceDisplay) priceDisplay.innerText = `₹${basePriceFormatted}`;
+          if (btnTextElement) {
+            btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+          }
+          if (atcBtn) atcBtn.setAttribute('data-purchase-type', 'onetime');
+          optOnetime?.classList.add('border-[#111827]', 'bg-gray-50/50');
+          optOnetime?.classList.remove('border-gray-200');
+          optSubscribe?.classList.add('border-gray-200');
+          optSubscribe?.classList.remove('border-[#111827]', 'bg-gray-50/50');
         }
+      }
+
+      radioOnetime?.addEventListener('change', updatePurchaseOptionUI);
+      radioSubscribe?.addEventListener('change', updatePurchaseOptionUI);
+      
+      optOnetime?.addEventListener('click', () => {
+        const input = optOnetime.querySelector('input[type="radio"]') as HTMLInputElement;
+        if (input && !input.checked) {
+          input.checked = true;
+          updatePurchaseOptionUI();
+        }
+      });
+      
+      optSubscribe?.addEventListener('click', () => {
+        const input = optSubscribe.querySelector('input[type="radio"]') as HTMLInputElement;
+        if (input && !input.checked) {
+          input.checked = true;
+          updatePurchaseOptionUI();
+        }
+      });
+
+      // 2. WhatsApp Opt-in Checkbox State Logic (RTO Reduction)
+      const waToggle = document.getElementById('whatsapp-toggle-container');
+      const waCheckbox = document.getElementById('whatsapp-checkbox');
+      
+      if (waToggle && waCheckbox) {
+        const checkboxIcon = waCheckbox.querySelector('svg');
+        const isOptedIn = localStorage.getItem('sujata_whatsapp_optin') === 'true';
+        
+        const updateCheckboxState = (active: boolean) => {
+          if (active) {
+            waCheckbox.classList.remove('bg-white');
+            waCheckbox.classList.add('bg-[#166534]');
+            checkboxIcon?.classList.remove('scale-0');
+            checkboxIcon?.classList.add('scale-100');
+          } else {
+            waCheckbox.classList.remove('bg-[#166534]');
+            waCheckbox.classList.add('bg-white');
+            checkboxIcon?.classList.remove('scale-100');
+            checkboxIcon?.classList.add('scale-0');
+          }
+        };
+
+        if (isOptedIn) updateCheckboxState(true);
         
         waToggle.addEventListener('click', () => {
-          const active = waSwitch.classList.contains('bg-[#25D366]');
+          const active = waCheckbox.classList.contains('bg-[#166534]');
           if (active) {
-            waSwitch.classList.remove('bg-[#25D366]');
-            waSwitch.classList.add('bg-gray-200');
-            waKnob.classList.remove('translate-x-4');
-            waKnob.classList.add('translate-x-0');
+            updateCheckboxState(false);
             localStorage.setItem('sujata_whatsapp_optin', 'false');
           } else {
-            waSwitch.classList.remove('bg-gray-200');
-            waSwitch.classList.add('bg-[#25D366]');
-            waKnob.classList.remove('translate-x-0');
-            waKnob.classList.add('translate-x-4');
+            updateCheckboxState(true);
             localStorage.setItem('sujata_whatsapp_optin', 'true');
             
-            // Success toast feedback integration
+            // Trigger success feedback on global Live Toast
             const toast = document.getElementById('live-toast');
             const toastName = document.getElementById('toast-name');
             if (toast && toastName) {
               const oldName = toastName.innerText;
-              const toastTitle = toast.querySelector('span:first-child');
-              const toastDesc = toast.querySelector('span:last-child');
+              const toastTitle = document.getElementById('toast-title');
+              const toastAction = document.getElementById('toast-action');
               
-              const oldTitleText = toastTitle ? toastTitle.innerText : 'Just Secured';
-              const oldDescText = toastDesc ? toastDesc.innerText : 'optimized his protocol';
+              const oldTitleText = toastTitle ? toastTitle.innerText : 'Live Order';
+              const oldActionText = toastAction ? toastAction.innerText : '';
               
               if (toastTitle) toastTitle.innerText = "WhatsApp Enabled";
               toastName.innerText = "Live tracking linked!";
-              if (toastDesc) toastDesc.innerText = "Updates will be sent on checkout";
+              if (toastAction) toastAction.innerText = "Updates will be sent on checkout";
               
               toast.classList.remove('translate-y-[150%]', 'opacity-0');
               setTimeout(() => {
@@ -779,7 +913,7 @@ const labReportUrl = product.labReport?.value || null;
                 setTimeout(() => {
                   if (toastTitle) toastTitle.innerText = oldTitleText;
                   toastName.innerText = oldName;
-                  if (toastDesc) toastDesc.innerText = oldDescText;
+                  if (toastAction) toastAction.innerText = oldActionText;
                 }, 800);
               }, 2500);
             }

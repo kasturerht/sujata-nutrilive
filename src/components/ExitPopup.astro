@@ -148,7 +148,7 @@ import { Image } from 'astro:assets';
       card.classList.add('scale-95', 'translate-y-4');
     };
 
-    // 🌟 THE TRIGGER: Listen for Exit Intent or Mobile Scroll/Timer Triggers
+    // 🌟 THE TRIGGER: Listen strictly for Desktop Exit Intent
     setTimeout(() => {
       // Desktop trigger: Mouse leave
       document.addEventListener('mouseout', (e) => {
@@ -156,25 +156,6 @@ import { Image } from 'astro:assets';
           showPopup();
         }
       });
-
-      // Mobile / Scroll-Depth Trigger
-      const onScrollOrTouch = () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-
-        if (scrollPercentage >= 75) {
-          showPopup();
-          window.removeEventListener('scroll', onScrollOrTouch);
-        }
-      };
-
-      window.addEventListener('scroll', onScrollOrTouch, { passive: true });
-
-      // Timer Trigger: After 20 seconds
-      setTimeout(() => {
-        showPopup();
-      }, 20000);
     }, 2000);
 
     // Close Events

@@ -25,8 +25,8 @@
     </div>
   </div>
 
-  {/* 2. THE LUXURY UTILITY HEADER (Deep Emerald Background) */}
-  <nav class="bg-[#064E3B] border-b border-[#043d2e] px-4 md:px-8 py-3 lg:py-4 shadow-xl">
+  {/* 2. THE LUXURY UTILITY HEADER (Deep Emerald Background with dynamic glassmorphism on scroll) */}
+  <nav id="main-nav" class="bg-[#064E3B] border-b border-[#043d2e] px-4 md:px-8 py-3 lg:py-4 shadow-xl transition-all duration-500 ease-in-out">
     <div class="max-w-[95rem] mx-auto flex items-center justify-between gap-6 md:gap-8">
       
       {/* Logo - White Text */}
@@ -183,13 +183,37 @@
     });
   }
 
-  // Initialize pincode logic
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPincode);
-  } else {
+  function initHeaderScroll() {
+    const nav = document.getElementById('main-nav');
+    if (!nav) return;
+
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        nav.classList.remove('bg-[#064E3B]', 'py-3', 'lg:py-4', 'border-[#043d2e]');
+        nav.classList.add('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-[#043d2e]/50', 'shadow-2xl');
+      } else {
+        nav.classList.remove('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-[#043d2e]/50', 'shadow-2xl');
+        nav.classList.add('bg-[#064E3B]', 'py-3', 'lg:py-4', 'border-[#043d2e]');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Run once on load to catch current position
+    handleScroll();
+  }
+
+  // Initialize header and pincode logic
+  const runAllHeaderInits = () => {
     initPincode();
+    initHeaderScroll();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runAllHeaderInits);
+  } else {
+    runAllHeaderInits();
   }
 
   // Handle page transitions in Astro
-  document.addEventListener('astro:page-load', initPincode);
+  document.addEventListener('astro:page-load', runAllHeaderInits);
 </script>
