@@ -54,6 +54,27 @@ const hasPriceRange = price !== maxPrice;
 const ingredientsData = product.ingredients?.value ? JSON.parse(product.ingredients.value) : [];
 const timelineData = product.timeline?.value ? JSON.parse(product.timeline.value) : [];
 const labReportUrl = product.labReport?.value || null;
+
+const videoTestimonials = [
+  {
+    customerName: "Dr. Siddhant M.",
+    tag: "Expert Opinion",
+    thumbnail: "/siddharth_testimonial_video.png",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hand-taking-capsules-from-a-bottle-41614-large.mp4"
+  },
+  {
+    customerName: "Aditya V.",
+    tag: "Energy Boost",
+    thumbnail: "/sujata_goal_energy.png",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-healthy-green-smoothie-being-poured-into-a-glass-41618-large.mp4"
+  },
+  {
+    customerName: "Priya S.",
+    tag: "Better Immunity",
+    thumbnail: "/sujata_goal_immunity.png",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-drinking-water-after-workout-40898-large.mp4"
+  }
+];
 ---
 
 <StoreLayout title={`${product.title} | Sujata Premium`}>
@@ -385,31 +406,52 @@ const labReportUrl = product.labReport?.value || null;
           </div>
         </div>
 
-        {/* Right Side: Video Hook */}
+        {/* Right Side: Dynamic Multi-Video Layout (Grid on Desktop, Swipe Carousel on Mobile) */}
         <div class="lg:col-span-7 flex flex-col justify-center">
-          <div class="relative w-full aspect-video rounded-[2rem] overflow-hidden shadow-2xl border border-black/[0.04] bg-[#022c22] group cursor-pointer">
-            {/* Ambient Glow */}
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#047857_0%,transparent_70%)] opacity-20 mix-blend-screen pointer-events-none group-hover:opacity-30 transition-opacity duration-500"></div>
-            
-            {/* Poster Image */}
-            <img src="/siddharth_testimonial_video.png" alt="Clinical Video Testimonial" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-[800ms]" />
-            
-            {/* Play Button Overlay */}
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500 flex flex-col items-center justify-center gap-4">
-              <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/30 hover:border-white/60 shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
-                <svg class="w-7 h-7 text-white translate-x-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+          <div class="flex overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 scrollbar-hide pb-4 md:pb-0">
+            {videoTestimonials.map((video) => (
+              <div 
+                class="video-testimonial-card snap-start shrink-0 w-[80%] sm:w-[48%] md:w-auto relative aspect-[3/4] rounded-3xl overflow-hidden shadow-lg border border-white bg-[#022c22] group cursor-pointer transition-all duration-300 hover:shadow-2xl"
+                data-video-url={video.videoUrl}
+              >
+                {/* Ambient Glow */}
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#047857_0%,transparent_70%)] opacity-10 mix-blend-screen pointer-events-none group-hover:opacity-25 transition-opacity duration-500"></div>
+                
+                {/* Poster Image */}
+                <img src={video.thumbnail} alt={`${video.customerName} Testimonial`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[600ms] ease-out" />
+                
+                {/* Dark Gradient Overlay */}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent z-10 transition-colors duration-500 group-hover:from-black/90"></div>
+                
+                {/* Play Button Overlay */}
+                <div class="absolute inset-0 flex items-center justify-center z-20">
+                  <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-lg transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:bg-white/30">
+                    <svg class="w-5 h-5 text-white translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Verified Tag / Health Tag */}
+                <div class="absolute top-4 left-4 z-20 flex flex-col gap-1.5">
+                  <span class="bg-black/35 backdrop-blur-md border border-white/20 text-white text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
+                    <svg class="w-2 h-2 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Verified
+                  </span>
+                  <span class="bg-[#166534] text-white text-[8px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider w-fit">
+                    {video.tag}
+                  </span>
+                </div>
+
+                {/* Bottom Customer Info */}
+                <div class="absolute bottom-4 left-4 right-4 z-20">
+                  <h4 class="text-white text-sm font-black tracking-wide leading-none">{video.customerName}</h4>
+                  <p class="text-[9px] text-gray-300 font-medium uppercase tracking-widest mt-1">Verified Buyer</p>
+                </div>
               </div>
-              <span class="text-white text-[9px] font-extrabold uppercase tracking-[0.3em] bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg group-hover:bg-black/60 transition-all duration-300">
-                Play Testimonial Video
-              </span>
-            </div>
-            
-            {/* Decorative timeline bar */}
-            <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-black/30 backdrop-blur-sm flex items-center">
-              <div class="h-full w-1/3 bg-emerald-500/80 rounded-r shadow-[0_0_10px_rgba(16,185,129,0.5)] group-hover:w-1/2 transition-all duration-700"></div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -596,18 +638,26 @@ const labReportUrl = product.labReport?.value || null;
             <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white">View Official Lab Report</span>
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
           </button>
-        </div>
-      </div>
-    </div>
-  </section>
       </div>
     </div>
   </section>
 
+  {/* 🌟 Interactive Video Lightbox Modal */}
+  <div id="video-lightbox" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out p-4">
+    <div class="relative w-full max-w-2xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 animate-[fadeIn_0.3s_ease-out]">
+      <!-- Close Button -->
+      <button id="close-lightbox-btn" class="absolute top-4 right-4 z-50 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-colors" aria-label="Close video">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <!-- Video Container -->
+      <div id="lightbox-video-container" class="w-full h-full flex items-center justify-center"></div>
+    </div>
+  </div>
+
   <div id="lab-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out bg-[#022c22]/80 backdrop-blur-xl p-4">
     <div class="w-full aspect-video bg-white/5 border border-white/10 rounded-xl relative overflow-hidden flex flex-col items-center justify-center">
-           <svg class="w-16 h-16 text-emerald-500/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-           <span class="text-gray-500 text-[10px] uppercase tracking-widest">[ PDF REPORT LOADED ]</span>
+      <svg class="w-16 h-16 text-emerald-500/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+      <span class="text-gray-500 text-[10px] uppercase tracking-widest">[ PDF REPORT LOADED ]</span>
            {labReportUrl ? (
              <a href={labReportUrl} target="_blank" class="mt-4 px-6 py-2 bg-emerald-500 text-black text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-emerald-400 transition-colors z-20 relative">
                Open Full PDF
@@ -842,6 +892,41 @@ const labReportUrl = product.labReport?.value || null;
         }
         labModal.addEventListener('click', (e) => {
           if(e.target === labModal) closeModal();
+        });
+      }
+
+      // Interactive Video Lightbox
+      const videoLightbox = document.getElementById('video-lightbox');
+      const lightboxVideoContainer = document.getElementById('lightbox-video-container');
+      const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+      const videoCards = document.querySelectorAll('.video-testimonial-card');
+
+      if (videoLightbox && lightboxVideoContainer && closeLightboxBtn) {
+        const closeLightbox = () => {
+          videoLightbox.classList.add('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = '';
+          lightboxVideoContainer.innerHTML = '';
+        };
+
+        videoCards.forEach(card => {
+          card.addEventListener('click', () => {
+            const videoUrl = card.getAttribute('data-video-url');
+            if (videoUrl) {
+              lightboxVideoContainer.innerHTML = `
+                <video controls autoplay class="w-full h-full object-cover">
+                  <source src="${videoUrl}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              `;
+              videoLightbox.classList.remove('opacity-0', 'pointer-events-none');
+              document.body.style.overflow = 'hidden';
+            }
+          });
+        });
+
+        closeLightboxBtn.addEventListener('click', closeLightbox);
+        videoLightbox.addEventListener('click', (e) => {
+          if (e.target === videoLightbox) closeLightbox();
         });
       }
 
