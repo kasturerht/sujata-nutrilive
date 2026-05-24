@@ -295,54 +295,157 @@ const labReportUrl = product.labReport?.value || null;
           </div>
 
         </div>
+       {/* 🌟 The Sujata Purity Moat Comparative Table Section */}
+  <section class="max-w-[85rem] mx-auto px-6 lg:px-12 py-24 border-t border-black/[0.05] z-20 relative bg-[#FAF9F6]">
+    <div class="mb-14 text-center max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 backdrop-blur-md shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-emerald-800 text-[9px] font-black uppercase tracking-[0.3em]">Pure Moat</span>
       </div>
-    </div>
-  </main>
-
-  {/* 🌟 The Sujata Purity Moat Comparative Table Section */}
-  <section class="max-w-[85rem] mx-auto px-6 lg:px-12 py-16 border-t border-gray-100 z-20 relative bg-white">
-    <div class="mb-10 text-center sm:text-left">
-      <span class="text-emerald-800 text-[10px] font-black uppercase tracking-[0.2em] mb-2 block">The Sujata Purity Moat</span>
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-['Playfair_Display'] font-black text-[#111827] tracking-tight">
-        Sujata Raw (Cold-Pressed) vs. Commercial (Heat-Processed)
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-4">
+        Sujata Raw <span class="italic text-gray-400 font-light">vs.</span> Commercial
       </h2>
+      <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed">
+        We do not compromise. Here is a clinical, side-by-side analysis of Sujata's cold-pressed molecular structure compared to high-heat commercial alternatives.
+      </p>
     </div>
     
-    <div class="overflow-x-auto rounded-2xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.015)]">
-      <table class="w-full text-left border-collapse bg-white">
+    <div class="overflow-x-auto pb-4 scrollbar-hide">
+      <table class="w-full text-left border-separate border-spacing-y-3 min-w-[700px]">
         <thead>
-          <tr class="bg-gray-50 border-b border-gray-100">
-            <th class="p-5 text-xs font-bold text-gray-500 uppercase tracking-widest">Active Metric</th>
-            <th class="p-5 text-xs font-black text-emerald-800 uppercase tracking-widest bg-emerald-50/50">Sujata (Raw & Cold-Pressed)</th>
-            <th class="p-5 text-xs font-bold text-gray-500 uppercase tracking-widest">Commercial Brands (Heat-Processed)</th>
+          <tr class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+            <th class="pb-4 px-6 font-semibold">Molecular Metric</th>
+            <th class="pb-4 px-6 font-black text-emerald-800 bg-[#f0fdf4]/50 border border-emerald-500/10 rounded-t-2xl relative">
+              <span class="absolute -top-2 left-6 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-[7px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                ✨ Gold Standard
+              </span>
+              Sujata (Raw & Cold-Pressed)
+            </th>
+            <th class="pb-4 px-6 font-semibold">Commercial Brands (Heat-Processed)</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-50 text-xs sm:text-sm">
-          <tr class="transition-colors hover:bg-gray-50/50">
-            <td class="p-5 font-bold text-gray-900">Extraction Temperature</td>
-            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">Zero Heat Cold-Pressing (&lt; 25°C)</td>
-            <td class="p-5 text-gray-500">High-Heat Spray Drying (80°C - 120°C)</td>
+        <tbody class="text-xs sm:text-sm">
+          
+          {/* ROW 1 */}
+          <tr class="group hover:scale-[1.005] transition-all duration-300">
+            <td class="bg-white p-6 rounded-l-2xl border-y border-l border-black/[0.03] group-hover:border-emerald-500/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="font-bold text-[#111827] text-sm">Extraction Temperature</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Thermal thresholds during plant cell processing</div>
+            </td>
+            <td class="bg-[#f0fdf4]/40 px-6 py-6 border-y border-x border-emerald-500/10 font-bold text-emerald-950 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-[#166534] mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span>Zero Heat Cold-Pressing (&lt; 25°C)</span>
+              </div>
+            </td>
+            <td class="bg-white p-6 rounded-r-2xl border-y border-r border-black/[0.03] group-hover:border-emerald-500/10 transition-colors text-gray-500 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500/10 text-red-500 mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span>High-Heat Spray Drying (80°C - 120°C)</span>
+              </div>
+            </td>
           </tr>
-          <tr class="transition-colors hover:bg-gray-50/50">
-            <td class="p-5 font-bold text-gray-900">Phycocyanin Potency</td>
-            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">100% Active & Bio-Available</td>
-            <td class="p-5 text-gray-500">Thermally Degraded (Loss of &gt;50%)</td>
+
+          {/* ROW 2 */}
+          <tr class="group hover:scale-[1.005] transition-all duration-300">
+            <td class="bg-white p-6 rounded-l-2xl border-y border-l border-black/[0.03] group-hover:border-emerald-500/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="font-bold text-[#111827] text-sm">Phycocyanin Potency</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Concentration of key active anti-inflammatory proteins</div>
+            </td>
+            <td class="bg-[#f0fdf4]/40 px-6 py-6 border-y border-x border-emerald-500/10 font-bold text-emerald-950 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-[#166534] mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span>100% Active & Bio-Available</span>
+              </div>
+            </td>
+            <td class="bg-white p-6 rounded-r-2xl border-y border-r border-black/[0.03] group-hover:border-emerald-500/10 transition-colors text-gray-500 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500/10 text-red-500 mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span>Thermally Degraded (Loss of &gt;50%)</span>
+              </div>
+            </td>
           </tr>
-          <tr class="transition-colors hover:bg-gray-50/50">
-            <td class="p-5 font-bold text-gray-900">Chemical Binders & Fillers</td>
-            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">None (Pure Raw Formulation)</td>
-            <td class="p-5 text-gray-500">Silica, Starch, Binders & Artificial Flavorings</td>
+
+          {/* ROW 3 */}
+          <tr class="group hover:scale-[1.005] transition-all duration-300">
+            <td class="bg-white p-6 rounded-l-2xl border-y border-l border-black/[0.03] group-hover:border-emerald-500/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="font-bold text-[#111827] text-sm">Chemical Binders & Fillers</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Additive binders used for bulk preservation</div>
+            </td>
+            <td class="bg-[#f0fdf4]/40 px-6 py-6 border-y border-x border-emerald-500/10 font-bold text-emerald-950 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-[#166534] mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span>None (Pure Raw Formulation)</span>
+              </div>
+            </td>
+            <td class="bg-white p-6 rounded-r-2xl border-y border-r border-black/[0.03] group-hover:border-emerald-500/10 transition-colors text-gray-500 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500/10 text-red-500 mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span>Silica, Starch, Binders & Flavorings</span>
+              </div>
+            </td>
           </tr>
-          <tr class="transition-colors hover:bg-gray-50/50">
-            <td class="p-5 font-bold text-gray-900">Heavy Metal Contamination</td>
-            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">Double Filtered & NABL Certified Free</td>
-            <td class="p-5 text-gray-500">Often Untested / Trace Heavy Metals Present</td>
+
+          {/* ROW 4 */}
+          <tr class="group hover:scale-[1.005] transition-all duration-300">
+            <td class="bg-white p-6 rounded-l-2xl border-y border-l border-black/[0.03] group-hover:border-emerald-500/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="font-bold text-[#111827] text-sm">Heavy Metal Contamination</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Laboratory limits on Lead, Mercury, and Arsenic</div>
+            </td>
+            <td class="bg-[#f0fdf4]/40 px-6 py-6 border-y border-x border-emerald-500/10 font-bold text-emerald-950 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-[#166534] mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span>Double Filtered & NABL Certified Free</span>
+              </div>
+            </td>
+            <td class="bg-white p-6 rounded-r-2xl border-y border-r border-black/[0.03] group-hover:border-emerald-500/10 transition-colors text-gray-500 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500/10 text-red-500 mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span>Often Untested / Trace Metals Present</span>
+              </div>
+            </td>
           </tr>
-          <tr class="transition-colors hover:bg-gray-50/50">
-            <td class="p-5 font-bold text-gray-900">Cellular Absorption Rate</td>
-            <td class="p-5 font-bold text-emerald-700 bg-emerald-50/30">Instant Cellular Osmosis (High)</td>
-            <td class="p-5 text-gray-500">Slow Digestibility (Partially Flushed)</td>
+
+          {/* ROW 5 */}
+          <tr class="group hover:scale-[1.005] transition-all duration-300">
+            <td class="bg-white p-6 rounded-l-2xl border-y border-l border-black/[0.03] group-hover:border-emerald-500/10 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="font-bold text-[#111827] text-sm">Cellular Absorption Rate</div>
+              <div class="text-[10px] text-gray-400 mt-1 font-light">Rate at which raw minerals enter human blood streams</div>
+            </td>
+            <td class="bg-[#f0fdf4]/40 px-6 py-6 border-y border-x border-emerald-500/10 font-bold text-emerald-950 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/20 text-[#166534] mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <span>Instant Cellular Osmosis (High)</span>
+              </div>
+            </td>
+            <td class="bg-white p-6 rounded-r-2xl border-y border-r border-black/[0.03] group-hover:border-emerald-500/10 transition-colors text-gray-500 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
+              <div class="flex items-center">
+                <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500/10 text-red-500 mr-3 shrink-0">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <span>Slow Digestibility (Partially Flushed)</span>
+              </div>
+            </td>
           </tr>
+
         </tbody>
       </table>
     </div>
