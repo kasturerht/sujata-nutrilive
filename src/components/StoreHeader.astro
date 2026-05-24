@@ -188,11 +188,11 @@
     if (!nav) return;
 
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 50) {
         nav.classList.remove('bg-[#064E3B]', 'py-3', 'lg:py-4', 'border-[#043d2e]');
-        nav.classList.add('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-[#043d2e]/50', 'shadow-2xl');
+        nav.classList.add('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-b', 'border-[#043d2e]/50', 'shadow-lg');
       } else {
-        nav.classList.remove('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-[#043d2e]/50', 'shadow-2xl');
+        nav.classList.remove('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-b', 'border-[#043d2e]/50', 'shadow-lg');
         nav.classList.add('bg-[#064E3B]', 'py-3', 'lg:py-4', 'border-[#043d2e]');
       }
     };

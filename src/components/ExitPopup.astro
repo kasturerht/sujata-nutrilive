@@ -152,7 +152,7 @@ import { Image } from 'astro:assets';
     setTimeout(() => {
       // Desktop trigger: Mouse leave
       document.addEventListener('mouseout', (e) => {
-        if (e.clientY < 20 || e.relatedTarget == null) {
+        if (e.clientY < 0 || e.relatedTarget == null) {
           showPopup();
         }
       });
