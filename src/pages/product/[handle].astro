@@ -318,14 +318,18 @@ const labReportUrl = product.labReport?.value || null;
       <table class="w-full text-left border-separate border-spacing-y-3 min-w-[700px]">
         <thead>
           <tr class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">
-            <th class="pb-4 px-6 font-semibold">Molecular Metric</th>
-            <th class="pb-4 px-6 font-black text-emerald-800 bg-[#f0fdf4]/50 border border-emerald-500/10 rounded-t-2xl relative">
-              <span class="absolute -top-2 left-6 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-[7px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
-                ✨ Gold Standard
-              </span>
-              Sujata (Raw & Cold-Pressed)
+            <th class="pb-4 px-6 pt-8 font-semibold">Molecular Metric</th>
+            <th class="pt-8 pb-4 px-6 bg-[#f0fdf4]/50 border-t border-x border-emerald-500/10 rounded-t-2xl relative">
+              <div class="flex flex-col items-start gap-2">
+                <span class="inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-[8px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  ✨ Gold Standard
+                </span>
+                <span class="text-xs font-black text-emerald-950 uppercase tracking-wider">
+                  Sujata (Raw & Cold-Pressed)
+                </span>
+              </div>
             </th>
-            <th class="pb-4 px-6 font-semibold">Commercial Brands (Heat-Processed)</th>
+            <th class="pb-4 px-6 pt-8 font-semibold">Commercial Brands (Heat-Processed)</th>
           </tr>
         </thead>
         <tbody class="text-xs sm:text-sm">
