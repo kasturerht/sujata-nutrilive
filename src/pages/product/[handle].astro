@@ -815,7 +815,7 @@ const labReportUrl = product.labReport?.value || null;
         const activeVariant = document.querySelector('.variant-btn.selected-variant');
         const basePrice = activeVariant ? parseFloat(activeVariant.getAttribute('data-price')) : 0;
         
-        if (radioSubscribe && (radioSubscribe as HTMLInputElement).checked) {
+        if (radioSubscribe && radioSubscribe.checked) {
           const discountPrice = (basePrice * 0.9).toFixed(2);
           if (priceDisplay) priceDisplay.innerText = `₹${discountPrice}`;
           if (btnTextElement) {
@@ -844,7 +844,7 @@ const labReportUrl = product.labReport?.value || null;
       radioSubscribe?.addEventListener('change', updatePurchaseOptionUI);
       
       optOnetime?.addEventListener('click', () => {
-        const input = optOnetime.querySelector('input[type="radio"]') as HTMLInputElement;
+        const input = optOnetime.querySelector('input[type="radio"]');
         if (input && !input.checked) {
           input.checked = true;
           updatePurchaseOptionUI();
@@ -852,7 +852,7 @@ const labReportUrl = product.labReport?.value || null;
       });
       
       optSubscribe?.addEventListener('click', () => {
-        const input = optSubscribe.querySelector('input[type="radio"]') as HTMLInputElement;
+        const input = optSubscribe.querySelector('input[type="radio"]');
         if (input && !input.checked) {
           input.checked = true;
           updatePurchaseOptionUI();
@@ -867,7 +867,7 @@ const labReportUrl = product.labReport?.value || null;
         const checkboxIcon = waCheckbox.querySelector('svg');
         const isOptedIn = localStorage.getItem('sujata_whatsapp_optin') === 'true';
         
-        const updateCheckboxState = (active: boolean) => {
+        const updateCheckboxState = (active) => {
           if (active) {
             waCheckbox.classList.remove('bg-white');
             waCheckbox.classList.add('bg-[#166534]');
