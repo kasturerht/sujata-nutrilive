@@ -1,0 +1,26 @@
+# AI Coding Agent Token Optimization Rules (.cursorrules)
+# This file is read by Cursor, Windsurf, Claude Code, and other AI Coding Agents to minimize token usage.
+
+# 1. CONCISE RESPONSES & ZERO CHAT BLOAT
+- Keep responses short, direct, and strictly technical. No pleasantries, no over-the-top politeness, no repetitive "Summary of Accomplishments".
+- Explain modifications in 1-2 bullet points maximum. Never write long-winded paragraphs explaining what code does.
+
+# 2. TOKEN-EFFICIENT FILE VIEWING & WRITING
+- NEVER read entire files if you only need a specific block. Use line-targeted viewing tools (e.g., view_file with StartLine/EndLine).
+- NEVER overwrite or rewrite entire files to make small changes. Always use precise partial replacement tools (like replace_file_content or diffs).
+- Preserve all existing comments and structure to avoid generating unnecessary token differences.
+
+# 3. HIGHLY SCOPED SEARCHES
+- Do NOT perform global searches (`grep_search` or `ripgrep` across the entire workspace) if the path or file is known. Search only target subdirectories (e.g., `/src/components` or `/src/pages`).
+- Avoid running multiple parallel search commands.
+
+# 4. QUIET COMMAND EXECUTION
+- Run terminal commands with quiet flags where possible (e.g., `npm install --quiet`, `git pull -q`) to avoid flooding logs with hundreds of lines of terminal output which bloat the LLM's history.
+- Limit output length of log-generating commands (e.g., use `git log -n 5` instead of `git log`).
+
+# 5. CART & ROUTING CONTEXT SCOPE
+- Do not scan the entire workspace for Cart details. The cart logic is strictly located in `src/components/CartDrawer.astro`. Refer only to that file for checkout mutations.
+- The Pincode validator is strictly in `src/components/StoreHeader.astro`.
+
+# 6. VERBOSITY LIMITS
+- Code snippets: Only output the specific lines that changed, or provide unified diffs. Never output hundreds of lines of unchanged code.
