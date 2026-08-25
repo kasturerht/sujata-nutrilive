@@ -1,0 +1,232 @@
+---
+// src/components/StoreShopHub.astro
+import StoreBundleBuilder from './StoreBundleBuilder.astro';
+
+const { products = [] } = Astro.props;
+
+// Shopify Credentials
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com"; 
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+
+function formatPrice(amount: string | number) {
+  const num = typeof amount === 'string' ? parseFloat(amount) : amount;
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(num);
+}
+
+function getImageUrl(product: any) {
+  if (product.featuredImage?.url) return product.featuredImage.url;
+  if (product.images?.edges?.[0]?.node?.url) return product.images.edges[0].node.url;
+  const title = (product.title || '').toLowerCase();
+  if (title.includes('capsule')) return '/spirulina-bottle.png';
+  return '/spirulina-powder.png';
+}
+
+const productMeta = [
+  { category: 'capsules', tag: "Bestseller", benefit: "⚡ Daily Energy & Stamina", oldPrice: 1499, savedPrice: "₹500", rating: "4.9 (1.8k)" },
+  { category: 'powder', tag: "Raw Pure", benefit: "🛡️ Cellular Rejuvenation", oldPrice: 1299, savedPrice: "₹500", rating: "4.9 (2.1k)" },
+  { category: 'combos', tag: "Best Value", benefit: "✨ Complete 90-Day Detox", oldPrice: 2798, savedPrice: "₹999", rating: "5.0 (890)" },
+  { category: 'trial', tag: "Starter Trial", benefit: "🌱 7-Day Experience Pack", oldPrice: 799, savedPrice: "₹300", rating: "4.8 (640)" }
+];
+---
+
+<!-- 🛍️ ZONE 2: The Unified Shop Engine (Featured Kit + Segmented Catalog) -->
+<section id="product-ecosystem" class="py-16 md:py-24 bg-[#FBF9F5] text-[#111827] border-t border-gray-200/80">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    
+    {/* 1. FEATURED WELCOME KIT BUILDER (The Seed / AG1 High-Converting Anchor) */}
+    <div class="mb-16 md:mb-24">
+      <StoreBundleBuilder />
+    </div>
+
+    {/* 2. CATALOG HEADER & FILTER PILLS */}
+    <div class="border-t border-gray-200 pt-12 md:pt-16 mb-10">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] block mb-2 font-sans">
+            Individual Formulations & Combos
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight">
+            Explore All <span class="italic text-[#166534]">Formulations.</span>
+          </h2>
+        </div>
+
+        {/* Filter Pills */}
+        <div class="flex flex-wrap items-center gap-2" id="shop-catalog-filters">
+          <button class="shop-filter-btn active px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-[#111827] text-white cursor-pointer" data-filter="all">
+            All Products
+          </button>
+          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="capsules">
+            💊 Veg Capsules
+          </button>
+          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="powder">
+            🌿 Pure Powder
+          </button>
+          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="combos">
+            📦 Value Combos
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    {/* 3. PRODUCT SALES GRID (With Live Pincode Estimator & 1-Tap ATC) */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="shop-products-grid">
+      {products.map((edge: any, index: number) => {
+        const product = edge.node;
+        const meta = productMeta[index % productMeta.length];
+        const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.priceV2?.amount || "799";
+
+        return (
+          <div class={`product-card-item bg-white rounded-3xl p-5 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={meta.category}>
+            
+            <div>
+              {/* Card Header & Badge */}
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[10px] font-bold uppercase tracking-widest bg-emerald-50 text-[#166534] border border-emerald-200/60 px-2.5 py-0.5 rounded-full font-sans">
+                  {meta.tag}
+                </span>
+                <span class="text-[11px] font-bold text-gray-400 font-sans">
+                  ★ {meta.rating}
+                </span>
+              </div>
+
+              {/* Product Visual */}
+              <a href={`/product/${product.handle}`} class="block relative aspect-square bg-[#FAF9F6] rounded-2xl p-4 mb-4 overflow-hidden group-hover:bg-emerald-50/30 transition-colors">
+                <img 
+                  src={getImageUrl(product)} 
+                  alt={product.title} 
+                  class="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </a>
+
+              {/* Title & Benefit */}
+              <a href={`/product/${product.handle}`} class="block mb-1">
+                <h3 class="text-base font-bold font-sans text-[#111827] group-hover:text-[#166534] transition-colors leading-snug">
+                  {product.title}
+                </h3>
+              </a>
+              <span class="text-xs text-gray-500 font-medium block mb-4">
+                {meta.benefit}
+              </span>
+            </div>
+
+            <div>
+              {/* Pricing */}
+              <div class="flex items-baseline justify-between gap-2 pt-3 border-t border-gray-100 mb-3">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-xl font-extrabold text-[#111827] font-sans">
+                    {formatPrice(priceAmount)}
+                  </span>
+                  <span class="text-xs text-gray-400 line-through font-sans">
+                    ₹{meta.oldPrice}
+                  </span>
+                </div>
+                <span class="text-[10px] font-black text-[#166534] bg-emerald-50 px-2 py-0.5 rounded font-sans">
+                  Save {meta.savedPrice}
+                </span>
+              </div>
+
+              {/* Dynamic Delivery Date Estimator Pill */}
+              <div class="product-delivery-badge flex items-center justify-between gap-1.5 bg-emerald-50/70 border border-emerald-100 rounded-xl px-2.5 py-1.5 mb-3 text-[10px] text-[#064E3B]">
+                <div class="flex items-center gap-1.5 min-w-0">
+                  <span class="text-xs">🚚</span>
+                  <span class="truncate">
+                    <span class="delivery-date-text font-medium text-gray-700">Dispatch in 24h</span>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold bg-[#166534] text-white px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
+              </div>
+
+              {/* 1-Tap Add To Cart Button */}
+              <button 
+                class="add-to-cart-btn w-full bg-[#111827] hover:bg-[#166534] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-sm active:scale-95 touch-manipulation cursor-pointer flex items-center justify-center gap-2"
+                data-variant-id={product.variants?.edges[0]?.node?.id || ('prod_' + index)}
+                data-title={product.title}
+                data-price={priceAmount}
+                data-image={getImageUrl(product)}
+                data-domain={shopifyDomain}
+                data-token={storefrontToken}
+              >
+                <span>Add To Routine</span>
+                <span class="text-sm">→</span>
+              </button>
+            </div>
+
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  function initShopHubFilters() {
+    const filterBtns = document.querySelectorAll('.shop-filter-btn');
+    const productCards = document.querySelectorAll('.product-card-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-[#111827]', 'text-white');
+          b.classList.add('bg-white', 'text-gray-700');
+        });
+
+        btn.classList.add('active', 'bg-[#111827]', 'text-white');
+        btn.classList.remove('bg-white', 'text-gray-700');
+
+        productCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  function updateDeliveryEstimators() {
+    const savedPincode = localStorage.getItem('user_pincode') || '411001';
+    const badges = document.querySelectorAll('.product-delivery-badge .delivery-date-text');
+    
+    // Calculate delivery date (+3 business days)
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 3);
+    if (targetDate.getDay() === 0) targetDate.setDate(targetDate.getDate() + 1); // skip Sunday
+    
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    const dateStr = targetDate.toLocaleDateString('en-IN', options);
+
+    badges.forEach(badge => {
+      badge.innerHTML = `Get it by <strong>${dateStr}</strong> (to ${savedPincode})`;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initShopHubFilters();
+      updateDeliveryEstimators();
+    });
+  } else {
+    initShopHubFilters();
+    updateDeliveryEstimators();
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initShopHubFilters();
+    updateDeliveryEstimators();
+  });
+
+  window.addEventListener('pincode-updated', updateDeliveryEstimators);
+</script>

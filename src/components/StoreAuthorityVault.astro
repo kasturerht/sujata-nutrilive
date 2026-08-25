@@ -1,0 +1,249 @@
+---
+// src/components/StoreAuthorityVault.astro
+const faqs = [
+  {
+    question: "When will I start seeing noticeable results?",
+    answer: "Most customers experience a significant reduction in midday fatigue and improved digestion within 7 to 10 days. Deeper cellular benefits—such as skin clarity, hemoglobin boost, and immune resilience—compound over 3 to 4 weeks of consistent daily usage."
+  },
+  {
+    question: "Do you offer Cash on Delivery (COD) & Free Shipping?",
+    answer: "Yes! We offer free Cash on Delivery (COD) across 25,000+ pin codes in India. All orders are processed in 24 hours with zero hidden shipping fees."
+  },
+  {
+    question: "How is Sujata Spirulina different from cheap multivitamins?",
+    answer: "Unlike lab-synthesized chemical tablets that are 78% excreted, Sujata is 100% raw, cold-pressed Spirulina with an organic cellular matrix offering 95% net human bio-absorption, 65% plant protein, and zero artificial binders."
+  },
+  {
+    question: "Are these formulations verified for heavy metal safety?",
+    answer: "Every harvest is rigorously tested across 18 heavy metal and microbiological parameters in NABL-accredited laboratories. Lead, Mercury, and Arsenic levels are verified at 0.00% prior to medical board release."
+  }
+];
+---
+
+<!-- 🛡️ ZONE 6: Clinical Governance, Clarity FAQ & 30-Day Risk Reversal Vault -->
+<section id="authority-vault" class="py-20 md:py-28 bg-[#FAF9F6] text-[#111827] border-t border-gray-200/80">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    
+    {/* 1. CLINICAL ADVISORY BOARD HEADER & PRACTITIONER ROSTER */}
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-gray-200 pb-8">
+      <div class="max-w-2xl">
+        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] block mb-2 font-sans">
+          Clinical Governance & Medical Board
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight">
+          Formulated by Practitioners.<br/>
+          <span class="font-normal text-gray-600">Guided by Clinical Science.</span>
+        </h2>
+      </div>
+
+      <div class="max-w-md">
+        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
+          Every harvest undergoes independent clearance by certified Ayurvedic Vaidyas and Clinical Nutritionists to verify zero heavy metal toxicity and peak bio-availability.
+        </p>
+      </div>
+    </div>
+
+    {/* 3 Practitioner Cards */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      
+      {/* Dr. Rajesh Joshi */}
+      <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4 text-[11px]">
+            <span class="font-bold text-[#166534] font-sans">Ayurvedic Medicine</span>
+            <span class="font-mono text-gray-400 font-sans">MCIM/I-48921-A</span>
+          </div>
+          <h3 class="text-lg font-bold font-serif text-[#111827]">Dr. Rajesh Joshi</h3>
+          <p class="text-xs font-semibold text-[#166534] font-sans mt-0.5">BAMS, MD (Ayurveda)</p>
+          <p class="text-xs text-gray-500 font-sans mt-1 mb-4">Former Dean, Bharati Vidyapeeth Ayurvedic Hospital</p>
+          <p class="text-xs text-gray-600 font-normal leading-relaxed mb-4">
+            "Low-temperature harvesting preserves organic iron and phycocyanin intact, enabling genuine Rasayana cellular renewal."
+          </p>
+        </div>
+        <span class="text-[10px] font-medium text-gray-700 bg-gray-100 px-2.5 py-1 rounded self-start font-sans">
+          Cellular Longevity
+        </span>
+      </div>
+
+      {/* Dr. Ananya Sharma */}
+      <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4 text-[11px]">
+            <span class="font-bold text-[#166534] font-sans">Clinical Nutrition</span>
+            <span class="font-mono text-gray-400 font-sans">IDA-MH-2018-091</span>
+          </div>
+          <h3 class="text-lg font-bold font-serif text-[#111827]">Dr. Ananya Sharma</h3>
+          <p class="text-xs font-semibold text-[#166534] font-sans mt-0.5">Ph.D., RD (Clinical Nutrition)</p>
+          <p class="text-xs text-gray-500 font-sans mt-1 mb-4">Former Lead Nutritionist, Fortis Healthcare</p>
+          <p class="text-xs text-gray-600 font-normal leading-relaxed mb-4">
+            "Providing a complete essential amino acid profile and 65% bio-protein, cold-pressed Spirulina corrects urban micronutrient deficits."
+          </p>
+        </div>
+        <span class="text-[10px] font-medium text-gray-700 bg-gray-100 px-2.5 py-1 rounded self-start font-sans">
+          Metabolic Nutrition
+        </span>
+      </div>
+
+      {/* Dr. Vikramaditya Patil */}
+      <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4 text-[11px]">
+            <span class="font-bold text-[#166534] font-sans">Purity & Detox Audits</span>
+            <span class="font-mono text-gray-400 font-sans">MCIM/I-55210-B</span>
+          </div>
+          <h3 class="text-lg font-bold font-serif text-[#111827]">Dr. Vikramaditya Patil</h3>
+          <p class="text-xs font-semibold text-[#166534] font-sans mt-0.5">BAMS, MS (Ayur-Surgery & Detox)</p>
+          <p class="text-xs text-gray-500 font-sans mt-1 mb-4">15+ Years Clinical Practice in Immunity & Purity</p>
+          <p class="text-xs text-gray-600 font-normal leading-relaxed mb-4">
+            "Every harvest is independently tested across 18 heavy metal parameters at NABL labs. Zero-lead standards are strictly enforced."
+          </p>
+        </div>
+        <span class="text-[10px] font-medium text-gray-700 bg-gray-100 px-2.5 py-1 rounded self-start font-sans">
+          NABL Lab Clearance
+        </span>
+      </div>
+
+    </div>
+
+    {/* 2. CLARITY FAQ & BLACK CARD GUARANTEE SPLIT */}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start mb-12">
+      
+      {/* LEFT: Accordion FAQs */}
+      <div class="lg:col-span-7">
+        <div class="mb-8">
+          <span class="text-xs font-bold text-[#166534] uppercase tracking-[0.2em] mb-1 block font-sans">Customer Inquiries</span>
+          <h3 class="text-2xl sm:text-3xl font-serif font-normal text-[#111827]">
+            Frequently Asked <span class="italic text-[#166534]">Questions.</span>
+          </h3>
+        </div>
+
+        <div class="border-t border-gray-200">
+          {faqs.map((faq, index) => (
+            <div class="faq-item border-b border-gray-200">
+              <button class="faq-button w-full text-left py-5 flex items-start gap-4 group focus:outline-none transition-colors cursor-pointer">
+                <span class="text-xs font-bold text-gray-400 group-hover:text-[#166534] transition-colors mt-0.5 tracking-wider font-sans">0{index + 1}</span>
+                <div class="flex-1">
+                  <span class="text-[#111827] text-sm sm:text-base font-bold group-hover:text-[#166534] transition-colors block pr-4 font-sans">{faq.question}</span>
+                  <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out mt-0">
+                    <div class="overflow-hidden">
+                      <p class="text-gray-500 text-xs sm:text-sm leading-relaxed pt-3 pr-6 font-normal">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="shrink-0 text-gray-400 group-hover:text-[#166534] transition-colors mt-0.5 text-lg">
+                  +
+                </div>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* RIGHT: Black Card 30-Day Guarantee */}
+      <div class="lg:col-span-5 bg-[#064E3B] text-white rounded-3xl p-7 sm:p-9 shadow-md flex flex-col justify-between relative overflow-hidden">
+        <div>
+          <span class="text-[10px] font-black uppercase tracking-widest bg-emerald-800/80 text-emerald-200 border border-emerald-500/30 px-3 py-1 rounded-full inline-block mb-6 font-sans">
+            Risk Reversal
+          </span>
+
+          <h3 class="text-2xl font-serif font-normal text-white mb-3 leading-snug">
+            30-Day Empty-Bottle<br/>
+            <span class="italic text-emerald-300">Money-Back Guarantee.</span>
+          </h3>
+
+          <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed mb-6">
+            We are so confident in our cold-pressed purity that if you do not experience a noticeable boost in daily stamina within 30 days, simply contact us for a 100% full refund. No questions asked.
+          </p>
+
+          <div class="space-y-2 text-xs border-t border-emerald-700/50 pt-4 font-sans">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-300">✓</span>
+              <span>100% Full Refund Policy</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-300">✓</span>
+              <span>Free Return Pickup from your doorstep</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-300">✓</span>
+              <span>24/7 Dedicated Support Desk</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-emerald-700/50 flex items-center justify-between text-[11px] text-emerald-200 font-sans">
+          <span>🔒 100% Risk-Free Purchase</span>
+          <span class="font-bold text-white">NABL Certified</span>
+        </div>
+      </div>
+
+    </div>
+
+    {/* 3. LIVE WHATSAPP PRACTITIONER CONCIERGE BAR */}
+    <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div class="flex items-center gap-4 text-left">
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-xl shrink-0">
+          🩺
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-[#166534] font-sans">Practitioner Support</span>
+          </div>
+          <h4 class="text-sm sm:text-base font-bold text-[#111827] font-sans">Have a dosage or medical query?</h4>
+          <p class="text-xs text-gray-500 font-sans mt-0.5">Speak with our certified Ayurvedic team on WhatsApp for free personalized advice.</p>
+        </div>
+      </div>
+
+      <a 
+        href="https://wa.me/919999999999?text=Hello%20Sujata%20Nutrilive%2C%20I%20have%20a%20question%20regarding%20Spirulina%20dosage." 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="bg-[#111827] hover:bg-[#166534] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shrink-0 touch-manipulation font-sans"
+      >
+        Consult Doctor on WhatsApp →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  function initVaultFAQAccordion() {
+    const faqButtons = document.querySelectorAll('#authority-vault .faq-button');
+
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.querySelector('.faq-answer');
+        const icon = button.querySelector('.shrink-0');
+        const isOpen = answer.classList.contains('open');
+
+        // Close all other FAQs
+        faqButtons.forEach(otherBtn => {
+          const otherAnswer = otherBtn.querySelector('.faq-answer');
+          const otherIcon = otherBtn.querySelector('.shrink-0');
+          if (otherAnswer) {
+            otherAnswer.classList.remove('open');
+            otherAnswer.style.gridTemplateRows = '0fr';
+          }
+          if (otherIcon) otherIcon.innerText = '+';
+        });
+
+        // Toggle clicked FAQ
+        if (!isOpen && answer) {
+          answer.classList.add('open');
+          answer.style.gridTemplateRows = '1fr';
+          if (icon) icon.innerText = '−';
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVaultFAQAccordion);
+  } else {
+    initVaultFAQAccordion();
+  }
+  document.addEventListener('astro:page-load', initVaultFAQAccordion);
+</script>
