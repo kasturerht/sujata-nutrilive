@@ -1,6 +1,7 @@
 ---
 // src/layouts/StoreLayout.astro
 import CartDrawer from '../components/CartDrawer.astro';
+import StoreSearchModal from '../components/StoreSearchModal.astro';
 const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
 ---
 <html lang="en">
@@ -13,12 +14,13 @@ const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen min-h-[100dvh] relative overflow-x-hidden font-['Inter']">
+  <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen min-h-[100dvh] relative overflow-x-hidden font-sans">
     <slot />
     <CartDrawer />
+    <StoreSearchModal />
 
     {/* Global Live Purchase Toast (FOMO & Mobile Interactive with Safe Areas) */}
     <div 

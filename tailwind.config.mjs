@@ -4,7 +4,12 @@ import typography from '@tailwindcss/typography';
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdoc,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+    },
   },
   plugins: [
     typography,

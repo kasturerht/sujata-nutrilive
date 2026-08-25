@@ -1,0 +1,463 @@
+---
+// src/components/StoreSearchModal.astro
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+---
+
+<!-- 🌟 Global Luxury Predictive Search Modal (Shopify GraphQL Engine) -->
+<div 
+  id="search-modal-backdrop" 
+  class="fixed inset-0 z-[200] bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex items-start justify-center pt-8 sm:pt-20 px-3 sm:px-4"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Product Search"
+>
+  <div 
+    id="search-modal-dialog" 
+    class="relative w-full max-w-2xl bg-[#022c22] border border-emerald-500/30 rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col max-h-[90dvh] sm:max-h-[85dvh] transform scale-95 transition-transform duration-300 text-white"
+  >
+    
+    {/* 1. Header: Search Input & Controls */}
+    <div class="p-4 sm:p-5 border-b border-white/10 flex items-center gap-3 bg-black/20">
+      <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 text-emerald-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </div>
+
+      <div class="flex-1 relative">
+        <input 
+          type="text" 
+          id="predictive-search-input" 
+          placeholder="Search formulations (e.g. 'Powder', 'Capsules', 'Immunity')..." 
+          class="w-full bg-white/5 border border-white/10 focus:border-emerald-400/60 focus:bg-white/10 rounded-xl px-4 py-3 text-sm sm:text-base text-white placeholder-emerald-200/40 outline-none transition-all pr-10"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button 
+          id="clear-search-btn" 
+          type="button" 
+          aria-label="Clear Search"
+          class="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white items-center justify-center hidden"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Close Button -->
+      <button 
+        id="close-search-modal" 
+        type="button" 
+        aria-label="Close Search"
+        class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-gray-300 hover:text-white transition-colors flex-shrink-0 touch-manipulation"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    {/* 2. Body: Scrollable Results / Zero-State */}
+    <div id="search-modal-body" class="p-4 sm:p-6 overflow-y-auto flex-1 space-y-6">
+      
+      {/* ZERO STATE (Default View) */}
+      <div id="search-zero-state" class="space-y-6">
+        
+        {/* Trending Searches */}
+        <div>
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-3 flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.527.82-1.11 2.078-1.488 3.51a14.73 14.73 0 00-.472 2.923c-.114.935-.164 1.83-.164 2.519 0 2.21 1.79 4 4 4s4-1.79 4-4c0-.689-.05-1.584-.164-2.52a14.73 14.73 0 00-.472-2.922c-.378-1.432-.961-2.69-1.488-3.51-.208-.322-.477-.65-.822-.88z" clip-rule="evenodd"></path></svg>
+            Trending Searches
+          </span>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="trending-tag-btn px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-xs font-medium text-emerald-100 transition-all touch-manipulation">Spirulina Powder</button>
+            <button type="button" class="trending-tag-btn px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-xs font-medium text-emerald-100 transition-all touch-manipulation">Spirulina Capsules</button>
+            <button type="button" class="trending-tag-btn px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-xs font-medium text-emerald-100 transition-all touch-manipulation">Buy 2 Get 1 Free</button>
+            <button type="button" class="trending-tag-btn px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-xs font-medium text-emerald-100 transition-all touch-manipulation">30-Day Starter Kit</button>
+            <button type="button" class="trending-tag-btn px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 text-xs font-medium text-emerald-100 transition-all touch-manipulation">Cellular Immunity</button>
+          </div>
+        </div>
+
+        {/* Recent Searches (Dynamically populates from localStorage) */}
+        <div id="recent-searches-container" class="hidden">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Recent Searches</span>
+            <button type="button" id="clear-recents-btn" class="text-[11px] text-emerald-400 hover:text-emerald-300 font-semibold underline">Clear</button>
+          </div>
+          <div id="recent-searches-list" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        {/* Quick Collections Jump */}
+        <div class="pt-4 border-t border-white/10">
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">Explore Categories</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <a href="/#product-ecosystem" class="search-category-link p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="text-xl">🌿</span>
+                <div class="flex flex-col">
+                  <span class="text-xs font-bold text-white">Pure Formulations</span>
+                  <span class="text-[10px] text-emerald-300/70">Powders & Capsules</span>
+                </div>
+              </div>
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+
+            <a href="/#bundle-offers" class="search-category-link p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between transition-colors">
+              <div class="flex items-center gap-3">
+                <span class="text-xl">📦</span>
+                <div class="flex flex-col">
+                  <span class="text-xs font-bold text-white">Value Bundles</span>
+                  <span class="text-[10px] text-amber-400/90">Save Up To 30%</span>
+                </div>
+              </div>
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      {/* LOADING STATE */}
+      <div id="search-loading-state" class="space-y-3 py-4 hidden">
+        <div class="flex items-center justify-center gap-3 text-emerald-400 py-6">
+          <svg class="w-6 h-6 animate-spin text-emerald-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+          <span class="text-xs font-bold uppercase tracking-widest">Searching Shopify Inventory...</span>
+        </div>
+      </div>
+
+      {/* RESULTS STATE */}
+      <div id="search-results-state" class="space-y-3 hidden">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest" id="search-results-count">Results</span>
+          <span class="text-[10px] text-gray-400">100% In Stock</span>
+        </div>
+        <div id="search-results-list" class="space-y-2.5"></div>
+      </div>
+
+      {/* NO RESULTS STATE */}
+      <div id="search-empty-state" class="text-center py-10 space-y-4 hidden">
+        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-2xl">
+          🔍
+        </div>
+        <div>
+          <h4 class="text-base font-bold text-white mb-1">No formulations found</h4>
+          <p class="text-xs text-gray-400 max-w-sm mx-auto">Try searching for general terms like "Spirulina", "Powder", "Immunity" or explore our full collection.</p>
+        </div>
+        <a href="/#product-ecosystem" class="search-category-link inline-block px-6 py-2.5 bg-emerald-500 text-black text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-emerald-400 transition-colors">
+          View All Products
+        </a>
+      </div>
+
+    </div>
+
+    {/* 3. Footer: Keyboard Shortcuts */}
+    <div class="px-5 py-3 border-t border-white/10 bg-black/40 flex items-center justify-between text-[11px] text-gray-400">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[10px] font-mono text-gray-300">ESC</kbd> to close</span>
+        <span class="hidden sm:inline-flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[10px] font-mono text-gray-300">CTRL+K</kbd> to open anytime</span>
+      </div>
+      <span class="text-emerald-400/80 font-medium">⚡ Powered by Shopify Storefront API</span>
+    </div>
+
+  </div>
+</div>
+
+<script is:inline define:vars={{ shopifyDomain, storefrontToken }}>
+  function initPredictiveSearch() {
+    const backdrop = document.getElementById('search-modal-backdrop');
+    const dialog = document.getElementById('search-modal-dialog');
+    const input = document.getElementById('predictive-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const closeBtn = document.getElementById('close-search-modal');
+
+    const zeroState = document.getElementById('search-zero-state');
+    const loadingState = document.getElementById('search-loading-state');
+    const resultsState = document.getElementById('search-results-state');
+    const emptyState = document.getElementById('search-empty-state');
+    const resultsList = document.getElementById('search-results-list');
+    const resultsCount = document.getElementById('search-results-count');
+
+    const recentsContainer = document.getElementById('recent-searches-container');
+    const recentsList = document.getElementById('recent-searches-list');
+    const clearRecentsBtn = document.getElementById('clear-recents-btn');
+    const trendingBtns = document.querySelectorAll('.trending-tag-btn');
+    const categoryLinks = document.querySelectorAll('.search-category-link');
+
+    if (!backdrop || !input) return;
+
+    let debounceTimer;
+
+    // 1. Open / Close Modal Logic
+    function openModal() {
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      dialog.classList.remove('scale-95');
+      dialog.classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+      loadRecentSearches();
+      setTimeout(() => input.focus(), 100);
+    }
+
+    function closeModal() {
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      dialog.classList.add('scale-95');
+      dialog.classList.remove('scale-100');
+      document.body.style.overflow = '';
+    }
+
+    // Global Triggers (Desktop search bar, mobile icon, keyboard shortcuts)
+    window.openSearchModal = openModal;
+    window.closeSearchModal = closeModal;
+
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openModal();
+      }
+      if (e.key === 'Escape' && !backdrop.classList.contains('opacity-0')) {
+        closeModal();
+      }
+    });
+
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', closeModal);
+    });
+
+    // 2. Recent Searches Storage Engine
+    function loadRecentSearches() {
+      const recents = JSON.parse(localStorage.getItem('sujata_recent_searches') || '[]');
+      if (recents.length > 0 && recentsContainer && recentsList) {
+        recentsContainer.classList.remove('hidden');
+        recentsList.innerHTML = recents.map(term => `
+          <button type="button" class="recent-tag-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-gray-300 hover:text-white transition-all flex items-center gap-1.5 touch-manipulation" data-term="${term}">
+            <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            ${term}
+          </button>
+        `).join('');
+
+        recentsList.querySelectorAll('.recent-tag-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const term = btn.getAttribute('data-term');
+            if (term) {
+              input.value = term;
+              triggerSearch(term);
+            }
+          });
+        });
+      } else if (recentsContainer) {
+        recentsContainer.classList.add('hidden');
+      }
+    }
+
+    function saveRecentSearch(term) {
+      if (!term || term.trim().length < 2) return;
+      let recents = JSON.parse(localStorage.getItem('sujata_recent_searches') || '[]');
+      recents = [term, ...recents.filter(t => t.toLowerCase() !== term.toLowerCase())].slice(0, 5);
+      localStorage.setItem('sujata_recent_searches', JSON.stringify(recents));
+    }
+
+    clearRecentsBtn?.addEventListener('click', () => {
+      localStorage.removeItem('sujata_recent_searches');
+      recentsContainer?.classList.add('hidden');
+    });
+
+    trendingBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.innerText.trim();
+        input.value = text;
+        triggerSearch(text);
+      });
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      input.value = '';
+      clearBtn.classList.add('hidden');
+      showZeroState();
+      input.focus();
+    });
+
+    // 3. UI State Switches
+    function showZeroState() {
+      zeroState.classList.remove('hidden');
+      loadingState.classList.add('hidden');
+      resultsState.classList.add('hidden');
+      emptyState.classList.add('hidden');
+      loadRecentSearches();
+    }
+
+    function showLoading() {
+      zeroState.classList.add('hidden');
+      loadingState.classList.remove('hidden');
+      resultsState.classList.add('hidden');
+      emptyState.classList.add('hidden');
+    }
+
+    function showResults() {
+      zeroState.classList.add('hidden');
+      loadingState.classList.add('hidden');
+      resultsState.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+    }
+
+    function showEmpty() {
+      zeroState.classList.add('hidden');
+      loadingState.classList.add('hidden');
+      resultsState.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+    }
+
+    // 4. Shopify GraphQL Query Execution
+    async function executeShopifySearch(searchTerm) {
+      if (!searchTerm || searchTerm.trim().length === 0) {
+        showZeroState();
+        return;
+      }
+
+      showLoading();
+
+      const graphqlQuery = `
+        query SearchProducts($query: String!) {
+          products(first: 8, query: $query) {
+            edges {
+              node {
+                id
+                handle
+                title
+                description
+                availableForSale
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                variants(first: 1) {
+                  edges {
+                    node {
+                      id
+                    }
+                  }
+                }
+                images(first: 1) {
+                  edges {
+                    node {
+                      url
+                      altText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': storefrontToken,
+          },
+          body: JSON.stringify({
+            query: graphqlQuery,
+            variables: { query: searchTerm }
+          })
+        });
+
+        const data = await res.json();
+        const products = data?.data?.products?.edges || [];
+
+        if (products.length === 0) {
+          showEmpty();
+        } else {
+          renderResults(products, searchTerm);
+          saveRecentSearch(searchTerm);
+        }
+      } catch (err) {
+        console.error("Search fetch failed:", err);
+        showEmpty();
+      }
+    }
+
+    function renderResults(products, searchTerm) {
+      if (resultsCount) resultsCount.innerText = `${products.length} Formulations Found`;
+      if (!resultsList) return;
+
+      resultsList.innerHTML = products.map(({ node }) => {
+        const price = parseFloat(node.priceRange?.minVariantPrice?.amount || 799).toFixed(2);
+        const imgUrl = node.images?.edges?.[0]?.node?.url || "/spirulina-bottle.png";
+        const variantId = node.variants?.edges?.[0]?.node?.id || "";
+
+        return `
+          <div class="group p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-emerald-500/30 transition-all flex items-center justify-between gap-3">
+            
+            <!-- Clickable Link to Product -->
+            <a href="/product/${node.handle}" class="flex items-center gap-3 flex-1 min-w-0">
+              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 p-1 flex-shrink-0 flex items-center justify-center border border-white/10 group-hover:scale-105 transition-transform">
+                <img src="${imgUrl}" alt="${node.title}" class="w-full h-full object-contain" loading="lazy" />
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors truncate font-['Playfair_Display']">${node.title}</span>
+                <div class="flex items-center gap-2 mt-0.5">
+                  <span class="text-xs sm:text-sm font-black text-emerald-400">₹${price}</span>
+                  <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.2 rounded uppercase">100% Pure</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Direct 1-Tap Add to Routine Button -->
+            <button 
+              type="button" 
+              class="add-to-cart-btn shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-md active:scale-95 transition-all touch-manipulation"
+              data-domain="${shopifyDomain}" 
+              data-token="${storefrontToken}" 
+              data-variant-id="${variantId}"
+            >
+              <span>Add</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      showResults();
+    }
+
+    function triggerSearch(term) {
+      if (clearBtn) {
+        if (term.length > 0) clearBtn.classList.remove('hidden');
+        else clearBtn.classList.add('hidden');
+      }
+
+      clearTimeout(debounceTimer);
+      if (term.trim().length === 0) {
+        showZeroState();
+      } else {
+        debounceTimer = setTimeout(() => {
+          executeShopifySearch(term.trim());
+        }, 280);
+      }
+    }
+
+    input.addEventListener('input', (e) => {
+      triggerSearch(e.target.value);
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        clearTimeout(debounceTimer);
+        executeShopifySearch(input.value.trim());
+      }
+    });
+
+  }
+
+  // Lifecycle Bindings
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPredictiveSearch);
+  } else {
+    initPredictiveSearch();
+  }
+  document.addEventListener('astro:page-load', initPredictiveSearch);
+</script>

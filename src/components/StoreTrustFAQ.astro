@@ -69,45 +69,69 @@ const faqs = [
         </div>
         <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">Zero Heavy <br/>Metals</span>
       </div>
-
-      {/* Badge 4: FSSAI Certified */}
+      {/* Badge 1: 100% Organic */}
       <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
-        <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300">
-          <div class="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(4,120,87,0.12)]"></div>
-          <div class="absolute inset-0 rounded-full border border-[#047857]/20"></div>
-          <div class="absolute inset-[5px] md:inset-[6px] rounded-full border-[1.5px] border-dashed border-[#047857]/40"></div>
-          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#047857] relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" /></svg>
         </div>
-        <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">FSSAI <br/>Certified</span>
+        <span class="text-xs font-bold text-[#111827] text-center font-sans">100% Organic</span>
+        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Pure Cultivation</span>
+      </div>
+
+      {/* Badge 2: GMP Certified */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
+        </div>
+        <span class="text-xs font-bold text-[#111827] text-center font-sans">GMP Certified</span>
+        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Pharma Grade</span>
+      </div>
+
+      {/* Badge 3: Lab Tested */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.942A4.5 4.5 0 0115.89 17H8.11a4.5 4.5 0 01-2.34-.658L4.2 15.3M19.8 15.3A2.25 2.25 0 0021 13.356V12a2.25 2.25 0 00-2.25-2.25h-1.5M4.2 15.3A2.25 2.25 0 013 13.356V12a2.25 2.25 0 012.25-2.25h1.5" /></svg>
+        </div>
+        <span class="text-xs font-bold text-[#111827] text-center font-sans">NABL Tested</span>
+        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Zero Heavy Metals</span>
+      </div>
+
+      {/* Badge 4: FSSAI Approved */}
+      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
+        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.67 2.67 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.07a4.5 4.5 0 004.486-6.32l-3.27 3.27a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 010-1.06l3.27-3.27A4.5 4.5 0 0013.9 4.5c-.58.118-1.193.342-1.743.708" /></svg>
+        </div>
+        <span class="text-xs font-bold text-[#111827] text-center font-sans">FSSAI Approved</span>
+        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Govt. Standard</span>
       </div>
 
     </div>
 
     {/* ==========================================
-        PART 2: THE EDITORIAL FAQ & LUXURY VAULT CARD
-        (UNTOUCHED AS PER INSTRUCTIONS)
+        PART 2: THE INTERACTIVE FAQ SPLIT
         ========================================== */}
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
       
-      {/* LEFT: Editorial FAQ */}
+      {/* LEFT: THE ACCORDION */}
       <div class="lg:col-span-7 flex flex-col">
-        <div class="mb-10">
-          <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-[#111827] tracking-tight mb-4">
+        <div class="mb-10 text-left">
+          <span class="text-xs font-bold text-[#166534] uppercase tracking-[0.25em] mb-2 block font-sans">Clear Answers</span>
+          <h2 class="text-3xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight mb-4">
             Clarity <span class="italic text-[#166534] font-normal">&</span> Confidence.
           </h2>
-          <p class="text-gray-500 text-sm md:text-base">Everything you need to know before upgrading your daily routine.</p>
+          <p class="text-gray-500 text-sm md:text-base font-normal">Everything you need to know before upgrading your daily routine.</p>
         </div>
         
         <div class="flex flex-col border-t border-gray-200">
           {faqs.map((faq, index) => (
             <div class={`faq-item border-b border-gray-200`}>
               <button class="faq-button w-full text-left py-6 md:py-8 flex items-start gap-6 group focus:outline-none transition-colors">
-                <span class="text-xs font-black text-gray-300 group-hover:text-[#166534] transition-colors mt-1 tracking-widest">0{index + 1}</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-[#166534] transition-colors mt-1 tracking-widest font-sans">0{index + 1}</span>
                 <div class="flex-1">
-                  <span class="text-[#111827] text-base md:text-lg font-bold group-hover:text-[#166534] transition-colors block pr-4">{faq.question}</span>
+                  <span class="text-[#111827] text-base md:text-lg font-bold group-hover:text-[#166534] transition-colors block pr-4 font-sans">{faq.question}</span>
                   <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] mt-0">
                     <div class="overflow-hidden">
-                      <p class="text-gray-500 text-sm leading-relaxed pt-4 pr-8">{faq.answer}</p>
+                      <p class="text-gray-500 text-sm leading-relaxed pt-4 pr-8 font-normal">{faq.answer}</p>
                     </div>
                   </div>
                 </div>
@@ -128,7 +152,7 @@ const faqs = [
           {/* Glowing Ambient Core */}
           <div class="absolute -top-10 -right-10 w-48 h-48 bg-[#166534]/40 rounded-full blur-[60px] pointer-events-none group-hover:bg-[#166534]/60 transition-colors duration-700"></div>
 
-          <h3 class="text-white text-2xl md:text-3xl font-['Playfair_Display'] font-black mb-8 relative z-10">
+          <h3 class="text-white text-2xl md:text-3xl font-serif font-normal mb-8 relative z-10">
             The Sujata <br/><span class="italic text-emerald-400">Black Card Guarantee.</span>
           </h3>
 

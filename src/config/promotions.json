@@ -1,0 +1,81 @@
+{
+  "routineBuilder": {
+    "title": "Build Your Custom Routine",
+    "subtitle": "Select your formulation, duration, and claim 1 complimentary doctor-grade gift.",
+    "formats": [
+      {
+        "id": "powder",
+        "name": "Pure Cold-Pressed Powder",
+        "subtitle": "100% Bio-Active Smoothie & Drink Mix",
+        "badge": "Highest Potency",
+        "image": "/spirulina-powder.png",
+        "basePrice": 799,
+        "variantId": "gid://shopify/ProductVariant/powder-30day-default"
+      },
+      {
+        "id": "capsules",
+        "name": "100% Vegetarian Capsules",
+        "subtitle": "Odourless & Easy-to-Swallow Daily Dose",
+        "badge": "Most Popular",
+        "image": "/spirulina-bottle.png",
+        "basePrice": 899,
+        "variantId": "gid://shopify/ProductVariant/capsule-60ct-default"
+      }
+    ],
+    "durations": [
+      {
+        "id": "30-days",
+        "title": "30-Day Starter",
+        "multiplier": 1,
+        "discountPct": 0,
+        "badge": "Trial Pack",
+        "shipping": "Standard Delivery"
+      },
+      {
+        "id": "60-days",
+        "title": "60-Day Protocol",
+        "multiplier": 2,
+        "discountPct": 15,
+        "badge": "Save 15%",
+        "shipping": "Free Express Shipping"
+      },
+      {
+        "id": "90-days",
+        "title": "90-Day Peak Vitality",
+        "multiplier": 3,
+        "discountPct": 25,
+        "badge": "Best Value (Save 25%)",
+        "shipping": "Free Express Shipping"
+      }
+    ],
+    "giftChoices": [
+      {
+        "id": "shaker-bottle",
+        "title": "Premium Stainless Shaker Bottle",
+        "desc": "BPA-Free, leak-proof with measurement markings",
+        "value": "₹499",
+        "badge": "Worth ₹499 • FREE",
+        "icon": "🥤",
+        "variantId": "gid://shopify/ProductVariant/free-shaker-gift"
+      },
+      {
+        "id": "diet-protocol",
+        "title": "Doctor-Curated Ayurvedic Diet Protocol",
+        "desc": "Personalized dosha & cellular rejuvenation guide",
+        "value": "₹299",
+        "badge": "Worth ₹299 • FREE",
+        "icon": "📋",
+        "variantId": "gid://shopify/ProductVariant/free-diet-guide"
+      },
+      {
+        "id": "herbal-tea",
+        "title": "Organic Herbal Detox Tea Sample",
+        "desc": "Ayurvedic triphala & green tea morning blend",
+        "value": "₹199",
+        "badge": "Worth ₹199 • FREE",
+        "icon": "🍵",
+        "variantId": "gid://shopify/ProductVariant/free-tea-sample"
+      }
+    ]
+  }
+}

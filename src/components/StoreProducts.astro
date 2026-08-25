@@ -58,7 +58,7 @@ const conversionData = [
 ];
 ---
 
-<section id="product-ecosystem" class="relative z-10 bg-[#F9FAFB] pt-16 md:pt-24 pb-24 lg:pb-32 font-['Inter'] selection:bg-[#166534] selection:text-white">
+<section id="product-ecosystem" class="relative z-10 bg-[#F9FAFB] pt-16 md:pt-24 pb-24 lg:pb-32 font-sans selection:bg-[#166534] selection:text-white">
   
   <div class="max-w-[90rem] mx-auto px-5 md:px-6 lg:px-12 relative z-10">
     
@@ -69,9 +69,9 @@ const conversionData = [
       
       {/* LEFT SIDE: The Editorial Titles */}
       <div class="flex flex-col items-start text-left">
-        <span class="text-[#166534] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mb-3 block">Engineered for Performance</span>
-        <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-['Playfair_Display'] font-black text-[#111827] tracking-tight leading-none">
-          Choose Your <span class="italic text-[#166534]">Routine.</span>
+        <span class="text-[#166534] text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-2 block font-sans">Engineered for Performance</span>
+        <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-serif font-normal text-[#111827] tracking-tight leading-none">
+          Choose Your <span class="italic text-[#166534]">Daily Ritual.</span>
         </h2>
       </div>
 
@@ -155,7 +155,7 @@ const conversionData = [
               </div>
 
               <a href={`/product/${product.handle}`} class="mb-2">
-                 <h3 class="text-lg md:text-[1.35rem] font-black font-['Playfair_Display'] text-[#111827] leading-tight group-hover:text-[#166534] transition-colors">{product.title}</h3>
+                 <h3 class="text-lg md:text-[1.35rem] font-bold font-sans text-[#111827] leading-tight group-hover:text-[#166534] transition-colors">{product.title}</h3>
               </a>
               
               <div class="flex items-center gap-2 mb-5 md:mb-6">
@@ -163,7 +163,7 @@ const conversionData = [
                  <span class="text-xs font-semibold text-gray-500">{meta.benefit}</span>
                </div>
 
-              <div class="mt-auto pt-5 md:pt-6 pb-5 md:pb-6 flex flex-col md:flex-row md:items-end justify-between gap-2 border-t border-gray-100">
+              <div class="mt-auto pt-5 md:pt-6 pb-2 flex flex-col md:flex-row md:items-end justify-between gap-2 border-t border-gray-100">
                 <div class="flex flex-col">
                    <div class="flex items-center gap-2 mb-1">
                     <span class="text-xs md:text-sm font-bold text-gray-400 line-through decoration-gray-300">{pricing.old}</span>
@@ -172,6 +172,17 @@ const conversionData = [
                   <span class="text-2xl md:text-3xl font-black text-[#111827] leading-none tracking-tight">{formatPrice(priceAmount)}</span>
                 </div>
                </div>
+
+              {/* Dynamic Delivery Date Estimator Pill */}
+              <div class="product-delivery-badge flex items-center justify-between gap-1.5 bg-emerald-50/80 border border-emerald-100/90 rounded-xl px-3 py-2 my-3 text-[11px] text-[#064E3B] transition-all">
+                <div class="flex items-center gap-1.5 min-w-0">
+                  <svg class="w-3.5 h-3.5 text-[#166534] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                  <span class="truncate">
+                    <span class="delivery-date-text font-medium text-gray-700">Dispatch in 24h</span>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold bg-[#166534] text-white px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
+              </div>
 
               {/* THE DIRECT CHECKOUT BUTTON */}
               <button class="add-to-cart-btn relative w-full overflow-hidden bg-[#111827] text-white py-3.5 md:py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-[0.15em] shadow-[0_10px_20px_rgba(17,24,39,0.08)] hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 group/btn disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation"
@@ -202,4 +213,39 @@ const conversionData = [
     </div>
   </div>
 </section>
+
+<script>
+  function updateDeliveryEstimates() {
+    const badges = document.querySelectorAll('.delivery-date-text');
+    if (badges.length === 0) return;
+
+    // Calculate delivery date: today + 3 days
+    const now = new Date();
+    const targetDate = new Date(now);
+    targetDate.setDate(targetDate.getDate() + 3);
+    
+    if (targetDate.getDay() === 0) {
+      targetDate.setDate(targetDate.getDate() + 1);
+    }
+
+    const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
+    const dateFormatted = targetDate.toLocaleDateString('en-IN', options);
+
+    const savedPincode = localStorage.getItem('sujata_pincode');
+    const destination = savedPincode ? `to ${savedPincode}` : 'Free Delivery';
+
+    badges.forEach(badge => {
+      badge.innerHTML = `Get it by <strong class="text-[#166534] font-bold">${dateFormatted}</strong> (${destination})`;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateDeliveryEstimates);
+  } else {
+    updateDeliveryEstimates();
+  }
+  document.addEventListener('astro:page-load', updateDeliveryEstimates);
+  window.addEventListener('storage', updateDeliveryEstimates);
+  window.addEventListener('pincode-updated', updateDeliveryEstimates);
+</script>
 

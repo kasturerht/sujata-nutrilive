@@ -18,6 +18,9 @@ import ExitPopup from '../components/ExitPopup.astro';
 import StoreMedia from '../components/StoreMedia.astro';
 import StoreProductBreakdown from '../components/StoreProductBreakdown.astro';
 import StoreBundles from '../components/StoreBundles.astro';
+import StoreBundleBuilder from '../components/StoreBundleBuilder.astro';
+import StoreMedicalBoard from '../components/StoreMedicalBoard.astro';
+import StoreNutrientMatrix from '../components/StoreNutrientMatrix.astro';
 
 
 // १. तुझे Shopify डिटेल्स
@@ -101,6 +104,9 @@ try {
   {/* 2. The Product (Bento Box) */}
   <StoreProducts products={products} />
 
+  {/* 🌟 NEW: Interactive Custom Routine & Bundle Builder */}
+  <StoreBundleBuilder />
+
   {/* 🌟 NEW: High-AOV Combos & Bundles */}
   <StoreBundles />
 
@@ -110,8 +116,14 @@ try {
   {/* 🌟 NEW: Product breakdown instead of scroll science */}
   <StoreProductBreakdown />
 
+  {/* 🌟 1 Scoop = Nutrient Equivalent Matrix */}
+  <StoreNutrientMatrix />
+
   {/* 🌟 Apothecary Quiz & Doctor Consultation Bento Hub */}
   <StoreQuiz />
+
+  {/* 🌟 Medical Advisory Board & Doctor Endorsement Showcase */}
+  <StoreMedicalBoard />
 
   {/* 3. The Conviction & Comparison Matrix */}
   <StoreConviction />

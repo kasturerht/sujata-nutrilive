@@ -79,14 +79,13 @@
         </div>
       </div>
 
-      {/* Main Search Bar (Desktop) */}
-      <div class="hidden md:block flex-1 max-w-md lg:max-w-lg relative group">
-        <input 
-          type="text" 
-          placeholder="Search for 'Spirulina Powders', 'Capsules'..." 
-          class="w-full bg-black/20 hover:bg-black/30 border border-white/10 text-white placeholder-emerald-100/50 rounded-full px-5 py-2.5 md:py-3 text-xs md:text-sm focus:bg-black/40 focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400/50 outline-none transition-all pl-12 shadow-inner"
-        />
-        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-100/60 group-focus-within:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      {/* Main Search Trigger (Desktop) */}
+      <div id="desktop-search-trigger" class="hidden md:block flex-1 max-w-md lg:max-w-lg relative group cursor-pointer" role="button" tabindex="0" aria-label="Open Product Search">
+        <div class="w-full bg-black/20 hover:bg-black/30 border border-white/10 text-white rounded-full px-5 py-2.5 md:py-3 text-xs md:text-sm flex items-center justify-between transition-all pl-12 shadow-inner group-hover:border-emerald-400/40">
+          <span class="text-emerald-100/60 font-medium">Search formulations, powders, capsules...</span>
+          <kbd class="hidden lg:inline-flex items-center gap-0.5 px-2 py-0.5 bg-white/10 rounded text-[10px] font-mono text-emerald-200/80 border border-white/10">⌘K</kbd>
+        </div>
+        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-100/60 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </div>
 
       {/* Action Icons */}
@@ -94,7 +93,8 @@
         {/* Mobile Search Button */}
         <button 
           id="mobile-search-btn" 
-          aria-label="Search" 
+          type="button"
+          aria-label="Search Formulations" 
           class="md:hidden w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-colors touch-manipulation"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -137,15 +137,12 @@
         </button>
       </div>
 
-      {/* Mobile Search Box */}
-      <div class="relative mb-6">
-        <input 
-          type="text" 
-          id="mobile-search-input" 
-          placeholder="Search products, kits..." 
-          class="w-full bg-black/40 border border-emerald-500/20 text-white placeholder-emerald-200/50 rounded-xl px-4 py-3 text-base focus:ring-2 focus:ring-emerald-400/40 outline-none transition-all pl-11 shadow-inner"
-        />
-        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-emerald-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      {/* Mobile Search Trigger Button */}
+      <div id="drawer-search-trigger" class="relative mb-6 cursor-pointer" role="button" tabindex="0">
+        <div class="w-full bg-black/40 border border-emerald-500/20 text-emerald-100/60 rounded-xl px-4 py-3 text-base flex items-center gap-3 shadow-inner">
+          <svg class="w-5 h-5 text-emerald-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <span class="text-sm">Search products, kits...</span>
+        </div>
       </div>
 
       {/* Mobile Delivery Pincode Checker */}
@@ -226,6 +223,7 @@
       if (mobileDisplay) mobileDisplay.innerText = `Deliver to: ${val} ✓`;
       if (input) input.value = val;
       if (mobileInput) mobileInput.value = val;
+      window.dispatchEvent(new CustomEvent('pincode-updated', { detail: { pincode: val } }));
     };
 
     const savedPincode = localStorage.getItem('sujata_pincode');
@@ -315,15 +313,32 @@
       document.body.style.overflow = '';
     };
 
+    const desktopSearchTrigger = document.getElementById('desktop-search-trigger');
+    const drawerSearchTrigger = document.getElementById('drawer-search-trigger');
+
     menuTrigger?.addEventListener('click', openMenu);
     closeMenuBtn?.addEventListener('click', closeMenu);
     menuOverlay?.addEventListener('click', closeMenu);
 
+    desktopSearchTrigger?.addEventListener('click', () => {
+      if (typeof window.openSearchModal === 'function') {
+        window.openSearchModal();
+      }
+    });
+
     mobileSearchBtn?.addEventListener('click', () => {
-      openMenu();
+      if (typeof window.openSearchModal === 'function') {
+        window.openSearchModal();
+      }
+    });
+
+    drawerSearchTrigger?.addEventListener('click', () => {
+      closeMenu();
       setTimeout(() => {
-        if (mobileSearchInput) mobileSearchInput.focus();
-      }, 300);
+        if (typeof window.openSearchModal === 'function') {
+          window.openSearchModal();
+        }
+      }, 250);
     });
 
     navLinks.forEach(link => {

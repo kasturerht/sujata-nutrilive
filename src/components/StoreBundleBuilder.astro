@@ -1,0 +1,471 @@
+---
+// src/components/StoreBundleBuilder.astro
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+---
+
+<!-- 🌟 2026 Tier-1 Luxury D2C "Daily Welcome Kit" (AG1 / Seed / Thorne Editorial Standard) -->
+<section id="custom-bundle-builder" class="py-20 md:py-32 bg-gradient-to-b from-[#063328] via-[#03241C] to-[#021A14] text-white relative overflow-hidden border-t border-b border-emerald-500/20">
+  
+  {/* Atmospheric Luxury Ambient Light */}
+  <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[160px] pointer-events-none"></div>
+  <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+    
+    {/* Editorial Section Header */}
+    <div class="text-center max-w-2xl mx-auto mb-14 md:mb-20">
+      <span class="text-xs font-bold uppercase tracking-[0.25em] text-amber-300/90 block mb-3">
+        The Daily Ritual • Welcome Protocol
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-['Playfair_Display'] text-white tracking-tight leading-[1.15] mb-4">
+        Begin Your Daily Ritual<span class="text-amber-400">.</span>
+      </h2>
+      <p class="text-sm md:text-base text-emerald-100/75 font-light leading-relaxed">
+        Everything you need for 90 days of peak cellular vitality, packaged in a single doctor-approved protocol with complimentary apothecary essentials.
+      </p>
+    </div>
+
+    {/* Seamless 2-Column Editorial Grid (No Clunky Rounded Outer Boxes) */}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      
+      {/* LEFT COLUMN (6 Cols): Unboxing Studio & "What's In Your Kit" Breakdown */}
+      <div class="lg:col-span-6 flex flex-col items-center lg:items-start text-left space-y-8">
+        
+        {/* Main Kit Photography Display */}
+        <div class="relative w-full max-w-lg aspect-[4/3] bg-gradient-to-b from-white/[0.03] to-black/20 rounded-3xl border border-white/10 p-6 flex items-center justify-center shadow-2xl overflow-hidden group">
+          
+          {/* Soft Backdrop Radial Aura */}
+          <div class="absolute inset-0 bg-radial-gradient from-emerald-500/15 via-transparent to-transparent blur-2xl"></div>
+
+          {/* Social Proof Pill */}
+          <div class="absolute top-4 left-4 bg-black/40 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-lg z-20">
+            <div class="flex text-amber-400 text-xs">★★★★★</div>
+            <span class="text-[11px] font-bold text-white tracking-wide">4.9 / 5 (1,280+ Verified)</span>
+          </div>
+
+          {/* Dynamic Image Display */}
+          <img 
+            id="kit-visual-img"
+            src="/spirulina-bottle.png" 
+            alt="Sujata Nutrilive Daily Protocol" 
+            class="relative z-10 w-auto h-[80%] max-h-[80%] object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] transition-all duration-700 transform group-hover:scale-105"
+          />
+
+          {/* Golden Badge */}
+          <div class="absolute bottom-4 right-4 bg-amber-500/20 border border-amber-400/40 backdrop-blur-md px-3 py-1 rounded-xl text-amber-300 text-[10px] font-black uppercase tracking-widest z-20">
+            Batch #SN-0882 Verified
+          </div>
+        </div>
+
+        {/* "What's In Your Welcome Kit" Checklist (AG1 / Seed Style) */}
+        <div class="w-full max-w-lg space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-300/80 block mb-2">What's Inside Your Welcome Kit:</span>
+          
+          <div class="space-y-2.5 text-xs text-emerald-100/85">
+            <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+              <span class="text-emerald-400 mt-0.5 text-sm">✓</span>
+              <div>
+                <strong class="text-white font-semibold block" id="kit-item-1-title">3x Spirulina 100% Veg Capsules (180 Total Capsules)</strong>
+                <span class="text-gray-400 text-[11px]" id="kit-item-1-sub">90-Day supply of cold-pressed, bio-active superfood</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-3 rounded-2xl bg-amber-500/[0.04] border border-amber-500/20">
+              <span class="text-amber-400 mt-0.5 text-sm">🎁</span>
+              <div>
+                <strong class="text-amber-300 font-semibold block" id="kit-item-2-title">Complimentary Stainless Steel Shaker (Worth ₹499)</strong>
+                <span class="text-gray-300/80 text-[11px]" id="kit-item-2-sub">Medical-grade, BPA-free airtight everyday shaker</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5">
+              <span class="text-emerald-400 mt-0.5 text-sm">✓</span>
+              <div>
+                <strong class="text-white font-semibold block">Doctor-Curated Dosage Protocol & NABL Lab Report PDF</strong>
+                <span class="text-gray-400 text-[11px]">Instant digital access to personalized Ayurvedic routine guide</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* RIGHT COLUMN (6 Cols): Refined Minimalist Purchasing Stack */}
+      <div class="lg:col-span-6 bg-gradient-to-b from-white/[0.04] to-black/30 border border-white/10 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl space-y-7">
+        
+        {/* 1. Format Switcher (Minimalist Segmented Control) */}
+        <div>
+          <div class="flex items-center justify-between mb-2.5">
+            <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">1. Select Formulation</span>
+            <span class="text-[11px] text-emerald-400 font-medium">100% Bio-Active</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 p-1 bg-black/40 border border-white/10 rounded-2xl">
+            <button 
+              type="button" 
+              class="kit-format-btn active py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer bg-white text-black shadow-lg"
+              data-format="capsules"
+              data-name="100% Veg Capsules"
+              data-sub="3x Bottles (180 Capsules Total)"
+              data-img="/spirulina-bottle.png"
+              data-base="899"
+              data-variant="gid://shopify/ProductVariant/capsule-60ct-default"
+            >
+              <span>💊</span>
+              <span>Veg Capsules (60ct)</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="kit-format-btn py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer text-gray-300 hover:text-white hover:bg-white/5"
+              data-format="powder"
+              data-name="Pure Cold-Pressed Powder"
+              data-sub="3x Jars (300g Total Powder)"
+              data-img="/spirulina-powder.png"
+              data-base="799"
+              data-variant="gid://shopify/ProductVariant/powder-30day-default"
+            >
+              <span>🍃</span>
+              <span>Pure Powder (100g)</span>
+            </button>
+          </div>
+        </div>
+
+        {/* 2. Duration Tiers (Clean 2-Card Stack: 90 Days Recommended vs 30 Days Trial) */}
+        <div>
+          <div class="flex items-center justify-between mb-2.5">
+            <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">2. Select Protocol Plan</span>
+            <span class="text-[11px] text-amber-300 font-bold">⚡ Free Gift on 90 Days</span>
+          </div>
+
+          <div class="space-y-3">
+            
+            {/* 90 Days Supply (Auto-Selected Hero Card) */}
+            <button 
+              type="button" 
+              class="kit-plan-btn active w-full p-4 sm:p-5 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between border-amber-400 bg-amber-500/10 shadow-[0_0_25px_rgba(245,158,11,0.15)] relative"
+              data-tier="3"
+              data-multiplier="3"
+              data-discount="25"
+              data-has-gift="true"
+              data-title="90-Day Complete Protocol"
+              data-sub="3 Bottles + Free Shaker + Free Shipping"
+            >
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-5 h-5 rounded-full border-2 border-amber-400 flex items-center justify-center shrink-0">
+                  <div class="w-2.5 h-2.5 rounded-full bg-amber-400 plan-radio-dot"></div>
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm sm:text-base font-bold text-white">90-Day Protocol</span>
+                    <span class="text-[9px] font-black uppercase tracking-wider bg-amber-400 text-black px-2 py-0.5 rounded-full">BEST VALUE • SAVE 25%</span>
+                  </div>
+                  <span class="text-xs text-emerald-300/90 block mt-0.5">Includes Free Shaker Bottle (₹499) + Free Shipping</span>
+                </div>
+              </div>
+
+              <div class="text-right shrink-0 pl-2">
+                <span class="text-sm font-black text-amber-300 block kit-plan-price" id="plan-90-price">₹2,023</span>
+                <span class="text-[10px] text-gray-400 line-through" id="plan-90-mrp">₹3,196</span>
+              </div>
+            </button>
+
+            {/* 30 Days Starter */}
+            <button 
+              type="button" 
+              class="kit-plan-btn w-full p-4 sm:p-5 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between border-white/10 bg-white/5 hover:border-white/20"
+              data-tier="1"
+              data-multiplier="1"
+              data-discount="0"
+              data-has-gift="false"
+              data-title="30-Day Starter Kit"
+              data-sub="1 Bottle (Trial Routine)"
+            >
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center shrink-0">
+                  <div class="w-2.5 h-2.5 rounded-full bg-white hidden plan-radio-dot"></div>
+                </div>
+                <div class="min-w-0">
+                  <span class="text-sm sm:text-base font-bold text-white block">30-Day Starter Kit</span>
+                  <span class="text-xs text-gray-400 block mt-0.5">1 Bottle standard supply</span>
+                </div>
+              </div>
+
+              <div class="text-right shrink-0 pl-2">
+                <span class="text-sm font-black text-white block kit-plan-price" id="plan-30-price">₹899</span>
+                <span class="text-[10px] text-gray-400">Standard</span>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+        {/* 3. Gift Selection Pills (Visible & Interactive) */}
+        <div id="gift-selector-section">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-amber-300 uppercase tracking-wider">3. Choose Your Complimentary Gift</span>
+            <span class="text-[10px] text-emerald-400 font-bold uppercase">100% Free</span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2">
+            <button 
+              type="button" 
+              class="kit-gift-pill active p-2.5 rounded-xl border text-center transition-all cursor-pointer border-amber-400 bg-amber-500/20 text-white font-medium text-xs shadow-sm"
+              data-gift="shaker"
+              data-title="Stainless Steel Shaker (Worth ₹499)"
+              data-variant="gid://shopify/ProductVariant/free-shaker-gift"
+            >
+              <span class="text-lg block mb-1">🥤</span>
+              <span class="text-[11px] font-bold block truncate">Stainless Shaker</span>
+              <span class="text-[9px] text-amber-300 font-semibold block">₹499 Free</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="kit-gift-pill p-2.5 rounded-xl border text-center transition-all cursor-pointer border-white/10 bg-white/5 hover:border-white/20 text-gray-300 font-medium text-xs"
+              data-gift="diet"
+              data-title="Doctor's Ayurvedic Diet Plan (Worth ₹299)"
+              data-variant="gid://shopify/ProductVariant/free-diet-guide"
+            >
+              <span class="text-lg block mb-1">📋</span>
+              <span class="text-[11px] font-bold block truncate">Diet Protocol</span>
+              <span class="text-[9px] text-amber-300 font-semibold block">₹299 Free</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="kit-gift-pill p-2.5 rounded-xl border text-center transition-all cursor-pointer border-white/10 bg-white/5 hover:border-white/20 text-gray-300 font-medium text-xs"
+              data-gift="tea"
+              data-title="Organic Herbal Detox Tea (Worth ₹199)"
+              data-variant="gid://shopify/ProductVariant/free-tea-sample"
+            >
+              <span class="text-lg block mb-1">🍵</span>
+              <span class="text-[11px] font-bold block truncate">Detox Tea Pack</span>
+              <span class="text-[9px] text-amber-300 font-semibold block">₹199 Free</span>
+            </button>
+          </div>
+        </div>
+
+        {/* 4. Luxury Pricing & 1-Tap CTA Footer */}
+        <div class="pt-4 border-t border-white/10 space-y-4">
+          <div class="flex items-baseline justify-between">
+            <div class="flex flex-col">
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400 line-through" id="kit-final-mrp">₹3,196</span>
+                <span class="text-[10px] font-black uppercase text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30" id="kit-final-save">Save ₹1,173</span>
+              </div>
+              <span class="text-3xl sm:text-4xl font-black text-white tracking-tight mt-0.5" id="kit-final-price">₹2,023</span>
+            </div>
+            <span class="text-xs text-emerald-300 font-semibold text-right" id="kit-daily-rate">Just ₹22 / Day</span>
+          </div>
+
+          <button 
+            id="kit-main-atc-btn" 
+            type="button" 
+            class="add-to-cart-btn w-full bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-200 text-black py-4 px-6 rounded-2xl font-black text-sm uppercase tracking-[0.15em] shadow-[0_10px_35px_rgba(245,158,11,0.35)] hover:shadow-[0_15px_45px_rgba(245,158,11,0.5)] transition-all duration-300 flex items-center justify-center gap-2 active:scale-98 touch-manipulation cursor-pointer group"
+            data-domain={shopifyDomain}
+            data-token={storefrontToken}
+            data-variant-ids="gid://shopify/ProductVariant/capsule-60ct-default,gid://shopify/ProductVariant/free-shaker-gift"
+          >
+            <span class="btn-text flex items-center gap-2">
+              <span>Claim Protocol Kit</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </span>
+            <div class="btn-spinner absolute inset-0 z-10 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+              <svg class="w-5 h-5 text-black animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            </div>
+          </button>
+
+          {/* Guarantee Badges */}
+          <div class="flex items-center justify-center gap-4 text-[10px] text-gray-400">
+            <span>🔒 256-Bit SSL Checkout</span>
+            <span>•</span>
+            <span>📦 30-Day Empty-Bottle Guarantee</span>
+            <span>•</span>
+            <span>🚚 Express Delivery</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script is:inline define:vars={{ shopifyDomain, storefrontToken }}>
+  function initEditorialWelcomeKit() {
+    const formatBtns = document.querySelectorAll('.kit-format-btn');
+    const planBtns = document.querySelectorAll('.kit-plan-btn');
+    const giftPills = document.querySelectorAll('.kit-gift-pill');
+
+    const visualImg = document.getElementById('kit-visual-img');
+    const item1Title = document.getElementById('kit-item-1-title');
+    const item1Sub = document.getElementById('kit-item-1-sub');
+    const item2Title = document.getElementById('kit-item-2-title');
+
+    const plan90Price = document.getElementById('plan-90-price');
+    const plan90Mrp = document.getElementById('plan-90-mrp');
+    const plan30Price = document.getElementById('plan-30-price');
+
+    const finalMrpEl = document.getElementById('kit-final-mrp');
+    const finalSaveEl = document.getElementById('kit-final-save');
+    const finalPriceEl = document.getElementById('kit-final-price');
+    const dailyRateEl = document.getElementById('kit-daily-rate');
+    const atcBtn = document.getElementById('kit-main-atc-btn');
+    const giftSection = document.getElementById('gift-selector-section');
+
+    let currentFormat = {
+      id: 'capsules',
+      name: '100% Veg Capsules',
+      sub: '3x Bottles (180 Capsules Total)',
+      img: '/spirulina-bottle.png',
+      basePrice: 899,
+      variantId: 'gid://shopify/ProductVariant/capsule-60ct-default'
+    };
+
+    let currentPlan = {
+      tier: 3,
+      multiplier: 3,
+      discountPct: 25,
+      hasGift: true,
+      days: 90
+    };
+
+    let currentGift = {
+      id: 'shaker',
+      title: 'Complimentary Stainless Steel Shaker (Worth ₹499)',
+      variantId: 'gid://shopify/ProductVariant/free-shaker-gift',
+      value: 499
+    };
+
+    function updateKitUI() {
+      // 1. Calculations
+      const baseTotal = currentFormat.basePrice * currentPlan.multiplier;
+      const discountedPrice = Math.round(baseTotal * ((100 - currentPlan.discountPct) / 100));
+      const giftValue = currentPlan.hasGift ? currentGift.value : 0;
+      const totalMSRP = baseTotal + giftValue;
+      const totalSavings = totalMSRP - discountedPrice;
+      const perDay = Math.round(discountedPrice / currentPlan.days);
+
+      // 2. Update Plan Prices in Buttons
+      const p90Base = currentFormat.basePrice * 3;
+      const p90Discounted = Math.round(p90Base * 0.75);
+      const p90MSRP = p90Base + 499;
+
+      if (plan90Price) plan90Price.innerText = `₹${p90Discounted.toLocaleString('en-IN')}`;
+      if (plan90Mrp) plan90Mrp.innerText = `₹${p90MSRP.toLocaleString('en-IN')}`;
+      if (plan30Price) plan30Price.innerText = `₹${currentFormat.basePrice.toLocaleString('en-IN')}`;
+
+      // 3. Update Left Unboxing Showcase
+      if (visualImg) visualImg.src = currentFormat.img;
+      if (item1Title) item1Title.innerText = `${currentPlan.multiplier}x Spirulina ${currentFormat.name} (${currentPlan.multiplier === 3 ? '180 Total' : '60 Total'})`;
+      if (item1Sub) item1Sub.innerText = `${currentPlan.days}-Day supply of pure cold-pressed bio-active superfood`;
+      if (item2Title) item2Title.innerText = currentPlan.hasGift ? currentGift.title : 'No Gift on 1-Month Trial';
+
+      // 4. Update Final Price Footer
+      if (finalMrpEl) finalMrpEl.innerText = `₹${totalMSRP.toLocaleString('en-IN')}`;
+      if (finalSaveEl) finalSaveEl.innerText = totalSavings > 0 ? `Save ₹${totalSavings.toLocaleString('en-IN')}` : `Standard Rate`;
+      if (finalPriceEl) finalPriceEl.innerText = `₹${discountedPrice.toLocaleString('en-IN')}`;
+      if (dailyRateEl) dailyRateEl.innerText = `Just ₹${perDay} / Day`;
+
+      // 5. Gift Section Visibility
+      if (giftSection) {
+        if (currentPlan.hasGift) giftSection.classList.remove('opacity-40', 'pointer-events-none');
+        else giftSection.classList.add('opacity-40', 'pointer-events-none');
+      }
+
+      // 6. Set ATC variant IDs
+      if (atcBtn) {
+        if (currentPlan.hasGift) {
+          atcBtn.setAttribute('data-variant-ids', `${currentFormat.variantId},${currentGift.variantId}`);
+        } else {
+          atcBtn.removeAttribute('data-variant-ids');
+          atcBtn.setAttribute('data-variant-id', currentFormat.variantId);
+        }
+      }
+    }
+
+    // Format Button Handlers
+    formatBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        formatBtns.forEach(b => {
+          b.classList.remove('active', 'bg-white', 'text-black', 'shadow-lg');
+          b.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-white/5');
+        });
+        btn.classList.add('active', 'bg-white', 'text-black', 'shadow-lg');
+        btn.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-white/5');
+
+        currentFormat = {
+          id: btn.getAttribute('data-format') || 'capsules',
+          name: btn.getAttribute('data-name') || '100% Veg Capsules',
+          sub: btn.getAttribute('data-sub') || '',
+          img: btn.getAttribute('data-img') || '/spirulina-bottle.png',
+          basePrice: parseInt(btn.getAttribute('data-base') || '899'),
+          variantId: btn.getAttribute('data-variant') || ''
+        };
+
+        updateKitUI();
+      });
+    });
+
+    // Plan Tier Handlers
+    planBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        planBtns.forEach(b => {
+          b.classList.remove('active', 'border-amber-400', 'bg-amber-500/10', 'shadow-[0_0_25px_rgba(245,158,11,0.15)]');
+          b.classList.add('border-white/10', 'bg-white/5');
+          const dot = b.querySelector('.plan-radio-dot');
+          if (dot) dot.classList.add('hidden');
+        });
+
+        btn.classList.add('active', 'border-amber-400', 'bg-amber-500/10', 'shadow-[0_0_25px_rgba(245,158,11,0.15)]');
+        btn.classList.remove('border-white/10', 'bg-white/5');
+        const activeDot = btn.querySelector('.plan-radio-dot');
+        if (activeDot) activeDot.classList.remove('hidden');
+
+        currentPlan = {
+          tier: parseInt(btn.getAttribute('data-tier') || '3'),
+          multiplier: parseInt(btn.getAttribute('data-multiplier') || '3'),
+          discountPct: parseInt(btn.getAttribute('data-discount') || '25'),
+          hasGift: btn.getAttribute('data-has-gift') === 'true',
+          days: parseInt(btn.getAttribute('data-multiplier') || '3') * 30
+        };
+
+        updateKitUI();
+      });
+    });
+
+    // Gift Pill Handlers
+    giftPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        giftPills.forEach(p => {
+          p.classList.remove('active', 'border-amber-400', 'bg-amber-500/20', 'text-white');
+          p.classList.add('border-white/10', 'bg-white/5', 'text-gray-300');
+        });
+
+        pill.classList.add('active', 'border-amber-400', 'bg-amber-500/20', 'text-white');
+        pill.classList.remove('border-white/10', 'bg-white/5', 'text-gray-300');
+
+        currentGift = {
+          id: pill.getAttribute('data-gift') || 'shaker',
+          title: pill.getAttribute('data-title') || 'Complimentary Stainless Steel Shaker',
+          variantId: pill.getAttribute('data-variant') || '',
+          value: pill.getAttribute('data-gift') === 'shaker' ? 499 : pill.getAttribute('data-gift') === 'diet' ? 299 : 199
+        };
+
+        updateKitUI();
+      });
+    });
+
+    updateKitUI();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEditorialWelcomeKit);
+  } else {
+    initEditorialWelcomeKit();
+  }
+  document.addEventListener('astro:page-load', initEditorialWelcomeKit);
+</script>
