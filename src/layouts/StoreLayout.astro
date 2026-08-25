@@ -6,7 +6,7 @@ const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content="Sujata Nutrilive – Premium cold-pressed Spirulina supplements. Lab-tested, 100% pure. Boost energy, immunity, and mental clarity with nature's most nutrient-dense superfood." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -16,12 +16,19 @@ const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen relative overflow-x-hidden font-['Inter']">
+  <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen min-h-[100dvh] relative overflow-x-hidden font-['Inter']">
     <slot />
     <CartDrawer />
 
-    {/* Global Live Purchase Toast (FOMO) */}
-    <div id="live-toast" class="fixed bottom-6 left-6 z-[9999] bg-white/90 backdrop-blur-xl border border-black/[0.05] shadow-[0_20px_40px_rgba(0,0,0,0.08)] p-3 pr-6 rounded-2xl flex items-center gap-4 translate-y-[150%] opacity-0 transition-all duration-700 ease-[cubic-bezier(0.1,0,0,1)] pointer-events-none md:pointer-events-auto">
+    {/* Global Live Purchase Toast (FOMO & Mobile Interactive with Safe Areas) */}
+    <div 
+      id="live-toast" 
+      class="fixed z-[9999] bg-white/95 backdrop-blur-xl border border-black/[0.05] shadow-[0_20px_40px_rgba(0,0,0,0.12)] p-3 pr-6 rounded-2xl flex items-center gap-4 translate-y-[150%] opacity-0 transition-all duration-700 ease-[cubic-bezier(0.1,0,0,1)] cursor-pointer select-none"
+      style="bottom: max(1.25rem, calc(0.75rem + env(safe-area-inset-bottom, 0px))); left: max(1.25rem, calc(0.75rem + env(safe-area-inset-left, 0px)));"
+      role="status"
+      aria-live="polite"
+      title="Tap to dismiss"
+    >
       <div class="w-10 h-10 rounded-full bg-[#f0fdf4] border border-emerald-100 flex items-center justify-center flex-shrink-0"><svg class="w-5 h-5 text-[#166534]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg></div>
       <div class="flex flex-col">
         <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5" id="toast-title">Live Order</span>
@@ -49,6 +56,11 @@ const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
         if (toast && toastName && toastAction) {
           if (toastTitle) toastTitle.innerText = "Live Order";
           
+          // Tap to dismiss on mobile / click to dismiss on desktop
+          toast.addEventListener('click', () => {
+            toast.classList.add('translate-y-[150%]', 'opacity-0');
+          });
+
           setTimeout(() => {
             const buyer = names[Math.floor(Math.random() * names.length)];
             toastName.innerText = buyer.name;

@@ -7,9 +7,9 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
 <section id="d2c-performance-hero" class="relative w-full font-['Inter'] z-20">
 
   {/* ==========================================
-      1. THE MASTER SLIDER CONTAINER (Pure CSS Height - No JS Bugs!)
+      1. THE MASTER SLIDER CONTAINER (Dynamic Viewport Height for Mobile)
       ========================================== */}
-  <div class="relative w-full overflow-hidden bg-[#F8FAFC] h-[85vh] min-h-[550px] md:min-h-[700px] lg:min-h-[750px] max-h-[850px]" id="hero-slider">
+  <div class="relative w-full overflow-hidden bg-[#F8FAFC] h-[85vh] h-[85dvh] min-h-[500px] md:min-h-[700px] lg:min-h-[750px] max-h-[850px]" id="hero-slider">
     
     {/* -----------------------------------
         SLIDE 1: THE BIG DISCOUNT (Clinical Dark Theme)
@@ -17,7 +17,7 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
     <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-0" data-index="0">
       <div class="absolute inset-0 bg-gradient-to-r from-[#022c22] to-[#064e3b] z-0"></div>
       
-      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[100px] md:pt-[140px] pb-[80px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
+      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[90px] md:pt-[140px] pb-[70px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
         
         <div class="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left z-20">
           <h2 class="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium text-emerald-100 mb-1 md:mb-2 font-['Playfair_Display']">Peak Energy Made Affordable</h2>
@@ -28,21 +28,19 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
           </div>
 
           <div class="flex items-center gap-4 mb-6 md:mb-8 lg:mb-10">
-            <span class="text-lg md:text-2xl text-emerald-300/50 font-bold line-through decoration-red-500/80 decoration-2">₹1,999</span>
-            <span class="text-3xl md:text-5xl lg:text-6xl font-black text-white">₹1,499</span>
+            <span class="text-xl md:text-2xl lg:text-3xl font-black text-white">₹799</span>
+            <span class="text-sm md:text-base lg:text-lg text-emerald-200/50 line-through">₹1,299</span>
+            <span class="bg-[#D97706] text-white text-[10px] md:text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-inner">LIMITED BATCH</span>
           </div>
 
-          <a href="#product-ecosystem" class="bg-[#D97706] hover:bg-[#B45309] text-white text-center text-sm md:text-base lg:text-lg font-bold uppercase tracking-[0.15em] px-8 sm:px-12 py-3.5 md:py-4 rounded-md shadow-[0_10px_20px_rgba(217,119,6,0.3)] transition-all transform hover:-translate-y-1 w-full sm:w-auto">
-            SHOP NOW
+          <a href="#product-ecosystem" class="bg-[#10B981] hover:bg-[#059669] text-white text-center text-sm md:text-base lg:text-lg font-bold uppercase tracking-[0.15em] px-8 sm:px-12 py-3.5 md:py-4 rounded-md shadow-[0_10px_20px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+            SHOP 30-DAY KIT
           </a>
         </div>
 
         <div class="w-full md:w-[45%] flex items-center justify-center relative h-[220px] sm:h-[260px] md:h-full group">
           <Image src="/spirulina-powder.png" alt="Spirulina Kit" width={500} height={500} class="relative z-10 w-auto h-[85%] max-h-[85%] object-contain drop-shadow-2xl group-hover:-translate-y-2 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" fetchpriority="high"/>
-          <div class="absolute top-[5%] right-0 lg:right-[10%] bg-black/40 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-xl border border-emerald-500/20 flex flex-col z-30">
-            <span class="text-[9px] md:text-[10px] font-bold text-emerald-300/60 uppercase tracking-widest">Net Qty.</span>
-            <span class="text-[11px] md:text-sm font-black text-white">250g (30 Days)</span>
-          </div>
+          <div class="absolute -bottom-4 w-48 h-8 bg-black/40 rounded-full blur-xl z-0 group-hover:scale-90 transition-transform duration-700"></div>
         </div>
       </div>
     </div>
@@ -53,7 +51,7 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
     <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-full" data-index="1">
       <div class="absolute inset-0 bg-gradient-to-r from-[#FCFBF9] to-[#F0FDF4] z-0"></div>
       
-      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[100px] md:pt-[140px] pb-[80px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
+      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[90px] md:pt-[140px] pb-[70px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
         
         <div class="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left z-20">
           <h2 class="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium text-gray-800 mb-1 md:mb-2 font-['Playfair_Display']">Complete Cellular Immunity</h2>
@@ -87,7 +85,7 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
     <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-full" data-index="2">
       <div class="absolute inset-0 bg-gradient-to-r from-[#011C16] to-[#043E31] z-0"></div>
       
-      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[100px] md:pt-[140px] pb-[80px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
+      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[90px] md:pt-[140px] pb-[70px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
         
         <div class="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left z-20">
           <h2 class="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium text-emerald-100 mb-1 md:mb-2 font-['Playfair_Display']">The Ultimate Protocol</h2>
@@ -119,7 +117,7 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
     <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-full" data-index="3">
       <div class="absolute inset-0 bg-gradient-to-r from-[#FCFBF9] to-[#ECFDF5] z-0"></div>
       
-      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[100px] md:pt-[140px] pb-[80px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
+      <div class="max-w-[90rem] mx-auto px-5 sm:px-8 lg:px-16 relative z-10 w-full h-full pt-[90px] md:pt-[140px] pb-[70px] md:pb-[100px] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
         
         <div class="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left z-20">
           <h2 class="text-base sm:text-lg md:text-2xl lg:text-3xl font-medium text-gray-800 mb-1 md:mb-2 font-['Playfair_Display']">New to Spirulina?</h2>
@@ -146,13 +144,21 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
     </div>
 
     {/* ==========================================
-        SLIDER CONTROLS (Dots strictly positioned above the target goal line)
+        SLIDER CONTROLS (Ultra-Luxury Glassmorphic Pill Pagination)
         ========================================== */}
-    <div class="absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 flex gap-3 z-30">
-      <button class="slider-dot w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-full bg-[#D97706] border border-white/40 transition-colors shadow-sm cursor-pointer" data-index="0" aria-label="Slide 1"></button>
-      <button class="slider-dot w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-full bg-gray-300 border border-white/40 hover:bg-[#D97706] transition-colors shadow-sm cursor-pointer" data-index="1" aria-label="Slide 2"></button>
-      <button class="slider-dot w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-full bg-gray-300 border border-white/40 hover:bg-[#D97706] transition-colors shadow-sm cursor-pointer" data-index="2" aria-label="Slide 3"></button>
-      <button class="slider-dot w-2.5 h-2.5 lg:w-3 lg:h-3 rounded-full bg-gray-300 border border-white/40 hover:bg-[#D97706] transition-colors shadow-sm cursor-pointer" data-index="3" aria-label="Slide 4"></button>
+    <div class="absolute bottom-10 md:bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-30 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-2xl">
+      <button class="slider-dot group p-1.5 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none" data-index="0" aria-label="Slide 1">
+        <span class="dot-indicator w-6 h-2 rounded-full bg-[#D97706] shadow-[0_0_10px_rgba(217,119,6,0.8)] transition-all duration-500 ease-out block"></span>
+      </button>
+      <button class="slider-dot group p-1.5 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none" data-index="1" aria-label="Slide 2">
+        <span class="dot-indicator w-2 h-2 rounded-full bg-white/40 group-hover:bg-white/70 transition-all duration-500 ease-out block"></span>
+      </button>
+      <button class="slider-dot group p-1.5 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none" data-index="2" aria-label="Slide 3">
+        <span class="dot-indicator w-2 h-2 rounded-full bg-white/40 group-hover:bg-white/70 transition-all duration-500 ease-out block"></span>
+      </button>
+      <button class="slider-dot group p-1.5 flex items-center justify-center cursor-pointer touch-manipulation focus:outline-none" data-index="3" aria-label="Slide 4">
+        <span class="dot-indicator w-2 h-2 rounded-full bg-white/40 group-hover:bg-white/70 transition-all duration-500 ease-out block"></span>
+      </button>
     </div>
 
   </div>
@@ -222,12 +228,13 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
       });
 
       dots.forEach((dot, i) => {
+        const indicator = dot.querySelector('.dot-indicator') || dot;
         if (i === index) {
-          dot.classList.remove('bg-gray-300');
-          dot.classList.add('bg-[#D97706]');
+          indicator.classList.remove('w-2', 'bg-white/40', 'bg-gray-300');
+          indicator.classList.add('w-6', 'bg-[#D97706]', 'shadow-[0_0_10px_rgba(217,119,6,0.8)]');
         } else {
-          dot.classList.remove('bg-[#D97706]');
-          dot.classList.add('bg-gray-300');
+          indicator.classList.remove('w-6', 'bg-[#D97706]', 'shadow-[0_0_10px_rgba(217,119,6,0.8)]');
+          indicator.classList.add('w-2', 'bg-white/40');
         }
       });
       currentSlide = index;
@@ -254,6 +261,32 @@ import imgMorningRoutine from '../assets/sujata_morning_routine.png';
     
     sliderContainer?.addEventListener('mouseenter', stopAutoSlide);
     sliderContainer?.addEventListener('mouseleave', startAutoSlide);
+
+    // 📱 Mobile Touch Swipe Support (Google WCAG Mobile Standard)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    sliderContainer?.addEventListener('touchstart', (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoSlide();
+    }, { passive: true });
+
+    sliderContainer?.addEventListener('touchend', (e: TouchEvent) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchStartX - touchEndX;
+
+      if (Math.abs(swipeDistance) > 40) {
+        if (swipeDistance > 0) {
+          // Swiped left -> Next slide
+          nextSlide();
+        } else {
+          // Swiped right -> Prev slide
+          const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+          goToSlide(prev);
+        }
+      }
+      startAutoSlide();
+    }, { passive: true });
   }
 
   // Bind for standard page load and client-side view transition

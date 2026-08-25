@@ -62,53 +62,53 @@ const reviews = [
       </h2>
 
       {/* Concern Filters */}
-      <div class="flex flex-wrap items-center justify-center gap-2">
-        <button class="px-5 py-2 rounded-full bg-[#111827] text-white text-xs font-bold shadow-md">All Reviews</button>
-        <button class="px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all">⚡ Energy</button>
-        <button class="px-5 py-2 rounded-full bg-white border border-gray-200 text-gray-600 text-xs font-bold hover:border-gray-300 shadow-sm transition-all">🛡️ Immunity</button>
+      <div class="flex flex-wrap items-center justify-center gap-2.5" id="review-filter-group">
+        <button data-filter="all" class="review-filter-btn px-6 py-3 min-h-[44px] rounded-full bg-[#111827] text-white text-xs font-bold shadow-md touch-manipulation transition-all">All Reviews</button>
+        <button data-filter="energy" class="review-filter-btn px-6 py-3 min-h-[44px] rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:border-gray-400 shadow-sm touch-manipulation transition-all">⚡ Energy</button>
+        <button data-filter="immunity" class="review-filter-btn px-6 py-3 min-h-[44px] rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:border-gray-400 shadow-sm touch-manipulation transition-all">🛡️ Immunity</button>
       </div>
 
     </div>
 
     {/* Reviews Grid / Mobile Horizontal Slider */}
-    <div class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-8 -mx-5 px-5 sm:mx-0 sm:px-0 mb-16 scroll-smooth">
+    <div id="reviews-slider-track" class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar pb-8 -mx-5 px-5 sm:mx-0 sm:px-0 mb-16 scroll-smooth">
       
       {/* Card 1: Text Review */}
-      <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative w-[82vw] sm:w-auto shrink-0 snap-center">
-        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
+      <div data-category="energy" class="review-card bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative w-[82vw] sm:w-auto shrink-0 snap-center">
+        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Verified
         </div>
-        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[0].category}</span>
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[0].category}</span>
         <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[0].highlight}"</h4>
         <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[0].text}</p>
         <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
-          <img src={reviews[0].avatar} alt={reviews[0].name} decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
+          <img src={reviews[0].avatar} alt={reviews[0].name} width="36" height="36" decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
           <div class="flex flex-col">
             <span class="text-[#111827] font-bold text-xs">{reviews[0].name}</span>
-            <span class="text-gray-400 text-[10px]">{reviews[0].purchaseDate}</span>
+            <span class="text-gray-400 text-xs">{reviews[0].purchaseDate}</span>
           </div>
         </div>
       </div>
 
       {/* Card 2: Text Review */}
-      <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative w-[82vw] sm:w-auto shrink-0 snap-center">
-        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
+      <div data-category="immunity" class="review-card bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative w-[82vw] sm:w-auto shrink-0 snap-center">
+        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Verified
         </div>
-        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[1].category}</span>
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[1].category}</span>
         <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[1].highlight}"</h4>
         <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[1].text}</p>
         <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
-          <img src={reviews[1].avatar} alt={reviews[1].name} decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
+          <img src={reviews[1].avatar} alt={reviews[1].name} width="36" height="36" decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
           <div class="flex flex-col">
             <span class="text-[#111827] font-bold text-xs">{reviews[1].name}</span>
-            <span class="text-gray-400 text-[10px]">{reviews[1].purchaseDate}</span>
+            <span class="text-gray-400 text-xs">{reviews[1].purchaseDate}</span>
           </div>
         </div>
       </div>
 
-      {/* Card 3: THE VIDEO REEL CARD (Fits perfectly in the grid) */}
-      <div class="relative bg-black rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] group cursor-pointer aspect-[3/4] lg:aspect-auto lg:h-full border border-gray-100 w-[82vw] sm:w-auto shrink-0 snap-center min-h-[350px] sm:min-h-0">
+      {/* Card 3: THE VIDEO REEL CARD */}
+      <div data-category="energy" class="review-card relative bg-black rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] group cursor-pointer aspect-[3/4] lg:aspect-auto lg:h-full border border-gray-100 w-[82vw] sm:w-auto shrink-0 snap-center min-h-[350px] sm:min-h-0">
         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10"></div>
         <Image src="/siddharth_testimonial_video.png" alt="Video Review" width={300} height={400} class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105 group-hover:scale-100 transition-transform duration-700" />
         
@@ -121,7 +121,7 @@ const reviews = [
 
         {/* Video Tags */}
         <div class="absolute top-4 left-4 z-20">
-          <span class="bg-black/40 backdrop-blur-md border border-white/20 text-white px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1.5">
+          <span class="bg-black/40 backdrop-blur-md border border-white/20 text-white px-2.5 py-1 rounded-full text-[11px] font-black uppercase tracking-widest flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Video
           </span>
         </div>
@@ -129,23 +129,23 @@ const reviews = [
         {/* Quote */}
         <div class="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
           <p class="text-white text-xs font-bold leading-tight mb-1">"The energy is insane!"</p>
-          <span class="text-gray-300 text-[10px]">Siddharth J.</span>
+          <span class="text-gray-300 text-xs">Siddharth J.</span>
         </div>
       </div>
 
       {/* Card 4: Text Review */}
-      <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative w-[82vw] sm:w-auto shrink-0 snap-center">
-        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
+      <div data-category="immunity" class="review-card bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(22,101,52,0.06)] transition-all flex flex-col h-full relative w-[82vw] sm:w-auto shrink-0 snap-center">
+        <div class="absolute -top-3 right-5 bg-[#f0fdf4] border border-emerald-100 text-[#166534] px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm z-10">
            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Verified
         </div>
-        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[2].category}</span>
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 block">{reviews[2].category}</span>
         <h4 class="text-lg font-bold text-[#111827] mb-2 leading-tight">"{reviews[2].highlight}"</h4>
         <p class="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{reviews[2].text}</p>
         <div class="flex items-center gap-3 pt-4 border-t border-gray-50 mt-auto">
-          <img src={reviews[2].avatar} alt={reviews[2].name} decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
+          <img src={reviews[2].avatar} alt={reviews[2].name} width="36" height="36" decoding="async" loading="lazy" class="w-9 h-9 rounded-full object-cover" />
           <div class="flex flex-col">
             <span class="text-[#111827] font-bold text-xs">{reviews[2].name}</span>
-            <span class="text-gray-400 text-[10px]">{reviews[2].purchaseDate}</span>
+            <span class="text-gray-400 text-xs">{reviews[2].purchaseDate}</span>
           </div>
         </div>
       </div>
@@ -156,12 +156,12 @@ const reviews = [
         ZONE 3: THE FINAL CTA CLOSER
         ========================================== */}
     <div class="text-center pt-8 border-t border-gray-100/50">
-      <a href="#product-ecosystem" class="inline-flex flex-col items-center justify-center bg-[#111827] hover:bg-[#166534] text-white px-10 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 group">
+      <a href="#product-ecosystem" class="inline-flex flex-col items-center justify-center bg-[#111827] hover:bg-[#166534] text-white px-10 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 group touch-manipulation">
         <div class="flex items-center gap-3 mb-1">
           <span class="font-black text-xs uppercase tracking-[0.2em]">Start Your Routine</span>
           <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
         </div>
-        <span class="text-gray-300 text-[10px] font-medium">Trial Packs start at just ₹499</span>
+        <span class="text-gray-300 text-xs font-medium">Trial Packs start at just ₹499</span>
       </a>
     </div>
 
@@ -172,3 +172,41 @@ const reviews = [
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
+
+<script>
+  function initReviewFilters() {
+    const filterBtns = document.querySelectorAll('.review-filter-btn');
+    const cards = document.querySelectorAll('.review-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-[#111827]', 'text-white', 'shadow-md');
+          b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+        });
+
+        btn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+        btn.classList.add('bg-[#111827]', 'text-white', 'shadow-md');
+
+        cards.forEach(card => {
+          const cardEl = card as HTMLElement;
+          const cat = cardEl.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            cardEl.style.display = 'flex';
+          } else {
+            cardEl.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReviewFilters);
+  } else {
+    initReviewFilters();
+  }
+  document.addEventListener('astro:page-load', initReviewFilters);
+</script>

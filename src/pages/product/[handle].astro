@@ -92,9 +92,9 @@ const videoTestimonials = [
 
   <div class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F6]/80 backdrop-blur-xl border-b border-black/[0.04]">
     <div class="max-w-[90rem] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2.5 text-[#4B5563] hover:text-[#166534] transition-colors duration-300 group">
+      <a href="/" class="flex items-center gap-2.5 text-[#4B5563] hover:text-[#166534] transition-colors duration-300 py-2 px-1 group touch-manipulation">
         <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
-        <span class="text-[10px] font-bold tracking-[0.2em] uppercase">Return to Store</span>
+        <span class="text-xs font-bold tracking-[0.2em] uppercase">Return to Store</span>
       </a>
       <span class="font-['Playfair_Display'] font-bold text-[#111827] text-sm hidden sm:block tracking-widest">SUJATA<span class="text-[#166534]">.</span></span>
       <div class="w-32 hidden sm:block"></div>
@@ -105,9 +105,9 @@ const videoTestimonials = [
     <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
 
       <nav class="flex items-center gap-3 mb-8">
-        <a href="/" class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors">Apothecary</a>
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation">Apothecary</a>
         <span class="w-8 h-[1px] bg-gray-300"></span>
-        <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-[#111827]">{product.title}</span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#111827]">{product.title}</span>
       </nav>
 
       <div class="grid grid-cols-1 md:grid-cols-[1fr_400px] lg:grid-cols-[1fr_450px] gap-10 lg:gap-16 items-start">
@@ -133,55 +133,50 @@ const videoTestimonials = [
             <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
               {images.map((img: any, i: number) => (
                 <button class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border transition-all duration-300 ${i === 0 ? 'border-[#166534] shadow-md opacity-100' : 'border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30'}`} data-src={img.url}>
-                  <img src={img.url} alt="thumbnail" class="w-full h-full object-contain bg-white p-2" />
+                  <img src={img.url} alt="Thumbnail" class="w-full h-full object-cover" />
                 </button>
               ))}
-              {/* Extra Dynamic Texture Detail Card */}
-              <button class="thumb-btn flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30" data-src="/spirulina-texture.png">
-                <img src="/spirulina-texture.png" alt="Texture Closeup" class="w-full h-full object-cover bg-white" />
-              </button>
             </div>
           )}
         </div>
 
-        <div class="flex flex-col pt-2 lg:pt-4">
-          <h1 class="text-3xl md:text-4xl lg:text-[2.75rem] font-['Playfair_Display'] font-black text-[#111827] leading-[1.1] tracking-tight mb-3">
-            {product.title}
-          </h1>
-          <div class="text-gray-500 text-sm font-light leading-relaxed mb-6 prose-sm [&_strong]:text-[#111827] [&_strong]:font-bold line-clamp-3" set:html={product.descriptionHtml} />
-
-          <div class="flex flex-col gap-2 mb-6 border border-emerald-900/10 bg-[#f0fdf4]/50 p-3 rounded-xl">
-            <div class="flex items-center gap-2">
-              <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span></span>
-              <span class="text-[9px] font-bold uppercase tracking-widest text-emerald-950">High Demand: <span class="text-[#166534]">Only 14 Batches Left</span></span>
-            </div>
-            <div class="flex items-center gap-2 text-[9px] uppercase tracking-widest text-gray-500 font-bold">
-              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              Order within <span class="text-gray-900 font-black" id="countdown-timer">02:14:00</span> for priority dispatch
-            </div>
-          </div>
-
-          <div class="product-details-container bg-white p-6 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-gray-100 mb-6">
-            <div class="flex items-end justify-between mb-6">
-              <div class="flex flex-col">
-                <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 mb-1">Formulation Investment</span>
-                <div class="flex items-baseline gap-1">
-                  <span id="dynamic-price" class="text-3xl font-black text-[#111827] transition-all duration-300 inline-block">₹{price}</span>
+        {/* 🌟 Right Column: Scientific & Commercial Interface */}
+        <div class="space-y-6">
+          <div class="bg-white p-6 sm:p-8 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.02)] border border-gray-100">
+            
+            {/* Header Block */}
+            <div class="border-b border-gray-50 pb-6 mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-1 text-amber-500">
+                  <span class="text-xs">★★★★★</span>
+                  <span class="text-xs font-bold text-gray-500 ml-1">4.9 (420+ Clinical Trials)</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-xs text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/50">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                  <span class="font-bold text-xs uppercase tracking-wider" id="stock-status">High Demand: Only 14 Left</span>
                 </div>
               </div>
-              <div class="text-right flex flex-col items-end">
-                <span class="text-[9px] font-bold uppercase tracking-widest text-[#166534] bg-[#f0fdf4] px-2 py-1 rounded mb-1">Free Delivery</span>
-                <span class="text-[8px] uppercase tracking-widest text-gray-400">Taxes Included</span>
+
+              <h1 class="text-2xl sm:text-3xl font-black text-[#111827] font-['Playfair_Display'] tracking-tight mb-3">
+                {product.title}
+              </h1>
+
+              {/* Dynamic Price Render */}
+              <div class="flex items-baseline gap-3">
+                <span class="text-3xl font-black text-[#111827] tracking-tight" id="display-price">₹{price}</span>
+                <span class="text-sm font-bold text-gray-400 line-through" id="display-compare-price">₹{parseFloat(price) * 1.3 > 0 ? (parseFloat(price) * 1.3).toFixed(2) : "1999.00"}</span>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-emerald-200/50">Save 30%</span>
+                <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">Taxes Included</span>
               </div>
             </div>
 
             {variants.length > 1 && (
               <div class="mb-6 border-t border-gray-50 pt-5">
-                <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size</span>
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size</span>
                 <div class="flex flex-wrap gap-2" id="variant-selector">
                   {variants.map((v: any, i: number) => (
                     <button 
-                      class={`variant-btn px-5 py-2.5 rounded-lg border-2 text-xs font-bold transition-all duration-300 ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                      class={`variant-btn px-5 py-3 min-h-[44px] rounded-xl border-2 text-xs font-bold transition-all duration-300 touch-manipulation ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
                       data-variant-id={v.id}
                       data-price={v.price.amount}
                     >
@@ -194,7 +189,7 @@ const videoTestimonials = [
 
             {/* 🌟 Subscribe & Save 10% Option Widget */}
             <div class="mb-6 border-t border-gray-50 pt-5">
-              <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Purchase Option</span>
+              <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Purchase Option</span>
               <div class="flex flex-col gap-3">
                 {/* One-time Option */}
                 <div class="purchase-option-label relative flex items-center justify-between p-4 rounded-xl border-2 border-[#111827] bg-gray-50/50 cursor-pointer transition-all duration-300 group" id="opt-one-time">
@@ -202,7 +197,7 @@ const videoTestimonials = [
                     <input type="radio" name="purchase_type" value="onetime" checked class="w-4 h-4 text-[#166534] focus:ring-[#166534] border-gray-300" />
                     <div class="flex flex-col">
                       <span class="text-xs font-bold text-[#111827] uppercase tracking-wider">One-time Purchase</span>
-                      <span class="text-[9px] text-gray-400 uppercase tracking-widest mt-0.5">Standard single shipment</span>
+                      <span class="text-[11px] text-gray-500 uppercase tracking-widest mt-0.5">Standard single shipment</span>
                     </div>
                   </div>
                   <span class="text-sm font-black text-[#111827]" id="onetime-price-label">₹{price}</span>
@@ -215,14 +210,14 @@ const videoTestimonials = [
                     <div class="flex flex-col">
                       <div class="flex items-center gap-2">
                         <span class="text-xs font-bold text-[#111827] uppercase tracking-wider">Subscribe & Save</span>
-                        <span class="text-[8px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Save 10%</span>
+                        <span class="text-[11px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Save 10%</span>
                       </div>
-                      <span class="text-[9px] text-gray-400 uppercase tracking-widest mt-0.5">Auto-delivers every 30 days</span>
+                      <span class="text-[11px] text-gray-500 uppercase tracking-widest mt-0.5">Auto-delivers every 30 days</span>
                     </div>
                   </div>
                   <div class="flex flex-col items-end">
                     <span class="text-sm font-black text-emerald-700" id="subscribe-price-label">₹{(parseFloat(price) * 0.9).toFixed(2)}</span>
-                    <span class="text-[8px] text-gray-400 line-through" id="subscribe-old-price">₹{price}</span>
+                    <span class="text-[11px] text-gray-400 line-through" id="subscribe-old-price">₹{price}</span>
                   </div>
                 </div>
               </div>
@@ -236,12 +231,12 @@ const videoTestimonials = [
                 data-token={storefrontToken}
                 data-default-variant={variants[0]?.id}
                 data-variant-id={variants[0]?.id}
-                class="add-to-cart-btn absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed"
+                class="add-to-cart-btn absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation"
               >
               
                 <div class="absolute inset-0 bg-gradient-to-r from-[#166534] to-[#042f17] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.1,0,0,1)] z-0"></div>
                 
-                <span id="btn-text" class="relative z-10 text-xs font-bold tracking-[0.15em] uppercase flex items-center gap-2 transition-opacity duration-300">
+                <span id="btn-text" class="relative z-10 text-sm font-bold tracking-[0.15em] uppercase flex items-center gap-2 transition-opacity duration-300">
                   Add to Routine
                   <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </span>
@@ -253,7 +248,7 @@ const videoTestimonials = [
             <div class="mt-4 flex flex-col gap-4 animate-[fadeInUp_0.5s_ease-out]">
               
               {/* Short Trust Bar (Immediately below CTA) */}
-              <div class="flex items-center justify-between border-t border-b border-gray-100 py-3 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+              <div class="flex items-center justify-between border-t border-b border-gray-100 py-3 text-xs font-bold text-gray-500 uppercase tracking-widest">
                 <div class="flex items-center gap-1">
                   <div class="flex items-center text-amber-500 mr-1">
                     {[...Array(5)].map(() => (
@@ -301,8 +296,8 @@ const videoTestimonials = [
                 <div class="flex items-center gap-2.5">
                   <svg class="w-5 h-5 text-[#25D366] transition-transform duration-300 group-hover:scale-110 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.042c0 2.124.553 4.195 1.604 6.012L.452 24l6.104-1.601a11.964 11.964 0 005.475 1.328h.005c6.645 0 12.031-5.388 12.031-12.042C24 5.388 18.677 0 12.031 0zm5.351 17.181c-.223.633-1.282 1.206-1.768 1.246-.445.038-.971.21-3.085-.666-2.545-1.054-4.161-3.666-4.288-3.834-.127-.168-1.026-1.365-1.026-2.605 0-1.24.634-1.85 1.026-2.261.353-.372.889-.486 1.185-.486.297 0 .593.004.851.015.275.011.644-.105.992.738.356.862 1.218 2.966 1.326 3.181.107.215.178.468.03.743-.148.275-.222.446-.445.714-.222.268-.466.586-.667.828-.222.268-.458.558-.201.996.258.438 1.144 1.884 2.456 3.051 1.693 1.506 3.093 1.97 3.538 2.185.445.215.707.19 1.002-.148.297-.338 1.282-1.488 1.626-2.001.344-.513.687-.428 1.088-.275.402.153 2.541 1.196 2.977 1.41.436.215.727.322.831.5.105.178.105 1.037-.118 1.67z"></path></svg>
                   <div class="flex flex-col">
-                    <span class="text-[9.5px] font-extrabold text-[#064E3B] uppercase tracking-wider">Get order updates on WhatsApp 📱</span>
-                    <span class="text-[8px] text-[#064E3B]/70 uppercase tracking-widest font-bold mt-0.5">Receive order confirmation & delivery alerts</span>
+                    <span class="text-xs font-extrabold text-[#064E3B] uppercase tracking-wider">Get order updates on WhatsApp 📱</span>
+                    <span class="text-[11px] text-[#064E3B]/80 uppercase tracking-widest font-bold mt-0.5">Receive order confirmation & delivery alerts</span>
                   </div>
                 </div>
                 <div class="w-5 h-5 rounded border-2 border-[#166534] flex items-center justify-center bg-white transition-all duration-300" id="whatsapp-checkbox">
@@ -320,8 +315,8 @@ const videoTestimonials = [
             ].map(item => (
               <div class="text-center p-3 rounded-xl bg-white border border-gray-100 hover:border-[#166534]/20 transition-colors">
                 <div class="text-xl mb-1.5">{item.icon}</div>
-                <div class="text-[9px] font-bold text-[#111827] uppercase tracking-widest">{item.title}</div>
-                <div class="text-[8px] text-gray-400 mt-0.5">{item.sub}</div>
+                <div class="text-xs font-bold text-[#111827] uppercase tracking-widest">{item.title}</div>
+                <div class="text-[10px] text-gray-500 mt-0.5">{item.sub}</div>
               </div>
             ))}
           </div>
@@ -366,7 +361,7 @@ const videoTestimonials = [
                 <div>
                   <h4 class="text-xs font-black text-[#111827]">Aditya V.</h4>
                   <div class="flex items-center gap-1.5 mt-0.5">
-                    <span class="bg-[#f0fdf4] text-emerald-800 text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span class="bg-[#f0fdf4] text-emerald-800 text-[11px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full flex items-center gap-1">
                       <svg class="w-2.5 h-2.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Verified Buyer
                     </span>
                   </div>
@@ -391,7 +386,7 @@ const videoTestimonials = [
                 </div>
                 <div>
                   <h4 class="text-xs font-black text-[#111827]">Dr. Siddhant M.</h4>
-                  <p class="text-[9px] uppercase tracking-widest text-[#166534] font-bold">Clinical Nutritionist</p>
+                  <p class="text-xs uppercase tracking-widest text-[#166534] font-bold">Clinical Nutritionist</p>
                 </div>
               </div>
 
@@ -401,7 +396,7 @@ const videoTestimonials = [
             </div>
           </div>
           
-          <div class="flex items-center justify-between px-4 py-2 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
+          <div class="flex items-center justify-between px-4 py-2 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 text-xs font-black uppercase tracking-[0.2em] text-gray-400">
             <span>Forbes</span><span>GQ</span><span>Vogue</span><span>Men's Health</span>
           </div>
         </div>
@@ -434,13 +429,13 @@ const videoTestimonials = [
 
                 {/* Verified Tag / Health Tag */}
                 <div class="absolute top-4 left-4 z-20 flex flex-col gap-1.5">
-                  <span class="bg-black/35 backdrop-blur-md border border-white/20 text-white text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
-                    <svg class="w-2 h-2 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                  <span class="bg-black/35 backdrop-blur-md border border-white/20 text-white text-[11px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full flex items-center gap-1 w-fit">
+                    <svg class="w-2.5 h-2.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                     </svg>
                     Verified
                   </span>
-                  <span class="bg-[#166534] text-white text-[8px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider w-fit">
+                  <span class="bg-[#166534] text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider w-fit">
                     {video.tag}
                   </span>
                 </div>
@@ -448,7 +443,7 @@ const videoTestimonials = [
                 {/* Bottom Customer Info */}
                 <div class="absolute bottom-4 left-4 right-4 z-20">
                   <h4 class="text-white text-sm font-black tracking-wide leading-none">{video.customerName}</h4>
-                  <p class="text-[9px] text-gray-300 font-medium uppercase tracking-widest mt-1">Verified Buyer</p>
+                  <p class="text-xs text-gray-300 font-medium uppercase tracking-widest mt-1">Verified Buyer</p>
                 </div>
               </div>
             ))}
@@ -463,7 +458,7 @@ const videoTestimonials = [
     <div class="mb-14 text-center max-w-2xl mx-auto">
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 backdrop-blur-md shadow-sm">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span class="text-emerald-800 text-[9px] font-black uppercase tracking-[0.3em]">Pure Moat</span>
+        <span class="text-emerald-800 text-[11px] font-black uppercase tracking-[0.3em]">Pure Moat</span>
       </div>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-4">
         Sujata Raw <span class="italic text-gray-400 font-light">vs.</span> Commercial
@@ -477,10 +472,10 @@ const videoTestimonials = [
     <div class="w-full border border-[#022c22]/10 rounded-[2rem] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.02)] overflow-hidden">
       
       {/* Header Row - Hidden on mobile, flex on desktop */}
-      <div class="hidden md:grid grid-cols-12 bg-gray-50/50 border-b border-[#022c22]/10 font-bold uppercase tracking-widest text-[10px] text-gray-500">
+      <div class="hidden md:grid grid-cols-12 bg-gray-50/50 border-b border-[#022c22]/10 font-bold uppercase tracking-widest text-xs text-gray-500">
         <div class="col-span-4 p-6 flex items-center">Molecular Metric</div>
         <div class="col-span-4 p-6 border-l border-r border-[#022c22]/10 bg-[#f0fdf4]/25 flex flex-col gap-1.5">
-          <span class="bg-[#166534] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider w-fit">
+          <span class="bg-[#166534] text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider w-fit">
             ✨ Gold Standard
           </span>
           <span class="text-xs font-black text-[#111827] uppercase tracking-wider">
@@ -586,18 +581,18 @@ const videoTestimonials = [
       </div>
 
       <div class="mb-20">
-        <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-500 mb-6 flex items-center gap-2">
+        <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-6 flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
           Active Compounds
         </h3>
         
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4" id="ingredient-grid">
           {ingredientsData.map((item: any) => (
-            <div class={`ingredient-box relative p-5 md:p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.05] hover:${item.border} group cursor-crosshair overflow-hidden`}>
+            <div class={`ingredient-box relative p-5 md:p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.05] hover:${item.border} group overflow-hidden`}>
               <div class="absolute top-0 right-0 p-4 opacity-10 font-['Playfair_Display'] font-black text-5xl transition-opacity duration-500 group-hover:opacity-20">{item.symbol}</div>
               <div class={`text-xl md:text-2xl font-bold mb-1 ${item.color}`}>{item.symbol}</div>
-              <div class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white mb-3">{item.name}</div>
-              <div class="text-[10px] text-emerald-100/70 leading-relaxed font-light opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
+              <div class="text-xs font-bold uppercase tracking-widest text-white mb-2">{item.name}</div>
+              <div class="text-xs text-emerald-100/80 leading-relaxed font-light opacity-90 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
                 {item.desc}
               </div>
             </div>
@@ -616,7 +611,7 @@ const videoTestimonials = [
                 <div class="absolute -left-[35px] md:-left-[43px] top-1 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-[#022c22] bg-emerald-900 flex items-center justify-center z-10 transition-colors duration-500 step-dot">
                   <div class="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-transparent transition-colors duration-500 step-inner-dot"></div>
                 </div>
-                <span class="text-emerald-500 font-mono text-[8px] md:text-[9px] tracking-[0.2em] uppercase block mb-1">{step.time}</span>
+                <span class="text-emerald-400 font-mono text-[11px] md:text-xs tracking-[0.2em] uppercase block mb-1">{step.time}</span>
                 <h4 class="text-xl md:text-2xl font-['Playfair_Display'] font-bold text-white mb-2">{step.title}</h4>
                 <p class="text-emerald-100/70 text-xs md:text-sm font-light leading-relaxed max-w-sm">{step.desc}</p>
               </div>
@@ -646,30 +641,72 @@ const videoTestimonials = [
   <div id="video-lightbox" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out p-4">
     <div class="relative w-full max-w-2xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 animate-[fadeIn_0.3s_ease-out]">
       <!-- Close Button -->
-      <button id="close-lightbox-btn" class="absolute top-4 right-4 z-50 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-colors" aria-label="Close video">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <button id="close-lightbox-btn" class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-colors touch-manipulation" aria-label="Close video">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
       <!-- Video Container -->
       <div id="lightbox-video-container" class="w-full h-full flex items-center justify-center"></div>
     </div>
   </div>
 
-  <div id="lab-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out bg-[#022c22]/80 backdrop-blur-xl p-4">
-    <div class="w-full aspect-video bg-white/5 border border-white/10 rounded-xl relative overflow-hidden flex flex-col items-center justify-center">
-      <svg class="w-16 h-16 text-emerald-500/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-      <span class="text-gray-500 text-[10px] uppercase tracking-widest">[ PDF REPORT LOADED ]</span>
-           {labReportUrl ? (
-             <a href={labReportUrl} target="_blank" class="mt-4 px-6 py-2 bg-emerald-500 text-black text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-emerald-400 transition-colors z-20 relative">
-               Open Full PDF
-             </a>
-           ) : (
-             <span class="mt-4 text-emerald-500/50 text-[10px] uppercase tracking-widest">Document Secured</span>
-           )}
-           <div class="absolute top-0 w-full h-[2px] bg-emerald-500 shadow-[0_0_20px_#10b981] opacity-50 animate-[scan_3s_linear_infinite]"></div>
-        </div>
+  {/* 🌟 Lab Modal with Accessible Close Button */}
+  <div id="lab-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out bg-[#022c22]/85 backdrop-blur-xl p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Lab Certificate & Dossier">
+    <div class="relative w-full max-w-2xl bg-[#064e3b]/60 border border-emerald-500/30 rounded-2xl overflow-hidden shadow-2xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[300px]">
+      <!-- Close Button with 44px touch target -->
+      <button id="close-lab-modal" aria-label="Close lab report" class="absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-colors touch-manipulation">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <svg class="w-16 h-16 text-emerald-400/50 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+      <h3 class="text-lg sm:text-xl font-bold text-white font-['Playfair_Display'] mb-1">Batch Certificate & Dossier</h3>
+      <span class="text-emerald-300/80 text-xs uppercase tracking-widest">[ 100% HEAVY METAL & TOXIN FREE ]</span>
+      
+      {labReportUrl ? (
+        <a href={labReportUrl} target="_blank" rel="noopener noreferrer" class="mt-6 px-8 py-3.5 bg-emerald-500 text-black text-xs font-bold uppercase tracking-widest rounded-full hover:bg-emerald-400 transition-colors z-20 relative shadow-lg touch-manipulation">
+          Open Verified PDF ↗
+        </a>
+      ) : (
+        <span class="mt-6 text-emerald-400/80 text-xs uppercase tracking-widest bg-emerald-950/60 px-4 py-2 rounded-full border border-emerald-500/20">Official Lab Record Authenticated</span>
+      )}
+      <div class="absolute top-0 w-full h-[2px] bg-emerald-400 shadow-[0_0_20px_#10b981] opacity-50 animate-[scan_3s_linear_infinite]"></div>
+    </div>
   </div>
 
 
+
+  <!-- 🌟 Mobile Sticky Bottom "Add to Routine" Bar (High Conversion & Safe Area Fitted) -->
+  <div 
+    id="mobile-sticky-bottom-bar" 
+    class="fixed bottom-0 left-0 right-0 z-40 bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-4 py-3 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform translate-y-full md:hidden flex items-center justify-between gap-3"
+    aria-label="Quick Add to Routine Bar"
+  >
+    <!-- Left: Product Snapshot -->
+    <div class="flex items-center gap-2.5 min-w-0">
+      <div class="w-11 h-11 rounded-xl bg-white/10 p-1 flex-shrink-0 flex items-center justify-center border border-white/10">
+        <img src={images[0]?.url || "/spirulina-bottle.png"} alt={product.title} class="w-full h-full object-contain" />
+      </div>
+      <div class="flex flex-col min-w-0">
+        <span class="text-xs font-black text-white truncate font-['Playfair_Display']">{product.title}</span>
+        <div class="flex items-center gap-2 mt-0.5">
+          <span class="text-sm font-black text-emerald-400" id="sticky-display-price">₹{price}</span>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase">Save 30%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Fast Add to Routine Button -->
+    <button 
+      id="sticky-atc-btn" 
+      type="button" 
+      class="add-to-cart-btn shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg active:scale-95 transition-all touch-manipulation"
+      data-domain={shopifyDomain} 
+      data-token={storefrontToken} 
+      data-variant-id={variants[0]?.id}
+    >
+      <span id="sticky-btn-text">Add to Routine</span>
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </button>
+  </div>
 
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -930,6 +967,21 @@ const videoTestimonials = [
         });
       }
 
+      // Global Modal Keyboard Handling (Escape to Close)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (labModal && !labModal.classList.contains('opacity-0')) {
+            labModal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+          }
+          if (videoLightbox && !videoLightbox.classList.contains('opacity-0')) {
+            videoLightbox.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
+            if (lightboxVideoContainer) lightboxVideoContainer.innerHTML = '';
+          }
+        }
+      });
+
       // Odometer Score
       const odometerElements = document.querySelectorAll('.odometer-number');
       if (odometerElements.length > 0) {
@@ -958,6 +1010,11 @@ const videoTestimonials = [
       }
 
       // 1. Variant Switching Logic (Size switching)
+      const stickyBar = document.getElementById('mobile-sticky-bottom-bar');
+      const stickyPriceDisplay = document.getElementById('sticky-display-price');
+      const stickyAtcBtn = document.getElementById('sticky-atc-btn');
+      const stickyBtnText = document.getElementById('sticky-btn-text');
+
       variantBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           variantBtns.forEach(b => {
@@ -969,10 +1026,13 @@ const videoTestimonials = [
           target.classList.remove('border-gray-200', 'text-gray-500');
           target.classList.add('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
 
-          // Sync data-variant-id attribute on the main ATC button
+          // Sync data-variant-id attribute on the main and sticky ATC buttons
           const selectedVariantId = target.getAttribute('data-variant-id');
           if (atcBtn && selectedVariantId) {
             atcBtn.setAttribute('data-variant-id', selectedVariantId);
+          }
+          if (stickyAtcBtn && selectedVariantId) {
+            stickyAtcBtn.setAttribute('data-variant-id', selectedVariantId);
           }
 
           // Update Subscription Widget Labels dynamically when size changes
@@ -1015,10 +1075,13 @@ const videoTestimonials = [
         if (radioSubscribe && radioSubscribe.checked) {
           const discountPrice = (basePrice * 0.9).toFixed(2);
           if (priceDisplay) priceDisplay.innerText = `₹${discountPrice}`;
+          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${discountPrice}`;
           if (btnTextElement) {
             btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
           }
+          if (stickyBtnText) stickyBtnText.innerText = "Subscribe & Save";
           if (atcBtn) atcBtn.setAttribute('data-purchase-type', 'subscribe');
+          if (stickyAtcBtn) stickyAtcBtn.setAttribute('data-purchase-type', 'subscribe');
           optSubscribe?.classList.add('border-[#111827]', 'bg-gray-50/50');
           optSubscribe?.classList.remove('border-gray-200');
           optOnetime?.classList.add('border-gray-200');
@@ -1026,10 +1089,13 @@ const videoTestimonials = [
         } else {
           const basePriceFormatted = basePrice.toFixed(2);
           if (priceDisplay) priceDisplay.innerText = `₹${basePriceFormatted}`;
+          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${basePriceFormatted}`;
           if (btnTextElement) {
             btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
           }
+          if (stickyBtnText) stickyBtnText.innerText = "Add to Routine";
           if (atcBtn) atcBtn.setAttribute('data-purchase-type', 'onetime');
+          if (stickyAtcBtn) stickyAtcBtn.setAttribute('data-purchase-type', 'onetime');
           optOnetime?.classList.add('border-[#111827]', 'bg-gray-50/50');
           optOnetime?.classList.remove('border-gray-200');
           optSubscribe?.classList.add('border-gray-200');
@@ -1055,6 +1121,31 @@ const videoTestimonials = [
           updatePurchaseOptionUI();
         }
       });
+
+      // 1.8 Mobile Sticky Bottom Bar Scroll Observer
+      const buyBoxWrapper = document.getElementById('magnetic-btn-wrapper') || atcBtn;
+      if (buyBoxWrapper && stickyBar) {
+        const stickyObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              stickyBar.classList.remove('translate-y-0');
+              stickyBar.classList.add('translate-y-full');
+            } else {
+              if (entry.boundingClientRect.top < 0) {
+                stickyBar.classList.remove('translate-y-full');
+                stickyBar.classList.add('translate-y-0');
+              } else {
+                stickyBar.classList.remove('translate-y-0');
+                stickyBar.classList.add('translate-y-full');
+              }
+            }
+          });
+        }, {
+          threshold: 0.1
+        });
+
+        stickyObserver.observe(buyBoxWrapper);
+      }
 
       // 2. WhatsApp Opt-in Checkbox State Logic (RTO Reduction)
       const waToggle = document.getElementById('whatsapp-toggle-container');

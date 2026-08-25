@@ -13,8 +13,8 @@
       <h2 class="text-xl font-['Playfair_Display'] font-black text-[#111827]">Your Routine</h2>
       <span class="bg-[#166534] text-white text-[10px] font-bold px-2 py-0.5 rounded-full" id="cart-count-badge">1</span>
     </div>
-    <button id="close-cart-btn" aria-label="Close cart" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <button id="close-cart-btn" aria-label="Close cart" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors touch-manipulation">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
   </div>
 
@@ -24,7 +24,7 @@
     {/* DUMMY ITEM (He JS dware dynamic hoil, sadhya demo sathi ahe) */}
     <div class="flex gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-50 mb-4 animate-[fadeInUp_0.5s_ease-out]">
       <div class="w-20 h-24 bg-[#f0fdf4] rounded-xl flex items-center justify-center p-2">
-        <img src="/spirulina-bottle.png" alt="Product" class="w-full h-full object-contain drop-shadow-md" id="cart-item-image"/>
+        <img src="/spirulina-bottle.png" alt="Pure Spirulina Blend" class="w-full h-full object-contain drop-shadow-md" id="cart-item-image"/>
       </div>
       <div class="flex-1 flex flex-col justify-between py-1">
         <div>
@@ -32,11 +32,11 @@
           <p class="text-[10px] uppercase tracking-wider text-gray-600 font-semibold mt-1">One-Time Purchase</p>
         </div>
         <div class="flex items-center justify-between mt-3">
-          {/* Quantity Selector */}
-          <div class="flex items-center gap-3 bg-gray-50 rounded-full px-2 py-1 border border-gray-100">
-            <button class="w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black">-</button>
-            <span class="text-xs font-bold text-[#111827]">1</span>
-            <button class="w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black">+</button>
+          {/* Quantity Selector with accessible 44px touch area */}
+          <div class="flex items-center gap-2 bg-gray-50 rounded-full p-1 border border-gray-200">
+            <button class="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-black font-bold touch-manipulation transition-colors" aria-label="Decrease quantity">-</button>
+            <span class="text-sm font-bold text-[#111827] px-1 min-w-[20px] text-center">1</span>
+            <button class="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-black font-bold touch-manipulation transition-colors" aria-label="Increase quantity">+</button>
           </div>
           <span class="text-sm font-black text-[#111827]" id="cart-item-price">₹1,299</span>
         </div>
@@ -45,8 +45,8 @@
 
   </div>
 
-  {/* Drawer Footer (Checkout Section) */}
-  <div class="px-6 py-8 bg-white border-t border-gray-100 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+  {/* Drawer Footer (Checkout Section with Safe Area Inset) */}
+  <div class="px-6 pt-6 pb-8 pb-safe bg-white border-t border-gray-100 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
     
     <div class="flex items-center justify-between mb-2">
       <span class="text-gray-500 font-medium text-sm">Subtotal</span>
@@ -174,7 +174,7 @@
             <div id="loader-${node.id}" class="absolute inset-0 bg-white/80 backdrop-blur-sm hidden flex-center justify-center items-center rounded-xl z-10">
               <div class="w-4 h-4 border-2 border-[#166534] border-t-transparent rounded-full animate-spin"></div>
             </div>
-            <img src="${imageUrl}" class="w-full h-full object-contain drop-shadow-md"/>
+            <img src="${imageUrl}" alt="${product.title || 'Product'}" class="w-full h-full object-contain drop-shadow-md"/>
           </div>
           <div class="flex-1 flex flex-col justify-between py-1">
             <div>
@@ -182,10 +182,10 @@
               <p class="text-[10px] uppercase tracking-wider text-gray-600 font-semibold mt-1">${variant.title !== 'Default Title' ? variant.title : 'Pure Form'}</p>
             </div>
             <div class="flex items-center justify-between mt-3">
-              <div class="flex items-center gap-3 bg-gray-50 rounded-full px-2 py-1 border border-gray-100">
-                <button class="qty-btn w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black font-bold" data-line-id="${node.id}" data-action="decrease" data-current="${node.quantity}">-</button>
-                <span class="text-xs font-bold text-[#111827] w-3 text-center">${node.quantity}</span>
-                <button class="qty-btn w-5 h-5 flex items-center justify-center text-gray-500 hover:text-black font-bold" data-line-id="${node.id}" data-action="increase" data-current="${node.quantity}">+</button>
+              <div class="flex items-center gap-2 bg-gray-50 rounded-full p-1 border border-gray-200">
+                <button class="qty-btn w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-black font-bold touch-manipulation transition-colors" data-line-id="${node.id}" data-action="decrease" data-current="${node.quantity}" aria-label="Decrease quantity">-</button>
+                <span class="text-sm font-bold text-[#111827] px-1 min-w-[20px] text-center">${node.quantity}</span>
+                <button class="qty-btn w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 hover:text-black font-bold touch-manipulation transition-colors" data-line-id="${node.id}" data-action="increase" data-current="${node.quantity}" aria-label="Increase quantity">+</button>
               </div>
               <span class="text-sm font-black text-[#111827]">${itemPrice}</span>
             </div>
