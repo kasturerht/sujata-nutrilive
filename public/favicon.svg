@@ -1,9 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
-    <style>
-        path { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-            path { fill: #FFF; }
-        }
-    </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <!-- Luxury Emerald Base Gradient -->
+    <radialGradient id="emeraldBg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#065f46"/>
+      <stop offset="60%" stop-color="#022c22"/>
+      <stop offset="100%" stop-color="#011812"/>
+    </radialGradient>
+
+    <!-- Warm Royal Gold Metallic Gradient -->
+    <linearGradient id="royalGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="30%" stop-color="#F59E0B"/>
+      <stop offset="70%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+
+    <!-- Emerald Leaf Glow -->
+    <linearGradient id="emeraldLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="50%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Luxury Seal Background -->
+  <rect width="512" height="512" rx="128" fill="url(#emeraldBg)"/>
+  
+  <!-- Outer Gold Micro-Border -->
+  <rect x="16" y="16" width="480" height="480" rx="116" stroke="url(#royalGold)" stroke-width="8" stroke-opacity="0.6"/>
+
+  <!-- Subtle Inner Ring -->
+  <circle cx="256" cy="256" r="210" stroke="url(#royalGold)" stroke-width="2" stroke-dasharray="8 6" stroke-opacity="0.3"/>
+
+  <!-- Botanical Spirulina Vitality Icon (Stylized 'S' + Double Leaf Helix) -->
+  <g transform="translate(0,0)">
+    <!-- Right Golden Leaf Arc (Sun Vitality) -->
+    <path d="M256 96 C344 96, 400 160, 400 240 C400 320, 330 360, 270 380 C210 400, 160 410, 160 416 C160 416, 220 440, 290 410 C360 380, 416 310, 416 230 C416 130, 340 76, 256 76 Z" 
+          fill="url(#royalGold)"/>
+
+    <!-- Left Emerald Bio-Algae Helix Leaf -->
+    <path d="M256 416 C168 416, 112 352, 112 272 C112 192, 182 152, 242 132 C302 112, 352 102, 352 96 C352 96, 292 72, 222 102 C152 132, 96 202, 96 282 C96 382, 172 436, 256 436 Z" 
+          fill="url(#emeraldLeaf)"/>
+
+    <!-- Central Royal Monogram 'S' (Playfair Styling) -->
+    <path d="M280 170 C280 170, 225 170, 205 195 C185 220, 200 245, 235 260 L275 278 C315 296, 330 325, 310 355 C285 390, 215 390, 215 390 M230 170 C230 170, 290 170, 305 185" 
+          stroke="url(#royalGold)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Vitality Spark / Star Core -->
+    <circle cx="340" cy="150" r="14" fill="url(#royalGold)"/>
+  </g>
 </svg>
