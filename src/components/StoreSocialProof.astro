@@ -108,13 +108,13 @@ const reviews = [
       </div>
 
       {/* Card 3: THE VIDEO REEL CARD */}
-      <div data-category="energy" class="review-card relative bg-black rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] group cursor-pointer aspect-[3/4] lg:aspect-auto lg:h-full border border-gray-100 w-[82vw] sm:w-auto shrink-0 snap-center min-h-[350px] sm:min-h-0">
+      <div id="video-reel-card" data-category="energy" class="review-card relative bg-black rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)] group cursor-pointer aspect-[3/4] lg:aspect-auto lg:h-full border border-gray-100 w-[82vw] sm:w-auto shrink-0 snap-center min-h-[350px] sm:min-h-0">
         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 z-10"></div>
         <Image src="/siddharth_testimonial_video.png" alt="Video Review" width={300} height={400} class="absolute inset-0 w-full h-full object-cover opacity-90 scale-105 group-hover:scale-100 transition-transform duration-700" />
         
         {/* Play Button */}
         <div class="absolute inset-0 flex items-center justify-center z-20">
-          <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full border border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full border border-white/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
             <svg class="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
@@ -122,14 +122,14 @@ const reviews = [
         {/* Video Tags */}
         <div class="absolute top-4 left-4 z-20">
           <span class="bg-black/40 backdrop-blur-md border border-white/20 text-white px-2.5 py-1 rounded-full text-[11px] font-black uppercase tracking-widest flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Video
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Video Testimonial
           </span>
         </div>
         
         {/* Quote */}
         <div class="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
           <p class="text-white text-xs font-bold leading-tight mb-1">"The energy is insane!"</p>
-          <span class="text-gray-300 text-xs">Siddharth J.</span>
+          <span class="text-gray-300 text-xs">Siddharth J. (Verified Routine)</span>
         </div>
       </div>
 
@@ -166,6 +166,42 @@ const reviews = [
     </div>
 
   </div>
+
+  {/* 🎥 Video Testimonial Modal Dialog */}
+  <div 
+    id="video-reel-modal" 
+    class="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center p-4 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Customer Video Review"
+  >
+    <div class="relative w-full max-w-sm sm:max-w-md bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col">
+      {/* Close button */}
+      <button 
+        id="close-video-modal" 
+        aria-label="Close Video" 
+        class="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center border border-white/20 transition-colors cursor-pointer touch-manipulation"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      {/* Video Player */}
+      <div class="relative aspect-[9/16] w-full bg-black flex items-center justify-center">
+        <video 
+          id="reel-video-element" 
+          class="w-full h-full object-cover" 
+          controls 
+          playsinline 
+          preload="none" 
+          poster="/siddharth_testimonial_video.png"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-hand-taking-capsules-from-a-bottle-41614-large.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <style>
@@ -174,7 +210,8 @@ const reviews = [
 </style>
 
 <script>
-  function initReviewFilters() {
+  function initSocialProofEngine() {
+    // 1. Review Filters
     const filterBtns = document.querySelectorAll('.review-filter-btn');
     const cards = document.querySelectorAll('.review-card');
 
@@ -201,12 +238,51 @@ const reviews = [
         });
       });
     });
+
+    // 2. Video Reel Modal
+    const videoCard = document.getElementById('video-reel-card');
+    const videoModal = document.getElementById('video-reel-modal');
+    const closeBtn = document.getElementById('close-video-modal');
+    const videoEl = document.getElementById('reel-video-element') as HTMLVideoElement | null;
+
+    const openVideo = () => {
+      if (!videoModal) return;
+      videoModal.classList.remove('opacity-0', 'pointer-events-none');
+      videoModal.classList.add('opacity-100', 'pointer-events-auto');
+      if (videoEl) {
+        videoEl.currentTime = 0;
+        videoEl.play().catch(() => {});
+      }
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeVideo = () => {
+      if (!videoModal) return;
+      videoModal.classList.remove('opacity-100', 'pointer-events-auto');
+      videoModal.classList.add('opacity-0', 'pointer-events-none');
+      if (videoEl) {
+        videoEl.pause();
+      }
+      document.body.style.overflow = '';
+    };
+
+    videoCard?.addEventListener('click', openVideo);
+    closeBtn?.addEventListener('click', closeVideo);
+    videoModal?.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeVideo();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && videoModal?.classList.contains('opacity-100')) {
+        closeVideo();
+      }
+    });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReviewFilters);
+    document.addEventListener('DOMContentLoaded', initSocialProofEngine);
   } else {
-    initReviewFilters();
+    initSocialProofEngine();
   }
-  document.addEventListener('astro:page-load', initReviewFilters);
+  document.addEventListener('astro:page-load', initSocialProofEngine);
 </script>

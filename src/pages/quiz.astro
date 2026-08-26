@@ -1,0 +1,500 @@
+---
+// src/pages/quiz.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+---
+
+<StoreLayout title="1-Minute Routine Finder & Cellular Quiz | Sujata Nutrilive">
+
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
+
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
+    
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center gap-3 mb-8">
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+          <span>Store</span>
+        </a>
+        <span class="w-6 h-[1px] bg-gray-300"></span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#166534]">Apothecary Routine Finder</span>
+      </nav>
+
+      {/* Header Context Hero */}
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">Apothecary Assessment • 60 Seconds</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-3">
+          Find Your Ideal Cellular Protocol.
+        </h1>
+        <p class="text-gray-500 text-xs sm:text-sm font-light leading-relaxed">
+          Answer 3 quick lifestyle questions to discover your personalized dosage, ideal product format, and 30-day biological roadmap.
+        </p>
+      </div>
+
+      {/* =========================================================================
+          THE INTERACTIVE QUIZ CARD CONTAINER
+          ========================================================================= */}
+      <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.04)] relative overflow-hidden" id="quiz-card-container">
+        
+        {/* Step Progress Bar Header */}
+        <div class="mb-8" id="quiz-progress-header">
+          <div class="flex items-center justify-between text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
+            <span id="quiz-step-label">Question 1 of 3</span>
+            <span id="quiz-percentage-label" class="text-emerald-800 font-mono">33% Completed</span>
+          </div>
+          <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+            <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all duration-500 ease-out" style="width: 33.33%;"></div>
+          </div>
+        </div>
+
+        {/* =====================================================================
+            QUESTION 1: PRIMARY HEALTH OBJECTIVE
+            ===================================================================== */}
+        <div class="quiz-step-pane transition-opacity duration-300" id="step-1-pane">
+          <h2 class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#111827] mb-2 text-center sm:text-left">
+            What is your primary wellness objective?
+          </h2>
+          <p class="text-gray-400 text-xs font-light mb-6 text-center sm:text-left">
+            Select the key benefit your body needs most right now.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <button type="button" class="quiz-option-btn p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-start gap-4 cursor-pointer group" data-goal="energy" data-goal-title="Sustained Cellular Energy">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                ⚡
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Sustained Daily Energy</span>
+                <span class="text-xs text-gray-500 font-light mt-1">Combat 3 PM fatigue, brain fog & low morning stamina with raw non-heme iron.</span>
+              </div>
+            </button>
+
+            <button type="button" class="quiz-option-btn p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-start gap-4 cursor-pointer group" data-goal="gut" data-goal-title="Gut Alkalization & Detox">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                🌿
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Gut Alkalization & Detox</span>
+                <span class="text-xs text-gray-500 font-light mt-1">Eliminate chronic acidity, morning bloating & sluggish digestion via Chlorophyll-a.</span>
+              </div>
+            </button>
+
+            <button type="button" class="quiz-option-btn p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-start gap-4 cursor-pointer group" data-goal="beauty" data-goal-title="Hair Density & Skin Radiance">
+              <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                ✨
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Hair Density & Radiant Skin</span>
+                <span class="text-xs text-gray-500 font-light mt-1">Natural keratin nourishment, anti-aging Phycocyanin & healthy clear skin tone.</span>
+              </div>
+            </button>
+
+            <button type="button" class="quiz-option-btn p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-start gap-4 cursor-pointer group" data-goal="recovery" data-goal-title="Athletic Endurance & Recovery">
+              <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                🏋️‍♂️
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Athletic & Muscle Recovery</span>
+                <span class="text-xs text-gray-500 font-light mt-1">Accelerate post-workout lactic acid flush & support muscle protein synthesis.</span>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+        {/* =====================================================================
+            QUESTION 2: FORMAT & CONSUMPTION PREFERENCE
+            ===================================================================== */}
+        <div class="quiz-step-pane hidden transition-opacity duration-300" id="step-2-pane">
+          <h2 class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#111827] mb-2 text-center sm:text-left">
+            How do you prefer consuming your daily ritual?
+          </h2>
+          <p class="text-gray-400 text-xs font-light mb-6 text-center sm:text-left">
+            Choose your desired format and texture experience.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            <button type="button" class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" data-format="powder" data-format-title="Raw Spirulina Powder (100g)" data-price="600" data-image="/spirulina-powder.png">
+              <div>
+                <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 bg-emerald-50/50 border border-emerald-100 flex items-center justify-center p-3">
+                  <img src="/spirulina-powder.png" alt="Raw Powder" class="h-full object-contain group-hover:scale-110 transition-transform" />
+                </div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-800 block mb-1">Smoothie & Water Blend</span>
+                <h3 class="text-base font-bold text-[#111827] mb-1">Active Raw Powder (100g)</h3>
+                <p class="text-xs text-gray-500 font-light leading-relaxed">
+                  Sub-40°C cryo-milled raw powder. Perfect for morning lemon water, smoothies, or green bowls. 98.4% instant cellular absorption.
+                </p>
+              </div>
+              <div class="mt-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
+                <span class="text-emerald-900">₹600 / 30-Day Routine</span>
+                <span class="text-emerald-600 group-hover:translate-x-1 transition-transform">Select Powder →</span>
+              </div>
+            </button>
+
+            <button type="button" class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" data-format="capsules" data-format-title="Bio-Spirulina Capsules (60 Caps)" data-price="799" data-image="/spirulina-bottle.png">
+              <div>
+                <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 bg-emerald-50/50 border border-emerald-100 flex items-center justify-center p-3">
+                  <img src="/spirulina-bottle.png" alt="Bio Capsules" class="h-full object-contain group-hover:scale-110 transition-transform" />
+                </div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-800 block mb-1">Odourless & Travel-Friendly</span>
+                <h3 class="text-base font-bold text-[#111827] mb-1">Bio-Active Capsules (60 Caps)</h3>
+                <p class="text-xs text-gray-500 font-light leading-relaxed">
+                  100% plant-cellulose vegetarian capsules. Zero taste, zero algae odour, zero prep time. Take 2 capsules on the go.
+                </p>
+              </div>
+              <div class="mt-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
+                <span class="text-emerald-900">₹799 / 30-Day Routine</span>
+                <span class="text-emerald-600 group-hover:translate-x-1 transition-transform">Select Capsules →</span>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+        {/* =====================================================================
+            QUESTION 3: LIFESTYLE & DAILY ACTIVITY
+            ===================================================================== */}
+        <div class="quiz-step-pane hidden transition-opacity duration-300" id="step-3-pane">
+          <h2 class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#111827] mb-2 text-center sm:text-left">
+            What does your typical daily schedule look like?
+          </h2>
+          <p class="text-gray-400 text-xs font-light mb-6 text-center sm:text-left">
+            This helps our apothecary engine calculate your optimal dosage and timing.
+          </p>
+
+          <div class="space-y-4">
+            
+            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="desk" data-dosage="1 Scoop / 2 Capsules in the morning with lukewarm water before breakfast">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                  💼
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Desk Worker / Corporate Professional</span>
+                  <span class="text-xs text-gray-500 font-light mt-0.5">High screen time, mental stress, sedentary work & occasional irregular meal timings.</span>
+                </div>
+              </div>
+              <span class="text-emerald-600 text-sm font-bold hidden sm:inline group-hover:translate-x-1 transition-transform">Select →</span>
+            </button>
+
+            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="active" data-dosage="1.5 Scoops / 3 Capsules pre/post workout with fresh water">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                  🏃
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Active Fitness & Workout Enthusiast</span>
+                  <span class="text-xs text-gray-500 font-light mt-0.5">Regular gym training, running, yoga, or sports requiring high iron oxygenation.</span>
+                </div>
+              </div>
+              <span class="text-emerald-600 text-sm font-bold hidden sm:inline group-hover:translate-x-1 transition-transform">Select →</span>
+            </button>
+
+            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="wellness" data-dosage="1 Scoop / 2 Capsules every morning with a glass of water">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                  🧘
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-sm font-bold text-[#111827] group-hover:text-emerald-900">Holistic Wellness & Healthy Aging</span>
+                  <span class="text-xs text-gray-500 font-light mt-0.5">Focusing on deep natural longevity, immune resilience & gut cleansing.</span>
+                </div>
+              </div>
+              <span class="text-emerald-600 text-sm font-bold hidden sm:inline group-hover:translate-x-1 transition-transform">Select →</span>
+            </button>
+
+          </div>
+        </div>
+
+        {/* =====================================================================
+            CINEMATIC 1.5S ANALYSIS SCREEN (THE COMPUTATION STATE)
+            ===================================================================== */}
+        <div class="hidden flex-col items-center justify-center py-16 text-center" id="quiz-analysis-pane">
+          <div class="relative w-20 h-20 mb-6">
+            <div class="w-20 h-20 rounded-full border-4 border-emerald-500/20 border-t-emerald-600 animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center text-2xl">
+              🧬
+            </div>
+          </div>
+          <h3 class="text-xl font-['Playfair_Display'] font-black text-[#111827] mb-2" id="analysis-text">
+            Analyzing Biological Profile...
+          </h3>
+          <span class="text-xs font-mono text-emerald-700 tracking-wider">
+            MAPPING BIO-AVAILABILITY &amp; DOSAGE ALGORITHM
+          </span>
+        </div>
+
+        {/* =====================================================================
+            FINAL RESULTS DOSSIER (THE PERSONALIZED PRESCRIPTION CARD)
+            ===================================================================== */}
+        <div class="hidden transition-opacity duration-500" id="quiz-results-pane">
+          
+          <div class="bg-gradient-to-br from-[#064E3B] to-[#022219] rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-emerald-500/30 mb-8 relative overflow-hidden">
+            
+            <div class="absolute top-0 right-0 w-80 h-80 bg-emerald-400/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <div class="relative z-10">
+              
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <span class="bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-widest">
+                  ✨ Clinical Assessment Match: 98.6%
+                </span>
+                <span class="text-xs font-mono text-amber-400 font-bold" id="result-badge-goal">
+                  Target: Energy &amp; Cellular Vitality
+                </span>
+              </div>
+
+              <span class="text-[11px] font-mono text-emerald-200/80 uppercase tracking-widest block mb-1">Your Prescribed Protocol:</span>
+              <h3 class="text-2xl sm:text-3xl font-['Playfair_Display'] font-black text-white mb-4" id="result-routine-title">
+                The Morning Bio-Shield Protocol
+              </h3>
+
+              {/* Prescribed Dosage Card */}
+              <div class="bg-black/40 border border-white/10 rounded-2xl p-4 sm:p-5 mb-8 backdrop-blur-md">
+                <div class="text-xs font-bold uppercase tracking-wider text-emerald-300 mb-1 flex items-center gap-2">
+                  <span>⏱️ Prescribed Timing &amp; Dosage</span>
+                </div>
+                <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light" id="result-dosage-text">
+                  Take 1 scoop (3g) in the morning with lukewarm lemon water before breakfast.
+                </p>
+              </div>
+
+              {/* Matched Product Fast Buy Box */}
+              <div class="bg-white rounded-2xl p-5 sm:p-6 text-[#111827] flex flex-col sm:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-xl bg-emerald-50 p-2 border border-emerald-100 shrink-0 flex items-center justify-center">
+                    <img id="result-product-image" src="/spirulina-powder.png" alt="Recommended Product" class="w-full h-full object-contain" />
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="text-sm font-black text-[#111827]" id="result-product-title">Raw Spirulina Powder (100g)</span>
+                    <span class="text-xs text-gray-500 font-light">Sub-40°C Cold-Pressed • 30-Day Protocol</span>
+                    <span class="text-base font-black text-emerald-800 mt-1" id="result-product-price">₹600</span>
+                  </div>
+                </div>
+
+                <div class="w-full sm:w-auto flex flex-col gap-2">
+                  <button 
+                    id="quiz-add-to-cart-btn"
+                    type="button"
+                    class="w-full sm:w-auto bg-[#166534] hover:bg-[#111827] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 touch-manipulation cursor-pointer"
+                  >
+                    <span>Add to Routine →</span>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Secondary Actions: WhatsApp Doctor Consultation & Retake */}
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
+            
+            <a 
+              id="quiz-whatsapp-link"
+              href="https://wa.me/919876543210?text=Hello%20Dr.%20Sujata,%20I%20completed%20the%20routine%20finder%20quiz%20and%20wanted%20to%20verify%20my%20dosage." 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="w-full sm:w-auto text-[#064E3B] hover:text-[#166534] text-xs font-bold flex items-center justify-center gap-2 py-2 touch-manipulation"
+            >
+              <svg class="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.042c0 2.124.553 4.195 1.604 6.012L.452 24l6.104-1.601a11.964 11.964 0 005.475 1.328h.005c6.645 0 12.031-5.388 12.031-12.042C24 5.388 18.677 0 12.031 0zm5.351 17.181c-.223.633-1.282 1.206-1.768 1.246-.445.038-.971.21-3.085-.666-2.545-1.054-4.161-3.666-4.288-3.834-.127-.168-1.026-1.365-1.026-2.605 0-1.24.634-1.85 1.026-2.261.353-.372.889-.486 1.185-.486.297 0 .593.004.851.015.275.011.644-.105.992.738.356.862 1.218 2.966 1.326 3.181.107.215.178.468.03.743-.148.275-.222.446-.445.714-.222.268-.466.586-.667.828-.222.268-.458.558-.201.996.258.438 1.144 1.884 2.456 3.051 1.693 1.506 3.093 1.97 3.538 2.185.445.215.707.19 1.002-.148.297-.338 1.282-1.488 1.626-2.001.344-.513.687-.428 1.088-.275.402.153 2.541 1.196 2.977 1.41.436.215.727.322.831.5.105.178.105 1.037-.118 1.67z"></path></svg>
+              <span>Verify plan on WhatsApp with Ayurvedic Vaidya →</span>
+            </a>
+
+            <button 
+              id="quiz-retake-btn" 
+              type="button" 
+              class="text-xs text-gray-400 hover:text-gray-700 font-bold uppercase tracking-wider py-2 cursor-pointer"
+            >
+              ↻ Retake Assessment
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Trust Badges Strip below quiz */}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">
+        <div class="p-3 bg-white border border-gray-100 rounded-xl">✓ FSSAI Approved</div>
+        <div class="p-3 bg-white border border-gray-100 rounded-xl">✓ NABL Lab Certified</div>
+        <div class="p-3 bg-white border border-gray-100 rounded-xl">✓ 100% Raw Cold-Pressed</div>
+        <div class="p-3 bg-white border border-gray-100 rounded-xl">✓ 30-Day Money Back</div>
+      </div>
+
+    </div>
+
+  </main>
+
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
+
+  {/* CLIENT JAVASCRIPT FOR QUIZ LOGIC */}
+  <script is:inline>
+    function initQuizEngine() {
+      const step1Pane = document.getElementById('step-1-pane');
+      const step2Pane = document.getElementById('step-2-pane');
+      const step3Pane = document.getElementById('step-3-pane');
+      const analysisPane = document.getElementById('quiz-analysis-pane');
+      const resultsPane = document.getElementById('quiz-results-pane');
+      const progressHeader = document.getElementById('quiz-progress-header');
+      const progressBar = document.getElementById('quiz-progress-bar');
+      const stepLabel = document.getElementById('quiz-step-label');
+      const pctLabel = document.getElementById('quiz-percentage-label');
+
+      // State
+      let quizAnswers = {
+        goal: 'energy',
+        goalTitle: 'Sustained Cellular Energy',
+        format: 'powder',
+        formatTitle: 'Raw Spirulina Powder (100g)',
+        price: 600,
+        image: '/spirulina-powder.png',
+        lifestyle: 'desk',
+        dosage: 'Take 1 scoop (3g) in the morning with lukewarm lemon water before breakfast'
+      };
+
+      // Step 1 Click Handlers
+      const goalBtns = document.querySelectorAll('.quiz-option-btn');
+      goalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          quizAnswers.goal = btn.getAttribute('data-goal') || 'energy';
+          quizAnswers.goalTitle = btn.getAttribute('data-goal-title') || 'Sustained Cellular Energy';
+
+          step1Pane.classList.add('hidden');
+          step2Pane.classList.remove('hidden');
+          if (progressBar) progressBar.style.width = '66.66%';
+          if (stepLabel) stepLabel.innerText = 'Question 2 of 3';
+          if (pctLabel) pctLabel.innerText = '66% Completed';
+        });
+      });
+
+      // Step 2 Click Handlers
+      const formatBtns = document.querySelectorAll('.quiz-format-btn');
+      formatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          quizAnswers.format = btn.getAttribute('data-format') || 'powder';
+          quizAnswers.formatTitle = btn.getAttribute('data-format-title') || 'Raw Spirulina Powder (100g)';
+          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 600;
+          quizAnswers.image = btn.getAttribute('data-image') || '/spirulina-powder.png';
+
+          step2Pane.classList.add('hidden');
+          step3Pane.classList.remove('hidden');
+          if (progressBar) progressBar.style.width = '100%';
+          if (stepLabel) stepLabel.innerText = 'Question 3 of 3';
+          if (pctLabel) pctLabel.innerText = '100% Completed';
+        });
+      });
+
+      // Step 3 Click Handlers & Analysis Transition
+      const lifestyleBtns = document.querySelectorAll('.quiz-lifestyle-btn');
+      lifestyleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          quizAnswers.lifestyle = btn.getAttribute('data-lifestyle') || 'desk';
+          quizAnswers.dosage = btn.getAttribute('data-dosage') || 'Take 1 scoop in the morning with water';
+
+          step3Pane.classList.add('hidden');
+          progressHeader.classList.add('hidden');
+          analysisPane.classList.remove('hidden');
+          analysisPane.classList.add('flex');
+
+          // Simulated 1.5s clinical algorithmic analysis
+          const analysisText = document.getElementById('analysis-text');
+          setTimeout(() => {
+            if (analysisText) analysisText.innerText = "Synthesizing Bio-Active Synergy...";
+          }, 600);
+
+          setTimeout(() => {
+            if (analysisText) analysisText.innerText = "Formulating Custom Routine...";
+          }, 1100);
+
+          setTimeout(() => {
+            analysisPane.classList.add('hidden');
+            analysisPane.classList.remove('flex');
+            renderResults();
+            resultsPane.classList.remove('hidden');
+          }, 1600);
+        });
+      });
+
+      // Render Dynamic Results
+      function renderResults() {
+        const goalBadge = document.getElementById('result-badge-goal');
+        const routineTitle = document.getElementById('result-routine-title');
+        const dosageText = document.getElementById('result-dosage-text');
+        const prodImage = document.getElementById('result-product-image');
+        const prodTitle = document.getElementById('result-product-title');
+        const prodPrice = document.getElementById('result-product-price');
+        const waLink = document.getElementById('quiz-whatsapp-link');
+
+        if (goalBadge) goalBadge.innerText = `Target: ${quizAnswers.goalTitle}`;
+        if (routineTitle) {
+          if (quizAnswers.goal === 'energy') routineTitle.innerText = "The Morning Cellular Vitality Protocol";
+          else if (quizAnswers.goal === 'gut') routineTitle.innerText = "The Deep Gut Alkalization Protocol";
+          else if (quizAnswers.goal === 'beauty') routineTitle.innerText = "The Collagen & Cellular Glow Protocol";
+          else routineTitle.innerText = "The Athletic Cellular Recovery Protocol";
+        }
+
+        if (dosageText) dosageText.innerText = quizAnswers.dosage;
+        if (prodImage) prodImage.setAttribute('src', quizAnswers.image);
+        if (prodTitle) prodTitle.innerText = quizAnswers.formatTitle;
+        if (prodPrice) prodPrice.innerText = `₹${quizAnswers.price}`;
+
+        if (waLink) {
+          const msg = encodeURIComponent(`Hello Dr. Sujata, I completed the Routine Quiz for ${quizAnswers.goalTitle} and was prescribed ${quizAnswers.formatTitle}. Can you please confirm my dosage?`);
+          waLink.setAttribute('href', `https://wa.me/919876543210?text=${msg}`);
+        }
+      }
+
+      // Add To Cart from Quiz Result
+      const quizAtcBtn = document.getElementById('quiz-add-to-cart-btn');
+      quizAtcBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof window.addItemToLocalCart === 'function') {
+          window.addItemToLocalCart({
+            id: quizAnswers.format === 'capsules' ? 'sujata_capsules_60' : 'sujata_powder_100g',
+            title: quizAnswers.formatTitle,
+            subtitle: `Prescribed for ${quizAnswers.goalTitle}`,
+            price: quizAnswers.price,
+            image: quizAnswers.image,
+            quantity: 1
+          });
+        }
+      });
+
+      // Retake Quiz Handler
+      const retakeBtn = document.getElementById('quiz-retake-btn');
+      retakeBtn?.addEventListener('click', () => {
+        resultsPane.classList.add('hidden');
+        progressHeader.classList.remove('hidden');
+        if (progressBar) progressBar.style.width = '33.33%';
+        if (stepLabel) stepLabel.innerText = 'Question 1 of 3';
+        if (pctLabel) pctLabel.innerText = '33% Completed';
+        step1Pane.classList.remove('hidden');
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initQuizEngine);
+    } else {
+      initQuizEngine();
+    }
+    document.addEventListener('astro:page-load', initQuizEngine);
+  </script>
+
+</StoreLayout>

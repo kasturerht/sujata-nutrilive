@@ -96,7 +96,7 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
         </div>
 
         <a 
-          href={`https://wa.me/919999999999?text=Hello%20Sujata%20Nutrilive!%20My%20order%20is%20confirmed%20(Receipt%20ID:%20${orderNumber}).%20I%20want%20to%20activate%20my%20free%20doctor%20consultation%20and%20diet%20chart%20protocol.`}
+          href={`https://wa.me/919876543210?text=Hello%20Sujata%20Nutrilive!%20My%20order%20is%20confirmed%20(Receipt%20ID:%20${orderNumber}).%20I%20want%20to%20activate%20my%20free%20doctor%20consultation%20and%20diet%20chart%20protocol.`}
           target="_blank"
           rel="noopener noreferrer"
           class="bg-[#25D366] hover:bg-[#20ba5a] text-emerald-950 font-extrabold text-[11px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-[0_10px_25px_rgba(37,211,102,0.15)] hover:shadow-[0_15px_30px_rgba(37,211,102,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group/btn shrink-0 w-full md:w-auto relative z-10"
@@ -108,11 +108,17 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
         </a>
       </div>
 
-      {/* 5. APPLE-LIKE CTAS */}
-      <a href="/" class="w-full sm:w-auto bg-[#111827] text-white hover:bg-[#166534] font-bold text-xs uppercase tracking-[0.2em] px-10 py-5 rounded-xl transition-all duration-300 shadow-md hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] hover:-translate-y-0.5 flex items-center justify-center gap-2 group">
-        Continue Optimizing
-        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-      </a>
+      {/* 5. CTAS: Continue Shopping + Track Order */}
+      <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+        <a href="/track-order" class="w-full sm:w-auto bg-[#166534] hover:bg-[#064E3B] text-white font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group">
+          <span>Track Live Shipment</span>
+          <span class="group-hover:translate-x-1 transition-transform">🚚</span>
+        </a>
+        <a href="/" class="w-full sm:w-auto bg-[#111827] text-white hover:bg-gray-800 font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-sm flex items-center justify-center gap-2 group">
+          <span>Continue Shopping</span>
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
 
       {/* 6. SYMMETRICAL TRUST AXIS */}
       <div class="mt-16 pt-8 border-t border-gray-100 w-full flex flex-wrap justify-center items-center gap-6 md:gap-10 opacity-50 hover:opacity-85 transition-opacity duration-500">

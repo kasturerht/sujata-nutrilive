@@ -57,7 +57,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f6
     <div class="flex items-center justify-center gap-4 mt-4 text-[10px] text-gray-400 uppercase tracking-widest font-sans">
       <span>🔒 SSL 256-bit</span>
       <span>•</span>
-      <span>🛡️ 30-Day Guarantee</span>
+      <a href="/refund-policy" target="_blank" class="hover:text-emerald-700 underline transition-colors">🛡️ 30-Day Guarantee</a>
       <span>•</span>
       <span>💵 Free COD</span>
     </div>
@@ -321,6 +321,86 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f6
           image: image,
           quantity: 1
         });
+      }
+
+      // Checkout Action Button Handler (Shopify GraphQL Mutation)
+      const checkoutBtn = e.target.closest('#checkout-action-btn');
+      if (checkoutBtn) {
+        e.preventDefault();
+        const items = getLocalCart();
+        if (items.length === 0) return;
+
+        const originalText = checkoutBtn.innerHTML;
+        checkoutBtn.disabled = true;
+        checkoutBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>Securing Checkout...</span>
+        `;
+
+        // Format lines for Shopify Storefront API
+        const lines = items
+          .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
+          .map(i => {
+            const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
+            return { merchandiseId, quantity: i.quantity };
+          });
+
+        if (lines.length > 0) {
+          const mutation = `
+            mutation cartCreate($input: CartInput!) {
+              cartCreate(input: $input) {
+                cart {
+                  id
+                  checkoutUrl
+                }
+                userErrors {
+                  field
+                  message
+                }
+              }
+            }
+          `;
+
+          fetch(`https://${DOMAIN}/api/2024-01/graphql.json`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': TOKEN,
+            },
+            body: JSON.stringify({
+              query: mutation,
+              variables: { input: { lines } }
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            const checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
+            if (checkoutUrl) {
+              window.location.href = checkoutUrl;
+            } else {
+              // Direct fallback to store checkout
+              window.location.href = `https://${DOMAIN}/cart`;
+            }
+          })
+          .catch(() => {
+            window.location.href = `https://${DOMAIN}/cart`;
+          });
+        } else {
+          // If items are custom bundle items or demo items without live Shopify variant IDs
+          setTimeout(() => {
+            window.location.href = '/thank-you';
+          }, 800);
+        }
+      }
+    });
+
+    // Cross-tab Synchronization
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'sujata_cart_items') {
+        window.renderSujataCart();
       }
     });
 

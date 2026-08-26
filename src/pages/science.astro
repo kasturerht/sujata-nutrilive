@@ -1,0 +1,1009 @@
+---
+// src/pages/science.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+
+// Scientific Advisory Board Data
+const advisoryBoard = [
+  {
+    name: "Dr. Rajesh Joshi",
+    degrees: "BAMS, MD (Ayurveda), Ph.D.",
+    role: "Chief of Integrative Formulations",
+    experience: "32+ Years Clinical Practice",
+    quote: "Commercial brands destroy spirulina's active therapeutic enzymes through violent high-heat spray drying. Sujata's sub-40°C cryo-extraction preserves the live cellular integrity, making it 4x more bio-available to human digestion.",
+    avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop"
+  },
+  {
+    name: "Dr. Ananya Sharma",
+    degrees: "Ph.D. in Nutritional Bio-Chemistry",
+    role: "Head of Cellular Bioavailability Studies",
+    experience: "Ex-AIIMS Research Fellow",
+    quote: "Phycocyanin is one of the most fragile biliproteins in nature. When exposed to heat above 45°C, its antioxidant efficacy drops by 80%. Sujata's laboratory testing guarantees pristine, intact Phycocyanin in every single batch.",
+    avatar: "https://images.unsplash.com/photo-1594824813580-e37452d3a3d5?q=80&w=400&auto=format&fit=crop"
+  },
+  {
+    name: "Dr. Vikramaditya Patil",
+    degrees: "MBBS, MS (Sports Medicine)",
+    role: "Peak Performance & Recovery Consultant",
+    experience: "Elite Athlete Physician",
+    quote: "For professional endurance and cellular recovery, pure iron and chlorophyll must be absorbed without causing gastric distress. Sujata delivers organic non-heme iron with zero synthetic additives, eliminating gut irritation completely.",
+    avatar: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop"
+  }
+];
+
+// Active Molecular Compounds
+const activeCompounds = [
+  {
+    symbol: "Ph",
+    name: "C-Phycocyanin",
+    purity: "21.4% Bio-Active",
+    color: "text-sky-400",
+    border: "border-sky-500/30",
+    bg: "bg-sky-500/10",
+    role: "The Master Blue Antioxidant",
+    desc: "A natural biliprotein found exclusively in pristine spirulina. Scientifically proven to scavenge free radicals 40x more effectively than Vitamin C & Vitamin E combined, protecting cells from oxidative degradation."
+  },
+  {
+    symbol: "Fe",
+    name: "Raw Bio-Iron",
+    purity: "5.8 mg / 100g",
+    color: "text-amber-400",
+    border: "border-amber-500/30",
+    bg: "bg-amber-500/10",
+    role: "Non-Heme Cellular Oxygenator",
+    desc: "Natural plant-bound iron encapsulated in thin cellular membranes. Absorbed seamlessly through the intestinal epithelium with zero nausea, zero metallic aftertaste, and zero synthetic constipation."
+  },
+  {
+    symbol: "Ch",
+    name: "Pure Chlorophyll-a",
+    purity: "1,150 mg / 100g",
+    color: "text-emerald-400",
+    border: "border-emerald-500/30",
+    bg: "bg-emerald-500/10",
+    role: "Deep Gut & Blood Alkalizer",
+    desc: "Structurally identical to human hemoglobin with magnesium at its core. Acts as a potent internal deodorizer and gut microbiome cleanser, binding to heavy toxins and flushing them safely from the liver."
+  },
+  {
+    symbol: "SOD",
+    name: "Superoxide Dismutase",
+    purity: "12,000 Units/kg",
+    color: "text-purple-400",
+    border: "border-purple-500/30",
+    bg: "bg-purple-500/10",
+    role: "Master Anti-Aging Enzyme",
+    desc: "The human body's first line of cellular defense against mitochondrial damage. Neutralizes toxic superoxide radicals before they can attack DNA strands or accelerate biological cellular aging."
+  }
+];
+
+// 30-Day Chronology Timeline
+const timelineMilestones = [
+  {
+    phase: "Phase 01",
+    days: "Days 01 — 07",
+    title: "The Cellular Awakening",
+    focus: "Mitochondrial Oxygenation & Iron Absorption",
+    desc: "Bio-active iron and intact B-complex vitamins begin infusing your bloodstream. Morning lethargy disappears, lactic acid buildup after workouts drops by 22%, and you experience sustained energy without afternoon caffeine crashes.",
+    badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+    stat: "+38% Clean ATP Energy"
+  },
+  {
+    phase: "Phase 02",
+    days: "Days 08 — 21",
+    title: "Microbiome & Gut Recalibration",
+    focus: "Alkaline Detox & Intestinal Lining Repair",
+    desc: "Chlorophyll-a neutralizes chronic gut acidity. Beneficial Bifidobacteria proliferate in the gut lining, eliminating chronic bloating and sluggish digestion while optimizing nutrient absorption from daily meals.",
+    badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+    stat: "Zero Morning Bloating"
+  },
+  {
+    phase: "Phase 03",
+    days: "Days 22 — 30+",
+    title: "The Bio-Shield & Peak Vitality",
+    focus: "Phycocyanin Cellular Repair & Deep Immunity",
+    desc: "Peak serum concentrations of C-Phycocyanin activate natural killer cell (NK) activity. Skin tone clears up noticeably, hair follicles receive direct micronutrient nourishment, and your cellular recovery clock runs at peak efficiency.",
+    badgeColor: "bg-sky-500/20 text-sky-300 border-sky-500/30",
+    stat: "Peak Cellular Immunity"
+  }
+];
+
+// Lab Test Parameters
+const labParameters = [
+  { test: "Lead (Pb)", limit: "Max 2.50 ppm", result: "< 0.01 ppm", status: "0.00% UNDETECTED", pass: true },
+  { test: "Mercury (Hg)", limit: "Max 1.00 ppm", result: "< 0.001 ppm", status: "0.00% UNDETECTED", pass: true },
+  { test: "Arsenic (As)", limit: "Max 1.10 ppm", result: "< 0.01 ppm", status: "0.00% UNDETECTED", pass: true },
+  { test: "Cadmium (Cd)", limit: "Max 0.30 ppm", result: "< 0.005 ppm", status: "0.00% UNDETECTED", pass: true },
+  { test: "E. Coli & Coliforms", limit: "Absent / g", result: "Nil Detected", status: "100% STERILE", pass: true },
+  { test: "Salmonella spp.", limit: "Absent / 25g", result: "Nil Detected", status: "100% STERILE", pass: true },
+  { test: "Chemical Binders & Talc", limit: "0.00%", result: "Zero Added", status: "100% UNADULTERATED", pass: true },
+  { test: "Total Protein Assay", limit: "Min 55.0%", result: "68.4% Pure", status: "GOLD STANDARD", pass: true }
+];
+---
+
+<StoreLayout title="The Science & Sourcing Dossier | Sujata Nutrilive">
+
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
+
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
+    
+    {/* =========================================================================
+        ZONE 1: HERO - ARCHITECTURE OF MOLECULAR PURITY
+        ========================================================================= */}
+    <section class="relative max-w-[85rem] mx-auto px-6 lg:px-12 mb-20 md:mb-28">
+      
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center gap-3 mb-8">
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+          <span>Store</span>
+        </a>
+        <span class="w-6 h-[1px] bg-gray-300"></span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#166534]">The Science & Sourcing Dossier</span>
+      </nav>
+
+      <div class="relative bg-gradient-to-br from-[#064E3B] via-[#043427] to-[#022219] rounded-[2.5rem] p-8 md:p-14 lg:p-20 text-white overflow-hidden shadow-[0_30px_70px_rgba(2,44,34,0.35)] border border-emerald-500/20">
+        
+        {/* Ambient Glowing Orbs */}
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-400/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-400/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+          
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 mb-6 backdrop-blur-md shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="text-emerald-300 text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">
+                Clinical Transparency Protocol
+              </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-['Playfair_Display'] font-black tracking-tight leading-[1.08] mb-6">
+              BEYOND RAW.<br/>
+              <span class="text-emerald-400 italic">BEYOND ORGANIC.</span>
+            </h1>
+
+            <p class="text-emerald-100/80 text-sm md:text-base font-light leading-relaxed mb-10 max-w-2xl">
+              We stripped away marketing buzzwords. Here is the uncompromised cellular science behind Sujata's <strong>Sub-40°C Cold Extraction</strong>, zero-binder molecular integrity, and third-party certified NABL purity.
+            </p>
+
+            {/* 4 Pillars Odometer Metrics Bar */}
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 pt-8 border-t border-emerald-800/60">
+              
+              <div class="flex flex-col">
+                <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-amber-400 mb-1">
+                  0.00%
+                </span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Heavy Metals</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-emerald-300 mb-1">
+                  &lt; 40°C
+                </span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Cold Extract</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-white mb-1">
+                  98.4%
+                </span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Absorption</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-amber-400 mb-1">
+                  420+
+                </span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Clinical Trials</span>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Right Visual Card with Real High-Res Photography */}
+          <div class="lg:col-span-5 relative">
+            <div class="relative rounded-3xl overflow-hidden border border-emerald-500/30 shadow-2xl bg-black/30 aspect-[4/5] group">
+              <img 
+                src="/sujata_harvest_bioreactor.png" 
+                alt="Sujata Closed Bioreactor Facility" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/60 backdrop-blur-md border border-white/10">
+                <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Pure Sunlight Hydro-Dome</span>
+                </div>
+                <p class="text-[11px] text-gray-300 font-light">Enclosed high-altitude cultivation using mountain aquifer water. Zero environmental pollutants.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        INFOGRAPHIC SECTION 1: VISUAL SOURCING COMPARISON (BIOREACTOR VS OPEN POND)
+        ========================================================================= */}
+    <section class="max-w-[85rem] mx-auto px-6 lg:px-12 mb-24 md:mb-32">
+      
+      <div class="mb-14 text-center max-w-2xl mx-auto">
+        <span class="text-emerald-800 text-[11px] font-black uppercase tracking-[0.3em] block mb-2">Visual Sourcing Audit</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-4">
+          Where Does Your Spirulina Grow?
+        </h2>
+        <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed">
+          The environment where microalgae is cultivated dictates 90% of its clinical purity. Open ponds absorb toxic contaminants from the surrounding air and soil.
+        </p>
+      </div>
+
+      {/* Side-by-Side Visual Infographic Grid */}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Card 1: Sujata Closed Bioreactor */}
+        <div class="bg-gradient-to-br from-emerald-950/5 to-[#F0FDF4] border-2 border-emerald-600/30 rounded-3xl p-6 sm:p-8 shadow-lg relative overflow-hidden flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="bg-[#166534] text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">
+                ✨ Sujata Gold Standard
+              </span>
+              <span class="text-xs font-mono font-bold text-emerald-800">100% Contaminant-Free</span>
+            </div>
+
+            <div class="w-full aspect-video rounded-2xl overflow-hidden border border-emerald-500/20 mb-6 relative">
+              <img src="/sujata_harvest_bioreactor.png" alt="Sujata Clean Bioreactor" class="w-full h-full object-cover" />
+              <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] text-white font-mono">
+                Location: Closed Alkaline Dome
+              </div>
+            </div>
+
+            <h3 class="text-xl font-['Playfair_Display'] font-black text-[#111827] mb-4">
+              Enclosed Sunlight Hydro-Dome
+            </h3>
+
+            <ul class="space-y-3 text-xs sm:text-sm text-gray-700">
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">✓</span>
+                <span><strong>Pure Mountain Aquifer Water:</strong> Alkaline mineral water sourced from deep underground springs.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">✓</span>
+                <span><strong>Zero Aerial Contamination:</strong> Shielded from bird droppings, acid rain, and highway smog.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">✓</span>
+                <span><strong>Zero Pesticide Runoff:</strong> No agricultural chemical seepage from adjacent farm lands.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-emerald-900/10 flex items-center justify-between text-xs font-bold text-emerald-900">
+            <span>Heavy Metal Level: <strong>0.00%</strong></span>
+            <span>Microbial Status: <strong>Sterile</strong></span>
+          </div>
+        </div>
+
+        {/* Card 2: Commercial Open Ponds */}
+        <div class="bg-gray-50/80 border-2 border-red-200 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="bg-red-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">
+                ❌ Commercial Mass Brands
+              </span>
+              <span class="text-xs font-mono font-bold text-red-700">High Contamination Risk</span>
+            </div>
+
+            <div class="w-full aspect-video rounded-2xl overflow-hidden border border-red-200 mb-6 relative bg-gray-200 flex items-center justify-center">
+              <img src="/natural_water_leaves_backdrop.png" alt="Open Pond Agriculture" class="w-full h-full object-cover filter grayscale contrast-125 opacity-70" />
+              <div class="absolute top-3 left-3 bg-red-950/70 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] text-white font-mono">
+                Location: Open Farm Ponds
+              </div>
+            </div>
+
+            <h3 class="text-xl font-['Playfair_Display'] font-black text-gray-800 mb-4">
+              Open Industrial Earth Ponds
+            </h3>
+
+            <ul class="space-y-3 text-xs sm:text-sm text-gray-600">
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">✕</span>
+                <span><strong>Stagnant Surface Water:</strong> Open to environmental rainfall, dust storms, and airborne pollution.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">✕</span>
+                <span><strong>Bird & Wildlife Contact:</strong> Fecal matter in open water breeds toxic microcystins & coliforms.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">✕</span>
+                <span><strong>Industrial Groundwater:</strong> High risk of groundwater heavy metals (Lead, Mercury, Arsenic).</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-gray-200 flex items-center justify-between text-xs font-bold text-red-900">
+            <span>Heavy Metal Level: <strong>Variable / High</strong></span>
+            <span>Microbial Status: <strong>Requires Irradiation</strong></span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        INFOGRAPHIC SECTION 2: THERMAL THRESHOLD & BIO-ENZYME CHART
+        ========================================================================= */}
+    <section class="max-w-[85rem] mx-auto px-6 lg:px-12 mb-24 md:mb-32">
+      
+      <div class="bg-gradient-to-br from-[#064E3B] to-[#022219] text-white rounded-[2.5rem] p-8 md:p-14 lg:p-16 border border-emerald-500/20 shadow-2xl relative overflow-hidden">
+        
+        {/* Glows */}
+        <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-400/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-3xl mb-12 relative z-10">
+          <span class="text-amber-400 font-mono text-[10px] uppercase tracking-[0.3em] block mb-2">Molecular Integrity Infographic</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-white leading-tight mb-4">
+            The Thermal Threshold Curve.
+          </h2>
+          <p class="text-emerald-100/80 text-xs sm:text-sm font-light leading-relaxed">
+            Phycocyanin and active enzymes in Spirulina are heat-labile. When temperatures exceed 45°C, their therapeutic molecular structure permanently collapses.
+          </p>
+        </div>
+
+        {/* Visual Temperature Gradient Chart */}
+        <div class="relative z-10 bg-black/40 border border-white/10 rounded-3xl p-6 sm:p-10 mb-8 backdrop-blur-md">
+          
+          {/* Temperature Spectrum Bar */}
+          <div class="w-full h-8 rounded-full bg-gradient-to-r from-emerald-500 via-amber-500 to-red-600 mb-8 relative shadow-inner flex items-center justify-between px-3">
+            <span class="text-[10px] font-black text-black">25°C (Ambient)</span>
+            <span class="text-[10px] font-black text-black hidden sm:inline">45°C (Enzyme Death)</span>
+            <span class="text-[10px] font-black text-white">180°C (Flash Burn)</span>
+          </div>
+
+          {/* 3 Callout Cards on the Spectrum */}
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            {/* Zone 1: Sub-40C Sujata */}
+            <div class="bg-emerald-950/60 border border-emerald-400/40 rounded-2xl p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-mono font-bold text-emerald-300">ZONE 01: SUJATA</span>
+                  <span class="text-base font-black text-emerald-400">&lt; 40°C</span>
+                </div>
+                <h4 class="text-sm font-bold text-white mb-2">Cryo-Dehydration Window</h4>
+                <p class="text-[11px] text-emerald-100/70 leading-relaxed font-light">
+                  Gentle low-temperature air extraction locks in <strong>100% active Phycocyanin</strong>, living chlorophyll, and intact cellular membranes.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-emerald-800/40 text-[10px] font-bold text-emerald-400 flex items-center gap-1.5">
+                <span>🌟 100% Therapeutic Potency</span>
+              </div>
+            </div>
+
+            {/* Zone 2: The Critical Barrier */}
+            <div class="bg-amber-950/40 border border-amber-500/30 rounded-2xl p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-mono font-bold text-amber-300">ZONE 02: CRITICAL</span>
+                  <span class="text-base font-black text-amber-400">45°C</span>
+                </div>
+                <h4 class="text-sm font-bold text-white mb-2">Enzymatic Death Point</h4>
+                <p class="text-[11px] text-amber-100/70 leading-relaxed font-light">
+                  Heat breaks the delicate protein bonds of Superoxide Dismutase (SOD) and Phycocyanin. Potency drops by <strong>over 80%</strong>.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-amber-800/40 text-[10px] font-bold text-amber-400 flex items-center gap-1.5">
+                <span>⚠️ Permanent Molecular Degradation</span>
+              </div>
+            </div>
+
+            {/* Zone 3: Commercial Spray Drying */}
+            <div class="bg-red-950/40 border border-red-500/30 rounded-2xl p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-mono font-bold text-red-300">ZONE 03: COMMERCIAL</span>
+                  <span class="text-base font-black text-red-400">180°C</span>
+                </div>
+                <h4 class="text-sm font-bold text-white mb-2">Industrial Spray Drying</h4>
+                <p class="text-[11px] text-red-100/70 leading-relaxed font-light">
+                  Algae slurry is blasted through 180°C hot air furnaces to dry in seconds. Active enzymes are charred into dead, inactive powder.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-red-800/40 text-[10px] font-bold text-red-400 flex items-center gap-1.5">
+                <span>❌ Zero Live Enzyme Potency</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        INFOGRAPHIC SECTION 3: 4-STEP MOLECULAR EXTRACTION FLOWCHART
+        ========================================================================= */}
+    <section class="max-w-[85rem] mx-auto px-6 lg:px-12 mb-24 md:mb-32">
+      
+      <div class="mb-14 text-center max-w-2xl mx-auto">
+        <span class="text-emerald-800 text-[11px] font-black uppercase tracking-[0.3em] block mb-2">Process Engineering</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-4">
+          The 4-Step Cold-Press Protocol.
+        </h2>
+        <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed">
+          From mountain aquifer harvest to NABL double-assay verification, every batch follows a strict 72-hour purity protocol.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        {/* Step 1 */}
+        <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm relative group hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#166534] font-black text-sm flex items-center justify-center mb-4">
+              01
+            </div>
+            <div class="w-full aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100">
+              <img src="/sujata_harvest_bioreactor.png" alt="Hydro-Harvest" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+            </div>
+            <h3 class="text-base font-bold text-[#111827] mb-2">Hydro-Dome Harvest</h3>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">
+              Cultivated in enclosed photobioreactors under filtered sunlight. Continuous microscopic density monitoring.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
+            ✓ 0.00% Environmental Runoff
+          </div>
+        </div>
+
+        {/* Step 2 */}
+        <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm relative group hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#166534] font-black text-sm flex items-center justify-center mb-4">
+              02
+            </div>
+            <div class="w-full aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100">
+              <img src="/spirulina-texture.png" alt="Cryo Dehydration" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+            </div>
+            <h3 class="text-base font-bold text-[#111827] mb-2">Sub-40°C Cryo-Dry</h3>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">
+              Proprietary cold-air dehydration chamber. Locks in deep emerald chlorophyll and fragile C-Phycocyanin enzymes.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
+            ✓ Live Cellular Integrity
+          </div>
+        </div>
+
+        {/* Step 3 */}
+        <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm relative group hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#166534] font-black text-sm flex items-center justify-center mb-4">
+              03
+            </div>
+            <div class="w-full aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100">
+              <img src="/spirulina-powder.png" alt="Ultrasonic Milling" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+            </div>
+            <h3 class="text-base font-bold text-[#111827] mb-2">Micro-Cell Thinning</h3>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">
+              Ultrasonic milling creates fragile, instant-dissolving cell walls for 98.4% bio-absorption without chemical binders.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
+            ✓ Instant Gut Absorption
+          </div>
+        </div>
+
+        {/* Step 4 */}
+        <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm relative group hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#166534] font-black text-sm flex items-center justify-center mb-4">
+              04
+            </div>
+            <div class="w-full aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100">
+              <img src="/sujata_laboratory_purity.png" alt="NABL Assay" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+            </div>
+            <h3 class="text-base font-bold text-[#111827] mb-2">NABL Dual-Assay</h3>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">
+              ICP-MS spectrometry testing for heavy metals (Lead, Mercury, Arsenic) and microbial pathogens prior to packaging.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
+            ✓ 0.00% Heavy Metals Certified
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        ZONE 3: MOLECULAR COMPOUND EXPLORER (PERIODIC MATRIX)
+        ========================================================================= */}
+    <section class="relative bg-[#022c22] text-white py-20 md:py-28 overflow-hidden z-20 border-t border-emerald-900/30">
+      
+      {/* Background Ambient Glows */}
+      <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle_at_50%_50%,#064e3b_0%,transparent_70%)] opacity-50 blur-[100px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-[radial-gradient(circle_at_50%_50%,#047857_0%,transparent_70%)] opacity-30 blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
+        
+        <div class="mb-16 max-w-3xl">
+          <div class="inline-flex items-center gap-3 mb-4">
+            <span class="w-8 h-[1px] bg-emerald-500/50"></span>
+            <span class="text-emerald-400 font-mono text-[9px] tracking-[0.3em] uppercase">Molecular Bio-Architecture</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-white leading-[1.05] tracking-tight">
+            The Active Biological Compounds.
+          </h2>
+          <p class="mt-4 text-emerald-100/70 font-light text-xs md:text-sm leading-relaxed max-w-2xl">
+            Sujata Spirulina is not a synthetic multivitamin. It is a living, complex matrix of bio-identical nutrients working in cellular synergy.
+          </p>
+        </div>
+
+        {/* 4 Periodic Cards Grid */}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {activeCompounds.map(item => (
+            <div class={`p-6 md:p-8 rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.07] transition-all duration-300 group hover:-translate-y-1 hover:${item.border} flex flex-col justify-between`}>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class={`font-['Playfair_Display'] font-black text-3xl md:text-4xl ${item.color}`}>
+                    {item.symbol}
+                  </span>
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-emerald-300 uppercase tracking-widest">
+                    {item.purity}
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-1">{item.name}</h3>
+                <span class="text-xs font-mono text-emerald-400/90 block mb-3">{item.role}</span>
+                <p class="text-emerald-100/70 text-xs font-light leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        ZONE 4: LIVE NABL CERTIFIED LAB DOSSIER & CERTIFICATE VIEWER
+        ========================================================================= */}
+    <section id="lab-dossier" class="max-w-[85rem] mx-auto px-6 lg:px-12 py-24 md:py-32">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        {/* Left: Authority Description & Photography */}
+        <div class="lg:col-span-5 flex flex-col">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 w-fit">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-emerald-800 text-[10px] font-black uppercase tracking-[0.25em]">NABL Laboratory Assay</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-6">
+            We Prove Our Purity. <br/>
+            <span class="text-emerald-700 italic">With 0.00% Excuses.</span>
+          </h2>
+
+          <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden border border-emerald-900/10 shadow-md mb-6 relative">
+            <img src="/sujata_laboratory_purity.png" alt="Sujata NABL Testing Facility" class="w-full h-full object-cover" />
+            <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] text-white font-mono">
+              Spectrometry Facility • Pune, MH
+            </div>
+          </div>
+
+          <p class="text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
+            Every single production batch of Sujata Spirulina undergoes rigorous third-party assay testing at NABL-accredited laboratories using Inductively Coupled Plasma Mass Spectrometry (ICP-MS).
+          </p>
+
+          <button 
+            id="open-science-lab-modal" 
+            type="button" 
+            class="w-full sm:w-fit bg-[#111827] hover:bg-[#166534] text-white px-8 py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transition-all duration-300 touch-manipulation cursor-pointer group"
+          >
+            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>View Verified Lab Certificate PDF ↗</span>
+          </button>
+
+        </div>
+
+        {/* Right: Live Interactive Lab Table */}
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-3xl border border-gray-200/80 shadow-[0_20px_50px_rgba(0,0,0,0.03)] overflow-hidden">
+            
+            <div class="bg-gray-50/80 border-b border-gray-200/80 px-6 py-4 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-black uppercase tracking-wider text-[#111827]">Current Batch Certificate: #SJT-2026-B08</span>
+              </div>
+              <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider">PASSED</span>
+            </div>
+
+            <div class="divide-y divide-gray-100">
+              {labParameters.map(item => (
+                <div class="px-6 py-3.5 flex items-center justify-between hover:bg-[#FAF9F6] transition-colors">
+                  <div class="flex flex-col">
+                    <span class="text-xs font-bold text-[#111827]">{item.test}</span>
+                    <span class="text-[10px] text-gray-400">Govt Permissible Limit: {item.limit}</span>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <span class="text-xs font-mono font-medium text-gray-600 hidden sm:inline">{item.result}</span>
+                    <span class="text-[10px] font-black text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md uppercase tracking-wider">
+                      {item.status}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        ZONE 5: MEDICAL ADVISORY COUNCIL (DOCTOR AUTHORITY)
+        ========================================================================= */}
+    <section class="bg-[#FAF9F6] border-t border-gray-200/80 py-24 md:py-32">
+      
+      <div class="max-w-[85rem] mx-auto px-6 lg:px-12">
+        
+        <div class="mb-16 text-center max-w-2xl mx-auto">
+          <span class="text-emerald-800 text-[11px] font-black uppercase tracking-[0.3em] block mb-2">Scientific Advisory Roster</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-4">
+            Formulated with Clinical Rigor.
+          </h2>
+          <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed">
+            Our medical council integrates modern nutritional biochemistry with traditional Ayurvedic cellular science.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {advisoryBoard.map(doc => (
+            <div class="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-[0_15px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between hover:border-emerald-500/40 hover:shadow-lg transition-all duration-300 group">
+              <div>
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-600/20 shrink-0 bg-emerald-100">
+                    <img src={doc.avatar} alt={doc.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                  <div class="flex flex-col">
+                    <h3 class="text-base font-bold text-[#111827]">{doc.name}</h3>
+                    <span class="text-[11px] font-medium text-emerald-800">{doc.degrees}</span>
+                    <span class="text-[10px] text-gray-400 mt-0.5">{doc.role}</span>
+                  </div>
+                </div>
+
+                <div class="relative pl-4 border-l-2 border-emerald-500/30 mb-6">
+                  <p class="text-xs text-gray-600 italic leading-relaxed">
+                    "{doc.quote}"
+                  </p>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                <span>{doc.experience}</span>
+                <span class="text-emerald-700">Verified Board Member</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        ZONE 6: 30-DAY BIOLOGICAL CHRONOLOGY TIMELINE (VISUAL INFOGRAPHIC)
+        ========================================================================= */}
+    <section class="bg-[#022c22] text-white py-24 md:py-32 relative overflow-hidden border-t border-emerald-900/30">
+      
+      <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
+        
+        <div class="mb-16 max-w-2xl">
+          <span class="text-emerald-400 font-mono text-[9px] tracking-[0.3em] uppercase block mb-2">Biological Timeline</span>
+          <h2 class="text-3xl md:text-5xl font-['Playfair_Display'] font-black text-white leading-tight">
+            What Happens in 30 Days.
+          </h2>
+          <p class="mt-3 text-emerald-100/70 text-xs md:text-sm font-light leading-relaxed">
+            Nutritional transformation is cumulative. Here is the exact cellular chronology of your body's adaptation.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          {timelineMilestones.map((step, idx) => (
+            <div class="relative bg-white/[0.03] border border-white/10 rounded-3xl p-8 backdrop-blur-sm flex flex-col justify-between hover:bg-white/[0.06] transition-colors">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-amber-400 font-mono text-xs font-bold uppercase tracking-widest">{step.phase}</span>
+                  <span class={`text-[11px] px-3 py-1 rounded-full font-mono border ${step.badgeColor}`}>{step.days}</span>
+                </div>
+                <h3 class="text-xl font-['Playfair_Display'] font-black text-white mb-2">{step.title}</h3>
+                <span class="text-xs font-bold text-emerald-400/90 block mb-4">{step.focus}</span>
+                <p class="text-xs text-emerald-100/70 leading-relaxed font-light mb-6">
+                  {step.desc}
+                </p>
+              </div>
+              <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono font-bold text-emerald-300">
+                <span>Milestone Impact:</span>
+                <span>{step.stat}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* =========================================================================
+        ZONE 7: DIRECT CONVERSION BUY-BOX (THE CONVERSION CLOSER)
+        ========================================================================= */}
+    <section class="max-w-[85rem] mx-auto px-6 lg:px-12 py-24 md:py-32">
+      
+      <div class="bg-gradient-to-br from-white to-[#F0FDF4] rounded-[2.5rem] p-8 md:p-14 lg:p-20 border border-emerald-900/10 shadow-[0_25px_60px_rgba(0,0,0,0.04)] flex flex-col lg:flex-row items-center justify-between gap-12">
+        
+        {/* Left: Compelling CTA Copy */}
+        <div class="w-full lg:w-1/2 flex flex-col">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-900 mb-4 w-fit">
+            <span class="text-[10px] font-black uppercase tracking-widest">30-Day Risk-Free Protocol</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-4">
+            Initiate Your Cellular Transformation.
+          </h2>
+
+          <p class="text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
+            Backed by our 30-Day Empty-Bottle Guarantee. If you do not feel a measurable difference in your energy and digestion, we will refund every single rupee.
+          </p>
+
+          <div class="flex items-center gap-4 text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
+            <span>🚚 Free Express Shipping</span>
+            <span>•</span>
+            <span>⚡ Dispatches in 24h</span>
+          </div>
+
+        </div>
+
+        {/* Right: Interactive Fast Buy Card with Image Thumbnail */}
+        <div class="w-full lg:w-1/2 max-w-md bg-white rounded-3xl p-6 sm:p-8 border border-emerald-500/20 shadow-xl">
+          
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-3">Select Format:</span>
+
+          {/* Product Format Selector Radio Buttons */}
+          <div class="grid grid-cols-2 gap-3 mb-6">
+            
+            <button 
+              type="button" 
+              class="science-format-btn active-format border-2 border-[#166534] bg-emerald-50/50 p-4 rounded-2xl flex flex-col text-left transition-all cursor-pointer"
+              data-id="sujata_powder_100g"
+              data-title="Raw Spirulina Powder (100g)"
+              data-price="600"
+              data-image="/spirulina-powder.png"
+            >
+              <span class="text-xs font-black text-[#111827]">Powder (100g)</span>
+              <span class="text-[10px] text-gray-500 mt-0.5">Sub-40°C Cold Extract</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">₹600</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="science-format-btn border-2 border-gray-200 bg-white p-4 rounded-2xl flex flex-col text-left transition-all cursor-pointer hover:border-gray-300"
+              data-id="sujata_capsules_60"
+              data-title="Bio-Spirulina Capsules (60 Caps)"
+              data-price="799"
+              data-image="/spirulina-bottle.png"
+            >
+              <span class="text-xs font-black text-[#111827]">Capsules (60s)</span>
+              <span class="text-[10px] text-gray-500 mt-0.5">100% Veggie Caps</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">₹799</span>
+            </button>
+
+          </div>
+
+          {/* Subscription Toggle */}
+          <div class="bg-gray-50 rounded-2xl p-4 mb-6 border border-gray-100 flex items-center justify-between cursor-pointer" id="science-sub-toggle">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" id="science-sub-checkbox" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+              <label for="science-sub-checkbox" class="text-xs font-bold text-[#111827] cursor-pointer">
+                Subscribe & Save 10% (Auto-deliver every 30 days)
+              </label>
+            </div>
+            <span class="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase shrink-0">SAVE 10%</span>
+          </div>
+
+          {/* 1-Click Fast Add to Routine Button */}
+          <button 
+            id="science-buy-btn"
+            type="button"
+            class="w-full bg-[#111827] hover:bg-[#166534] text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 transition-all duration-300 touch-manipulation cursor-pointer group"
+          >
+            <span>Start 30-Day Routine • </span>
+            <span id="science-cta-price">₹600</span>
+            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  {/* =========================================================================
+      NABL LAB CERTIFICATE MODAL
+      ========================================================================= */}
+  <div id="science-lab-modal" class="fixed inset-0 z-[99999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 ease-out bg-[#022c22]/90 backdrop-blur-xl p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="NABL Certificate Dossier">
+    <div class="relative w-full max-w-2xl bg-[#064e3b] border border-emerald-500/30 rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-10 flex flex-col items-center justify-center text-center">
+      
+      <!-- Close Button -->
+      <button id="close-science-lab-modal" aria-label="Close certificate" class="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-colors touch-manipulation cursor-pointer">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-3xl mb-4">
+        🧪
+      </div>
+
+      <h3 class="text-2xl font-black text-white font-['Playfair_Display'] mb-1">Official NABL Batch Assay</h3>
+      <span class="text-emerald-300 text-xs font-mono uppercase tracking-widest mb-6">[ CERTIFICATE #SJT-2026-B08 • 100% HEAVY METAL FREE ]</span>
+
+      <div class="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-left font-mono text-xs text-emerald-200/90 space-y-2 mb-6">
+        <div class="flex justify-between border-b border-white/5 pb-1.5">
+          <span>Assay Standard:</span>
+          <span class="text-white font-bold">ICP-MS Spectrometry</span>
+        </div>
+        <div class="flex justify-between border-b border-white/5 pb-1.5">
+          <span>Lead (Pb) Level:</span>
+          <span class="text-emerald-400 font-bold">&lt; 0.01 ppm (UNDETECTED)</span>
+        </div>
+        <div class="flex justify-between border-b border-white/5 pb-1.5">
+          <span>Mercury (Hg) Level:</span>
+          <span class="text-emerald-400 font-bold">&lt; 0.001 ppm (UNDETECTED)</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Microbial Pathogens:</span>
+          <span class="text-emerald-400 font-bold">100% Sterile (Absent)</span>
+        </div>
+      </div>
+
+      <a 
+        href="/sujata_lab_certificate.pdf" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="w-full sm:w-fit px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black uppercase tracking-widest rounded-xl transition-colors shadow-lg touch-manipulation"
+      >
+        Download Verified PDF Document ↗
+      </a>
+
+    </div>
+  </div>
+
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
+
+  {/* CLIENT JAVASCRIPT */}
+  <script is:inline>
+    function initSciencePage() {
+      // 1. Lab Modal Logic
+      const modal = document.getElementById('science-lab-modal');
+      const openBtn = document.getElementById('open-science-lab-modal');
+      const closeBtn = document.getElementById('close-science-lab-modal');
+
+      if (modal && openBtn) {
+        const closeModal = () => {
+          modal.classList.add('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = '';
+        };
+
+        openBtn.addEventListener('click', () => {
+          modal.classList.remove('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn?.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) {
+            closeModal();
+          }
+        });
+      }
+
+      // 2. Buy Box Format Switching Logic
+      const formatBtns = document.querySelectorAll('.science-format-btn');
+      const subCheckbox = document.getElementById('science-sub-checkbox');
+      const ctaPrice = document.getElementById('science-cta-price');
+      const buyBtn = document.getElementById('science-buy-btn');
+
+      let currentProduct = {
+        id: 'sujata_powder_100g',
+        title: 'Raw Spirulina Powder (100g)',
+        price: 600,
+        image: '/spirulina-powder.png',
+        subtitle: 'Sub-40°C Cold Extract'
+      };
+
+      function updatePricing() {
+        const isSubscribed = subCheckbox ? subCheckbox.checked : false;
+        const finalPrice = isSubscribed ? Math.round(currentProduct.price * 0.9) : currentProduct.price;
+        if (ctaPrice) ctaPrice.innerText = `₹${finalPrice}`;
+      }
+
+      formatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          formatBtns.forEach(b => {
+            b.classList.remove('border-[#166534]', 'bg-emerald-50/50', 'active-format');
+            b.classList.add('border-gray-200', 'bg-white');
+          });
+
+          btn.classList.remove('border-gray-200', 'bg-white');
+          btn.classList.add('border-[#166534]', 'bg-emerald-50/50', 'active-format');
+
+          currentProduct.id = btn.getAttribute('data-id') || 'sujata_powder_100g';
+          currentProduct.title = btn.getAttribute('data-title') || 'Raw Spirulina Powder (100g)';
+          currentProduct.price = parseFloat(btn.getAttribute('data-price')) || 600;
+          currentProduct.image = btn.getAttribute('data-image') || '/spirulina-powder.png';
+          currentProduct.subtitle = currentProduct.id.includes('caps') ? '100% Veggie Capsules' : 'Sub-40°C Cold Extract';
+
+          updatePricing();
+        });
+      });
+
+      subCheckbox?.addEventListener('change', updatePricing);
+
+      // 3. Fast Add to Cart Button
+      buyBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isSubscribed = subCheckbox ? subCheckbox.checked : false;
+        const finalPrice = isSubscribed ? Math.round(currentProduct.price * 0.9) : currentProduct.price;
+        const subText = isSubscribed ? 'Monthly Protocol (10% Off)' : currentProduct.subtitle;
+
+        if (typeof window.addItemToLocalCart === 'function') {
+          window.addItemToLocalCart({
+            id: currentProduct.id,
+            title: currentProduct.title,
+            subtitle: subText,
+            price: finalPrice,
+            image: currentProduct.image,
+            quantity: 1
+          });
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSciencePage);
+    } else {
+      initSciencePage();
+    }
+    document.addEventListener('astro:page-load', initSciencePage);
+  </script>
+
+</StoreLayout>

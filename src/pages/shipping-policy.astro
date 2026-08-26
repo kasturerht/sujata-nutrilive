@@ -1,0 +1,143 @@
+---
+// src/pages/shipping-policy.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+---
+
+<StoreLayout title="Shipping & Express Delivery Policy | Sujata Nutrilive">
+
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
+
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
+    
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center gap-3 mb-8">
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+          <span>Store</span>
+        </a>
+        <span class="w-6 h-[1px] bg-gray-300"></span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#166534]">Shipping Policy</span>
+      </nav>
+
+      {/* Policy Switcher Bar */}
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-wider">
+        <a href="/privacy-policy" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Privacy Policy</a>
+        <a href="/terms-of-service" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Terms of Service</a>
+        <a href="/refund-policy" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Refund &amp; Returns</a>
+        <a href="/shipping-policy" class="bg-[#166534] text-white px-4 py-2 rounded-xl shrink-0 shadow-sm">Shipping Policy</a>
+      </div>
+
+      {/* Header Context Hero */}
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">Priority Air Freight • 26,000+ Indian Pincodes</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-3">
+          Shipping &amp; Express Delivery.
+        </h1>
+        <p class="text-xs font-mono text-gray-400 uppercase tracking-widest">
+          Effective Date: August 26, 2026 • 48–72h Doorstep SLA
+        </p>
+      </div>
+
+      {/* Logistics Overview Metrics */}
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center">
+          <span class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#166534] block mb-1">48–72h</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-gray-400">Metro Delivery</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center">
+          <span class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#166534] block mb-1">26,000+</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-gray-400">Pincodes Served</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center">
+          <span class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#166534] block mb-1">FREE</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-gray-400">Orders Above ₹999</span>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-gray-200 text-center">
+          <span class="text-xl sm:text-2xl font-['Playfair_Display'] font-black text-[#166534] block mb-1">LIVE</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-gray-400">WhatsApp Tracking</span>
+        </div>
+      </div>
+
+      {/* Structured Legal Content */}
+      <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
+        
+        {/* Section 1 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            1. Dispatch &amp; Processing Timelines
+          </h2>
+          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+            <li><strong>Same-Day Dispatch:</strong> All orders confirmed before <strong>2:00 PM IST (Monday through Saturday)</strong> are packaged in our temperature-controlled facility and handed to express air linehaul on the same day.</li>
+            <li><strong>Subsequent Orders:</strong> Orders placed after 2:00 PM IST or on Sundays/Public Holidays dispatch on the next immediate business morning.</li>
+          </ul>
+        </div>
+
+        {/* Section 2 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            2. Delivery Timelines by Region
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-700">
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <strong class="font-bold text-[#111827] block mb-1">Tier 1 Metros (48–72 Hours)</strong>
+              <span>Mumbai, Pune, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata, Ahmedabad.</span>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <strong class="font-bold text-[#111827] block mb-1">Tier 2/3 Cities (3–4 Days)</strong>
+              <span>State capitals and major commercial centers across all Indian states.</span>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <strong class="font-bold text-[#111827] block mb-1">Remote &amp; NE (4–6 Days)</strong>
+              <span>Jammu &amp; Kashmir, North-East states, and island territories via India Post Air.</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Section 3 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            3. Cold-Chain Packaging Standards
+          </h2>
+          <p>
+            Spirulina enzymes are protected using multi-layer metallized moisture-barrier pouches with an airtight ziplock seal. Every package is sealed with a tamper-evident holographic security sticker at our GMP facility in Pune, ensuring 0.00% environmental humidity penetration during transit.
+          </p>
+        </div>
+
+        {/* Section 4 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            4. Live Tracking &amp; Notifications
+          </h2>
+          <p>
+            Upon courier pickup, an automated SMS and WhatsApp notification containing your live AWB tracking link is dispatched to your registered mobile number. You can also track real-time courier movement anytime via our <a href="/track-order" class="text-emerald-700 font-bold underline">Live Shipment Tracker</a>.
+          </p>
+        </div>
+
+        {/* Section 5 */}
+        <div class="pt-6 border-t border-gray-100">
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            5. Cash on Delivery (COD) Guidelines
+          </h2>
+          <p>
+            Cash on Delivery is available across 22,000+ pincodes. To prevent fraudulent bot orders, an automated SMS/WhatsApp OTP confirmation is requested prior to dispatch. Please keep the exact cash amount ready for the delivery partner upon arrival.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
+
+</StoreLayout>

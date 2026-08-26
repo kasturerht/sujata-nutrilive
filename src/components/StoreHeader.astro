@@ -53,7 +53,8 @@
       {/* Desktop Links (Hidden on small screens) */}
       <div class="hidden xl:flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-emerald-100/80">
         <a href="/#product-ecosystem" class="hover:text-emerald-300 transition-colors">Products</a>
-        <a href="/#science-section" class="hover:text-emerald-300 transition-colors">The Science</a>
+        <a href="/science" class="hover:text-emerald-300 transition-colors">The Science</a>
+        <a href="/quiz" class="hover:text-emerald-300 transition-colors flex items-center gap-1.5"><span class="text-amber-400">⚡</span> <span>Routine Quiz</span></a>
         <a href="/#bundle-offers" class="hover:text-emerald-300 transition-colors">Value Bundles</a>
         <a href="/#reviews-section" class="hover:text-emerald-300 transition-colors">Reviews</a>
       </div>
@@ -100,8 +101,8 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </button>
 
-        {/* Account Link */}
-        <a href="/account" aria-label="Account" class="hidden sm:flex flex-col items-center gap-1 group">
+        {/* Track Order / Account Link */}
+        <a href="/track-order" aria-label="Track Order" title="Track Your Order" class="hidden sm:flex flex-col items-center gap-1 group">
           <div class="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors">
             <svg class="w-5 h-5 text-emerald-50 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
           </div>
@@ -160,6 +161,10 @@
 
       {/* Navigation Links */}
       <nav class="space-y-1">
+        <a href="/quiz" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-base font-bold text-emerald-300 transition-colors">
+          <span>🧠 1-Min Routine Finder</span>
+          <span class="text-[10px] bg-emerald-400 text-black font-black px-2 py-0.5 rounded uppercase">Start Quiz</span>
+        </a>
         <a href="/#product-ecosystem" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
           <span>🌿 All Formulations</span>
           <span class="text-xs text-emerald-400">Shop →</span>
@@ -168,21 +173,21 @@
           <span>📦 Value Bundles & Kits</span>
           <span class="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded uppercase">Save 30%</span>
         </a>
-        <a href="/#science-section" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
+        <a href="/science" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
           <span>🧪 The Science & Lab Reports</span>
-          <span class="text-xs text-gray-400">→</span>
+          <span class="text-xs text-emerald-400">Read Dossier →</span>
         </a>
         <a href="/#reviews-section" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
           <span>⭐ 50,000+ Verified Reviews</span>
           <span class="text-xs text-amber-400">4.9 ★</span>
         </a>
-        <a href="/#faq-section" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
-          <span>❓ FAQ & Help Center</span>
-          <span class="text-xs text-gray-400">→</span>
+        <a href="/contact" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
+          <span>📞 Contact & Vaidya Help</span>
+          <span class="text-xs text-emerald-400">Contact →</span>
         </a>
-        <a href="/account" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
-          <span>👤 My Account & Orders</span>
-          <span class="text-xs text-gray-400">→</span>
+        <a href="/track-order" class="mobile-nav-link flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-white/10 text-base font-semibold text-white transition-colors">
+          <span>📦 Track Order & Live Shipment</span>
+          <span class="text-xs text-emerald-400">Track →</span>
         </a>
       </nav>
     </div>

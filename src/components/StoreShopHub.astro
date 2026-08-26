@@ -197,7 +197,7 @@ const productMeta = [
   }
 
   function updateDeliveryEstimators() {
-    const savedPincode = localStorage.getItem('user_pincode') || '411001';
+    const savedPincode = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || '411001';
     const badges = document.querySelectorAll('.product-delivery-badge .delivery-date-text');
     
     // Calculate delivery date (+3 business days)
@@ -228,5 +228,7 @@ const productMeta = [
     updateDeliveryEstimators();
   });
 
-  window.addEventListener('pincode-updated', updateDeliveryEstimators);
+  window.addEventListener('pincode-updated', (e) => {
+    updateDeliveryEstimators();
+  });
 </script>

@@ -1,0 +1,441 @@
+---
+// src/pages/track-order.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+---
+
+<StoreLayout title="Real-Time Order & Shipment Tracker | Sujata Nutrilive">
+
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
+
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
+    
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center gap-3 mb-8">
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+          <span>Store</span>
+        </a>
+        <span class="w-6 h-[1px] bg-gray-300"></span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#166534]">Shipment Tracking Radar</span>
+      </nav>
+
+      {/* =========================================================================
+          ZONE 1: HERO & UNIVERSAL TRACKING SEARCH BOX
+          ========================================================================= */}
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">Live Logistics Radar • 24/7 Tracking</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-3">
+          Track Your Cellular Protocol.
+        </h1>
+        <p class="text-gray-500 text-xs sm:text-sm font-light leading-relaxed">
+          Enter your 10-digit mobile number, Sujata Order ID (e.g. <code>SUJATA-84920</code>), or courier AWB number to inspect live transit status.
+        </p>
+      </div>
+
+      {/* Search Bar Input Card */}
+      <div class="bg-white rounded-[2rem] p-6 sm:p-8 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.04)] mb-10">
+        
+        <form id="tracking-form" class="flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-1">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <input 
+              type="text" 
+              id="tracking-input" 
+              placeholder="e.g. 9876543210 or SUJATA-84920" 
+              class="w-full bg-[#FAF9F6] border border-gray-200 focus:border-emerald-600 focus:bg-white rounded-xl py-3.5 pl-11 pr-4 text-xs sm:text-sm font-medium text-black outline-none transition-all"
+              required
+            />
+          </div>
+          
+          <button 
+            type="submit" 
+            id="track-submit-btn"
+            class="bg-[#111827] hover:bg-[#166534] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg transition-all duration-300 touch-manipulation cursor-pointer shrink-0"
+          >
+            <span>Track Order</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+        </form>
+
+        {/* Demo Quick Try Presets */}
+        <div class="mt-4 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-2 text-xs text-gray-400">
+          <span class="font-medium text-[11px]">Quick Demo Orders:</span>
+          <button type="button" class="demo-preset-btn bg-emerald-50 hover:bg-emerald-100 text-[#166534] font-mono text-[11px] font-bold px-2.5 py-1 rounded-md border border-emerald-200 transition-colors cursor-pointer" data-code="SUJATA-84920" data-status="transit">
+            #SUJATA-84920 (In Transit)
+          </button>
+          <button type="button" class="demo-preset-btn bg-emerald-50 hover:bg-emerald-100 text-[#166534] font-mono text-[11px] font-bold px-2.5 py-1 rounded-md border border-emerald-200 transition-colors cursor-pointer" data-code="SUJATA-93104" data-status="out">
+            #SUJATA-93104 (Out for Delivery)
+          </button>
+        </div>
+
+      </div>
+
+      {/* =========================================================================
+          ZONE 2: LIVE SHIPMENT DOSSIER (THE RESULT CARD)
+          ========================================================================= */}
+      <div id="shipment-result-card" class="bg-white rounded-[2.5rem] p-6 sm:p-10 border border-emerald-900/10 shadow-[0_25px_60px_rgba(0,0,0,0.04)] mb-12 relative overflow-hidden transition-all duration-500">
+        
+        {/* Order Header Summary Banner */}
+        <div class="bg-gradient-to-br from-[#064E3B] to-[#022219] rounded-2xl p-6 text-white mb-8 relative overflow-hidden shadow-lg">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[60px] pointer-events-none"></div>
+          
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-mono font-bold text-amber-400" id="display-order-id">ORDER #SUJATA-84920</span>
+                <span class="text-[10px] bg-emerald-900/80 border border-emerald-500/30 text-emerald-300 px-2 py-0.5 rounded font-mono uppercase">Prepaid Express</span>
+              </div>
+              <h2 class="text-lg sm:text-xl font-['Playfair_Display'] font-black text-white" id="display-eta">
+                🚚 Expected Delivery: Thursday, Aug 28
+              </h2>
+            </div>
+
+            <div class="flex flex-col md:items-end">
+              <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-200/80">Courier Partner</span>
+              <span class="text-xs font-bold text-white mt-0.5 flex items-center gap-1.5" id="display-courier-partner">
+                <span>BlueDart Express</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              </span>
+              <span class="text-[10px] font-mono text-emerald-300/80" id="display-awb">AWB: BLU-98210492</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 5-Step Visual Stepper */}
+        <div class="mb-10">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Live Transit Milestones</h3>
+          
+          <div class="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-3 sm:before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-200" id="stepper-container">
+            
+            {/* Step 1 */}
+            <div class="relative flex items-start gap-4 stepper-item step-completed">
+              <div class="absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white">
+                ✓
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold text-[#111827]">Order Confirmed &amp; Payment Verified</span>
+                <span class="text-[11px] text-gray-400 font-mono mt-0.5">Aug 26, 11:30 AM • System Gateway Verified</span>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div class="relative flex items-start gap-4 stepper-item step-completed">
+              <div class="absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white">
+                ✓
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold text-[#111827]">Sub-40°C Cold-Chain Sealed &amp; Quality Inspected</span>
+                <span class="text-[11px] text-gray-400 font-mono mt-0.5">Aug 26, 03:15 PM • Pune GMP Facility #02</span>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div class="relative flex items-start gap-4 stepper-item step-completed">
+              <div class="absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white">
+                ✓
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold text-[#111827]">Handed Over to Express Air Courier</span>
+                <span class="text-[11px] text-gray-400 font-mono mt-0.5">Aug 26, 07:45 PM • Outbound Manifest Generated</span>
+              </div>
+            </div>
+
+            {/* Step 4: Active Pulse */}
+            <div class="relative flex items-start gap-4 stepper-item step-active" id="step-4-item">
+              <div class="absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold ring-4 ring-amber-100 animate-pulse">
+                ⚡
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold text-[#111827] flex items-center gap-2">
+                  <span>In Transit — Arrived at Regional City Hub</span>
+                  <span class="text-[9px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded uppercase">Current Location</span>
+                </span>
+                <span class="text-[11px] text-gray-500 font-mono mt-0.5" id="step-4-time">Aug 27, 08:20 AM • Central Distribution Hub</span>
+              </div>
+            </div>
+
+            {/* Step 5 */}
+            <div class="relative flex items-start gap-4 stepper-item opacity-50" id="step-5-item">
+              <div class="absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold ring-4 ring-white">
+                05
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs font-bold text-gray-500" id="step-5-title">Out for Delivery &amp; Doorstep Handover</span>
+                <span class="text-[11px] text-gray-400 font-mono mt-0.5" id="step-5-time">Expected by Thursday, Aug 28 • Before 6:00 PM</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Detailed Chronological Transit Log Table */}
+        <div class="border-t border-gray-100 pt-6">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Detailed Scans Log</h3>
+          <div class="bg-gray-50 rounded-2xl p-4 overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono text-gray-600">
+              <thead>
+                <tr class="border-b border-gray-200 text-[10px] uppercase text-gray-400 tracking-wider">
+                  <th class="pb-2 font-bold">Timestamp</th>
+                  <th class="pb-2 font-bold">Location Hub</th>
+                  <th class="pb-2 font-bold">Activity Scan</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200/50" id="scans-log-body">
+                <tr>
+                  <td class="py-2 text-[#111827]">Aug 27, 08:20 AM</td>
+                  <td>Central Hub</td>
+                  <td class="text-emerald-800 font-bold">Inbound Scan &amp; Sorter Allocation</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-[#111827]">Aug 26, 11:10 PM</td>
+                  <td>Airport Cargo Hub</td>
+                  <td>Departed on Express Air Linehaul</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-[#111827]">Aug 26, 07:45 PM</td>
+                  <td>Pune Origin Hub</td>
+                  <td>Shipment Bagged &amp; Manifested</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-[#111827]">Aug 26, 03:15 PM</td>
+                  <td>Sujata Lab Warehouse</td>
+                  <td>Cold-Pack Sealed &amp; Ready for Pickup</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      {/* =========================================================================
+          ZONE 3: COLD-CHAIN LOGISTICS GUARANTEE (TRUST PILLARS)
+          ========================================================================= */}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center flex flex-col items-center">
+          <span class="text-2xl mb-1">❄️</span>
+          <span class="text-xs font-bold text-[#111827]">Sub-40°C Pack</span>
+          <span class="text-[10px] text-gray-400 mt-0.5">UV-Shield Barrier Sealed</span>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center flex flex-col items-center">
+          <span class="text-2xl mb-1">🔒</span>
+          <span class="text-xs font-bold text-[#111827]">Tamper Hologram</span>
+          <span class="text-[10px] text-gray-400 mt-0.5">100% Factory Sealed</span>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center flex flex-col items-center">
+          <span class="text-2xl mb-1">🚀</span>
+          <span class="text-xs font-bold text-[#111827]">Express Air Cargo</span>
+          <span class="text-[10px] text-gray-400 mt-0.5">48-72h Doorstep SLA</span>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 text-center flex flex-col items-center">
+          <span class="text-2xl mb-1">📦</span>
+          <span class="text-xs font-bold text-[#111827]">Transit Insurance</span>
+          <span class="text-[10px] text-gray-400 mt-0.5">Free Instant Replacement</span>
+        </div>
+
+      </div>
+
+      {/* =========================================================================
+          ZONE 4: 1-CLICK WHATSAPP LOGISTICS RESCHEDULE CONCIERGE
+          ========================================================================= */}
+      <div class="bg-emerald-50/60 border border-emerald-100 rounded-3xl p-6 sm:p-8 mb-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+        
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-[#25D366] fill-current" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.042c0 2.124.553 4.195 1.604 6.012L.452 24l6.104-1.601a11.964 11.964 0 005.475 1.328h.005c6.645 0 12.031-5.388 12.031-12.042C24 5.388 18.677 0 12.031 0zm5.351 17.181c-.223.633-1.282 1.206-1.768 1.246-.445.038-.971.21-3.085-.666-2.545-1.054-4.161-3.666-4.288-3.834-.127-.168-1.026-1.365-1.026-2.605 0-1.24.634-1.85 1.026-2.261.353-.372.889-.486 1.185-.486.297 0 .593.004.851.015.275.011.644-.105.992.738.356.862 1.218 2.966 1.326 3.181.107.215.178.468.03.743-.148.275-.222.446-.445.714-.222.268-.466.586-.667.828-.222.268-.458.558-.201.996.258.438 1.144 1.884 2.456 3.051 1.693 1.506 3.093 1.97 3.538 2.185.445.215.707.19 1.002-.148.297-.338 1.282-1.488 1.626-2.001.344-.513.687-.428 1.088-.275.402.153 2.541 1.196 2.977 1.41.436.215.727.322.831.5.105.178.105 1.037-.118 1.67z"></path></svg>
+          </div>
+          <div class="flex flex-col">
+            <h4 class="text-sm font-bold text-[#064E3B]">Need to update address or reschedule?</h4>
+            <p class="text-xs text-gray-500 font-light mt-0.5">Chat directly with our dispatch desk on WhatsApp. Zero IVR waiting time.</p>
+          </div>
+        </div>
+
+        <a 
+          id="whatsapp-reschedule-link"
+          href="https://wa.me/919876543210?text=Hello%20Sujata%20Dispatch%20Desk,%20I%20need%20help%20with%20Order%20SUJATA-84920" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto bg-[#166534] hover:bg-[#064E3B] text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl transition-colors shadow-md shrink-0 flex items-center justify-center gap-2 touch-manipulation"
+        >
+          <span>Reschedule on WhatsApp →</span>
+        </a>
+
+      </div>
+
+      {/* =========================================================================
+          ZONE 5: "PREPARING FOR DAY 1" ONBOARDING PROTOCOL
+          ========================================================================= */}
+      <div class="bg-white rounded-[2rem] p-6 sm:p-8 border border-gray-100">
+        <h3 class="text-base font-['Playfair_Display'] font-black text-[#111827] mb-2">
+          Preparing for Day 01: While You Wait
+        </h3>
+        <p class="text-xs text-gray-500 font-light mb-6">
+          Set up your morning ritual to unlock maximum cellular bio-absorption from the very first scoop.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-[#166534] font-black text-xs flex items-center justify-center shrink-0">01</span>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-[#111827]">Lukewarm Water Pair</span>
+              <span class="text-[11px] text-gray-500 font-light mt-0.5">Always mix with 250ml of lukewarm water and a squeeze of fresh lemon to double non-heme iron absorption.</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-[#166534] font-black text-xs flex items-center justify-center shrink-0">02</span>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-[#111827]">Empty Stomach Routine</span>
+              <span class="text-[11px] text-gray-500 font-light mt-0.5">Consume 15–20 minutes before breakfast. This allows thin cell walls to absorb without digestive competition.</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-[#166534] font-black text-xs flex items-center justify-center shrink-0">03</span>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-[#111827]">Cool Dark Storage</span>
+              <span class="text-[11px] text-gray-500 font-light mt-0.5">Once unsealed, store your pouch or bottle in a cool, dry cupboard away from direct sunlight to preserve enzymes.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
+
+  {/* CLIENT SCRIPT FOR REAL-TIME SEARCH & DEMO PRESETS */}
+  <script is:inline>
+    function initTrackerEngine() {
+      const form = document.getElementById('tracking-form');
+      const input = document.getElementById('tracking-input');
+      const submitBtn = document.getElementById('track-submit-btn');
+      const resultCard = document.getElementById('shipment-result-card');
+      const displayOrderId = document.getElementById('display-order-id');
+      const displayEta = document.getElementById('display-eta');
+      const displayAwb = document.getElementById('display-awb');
+      const waLink = document.getElementById('whatsapp-reschedule-link');
+      const presetBtns = document.querySelectorAll('.demo-preset-btn');
+      const step4Item = document.getElementById('step-4-item');
+      const step5Item = document.getElementById('step-5-item');
+      const step5Title = document.getElementById('step-5-title');
+
+      // Demo Presets Click Handlers
+      presetBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const code = btn.getAttribute('data-code') || 'SUJATA-84920';
+          const status = btn.getAttribute('data-status') || 'transit';
+          if (input) input.value = code;
+          loadShipmentData(code, status);
+        });
+      });
+
+      // Form Submit Handler
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const code = input?.value?.trim() || 'SUJATA-84920';
+        
+        if (submitBtn) {
+          submitBtn.innerHTML = `<span>Searching...</span>`;
+        }
+
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = `<span>Track Order</span> <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>`;
+          }
+          loadShipmentData(code, code.includes('93') ? 'out' : 'transit');
+        }, 500);
+      });
+
+      function loadShipmentData(code, status) {
+        const orderClean = code.toUpperCase().startsWith('SUJATA') ? code.toUpperCase() : `SUJATA-${code.slice(-5)}`;
+        if (displayOrderId) displayOrderId.innerText = `ORDER #${orderClean}`;
+        
+        if (status === 'out') {
+          if (displayEta) displayEta.innerText = "🚚 Out for Delivery: Expected Today by 2:00 PM";
+          if (displayAwb) displayAwb.innerText = `AWB: DEL-${Math.floor(10000000 + Math.random() * 90000000)}`;
+          
+          if (step4Item) {
+            step4Item.classList.remove('step-active');
+            step4Item.classList.add('step-completed');
+            const dot = step4Item.querySelector('div');
+            if (dot) {
+              dot.className = "absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white";
+              dot.innerText = "✓";
+            }
+          }
+
+          if (step5Item) {
+            step5Item.classList.remove('opacity-50');
+            step5Item.classList.add('step-active');
+            const dot = step5Item.querySelector('div');
+            if (dot) {
+              dot.className = "absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold ring-4 ring-emerald-100 animate-pulse";
+              dot.innerText = "🛵";
+            }
+            if (step5Title) step5Title.className = "text-xs font-bold text-emerald-900";
+          }
+        } else {
+          if (displayEta) displayEta.innerText = "🚚 Expected Delivery: Thursday, Aug 28";
+          if (displayAwb) displayAwb.innerText = `AWB: BLU-98210492`;
+
+          if (step4Item) {
+            step4Item.classList.add('step-active');
+            const dot = step4Item.querySelector('div');
+            if (dot) {
+              dot.className = "absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold ring-4 ring-amber-100 animate-pulse";
+              dot.innerText = "⚡";
+            }
+          }
+
+          if (step5Item) {
+            step5Item.classList.add('opacity-50');
+            const dot = step5Item.querySelector('div');
+            if (dot) {
+              dot.className = "absolute -left-[30px] sm:-left-[35px] top-0 w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold ring-4 ring-white";
+              dot.innerText = "05";
+            }
+            if (step5Title) step5Title.className = "text-xs font-bold text-gray-500";
+          }
+        }
+
+        if (waLink) {
+          const msg = encodeURIComponent(`Hello Sujata Dispatch Desk, I need help with Order ${orderClean}`);
+          waLink.setAttribute('href', `https://wa.me/919876543210?text=${msg}`);
+        }
+
+        resultCard?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTrackerEngine);
+    } else {
+      initTrackerEngine();
+    }
+    document.addEventListener('astro:page-load', initTrackerEngine);
+  </script>
+
+</StoreLayout>

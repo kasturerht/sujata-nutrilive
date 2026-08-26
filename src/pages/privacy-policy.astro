@@ -1,0 +1,149 @@
+---
+// src/pages/privacy-policy.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+---
+
+<StoreLayout title="Privacy Policy & Data Protection Charter | Sujata Nutrilive">
+
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
+
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
+    
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center gap-3 mb-8">
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+          <span>Store</span>
+        </a>
+        <span class="w-6 h-[1px] bg-gray-300"></span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#166534]">Privacy Policy</span>
+      </nav>
+
+      {/* Policy Switcher Bar */}
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-wider">
+        <a href="/privacy-policy" class="bg-[#166534] text-white px-4 py-2 rounded-xl shrink-0 shadow-sm">Privacy Policy</a>
+        <a href="/terms-of-service" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Terms of Service</a>
+        <a href="/refund-policy" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Refund &amp; Returns</a>
+        <a href="/shipping-policy" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Shipping Policy</a>
+      </div>
+
+      {/* Header Context Hero */}
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">DPDP Act 2023 &amp; IT Rules 2011 Compliant</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-3">
+          Privacy Policy &amp; Data Charter.
+        </h1>
+        <p class="text-xs font-mono text-gray-400 uppercase tracking-widest">
+          Effective Date: August 26, 2026 • Version 2.4
+        </p>
+      </div>
+
+      {/* 100% Zero-Data-Selling Pledge Box */}
+      <div class="bg-gradient-to-br from-[#064E3B] to-[#022219] rounded-3xl p-6 sm:p-8 text-white border border-emerald-500/30 shadow-xl mb-12 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[60px] pointer-events-none"></div>
+        <div class="relative z-10">
+          <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest block mb-1">Our Core Commitment</span>
+          <h2 class="text-xl sm:text-2xl font-['Playfair_Display'] font-bold text-white mb-2">
+            100% Zero-Data-Selling Guarantee.
+          </h2>
+          <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light">
+            Sujata Nutrilive does not sell, rent, lease, or trade your personal phone number, email address, or medical inquiries to third-party telemarketers, loan brokers, or advertising networks. Your data is used strictly to deliver your wellness protocol.
+          </p>
+        </div>
+      </div>
+
+      {/* Structured Legal Content */}
+      <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
+        
+        {/* Section 1 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            1. Information We Collect
+          </h2>
+          <p class="mb-3">
+            When you interact with Sujata Nutrilive (via website checkout, the 1-Minute Routine Finder Quiz, or WhatsApp Vaidya Concierge), we collect only the minimum necessary information:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+            <li><strong>Identity &amp; Contact:</strong> Full name, shipping address, 10-digit mobile number, and email address.</li>
+            <li><strong>Order &amp; Transaction Details:</strong> Products purchased, dosage preferences, order timestamps, and invoice values.</li>
+            <li><strong>Secure Payment Tokens:</strong> We do NOT store your credit card numbers, debit card PINs, or UPI MPINs. All transactions are securely processed through RBI-authorized payment aggregators (Razorpay / PhonePe) with 256-bit encryption.</li>
+            <li><strong>Quiz &amp; Health Insights:</strong> Wellness goals (energy, gut detox, skin/hair) to personalize dosage and formulation recommendations.</li>
+          </ul>
+        </div>
+
+        {/* Section 2 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            2. How We Use Your Information
+          </h2>
+          <p class="mb-3">Your information is used strictly for operational and clinical fulfillment:</p>
+          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+            <li>To dispatch and deliver your package via our express courier partners (BlueDart, Delhivery).</li>
+            <li>To send automated SMS/WhatsApp live tracking links and delivery status updates.</li>
+            <li>To provide personalized dosage support from certified Ayurvedic doctors when requested.</li>
+            <li>To comply with statutory regulations under the Food Safety and Standards Act (FSSAI) and the Consumer Protection (E-Commerce) Rules, 2020.</li>
+          </ul>
+        </div>
+
+        {/* Section 3 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            3. Data Security &amp; Encryption
+          </h2>
+          <p>
+            We implement industry-grade technical and organizational security measures. All communications between your browser and our server are encrypted using <strong>SHA-256 SSL Encryption</strong>. Our server infrastructure adheres to ISO/IEC 27001 standards and the Digital Personal Data Protection (DPDP) Act, 2023.
+          </p>
+        </div>
+
+        {/* Section 4 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            4. Cookies &amp; Tracking Technologies
+          </h2>
+          <p>
+            We use essential cookies to maintain your shopping cart state, remember your selected pincode for delivery estimation, and optimize site loading speed. You can configure your browser to reject non-essential cookies at any time without impacting checkout functionality.
+          </p>
+        </div>
+
+        {/* Section 5 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            5. Your Data Rights &amp; Deletion Requests
+          </h2>
+          <p>
+            Under Indian law, you retain full rights over your data. You may at any time request access to your stored records, request correction of inaccurate addresses, or ask for complete deletion of your account and personal records by writing to <a href="mailto:support@sujatanutrilive.com" class="text-emerald-700 font-bold underline">support@sujatanutrilive.com</a>. Deletion requests are fulfilled within 7 business days.
+          </p>
+        </div>
+
+        {/* Section 6 */}
+        <div class="pt-6 border-t border-gray-100">
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            6. Grievance Officer &amp; Contact
+          </h2>
+          <p class="mb-2">For any privacy questions, disputes, or regulatory disclosures, please contact:</p>
+          <div class="p-4 bg-gray-50 rounded-2xl border border-gray-200 text-xs font-mono text-gray-700 space-y-1">
+            <div><strong>Company:</strong> Sujata Nutrilive Pvt. Ltd.</div>
+            <div><strong>Grievance Officer:</strong> Mr. Harshvardhan Joshi</div>
+            <div><strong>Address:</strong> 42/B, Prabhat Road, Deccan Gymkhana, Pune, Maharashtra 411004, India.</div>
+            <div><strong>Email:</strong> <a href="mailto:grievance@sujatanutrilive.com" class="text-emerald-700 underline">grievance@sujatanutrilive.com</a></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
+
+</StoreLayout>

@@ -1,5 +1,7 @@
 ---
 import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
@@ -90,24 +92,22 @@ const videoTestimonials = [
     <div class="w-1 h-1 bg-[#166534] rounded-full"></div>
   </div>
 
-  <div class="fixed top-0 left-0 right-0 z-50 bg-[#FAF9F6]/80 backdrop-blur-xl border-b border-black/[0.04]">
-    <div class="max-w-[90rem] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2.5 text-[#4B5563] hover:text-[#166534] transition-colors duration-300 py-2 px-1 group touch-manipulation">
-        <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
-        <span class="text-xs font-bold tracking-[0.2em] uppercase">Return to Store</span>
-      </a>
-      <span class="font-['Playfair_Display'] font-bold text-[#111827] text-sm hidden sm:block tracking-widest">SUJATA<span class="text-[#166534]">.</span></span>
-      <div class="w-32 hidden sm:block"></div>
-    </div>
-  </div>
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
 
-  <main class="bg-[#FAF9F6] min-h-screen pt-24 pb-12 selection:bg-[#166534] selection:text-white">
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-12 selection:bg-[#166534] selection:text-white">
     <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
 
-      <nav class="flex items-center gap-3 mb-8">
-        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation">Apothecary</a>
-        <span class="w-8 h-[1px] bg-gray-300"></span>
-        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#111827]">{product.title}</span>
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+          <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+            <span>Apothecary</span>
+          </a>
+          <span class="w-6 h-[1px] bg-gray-300"></span>
+          <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#111827]">{product.title}</span>
+        </div>
       </nav>
 
       <div class="grid grid-cols-1 md:grid-cols-[1fr_400px] lg:grid-cols-[1fr_450px] gap-10 lg:gap-16 items-start">
@@ -223,6 +223,17 @@ const videoTestimonials = [
               </div>
             </div>
 
+            {/* Dynamic Delivery Date Estimator Pill */}
+            <div class="product-delivery-badge flex items-center justify-between gap-1.5 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2 mb-4 text-xs text-[#064E3B]">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="text-sm">🚚</span>
+                <span class="truncate">
+                  <span class="delivery-date-text font-medium text-gray-700">Dispatch in 24h</span>
+                </span>
+              </div>
+              <span class="text-[9px] font-bold bg-[#166534] text-white px-2 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
+            </div>
+
             <div class="relative w-full h-14" id="magnetic-btn-wrapper">
               <button 
                 id="add-to-cart-btn" 
@@ -230,8 +241,13 @@ const videoTestimonials = [
                 data-domain={shopifyDomain} 
                 data-token={storefrontToken}
                 data-default-variant={variants[0]?.id}
-                data-variant-id={variants[0]?.id}
-                class="add-to-cart-btn absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation"
+                data-variant-id={variants[0]?.id || `prod_${product.id}`}
+                data-title={product.title}
+                data-price={price}
+                data-image={primaryImage?.url || '/spirulina-bottle.png'}
+                data-subtitle="Standard Single Shipment"
+                data-purchase-type="onetime"
+                class="add-to-cart-btn absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation cursor-pointer"
               >
               
                 <div class="absolute inset-0 bg-gradient-to-r from-[#166534] to-[#042f17] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.1,0,0,1)] z-0"></div>
@@ -637,12 +653,12 @@ const videoTestimonials = [
     </div>
   </section>
 
-  {/* 🌟 Interactive Video Lightbox Modal */}
-  <div id="video-lightbox" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out p-4">
-    <div class="relative w-full max-w-2xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 animate-[fadeIn_0.3s_ease-out]">
+  {/* 🌟 Interactive Video Lightbox Modal (Portrait 9:16 Reel Ratio) */}
+  <div id="video-lightbox" class="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 ease-out p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Customer Video Review">
+    <div class="relative w-full max-w-sm sm:max-w-md aspect-[9/16] sm:aspect-[3/4] bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col">
       <!-- Close Button -->
-      <button id="close-lightbox-btn" class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-colors touch-manipulation" aria-label="Close video">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <button id="close-lightbox-btn" class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center border border-white/20 transition-colors touch-manipulation cursor-pointer" aria-label="Close video">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
       <!-- Video Container -->
       <div id="lightbox-video-container" class="w-full h-full flex items-center justify-center"></div>
@@ -653,7 +669,7 @@ const videoTestimonials = [
   <div id="lab-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 ease-out bg-[#022c22]/85 backdrop-blur-xl p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Lab Certificate & Dossier">
     <div class="relative w-full max-w-2xl bg-[#064e3b]/60 border border-emerald-500/30 rounded-2xl overflow-hidden shadow-2xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[300px]">
       <!-- Close Button with 44px touch target -->
-      <button id="close-lab-modal" aria-label="Close lab report" class="absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-colors touch-manipulation">
+      <button id="close-lab-modal" aria-label="Close lab report" class="absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-colors touch-manipulation cursor-pointer">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
@@ -671,8 +687,6 @@ const videoTestimonials = [
       <div class="absolute top-0 w-full h-[2px] bg-emerald-400 shadow-[0_0_20px_#10b981] opacity-50 animate-[scan_3s_linear_infinite]"></div>
     </div>
   </div>
-
-
 
   <!-- 🌟 Mobile Sticky Bottom "Add to Routine" Bar (High Conversion & Safe Area Fitted) -->
   <div 
@@ -698,15 +712,23 @@ const videoTestimonials = [
     <button 
       id="sticky-atc-btn" 
       type="button" 
-      class="add-to-cart-btn shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg active:scale-95 transition-all touch-manipulation"
+      class="add-to-cart-btn shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg active:scale-95 transition-all touch-manipulation cursor-pointer"
       data-domain={shopifyDomain} 
       data-token={storefrontToken} 
-      data-variant-id={variants[0]?.id}
+      data-variant-id={variants[0]?.id || `prod_${product.id}`}
+      data-title={product.title}
+      data-price={price}
+      data-image={primaryImage?.url || '/spirulina-bottle.png'}
+      data-subtitle="Standard Single Shipment"
+      data-purchase-type="onetime"
     >
       <span id="sticky-btn-text">Add to Routine</span>
       <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
     </button>
   </div>
+  
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
 
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -1009,7 +1031,26 @@ const videoTestimonials = [
         odometerElements.forEach(el => observerOdometer.observe(el));
       }
 
-      // 1. Variant Switching Logic (Size switching)
+      // 1. Dynamic Delivery Date Estimator (Linked to sujata_pincode)
+      function updatePdpDeliveryEstimator() {
+        const savedPincode = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || '411001';
+        const badges = document.querySelectorAll('.product-delivery-badge .delivery-date-text');
+        
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 3);
+        if (targetDate.getDay() === 0) targetDate.setDate(targetDate.getDate() + 1); // skip Sunday
+        
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        const dateStr = targetDate.toLocaleDateString('en-IN', options);
+
+        badges.forEach(badge => {
+          badge.innerHTML = `Get it by <strong>${dateStr}</strong> (to ${savedPincode})`;
+        });
+      }
+      updatePdpDeliveryEstimator();
+      window.addEventListener('pincode-updated', updatePdpDeliveryEstimator);
+
+      // 1.2 Variant Switching Logic (Size switching)
       const stickyBar = document.getElementById('mobile-sticky-bottom-bar');
       const stickyPriceDisplay = document.getElementById('sticky-display-price');
       const stickyAtcBtn = document.getElementById('sticky-atc-btn');
@@ -1036,7 +1077,7 @@ const videoTestimonials = [
           }
 
           // Update Subscription Widget Labels dynamically when size changes
-          const selectedPrice = parseFloat(target.getAttribute('data-price'));
+          const selectedPrice = parseFloat(target.getAttribute('data-price')) || 0;
           const selectedPriceFormatted = selectedPrice.toFixed(2);
           const discountedPriceFormatted = (selectedPrice * 0.9).toFixed(2);
 
@@ -1070,7 +1111,7 @@ const videoTestimonials = [
 
       function updatePurchaseOptionUI() {
         const activeVariant = document.querySelector('.variant-btn.selected-variant');
-        const basePrice = activeVariant ? parseFloat(activeVariant.getAttribute('data-price')) : 0;
+        const basePrice = activeVariant ? parseFloat(activeVariant.getAttribute('data-price')) : (parseFloat(atcBtn?.getAttribute('data-price')) || 600);
         
         if (radioSubscribe && radioSubscribe.checked) {
           const discountPrice = (basePrice * 0.9).toFixed(2);
@@ -1080,8 +1121,16 @@ const videoTestimonials = [
             btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
           }
           if (stickyBtnText) stickyBtnText.innerText = "Subscribe & Save";
-          if (atcBtn) atcBtn.setAttribute('data-purchase-type', 'subscribe');
-          if (stickyAtcBtn) stickyAtcBtn.setAttribute('data-purchase-type', 'subscribe');
+          if (atcBtn) {
+            atcBtn.setAttribute('data-purchase-type', 'subscribe');
+            atcBtn.setAttribute('data-price', discountPrice);
+            atcBtn.setAttribute('data-subtitle', 'Monthly Protocol (10% Off)');
+          }
+          if (stickyAtcBtn) {
+            stickyAtcBtn.setAttribute('data-purchase-type', 'subscribe');
+            stickyAtcBtn.setAttribute('data-price', discountPrice);
+            stickyAtcBtn.setAttribute('data-subtitle', 'Monthly Protocol (10% Off)');
+          }
           optSubscribe?.classList.add('border-[#111827]', 'bg-gray-50/50');
           optSubscribe?.classList.remove('border-gray-200');
           optOnetime?.classList.add('border-gray-200');
@@ -1094,8 +1143,16 @@ const videoTestimonials = [
             btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
           }
           if (stickyBtnText) stickyBtnText.innerText = "Add to Routine";
-          if (atcBtn) atcBtn.setAttribute('data-purchase-type', 'onetime');
-          if (stickyAtcBtn) stickyAtcBtn.setAttribute('data-purchase-type', 'onetime');
+          if (atcBtn) {
+            atcBtn.setAttribute('data-purchase-type', 'onetime');
+            atcBtn.setAttribute('data-price', basePriceFormatted);
+            atcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
+          }
+          if (stickyAtcBtn) {
+            stickyAtcBtn.setAttribute('data-purchase-type', 'onetime');
+            stickyAtcBtn.setAttribute('data-price', basePriceFormatted);
+            stickyAtcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
+          }
           optOnetime?.classList.add('border-[#111827]', 'bg-gray-50/50');
           optOnetime?.classList.remove('border-gray-200');
           optSubscribe?.classList.add('border-gray-200');
@@ -1122,7 +1179,37 @@ const videoTestimonials = [
         }
       });
 
-      // 1.8 Mobile Sticky Bottom Bar Scroll Observer
+      // 1.8 Direct Add to Cart Click Handlers for PDP Main and Sticky Buttons
+      const handlePdpAddToCart = (btn) => {
+        const id = btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
+        const title = btn.getAttribute('data-title') || document.querySelector('h1')?.innerText?.trim() || 'Sujata Spirulina Daily Routine';
+        const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
+        const priceNum = parseFloat(btn.getAttribute('data-price')) || 600;
+        const image = btn.getAttribute('data-image') || document.getElementById('main-pdp-image')?.getAttribute('src') || '/spirulina-bottle.png';
+
+        if (typeof window.addItemToLocalCart === 'function') {
+          window.addItemToLocalCart({
+            id,
+            title,
+            subtitle,
+            price: Math.round(priceNum),
+            image,
+            quantity: 1
+          });
+        }
+      };
+
+      atcBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        handlePdpAddToCart(atcBtn);
+      });
+
+      stickyAtcBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        handlePdpAddToCart(stickyAtcBtn);
+      });
+
+      // 1.9 Mobile Sticky Bottom Bar Scroll Observer
       const buyBoxWrapper = document.getElementById('magnetic-btn-wrapper') || atcBtn;
       if (buyBoxWrapper && stickyBar) {
         const stickyObserver = new IntersectionObserver((entries) => {

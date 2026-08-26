@@ -1,0 +1,130 @@
+---
+// src/pages/refund-policy.astro
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+---
+
+<StoreLayout title="30-Day Money-Back Guarantee & Refund Policy | Sujata Nutrilive">
+
+  {/* UNIFIED LUXURY STORE HEADER */}
+  <StoreHeader />
+
+  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
+    
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+      
+      {/* Breadcrumb Navigation */}
+      <nav class="flex items-center gap-3 mb-8">
+        <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
+          <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
+          <span>Store</span>
+        </a>
+        <span class="w-6 h-[1px] bg-gray-300"></span>
+        <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#166534]">Refund &amp; Return Policy</span>
+      </nav>
+
+      {/* Policy Switcher Bar */}
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-wider">
+        <a href="/privacy-policy" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Privacy Policy</a>
+        <a href="/terms-of-service" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Terms of Service</a>
+        <a href="/refund-policy" class="bg-[#166534] text-white px-4 py-2 rounded-xl shrink-0 shadow-sm">Refund &amp; Returns</a>
+        <a href="/shipping-policy" class="hover:text-[#166534] px-4 py-2 rounded-xl shrink-0 hover:bg-gray-100 transition-colors">Shipping Policy</a>
+      </div>
+
+      {/* Header Context Hero */}
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">100% Risk-Free • Zero-Interrogation Policy</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-3">
+          30-Day Money-Back Guarantee.
+        </h1>
+        <p class="text-xs font-mono text-gray-400 uppercase tracking-widest">
+          Effective Date: August 26, 2026 • 100% Full Refund Promise
+        </p>
+      </div>
+
+      {/* Golden Guarantee Banner */}
+      <div class="bg-gradient-to-br from-[#064E3B] to-[#022219] rounded-3xl p-6 sm:p-8 text-white border border-emerald-500/30 shadow-xl mb-12 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[60px] pointer-events-none"></div>
+        <div class="relative z-10">
+          <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest block mb-1">The Sujata Promise</span>
+          <h2 class="text-xl sm:text-2xl font-['Playfair_Display'] font-bold text-white mb-2">
+            The Empty-Bottle / Empty-Pouch Guarantee.
+          </h2>
+          <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light">
+            We are confident in our sub-40°C cold-pressed spirulina. If you take Sujata Spirulina consistently for 30 days and do not experience a measurable surge in your daily energy and digestion, we will refund every single rupee back to your bank account — <strong>even if the bottle is completely empty</strong>. No interrogations.
+          </p>
+        </div>
+      </div>
+
+      {/* Structured Legal Content */}
+      <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
+        
+        {/* Section 1 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            1. Eligibility &amp; 30-Day Window
+          </h2>
+          <p class="mb-3">
+            To be eligible for the 30-Day Protocol Guarantee:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+            <li>Your refund claim must be submitted within <strong>30 calendar days</strong> from the date of confirmed delivery.</li>
+            <li>Applies to your first purchase of any single product or value bundle from Sujata Nutrilive.</li>
+            <li>No mandatory return shipping is required for used/empty pouches.</li>
+          </ul>
+        </div>
+
+        {/* Section 2 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            2. Damaged or Defective In-Transit Shipments
+          </h2>
+          <p>
+            If your parcel arrives with a broken tamper seal, torn outer pouch, or physical transit damage, we offer an <strong>Immediate Free Express Replacement</strong>. Simply snap a photo of the package and WhatsApp our dispatch desk at <strong>+91 98765 43210</strong>. We will dispatch a brand-new sealed batch within 24 hours via Priority Air Cargo.
+          </p>
+        </div>
+
+        {/* Section 3 */}
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            3. Refund Processing Timelines &amp; Methods
+          </h2>
+          <p class="mb-3">Once approved by our support team, refunds are initiated instantly:</p>
+          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+            <li><strong>Prepaid UPI (Google Pay, PhonePe, Paytm):</strong> Credited directly back to your linked bank account within <strong>24 to 48 hours</strong>.</li>
+            <li><strong>Debit / Credit Cards &amp; NetBanking:</strong> Credited within <strong>3 to 5 business days</strong> depending on your issuing bank's settlement cycle.</li>
+            <li><strong>Cash on Delivery (COD) Orders:</strong> Transferred via instant IMPS/UPI upon providing your bank account or UPI ID.</li>
+          </ul>
+        </div>
+
+        {/* Section 4: 2-Step Refund Process */}
+        <div class="bg-gray-50 rounded-2xl p-5 border border-gray-200">
+          <h2 class="text-base font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+            4. How to Request a Refund (2 Simple Steps)
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-700">
+            <div class="bg-white p-4 rounded-xl border border-gray-200">
+              <strong class="font-bold text-[#166534] block mb-1">Option A: Via WhatsApp</strong>
+              <span>Send your Order ID (e.g. <code>SUJATA-84920</code>) to our WhatsApp support desk at <a href="https://wa.me/919876543210" class="text-emerald-700 font-bold underline">+91 98765 43210</a>.</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-gray-200">
+              <strong class="font-bold text-[#166534] block mb-1">Option B: Via Email</strong>
+              <span>Send an email with your Order ID to <a href="mailto:support@sujatanutrilive.com" class="text-emerald-700 font-bold underline">support@sujatanutrilive.com</a>.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  {/* UNIFIED LUXURY STORE FOOTER */}
+  <StoreFooter />
+
+</StoreLayout>
