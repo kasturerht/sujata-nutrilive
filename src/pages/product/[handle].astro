@@ -52,10 +52,61 @@ const price = product.priceRange ? parseFloat(product.priceRange.minVariantPrice
 const maxPrice = product.priceRange ? parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2) : "0.00";
 const hasPriceRange = price !== maxPrice;
 
-// JSON Parsing with Fallbacks
-const ingredientsData = product.ingredients?.value ? JSON.parse(product.ingredients.value) : [];
-const timelineData = product.timeline?.value ? JSON.parse(product.timeline.value) : [];
-const labReportUrl = product.labReport?.value || null;
+// Product Type Detection (Powder vs Tablets/Capsules)
+const isTablet = (handle && handle.toLowerCase().includes('tablet')) || 
+                (handle && handle.toLowerCase().includes('capsule')) || 
+                (product.title && product.title.toLowerCase().includes('tablet')) || 
+                (product.title && product.title.toLowerCase().includes('capsule'));
+
+// Clinical Data for Tablets & Powder
+const defaultIngredients = isTablet ? [
+  { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Rare essential fatty acid. Regulates hormonal balance, calms joint inflammation, and protects cardiovascular wellness.", color: "text-amber-400", border: "border-amber-500/30" },
+  { symbol: "SOD", name: "Superoxide Dismutase", desc: "Master antioxidant enzyme preserved under Sub-40°C cold press. Neutralizes cellular oxidative stress instantly.", color: "text-cyan-400", border: "border-cyan-500/30" },
+  { symbol: "BC", name: "Beta-Carotene & Zeaxanthin", desc: "High-potency carotenoids. Shields eyes from screen fatigue and stimulates dermal collagen elasticity.", color: "text-orange-400", border: "border-orange-500/30" },
+  { symbol: "EAA", name: "18 Essential Amino Matrix", desc: "65% complete plant protein. Rebuilds muscle tissue, repairs connective fibers, and sustains peak stamina.", color: "text-emerald-400", border: "border-emerald-500/30" }
+] : [
+  { symbol: "Ph", name: "Phycocyanin", desc: "Powerful antioxidant. Fights free radicals and reduces cellular inflammation.", color: "text-blue-400", border: "border-blue-500/30" },
+  { symbol: "Fe", name: "Raw Iron", desc: "Highly bioavailable. Instantly boosts hemoglobin and oxygen transport.", color: "text-orange-400", border: "border-orange-500/30" },
+  { symbol: "B12", name: "Methylcobalamin", desc: "Active B12 form. Ignites brain function and nervous system repair.", color: "text-purple-400", border: "border-purple-500/30" },
+  { symbol: "Ch", name: "Chlorophyll", desc: "The green blood. Flushes out heavy metals and detoxifies the liver.", color: "text-emerald-400", border: "border-emerald-500/30" }
+];
+
+const defaultTimeline = isTablet ? [
+  { time: "Week 01", title: "Metabolic Ignition", desc: "Targeted enteric absorption delivers pure bio-iron and enzymes. Zero grassy aftertaste, zero acid reflux, and steady all-day physical stamina." },
+  { time: "Week 02", title: "Anti-Inflammatory Repair", desc: "Potent GLA and S.O.D enzymes soothe cellular inflammation. Muscle recovery accelerates post-workout, and morning joint stiffness vanishes." },
+  { time: "Day 30+", title: "Systemic Fortification", desc: "A complete 30-day red blood cell cycle finishes. Hemoglobin saturates, hair roots fortify from within, and deep immunity shields against daily fatigue." }
+] : [
+  { time: "Hour 01", title: "The Awakening", desc: "Raw B-vitamins flood your bloodstream. The afternoon brain-fog instantly lifts without caffeine jitters." },
+  { time: "Day 07", title: "Gut Rebalance", desc: "Cold-pressed enzymes begin to restore your microbiome. Bloating reduces, and nutrient absorption peaks." },
+  { time: "Day 30", title: "Cellular Peak", desc: "A full cycle of antioxidants completes. Skin clears, immune defense fortifies, and energy remains sustained." }
+];
+
+// Robust JSON Parsing with Guaranteed Array Validation
+let ingredientsData = defaultIngredients;
+try {
+  if (product.ingredients?.value && product.ingredients.value.trim().length > 2) {
+    const parsed = JSON.parse(product.ingredients.value);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      ingredientsData = parsed;
+    }
+  }
+} catch (e) {
+  ingredientsData = defaultIngredients;
+}
+
+let timelineData = defaultTimeline;
+try {
+  if (product.timeline?.value && product.timeline.value.trim().length > 2) {
+    const parsed = JSON.parse(product.timeline.value);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      timelineData = parsed;
+    }
+  }
+} catch (e) {
+  timelineData = defaultTimeline;
+}
+
+const labReportUrl = product.labReport?.value || "/NABL-Report-Sujata.pdf";
 
 const videoTestimonials = [
   {
@@ -608,7 +659,7 @@ const videoTestimonials = [
               <div class="absolute top-0 right-0 p-4 opacity-10 font-['Playfair_Display'] font-black text-5xl transition-opacity duration-500 group-hover:opacity-20">{item.symbol}</div>
               <div class={`text-xl md:text-2xl font-bold mb-1 ${item.color}`}>{item.symbol}</div>
               <div class="text-xs font-bold uppercase tracking-widest text-white mb-2">{item.name}</div>
-              <div class="text-xs text-emerald-100/80 leading-relaxed font-light opacity-90 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out">
+              <div class="text-xs text-emerald-100/80 leading-relaxed font-light opacity-95 md:opacity-80 md:group-hover:opacity-100 transition-all duration-300">
                 {item.desc}
               </div>
             </div>
