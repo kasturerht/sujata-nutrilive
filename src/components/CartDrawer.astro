@@ -8,7 +8,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f6
 <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-opacity duration-300 ease-out"></div>
 
 {/* The Premium Drawer (Slides from Right with high z-index above everything) */}
-<div id="cart-drawer" class="fixed top-0 right-0 w-full sm:w-[440px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
+<div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} class="fixed top-0 right-0 w-full sm:w-[440px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
   
   {/* 1. Drawer Header (Always Visible & Padded) */}
   <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
@@ -68,8 +68,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f6
 <script is:inline>
   // High-Performance Hybrid Cart Engine (Shopify GraphQL + Optimistic Local State)
   (function() {
-    const DOMAIN = "skadas-headless-demo.myshopify.com";
-    const TOKEN = "32f678c5f8d1345e945ed48713d9cf2f";
+    const drawerEl = document.getElementById('cart-drawer');
+    const DOMAIN = drawerEl?.getAttribute('data-domain') || "tvczdq-nu.myshopify.com";
+    const TOKEN = drawerEl?.getAttribute('data-token') || "7e8a0176aede63ce4c6b199e18684018";
     const SHIPPING_THRESHOLD = 1500;
 
     // Local Cart Data Management
