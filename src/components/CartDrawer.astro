@@ -234,6 +234,106 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       window.openSujataCart();
     };
 
+    // Reset Checkout Button State (Self-Healing State Machine)
+    function resetCheckoutBtn() {
+      const checkoutBtn = document.getElementById('checkout-action-btn');
+      if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+        checkoutBtn.innerHTML = `
+          <span>Proceed to Checkout</span>
+          <span class="text-base">→</span>
+        `;
+      }
+    }
+    window.resetSujataCheckoutBtn = resetCheckoutBtn;
+
+    // Checkout Action Button Handler (Shopify GraphQL Mutation with Self-Healing)
+    async function handleCheckout(e) {
+      const checkoutBtn = e.target.closest('#checkout-action-btn') || document.getElementById('checkout-action-btn');
+      if (!checkoutBtn || checkoutBtn.disabled) return;
+      e.preventDefault();
+
+      const items = getLocalCart();
+      if (items.length === 0) return;
+
+      // Enter Loading State
+      checkoutBtn.disabled = true;
+      checkoutBtn.classList.add('opacity-75', 'cursor-not-allowed');
+      checkoutBtn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Securing Checkout...</span>
+      `;
+
+      // 🛡️ Circuit Breaker: Auto-reset button if navigation takes > 8 seconds or user cancels
+      const recoveryTimer = setTimeout(resetCheckoutBtn, 8000);
+
+      // Format lines for Shopify Storefront API
+      const lines = items
+        .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
+        .map(i => {
+          const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
+          return { merchandiseId, quantity: i.quantity };
+        });
+
+      if (lines.length > 0) {
+        const mutation = `
+          mutation cartCreate($input: CartInput!) {
+            cartCreate(input: $input) {
+              cart {
+                id
+                checkoutUrl
+              }
+              userErrors {
+                field
+                message
+              }
+            }
+          }
+        `;
+
+        try {
+          const response = await fetch(`https://${DOMAIN}/api/2024-01/graphql.json`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': TOKEN,
+            },
+            body: JSON.stringify({
+              query: mutation,
+              variables: { input: { lines } }
+            })
+          });
+
+          const data = await response.json();
+          const checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
+
+          if (checkoutUrl) {
+            clearTimeout(recoveryTimer);
+            window.location.href = checkoutUrl;
+          } else {
+            console.warn("⚠️ Checkout URL missing from Shopify response, redirecting to store cart fallback");
+            clearTimeout(recoveryTimer);
+            window.location.href = `https://${DOMAIN}/cart`;
+          }
+        } catch (err) {
+          console.error("❌ Shopify checkout network error:", err);
+          clearTimeout(recoveryTimer);
+          resetCheckoutBtn();
+          window.location.href = `https://${DOMAIN}/cart`;
+        }
+      } else {
+        // Fallback for custom bundle or trial items
+        setTimeout(() => {
+          clearTimeout(recoveryTimer);
+          window.location.href = '/thank-you';
+        }, 600);
+      }
+    }
+
     // Event Delegations
     document.addEventListener('click', (e) => {
       // Close Cart
@@ -324,83 +424,40 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         });
       }
 
-      // Checkout Action Button Handler (Shopify GraphQL Mutation)
-      const checkoutBtn = e.target.closest('#checkout-action-btn');
-      if (checkoutBtn) {
-        e.preventDefault();
-        const items = getLocalCart();
-        if (items.length === 0) return;
-
-        const originalText = checkoutBtn.innerHTML;
-        checkoutBtn.disabled = true;
-        checkoutBtn.innerHTML = `
-          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          <span>Securing Checkout...</span>
-        `;
-
-        // Format lines for Shopify Storefront API
-        const lines = items
-          .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
-          .map(i => {
-            const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
-            return { merchandiseId, quantity: i.quantity };
-          });
-
-        if (lines.length > 0) {
-          const mutation = `
-            mutation cartCreate($input: CartInput!) {
-              cartCreate(input: $input) {
-                cart {
-                  id
-                  checkoutUrl
-                }
-                userErrors {
-                  field
-                  message
-                }
-              }
-            }
-          `;
-
-          fetch(`https://${DOMAIN}/api/2024-01/graphql.json`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Shopify-Storefront-Access-Token': TOKEN,
-            },
-            body: JSON.stringify({
-              query: mutation,
-              variables: { input: { lines } }
-            })
-          })
-          .then(res => res.json())
-          .then(data => {
-            const checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
-            if (checkoutUrl) {
-              window.location.href = checkoutUrl;
-            } else {
-              // Direct fallback to store checkout
-              window.location.href = `https://${DOMAIN}/cart`;
-            }
-          })
-          .catch(() => {
-            window.location.href = `https://${DOMAIN}/cart`;
-          });
-        } else {
-          // If items are custom bundle items or demo items without live Shopify variant IDs
-          setTimeout(() => {
-            window.location.href = '/thank-you';
-          }, 800);
-        }
+      // Checkout Action Click
+      if (e.target.closest('#checkout-action-btn')) {
+        handleCheckout(e);
       }
+    });
+
+    // 🚀 Silicon Valley Standard: Back-Forward Cache (bfcache) & Page Lifecycle Recovery
+    // When a user hits the browser Back button from Shopify checkout, instant restoration happens!
+    window.addEventListener('pageshow', (event) => {
+      resetCheckoutBtn();
+      window.renderSujataCart();
+    });
+
+    // When tab becomes active / visible again (e.g. after returning from payment/app)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        resetCheckoutBtn();
+        window.renderSujataCart();
+      }
+    });
+
+    window.addEventListener('focus', () => {
+      resetCheckoutBtn();
+    });
+
+    window.addEventListener('popstate', () => {
+      resetCheckoutBtn();
+      window.renderSujataCart();
     });
 
     // Cross-tab Synchronization
     window.addEventListener('storage', (e) => {
       if (e.key === 'sujata_cart_items') {
+        resetCheckoutBtn();
         window.renderSujataCart();
       }
     });
@@ -412,13 +469,19 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       }
     });
 
-    // Initialize on page load
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', window.renderSujataCart);
-    } else {
+    // Initialize on page load & Astro View Transitions
+    function init() {
+      resetCheckoutBtn();
       window.renderSujataCart();
     }
-    document.addEventListener('astro:page-load', window.renderSujataCart);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    document.addEventListener('astro:page-load', init);
+    document.addEventListener('astro:after-swap', init);
 
   })();
 </script>
