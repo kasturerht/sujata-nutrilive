@@ -73,18 +73,30 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     const TOKEN = drawerEl?.getAttribute('data-token') || "7e0a0176aede63ce4c6b199e18684018";
     const SHIPPING_THRESHOLD = 1500;
 
-    // Local Cart Data Management
+    // Local Cart Data Management (Strict Sanitization & Anti-Corruption)
     function getLocalCart() {
       try {
         const stored = localStorage.getItem('sujata_cart_items');
-        return stored ? JSON.parse(stored) : [];
+        const parsed = stored ? JSON.parse(stored) : [];
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter(item => 
+          item && 
+          typeof item === 'object' && 
+          item.id && 
+          typeof item.price === 'number' && 
+          !isNaN(item.price) && 
+          item.price >= 0 &&
+          typeof item.quantity === 'number' && 
+          item.quantity > 0
+        );
       } catch (e) {
         return [];
       }
     }
 
     function saveLocalCart(items) {
-      localStorage.setItem('sujata_cart_items', JSON.stringify(items));
+      const sanitized = (items || []).filter(item => item && item.quantity > 0);
+      localStorage.setItem('sujata_cart_items', JSON.stringify(sanitized));
     }
 
     function formatINR(amount) {
@@ -92,7 +104,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         style: 'currency',
         currency: 'INR',
         maximumFractionDigits: 0
-      }).format(amount);
+      }).format(amount || 0);
     }
 
     // Open & Close Drawer
@@ -235,7 +247,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     };
 
     // Reset Checkout Button State (Self-Healing State Machine)
+    let isCheckoutInProgress = false;
     function resetCheckoutBtn() {
+      isCheckoutInProgress = false;
       const checkoutBtn = document.getElementById('checkout-action-btn');
       if (checkoutBtn) {
         checkoutBtn.disabled = false;
@@ -251,13 +265,21 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     // Checkout Action Button Handler (Shopify GraphQL Mutation with Self-Healing)
     async function handleCheckout(e) {
       const checkoutBtn = e.target.closest('#checkout-action-btn') || document.getElementById('checkout-action-btn');
-      if (!checkoutBtn || checkoutBtn.disabled) return;
+      if (!checkoutBtn || isCheckoutInProgress) return;
       e.preventDefault();
+
+      // 1. Offline Network Protection
+      if (typeof navigator !== 'undefined' && 'onLine' in navigator && !navigator.onLine) {
+        alert("⚠️ You appear to be offline. Please check your internet connection and try again.");
+        resetCheckoutBtn();
+        return;
+      }
 
       const items = getLocalCart();
       if (items.length === 0) return;
 
-      // Enter Loading State
+      // In-flight locking (Prevents duplicate rapid clicks)
+      isCheckoutInProgress = true;
       checkoutBtn.disabled = true;
       checkoutBtn.classList.add('opacity-75', 'cursor-not-allowed');
       checkoutBtn.innerHTML = `
@@ -276,7 +298,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
         .map(i => {
           const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
-          return { merchandiseId, quantity: i.quantity };
+          return { merchandiseId, quantity: Math.max(1, parseInt(i.quantity) || 1) };
         });
 
       if (lines.length > 0) {
@@ -309,13 +331,25 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           });
 
           const data = await response.json();
-          const checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
+          let checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
+          const userErrors = data?.data?.cartCreate?.userErrors;
+
+          if (userErrors && userErrors.length > 0) {
+            console.warn("⚠️ Shopify cart userErrors:", userErrors);
+          }
 
           if (checkoutUrl) {
+            // 🎁 Auto-Apply Saved Discount Code (e.g. PEAK10 from Exit Popup)
+            const savedDiscount = localStorage.getItem('sujata_discount_code') || 'PEAK10';
+            if (savedDiscount && !checkoutUrl.includes('discount=')) {
+              const sep = checkoutUrl.includes('?') ? '&' : '?';
+              checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(savedDiscount)}`;
+            }
+
             clearTimeout(recoveryTimer);
             window.location.href = checkoutUrl;
           } else {
-            console.warn("⚠️ Checkout URL missing from Shopify response, redirecting to store cart fallback");
+            console.warn("⚠️ Checkout URL missing, redirecting to direct store checkout");
             clearTimeout(recoveryTimer);
             window.location.href = `https://${DOMAIN}/cart`;
           }

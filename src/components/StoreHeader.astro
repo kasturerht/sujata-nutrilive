@@ -263,18 +263,19 @@
     });
 
     const handlePincodeSubmit = (val: string, statusEl: HTMLElement | null, onSuccess?: () => void) => {
-      const isValid = /^\d{6}$/.test(val);
+      const cleanVal = (val || '').trim();
+      const isValid = /^[1-9]\d{5}$/.test(cleanVal);
       if (!statusEl) return;
       statusEl.classList.remove('hidden', 'text-red-400', 'text-red-500', 'text-emerald-400', 'text-emerald-600');
 
       if (!isValid) {
-        statusEl.innerText = 'Please enter a valid 6-digit pincode.';
+        statusEl.innerText = 'Please enter a valid 6-digit Indian PIN code.';
         statusEl.classList.add('text-red-400');
       } else {
         statusEl.innerText = 'Serviceable! Express delivery available. 🚚';
         statusEl.classList.add('text-emerald-400');
-        localStorage.setItem('sujata_pincode', val);
-        updatePincodeDisplay(val);
+        localStorage.setItem('sujata_pincode', cleanVal);
+        updatePincodeDisplay(cleanVal);
         if (onSuccess) setTimeout(onSuccess, 1200);
       }
     };

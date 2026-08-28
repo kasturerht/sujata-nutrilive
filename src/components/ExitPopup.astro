@@ -209,6 +209,9 @@ import { Image } from 'astro:assets';
       }
 
       setTimeout(() => {
+        try {
+          localStorage.setItem('sujata_discount_code', 'PEAK10');
+        } catch(e) {}
         formContainer?.classList.add('hidden');
         successContainer?.classList.remove('hidden');
         successContainer?.classList.add('flex', 'animate-[fadeInUp_0.5s_ease-out]');
@@ -218,7 +221,10 @@ import { Image } from 'astro:assets';
     // Copy Code Feature
     copyBtn?.addEventListener('click', () => {
       const theCodeEl = document.getElementById('the-code');
-      const code = theCodeEl ? theCodeEl.innerText : 'PEAK10';
+      const code = theCodeEl ? theCodeEl.innerText.trim() : 'PEAK10';
+      try {
+        localStorage.setItem('sujata_discount_code', code);
+      } catch(e) {}
       navigator.clipboard.writeText(code);
       
       copyBtn.innerHTML = `<span class="text-sm font-bold text-[#166534] uppercase tracking-widest">✔ COPIED!</span>`;
