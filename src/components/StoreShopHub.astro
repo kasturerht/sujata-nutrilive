@@ -5,8 +5,8 @@ import StoreBundleBuilder from './StoreBundleBuilder.astro';
 const { products = [] } = Astro.props;
 
 // Shopify Credentials
-const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "skadas-headless-demo.myshopify.com"; 
-const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "32f678c5f8d1345e945ed48713d9cf2f";
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com"; 
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e8a0176aede63ce4c6b199e18684018";
 
 function formatPrice(amount: string | number) {
   const num = typeof amount === 'string' ? parseFloat(amount) : amount;
