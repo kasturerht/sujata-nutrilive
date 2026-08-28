@@ -1,7 +1,7 @@
 ---
 // src/components/StoreQuiz.astro
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
-const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e8a0176aede63ce4c6b199e18684018";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 ---
 
 <section id="apothecary-quiz" data-domain={shopifyDomain} data-token={storefrontToken} class="relative bg-gradient-to-b from-[#031510] via-[#022c22] to-[#01140f] py-20 lg:py-28 font-['Inter'] overflow-hidden border-t border-white/5 selection:bg-[#166534] selection:text-white">
@@ -589,7 +589,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e8a
       if (quizAtcBtn) {
         const quizContainer = document.getElementById('apothecary-quiz');
         const shopDomain = quizContainer?.getAttribute('data-domain') || 'tvczdq-nu.myshopify.com';
-        const storeToken = quizContainer?.getAttribute('data-token') || '7e8a0176aede63ce4c6b199e18684018';
+        const storeToken = quizContainer?.getAttribute('data-token') || '7e0a0176aede63ce4c6b199e18684018';
         quizAtcBtn.setAttribute('data-variant-id', variantId);
         quizAtcBtn.setAttribute('data-domain', shopDomain);
         quizAtcBtn.setAttribute('data-token', storeToken);

@@ -1,7 +1,7 @@
 ---
 // src/components/CartDrawer.astro
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
-const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e8a0176aede63ce4c6b199e18684018";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 ---
 
 {/* The Dark Overlay (Background blur) */}
@@ -70,7 +70,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e8a
   (function() {
     const drawerEl = document.getElementById('cart-drawer');
     const DOMAIN = drawerEl?.getAttribute('data-domain') || "tvczdq-nu.myshopify.com";
-    const TOKEN = drawerEl?.getAttribute('data-token') || "7e8a0176aede63ce4c6b199e18684018";
+    const TOKEN = drawerEl?.getAttribute('data-token') || "7e0a0176aede63ce4c6b199e18684018";
     const SHIPPING_THRESHOLD = 1500;
 
     // Local Cart Data Management
