@@ -4,7 +4,11 @@ import StoreBundleBuilder from './StoreBundleBuilder.astro';
 
 const { products = [] } = Astro.props;
 
-// Shopify Credentials
+// Filter out old legacy demo products if new ones are present
+const filteredProducts = products.filter((edge: any) => {
+  const handle = edge.node?.handle;
+  return !['spirulin-powder', 'spirulina-tablets'].includes(handle);
+});
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com"; 
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
@@ -184,7 +188,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         {/* Filter Pills */}
         <div class="flex flex-wrap items-center gap-2" id="shop-catalog-filters">
           <button class="shop-filter-btn active px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-[#111827] text-white cursor-pointer" data-filter="all">
-            All Products ({products.length})
+            All Products ({filteredProducts.length})
           </button>
           <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="nutrition">
             🌿 Nutrition & Superfoods
@@ -205,7 +209,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
 
     {/* 3. PRODUCT SALES GRID (With Live Pincode Estimator & 1-Tap ATC) */}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="shop-products-grid">
-      {products.map((edge: any, index: number) => {
+      {filteredProducts.map((edge: any, index: number) => {
         const product = edge.node;
         const category = getProductCategory(product);
         const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.priceV2?.amount || "799";
