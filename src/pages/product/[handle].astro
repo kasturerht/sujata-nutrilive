@@ -144,59 +144,240 @@ const price = product.priceRange ? parseFloat(product.priceRange.minVariantPrice
 const maxPrice = product.priceRange ? parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2) : "0.00";
 const hasPriceRange = price !== maxPrice;
 
-// Product Type Detection (Powder vs Tablets/Capsules)
-const isTablet = (handle && handle.toLowerCase().includes('tablet')) || 
-                (handle && handle.toLowerCase().includes('capsule')) || 
-                (product.title && product.title.toLowerCase().includes('tablet')) || 
-                (product.title && product.title.toLowerCase().includes('capsule'));
+const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: any[] }> = {
+  'sujata-spirulina-powder': {
+    ingredients: [
+      { symbol: "Ph", name: "Phycocyanin (20%+)", desc: "Master blue antioxidant bio-pigment. Neutralizes free radicals and activates cellular defense pathways.", color: "text-blue-400", border: "border-blue-500/30" },
+      { symbol: "Fe", name: "Bioavailable Iron", desc: "Easily absorbable plant iron. Directly supports hemoglobin synthesis and boosts oxygen flow to tissues.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Ch", name: "Active Chlorophyll", desc: "The natural detoxifier. Assists liver detoxification, flushes heavy metals, and alkalizes gut pH.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "EAA", name: "18 Amino Acid Matrix", desc: "65-70% complete bio-protein. Repairs muscle tissue, rebuilds connective fibers, and sustains energy.", color: "text-amber-400", border: "border-amber-500/30" }
+    ],
+    timeline: [
+      { time: "Hour 01", title: "Metabolic Activation", desc: "Rapidly absorbed micro-nutrients flood the bloodstream. Brain fog lifts with steady, non-jittery energy." },
+      { time: "Day 07", title: "Digestive & Gut Detox", desc: "Natural chlorophyll balances microbiome ecology. Bloating subsides and daily digestion smooths out." },
+      { time: "Day 30", title: "Cellular Fortification", desc: "Red blood cell oxygenation peaks. Stamina remains steady throughout the day, and immune shield strengthens." }
+    ]
+  },
+  'sujata-spirulina-tablets': {
+    ingredients: [
+      { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Rare anti-inflammatory fatty acid. Regulates hormonal equilibrium and eases joint stiffness.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "SOD", name: "Superoxide Dismutase", desc: "Master antioxidant enzyme preserved under cold press. Protects mitochondria from oxidative wear.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Fe", name: "Zero-Binder Bio-Iron", desc: "High-absorption non-heme iron to combat chronic fatigue and elevate daily hemoglobin.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "EAA", name: "Pure Microalgae Protein", desc: "100% pure compressed spirulina without talc or chemical binders. Delivers all essential amino acids.", color: "text-emerald-400", border: "border-emerald-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Clean Enteric Absorption", desc: "Tablets dissolve gently without reflux or grassy aftertaste, providing sustained physical stamina." },
+      { time: "Week 02", title: "Anti-Fatigue Repair", desc: "Enzymes and micro-minerals alleviate post-work fatigue and support joint flexibility." },
+      { time: "Day 30+", title: "Total Body Defense", desc: "Full red blood cell renewal cycle completes. Hemoglobin saturates, hair roots fortify, and immunity peaks." }
+    ]
+  },
+  'sujata-spirulina-capsules': {
+    ingredients: [
+      { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Essential lipid compound for nerve calmness, cellular elasticity, and hormonal balance.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "Ph", name: "Phycocyanin Bio-Shield", desc: "Shields cells against urban pollution and oxidative stress with potent free-radical scavenging.", color: "text-blue-400", border: "border-blue-500/30" },
+      { symbol: "B-Cx", name: "B-Complex Vitamins", desc: "Fuels cellular ATP energy production and enhances mental focus without caffeine.", color: "text-purple-400", border: "border-purple-500/30" },
+      { symbol: "Veg", name: "Plant Cellulose Shell", desc: "100% vegetarian HPMC shell ensuring zero odor, gentle digestion, and rapid absorption.", color: "text-emerald-400", border: "border-emerald-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Odorless Micro-Nutrition", desc: "Gentle plant capsules deliver essential nutrients directly to the digestive tract with zero odor." },
+      { time: "Week 02", title: "Neural Clarity & Focus", desc: "B-complex and antioxidants optimize cognitive processing speed and reduce afternoon burnout." },
+      { time: "Day 30+", title: "Deep Immune Shield", desc: "Builds a resilient cellular defense barrier against seasonal infections and daily physical stress." }
+    ]
+  },
+  'sujata-sea-buckthorn-capsules': {
+    ingredients: [
+      { symbol: "Ω-7", name: "Rare Palmitoleic Acid (Omega 7)", desc: "Miracle lipid that rejuvenates mucosal membranes, hydrates dry eyes/skin, and stimulates collagen.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "Ω-369", name: "Omegas 3, 6 & 9 Spectrum", desc: "Promotes cardiovascular arterial flexibility, healthy lipid balance, and smooth circulation.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Vit C", name: "Active Super-Vitamin C", desc: "12x more potent than citrus fruits. Guards skin from UV photo-aging and boosts natural immunity.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "Fla", name: "Bioactive Flavonoids", desc: "Accelerates internal mucosal tissue repair and supports gut lining integrity.", color: "text-emerald-400", border: "border-emerald-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Deep Mucosal Hydration", desc: "Relieves internal dryness in eyes, throat, and skin; restores gut lining comfort and cellular hydration." },
+      { time: "Week 02", title: "Cardiovascular & Dermal Glow", desc: "Omega fatty acids enhance micro-circulation, bringing a natural healthy radiance to the face." },
+      { time: "Day 30+", title: "Comprehensive Cellular Defense", desc: "Boosts skin elasticity, promotes cardiovascular wellness, and strengthens systemic defense." }
+    ]
+  },
+  'sujata-plant-based-vitamin-b12': {
+    ingredients: [
+      { symbol: "MeB12", name: "Plant Methylcobalamin", desc: "100% natural, active co-enzyme B12 form for direct neurological absorption without liver conversion.", color: "text-purple-400", border: "border-purple-500/30" },
+      { symbol: "RBC", name: "Erythropoietic Co-Factors", desc: "Essential for healthy red blood cell synthesis, preventing megaloblastic fatigue and anemia.", color: "text-red-400", border: "border-red-500/30" },
+      { symbol: "My", name: "Myelin Sheath Repair", desc: "Rebuilds nerve protective sheaths, eliminating tingling sensations and enhancing memory speed.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Spi", name: "Botanical Ferment Base", desc: "Spirulina-fermented plant matrix providing 3x superior bio-absorption for vegans and vegetarians.", color: "text-emerald-400", border: "border-emerald-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Neural Awakening", desc: "Active Methylcobalamin crosses the blood-brain barrier; morning lethargy and brain fog lift." },
+      { time: "Week 02", title: "Hemoglobin & Energy Surge", desc: "Elevates cellular oxygen-carrying capacity, providing lasting stamina through active hours." },
+      { time: "Day 30+", title: "Nervous System Fortification", desc: "Nerve myelin sheaths strengthen, eliminating tingling in limbs and restoring peak mental sharpness." }
+    ]
+  },
+  'sujata-pure-himalayan-shilajit': {
+    ingredients: [
+      { symbol: "FA", name: "75%+ Fulvic Acid Matrix", desc: "Ultra-purified bio-carrier that transports minerals directly into mitochondrial cell membranes.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "Min", name: "84+ Ionic Trace Minerals", desc: "Replenishes vital micronutrients, electrolytes, zinc, and magnesium in ionic colloidal form.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "ATP", name: "Mitochondrial Energy Catalyst", desc: "Supercharges cellular ATP production, increasing endurance and post-exercise recovery.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Ras", name: "Purified Shodhana Extract", desc: "Traditional Ayurvedic Rasayana that enhances vitality, vigor, and physical power naturally.", color: "text-emerald-400", border: "border-emerald-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Mitochondrial Ignition", desc: "Cellular ATP levels surge, combating physical fatigue and boosting daily stamina." },
+      { time: "Week 02", title: "Strength & Recovery", desc: "Muscle endurance increases, post-workout soreness decreases, and stress resilience peaks." },
+      { time: "Day 30+", title: "Peak Vitality & Vigor", desc: "Optimizes vitality, endurance, and deep physiological resilience for sustained peak performance." }
+    ]
+  },
+  'sujata-moringa-powder': {
+    ingredients: [
+      { symbol: "Que", name: "Quercetin & Chlorogenic Acid", desc: "Bioactive polyphenols shown to support balanced blood sugar metabolism and liver detox.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Vit A", name: "Natural Beta-Carotene", desc: "4x higher than carrots. Protects eye vision, combats retinal fatigue, and clears complexion.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "BCAA", name: "All 9 Essential Amino Acids", desc: "Complete botanical protein source supporting muscle maintenance and daily metabolic tone.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Ca-Fe", name: "Bio-Calcium & Plant Iron", desc: "Natural mineral density strengthens bone structure and combats chronic nutritional gaps.", color: "text-amber-400", border: "border-amber-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Digestive Reset", desc: "Soluble dietary fibers and chlorophyll detoxify the digestive tract and relieve sluggishness." },
+      { time: "Week 02", title: "Metabolic Equilibrium", desc: "Stabilizes post-meal glucose spikes and reduces midday sugar cravings." },
+      { time: "Day 30+", title: "Nutritional Vitality", desc: "90+ vitamins and minerals saturate cellular reserves for full-body lightness and stamina." }
+    ]
+  },
+  'sujata-spirulina-facewash': {
+    ingredients: [
+      { symbol: "Spi", name: "Spirulina Bio-Extract", desc: "Infuses antioxidants and amino acids directly into epidermal layers, detoxifying clogged pores.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Alo", name: "Organic Aloe Vera Juice", desc: "Deeply hydrates skin tissues, reduces redness, and soothes active acne inflammation.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "GT", name: "Green Tea Polyphenols", desc: "Regulates excess sebum production and shields facial skin from urban pollutant damage.", color: "text-green-400", border: "border-green-500/30" },
+      { symbol: "pH", name: "pH 5.5 Balanced Cleanser", desc: "100% sulphate-free and paraben-free formula that cleanses without stripping skin barrier lipids.", color: "text-blue-400", border: "border-blue-500/30" }
+    ],
+    timeline: [
+      { time: "Day 01", title: "Instant Oil Balance", desc: "Cleanses deep impurities and excess sebum without causing skin tightness or dryness." },
+      { time: "Day 07", title: "Acne Breakout Relief", desc: "Reduces acne redness, calms active eruptions, and clears congested sebaceous pores." },
+      { time: "Day 21+", title: "24x7 Fresh Radiance", desc: "Pores remain clear and refined, providing an oil-free, luminous glow all day long." }
+    ]
+  },
+  'sujata-spirulina-facepack-powder': {
+    ingredients: [
+      { symbol: "Spi", name: "Pure Spirulina Powder", desc: "High micro-nutrient density feeds epidermal cells to revive tired, sun-damaged skin.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "MM", name: "Multani Mitti (Fuller's Earth)", desc: "Draws out deep micro-toxins, absorbs excess oil, and tightens enlarged pores.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "San", name: "Sandalwood (Chandan)", desc: "Traditional cooling botanical that fades blemishes, sun tan, and surface pigmentation.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "Nm", name: "Neem Leaf Extract", desc: "Natural antibacterial agent that kills acne-causing bacteria and prevents future breakouts.", color: "text-green-400", border: "border-green-500/30" }
+    ],
+    timeline: [
+      { time: "Day 01", title: "Instant Tan & Glow", desc: "Unclogs pores in 15 minutes, leaving facial skin noticeably brighter and refreshed." },
+      { time: "Week 02", title: "Blemish & Spot Fading", desc: "Regular application lightens stubborn sun tan, dark spots, and post-pimple marks." },
+      { time: "Day 30+", title: "Velvet Smooth Skin", desc: "Restores even skin tone and refined texture with a natural healthy bridal radiance." }
+    ]
+  },
+  'sujata-spiruglow-bath-soap': {
+    ingredients: [
+      { symbol: "Spi", name: "Active Spirulina Extract", desc: "Delivers trace vitamins and antioxidants to skin cells during daily bathing.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Tur", name: "Ayurvedic Turmeric (Haldi)", desc: "Purifies skin micro-flora, soothes body acne, and enhances natural skin tone.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "San", name: "Sandalwood & Neem", desc: "Calms heat rashes, backne, and skin irritation with gentle botanical action.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "VCO", name: "Cold-Pressed Coconut Oil", desc: "Pure coconut oil base rich in natural glycerin ensures deep, long-lasting moisturization.", color: "text-cyan-400", border: "border-cyan-500/30" }
+    ],
+    timeline: [
+      { time: "Day 01", title: "Nourishing Herbal Cleanse", desc: "Produces a rich, creamy lather that hydrates the skin without harsh chemical drying." },
+      { time: "Week 02", title: "Body Blemish Relief", desc: "Soothes backne, heat rash, and rough patches across arms, back, and shoulders." },
+      { time: "Day 30+", title: "Soft, Healthy Skin", desc: "Maintains optimal dermal barrier moisture and gives a natural silky texture all day." }
+    ]
+  },
+  'sujata-spirulina-korean-cream': {
+    ingredients: [
+      { symbol: "Nia", name: "Niacinamide (Vitamin B3)", desc: "Clinically proven to minimize enlarged pores, even skin tone, and fade hyperpigmentation.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "HA", name: "Hyaluronic Acid Complex", desc: "Binds 1000x its weight in water to deliver dewy, plump K-beauty glass skin hydration.", color: "text-blue-400", border: "border-blue-500/30" },
+      { symbol: "Spi", name: "Spirulina Bio-Actives", desc: "Accelerates epidermal cellular turnover to lighten sun tan and post-acne dark spots.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Lic", name: "Licorice Root Extract", desc: "Gentle plant brightener that inhibits excess melanin production for a spotless glow.", color: "text-amber-400", border: "border-amber-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Glass Skin Hydration", desc: "Non-greasy cream absorbs rapidly, giving a plump, dewy, lit-from-within glow." },
+      { time: "Week 02", title: "Tan & Dark Spot Fading", desc: "Sun tan patches and stubborn acne marks visibly reduce in darkness and size." },
+      { time: "Day 30+", title: "Luminous, Spotless Skin", desc: "Uniform complexion with visibly refined pores and resilient moisture barrier." }
+    ]
+  },
+  'sujata-bridal-whitening-cream': {
+    ingredients: [
+      { symbol: "Kes", name: "Kashmiri Saffron (Kesar)", desc: "Precious royal herb that improves dermal blood circulation for luminous bridal glow.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "San", name: "Pure Sandalwood Extract", desc: "Soothes skin redness, cools inflammation, and smooths uneven skin roughness.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "Spi", name: "Spirulina Bio-Complex", desc: "Delivers essential amino acids to reverse dullness and photo-fatigued dermal texture.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Alm", name: "Sweet Almond & Vitamin E", desc: "Deeply seals in hydration to create a soft, velvet bridal radiance without chemicals.", color: "text-orange-400", border: "border-orange-500/30" }
+    ],
+    timeline: [
+      { time: "Day 03", title: "Instant Glow & Softness", desc: "Dull, tired complexion immediately regains moisture and visible softness." },
+      { time: "Week 02", title: "Tone & Pigmentation Clarity", desc: "Fades uneven patches, dark circles, and sun tan with gentle botanical nourishment." },
+      { time: "Day 30+", title: "Wedding-Ready Luminous Radiance", desc: "Achieves velvet-smooth, glowing, and camera-ready skin without bleach or steroids." }
+    ]
+  },
+  'sujata-spirulina-coconut-hair-oil': {
+    ingredients: [
+      { symbol: "Bio", name: "Active Biotin & Spirulina", desc: "Feeds hair roots with sulfur-rich proteins and micronutrients to stop excessive shedding.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "VCO", name: "Virgin Cold-Pressed Coconut", desc: "Deep-penetrating medium-chain fatty acids prevent hair protein loss and strengthen shafts.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Ros", name: "Rosemary Essential Oil", desc: "Stimulates follicular blood micro-circulation to activate dormant hair roots for growth.", color: "text-green-400", border: "border-green-500/30" },
+      { symbol: "Vit E", name: "Pure Vitamin E & Almond Oil", desc: "Seals hair cuticles, eliminates split ends, and leaves strands shiny, silky, and frizz-free.", color: "text-amber-400", border: "border-amber-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Scalp Relief & Frizz Control", desc: "Soothes dry, itchy scalp and eliminates flyaways with lightweight non-sticky moisture." },
+      { time: "Week 03", title: "Hair Fall Reduction (70%+)", desc: "Strengthens root anchoring in the scalp, dramatically reducing hair fall in shower and comb." },
+      { time: "Day 60+", title: "Noticeable Density & Bounce", desc: "New baby hair growth begins along hairline; hair feels visibly thicker, glossier, and fuller." }
+    ]
+  },
+  'sujata-spirushine-shampoo-conditioner': {
+    ingredients: [
+      { symbol: "Ker", name: "Plant Keratin Matrix", desc: "Rebuilds damaged hair fiber proteins, preventing strand breakage and split ends.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "Spi", name: "Spirulina Bio-Extract", desc: "Delivers essential trace minerals directly to the scalp to fight hair thinning.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "B5", name: "Pro-Vitamin B5 (Panthenol)", desc: "Built-in deep conditioner coats strands for instant detangling and silky bounce.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Sul-0", name: "Sulphate-Free Coconut Foam", desc: "Ultra-mild natural surfactant cleanses scalp sebum without stripping moisture.", color: "text-blue-400", border: "border-blue-500/30" }
+    ],
+    timeline: [
+      { time: "Wash 01", title: "Silky Detangled Cleanse", desc: "Cleanses scalp thoroughly while built-in conditioner makes hair instantly soft and detangled." },
+      { time: "Week 02", title: "Anti-Breakage Defense", desc: "Keratin reinforces weak hair shafts, reducing breakage during combing and styling." },
+      { time: "Day 30+", title: "Salon-Grade Bounce & Gloss", desc: "Restores hair fullness, natural shine, and long-lasting freshness without chemical buildup." }
+    ]
+  },
+  'sujata-spirulina-sea-buckthorn-combo': {
+    ingredients: [
+      { symbol: "Spi", name: "Pure Spirulina (Tablets)", desc: "Delivers 65% complete vegan protein, organic iron, and all-day physical stamina.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "SBT", name: "Himalayan Sea Buckthorn", desc: "Provides rare Omega 7, 3, 6, 9 and natural Vitamin C for skin glow and heart health.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Ph-Fla", name: "Dual Bio-Shield", desc: "Synergy of Phycocyanin and Flavonoids creates a 360° antioxidant defense against aging.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Syn", name: "360° Ayurvedic Synergy", desc: "Comprehensive superfood combination that addresses energy, immunity, skin, and vitality.", color: "text-amber-400", border: "border-amber-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Synergistic Energy Surge", desc: "Bio-iron and omega fatty acids combine to boost daily stamina and mental sharpness." },
+      { time: "Week 02", title: "Immunity & Radiant Skin", desc: "Omega 7 hydrates dermal layers from within while antioxidants fortify immune defense." },
+      { time: "Day 30+", title: "360° Complete Wellness", desc: "Optimal cardiovascular wellness, radiant skin elasticity, and sustained high energy." }
+    ]
+  }
+};
 
-// Clinical Data for Tablets & Powder
-const defaultIngredients = isTablet ? [
-  { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Rare essential fatty acid. Regulates hormonal balance, calms joint inflammation, and protects cardiovascular wellness.", color: "text-amber-400", border: "border-amber-500/30" },
-  { symbol: "SOD", name: "Superoxide Dismutase", desc: "Master antioxidant enzyme preserved under Sub-40°C cold press. Neutralizes cellular oxidative stress instantly.", color: "text-cyan-400", border: "border-cyan-500/30" },
-  { symbol: "BC", name: "Beta-Carotene & Zeaxanthin", desc: "High-potency carotenoids. Shields eyes from screen fatigue and stimulates dermal collagen elasticity.", color: "text-orange-400", border: "border-orange-500/30" },
-  { symbol: "EAA", name: "18 Essential Amino Matrix", desc: "65% complete plant protein. Rebuilds muscle tissue, repairs connective fibers, and sustains peak stamina.", color: "text-emerald-400", border: "border-emerald-500/30" }
-] : [
-  { symbol: "Ph", name: "Phycocyanin", desc: "Powerful antioxidant. Fights free radicals and reduces cellular inflammation.", color: "text-blue-400", border: "border-blue-500/30" },
-  { symbol: "Fe", name: "Raw Iron", desc: "Highly bioavailable. Instantly boosts hemoglobin and oxygen transport.", color: "text-orange-400", border: "border-orange-500/30" },
-  { symbol: "B12", name: "Methylcobalamin", desc: "Active B12 form. Ignites brain function and nervous system repair.", color: "text-purple-400", border: "border-purple-500/30" },
-  { symbol: "Ch", name: "Chlorophyll", desc: "The green blood. Flushes out heavy metals and detoxifies the liver.", color: "text-emerald-400", border: "border-emerald-500/30" }
-];
+// Resolve Clinical Dossier for current product
+const resolvedDossier = (handle && productClinicalDossierMap[handle.toLowerCase()]) 
+  ? productClinicalDossierMap[handle.toLowerCase()]
+  : (handle && handle.toLowerCase().includes('oil')) ? productClinicalDossierMap['sujata-spirulina-coconut-hair-oil']
+  : (handle && handle.toLowerCase().includes('shampoo')) ? productClinicalDossierMap['sujata-spirushine-shampoo-conditioner']
+  : (handle && (handle.toLowerCase().includes('facewash') || handle.toLowerCase().includes('face-wash'))) ? productClinicalDossierMap['sujata-spirulina-facewash']
+  : (handle && (handle.toLowerCase().includes('facepack') || handle.toLowerCase().includes('face-pack'))) ? productClinicalDossierMap['sujata-spirulina-facepack-powder']
+  : (handle && handle.toLowerCase().includes('soap')) ? productClinicalDossierMap['sujata-spiruglow-bath-soap']
+  : (handle && (handle.toLowerCase().includes('korean') || handle.toLowerCase().includes('cream'))) ? productClinicalDossierMap['sujata-spirulina-korean-cream']
+  : (handle && handle.toLowerCase().includes('bridal')) ? productClinicalDossierMap['sujata-bridal-whitening-cream']
+  : (handle && handle.toLowerCase().includes('shilajit')) ? productClinicalDossierMap['sujata-pure-himalayan-shilajit']
+  : (handle && handle.toLowerCase().includes('b12')) ? productClinicalDossierMap['sujata-plant-based-vitamin-b12']
+  : (handle && handle.toLowerCase().includes('moringa')) ? productClinicalDossierMap['sujata-moringa-powder']
+  : (handle && handle.toLowerCase().includes('buckthorn')) ? productClinicalDossierMap['sujata-sea-buckthorn-capsules']
+  : (handle && handle.toLowerCase().includes('combo')) ? productClinicalDossierMap['sujata-spirulina-sea-buckthorn-combo']
+  : (handle && handle.toLowerCase().includes('tablet')) ? productClinicalDossierMap['sujata-spirulina-tablets']
+  : (handle && handle.toLowerCase().includes('capsule')) ? productClinicalDossierMap['sujata-spirulina-capsules']
+  : productClinicalDossierMap['sujata-spirulina-powder'];
 
-const defaultTimeline = isTablet ? [
-  { time: "Week 01", title: "Metabolic Ignition", desc: "Targeted enteric absorption delivers pure bio-iron and enzymes. Zero grassy aftertaste, zero acid reflux, and steady all-day physical stamina." },
-  { time: "Week 02", title: "Anti-Inflammatory Repair", desc: "Potent GLA and S.O.D enzymes soothe cellular inflammation. Muscle recovery accelerates post-workout, and morning joint stiffness vanishes." },
-  { time: "Day 30+", title: "Systemic Fortification", desc: "A complete 30-day red blood cell cycle finishes. Hemoglobin saturates, hair roots fortify from within, and deep immunity shields against daily fatigue." }
-] : [
-  { time: "Hour 01", title: "The Awakening", desc: "Raw B-vitamins flood your bloodstream. The afternoon brain-fog instantly lifts without caffeine jitters." },
-  { time: "Day 07", title: "Gut Rebalance", desc: "Cold-pressed enzymes begin to restore your microbiome. Bloating reduces, and nutrient absorption peaks." },
-  { time: "Day 30", title: "Cellular Peak", desc: "A full cycle of antioxidants completes. Skin clears, immune defense fortifies, and energy remains sustained." }
-];
+let ingredientsData = resolvedDossier.ingredients;
+let timelineData = resolvedDossier.timeline;
 
-// Robust JSON Parsing with Guaranteed Array Validation
-let ingredientsData = defaultIngredients;
+// If Shopify metafields provide custom JSON, let them override
 try {
   if (product.ingredients?.value && product.ingredients.value.trim().length > 2) {
     const parsed = JSON.parse(product.ingredients.value);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      ingredientsData = parsed;
-    }
+    if (Array.isArray(parsed) && parsed.length > 0) ingredientsData = parsed;
   }
-} catch (e) {
-  ingredientsData = defaultIngredients;
-}
+} catch (e) {}
 
-let timelineData = defaultTimeline;
 try {
   if (product.timeline?.value && product.timeline.value.trim().length > 2) {
     const parsed = JSON.parse(product.timeline.value);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      timelineData = parsed;
-    }
+    if (Array.isArray(parsed) && parsed.length > 0) timelineData = parsed;
   }
-} catch (e) {
-  timelineData = defaultTimeline;
-}
+} catch (e) {}
 
 const labReportUrl = product.labReport?.value || "/NABL-Report-Sujata.pdf";
 
