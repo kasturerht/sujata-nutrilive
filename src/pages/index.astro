@@ -19,7 +19,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 // GraphQL Query for Products Catalog
 const query = `
   {
-    products(first: 6) {
+    products(first: 50) {
       edges {
         node {
           id

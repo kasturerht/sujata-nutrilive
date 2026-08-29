@@ -42,11 +42,103 @@ try {
   console.error("❌ Failed to fetch product details from Shopify:", error);
 }
 
-if (!product) return Astro.redirect('/');
+const productLocalGalleryMap: Record<string, Array<{ url: string; altText: string }>> = {
+  'sujata-spirulina-powder': [
+    { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Organic Spirulina Powder Pouch' },
+    { url: '/products/sujata-spirulina-powder-nutrition-powerhouse.jpg', altText: 'Powerhouse of Nutrition Infographic' },
+    { url: '/products/sujata-spirulina-powder-energy-vitality.jpg', altText: 'Energy Stamina Mental Clarity' },
+    { url: '/products/sujata-spirulina-powder-how-to-use.jpg', altText: 'How to Use Spirulina Powder' }
+  ],
+  'spirulin-powder': [
+    { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Organic Spirulina Powder Pouch' },
+    { url: '/products/sujata-spirulina-powder-nutrition-powerhouse.jpg', altText: 'Powerhouse of Nutrition Infographic' },
+    { url: '/products/sujata-spirulina-powder-energy-vitality.jpg', altText: 'Energy Stamina Mental Clarity' },
+    { url: '/products/sujata-spirulina-powder-how-to-use.jpg', altText: 'How to Use Spirulina Powder' }
+  ],
+  'sujata-spirulina-tablets': [
+    { url: '/products/sujata-spirulina-tablets-bottle.jpg', altText: 'Sujata Spirulina Tablets Bottle' },
+    { url: '/products/sujata-spirulina-tablets-benefits.jpg', altText: 'Spirulina Tablets Strength & B-Vitamins' },
+    { url: '/products/sujata-spirulina-tablets-how-to-take.jpg', altText: 'How to Take Spirulina Tablets' }
+  ],
+  'spirulina-tablets': [
+    { url: '/products/sujata-spirulina-tablets-bottle.jpg', altText: 'Sujata Spirulina Tablets Bottle' },
+    { url: '/products/sujata-spirulina-tablets-benefits.jpg', altText: 'Spirulina Tablets Strength & B-Vitamins' },
+    { url: '/products/sujata-spirulina-tablets-how-to-take.jpg', altText: 'How to Take Spirulina Tablets' }
+  ],
+  'sujata-spirulina-capsules': [
+    { url: '/products/sujata-spirulina-capsules-bottle.jpg', altText: 'Sujata Spirulina Capsules Bottle' },
+    { url: '/products/sujata-spirulina-capsules-fuel-body.jpg', altText: 'Fuel Your Body Power Your Day' },
+    { url: '/products/sujata-spirulina-capsules-benefits.jpg', altText: 'Spirulina Capsules Mental Clarity' },
+    { url: '/products/sujata-spirulina-capsules-how-to-use.jpg', altText: 'How to Use Spirulina Capsules' }
+  ],
+  'sujata-sea-buckthorn-capsules': [
+    { url: '/products/sujata-sea-buckthorn-capsules-bottle.jpg', altText: 'Sujata Sea Buckthorn Capsules' },
+    { url: '/products/sujata-sea-buckthorn-capsules-rustic.jpg', altText: 'Nature Secret for Heart & Skin' },
+    { url: '/products/sujata-sea-buckthorn-capsules-benefits.jpg', altText: 'Powerful Benefits of Sea Buckthorn' },
+    { url: '/products/sujata-sea-buckthorn-capsules-poster.jpg', altText: 'Rich in Omega 3 7 9' }
+  ],
+  'sujata-plant-based-vitamin-b12': [
+    { url: '/products/sujata-plant-based-b12-bottle.jpg', altText: 'Sujata Plant-Based Vitamin B12 90 Capsules' }
+  ],
+  'sujata-pure-himalayan-shilajit': [
+    { url: '/products/sujata-himalayan-shilajit-bottle.jpg', altText: 'Sujata Pure Himalayan Shilajit 15000mg' }
+  ],
+  'sujata-moringa-powder': [
+    { url: '/products/sujata-moringa-powder-pouch.jpg', altText: 'Sujata Moringa Powder 100g' },
+    { url: '/products/sujata-moringa-powder-label-nutrition.jpg', altText: 'Moringa Powder Nutrition Label' }
+  ],
+  'sujata-spirulina-facewash': [
+    { url: '/products/sujata-spirulina-facewash-bottle.jpg', altText: 'Sujata Spirulina Face Wash 100ml' },
+    { url: '/products/sujata-spirulina-facewash-antioxidant.jpg', altText: 'Antioxidant & Deep Pore Cleansing' },
+    { url: '/products/sujata-spirulina-facewash-exfoliation.jpg', altText: 'Deep Cleansing & Oil Control' },
+    { url: '/products/sujata-spirulina-facewash-how-to-use.jpg', altText: 'How to Use Face Wash 3 Steps' },
+    { url: '/products/sujata-spirulina-facewash-lifestyle.jpg', altText: 'Refresh Your Skin' },
+    { url: '/products/sujata-spirulina-facewash-benefits.jpg', altText: 'Top Benefits of Spirulina Face Wash' }
+  ],
+  'sujata-spirulina-facepack-powder': [
+    { url: '/products/sujata-spirulina-facepack-pouch.jpg', altText: 'Sujata Spirulina Face Pack Powder 50g' },
+    { url: '/products/sujata-spirulina-facepack-glow.jpg', altText: 'Glow Naturally with Spirulina' },
+    { url: '/products/sujata-spirulina-facepack-acne.jpg', altText: 'Fights Acne and Pimples' },
+    { url: '/products/sujata-spirulina-facepack-how-to-use.jpg', altText: 'How to Use Spirulina Face Pack' }
+  ],
+  'sujata-spiruglow-bath-soap': [
+    { url: '/products/sujata-spiruglow-bath-soap-box.jpg', altText: 'SpiruGlow Handmade Bath Soap Bar' },
+    { url: '/products/sujata-spiruglow-bath-soap-ingredients.jpg', altText: 'SpiruGlow Soap Ingredients' }
+  ],
+  'sujata-spirulina-korean-cream': [
+    { url: '/products/sujata-spirulina-korean-cream-jar.jpg', altText: 'Sujata Spirulina Korean Cream 50g' },
+    { url: '/products/sujata-spirulina-korean-cream-spots-tan.jpg', altText: 'Tan Remover & Spot Corrector' }
+  ],
+  'sujata-bridal-whitening-cream': [
+    { url: '/products/sujata-bridal-whitening-cream-jar.jpg', altText: 'Sujata Bridal Whitening Cream 50g' },
+    { url: '/products/sujata-bridal-whitening-cream-roses.jpg', altText: 'Bridal Whitening Cream Rose Petals' }
+  ],
+  'sujata-spirulina-coconut-hair-oil': [
+    { url: '/products/sujata-spirulina-hair-oil-bottle.png', altText: 'Sujata Spirulina & Coconut Hair Oil 50ml' },
+    { url: '/products/sujata-spirulina-hair-oil-scalp.jpg', altText: 'Scalp Nourishment & Hair Fall' },
+    { url: '/products/sujata-spirulina-hair-oil-frizz.jpg', altText: 'Frizz & Heat Damage Solution' },
+    { url: '/products/sujata-spirulina-hair-oil-ingredients.jpg', altText: 'Pure Ingredients Biotin Vitamin E' }
+  ],
+  'sujata-spirushine-shampoo-conditioner': [
+    { url: '/products/sujata-spirushine-shampoo-bottle.jpg', altText: 'Sujata SpiruShine 2-in-1 Shampoo 100ml' },
+    { url: '/products/sujata-spirushine-shampoo-formula.jpg', altText: 'Shampoo with Conditioner Formula' },
+    { url: '/products/sujata-spirushine-shampoo-benefits.jpg', altText: 'Strengthens Hair Deep Hydration' },
+    { url: '/products/sujata-spirushine-shampoo-how-to-use.jpg', altText: 'How to Use SpiruShine Shampoo' }
+  ],
+  'sujata-spirulina-sea-buckthorn-combo': [
+    { url: '/products/sujata-combo-spirulina-sea-buckthorn.jpg', altText: 'Spirulina + Sea Buckthorn Super Combo' },
+    { url: '/products/sujata-combo-synergy-infographic-hindi.jpg', altText: 'Ayurvedic Synergy Infographic' }
+  ]
+};
 
-const images = product.images?.edges.map((e: any) => e.node) || [];
-const variants = product.variants?.edges.map((e: any) => e.node) || [];
+let images = product.images?.edges.map((e: any) => e.node) || [];
+if (images.length === 0 && handle && productLocalGalleryMap[handle.toLowerCase()]) {
+  images = productLocalGalleryMap[handle.toLowerCase()];
+} else if (images.length === 0) {
+  images = [{ url: '/products/sujata-spirulina-powder-pouch.jpg', altText: product.title }];
+}
 const primaryImage = images[0];
+const variants = product.variants?.edges.map((e: any) => e.node) || [];
 
 const price = product.priceRange ? parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2) : "0.00";
 const maxPrice = product.priceRange ? parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2) : "0.00";

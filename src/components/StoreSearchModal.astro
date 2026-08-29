@@ -402,13 +402,53 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       }
     }
 
+    function getSearchFallback(node) {
+      const handle = (node.handle || '').toLowerCase();
+      const map = {
+        'sujata-spirulina-powder': '/products/sujata-spirulina-powder-pouch.jpg',
+        'spirulin-powder': '/products/sujata-spirulina-powder-pouch.jpg',
+        'sujata-spirulina-tablets': '/products/sujata-spirulina-tablets-bottle.jpg',
+        'spirulina-tablets': '/products/sujata-spirulina-tablets-bottle.jpg',
+        'sujata-spirulina-capsules': '/products/sujata-spirulina-capsules-bottle.jpg',
+        'sujata-sea-buckthorn-capsules': '/products/sujata-sea-buckthorn-capsules-bottle.jpg',
+        'sujata-plant-based-vitamin-b12': '/products/sujata-plant-based-b12-bottle.jpg',
+        'sujata-pure-himalayan-shilajit': '/products/sujata-himalayan-shilajit-bottle.jpg',
+        'sujata-moringa-powder': '/products/sujata-moringa-powder-pouch.jpg',
+        'sujata-spirulina-facewash': '/products/sujata-spirulina-facewash-bottle.jpg',
+        'sujata-spirulina-facepack-powder': '/products/sujata-spirulina-facepack-pouch.jpg',
+        'sujata-spiruglow-bath-soap': '/products/sujata-spiruglow-bath-soap-box.jpg',
+        'sujata-spirulina-korean-cream': '/products/sujata-spirulina-korean-cream-jar.jpg',
+        'sujata-bridal-whitening-cream': '/products/sujata-bridal-whitening-cream-jar.jpg',
+        'sujata-spirulina-coconut-hair-oil': '/products/sujata-spirulina-hair-oil-bottle.png',
+        'sujata-spirushine-shampoo-conditioner': '/products/sujata-spirushine-shampoo-bottle.jpg',
+        'sujata-spirulina-sea-buckthorn-combo': '/products/sujata-combo-spirulina-sea-buckthorn.jpg'
+      };
+      if (map[handle]) return map[handle];
+      const t = (node.title || '').toLowerCase();
+      if (t.includes('shampoo')) return '/products/sujata-spirushine-shampoo-bottle.jpg';
+      if (t.includes('oil')) return '/products/sujata-spirulina-hair-oil-bottle.png';
+      if (t.includes('face wash') || t.includes('facewash')) return '/products/sujata-spirulina-facewash-bottle.jpg';
+      if (t.includes('face pack') || t.includes('facepack')) return '/products/sujata-spirulina-facepack-pouch.jpg';
+      if (t.includes('soap') || t.includes('spiruglow')) return '/products/sujata-spiruglow-bath-soap-box.jpg';
+      if (t.includes('korean')) return '/products/sujata-spirulina-korean-cream-jar.jpg';
+      if (t.includes('bridal') || t.includes('whitening')) return '/products/sujata-bridal-whitening-cream-jar.jpg';
+      if (t.includes('shilajit')) return '/products/sujata-himalayan-shilajit-bottle.jpg';
+      if (t.includes('b12')) return '/products/sujata-plant-based-b12-bottle.jpg';
+      if (t.includes('sea buckthorn')) return '/products/sujata-sea-buckthorn-capsules-bottle.jpg';
+      if (t.includes('moringa')) return '/products/sujata-moringa-powder-pouch.jpg';
+      if (t.includes('combo')) return '/products/sujata-combo-spirulina-sea-buckthorn.jpg';
+      if (t.includes('tablet')) return '/products/sujata-spirulina-tablets-bottle.jpg';
+      if (t.includes('capsule')) return '/products/sujata-spirulina-capsules-bottle.jpg';
+      return '/products/sujata-spirulina-powder-pouch.jpg';
+    }
+
     function renderResults(products, searchTerm) {
       if (resultsCount) resultsCount.innerText = `${products.length} Formulations Found`;
       if (!resultsList) return;
 
       resultsList.innerHTML = products.map(({ node }) => {
         const price = parseFloat(node.priceRange?.minVariantPrice?.amount || 799).toFixed(2);
-        const imgUrl = node.images?.edges?.[0]?.node?.url || "/spirulina-bottle.png";
+        const imgUrl = node.images?.edges?.[0]?.node?.url || getSearchFallback(node);
         const variantId = node.variants?.edges?.[0]?.node?.id || "";
 
         return `

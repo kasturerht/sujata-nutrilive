@@ -17,20 +17,145 @@ function formatPrice(amount: string | number) {
   }).format(num);
 }
 
+const productLocalImageMap: Record<string, string> = {
+  'sujata-spirulina-powder': '/products/sujata-spirulina-powder-pouch.jpg',
+  'spirulin-powder': '/products/sujata-spirulina-powder-pouch.jpg',
+  'sujata-spirulina-tablets': '/products/sujata-spirulina-tablets-bottle.jpg',
+  'spirulina-tablets': '/products/sujata-spirulina-tablets-bottle.jpg',
+  'sujata-spirulina-capsules': '/products/sujata-spirulina-capsules-bottle.jpg',
+  'sujata-sea-buckthorn-capsules': '/products/sujata-sea-buckthorn-capsules-bottle.jpg',
+  'sujata-plant-based-vitamin-b12': '/products/sujata-plant-based-b12-bottle.jpg',
+  'sujata-pure-himalayan-shilajit': '/products/sujata-himalayan-shilajit-bottle.jpg',
+  'sujata-moringa-powder': '/products/sujata-moringa-powder-pouch.jpg',
+  'sujata-spirulina-facewash': '/products/sujata-spirulina-facewash-bottle.jpg',
+  'sujata-spirulina-facepack-powder': '/products/sujata-spirulina-facepack-pouch.jpg',
+  'sujata-spiruglow-bath-soap': '/products/sujata-spiruglow-bath-soap-box.jpg',
+  'sujata-spirulina-korean-cream': '/products/sujata-spirulina-korean-cream-jar.jpg',
+  'sujata-bridal-whitening-cream': '/products/sujata-bridal-whitening-cream-jar.jpg',
+  'sujata-spirulina-coconut-hair-oil': '/products/sujata-spirulina-hair-oil-bottle.png',
+  'sujata-spirushine-shampoo-conditioner': '/products/sujata-spirushine-shampoo-bottle.jpg',
+  'sujata-spirulina-sea-buckthorn-combo': '/products/sujata-combo-spirulina-sea-buckthorn.jpg',
+};
+
 function getImageUrl(product: any) {
   if (product.featuredImage?.url) return product.featuredImage.url;
   if (product.images?.edges?.[0]?.node?.url) return product.images.edges[0].node.url;
+  
+  const handle = (product.handle || '').toLowerCase();
+  if (productLocalImageMap[handle]) return productLocalImageMap[handle];
+  
   const title = (product.title || '').toLowerCase();
-  if (title.includes('capsule')) return '/spirulina-bottle.png';
-  return '/spirulina-powder.png';
+  if (title.includes('shampoo')) return '/products/sujata-spirushine-shampoo-bottle.jpg';
+  if (title.includes('hair oil') || title.includes('oil')) return '/products/sujata-spirulina-hair-oil-bottle.png';
+  if (title.includes('face wash') || title.includes('facewash')) return '/products/sujata-spirulina-facewash-bottle.jpg';
+  if (title.includes('face pack') || title.includes('facepack')) return '/products/sujata-spirulina-facepack-pouch.jpg';
+  if (title.includes('soap') || title.includes('spiruglow')) return '/products/sujata-spiruglow-bath-soap-box.jpg';
+  if (title.includes('korean')) return '/products/sujata-spirulina-korean-cream-jar.jpg';
+  if (title.includes('bridal') || title.includes('whitening')) return '/products/sujata-bridal-whitening-cream-jar.jpg';
+  if (title.includes('shilajit')) return '/products/sujata-himalayan-shilajit-bottle.jpg';
+  if (title.includes('b12') || title.includes('vitamin b12')) return '/products/sujata-plant-based-b12-bottle.jpg';
+  if (title.includes('sea buckthorn')) return '/products/sujata-sea-buckthorn-capsules-bottle.jpg';
+  if (title.includes('moringa')) return '/products/sujata-moringa-powder-pouch.jpg';
+  if (title.includes('combo') || title.includes('bundle')) return '/products/sujata-combo-spirulina-sea-buckthorn.jpg';
+  if (title.includes('capsule')) return '/products/sujata-spirulina-capsules-bottle.jpg';
+  if (title.includes('tablet')) return '/products/sujata-spirulina-tablets-bottle.jpg';
+  if (title.includes('powder')) return '/products/sujata-spirulina-powder-pouch.jpg';
+  
+  return '/products/sujata-spirulina-powder-pouch.jpg';
 }
 
-const productMeta = [
-  { category: 'capsules', tag: "Bestseller", benefit: "⚡ Daily Energy & Stamina", oldPrice: 1499, savedPrice: "₹500", rating: "4.9 (1.8k)" },
-  { category: 'powder', tag: "Raw Pure", benefit: "🛡️ Cellular Rejuvenation", oldPrice: 1299, savedPrice: "₹500", rating: "4.9 (2.1k)" },
-  { category: 'combos', tag: "Best Value", benefit: "✨ Complete 90-Day Detox", oldPrice: 2798, savedPrice: "₹999", rating: "5.0 (890)" },
-  { category: 'trial', tag: "Starter Trial", benefit: "🌱 7-Day Experience Pack", oldPrice: 799, savedPrice: "₹300", rating: "4.8 (640)" }
-];
+function getProductCategory(product: any) {
+  const t = (product.title + ' ' + (product.tags || []).join(' ') + ' ' + product.handle).toLowerCase();
+  if (t.includes('combo') || t.includes('bundle')) return 'combos';
+  if (t.includes('shampoo') || t.includes('hair oil') || t.includes('hair')) return 'haircare';
+  if (t.includes('face') || t.includes('soap') || t.includes('cream') || t.includes('whitening') || t.includes('skin')) return 'skincare';
+  if (t.includes('capsule') || t.includes('tablet') || t.includes('shilajit') || t.includes('b12') || t.includes('sea buckthorn')) return 'nutrition';
+  if (t.includes('powder') || t.includes('moringa')) return 'nutrition';
+  return 'nutrition';
+}
+
+function getProductBadgeAndBenefit(product: any, currentPrice: number) {
+  const t = (product.title || '').toLowerCase();
+  let tag = "Bestseller";
+  let benefit = "⚡ Cellular Vitality & Immunity";
+  let rating = "4.9 (1.8k)";
+  let oldPrice = Math.round(currentPrice * 1.35);
+
+  if (t.includes('powder') && t.includes('spirulina')) {
+    tag = "100% Raw Pure";
+    benefit = "🌱 Complete Cellular Detox & Protein";
+    rating = "4.9 (2.4k)";
+    oldPrice = 799;
+  } else if (t.includes('tablet')) {
+    tag = "Zero Binder";
+    benefit = "⚡ Daily Energy, Iron & Stamina";
+    rating = "4.9 (3.1k)";
+    oldPrice = 650;
+  } else if (t.includes('sea buckthorn')) {
+    tag = "Rare Omega 7";
+    benefit = "🛡️ Heart, Skin & Mucosal Defense";
+    rating = "4.9 (1.2k)";
+    oldPrice = 999;
+  } else if (t.includes('b12')) {
+    tag = "Plant Based B12";
+    benefit = "🧠 Active Nerve & RBC Formation";
+    rating = "4.8 (940)";
+    oldPrice = 1099;
+  } else if (t.includes('shilajit')) {
+    tag = "Gold Grade 75%+";
+    benefit = "💪 Peak Physical Strength & Vitality";
+    rating = "5.0 (1.5k)";
+    oldPrice = 1299;
+  } else if (t.includes('moringa')) {
+    tag = "Super Detox";
+    benefit = "🍃 Blood Sugar Balance & Cleansing";
+    rating = "4.8 (820)";
+    oldPrice = 299;
+  } else if (t.includes('face wash') || t.includes('facewash')) {
+    tag = "Anti-Acne";
+    benefit = "✨ Deep Pore Detox & Oil Control";
+    rating = "4.9 (1.9k)";
+    oldPrice = 499;
+  } else if (t.includes('face pack') || t.includes('facepack')) {
+    tag = "Instant Glow";
+    benefit = "🌸 Botanical Tan & Blemish Removal";
+    rating = "4.8 (750)";
+    oldPrice = 399;
+  } else if (t.includes('soap')) {
+    tag = "100% Organic";
+    benefit = "🧼 Handcrafted Ayurvedic Herbal Bar";
+    rating = "4.9 (1.1k)";
+    oldPrice = 249;
+  } else if (t.includes('korean')) {
+    tag = "K-Beauty Formula";
+    benefit = "✨ Glass Skin & Dark Spot Corrector";
+    rating = "4.9 (880)";
+    oldPrice = 799;
+  } else if (t.includes('bridal') || t.includes('whitening')) {
+    tag = "Luxury Radiance";
+    benefit = "👑 Saffron & Sandalwood Bridal Glow";
+    rating = "5.0 (620)";
+    oldPrice = 899;
+  } else if (t.includes('hair oil') || t.includes('oil')) {
+    tag = "Hair Fall Control";
+    benefit = "💆 Scalp Nourishment & Active Biotin";
+    rating = "4.9 (1.4k)";
+    oldPrice = 399;
+  } else if (t.includes('shampoo')) {
+    tag = "2-in-1 Therapy";
+    benefit = "🌿 Anti-Thinning & Keratin Strength";
+    rating = "4.8 (910)";
+    oldPrice = 499;
+  } else if (t.includes('combo') || t.includes('bundle')) {
+    tag = "Best Value Synergy";
+    benefit = "🎁 Complete Superfood Immunity Synergy";
+    rating = "5.0 (2.8k)";
+    oldPrice = 1250;
+  }
+
+  const savedPrice = Math.max(0, oldPrice - currentPrice);
+  return { tag, benefit, rating, oldPrice, savedPrice };
+}
 ---
 
 <!-- 🛍️ ZONE 2: The Unified Shop Engine (Featured Kit + Segmented Catalog) -->
@@ -59,13 +184,16 @@ const productMeta = [
         {/* Filter Pills */}
         <div class="flex flex-wrap items-center gap-2" id="shop-catalog-filters">
           <button class="shop-filter-btn active px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-[#111827] text-white cursor-pointer" data-filter="all">
-            All Products
+            All Products ({products.length})
           </button>
-          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="capsules">
-            💊 Veg Capsules
+          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="nutrition">
+            🌿 Nutrition & Superfoods
           </button>
-          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="powder">
-            🌿 Pure Powder
+          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="skincare">
+            🌸 Skin & Face Care
+          </button>
+          <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="haircare">
+            💆 Hair Care
           </button>
           <button class="shop-filter-btn px-4 py-2 rounded-full text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer" data-filter="combos">
             📦 Value Combos
@@ -79,11 +207,14 @@ const productMeta = [
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="shop-products-grid">
       {products.map((edge: any, index: number) => {
         const product = edge.node;
-        const meta = productMeta[index % productMeta.length];
+        const category = getProductCategory(product);
         const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.priceV2?.amount || "799";
+        const numPrice = parseFloat(priceAmount) || 799;
+        const meta = getProductBadgeAndBenefit(product, numPrice);
+        const productImg = getImageUrl(product);
 
         return (
-          <div class={`product-card-item bg-white rounded-3xl p-5 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={meta.category}>
+          <div class={`product-card-item bg-white rounded-3xl p-5 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={category}>
             
             <div>
               {/* Card Header & Badge */}
@@ -99,7 +230,7 @@ const productMeta = [
               {/* Product Visual */}
               <a href={`/product/${product.handle}`} class="block relative aspect-square bg-[#FAF9F6] rounded-2xl p-4 mb-4 overflow-hidden group-hover:bg-emerald-50/30 transition-colors">
                 <img 
-                  src={getImageUrl(product)} 
+                  src={productImg} 
                   alt={product.title} 
                   class="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
@@ -108,7 +239,7 @@ const productMeta = [
 
               {/* Title & Benefit */}
               <a href={`/product/${product.handle}`} class="block mb-1">
-                <h3 class="text-base font-bold font-sans text-[#111827] group-hover:text-[#166534] transition-colors leading-snug">
+                <h3 class="text-base font-bold font-sans text-[#111827] group-hover:text-[#166534] transition-colors leading-snug line-clamp-2">
                   {product.title}
                 </h3>
               </a>
@@ -122,15 +253,19 @@ const productMeta = [
               <div class="flex items-baseline justify-between gap-2 pt-3 border-t border-gray-100 mb-3">
                 <div class="flex items-baseline gap-2">
                   <span class="text-xl font-extrabold text-[#111827] font-sans">
-                    {formatPrice(priceAmount)}
+                    {formatPrice(numPrice)}
                   </span>
-                  <span class="text-xs text-gray-400 line-through font-sans">
-                    ₹{meta.oldPrice}
-                  </span>
+                  {meta.oldPrice > numPrice && (
+                    <span class="text-xs text-gray-400 line-through font-sans">
+                      ₹{meta.oldPrice}
+                    </span>
+                  )}
                 </div>
-                <span class="text-[10px] font-black text-[#166534] bg-emerald-50 px-2 py-0.5 rounded font-sans">
-                  Save {meta.savedPrice}
-                </span>
+                {meta.savedPrice > 0 && (
+                  <span class="text-[10px] font-black text-[#166534] bg-emerald-50 px-2 py-0.5 rounded font-sans">
+                    Save ₹{meta.savedPrice}
+                  </span>
+                )}
               </div>
 
               {/* Dynamic Delivery Date Estimator Pill */}
@@ -149,8 +284,8 @@ const productMeta = [
                 class="add-to-cart-btn w-full bg-[#111827] hover:bg-[#166534] text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-sm active:scale-95 touch-manipulation cursor-pointer flex items-center justify-center gap-2"
                 data-variant-id={product.variants?.edges[0]?.node?.id || ('prod_' + index)}
                 data-title={product.title}
-                data-price={priceAmount}
-                data-image={getImageUrl(product)}
+                data-price={numPrice.toString()}
+                data-image={productImg}
                 data-domain={shopifyDomain}
                 data-token={storefrontToken}
               >
