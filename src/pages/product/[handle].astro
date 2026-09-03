@@ -35,6 +35,20 @@ try {
 
     const data = await res.json();
     product = data.data?.product;
+
+    // 🌟 Resilient Smart Alias Fallback (handles -pack / combo suffixes automatically)
+    if (!product && handle) {
+      const altHandle = handle.endsWith('-pack') ? handle.replace(/-pack$/, '') : `${handle}-pack`;
+      const resAlt = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+        body: JSON.stringify({ query: productQuery, variables: { handle: altHandle } }),
+      });
+      const dataAlt = await resAlt.json();
+      if (dataAlt.data?.product) {
+        product = dataAlt.data.product;
+      }
+    }
   } else {
     console.warn("⚠️ Shopify credentials missing! Please configure PUBLIC_SHOPIFY_STOREFRONT_DOMAIN and PUBLIC_SHOPIFY_STOREFRONT_TOKEN.");
   }
