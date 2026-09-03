@@ -16,9 +16,45 @@ import ExitPopup from '../components/ExitPopup.astro';
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com"; 
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018"; 
 
-// GraphQL Query for Products Catalog
+// GraphQL Query for Products Catalog (Fetches exact sequence from Shopify 'Home page' Collection)
 const query = `
   {
+    collection(handle: "frontpage") {
+      id
+      title
+      products(first: 50) {
+        edges {
+          node {
+            id
+            handle
+            title
+            description
+            availableForSale
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+            images(first: 2) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     products(first: 50) {
       edges {
         node {
@@ -68,7 +104,10 @@ try {
     });
 
     const json = await response.json();
-    products = json.data?.products?.edges || [];
+    // Prioritize exact manual sort sequence from 'Home page' (frontpage) collection
+    const collectionEdges = json.data?.collection?.products?.edges || [];
+    const fallbackEdges = json.data?.products?.edges || [];
+    products = collectionEdges.length > 0 ? collectionEdges : fallbackEdges;
   } else {
     console.warn("⚠️ Shopify credentials missing! Please configure PUBLIC_SHOPIFY_STOREFRONT_DOMAIN and PUBLIC_SHOPIFY_STOREFRONT_TOKEN.");
   }
