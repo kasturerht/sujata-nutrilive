@@ -1124,7 +1124,8 @@ const videoTestimonials = [
       const customCursor = document.getElementById('custom-cursor');
       const mainImg = document.getElementById('main-pdp-image');
       const variantBtns = document.querySelectorAll('.variant-btn');
-      const priceDisplay = document.getElementById('dynamic-price');
+      const priceDisplay = document.getElementById('display-price');
+      const comparePriceDisplay = document.getElementById('display-compare-price');
 
       let ticking3D = false;
 
@@ -1458,6 +1459,7 @@ const videoTestimonials = [
         if (radioSubscribe && radioSubscribe.checked) {
           const discountPrice = (basePrice * 0.9).toFixed(2);
           if (priceDisplay) priceDisplay.innerText = `₹${discountPrice}`;
+          if (comparePriceDisplay) comparePriceDisplay.innerText = `₹${(basePrice * 1.3).toFixed(2)}`;
           if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${discountPrice}`;
           if (btnTextElement) {
             btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
@@ -1480,6 +1482,7 @@ const videoTestimonials = [
         } else {
           const basePriceFormatted = basePrice.toFixed(2);
           if (priceDisplay) priceDisplay.innerText = `₹${basePriceFormatted}`;
+          if (comparePriceDisplay) comparePriceDisplay.innerText = `₹${(basePrice * 1.3).toFixed(2)}`;
           if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${basePriceFormatted}`;
           if (btnTextElement) {
             btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
