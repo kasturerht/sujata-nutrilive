@@ -4,11 +4,8 @@ import StoreBundleBuilder from './StoreBundleBuilder.astro';
 
 const { products = [] } = Astro.props;
 
-// Filter out old legacy demo products if new ones are present
-const filteredProducts = products.filter((edge: any) => {
-  const handle = edge.node?.handle;
-  return !['spirulin-powder', 'spirulina-tablets'].includes(handle);
-});
+// Allow all products exactly in the sequence set in Shopify Admin
+const filteredProducts = products;
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com"; 
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
