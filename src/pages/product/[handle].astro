@@ -15,7 +15,18 @@ const productQuery = `
       id title handle descriptionHtml availableForSale vendor tags
       priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } }
       images(first: 10) { edges { node { url altText } } }
-      variants(first: 20) { edges { node { id title availableForSale price { amount currencyCode } selectedOptions { name value } } } }
+      variants(first: 20) { 
+        edges { 
+          node { 
+            id 
+            title 
+            availableForSale 
+            price { amount currencyCode } 
+            compareAtPrice { amount currencyCode }
+            selectedOptions { name value } 
+          } 
+        } 
+      }
       
       ingredients: metafield(namespace: "custom", key: "active_compounds") { value }
       timeline: metafield(namespace: "custom", key: "efficacy_timeline") { value }
@@ -158,8 +169,20 @@ if (images.length === 0 && handle && productLocalGalleryMap[handle.toLowerCase()
 const primaryImage = images[0];
 const variants = product.variants?.edges.map((e: any) => e.node) || [];
 
-const price = product.priceRange ? parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2) : "0.00";
-const maxPrice = product.priceRange ? parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2) : "0.00";
+function formatINR(val: string | number) {
+  const num = typeof val === 'string' ? parseFloat(val) : val;
+  if (isNaN(num)) return "0";
+  return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(num));
+}
+
+const initialVariant = variants[0];
+const initialPrice = initialVariant?.price ? parseFloat(initialVariant.price.amount) : (product.priceRange ? parseFloat(product.priceRange.minVariantPrice.amount) : 0);
+const initialComparePrice = initialVariant?.compareAtPrice ? parseFloat(initialVariant.compareAtPrice.amount) : (initialPrice > 0 ? Math.round(initialPrice * 1.3) : 0);
+const hasInitialDiscount = initialComparePrice > initialPrice;
+const initialDiscountPct = hasInitialDiscount ? Math.round(((initialComparePrice - initialPrice) / initialComparePrice) * 100) : 0;
+
+const price = initialPrice.toFixed(2);
+const maxPrice = product.priceRange ? parseFloat(product.priceRange.maxVariantPrice.amount).toFixed(2) : price;
 const hasPriceRange = price !== maxPrice;
 
 const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: any[] }> = {
@@ -488,14 +511,14 @@ const videoTestimonials = [
             
             {/* Header Block */}
             <div class="border-b border-gray-50 pb-6 mb-6">
-              <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-1 text-amber-500">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-1.5 text-amber-500 whitespace-nowrap">
                   <span class="text-xs">★★★★★</span>
-                  <span class="text-xs font-bold text-gray-500 ml-1">4.9 (420+ Clinical Trials)</span>
+                  <span class="text-xs font-bold text-gray-600 ml-1">4.9 (420+ Clinical Trials)</span>
                 </div>
-                <div class="flex items-center gap-1.5 text-xs text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/50">
+                <div class="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/60 whitespace-nowrap shrink-0">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                  <span class="font-bold text-xs uppercase tracking-wider" id="stock-status">High Demand: Only 14 Left</span>
+                  <span class="font-bold text-[11px] uppercase tracking-wider" id="stock-status">High Demand: Only 14 Left</span>
                 </div>
               </div>
 
@@ -504,27 +527,33 @@ const videoTestimonials = [
               </h1>
 
               {/* Dynamic Price Render */}
-              <div class="flex items-baseline gap-3">
-                <span class="text-3xl font-black text-[#111827] tracking-tight" id="display-price">₹{price}</span>
-                <span class="text-sm font-bold text-gray-400 line-through" id="display-compare-price">₹{parseFloat(price) * 1.3 > 0 ? (parseFloat(price) * 1.3).toFixed(2) : "1999.00"}</span>
-                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-emerald-200/50">Save 30%</span>
-                <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">Taxes Included</span>
+              <div class="flex flex-wrap items-baseline gap-2.5 sm:gap-3">
+                <span class="text-3xl sm:text-4xl font-black text-[#111827] tracking-tight whitespace-nowrap" id="display-price">₹{formatINR(initialPrice)}</span>
+                <span class={`text-sm sm:text-base font-bold text-gray-400 line-through whitespace-nowrap ${hasInitialDiscount ? '' : 'hidden'}`} id="display-compare-price">₹{formatINR(initialComparePrice)}</span>
+                <span class={`text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-emerald-200/60 whitespace-nowrap shrink-0 ${hasInitialDiscount ? '' : 'hidden'}`} id="display-discount-badge">Save {initialDiscountPct}%</span>
+                <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest whitespace-nowrap shrink-0">Taxes Included</span>
               </div>
             </div>
 
             {variants.length > 1 && (
               <div class="mb-6 border-t border-gray-50 pt-5">
-                <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size</span>
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size / Duration</span>
                 <div class="flex flex-wrap gap-2" id="variant-selector">
-                  {variants.map((v: any, i: number) => (
-                    <button 
-                      class={`variant-btn px-5 py-3 min-h-[44px] rounded-xl border-2 text-xs font-bold transition-all duration-300 touch-manipulation ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
-                      data-variant-id={v.id}
-                      data-price={v.price.amount}
-                    >
-                      {v.title}
-                    </button>
-                  ))}
+                  {variants.map((v: any, i: number) => {
+                    const vPrice = v.price?.amount || "0";
+                    const vCompare = v.compareAtPrice?.amount || "";
+                    return (
+                      <button 
+                        class={`variant-btn px-4 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-xl border-2 text-xs font-bold transition-all duration-300 touch-manipulation whitespace-nowrap ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                        data-variant-id={v.id}
+                        data-price={vPrice}
+                        data-compare-price={vCompare}
+                        data-title={v.title}
+                      >
+                        {v.title}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -542,7 +571,7 @@ const videoTestimonials = [
                       <span class="text-[11px] text-gray-500 uppercase tracking-widest mt-0.5">Standard single shipment</span>
                     </div>
                   </div>
-                  <span class="text-sm font-black text-[#111827]" id="onetime-price-label">₹{price}</span>
+                  <span class="text-sm font-black text-[#111827]" id="onetime-price-label">₹{formatINR(initialPrice)}</span>
                 </div>
                 
                 {/* Subscription Option */}
@@ -558,8 +587,8 @@ const videoTestimonials = [
                     </div>
                   </div>
                   <div class="flex flex-col items-end">
-                    <span class="text-sm font-black text-emerald-700" id="subscribe-price-label">₹{(parseFloat(price) * 0.9).toFixed(2)}</span>
-                    <span class="text-[11px] text-gray-400 line-through" id="subscribe-old-price">₹{price}</span>
+                    <span class="text-sm font-black text-emerald-700" id="subscribe-price-label">₹{formatINR(initialPrice * 0.9)}</span>
+                    <span class="text-[11px] text-gray-400 line-through" id="subscribe-old-price">₹{formatINR(initialPrice)}</span>
                   </div>
                 </div>
               </div>
@@ -1404,6 +1433,13 @@ const videoTestimonials = [
       const stickyPriceDisplay = document.getElementById('sticky-display-price');
       const stickyAtcBtn = document.getElementById('sticky-atc-btn');
       const stickyBtnText = document.getElementById('sticky-btn-text');
+      const badgeElement = document.getElementById('display-discount-badge');
+
+      function formatINRClient(val) {
+        const num = typeof val === 'string' ? parseFloat(val) : val;
+        if (isNaN(num)) return "0";
+        return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(num));
+      }
 
       variantBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1427,16 +1463,15 @@ const videoTestimonials = [
 
           // Update Subscription Widget Labels dynamically when size changes
           const selectedPrice = parseFloat(target.getAttribute('data-price')) || 0;
-          const selectedPriceFormatted = selectedPrice.toFixed(2);
-          const discountedPriceFormatted = (selectedPrice * 0.9).toFixed(2);
+          const discountedPrice = Math.round(selectedPrice * 0.9);
 
           const labelOnetime = document.getElementById('onetime-price-label');
           const labelSubscribe = document.getElementById('subscribe-price-label');
           const labelOldSubscribe = document.getElementById('subscribe-old-price');
 
-          if(labelOnetime) labelOnetime.innerText = `₹${selectedPriceFormatted}`;
-          if(labelSubscribe) labelSubscribe.innerText = `₹${discountedPriceFormatted}`;
-          if(labelOldSubscribe) labelOldSubscribe.innerText = `₹${selectedPriceFormatted}`;
+          if(labelOnetime) labelOnetime.innerText = `₹${formatINRClient(selectedPrice)}`;
+          if(labelSubscribe) labelSubscribe.innerText = `₹${formatINRClient(discountedPrice)}`;
+          if(labelOldSubscribe) labelOldSubscribe.innerText = `₹${formatINRClient(selectedPrice)}`;
 
           // Update main display price with fade animation
           if (priceDisplay) {
@@ -1461,12 +1496,35 @@ const videoTestimonials = [
       function updatePurchaseOptionUI() {
         const activeVariant = document.querySelector('.variant-btn.selected-variant');
         const basePrice = activeVariant ? parseFloat(activeVariant.getAttribute('data-price')) : (parseFloat(atcBtn?.getAttribute('data-price')) || 600);
+        const rawCompare = activeVariant ? parseFloat(activeVariant.getAttribute('data-compare-price')) : 0;
+        const baseCompare = rawCompare > basePrice ? rawCompare : (basePrice > 0 ? Math.round(basePrice * 1.3) : 0);
         
         if (radioSubscribe && radioSubscribe.checked) {
-          const discountPrice = (basePrice * 0.9).toFixed(2);
-          if (priceDisplay) priceDisplay.innerText = `₹${discountPrice}`;
-          if (comparePriceDisplay) comparePriceDisplay.innerText = `₹${(basePrice * 1.3).toFixed(2)}`;
-          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${discountPrice}`;
+          const discountPrice = Math.round(basePrice * 0.9);
+          if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(discountPrice)}`;
+          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(discountPrice)}`;
+          
+          if (baseCompare > discountPrice) {
+            const totalPct = Math.round(((baseCompare - discountPrice) / baseCompare) * 100);
+            if (comparePriceDisplay) {
+              comparePriceDisplay.innerText = `₹${formatINRClient(baseCompare)}`;
+              comparePriceDisplay.classList.remove('hidden');
+            }
+            if (badgeElement) {
+              badgeElement.innerText = `Save ${totalPct}%`;
+              badgeElement.classList.remove('hidden');
+            }
+          } else {
+            if (comparePriceDisplay) {
+              comparePriceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
+              comparePriceDisplay.classList.remove('hidden');
+            }
+            if (badgeElement) {
+              badgeElement.innerText = `Save 10%`;
+              badgeElement.classList.remove('hidden');
+            }
+          }
+
           if (btnTextElement) {
             btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
           }
@@ -1486,22 +1544,36 @@ const videoTestimonials = [
           optOnetime?.classList.add('border-gray-200');
           optOnetime?.classList.remove('border-[#111827]', 'bg-gray-50/50');
         } else {
-          const basePriceFormatted = basePrice.toFixed(2);
-          if (priceDisplay) priceDisplay.innerText = `₹${basePriceFormatted}`;
-          if (comparePriceDisplay) comparePriceDisplay.innerText = `₹${(basePrice * 1.3).toFixed(2)}`;
-          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${basePriceFormatted}`;
+          if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
+          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
+          
+          if (baseCompare > basePrice) {
+            const pct = Math.round(((baseCompare - basePrice) / baseCompare) * 100);
+            if (comparePriceDisplay) {
+              comparePriceDisplay.innerText = `₹${formatINRClient(baseCompare)}`;
+              comparePriceDisplay.classList.remove('hidden');
+            }
+            if (badgeElement) {
+              badgeElement.innerText = `Save ${pct}%`;
+              badgeElement.classList.remove('hidden');
+            }
+          } else {
+            if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
+            if (badgeElement) badgeElement.classList.add('hidden');
+          }
+
           if (btnTextElement) {
             btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
           }
           if (stickyBtnText) stickyBtnText.innerText = "Add to Routine";
           if (atcBtn) {
             atcBtn.setAttribute('data-purchase-type', 'onetime');
-            atcBtn.setAttribute('data-price', basePriceFormatted);
+            atcBtn.setAttribute('data-price', basePrice);
             atcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
           }
           if (stickyAtcBtn) {
             stickyAtcBtn.setAttribute('data-purchase-type', 'onetime');
-            stickyAtcBtn.setAttribute('data-price', basePriceFormatted);
+            stickyAtcBtn.setAttribute('data-price', basePrice);
             stickyAtcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
           }
           optOnetime?.classList.add('border-[#111827]', 'bg-gray-50/50');
