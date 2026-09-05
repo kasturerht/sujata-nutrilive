@@ -29,7 +29,12 @@ const query = `
             handle
             title
             description
+            tags
             availableForSale
+            subtitle: metafield(namespace: "custom", key: "subtitle") { value }
+            keyBenefit: metafield(namespace: "custom", key: "key_benefit") { value }
+            badgeTag: metafield(namespace: "custom", key: "badge") { value }
+            badgeTagAlt: metafield(namespace: "custom", key: "badge_tag") { value }
             priceRange {
               minVariantPrice {
                 amount
@@ -62,7 +67,12 @@ const query = `
           handle
           title
           description
+          tags
           availableForSale
+          subtitle: metafield(namespace: "custom", key: "subtitle") { value }
+          keyBenefit: metafield(namespace: "custom", key: "key_benefit") { value }
+          badgeTag: metafield(namespace: "custom", key: "badge") { value }
+          badgeTagAlt: metafield(namespace: "custom", key: "badge_tag") { value }
           priceRange {
             minVariantPrice {
               amount

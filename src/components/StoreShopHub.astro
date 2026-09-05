@@ -77,91 +77,107 @@ function getProductCategory(product: any) {
 }
 
 function getProductBadgeAndBenefit(product: any, currentPrice: number) {
+  // 🌟 PRIORITY 1: Direct Shopify Admin Content (Metafields / Tags)
+  const metaBenefit = product.keyBenefit?.value || product.subtitle?.value;
+  const metaBadge = product.badgeTag?.value || product.badgeTagAlt?.value;
+  
+  // Check if merchant added tags like "badge:Custom Name" or "benefit:Custom Benefit"
+  const tagList = (product.tags || []) as string[];
+  const tagBadge = tagList.find((t: string) => t.toLowerCase().startsWith('badge:'))?.split(':')[1]?.trim();
+  const tagBenefit = tagList.find((t: string) => t.toLowerCase().startsWith('benefit:'))?.split(':')[1]?.trim();
+
+  const customBadge = metaBadge || tagBadge;
+  const customBenefit = metaBenefit || tagBenefit;
+
+  // 🌟 PRIORITY 2: Smart Semantic Fallback (Used ONLY if merchant left it blank in Shopify Admin)
   const t = (product.title || '').toLowerCase();
-  let tag = "Bestseller";
-  let benefit = "⚡ Cellular Vitality & Immunity";
+  let defaultTag = "Bestseller";
+  let defaultBenefit = "⚡ Cellular Vitality & Immunity";
   let rating = "4.9 (1.8k)";
   let oldPrice = Math.round(currentPrice * 1.35);
 
   if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
-    tag = "360° VALUE COMBO";
-    benefit = "⚡ All-Day Energy, Immunity & Skin Synergy";
+    defaultTag = "360° VALUE COMBO";
+    defaultBenefit = "⚡ All-Day Energy, Immunity & Skin Synergy";
     rating = "4.9 (1.5k)";
     oldPrice = Math.round(currentPrice * 1.3);
   } else if (t.includes('powder') && t.includes('spirulina')) {
-    tag = "100% Raw Pure";
-    benefit = "🌱 Complete Cellular Detox & Protein";
+    defaultTag = "100% Raw Pure";
+    defaultBenefit = "🌱 Complete Cellular Detox & Protein";
     rating = "4.9 (2.4k)";
     oldPrice = 799;
   } else if (t.includes('tablet')) {
-    tag = "Zero Binder";
-    benefit = "⚡ Daily Energy, Iron & Stamina";
+    defaultTag = "Zero Binder";
+    defaultBenefit = "⚡ Daily Energy, Iron & Stamina";
     rating = "4.9 (3.1k)";
     oldPrice = 650;
   } else if (t.includes('sea buckthorn')) {
-    tag = "Rare Omega 7";
-    benefit = "🛡️ Heart, Skin & Mucosal Defense";
+    defaultTag = "Rare Omega 7";
+    defaultBenefit = "🛡️ Heart, Skin & Mucosal Defense";
     rating = "4.9 (1.2k)";
     oldPrice = 999;
   } else if (t.includes('b12')) {
-    tag = "Plant Based B12";
-    benefit = "🧠 Active Nerve & RBC Formation";
+    defaultTag = "Plant Based B12";
+    defaultBenefit = "🧠 Active Nerve & RBC Formation";
     rating = "4.8 (940)";
     oldPrice = 1099;
   } else if (t.includes('shilajit')) {
-    tag = "Gold Grade 75%+";
-    benefit = "💪 Peak Physical Strength & Vitality";
+    defaultTag = "Gold Grade 75%+";
+    defaultBenefit = "💪 Peak Physical Strength & Vitality";
     rating = "5.0 (1.5k)";
     oldPrice = 1299;
   } else if (t.includes('moringa')) {
-    tag = "Super Detox";
-    benefit = "🍃 Blood Sugar Balance & Cleansing";
+    defaultTag = "Super Detox";
+    defaultBenefit = "🍃 Blood Sugar Balance & Cleansing";
     rating = "4.8 (820)";
     oldPrice = 299;
   } else if (t.includes('face wash') || t.includes('facewash')) {
-    tag = "Anti-Acne";
-    benefit = "✨ Deep Pore Detox & Oil Control";
+    defaultTag = "Anti-Acne";
+    defaultBenefit = "✨ Deep Pore Detox & Oil Control";
     rating = "4.9 (1.9k)";
     oldPrice = 499;
   } else if (t.includes('face pack') || t.includes('facepack')) {
-    tag = "Instant Glow";
-    benefit = "🌸 Botanical Tan & Blemish Removal";
+    defaultTag = "Instant Glow";
+    defaultBenefit = "🌸 Botanical Tan & Blemish Removal";
     rating = "4.8 (750)";
     oldPrice = 399;
   } else if (t.includes('soap')) {
-    tag = "100% Organic";
-    benefit = "🧼 Handcrafted Ayurvedic Herbal Bar";
+    defaultTag = "100% Organic";
+    defaultBenefit = "🧼 Handcrafted Ayurvedic Herbal Bar";
     rating = "4.9 (1.1k)";
     oldPrice = 249;
   } else if (t.includes('korean')) {
-    tag = "K-Beauty Formula";
-    benefit = "✨ Glass Skin & Dark Spot Corrector";
+    defaultTag = "K-Beauty Formula";
+    defaultBenefit = "✨ Glass Skin & Dark Spot Corrector";
     rating = "4.9 (880)";
     oldPrice = 799;
   } else if (t.includes('bridal') || t.includes('whitening')) {
-    tag = "Luxury Radiance";
-    benefit = "👑 Saffron & Sandalwood Bridal Glow";
+    defaultTag = "Luxury Radiance";
+    defaultBenefit = "👑 Saffron & Sandalwood Bridal Glow";
     rating = "5.0 (620)";
     oldPrice = 899;
   } else if (t.includes('hair oil') || t.includes('oil')) {
-    tag = "Hair Fall Control";
-    benefit = "💆 Scalp Nourishment & Active Biotin";
+    defaultTag = "Hair Fall Control";
+    defaultBenefit = "💆 Scalp Nourishment & Active Biotin";
     rating = "4.9 (1.4k)";
     oldPrice = 399;
   } else if (t.includes('shampoo')) {
-    tag = "2-in-1 Therapy";
-    benefit = "🌿 Anti-Thinning & Keratin Strength";
+    defaultTag = "2-in-1 Therapy";
+    defaultBenefit = "🌿 Anti-Thinning & Keratin Strength";
     rating = "4.8 (910)";
     oldPrice = 499;
-  } else if (t.includes('combo') || t.includes('bundle')) {
-    tag = "Best Value Synergy";
-    benefit = "🎁 Complete Superfood Immunity Synergy";
-    rating = "5.0 (2.8k)";
-    oldPrice = 1250;
   }
 
-  const savedPrice = Math.max(0, oldPrice - currentPrice);
-  return { tag, benefit, rating, oldPrice, savedPrice };
+  const finalOldPrice = oldPrice;
+  const savedPrice = Math.max(0, finalOldPrice - currentPrice);
+
+  return {
+    tag: customBadge || defaultTag,
+    benefit: customBenefit || defaultBenefit,
+    rating,
+    oldPrice: finalOldPrice,
+    savedPrice
+  };
 }
 ---
 
