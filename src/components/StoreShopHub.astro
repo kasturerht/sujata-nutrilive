@@ -83,7 +83,12 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
   let rating = "4.9 (1.8k)";
   let oldPrice = Math.round(currentPrice * 1.35);
 
-  if (t.includes('powder') && t.includes('spirulina')) {
+  if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
+    tag = "360° VALUE COMBO";
+    benefit = "⚡ All-Day Energy, Immunity & Skin Synergy";
+    rating = "4.9 (1.5k)";
+    oldPrice = Math.round(currentPrice * 1.3);
+  } else if (t.includes('powder') && t.includes('spirulina')) {
     tag = "100% Raw Pure";
     benefit = "🌱 Complete Cellular Detox & Protein";
     rating = "4.9 (2.4k)";
