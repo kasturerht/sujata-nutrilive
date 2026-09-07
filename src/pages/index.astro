@@ -4,7 +4,6 @@ import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
 import StoreTrustBadges from '../components/StoreTrustBadges.astro';
-import StoreGoals from '../components/StoreGoals.astro';
 import StoreShopHub from '../components/StoreShopHub.astro';
 import StoreNutrientMatrix from '../components/StoreNutrientMatrix.astro';
 import StoreConviction from '../components/StoreConviction.astro';
@@ -136,13 +135,10 @@ try {
   {/* 🌟 1. SINGLE HIGH-CONVERTING HERO */}
   <StoreHero />
 
-  {/* 🛡️ 2. INDIAN TRUST STRIP (FSSAI, NABL, 100% Veg, Cold-Pressed, Free COD) */}
+  {/* 🛡️ 2. SMART INDIAN TRUST STRIP (FSSAI, NABL, 100% Veg, Free COD) */}
   <StoreTrustBadges />
 
-  {/* 🎯 3. SHOP BY HEALTH NEED (Energy, Gut, Glow, Combos) */}
-  <StoreGoals />
-
-  {/* 🛍️ 4. CORE BESTSELLERS & CURATED CATALOG (Direct from Shopify API) */}
+  {/* 🛍️ 3. CORE BESTSELLERS & CURATED CATALOG (Direct from Shopify API) */}
   <StoreShopHub products={products} />
 
   {/* 🧬 5. THE NUTRIENT EQUIVALENCE (1 Scoop = 5 Whole Foods) */}
