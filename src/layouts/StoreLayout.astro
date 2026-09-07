@@ -2,6 +2,7 @@
 // src/layouts/StoreLayout.astro
 import CartDrawer from '../components/CartDrawer.astro';
 import StoreSearchModal from '../components/StoreSearchModal.astro';
+import StoreBottomNav from '../components/StoreBottomNav.astro';
 const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
 ---
 <html lang="en">
@@ -23,12 +24,13 @@ const { title = "Sujata Nutrilive | Premium Spirulina" } = Astro.props;
     <slot />
     <CartDrawer />
     <StoreSearchModal />
+    <StoreBottomNav />
 
-    {/* Global Live Purchase Toast (FOMO & Mobile Interactive with Safe Areas) */}
+    {/* Global Live Purchase Toast (Docked right above Mobile Bottom Bar) */}
     <div 
       id="live-toast" 
       class="fixed z-[9999] bg-white/95 backdrop-blur-xl border border-black/[0.05] shadow-[0_20px_40px_rgba(0,0,0,0.12)] p-3 pr-6 rounded-2xl flex items-center gap-4 translate-y-[150%] opacity-0 transition-all duration-700 ease-[cubic-bezier(0.1,0,0,1)] cursor-pointer select-none"
-      style="bottom: max(1.25rem, calc(0.75rem + env(safe-area-inset-bottom, 0px))); left: max(1.25rem, calc(0.75rem + env(safe-area-inset-left, 0px)));"
+      style="bottom: max(4.75rem, calc(4.25rem + env(safe-area-inset-bottom, 0px))); left: max(1rem, calc(0.75rem + env(safe-area-inset-left, 0px)));"
       role="status"
       aria-live="polite"
       title="Tap to dismiss"

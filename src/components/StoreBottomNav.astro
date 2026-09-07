@@ -1,0 +1,253 @@
+---
+// src/components/StoreBottomNav.astro
+---
+
+<!-- 📱 THE SILICON VALLEY-GRADE MOBILE THUMB DOCK (Zero Local Agency Feel, Pure Luxury D2C) -->
+<nav 
+  id="mobile-bottom-dock" 
+  class="md:hidden fixed bottom-0 left-0 right-0 z-[130] bg-[#022C22]/95 backdrop-blur-2xl border-t border-emerald-500/20 shadow-[0_-12px_32px_rgba(0,0,0,0.45)] transition-transform duration-300 font-sans"
+  style="padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));"
+  aria-label="Mobile Bottom Navigation"
+>
+  <div class="max-w-md mx-auto px-4 py-1.5 flex items-center justify-around relative">
+    
+    {/* 1. Home Tab */}
+    <a 
+      href="/" 
+      id="bottom-tab-home"
+      class="bottom-nav-item active flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all duration-300 group cursor-pointer touch-manipulation"
+      aria-label="Home"
+    >
+      <div class="relative flex items-center justify-center">
+        <svg class="w-5 h-5 text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+      </div>
+      <span class="text-[10px] font-bold tracking-tight text-amber-400 mt-0.5 font-sans">Home</span>
+      <span class="active-dot w-1 h-1 rounded-full bg-amber-400 mt-0.5 scale-100 transition-transform"></span>
+    </a>
+
+    {/* 2. Shop / Formulations Tab */}
+    <a 
+      href="/#product-ecosystem" 
+      id="bottom-tab-shop"
+      class="bottom-nav-item flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all duration-300 group cursor-pointer touch-manipulation"
+      aria-label="Explore Formulations"
+    >
+      <div class="relative flex items-center justify-center">
+        <svg class="w-5 h-5 text-emerald-100/60 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+        </svg>
+      </div>
+      <span class="text-[10px] font-medium tracking-tight text-emerald-100/70 group-hover:text-white mt-0.5 font-sans">Shop</span>
+      <span class="active-dot w-1 h-1 rounded-full bg-amber-400 mt-0.5 scale-0 transition-transform"></span>
+    </a>
+
+    {/* 3. Search Trigger Tab */}
+    <button 
+      type="button"
+      id="bottom-tab-search"
+      class="bottom-nav-item flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all duration-300 group cursor-pointer touch-manipulation"
+      aria-label="Search Catalog"
+    >
+      <div class="relative flex items-center justify-center">
+        <svg class="w-5 h-5 text-emerald-100/60 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+      <span class="text-[10px] font-medium tracking-tight text-emerald-100/70 group-hover:text-white mt-0.5 font-sans">Search</span>
+      <span class="active-dot w-1 h-1 rounded-full bg-amber-400 mt-0.5 scale-0 transition-transform"></span>
+    </button>
+
+    {/* 4. Cart / Daily Routine Trigger Tab (With Real-Time Dynamic Badge) */}
+    <button 
+      type="button"
+      id="bottom-tab-cart"
+      class="bottom-nav-item flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all duration-300 group cursor-pointer touch-manipulation relative"
+      aria-label="View Shopping Cart"
+    >
+      <div class="relative flex items-center justify-center">
+        <svg class="w-5 h-5 text-emerald-100/60 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+        </svg>
+        {/* Dynamic Cart Badge */}
+        <span 
+          id="bottom-cart-badge" 
+          style="display: none;" 
+          class="absolute -top-1.5 -right-2.5 min-w-[17px] h-[17px] px-1 bg-gradient-to-r from-amber-400 to-amber-500 text-black text-[9px] font-black rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.6)] leading-none animate-pulse"
+        >
+          0
+        </span>
+      </div>
+      <span class="text-[10px] font-medium tracking-tight text-emerald-100/70 group-hover:text-white mt-0.5 font-sans">Cart</span>
+      <span class="active-dot w-1 h-1 rounded-full bg-amber-400 mt-0.5 scale-0 transition-transform"></span>
+    </button>
+
+  </div>
+</nav>
+
+<script is:inline>
+  function initMobileBottomDock() {
+    const dock = document.getElementById('mobile-bottom-dock');
+    if (!dock) return;
+
+    const tabHome = document.getElementById('bottom-tab-home');
+    const tabShop = document.getElementById('bottom-tab-shop');
+    const tabSearch = document.getElementById('bottom-tab-search');
+    const tabCart = document.getElementById('bottom-tab-cart');
+    const bottomBadge = document.getElementById('bottom-cart-badge');
+
+    // 1. Synchronize Cart Badge with LocalStorage & Header
+    function syncCartBadge() {
+      try {
+        const stored = localStorage.getItem('sujata_cart_items');
+        const items = stored ? JSON.parse(stored) : [];
+        const count = Array.isArray(items) 
+          ? items.reduce((acc, item) => acc + (item.quantity || 1), 0) 
+          : 0;
+
+        if (bottomBadge) {
+          if (count > 0) {
+            bottomBadge.innerText = count > 99 ? '99+' : count;
+            bottomBadge.style.display = 'flex';
+          } else {
+            bottomBadge.style.display = 'none';
+          }
+        }
+      } catch (e) {
+        if (bottomBadge) bottomBadge.style.display = 'none';
+      }
+    }
+
+    // Run initial sync
+    syncCartBadge();
+
+    // Re-sync on storage changes or custom cart events
+    window.addEventListener('storage', syncCartBadge);
+    window.addEventListener('cart-updated', syncCartBadge);
+
+    // Observer to mirror header-cart-badge mutations
+    const headerBadge = document.getElementById('header-cart-badge');
+    if (headerBadge) {
+      const observer = new MutationObserver(() => syncCartBadge());
+      observer.observe(headerBadge, { childList: true, characterData: true, subtree: true, attributes: true });
+    }
+
+    // 2. Tab Navigation Handlers
+    // Home Tab
+    if (tabHome) {
+      tabHome.addEventListener('click', (e) => {
+        if (window.location.pathname === '/' || window.location.pathname === '') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setActiveTab(tabHome);
+        }
+      });
+    }
+
+    // Shop Tab
+    if (tabShop) {
+      tabShop.addEventListener('click', (e) => {
+        const target = document.getElementById('product-ecosystem');
+        if (target && (window.location.pathname === '/' || window.location.pathname === '')) {
+          e.preventDefault();
+          const offsetTop = target.offsetTop - 70;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+          setActiveTab(tabShop);
+        }
+      });
+    }
+
+    // Search Tab (triggers existing predictive search modal)
+    if (tabSearch) {
+      tabSearch.addEventListener('click', () => {
+        if (typeof window.openSearchModal === 'function') {
+          window.openSearchModal();
+        } else {
+          const searchModal = document.getElementById('search-modal-backdrop');
+          const searchInput = document.getElementById('predictive-search-input');
+          if (searchModal) {
+            searchModal.classList.remove('opacity-0', 'pointer-events-none');
+            searchModal.classList.add('opacity-100', 'pointer-events-auto');
+            if (searchInput) setTimeout(() => searchInput.focus(), 150);
+          }
+        }
+      });
+    }
+
+    // Cart Tab (triggers window.openSujataCart)
+    if (tabCart) {
+      tabCart.addEventListener('click', () => {
+        if (typeof window.openSujataCart === 'function') {
+          window.openSujataCart();
+        } else {
+          const drawer = document.getElementById('cart-drawer');
+          const overlay = document.getElementById('cart-overlay');
+          if (drawer && overlay) {
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            overlay.classList.add('opacity-100');
+            drawer.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+      });
+    }
+
+    function setActiveTab(activeEl) {
+      const items = dock.querySelectorAll('.bottom-nav-item');
+      items.forEach(item => {
+        const svg = item.querySelector('svg');
+        const label = item.querySelector('span:not(.active-dot):not(#bottom-cart-badge)');
+        const dot = item.querySelector('.active-dot');
+
+        if (item === activeEl) {
+          item.classList.add('active');
+          if (svg) {
+            svg.classList.remove('text-emerald-100/60');
+            svg.classList.add('text-amber-400');
+          }
+          if (label) {
+            label.classList.remove('text-emerald-100/70', 'font-medium');
+            label.classList.add('text-amber-400', 'font-bold');
+          }
+          if (dot) dot.classList.replace('scale-0', 'scale-100');
+        } else {
+          item.classList.remove('active');
+          if (svg) {
+            svg.classList.remove('text-amber-400');
+            svg.classList.add('text-emerald-100/60');
+          }
+          if (label) {
+            label.classList.remove('text-amber-400', 'font-bold');
+            label.classList.add('text-emerald-100/70', 'font-medium');
+          }
+          if (dot) dot.classList.replace('scale-100', 'scale-0');
+        }
+      });
+    }
+
+    // 3. Auto Highlight based on Scroll Position
+    let scrollDebounce = null;
+    window.addEventListener('scroll', () => {
+      if (scrollDebounce) clearTimeout(scrollDebounce);
+      scrollDebounce = setTimeout(() => {
+        const ecosystem = document.getElementById('product-ecosystem');
+        if (ecosystem && tabShop && tabHome) {
+          const rect = ecosystem.getBoundingClientRect();
+          if (rect.top <= 250 && rect.bottom >= 150) {
+            setActiveTab(tabShop);
+          } else if (window.scrollY < 400) {
+            setActiveTab(tabHome);
+          }
+        }
+      }, 100);
+    }, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileBottomDock);
+  } else {
+    initMobileBottomDock();
+  }
+  document.addEventListener('astro:page-load', initMobileBottomDock);
+</script>
