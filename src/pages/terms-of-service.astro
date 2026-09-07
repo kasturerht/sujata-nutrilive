@@ -3,6 +3,24 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
+
+let policy = null;
+try {
+  if (shopifyDomain && storefrontToken) {
+    const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+      body: JSON.stringify({ query: `{ shop { termsOfService { title body } } }` })
+    });
+    const data = await res.json();
+    policy = data.data?.shop?.termsOfService;
+  }
+} catch (e) {
+  console.warn("Shopify termsOfService fetch fallback active:", e);
+}
 ---
 
 <StoreLayout title="Terms of Service & Conditions of Sale | Sujata Nutrilive">
@@ -48,69 +66,73 @@ import StoreFooter from '../components/StoreFooter.astro';
 
       {/* Structured Legal Content */}
       <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
-        
-        {/* Section 1 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            1. Operating Entity &amp; Acceptance
-          </h2>
-          <p>
-            This website and online storefront are owned and operated by <strong>Sujata Nutrilive Pvt. Ltd.</strong>, having its registered corporate headquarters at 42/B, Prabhat Road, Deccan Gymkhana, Pune, Maharashtra 411004, India. By accessing, browsing, or purchasing from this website, you agree to be bound by these Terms of Service, all applicable laws of the Republic of India, and our published store policies.
-          </p>
-        </div>
+        {policy?.body ? (
+          <div class="prose prose-emerald max-w-none text-gray-700 leading-relaxed font-sans" set:html={policy.body} />
+        ) : (
+          <>
+            {/* Section 1 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                1. Operating Entity &amp; Acceptance
+              </h2>
+              <p>
+                This website and online storefront are owned and operated by <strong>Sujata Nutrilive Pvt. Ltd.</strong>, having its registered corporate headquarters at 42/B, Prabhat Road, Deccan Gymkhana, Pune, Maharashtra 411004, India. By accessing, browsing, or purchasing from this website, you agree to be bound by these Terms of Service, all applicable laws of the Republic of India, and our published store policies.
+              </p>
+            </div>
 
-        {/* Section 2: FSSAI Classification */}
-        <div class="bg-emerald-50/60 border border-emerald-200/80 p-5 rounded-2xl">
-          <h2 class="text-base sm:text-lg font-bold text-[#064E3B] font-['Playfair_Display'] mb-2">
-            2. Statutory Nutraceutical Classification (FSSAI)
-          </h2>
-          <p class="text-xs text-gray-700 leading-relaxed">
-            Sujata Spirulina is manufactured and marketed as a pure <strong>Dietary / Nutraceutical Food Supplement</strong> licensed under FSSAI Central License <strong>#11521999000284</strong>. The statements on this website have not been evaluated by the FDA or pharmaceutical authorities for drug treatment. Our products are not intended to diagnose, cure, or substitute for individualized professional medical advice from a licensed medical practitioner.
-          </p>
-        </div>
+            {/* Section 2: FSSAI Classification */}
+            <div class="bg-emerald-50/60 border border-emerald-200/80 p-5 rounded-2xl">
+              <h2 class="text-base sm:text-lg font-bold text-[#064E3B] font-['Playfair_Display'] mb-2">
+                2. Statutory Nutraceutical Classification (FSSAI)
+              </h2>
+              <p class="text-xs text-gray-700 leading-relaxed">
+                Sujata Spirulina is manufactured and marketed as a pure <strong>Dietary / Nutraceutical Food Supplement</strong> licensed under FSSAI Central License <strong>#11521999000284</strong>. The statements on this website have not been evaluated by the FDA or pharmaceutical authorities for drug treatment. Our products are not intended to diagnose, cure, or substitute for individualized professional medical advice from a licensed medical practitioner.
+              </p>
+            </div>
 
-        {/* Section 3 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            3. Pricing, Taxes &amp; Payment Gateway
-          </h2>
-          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
-            <li>All prices displayed on the website are in Indian National Rupees (INR) and are inclusive of all applicable Goods and Services Tax (GST).</li>
-            <li>We accept all major Indian payment methods: UPI (Google Pay, PhonePe, Paytm, BHIM), Credit/Debit Cards (Visa, Mastercard, RuPay), NetBanking, and Cash on Delivery (COD).</li>
-            <li>We reserve the right to revise product prices or discontinue formulations at any time without prior notice.</li>
-          </ul>
-        </div>
+            {/* Section 3 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                3. Pricing, Taxes &amp; Payment Gateway
+              </h2>
+              <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+                <li>All prices displayed on the website are in Indian National Rupees (INR) and are inclusive of all applicable Goods and Services Tax (GST).</li>
+                <li>We accept all major Indian payment methods: UPI (Google Pay, PhonePe, Paytm, BHIM), Credit/Debit Cards (Visa, Mastercard, RuPay), NetBanking, and Cash on Delivery (COD).</li>
+                <li>We reserve the right to revise product prices or discontinue formulations at any time without prior notice.</li>
+              </ul>
+            </div>
 
-        {/* Section 4 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            4. Subscribe &amp; Save (Recurring Delivery) Terms
-          </h2>
-          <p>
-            When you choose our "Subscribe &amp; Save (10% Off)" plan, you are enrolled in an auto-delivery protocol with deliveries scheduled every 30 days. You enjoy 100% flexibility: you can pause, skip an upcoming cycle, update your delivery address, or cancel anytime with zero lock-in fees directly from your account page or by messaging our WhatsApp support desk.
-          </p>
-        </div>
+            {/* Section 4 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                4. Subscribe &amp; Save (Recurring Delivery) Terms
+              </h2>
+              <p>
+                When you choose our "Subscribe &amp; Save (10% Off)" plan, you are enrolled in an auto-delivery protocol with deliveries scheduled every 30 days. You enjoy 100% flexibility: you can pause, skip an upcoming cycle, update your delivery address, or cancel anytime with zero lock-in fees directly from your account page or by messaging our WhatsApp support desk.
+              </p>
+            </div>
 
-        {/* Section 5 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            5. Intellectual Property
-          </h2>
-          <p>
-            All trademarks, logos, clinical dossiers, product photography, text content, and graphics on this website are the proprietary intellectual property of Sujata Nutrilive Pvt. Ltd. Unauthorized commercial reproduction or duplication without prior written consent is strictly prohibited and subject to legal prosecution under the Indian Copyright Act, 1957.
-          </p>
-        </div>
+            {/* Section 5 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                5. Intellectual Property
+              </h2>
+              <p>
+                All trademarks, logos, clinical dossiers, product photography, text content, and graphics on this website are the proprietary intellectual property of Sujata Nutrilive Pvt. Ltd. Unauthorized commercial reproduction or duplication without prior written consent is strictly prohibited and subject to legal prosecution under the Indian Copyright Act, 1957.
+              </p>
+            </div>
 
-        {/* Section 6 */}
-        <div class="pt-6 border-t border-gray-100">
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            6. Governing Law &amp; Exclusive Jurisdiction
-          </h2>
-          <p>
-            These Terms of Service and any transactional disputes arising out of purchase shall be governed by and construed in accordance with the laws of the Republic of India. Any legal proceedings, arbitrations, or claims shall be subject to the exclusive jurisdiction of the competent courts in <strong>Pune, Maharashtra, India</strong>.
-          </p>
-        </div>
-
+            {/* Section 6 */}
+            <div class="pt-6 border-t border-gray-100">
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                6. Governing Law &amp; Exclusive Jurisdiction
+              </h2>
+              <p>
+                These Terms of Service and any transactional disputes arising out of purchase shall be governed by and construed in accordance with the laws of the Republic of India. Any legal proceedings, arbitrations, or claims shall be subject to the exclusive jurisdiction of the competent courts in <strong>Pune, Maharashtra, India</strong>.
+              </p>
+            </div>
+          </>
+        )}
       </div>
 
     </div>

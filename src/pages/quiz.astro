@@ -6,6 +6,60 @@ import StoreFooter from '../components/StoreFooter.astro';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
+
+let powderProduct = {
+  variantId: "gid://shopify/ProductVariant/52738357854340",
+  title: "Sujata Pure Organic Spirulina Powder (100g)",
+  price: 599,
+  image: "/products/sujata-spirulina-powder-pouch.jpg"
+};
+
+let capsulesProduct = {
+  variantId: "gid://shopify/ProductVariant/52738357985412",
+  title: "Sujata Premium Spirulina Capsules (60 Caps)",
+  price: 649,
+  image: "/products/sujata-spirulina-capsules-bottle.jpg"
+};
+
+try {
+  if (shopifyDomain && storefrontToken) {
+    const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+      body: JSON.stringify({
+        query: `
+          {
+            powder: product(handle: "sujata-spirulina-powder") {
+              title
+              featuredImage { url }
+              variants(first: 1) { edges { node { id price { amount } } } }
+            }
+            capsules: product(handle: "sujata-spirulina-capsules") {
+              title
+              featuredImage { url }
+              variants(first: 1) { edges { node { id price { amount } } } }
+            }
+          }
+        `
+      })
+    });
+    const data = await res.json();
+    if (data.data?.powder?.variants?.edges?.[0]?.node) {
+      const v = data.data.powder.variants.edges[0].node;
+      powderProduct.variantId = v.id;
+      powderProduct.price = Math.round(parseFloat(v.price.amount));
+      if (data.data.powder.featuredImage?.url) powderProduct.image = data.data.powder.featuredImage.url;
+    }
+    if (data.data?.capsules?.variants?.edges?.[0]?.node) {
+      const v = data.data.capsules.variants.edges[0].node;
+      capsulesProduct.variantId = v.id;
+      capsulesProduct.price = Math.round(parseFloat(v.price.amount));
+      if (data.data.capsules.featuredImage?.url) capsulesProduct.image = data.data.capsules.featuredImage.url;
+    }
+  }
+} catch (e) {
+  console.warn("Shopify fetch fallback active in quiz.astro:", e);
+}
 ---
 
 <StoreLayout title="1-Minute Routine Finder & Cellular Quiz | Sujata Nutrilive">
@@ -126,36 +180,52 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             
-            <button type="button" class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" data-format="powder" data-format-title="Raw Spirulina Powder (100g)" data-price="600" data-image="/spirulina-powder.png">
+            <button 
+              type="button" 
+              class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" 
+              data-format="powder" 
+              data-format-title={powderProduct.title} 
+              data-price={powderProduct.price} 
+              data-image={powderProduct.image}
+              data-variant-id={powderProduct.variantId}
+            >
               <div>
                 <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 bg-emerald-50/50 border border-emerald-100 flex items-center justify-center p-3">
-                  <img src="/spirulina-powder.png" alt="Raw Powder" class="h-full object-contain group-hover:scale-110 transition-transform" />
+                  <img src={powderProduct.image} alt={powderProduct.title} class="h-full object-contain group-hover:scale-110 transition-transform" />
                 </div>
                 <span class="text-[10px] font-black uppercase tracking-widest text-emerald-800 block mb-1">Smoothie & Water Blend</span>
-                <h3 class="text-base font-bold text-[#111827] mb-1">Active Raw Powder (100g)</h3>
+                <h3 class="text-base font-bold text-[#111827] mb-1">{powderProduct.title}</h3>
                 <p class="text-xs text-gray-500 font-light leading-relaxed">
                   Sub-40°C cryo-milled raw powder. Perfect for morning lemon water, smoothies, or green bowls. 98.4% instant cellular absorption.
                 </p>
               </div>
               <div class="mt-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
-                <span class="text-emerald-900">₹600 / 30-Day Routine</span>
+                <span class="text-emerald-900">₹{powderProduct.price} / 30-Day Routine</span>
                 <span class="text-emerald-600 group-hover:translate-x-1 transition-transform">Select Powder →</span>
               </div>
             </button>
 
-            <button type="button" class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" data-format="capsules" data-format-title="Bio-Spirulina Capsules (60 Caps)" data-price="799" data-image="/spirulina-bottle.png">
+            <button 
+              type="button" 
+              class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" 
+              data-format="capsules" 
+              data-format-title={capsulesProduct.title} 
+              data-price={capsulesProduct.price} 
+              data-image={capsulesProduct.image}
+              data-variant-id={capsulesProduct.variantId}
+            >
               <div>
                 <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 bg-emerald-50/50 border border-emerald-100 flex items-center justify-center p-3">
-                  <img src="/spirulina-bottle.png" alt="Bio Capsules" class="h-full object-contain group-hover:scale-110 transition-transform" />
+                  <img src={capsulesProduct.image} alt={capsulesProduct.title} class="h-full object-contain group-hover:scale-110 transition-transform" />
                 </div>
                 <span class="text-[10px] font-black uppercase tracking-widest text-emerald-800 block mb-1">Odourless & Travel-Friendly</span>
-                <h3 class="text-base font-bold text-[#111827] mb-1">Bio-Active Capsules (60 Caps)</h3>
+                <h3 class="text-base font-bold text-[#111827] mb-1">{capsulesProduct.title}</h3>
                 <p class="text-xs text-gray-500 font-light leading-relaxed">
                   100% plant-cellulose vegetarian capsules. Zero taste, zero algae odour, zero prep time. Take 2 capsules on the go.
                 </p>
               </div>
               <div class="mt-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
-                <span class="text-emerald-900">₹799 / 30-Day Routine</span>
+                <span class="text-emerald-900">₹{capsulesProduct.price} / 30-Day Routine</span>
                 <span class="text-emerald-600 group-hover:translate-x-1 transition-transform">Select Capsules →</span>
               </div>
             </button>
@@ -363,8 +433,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         goalTitle: 'Sustained Cellular Energy',
         format: 'powder',
         formatTitle: 'Raw Spirulina Powder (100g)',
-        price: 600,
-        image: '/spirulina-powder.png',
+        price: 599,
+        image: '/products/sujata-spirulina-powder-pouch.jpg',
+        variantId: 'gid://shopify/ProductVariant/52738357854340',
         lifestyle: 'desk',
         dosage: 'Take 1 scoop (3g) in the morning with lukewarm lemon water before breakfast'
       };
@@ -390,8 +461,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         btn.addEventListener('click', () => {
           quizAnswers.format = btn.getAttribute('data-format') || 'powder';
           quizAnswers.formatTitle = btn.getAttribute('data-format-title') || 'Raw Spirulina Powder (100g)';
-          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 600;
-          quizAnswers.image = btn.getAttribute('data-image') || '/spirulina-powder.png';
+          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 599;
+          quizAnswers.image = btn.getAttribute('data-image') || '/products/sujata-spirulina-powder-pouch.jpg';
+          quizAnswers.variantId = btn.getAttribute('data-variant-id') || (quizAnswers.format === 'capsules' ? 'gid://shopify/ProductVariant/52738357985412' : 'gid://shopify/ProductVariant/52738357854340');
 
           step2Pane.classList.add('hidden');
           step3Pane.classList.remove('hidden');
@@ -467,7 +539,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         e.preventDefault();
         if (typeof window.addItemToLocalCart === 'function') {
           window.addItemToLocalCart({
-            id: quizAnswers.format === 'capsules' ? 'sujata_capsules_60' : 'sujata_powder_100g',
+            id: quizAnswers.variantId,
             title: quizAnswers.formatTitle,
             subtitle: `Prescribed for ${quizAnswers.goalTitle}`,
             price: quizAnswers.price,

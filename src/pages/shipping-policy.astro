@@ -3,6 +3,24 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
+
+let policy = null;
+try {
+  if (shopifyDomain && storefrontToken) {
+    const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+      body: JSON.stringify({ query: `{ shop { shippingPolicy { title body } } }` })
+    });
+    const data = await res.json();
+    policy = data.data?.shop?.shippingPolicy;
+  }
+} catch (e) {
+  console.warn("Shopify shippingPolicy fetch fallback active:", e);
+}
 ---
 
 <StoreLayout title="Shipping & Express Delivery Policy | Sujata Nutrilive">
@@ -68,69 +86,73 @@ import StoreFooter from '../components/StoreFooter.astro';
 
       {/* Structured Legal Content */}
       <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
-        
-        {/* Section 1 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            1. Dispatch &amp; Processing Timelines
-          </h2>
-          <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
-            <li><strong>Same-Day Dispatch:</strong> All orders confirmed before <strong>2:00 PM IST (Monday through Saturday)</strong> are packaged in our temperature-controlled facility and handed to express air linehaul on the same day.</li>
-            <li><strong>Subsequent Orders:</strong> Orders placed after 2:00 PM IST or on Sundays/Public Holidays dispatch on the next immediate business morning.</li>
-          </ul>
-        </div>
-
-        {/* Section 2 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            2. Delivery Timelines by Region
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-700">
-            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-              <strong class="font-bold text-[#111827] block mb-1">Tier 1 Metros (48–72 Hours)</strong>
-              <span>Mumbai, Pune, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata, Ahmedabad.</span>
+        {policy?.body ? (
+          <div class="prose prose-emerald max-w-none text-gray-700 leading-relaxed font-sans" set:html={policy.body} />
+        ) : (
+          <>
+            {/* Section 1 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                1. Dispatch &amp; Processing Timelines
+              </h2>
+              <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
+                <li><strong>Same-Day Dispatch:</strong> All orders confirmed before <strong>2:00 PM IST (Monday through Saturday)</strong> are packaged in our temperature-controlled facility and handed to express air linehaul on the same day.</li>
+                <li><strong>Subsequent Orders:</strong> Orders placed after 2:00 PM IST or on Sundays/Public Holidays dispatch on the next immediate business morning.</li>
+              </ul>
             </div>
-            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-              <strong class="font-bold text-[#111827] block mb-1">Tier 2/3 Cities (3–4 Days)</strong>
-              <span>State capitals and major commercial centers across all Indian states.</span>
+
+            {/* Section 2 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                2. Delivery Timelines by Region
+              </h2>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-700">
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <strong class="font-bold text-[#111827] block mb-1">Tier 1 Metros (48–72 Hours)</strong>
+                  <span>Mumbai, Pune, Delhi NCR, Bengaluru, Hyderabad, Chennai, Kolkata, Ahmedabad.</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <strong class="font-bold text-[#111827] block mb-1">Tier 2/3 Cities (3–4 Days)</strong>
+                  <span>State capitals and major commercial centers across all Indian states.</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <strong class="font-bold text-[#111827] block mb-1">Remote &amp; NE (4–6 Days)</strong>
+                  <span>Jammu &amp; Kashmir, North-East states, and island territories via India Post Air.</span>
+                </div>
+              </div>
             </div>
-            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-              <strong class="font-bold text-[#111827] block mb-1">Remote &amp; NE (4–6 Days)</strong>
-              <span>Jammu &amp; Kashmir, North-East states, and island territories via India Post Air.</span>
+
+            {/* Section 3 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                3. Cold-Chain Packaging Standards
+              </h2>
+              <p>
+                Spirulina enzymes are protected using multi-layer metallized moisture-barrier pouches with an airtight ziplock seal. Every package is sealed with a tamper-evident holographic security sticker at our GMP facility in Pune, ensuring 0.00% environmental humidity penetration during transit.
+              </p>
             </div>
-          </div>
-        </div>
 
-        {/* Section 3 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            3. Cold-Chain Packaging Standards
-          </h2>
-          <p>
-            Spirulina enzymes are protected using multi-layer metallized moisture-barrier pouches with an airtight ziplock seal. Every package is sealed with a tamper-evident holographic security sticker at our GMP facility in Pune, ensuring 0.00% environmental humidity penetration during transit.
-          </p>
-        </div>
+            {/* Section 4 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                4. Live Tracking &amp; Notifications
+              </h2>
+              <p>
+                Upon courier pickup, an automated SMS and WhatsApp notification containing your live AWB tracking link is dispatched to your registered mobile number. You can also track real-time courier movement anytime via our <a href="/track-order" class="text-emerald-700 font-bold underline">Live Shipment Tracker</a>.
+              </p>
+            </div>
 
-        {/* Section 4 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            4. Live Tracking &amp; Notifications
-          </h2>
-          <p>
-            Upon courier pickup, an automated SMS and WhatsApp notification containing your live AWB tracking link is dispatched to your registered mobile number. You can also track real-time courier movement anytime via our <a href="/track-order" class="text-emerald-700 font-bold underline">Live Shipment Tracker</a>.
-          </p>
-        </div>
-
-        {/* Section 5 */}
-        <div class="pt-6 border-t border-gray-100">
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-            5. Cash on Delivery (COD) Guidelines
-          </h2>
-          <p>
-            Cash on Delivery is available across 22,000+ pincodes. To prevent fraudulent bot orders, an automated SMS/WhatsApp OTP confirmation is requested prior to dispatch. Please keep the exact cash amount ready for the delivery partner upon arrival.
-          </p>
-        </div>
-
+            {/* Section 5 */}
+            <div class="pt-6 border-t border-gray-100">
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                5. Cash on Delivery (COD) Guidelines
+              </h2>
+              <p>
+                Cash on Delivery is available across 22,000+ pincodes. To prevent fraudulent bot orders, an automated SMS/WhatsApp OTP confirmation is requested prior to dispatch. Please keep the exact cash amount ready for the delivery partner upon arrival.
+              </p>
+            </div>
+          </>
+        )}
       </div>
 
     </div>

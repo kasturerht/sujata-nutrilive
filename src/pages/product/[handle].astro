@@ -31,6 +31,12 @@ const productQuery = `
       ingredients: metafield(namespace: "custom", key: "active_compounds") { value }
       timeline: metafield(namespace: "custom", key: "efficacy_timeline") { value }
       labReport: metafield(namespace: "custom", key: "lab_report_pdf") { value }
+      subtitle: metafield(namespace: "custom", key: "subtitle") { value }
+      keyBenefit: metafield(namespace: "custom", key: "key_benefit") { value }
+      badgeTag: metafield(namespace: "custom", key: "badge") { value }
+      badgeTagAlt: metafield(namespace: "custom", key: "badge_tag") { value }
+      howToUse: metafield(namespace: "custom", key: "how_to_use") { value }
+      faqs: metafield(namespace: "custom", key: "faqs") { value }
     }
   }
 `;
@@ -160,14 +166,14 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
   ]
 };
 
-let images = product.images?.edges.map((e: any) => e.node) || [];
+let images = product?.images?.edges ? product.images.edges.map((e: any) => e.node) : [];
 if (images.length === 0 && handle && productLocalGalleryMap[handle.toLowerCase()]) {
   images = productLocalGalleryMap[handle.toLowerCase()];
 } else if (images.length === 0) {
-  images = [{ url: '/products/sujata-spirulina-powder-pouch.jpg', altText: product.title }];
+  images = [{ url: '/products/sujata-spirulina-powder-pouch.jpg', altText: product?.title || 'Sujata Formulation' }];
 }
 const primaryImage = images[0];
-const variants = product.variants?.edges.map((e: any) => e.node) || [];
+const variants = product?.variants?.edges ? product.variants.edges.map((e: any) => e.node) : [];
 
 function formatINR(val: string | number) {
   const num = typeof val === 'string' ? parseFloat(val) : val;
@@ -402,25 +408,33 @@ const resolvedDossier = (handle && productClinicalDossierMap[handle.toLowerCase(
   : (handle && handle.toLowerCase().includes('capsule')) ? productClinicalDossierMap['sujata-spirulina-capsules']
   : productClinicalDossierMap['sujata-spirulina-powder'];
 
-let ingredientsData = resolvedDossier.ingredients;
-let timelineData = resolvedDossier.timeline;
+let ingredientsData = resolvedDossier?.ingredients || [];
+let timelineData = resolvedDossier?.timeline || [];
 
-// If Shopify metafields provide custom JSON, let them override
+// 🌟 Direct Shopify Metafield JSON Parsing
 try {
-  if (product.ingredients?.value && product.ingredients.value.trim().length > 2) {
+  if (product?.ingredients?.value && product.ingredients.value.trim().length > 2) {
     const parsed = JSON.parse(product.ingredients.value);
     if (Array.isArray(parsed) && parsed.length > 0) ingredientsData = parsed;
   }
-} catch (e) {}
+} catch (e) {
+  console.warn("Could not parse product.ingredients metafield JSON:", e);
+}
 
 try {
-  if (product.timeline?.value && product.timeline.value.trim().length > 2) {
+  if (product?.timeline?.value && product.timeline.value.trim().length > 2) {
     const parsed = JSON.parse(product.timeline.value);
     if (Array.isArray(parsed) && parsed.length > 0) timelineData = parsed;
   }
-} catch (e) {}
+} catch (e) {
+  console.warn("Could not parse product.timeline metafield JSON:", e);
+}
 
-const labReportUrl = product.labReport?.value || "/NABL-Report-Sujata.pdf";
+const labReportUrl = product?.labReport?.value || "/NABL-Report-Sujata.pdf";
+const customSubtitle = product?.subtitle?.value || "";
+const customKeyBenefit = product?.keyBenefit?.value || "";
+const customBadge = product?.badgeTag?.value || product?.badgeTagAlt?.value || "";
+const customHowToUse = product?.howToUse?.value || "";
 
 const videoTestimonials = [
   {
@@ -522,9 +536,23 @@ const videoTestimonials = [
                 </div>
               </div>
 
-              <h1 class="text-2xl sm:text-3xl font-black text-[#111827] font-['Playfair_Display'] tracking-tight mb-3">
-                {product.title}
+              {customBadge && (
+                <div class="mb-2">
+                  <span class="bg-amber-400 text-black text-[9px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider shadow-xs">
+                    {customBadge}
+                  </span>
+                </div>
+              )}
+
+              <h1 class="text-2xl sm:text-3xl font-black text-[#111827] font-['Playfair_Display'] tracking-tight mb-1.5">
+                {product?.title || 'Sujata Formulation'}
               </h1>
+
+              {customSubtitle && (
+                <p class="text-xs sm:text-sm font-semibold text-emerald-800/90 mb-3 font-sans">
+                  {customSubtitle}
+                </p>
+              )}
 
               {/* Dynamic Price Render */}
               <div class="flex flex-wrap items-baseline gap-2.5 sm:gap-3">

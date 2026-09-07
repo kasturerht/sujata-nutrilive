@@ -46,6 +46,14 @@ const query = `
               edges {
                 node {
                   id
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  compareAtPrice {
+                    amount
+                    currencyCode
+                  }
                 }
               }
             }
@@ -84,6 +92,14 @@ const query = `
             edges {
               node {
                 id
+                price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
+                  amount
+                  currencyCode
+                }
               }
             }
           }
@@ -133,7 +149,7 @@ try {
   <StoreHeader />
   
   {/* 🌟 1. SINGLE HIGH-CONVERTING HERO */}
-  <StoreHero />
+  <StoreHero products={products} />
 
   {/* 🛡️ 2. SMART INDIAN TRUST STRIP (FSSAI, NABL, 100% Veg, Free COD) */}
   <StoreTrustBadges />

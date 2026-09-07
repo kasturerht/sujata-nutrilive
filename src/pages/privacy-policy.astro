@@ -3,6 +3,24 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
+const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
+
+let policy = null;
+try {
+  if (shopifyDomain && storefrontToken) {
+    const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+      body: JSON.stringify({ query: `{ shop { privacyPolicy { title body } } }` })
+    });
+    const data = await res.json();
+    policy = data.data?.shop?.privacyPolicy;
+  }
+} catch (e) {
+  console.warn("Shopify policy fetch fallback active:", e);
+}
 ---
 
 <StoreLayout title="Privacy Policy & Data Protection Charter | Sujata Nutrilive">
@@ -62,10 +80,13 @@ import StoreFooter from '../components/StoreFooter.astro';
 
       {/* Structured Legal Content */}
       <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
-        
-        {/* Section 1 */}
-        <div>
-          <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+        {policy?.body ? (
+          <div class="prose prose-emerald max-w-none text-gray-700 leading-relaxed font-sans" set:html={policy.body} />
+        ) : (
+          <>
+            {/* Section 1 */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
             1. Information We Collect
           </h2>
           <p class="mb-3">
@@ -136,7 +157,8 @@ import StoreFooter from '../components/StoreFooter.astro';
             <div><strong>Email:</strong> <a href="mailto:grievance@sujatanutrilive.com" class="text-emerald-700 underline">grievance@sujatanutrilive.com</a></div>
           </div>
         </div>
-
+        </>
+        )}
       </div>
 
     </div>

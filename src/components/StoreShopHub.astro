@@ -89,14 +89,20 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
   const customBadge = metaBadge || tagBadge;
   const customBenefit = metaBenefit || tagBenefit;
 
+  // Real Shopify compare-at price check
+  const rawCompare = product.variants?.edges?.[0]?.node?.compareAtPrice?.amount;
+  const shopifyComparePrice = rawCompare ? Math.round(parseFloat(rawCompare)) : 0;
+
   // 🌟 PRIORITY 2: Smart Semantic Fallback (Used ONLY if merchant left it blank in Shopify Admin)
   const t = (product.title || '').toLowerCase();
   let defaultTag = "Bestseller";
   let defaultBenefit = "⚡ Cellular Vitality & Immunity";
   let rating = "4.9 (1.8k)";
-  let oldPrice = Math.round(currentPrice * 1.35);
+  let oldPrice = shopifyComparePrice > currentPrice ? shopifyComparePrice : Math.round(currentPrice * 1.35);
 
-  if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
+  if (shopifyComparePrice > currentPrice) {
+    oldPrice = shopifyComparePrice;
+  } else if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
     defaultTag = "360° VALUE COMBO";
     defaultBenefit = "⚡ All-Day Energy, Immunity & Skin Synergy";
     rating = "4.9 (1.5k)";

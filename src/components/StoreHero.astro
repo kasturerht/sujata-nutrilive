@@ -1,5 +1,44 @@
 ---
 // src/components/StoreHero.astro
+interface Props {
+  products?: any[];
+}
+
+const { products = [] } = Astro.props;
+
+// Helper to look up product by handle in the live catalog
+function findProduct(handles: string[]) {
+  if (!products || !products.length) return null;
+  for (const h of handles) {
+    const found = products.find((p: any) => p?.node?.handle === h || p?.node?.handle?.includes(h));
+    if (found) return found.node;
+  }
+  return null;
+}
+
+// 1. Combo
+const comboProduct = findProduct(['sujata-spirulina-sea-buckthorn-combo-pack', 'sujata-spirulina-sea-buckthorn-combo']);
+const comboVariant = comboProduct?.variants?.edges?.[0]?.node;
+const comboPrice = comboVariant?.price?.amount ? Math.round(Number(comboVariant.price.amount)) : 1100;
+const comboCompare = comboVariant?.compareAtPrice?.amount ? Math.round(Number(comboVariant.compareAtPrice.amount)) : 1598;
+const comboDiscount = comboCompare > comboPrice ? Math.round(((comboCompare - comboPrice) / comboCompare) * 100) : 30;
+const comboHandle = comboProduct?.handle || 'sujata-spirulina-sea-buckthorn-combo-pack';
+
+// 2. Spirulina Capsules
+const spiriProduct = findProduct(['sujata-spirulina-capsules']);
+const spiriVariant = spiriProduct?.variants?.edges?.[0]?.node;
+const spiriPrice = spiriVariant?.price?.amount ? Math.round(Number(spiriVariant.price.amount)) : 649;
+const spiriCompare = spiriVariant?.compareAtPrice?.amount ? Math.round(Number(spiriVariant.compareAtPrice.amount)) : 850;
+const spiriDiscount = spiriCompare > spiriPrice ? Math.round(((spiriCompare - spiriPrice) / spiriCompare) * 100) : 24;
+const spiriHandle = spiriProduct?.handle || 'sujata-spirulina-capsules';
+
+// 3. Sea Buckthorn Capsules
+const sbtProduct = findProduct(['sujata-sea-buckthorn-capsules']);
+const sbtVariant = sbtProduct?.variants?.edges?.[0]?.node;
+const sbtPrice = sbtVariant?.price?.amount ? Math.round(Number(sbtVariant.price.amount)) : 749;
+const sbtCompare = sbtVariant?.compareAtPrice?.amount ? Math.round(Number(sbtVariant.compareAtPrice.amount)) : 999;
+const sbtDiscount = sbtCompare > sbtPrice ? Math.round(((sbtCompare - sbtPrice) / sbtCompare) * 100) : 25;
+const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
 ---
 
 <!-- 🌟 THE 2026 LUXURY MOBILE-FIRST D2C PROTOCOL HERO (Zero Overlap, Touch Snap-Slider) -->
@@ -31,7 +70,7 @@
         >
           <span class="text-amber-400 text-xs sm:text-sm">📦</span>
           <span>Combo</span>
-          <span class="bg-amber-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">30%</span>
+          <span class="bg-amber-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">{comboDiscount}%</span>
           <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
         </button>
 
@@ -137,11 +176,13 @@
             {/* Pricing & Free Gift Pill */}
             <div class="flex items-center justify-between gap-1.5 mb-2.5 sm:mb-3 px-3 py-2 sm:p-2.5 rounded-xl bg-black/40 border border-white/10 w-full max-w-md">
               <div class="flex items-baseline gap-1.5 sm:gap-2">
-                <span class="text-lg sm:text-xl font-black text-white font-sans">₹1,100</span>
-                <span class="text-xs text-gray-400 line-through font-sans">₹1,598</span>
-                <span class="bg-amber-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
-                  SAVE 30%
-                </span>
+                <span class="text-lg sm:text-xl font-black text-white font-sans">₹{comboPrice.toLocaleString('en-IN')}</span>
+                {comboCompare > comboPrice && (
+                  <span class="text-xs text-gray-400 line-through font-sans">₹{comboCompare.toLocaleString('en-IN')}</span>
+                  <span class="bg-amber-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
+                    SAVE {comboDiscount}%
+                  </span>
+                )}
               </div>
               <div class="text-[9px] sm:text-[10px] font-semibold text-emerald-300 flex items-center gap-1 font-sans shrink-0">
                 <span>🎁</span>
@@ -152,10 +193,10 @@
             {/* Single High-Converting Primary CTA on Mobile */}
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
-                href="/product/sujata-spirulina-sea-buckthorn-combo" 
+                href={`/product/${comboHandle}`} 
                 class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[0_6px_18px_rgba(245,158,11,0.25)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
-                <span>Claim Combo Offer (Save 30%)</span>
+                <span>Claim Combo Offer (Save {comboDiscount}%)</span>
                 <span class="text-sm">→</span>
               </a>
 
@@ -242,11 +283,13 @@
             {/* Pricing Bar */}
             <div class="flex items-center justify-between gap-1.5 mb-2.5 sm:mb-3 px-3 py-2 sm:p-2.5 rounded-xl bg-black/40 border border-white/10 w-full max-w-md">
               <div class="flex items-baseline gap-1.5 sm:gap-2">
-                <span class="text-lg sm:text-xl font-black text-white font-sans">₹599</span>
-                <span class="text-xs text-gray-400 line-through font-sans">₹799</span>
-                <span class="bg-emerald-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
-                  SAVE 25%
-                </span>
+                <span class="text-lg sm:text-xl font-black text-white font-sans">₹{spiriPrice.toLocaleString('en-IN')}</span>
+                {spiriCompare > spiriPrice && (
+                  <span class="text-xs text-gray-400 line-through font-sans">₹{spiriCompare.toLocaleString('en-IN')}</span>
+                  <span class="bg-emerald-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
+                    SAVE {spiriDiscount}%
+                  </span>
+                )}
               </div>
               <div class="text-[9px] sm:text-[10px] font-semibold text-emerald-300 flex items-center gap-1 font-sans shrink-0">
                 <span>📦</span>
@@ -257,10 +300,10 @@
             {/* CTA */}
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
-                href="/product/sujata-spirulina-capsules" 
+                href={`/product/${spiriHandle}`} 
                 class="bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[0_6px_18px_rgba(52,211,153,0.3)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
-                <span>Shop Spirulina Protocol (₹599)</span>
+                <span>Shop Spirulina Protocol (₹{spiriPrice.toLocaleString('en-IN')})</span>
                 <span class="text-sm">→</span>
               </a>
 
@@ -347,11 +390,13 @@
             {/* Pricing Bar */}
             <div class="flex items-center justify-between gap-1.5 mb-2.5 sm:mb-3 px-3 py-2 sm:p-2.5 rounded-xl bg-black/40 border border-white/10 w-full max-w-md">
               <div class="flex items-baseline gap-1.5 sm:gap-2">
-                <span class="text-lg sm:text-xl font-black text-white font-sans">₹799</span>
-                <span class="text-xs text-gray-400 line-through font-sans">₹999</span>
-                <span class="bg-amber-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
-                  SAVE 20%
-                </span>
+                <span class="text-lg sm:text-xl font-black text-white font-sans">₹{sbtPrice.toLocaleString('en-IN')}</span>
+                {sbtCompare > sbtPrice && (
+                  <span class="text-xs text-gray-400 line-through font-sans">₹{sbtCompare.toLocaleString('en-IN')}</span>
+                  <span class="bg-amber-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
+                    SAVE {sbtDiscount}%
+                  </span>
+                )}
               </div>
               <div class="text-[9px] sm:text-[10px] font-semibold text-amber-300 flex items-center gap-1 font-sans shrink-0">
                 <span>📦</span>
@@ -362,10 +407,10 @@
             {/* CTA */}
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
-                href="/product/sujata-sea-buckthorn-capsules" 
+                href={`/product/${sbtHandle}`} 
                 class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[0_6px_18px_rgba(245,158,11,0.3)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
-                <span>Explore Sea Buckthorn (₹799)</span>
+                <span>Explore Sea Buckthorn (₹{sbtPrice.toLocaleString('en-IN')})</span>
                 <span class="text-sm">→</span>
               </a>
 

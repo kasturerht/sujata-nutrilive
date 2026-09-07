@@ -529,15 +529,14 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         stepResult.classList.add('opacity-100');
       }, 50);
 
-      // Clinical recommendation engine mapping:
-      // Shopify products retrieved from store:
-      // 1. Tablets (gid://shopify/ProductVariant/59247880438094, price ₹1200)
-      // 2. Powder (gid://shopify/ProductVariant/59276906103118, price ₹600)
+      // Clinical recommendation engine mapping (Live Shopify Catalog):
+      // 1. Tablets (gid://shopify/ProductVariant/52738357887108, price ₹499)
+      // 2. Powder (gid://shopify/ProductVariant/52738357854340, price ₹599)
       
-      let variantId = "gid://shopify/ProductVariant/59247880438094"; // default Tablets
-      let title = "Sujata Premium Tablets";
-      let price = "₹1,200";
-      let imgPath = "/spirulina-bottle.png";
+      let variantId = "gid://shopify/ProductVariant/52738357887108"; // default Tablets
+      let title = "Sujata 100% Vegan Spirulina Tablets";
+      let price = "₹499";
+      let imgPath = "/products/sujata-spirulina-tablets-bottle.jpg";
       let pName = "Spirulina Tablets";
       
       let concernLabel = "Cellular Optimization";
@@ -548,11 +547,11 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
       // If user chooses powder specifically or combo
       if (quizData.style === 'powder' || (quizData.concern === 'energy' && quizData.style !== 'tablets')) {
-        variantId = "gid://shopify/ProductVariant/59276906103118"; // Powder
-        title = "Sujata Live Enzyme Powder";
-        price = "₹600";
-        imgPath = "/spirulina-powder.png";
-        pName = "Spirulin Powder";
+        variantId = "gid://shopify/ProductVariant/52738357854340"; // Powder
+        title = "Sujata Pure Organic Spirulina Powder";
+        price = "₹599";
+        imgPath = "/products/sujata-spirulina-powder-pouch.jpg";
+        pName = "Spirulina Powder";
         absorption = "99.4% Bioactive";
         batchCode = "#PWD-0426";
       }
