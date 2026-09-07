@@ -3,9 +3,11 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
-import StoreMedia from '../components/StoreMedia.astro';
+import StoreTrustBadges from '../components/StoreTrustBadges.astro';
+import StoreGoals from '../components/StoreGoals.astro';
 import StoreShopHub from '../components/StoreShopHub.astro';
 import StoreNutrientMatrix from '../components/StoreNutrientMatrix.astro';
+import StoreConviction from '../components/StoreConviction.astro';
 import StoreProtocol from '../components/StoreProtocol.astro';
 import StoreSocialProof from '../components/StoreSocialProof.astro';
 import StoreAuthorityVault from '../components/StoreAuthorityVault.astro';
@@ -131,23 +133,31 @@ try {
   {/* GLOBAL HEADER */}
   <StoreHeader />
   
-  {/* 🌟 ZONE 1: THE HOOK & MEDIA AUTHORITY */}
+  {/* 🌟 1. SINGLE HIGH-CONVERTING HERO */}
   <StoreHero />
-  <StoreMedia />
 
-  {/* 🛍️ ZONE 2: THE UNIFIED SHOP ENGINE (Featured Daily Kit + Segmented Catalog) */}
+  {/* 🛡️ 2. INDIAN TRUST STRIP (FSSAI, NABL, 100% Veg, Cold-Pressed, Free COD) */}
+  <StoreTrustBadges />
+
+  {/* 🎯 3. SHOP BY HEALTH NEED (Energy, Gut, Glow, Combos) */}
+  <StoreGoals />
+
+  {/* 🛍️ 4. CORE BESTSELLERS & CURATED CATALOG (Direct from Shopify API) */}
   <StoreShopHub products={products} />
 
-  {/* 🧬 ZONE 3: NUTRITIONAL BIO-EQUIVALENCY (The 1-Scoop Radial Diagram) */}
+  {/* 🧬 5. THE NUTRIENT EQUIVALENCE (1 Scoop = 5 Whole Foods) */}
   <StoreNutrientMatrix />
 
-  {/* ⏳ ZONE 4: THE 30-DAY TRANSFORMATION PROTOCOL */}
+  {/* ⚖️ 6. "WHY SUJATA?" PURITY MOAT (Ordinary Spirulina vs Sujata Cryo) */}
+  <StoreConviction />
+
+  {/* ⏳ 7. THE 30-DAY BIOLOGICAL PROTOCOL (Smooth, Zero Scroll-Jacking) */}
   <StoreProtocol />
 
-  {/* ⭐ ZONE 5: SOCIAL PROOF & VERIFIED REVIEWS */}
+  {/* ⭐ 8. VERIFIED SOCIAL PROOF & REVIEWS */}
   <StoreSocialProof />
 
-  {/* 🛡️ ZONE 6: CLINICAL GOVERNANCE, FAQ & 30-DAY RISK REVERSAL VAULT */}
+  {/* 🩺 9. CLINICAL GOVERNANCE, FAQS & 30-DAY RISK REVERSAL VAULT */}
   <StoreAuthorityVault />
 
   {/* GLOBAL FOOTER & CONVERSION POPUPS */}

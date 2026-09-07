@@ -1,286 +1,580 @@
 ---
 // src/components/StoreHero.astro
-import { Image } from 'astro:assets';
 ---
 
-<section id="d2c-performance-hero" class="relative w-full font-sans z-20 bg-[#011C16] pt-[84px] sm:pt-[94px] md:pt-[104px]">
+<!-- 🌟 THE 2026 LUXURY MOBILE-FIRST D2C PROTOCOL HERO (Zero Overlap, Touch Snap-Slider) -->
+<section id="hero-section" class="relative w-full bg-[#011F18] text-white pt-[108px] sm:pt-[118px] md:pt-[124px] pb-5 sm:pb-8 md:pb-10 overflow-hidden border-b border-emerald-950/80 font-sans">
+  
+  {/* Atmospheric Dynamic Background Radiance */}
+  <div id="hero-ambient-glow" class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[350px] md:h-[500px] bg-amber-500/10 rounded-full blur-[130px] pointer-events-none transition-colors duration-1000"></div>
 
-  {/* ==========================================
-      1. THE MASTER SLIDER CONTAINER (Fluid 2.44:1 Panoramic Widescreen Ratio - Zero Crop, 100% Full-Bleed)
-      ========================================== */}
-  <div class="relative w-full aspect-[3200/1312] min-h-[280px] sm:min-h-[360px] md:min-h-[460px] lg:min-h-[560px] max-h-[820px] overflow-hidden bg-[#071F19] shadow-2xl" id="hero-slider">
+  <div class="max-w-[94rem] mx-auto px-3 sm:px-6 lg:px-12 relative z-10">
     
-    {/* -----------------------------------
-        SLIDE 1: THE MASTER HEALTHY LIFE COMBO BANNER (100% Edge-to-Edge, Zero Crop)
-        ----------------------------------- */}
-    <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-0" data-index="0">
-      <a 
-        href="/product/sujata-spirulina-sea-buckthorn-combo" 
-        class="block w-full h-full relative group cursor-pointer overflow-hidden bg-[#071F19]"
-        title="Explore Sujata Healthy Life Combo Offer"
+    {/* =========================================================================
+        1. THE COMPACT PROTOCOL SELECTOR (Fits 100% on Mobile with Zero Cutoff)
+        ========================================================================= */}
+    <div class="w-full max-w-md mx-auto mb-3 sm:mb-5 px-1 sm:px-0 flex justify-center">
+      <div 
+        id="hero-protocol-tabs" 
+        class="w-full grid grid-cols-3 p-1 rounded-full bg-black/60 border border-white/15 backdrop-blur-xl shadow-xl gap-1"
+        role="tablist"
+        aria-label="Flagship Protocols"
       >
-        <img 
-          src="/sujata-healthy-life-combo-master-banner.png" 
-          alt="Sujata Nutrilive Healthy Life Combo Offer - 100% Natural Direct From Farm Spirulina and Sea Buckthorn" 
-          class="w-full h-full object-cover object-center group-hover:scale-[1.008] transition-transform duration-700 ease-out"
-          loading="eager"
-          fetchpriority="high"
-        />
-        {/* Subtle Interactive Hover Highlight */}
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none"></div>
-      </a>
-    </div>
+        {/* Tab 0: Combo */}
+        <button 
+          type="button" 
+          role="tab" 
+          aria-selected="true" 
+          aria-controls="hero-slide-0"
+          data-tab-index="0"
+          class="hero-tab-btn active relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap bg-[#064E3B] text-white shadow-md border border-emerald-400/40"
+        >
+          <span class="text-amber-400 text-xs sm:text-sm">📦</span>
+          <span>Combo</span>
+          <span class="bg-amber-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">30%</span>
+          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
+        </button>
 
-    {/* -----------------------------------
-        SLIDE 2: PURE COLD-PRESSED SPIRULINA (Clinical Green Theme)
-        ----------------------------------- */}
-    <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-full" data-index="1">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#011C16] via-[#022c22] to-[#043E31] z-0"></div>
-      
-      <div class="max-w-[95rem] mx-auto px-6 sm:px-10 lg:px-16 relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-between gap-6 pb-12 sm:pb-0">
-        
-        <div class="w-full md:w-[54%] flex flex-col items-center md:items-start text-center md:text-left z-20">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/30 mb-2 sm:mb-3 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="text-emerald-300 text-[9px] sm:text-xs font-black uppercase tracking-[0.25em]">
-              100% Raw Bio-Secure Cultivation
-            </span>
-          </div>
-          
-          <h2 class="text-white text-2xl sm:text-4xl lg:text-6xl font-normal font-serif leading-[1.08] tracking-tight mb-2 sm:mb-3">
-            Peak Cellular Energy.<br/>
-            <span class="italic text-emerald-300">Without the 3 PM crash.</span>
-          </h2>
+        {/* Tab 1: Spirulina */}
+        <button 
+          type="button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="hero-slide-1"
+          data-tab-index="1"
+          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
+        >
+          <span class="text-emerald-400 text-xs sm:text-sm">🌿</span>
+          <span>Spirulina</span>
+          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-emerald-400 rounded-full scale-x-0 origin-left"></div>
+        </button>
 
-          <p class="text-xs sm:text-sm md:text-base font-normal text-emerald-100/85 mb-4 sm:mb-6 max-w-lg leading-relaxed">
-            100% Pure, sub-40°C cold-pressed Spirulina. Packed with 65% bio-protein, organic non-heme iron & active chlorophyll. Zero synthetic binders, zero digestive distress.
-          </p>
-
-          <div class="flex items-center gap-4 mb-4 sm:mb-6">
-            <span class="text-xl sm:text-3xl font-extrabold text-white font-sans">₹599</span>
-            <span class="text-xs sm:text-base text-emerald-200/50 line-through font-sans">₹799</span>
-            <span class="bg-amber-400 text-black text-[9px] sm:text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-md">
-              SAVE ₹200
-            </span>
-          </div>
-
-          <div class="flex items-center gap-3">
-            <a href="/product/sujata-spirulina-capsules" class="bg-emerald-400 hover:bg-emerald-300 text-black text-center text-xs sm:text-sm font-bold uppercase tracking-[0.15em] px-6 sm:px-10 py-3 sm:py-4 rounded-xl shadow-[0_10px_30px_rgba(52,211,153,0.3)] transition-all transform hover:-translate-y-0.5 active:scale-95 font-sans">
-              Shop Spirulina Protocol →
-            </a>
-          </div>
-        </div>
-
-        <div class="w-full md:w-[46%] flex items-center justify-center relative h-[180px] sm:h-[260px] md:h-full group">
-          <img 
-            src="/products/sujata-spirulina-capsules-bottle.jpg" 
-            alt="Sujata Pure Spirulina Capsules Bottle" 
-            class="relative z-10 w-auto h-[80%] max-h-[85%] object-contain drop-shadow-2xl rounded-2xl group-hover:-translate-y-2 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-          />
-        </div>
+        {/* Tab 2: Sea Buckthorn */}
+        <button 
+          type="button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="hero-slide-2"
+          data-tab-index="2"
+          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
+        >
+          <span class="text-amber-400 text-xs sm:text-sm">🍊</span>
+          <span class="truncate"><span class="hidden sm:inline">Sea </span>Buckthorn</span>
+          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
+        </button>
       </div>
     </div>
 
-    {/* -----------------------------------
-        SLIDE 3: WILD HIMALAYAN SEA BUCKTHORN (Warm Amber & Gold Theme)
-        ----------------------------------- */}
-    <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-full" data-index="2">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#1A0B02] via-[#3B1A05] to-[#78350F] z-0"></div>
+    {/* =========================================================================
+        2. HORIZONTAL TOUCH SNAP TRACK (Physical Separate Slots - Zero Text Overlap!)
+        ========================================================================= */}
+    <div 
+      id="hero-slider-track" 
+      class="relative w-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+      tabindex="0"
+      aria-label="Product Showcase Carousel"
+    >
       
-      <div class="max-w-[95rem] mx-auto px-6 sm:px-10 lg:px-16 relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-between gap-6 pb-12 sm:pb-0">
-        
-        <div class="w-full md:w-[54%] flex flex-col items-center md:items-start text-center md:text-left z-20">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/40 mb-2 sm:mb-3 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-            <span class="text-amber-300 text-[9px] sm:text-xs font-black uppercase tracking-[0.25em]">
-              12,000 ft Himalayan Wild Harvest
-            </span>
-          </div>
+      {/* -------------------------------------------------------------
+          SLIDE 0: HEALTHY LIFE COMBO (Flagship Synergy)
+          ------------------------------------------------------------- */}
+      <div 
+        id="hero-slide-0" 
+        class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
+        data-slide-index="0"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
-          <h2 class="text-white text-2xl sm:text-4xl lg:text-6xl font-normal font-serif leading-[1.08] tracking-tight mb-2 sm:mb-3">
-            Cellular Radiance & Youth.<br/>
-            <span class="italic text-amber-300">Powered by Rare Omega-7.</span>
-          </h2>
+          {/* Visual: On Mobile = Order 1 (TOP), On Desktop = Order 2 (RIGHT) */}
+          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
+            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-amber-500/15 rounded-full blur-[60px] pointer-events-none"></div>
 
-          <p class="text-xs sm:text-sm md:text-base font-normal text-amber-100/85 mb-4 sm:mb-6 max-w-lg leading-relaxed">
-            Nature's richest source of rare Omega 7, 3, 6, 9 and 12x Vitamin C of oranges. Protects heart cardiovascular health, deeply hydrates skin, and restores gut mucosal lining.
-          </p>
+            {/* Floating Trust Pill */}
+            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-amber-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-amber-200 font-sans">★ Bestseller • Dual Cellular Synergy</span>
+            </div>
 
-          <div class="flex items-center gap-4 mb-4 sm:mb-6">
-            <span class="text-xl sm:text-3xl font-extrabold text-white font-sans">₹799</span>
-            <span class="text-xs sm:text-base text-amber-200/50 line-through font-sans">₹1,199</span>
-            <span class="bg-amber-400 text-black text-[9px] sm:text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-full shadow-md">
-              SAVE ₹400
-            </span>
+            {/* Product Image */}
+            <div class="relative z-10 flex flex-col items-center justify-center group">
+              <img 
+                src="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png" 
+                alt="Sujata Nutrilive Healthy Life Combo - Spirulina and Sea Buckthorn Bottles Cutout" 
+                class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-500 ease-out"
+                loading="eager"
+              />
+              <div class="w-3/4 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-3">
-            <a href="/product/sujata-sea-buckthorn-capsules" class="bg-amber-400 hover:bg-amber-300 text-black text-center text-xs sm:text-sm font-bold uppercase tracking-[0.15em] px-6 sm:px-10 py-3 sm:py-4 rounded-xl shadow-[0_10px_30px_rgba(245,158,11,0.3)] transition-all transform hover:-translate-y-0.5 active:scale-95 font-sans">
-              Explore Sea Buckthorn →
-            </a>
-          </div>
-        </div>
+          {/* Copy & Offer: On Mobile = Order 2 (BOTTOM), On Desktop = Order 1 (LEFT) */}
+          <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+            
+            <h1 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
+              The Complete Daily Synergy.<br/>
+              <span class="italic text-amber-300 font-serif">Spirulina + Sea Buckthorn.</span>
+            </h1>
 
-        <div class="w-full md:w-[46%] flex items-center justify-center relative h-[180px] sm:h-[260px] md:h-full group">
-          <img 
-            src="/products/sujata-sea-buckthorn-capsules-bottle.jpg" 
-            alt="Sujata Wild Himalayan Sea Buckthorn Capsules Bottle" 
-            class="relative z-10 w-auto h-[80%] max-h-[85%] object-contain drop-shadow-2xl rounded-2xl group-hover:-translate-y-2 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-          />
+            <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
+              Pair cold-pressed Spirulina's plant protein and bio-iron with wild Himalayan Sea Buckthorn's rare Omega 7, 3, 6, 9. Restores cellular energy, heart health, and radiant skin together.
+            </p>
+
+            {/* 3 Clinical Pills */}
+            <div class="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🟢</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Veg</span>
+              </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🌿</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Zero Odour</span>
+              </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🧪</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">NABL Lab</span>
+              </div>
+            </div>
+
+            {/* Pricing & Free Gift Pill */}
+            <div class="flex items-center justify-between gap-1.5 mb-2.5 sm:mb-3 px-3 py-2 sm:p-2.5 rounded-xl bg-black/40 border border-white/10 w-full max-w-md">
+              <div class="flex items-baseline gap-1.5 sm:gap-2">
+                <span class="text-lg sm:text-xl font-black text-white font-sans">₹1,100</span>
+                <span class="text-xs text-gray-400 line-through font-sans">₹1,598</span>
+                <span class="bg-amber-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
+                  SAVE 30%
+                </span>
+              </div>
+              <div class="text-[9px] sm:text-[10px] font-semibold text-emerald-300 flex items-center gap-1 font-sans shrink-0">
+                <span>🎁</span>
+                <span>2 Jars (120 Caps)</span>
+              </div>
+            </div>
+
+            {/* Single High-Converting Primary CTA on Mobile */}
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+              <a 
+                href="/product/sujata-spirulina-sea-buckthorn-combo" 
+                class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[0_6px_18px_rgba(245,158,11,0.25)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+              >
+                <span>Claim Combo Offer (Save 30%)</span>
+                <span class="text-sm">→</span>
+              </a>
+
+              <a 
+                href="/quiz" 
+                class="hidden sm:flex bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all text-center font-sans items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>⚡ Dosage Quiz</span>
+              </a>
+            </div>
+
+            {/* Reassurance */}
+            <div class="flex items-center justify-center lg:justify-start gap-2 text-[9.5px] sm:text-[11px] text-emerald-200/80 font-sans whitespace-nowrap">
+              <span>🚚 24h Dispatch</span>
+              <span class="text-white/20">•</span>
+              <span>💵 Free COD</span>
+              <span class="text-white/20">•</span>
+              <span>🛡️ 30-Day Return</span>
+            </div>
+
+          </div>
+
         </div>
       </div>
-    </div>
 
-    {/* -----------------------------------
-        SLIDE 4: BUY 2 GET 1 FREE (Welcome Value Offer)
-        ----------------------------------- */}
-    <div class="slide absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] translate-x-full" data-index="3">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#FCFBF9] via-[#F4FAF6] to-[#E8F5EE] z-0"></div>
-      
-      <div class="max-w-[95rem] mx-auto px-6 sm:px-10 lg:px-16 relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-between gap-6 pb-12 sm:pb-0">
-        
-        <div class="w-full md:w-[54%] flex flex-col items-center md:items-start text-center md:text-left z-20">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#166534]/10 border border-[#166534]/30 mb-2 sm:mb-3 shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-[#166534] animate-pulse"></span>
-            <span class="text-[#166534] text-[9px] sm:text-xs font-black uppercase tracking-[0.25em]">
-              Complimentary Welcome Protocol
-            </span>
-          </div>
+      {/* -------------------------------------------------------------
+          SLIDE 1: PURE SPIRULINA PROTOCOL (Energy & Bio-Iron)
+          ------------------------------------------------------------- */}
+      <div 
+        id="hero-slide-1" 
+        class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
+        data-slide-index="1"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
-          <h2 class="text-[#111827] text-2xl sm:text-4xl lg:text-6xl font-normal font-serif leading-[1.08] tracking-tight mb-2 sm:mb-3">
-            Buy 2 Bottles.<br/>
-            <span class="italic text-[#166534]">Get 1 Bottle On Us.</span>
-          </h2>
+          {/* Visual */}
+          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
+            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-emerald-500/20 rounded-full blur-[60px] pointer-events-none"></div>
 
-          <p class="text-xs sm:text-sm md:text-base font-normal text-gray-600 mb-4 sm:mb-6 max-w-lg leading-relaxed">
-            Full 90-day cellular rejuvenation supply. Organic, lab-tested, and certified heavy-metal free. Shipped with free express delivery.
-          </p>
+            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-emerald-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
+              <div class="flex text-amber-400 text-[10px]">★★★★★</div>
+              <span class="text-[9px] sm:text-[10px] font-bold tracking-wide text-emerald-200 font-sans">4.9/5 • 10,000+ Daily Routines</span>
+            </div>
 
-          <div class="flex items-center gap-3">
-            <a href="#welcome-kit-builder" class="bg-[#064E3B] hover:bg-[#022C22] text-white text-center text-xs sm:text-sm font-bold uppercase tracking-[0.15em] px-6 sm:px-10 py-3 sm:py-4 rounded-xl shadow-[0_10px_20px_rgba(6,78,59,0.2)] transition-all transform hover:-translate-y-0.5 active:scale-95 font-sans">
-              Claim 3-Bottle Bundle →
-            </a>
+            <div class="relative z-10 flex flex-col items-center justify-center group">
+              <img 
+                src="/products/sujata-spirulina-capsules-bottle-transparent.png" 
+                alt="Sujata Pure Spirulina Capsules Seamless Bottle Cutout" 
+                class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-500 ease-out"
+                loading="lazy"
+              />
+              <div class="w-1/2 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
+            </div>
           </div>
-        </div>
 
-        <div class="w-full md:w-[46%] flex items-center justify-center relative h-[180px] sm:h-[260px] md:h-full">
-          <img src="/spirulina-bottle.png" alt="Bottle 1" width={260} height={360} class="relative z-10 h-[65%] sm:h-[70%] object-contain drop-shadow-xl -rotate-6 translate-x-4 opacity-90"/>
-          <img src="/spirulina-bottle.png" alt="Bottle 2" width={320} height={420} class="relative z-20 h-[80%] sm:h-[85%] object-contain drop-shadow-2xl"/>
-          <img src="/spirulina-bottle.png" alt="Bottle 3" width={260} height={360} class="relative z-10 h-[65%] sm:h-[70%] object-contain drop-shadow-xl rotate-6 -translate-x-4 opacity-90"/>
+          {/* Copy */}
+          <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+            
+            <h2 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
+              Double Your Daily Energy.<br/>
+              <span class="italic text-emerald-300 font-serif">Zero 3 PM Fatigue.</span>
+            </h2>
+
+            <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
+              100% Pure, sub-40°C cold-pressed Spirulina. Packed with 4x bio-iron, 65% complete plant protein, and active Phycocyanin to eliminate chronic fatigue without synthetic chemicals.
+            </p>
+
+            {/* 3 Clinical Pills */}
+            <div class="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🟢</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Veg</span>
+              </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🌿</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Zero Odour</span>
+              </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">⚡</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">4x Bio-Iron</span>
+              </div>
+            </div>
+
+            {/* Pricing Bar */}
+            <div class="flex items-center justify-between gap-1.5 mb-2.5 sm:mb-3 px-3 py-2 sm:p-2.5 rounded-xl bg-black/40 border border-white/10 w-full max-w-md">
+              <div class="flex items-baseline gap-1.5 sm:gap-2">
+                <span class="text-lg sm:text-xl font-black text-white font-sans">₹599</span>
+                <span class="text-xs text-gray-400 line-through font-sans">₹799</span>
+                <span class="bg-emerald-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
+                  SAVE 25%
+                </span>
+              </div>
+              <div class="text-[9px] sm:text-[10px] font-semibold text-emerald-300 flex items-center gap-1 font-sans shrink-0">
+                <span>📦</span>
+                <span>60 Veg Caps (1 Mo)</span>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+              <a 
+                href="/product/sujata-spirulina-capsules" 
+                class="bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[0_6px_18px_rgba(52,211,153,0.3)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+              >
+                <span>Shop Spirulina Protocol (₹599)</span>
+                <span class="text-sm">→</span>
+              </a>
+
+              <a 
+                href="/quiz" 
+                class="hidden sm:flex bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all text-center font-sans items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>⚡ Dosage Quiz</span>
+              </a>
+            </div>
+
+            {/* Reassurance */}
+            <div class="flex items-center justify-center lg:justify-start gap-2 text-[9.5px] sm:text-[11px] text-emerald-200/80 font-sans whitespace-nowrap">
+              <span>🚚 24h Dispatch</span>
+              <span class="text-white/20">•</span>
+              <span>💵 Free COD</span>
+              <span class="text-white/20">•</span>
+              <span>🛡️ 30-Day Return</span>
+            </div>
+
+          </div>
+
         </div>
       </div>
+
+      {/* -------------------------------------------------------------
+          SLIDE 2: WILD SEA BUCKTHORN (Cellular Glow & Omega 7)
+          ------------------------------------------------------------- */}
+      <div 
+        id="hero-slide-2" 
+        class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
+        data-slide-index="2"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
+          
+          {/* Visual */}
+          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
+            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-amber-500/20 rounded-full blur-[60px] pointer-events-none"></div>
+
+            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-amber-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
+              <span class="text-amber-400 text-xs">🏔️</span>
+              <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-amber-200 font-sans">12,000 ft Himalayan Harvest</span>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center justify-center group">
+              <img 
+                src="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png" 
+                alt="Sujata Wild Himalayan Sea Buckthorn Capsules Seamless Bottle Cutout" 
+                class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-500 ease-out"
+                loading="lazy"
+              />
+              <div class="w-1/2 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
+            </div>
+          </div>
+
+          {/* Copy */}
+          <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+            
+            <h2 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
+              Cellular Radiance & Youth.<br/>
+              <span class="italic text-amber-400 font-serif">Powered by Rare Omega-7.</span>
+            </h2>
+
+            <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
+              Nature's rarest source of Omega 7, 3, 6, 9 with 12x Vitamin C of fresh oranges. Deeply hydrates cellular mucosal linings, supports heart elasticity, and restores clear skin glow.
+            </p>
+
+            {/* 3 Clinical Pills */}
+            <div class="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-amber-400 text-[10px] sm:text-xs">💧</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Hydration</span>
+              </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-amber-400 text-[10px] sm:text-xs">❤️</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Heart Health</span>
+              </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-amber-400 text-[10px] sm:text-xs">🍊</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">12x Vit C</span>
+              </div>
+            </div>
+
+            {/* Pricing Bar */}
+            <div class="flex items-center justify-between gap-1.5 mb-2.5 sm:mb-3 px-3 py-2 sm:p-2.5 rounded-xl bg-black/40 border border-white/10 w-full max-w-md">
+              <div class="flex items-baseline gap-1.5 sm:gap-2">
+                <span class="text-lg sm:text-xl font-black text-white font-sans">₹799</span>
+                <span class="text-xs text-gray-400 line-through font-sans">₹999</span>
+                <span class="bg-amber-400 text-black text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 rounded font-sans">
+                  SAVE 20%
+                </span>
+              </div>
+              <div class="text-[9px] sm:text-[10px] font-semibold text-amber-300 flex items-center gap-1 font-sans shrink-0">
+                <span>📦</span>
+                <span>60 Veg Caps (Ladakh)</span>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+              <a 
+                href="/product/sujata-sea-buckthorn-capsules" 
+                class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[0_6px_18px_rgba(245,158,11,0.3)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+              >
+                <span>Explore Sea Buckthorn (₹799)</span>
+                <span class="text-sm">→</span>
+              </a>
+
+              <a 
+                href="/quiz" 
+                class="hidden sm:flex bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all text-center font-sans items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>⚡ Dosage Quiz</span>
+              </a>
+            </div>
+
+            {/* Reassurance */}
+            <div class="flex items-center justify-center lg:justify-start gap-2 text-[9.5px] sm:text-[11px] text-emerald-200/80 font-sans whitespace-nowrap">
+              <span>🚚 24h Dispatch</span>
+              <span class="text-white/20">•</span>
+              <span>💵 Free COD</span>
+              <span class="text-white/20">•</span>
+              <span>🛡️ 30-Day Return</span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
-    {/* Navigation Arrows */}
-    <button id="prev-slide" class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer hidden md:flex shadow-xl" aria-label="Previous Slide">
-      ‹
-    </button>
-    <button id="next-slide" class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer hidden md:flex shadow-xl" aria-label="Next Slide">
-      ›
-    </button>
-  </div>
-
-  {/* ==========================================
-      SLIDER CONTROLS & TABS (Clean Sub-Bar Positioning)
-      ========================================== */}
-  <div class="w-full py-3 bg-[#011C16] border-b border-white/10 flex justify-center items-center px-4">
-    <div class="bg-black/40 backdrop-blur-md border border-white/15 p-1 sm:p-1.5 rounded-full flex gap-1.5 sm:gap-3 max-w-full overflow-x-auto shadow-2xl">
-      <button class="hero-tab active px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all text-white bg-white/20 border border-white/30 cursor-pointer whitespace-nowrap" data-target="0">
-        🔥 Healthy Life Combo
-      </button>
-      <button class="hero-tab px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all text-white/70 hover:text-white hover:bg-white/10 cursor-pointer whitespace-nowrap" data-target="1">
-        🌿 Pure Spirulina
-      </button>
-      <button class="hero-tab px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all text-white/70 hover:text-white hover:bg-white/10 cursor-pointer whitespace-nowrap" data-target="2">
-        🍊 Sea Buckthorn
-      </button>
-      <button class="hero-tab px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all text-white/70 hover:text-white hover:bg-white/10 cursor-pointer whitespace-nowrap" data-target="3">
-        🎁 Buy 2 Get 1
-      </button>
+    {/* =========================================================================
+        3. SLEEK PAGINATION INDICATOR DOTS (Touch Responsive)
+        ========================================================================= */}
+    <div class="flex items-center justify-center gap-2 mt-3 sm:mt-4">
+      <button 
+        type="button" 
+        class="hero-dot-indicator w-6 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer" 
+        data-dot-index="0" 
+        aria-label="Go to slide 1"
+      ></button>
+      <button 
+        type="button" 
+        class="hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer" 
+        data-dot-index="1" 
+        aria-label="Go to slide 2"
+      ></button>
+      <button 
+        type="button" 
+        class="hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer" 
+        data-dot-index="2" 
+        aria-label="Go to slide 3"
+      ></button>
     </div>
+
   </div>
 
 </section>
 
+{/* =========================================================================
+    4. ENGINE: TOUCH SWIPE + AUTO-ADVANCE + TAB/DOT SYNCHRONIZATION
+    ========================================================================= */}
 <script is:inline>
-  function initHeroSlider() {
-    const slides = document.querySelectorAll('.slide');
-    const tabs = document.querySelectorAll('.hero-tab');
-    const prevBtn = document.getElementById('prev-slide');
-    const nextBtn = document.getElementById('next-slide');
-    let currentSlide = 0;
-    let autoSlideInterval;
+  function initProtocolHeroSwitcher() {
+    const track = document.getElementById('hero-slider-track');
+    const tabButtons = document.querySelectorAll('.hero-tab-btn');
+    const dotIndicators = document.querySelectorAll('.hero-dot-indicator');
+    const ambientGlow = document.getElementById('hero-ambient-glow');
+    if (!track) return;
 
-    function goToSlide(index) {
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      
-      slides.forEach((slide, i) => {
-        if (i === index) {
-          slide.classList.remove('translate-x-full', '-translate-x-full');
-          slide.classList.add('translate-x-0');
-        } else if (i < index) {
-          slide.classList.remove('translate-x-0', 'translate-x-full');
-          slide.classList.add('-translate-x-full');
+    const slides = track.querySelectorAll('.hero-slide-card');
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    const SLIDE_DURATION = 6000; // 6s per protocol
+
+    const glowColors = [
+      'rgba(245, 158, 11, 0.14)', // Combo (Warm Amber Gold)
+      'rgba(16, 185, 129, 0.16)', // Spirulina (Luminous Emerald)
+      'rgba(217, 119, 6, 0.15)',  // Sea Buckthorn (Himalayan Amber)
+    ];
+
+    function updateUI(targetIndex) {
+      if (targetIndex < 0 || targetIndex >= slides.length) return;
+      currentIndex = targetIndex;
+
+      // 1. Update Tabs
+      tabButtons.forEach((btn, idx) => {
+        const isCurrent = idx === currentIndex;
+        btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        const progressLine = btn.querySelector('.tab-progress-line');
+
+        if (isCurrent) {
+          btn.classList.add('active', 'bg-[#064E3B]', 'text-white', 'shadow-md', 'border-emerald-400/40');
+          btn.classList.remove('text-emerald-100/70', 'border-transparent');
+          if (progressLine) {
+            progressLine.style.transition = 'none';
+            progressLine.style.transform = 'scaleX(0)';
+            setTimeout(() => {
+              progressLine.style.transition = `transform ${SLIDE_DURATION}ms linear`;
+              progressLine.style.transform = 'scaleX(1)';
+            }, 30);
+          }
         } else {
-          slide.classList.remove('translate-x-0', '-translate-x-full');
-          slide.classList.add('translate-x-full');
+          btn.classList.remove('active', 'bg-[#064E3B]', 'text-white', 'shadow-md', 'border-emerald-400/40');
+          btn.classList.add('text-emerald-100/70', 'border-transparent');
+          if (progressLine) {
+            progressLine.style.transition = 'none';
+            progressLine.style.transform = 'scaleX(0)';
+          }
         }
       });
 
-      tabs.forEach((tab, i) => {
-        if (i === index) {
-          tab.classList.add('active', 'text-white', 'bg-white/20', 'border', 'border-white/30');
-          tab.classList.remove('text-white/70');
+      // 2. Update Dots
+      dotIndicators.forEach((dot, idx) => {
+        const isCurrent = idx === currentIndex;
+        if (isCurrent) {
+          dot.className = 'hero-dot-indicator w-6 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer';
         } else {
-          tab.classList.remove('active', 'text-white', 'bg-white/20', 'border', 'border-white/30');
-          tab.classList.add('text-white/70');
+          dot.className = 'hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer';
         }
       });
 
-      currentSlide = index;
+      // 3. Update Ambient Glow
+      if (ambientGlow && glowColors[currentIndex]) {
+        ambientGlow.style.backgroundColor = glowColors[currentIndex];
+      }
     }
 
-    function startAutoSlide() {
-      stopAutoSlide();
-      autoSlideInterval = setInterval(() => {
-        goToSlide(currentSlide + 1);
-      }, 6000);
+    function scrollToIndex(targetIndex) {
+      if (!slides[targetIndex]) return;
+      const targetSlide = slides[targetIndex];
+      track.scrollTo({
+        left: targetSlide.offsetLeft,
+        behavior: 'smooth'
+      });
+      updateUI(targetIndex);
     }
 
-    function stopAutoSlide() {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(() => {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        scrollToIndex(nextIndex);
+      }, SLIDE_DURATION);
     }
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        const target = parseInt(e.currentTarget.getAttribute('data-target'));
-        goToSlide(target);
-        startAutoSlide();
+    function stopAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
+    // Tab Clicks
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-tab-index') || '0', 10);
+        stopAutoPlay();
+        scrollToIndex(idx);
+        startAutoPlay();
       });
     });
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        goToSlide(currentSlide - 1);
-        startAutoSlide();
+    // Dot Clicks
+    dotIndicators.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-dot-index') || '0', 10);
+        stopAutoPlay();
+        scrollToIndex(idx);
+        startAutoPlay();
       });
+    });
+
+    // Track User Touch Scroll via Debounced Scroll Listener
+    let scrollTimeout = null;
+    track.addEventListener('scroll', () => {
+      stopAutoPlay();
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const scrollLeft = track.scrollLeft;
+        const trackWidth = track.clientWidth;
+        const newIndex = Math.round(scrollLeft / trackWidth);
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < slides.length) {
+          updateUI(newIndex);
+        }
+        startAutoPlay();
+      }, 80);
+    }, { passive: true });
+
+    // Pause on Hover
+    const heroSection = document.getElementById('hero-section');
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', stopAutoPlay);
+      heroSection.addEventListener('mouseleave', startAutoPlay);
     }
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        goToSlide(currentSlide + 1);
-        startAutoSlide();
-      });
-    }
-
-    startAutoSlide();
+    // Initialize UI on Mount
+    updateUI(0);
+    startAutoPlay();
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroSlider);
+    document.addEventListener('DOMContentLoaded', initProtocolHeroSwitcher);
   } else {
-    initHeroSlider();
+    initProtocolHeroSwitcher();
   }
-  document.addEventListener('astro:page-load', initHeroSlider);
+  document.addEventListener('astro:page-load', initProtocolHeroSwitcher);
 </script>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

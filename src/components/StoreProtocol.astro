@@ -2,165 +2,108 @@
 // src/components/StoreProtocol.astro
 ---
 
-<section id="protocol-stack-section" class="relative bg-[#F9F9F6] text-[#0A0A0A] font-sans z-30 pb-32">
+<!-- ⏳ Block 8: The 30-Day Transformation Protocol (Zero Scroll-Jacking • Mobile Fluid) -->
+<section id="protocol-timeline" class="py-16 md:py-24 bg-[#F9F9F6] text-[#111827] font-sans border-t border-gray-200/80 relative overflow-hidden">
   
-  {/* 🌟 THE IMMERSIVE BACKGROUND CANVAS (This will NOT scroll away!) */}
-  <div class="absolute inset-0 z-0 pointer-events-none">
-    {/* By making this sticky, the background stays locked in the viewport while you scroll the cards! */}
-    <div class="sticky top-0 h-[100svh] w-full overflow-hidden">
-      
-      {/* 1. Expensive Paper Grain */}
-      <div class="absolute inset-0 opacity-[0.05] mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
-      
-      {/* 2. Constant Floating Micro-Orbs (They stay on screen!) */}
-      <div class="hidden md:block absolute top-[15%] left-[5%] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-emerald-500/10 rounded-full blur-[100px] orb-1"></div>
-      <div class="hidden md:block absolute bottom-[10%] right-[10%] w-[55vw] h-[55vw] max-w-[550px] max-h-[550px] bg-teal-500/10 rounded-full blur-[120px] orb-2"></div>
-
-      {/* 3. The Editorial Stamp (Locked to top-right corner) */}
-      <div class="absolute top-8 right-8 md:top-12 md:right-12 z-0 opacity-25 hidden lg:block">
-        <svg class="w-40 h-40 stamp-spin" viewBox="0 0 100 100">
-          <path id="curve" d="M 50 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent"/>
-          <text class="text-[9.5px] font-bold uppercase tracking-[0.25em] fill-[#064E3B] font-sans">
-            <textPath href="#curve">PURE AQUA CULTIVATION • ZERO HEAT EXTRACTION •</textPath>
-          </text>
-        </svg>
-      </div>
-      
-    </div>
-  </div>
-
-  {/* 🌟 THE CONTENT FRONT-LAYER */}
-  <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10 pt-24 md:pt-40 flex flex-col md:flex-row gap-12 lg:gap-24 items-start">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
     
-    {/* LEFT: THE STICKY HEADER */}
-    <div class="w-full md:w-5/12 md:sticky top-[25vh] z-10 md:pr-10 mb-12 md:mb-0">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 border border-emerald-900/10 mb-8 backdrop-blur-md shadow-sm">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot"></span>
-        <span class="text-emerald-800 text-[9px] font-bold uppercase tracking-[0.25em] font-sans">The Protocol</span>
+    {/* Section Header */}
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100/70 border border-emerald-300/50 mb-3.5 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] font-sans">
+          The 30-Day Protocol
+        </span>
       </div>
-      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] lg:text-7xl font-normal font-serif leading-[1.1] mb-6 text-[#111827]">
-        Your 30-Day<br/><span class="italic text-gray-400 font-normal">Rebirth.</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight mb-3">
+        Your 30-Day <span class="italic text-[#166534]">Biological Rebirth.</span>
       </h2>
-      <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-sm font-normal">
-        True cellular transformation isn't instant. It's a precise, compounding protocol. Here is exactly what happens to your body when you commit to the absolute peak.
+      <p class="text-xs sm:text-sm md:text-base text-gray-600 font-normal leading-relaxed font-sans">
+        True cellular renewal is not an overnight chemical spike. It is a compounding biological transformation. Here is what happens when you stay consistent.
       </p>
     </div>
 
-    {/* RIGHT: THE 3D STACKING DOSSIER CARDS */}
-    <div class="w-full md:w-7/12 relative pb-[10vh]" id="cards-container">
+    {/* The 3 Compounding Milestones (Mobile Vertical Connected Flow / Desktop 3-Col Step Grid) */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
       
-      {/* CARD 1 */}
-      <div class="protocol-card relative md:sticky md:top-[15vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-white/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[1]" data-index="0">
-        <div class="absolute top-8 right-8 text-emerald-50 text-6xl md:text-8xl font-normal font-serif pointer-events-none">01</div>
-        <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-4 font-sans">Day 1 - 7</span>
-        <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-serif font-normal mb-4 md:mb-6 text-[#111827]">The Awakening.</h3>
-        <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-md mb-8 font-normal">
-          The highly bio-available B-vitamins and raw iron flood your bloodstream. The first thing you'll notice? The 3 PM afternoon crash completely vanishes.
-        </p>
-        <div class="mt-auto flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-          <span class="text-xs font-bold uppercase tracking-widest text-gray-400 font-sans">Immediate Impact</span>
+      {/* Milestone 1: Day 1 - 7 */}
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-4">
+            <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full font-sans">
+              Day 1 – 7
+            </span>
+            <span class="text-3xl font-serif font-bold text-gray-200 group-hover:text-emerald-300 transition-colors">01</span>
+          </div>
+          <h3 class="text-xl font-bold font-serif text-[#111827] mb-2 leading-snug">
+            The Awakening.
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed mb-6">
+            Highly bio-available organic iron and B-vitamins flood your bloodstream. The very first measurable shift? Your 3 PM afternoon energy slump completely disappears.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-emerald-800 font-sans">
+          <span>⚡ Cellular Oxygenation Boost</span>
         </div>
       </div>
 
-      {/* CARD 2 */}
-      <div class="protocol-card relative md:sticky md:top-[18vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#F3F4F1]/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_50px_rgba(0,0,0,0.06)] border border-white flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[2] mt-8 md:mt-[20vh]" data-index="1">
-        <div class="absolute top-8 right-8 text-white text-6xl md:text-8xl font-normal font-serif pointer-events-none drop-shadow-sm">02</div>
-        <span class="text-emerald-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-4 font-sans">Day 14 - 21</span>
-        <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-serif font-normal mb-4 md:mb-6 text-[#111827]">Gut Rebalance.</h3>
-        <p class="text-gray-600 text-sm md:text-base leading-relaxed max-w-md mb-8 font-normal">
-          As the cold-pressed enzymes compound, your micro-biome shifts. Digestion optimizes effortlessly. You will experience a significant reduction in bloating.
-        </p>
-        <div class="mt-auto flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-          <span class="text-xs font-bold uppercase tracking-widest text-gray-400 font-sans">Compounding Phase</span>
+      {/* Milestone 2: Day 8 - 21 */}
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-4">
+            <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full font-sans">
+              Day 8 – 21
+            </span>
+            <span class="text-3xl font-serif font-bold text-gray-200 group-hover:text-emerald-300 transition-colors">02</span>
+          </div>
+          <h3 class="text-xl font-bold font-serif text-[#111827] mb-2 leading-snug">
+            The Gut Cleanse.
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed mb-6">
+            Natural Chlorophyll-a neutralizes chronic stomach acidity and morning bloating. Bowel motility normalizes as healthy gut microbiome flora begins multiplying.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-emerald-800 font-sans">
+          <span>🌿 Alkaline Digestive Balance</span>
         </div>
       </div>
 
-      {/* CARD 3 */}
-      <div class="protocol-card relative md:sticky md:top-[21vh] w-full h-auto min-h-[55vh] md:h-[60vh] bg-[#064E3B] text-white rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_-20px_60px_rgba(6,78,59,0.5)] border border-emerald-700/50 flex flex-col justify-center origin-top transition-all duration-300 will-change-transform z-[3] mt-8 md:mt-[20vh]" data-index="2">
-        <div class="absolute top-8 right-8 text-emerald-800 text-6xl md:text-8xl font-normal font-serif pointer-events-none">03</div>
-        <span class="text-emerald-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] mb-4 font-sans">Day 30 & Beyond</span>
-        <h3 class="text-[clamp(1.75rem,4vw,3rem)] md:text-5xl font-serif font-normal mb-4 md:mb-6 text-white">Cellular Peak.</h3>
-        <p class="text-emerald-100/80 text-sm md:text-base leading-relaxed max-w-md mb-8 font-normal">
-          A full cycle of Phycocyanin antioxidants completes. The results are now visible externally: clearer skin, fortified immune defense, and a sustained state of mental clarity.
-        </p>
-        <div class="mt-auto flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] pulse-dot"></div>
-          <span class="text-xs font-bold uppercase tracking-widest text-emerald-200 font-sans">Total Transformation</span>
+      {/* Milestone 3: Day 22 - 30 */}
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-4">
+            <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full font-sans">
+              Day 22 – 30
+            </span>
+            <span class="text-3xl font-serif font-bold text-gray-200 group-hover:text-emerald-300 transition-colors">03</span>
+          </div>
+          <h3 class="text-xl font-bold font-serif text-[#111827] mb-2 leading-snug">
+            The Deep Baseline.
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed mb-6">
+            Phycocyanin and Superoxide Dismutase (SOD) establish an antioxidant shield. Natural keratin strengthens hair roots and skin develops a healthy, clean glow.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-emerald-800 font-sans">
+          <span>✨ Radiant Skin & Immune Baseline</span>
         </div>
       </div>
 
     </div>
+
+    {/* Risk Reversal Callout */}
+    <div class="max-w-xl mx-auto text-center">
+      <a 
+        href="#product-ecosystem" 
+        class="inline-flex items-center gap-2 bg-[#111827] hover:bg-[#166534] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-md touch-manipulation cursor-pointer font-sans"
+      >
+        <span>Begin Your 30-Day Protocol →</span>
+      </a>
+      <p class="text-[11px] text-gray-500 font-medium font-sans mt-2.5">
+        Backed by our 30-Day Empty-Bottle Money-Back Guarantee. No questions asked.
+      </p>
+    </div>
+
   </div>
+
 </section>
-
-{/* 🌟 PURE CSS (Animations locked and smooth) */}
-<style is:global>
-  @keyframes float {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -40px) scale(1.05); }
-    66% { transform: translate(-20px, 20px) scale(0.95); }
-    100% { transform: translate(0px, 0px) scale(1); }
-  }
-  
-  .orb-1 { animation: float 15s ease-in-out infinite; }
-  .orb-2 { animation: float 20s ease-in-out infinite reverse; }
-  .orb-3 { animation: float 10s ease-in-out infinite; }
-  .orb-4 { animation: float 12s ease-in-out infinite reverse; }
-  
-  @keyframes spin-slow {
-    100% { transform: rotate(360deg); }
-  }
-  .stamp-spin { animation: spin-slow 25s linear infinite; }
-
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-  .pulse-dot { animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-</style>
-
-{/* 🌟 THE DOSSIER ENGINE (Only handles Card Stacking) */}
-<script>
-  function initProtocolStack() {
-    const cards = document.querySelectorAll('.protocol-card');
-    if (cards.length === 0) return;
-
-    window.addEventListener('scroll', () => {
-      if (window.innerWidth < 768) {
-        cards.forEach(card => {
-          const cardEl = card as HTMLElement;
-          cardEl.style.transform = '';
-          cardEl.style.filter = '';
-        });
-        return;
-      }
-      for (let i = 0; i < cards.length - 1; i++) {
-        const currentCard = cards[i] as HTMLElement;
-        const nextCard = cards[i + 1] as HTMLElement;
-        
-        const currentRect = currentCard.getBoundingClientRect();
-        const nextRect = nextCard.getBoundingClientRect();
-        
-        const overlap = currentRect.bottom - nextRect.top;
-        
-        if (overlap > 0) {
-          const scaleProgress = Math.min(overlap / window.innerHeight, 1);
-          const scale = 1 - (scaleProgress * 0.08); 
-          const brightness = 1 - (scaleProgress * 0.15); 
-          
-          currentCard.style.transform = `scale(${scale})`;
-          currentCard.style.filter = `brightness(${brightness})`;
-        } else {
-          currentCard.style.transform = `scale(1)`;
-          currentCard.style.filter = `brightness(1)`;
-        }
-      }
-    }, { passive: true });
-  }
-
-  // Bind for standard page load and client-side view transition
-  document.addEventListener('DOMContentLoaded', initProtocolStack);
-  document.addEventListener('astro:page-load', initProtocolStack);
-</script>

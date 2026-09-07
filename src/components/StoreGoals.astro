@@ -1,119 +1,135 @@
 ---
 // src/components/StoreGoals.astro
-import { Image } from 'astro:assets';
-import imgGoalEnergy from '../assets/sujata_goal_energy.png';
-import imgGoalImmunity from '../assets/sujata_goal_immunity.png';
-import imgGoalBeauty from '../assets/sujata_goal_beauty.png';
 ---
 
-<section id="shop-by-goal" class="relative bg-[#022c22] py-20 lg:py-32 font-sans overflow-hidden border-b border-white/5">
+<section id="shop-by-goal" class="relative bg-[#022C22] py-16 md:py-24 font-sans overflow-hidden border-b border-white/5 text-white">
   
-  {/* Subtle Background Elements */}
-  <div class="absolute inset-0 z-0 opacity-20">
-    <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.2)_0%,transparent_70%)] blur-[80px]"></div>
-  </div>
+  {/* Ambient Background Light */}
+  <div class="absolute top-0 right-0 w-[40vw] h-[40vw] bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-  <div class="max-w-[90rem] mx-auto px-5 md:px-6 lg:px-12 relative z-10">
+  <div class="max-w-[92rem] mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
     
-    {/* Header */}
-    <div class="text-center mb-16 md:mb-20">
-      <span class="text-emerald-400 text-[10px] md:text-xs font-bold tracking-[0.25em] uppercase mb-3 block font-sans">Personalized Routine</span>
-      <h2 class="text-3xl md:text-5xl font-serif font-normal text-white leading-tight">
-        What is your <span class="italic text-emerald-300">Daily Objective?</span>
+    {/* Section Header */}
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <span class="text-emerald-400 text-[10px] md:text-xs font-bold tracking-[0.25em] uppercase mb-2.5 block font-sans">
+        Targeted Ayurvedic Nutrition
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-white leading-tight">
+        Shop By Health <span class="italic text-emerald-300">Need.</span>
       </h2>
-      <p class="text-emerald-100/70 text-sm md:text-base mt-4 max-w-lg mx-auto">Select your primary objective to discover the perfect Spirulina formulation for your body.</p>
+      <p class="text-emerald-100/70 text-xs sm:text-sm md:text-base mt-3 leading-relaxed font-sans">
+        Select your primary concern to discover the doctor-curated protocol formulated for your body.
+      </p>
     </div>
 
-    {/* The Goal Cards (Scroll Swiper on mobile, Elegant Grid on Desktop) */}
-    <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 gap-6 lg:gap-8 pb-8 md:pb-0 scroll-smooth no-scrollbar">
+    {/* 4 Targeted Intent Cards (Mobile Horizontal Scroll / Desktop 4-Col Grid) */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
       
-      {/* Goal 1: Pure Energy */}
-      <a href="/quiz" data-goal-select="energy" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full w-[85vw] sm:w-[50vw] md:w-auto shrink-0 snap-center">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#166534]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
-        {/* Crisp circular realworld micro-image with glowing ring */}
-        <div class="relative w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-emerald-500/25 group-hover:border-emerald-400 group-hover:scale-110 transition-all duration-500 shadow-lg z-10 shrink-0">
-          <Image src={imgGoalEnergy} alt="Pure Energy & Focus" width={80} height={80} class="w-full h-full object-cover" />
+      {/* 1. All-Day Energy & Stamina */}
+      <a 
+        href="#product-ecosystem" 
+        data-goal-filter="nutrition"
+        class="goal-card group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+      >
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+            ⚡
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-amber-300 block mb-1 font-sans">For Low Stamina</span>
+          <h3 class="text-lg sm:text-xl font-bold text-white mb-2.5 font-serif leading-snug">All-Day Energy & Iron</h3>
+          <p class="text-xs text-emerald-100/70 leading-relaxed font-sans mb-6">
+            Banish 3 PM fatigue, morning brain fog, and low hemoglobin with natural organic non-heme iron.
+          </p>
         </div>
-        
-        <h3 class="text-xl md:text-2xl font-bold text-white mb-3 relative z-10">Pure Energy & Focus</h3>
-        <p class="text-emerald-100/60 text-sm mb-8 relative z-10 leading-relaxed">Beat the afternoon crash. Formulations designed for immediate cognitive clarity and sustained physical stamina.</p>
-        <span class="mt-auto text-emerald-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all relative z-10">
-          Start 1-Min Quiz
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-sans">
+          <span>Explore Formulations</span>
+          <span>→</span>
         </span>
       </a>
 
-      {/* Goal 2: Cellular Immunity */}
-      <a href="/quiz" data-goal-select="immunity" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full w-[85vw] sm:w-[50vw] md:w-auto shrink-0 snap-center">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#166534]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
-        {/* Crisp circular realworld micro-image with glowing ring */}
-        <div class="relative w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-emerald-500/25 group-hover:border-emerald-400 group-hover:scale-110 transition-all duration-500 shadow-lg z-10 shrink-0">
-          <Image src={imgGoalImmunity} alt="Controlled Close-Pond Aquaculture" width={80} height={80} class="w-full h-full object-cover" />
+      {/* 2. Gut Cleanse & Acidity */}
+      <a 
+        href="#product-ecosystem" 
+        data-goal-filter="nutrition"
+        class="goal-card group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+      >
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+            🌿
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-300 block mb-1 font-sans">For Digestion</span>
+          <h3 class="text-lg sm:text-xl font-bold text-white mb-2.5 font-serif leading-snug">Gut Cleanse & Acidity</h3>
+          <p class="text-xs text-emerald-100/70 leading-relaxed font-sans mb-6">
+            Alkalize gut pH, eliminate chronic acid reflux, and restore microbiome balance via pure chlorophyll.
+          </p>
         </div>
-        
-        <h3 class="text-xl md:text-2xl font-bold text-white mb-3 relative z-10">Gut & Immunity</h3>
-        <p class="text-emerald-100/60 text-sm mb-8 relative z-10 leading-relaxed">Deep cellular repair. Cold-pressed capsules that restore gut micro-biome and fortify your immune defense.</p>
-        <span class="mt-auto text-[#00E676] text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all relative z-10">
-          Start 1-Min Quiz
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-sans">
+          <span>Explore Formulations</span>
+          <span>→</span>
         </span>
       </a>
 
-      {/* Goal 3: Skin & Hair */}
-      <a href="/quiz" data-goal-select="beauty" class="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all duration-500 flex flex-col items-center text-center overflow-hidden h-full w-[85vw] sm:w-[50vw] md:w-auto shrink-0 snap-center">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#166534]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        
-        {/* Crisp circular realworld micro-image with glowing ring */}
-        <div class="relative w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-emerald-500/25 group-hover:border-emerald-400 group-hover:scale-110 transition-all duration-500 shadow-lg z-10 shrink-0">
-          <Image src={imgGoalBeauty} alt="Organic Skin & Hair Purity" width={80} height={80} class="w-full h-full object-cover" />
+      {/* 3. Hair Density & Skin Radiance */}
+      <a 
+        href="#product-ecosystem" 
+        data-goal-filter="skincare"
+        class="goal-card group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+      >
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-pink-400/15 border border-pink-400/30 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+            ✨
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-pink-300 block mb-1 font-sans">For Glow & Hair Fall</span>
+          <h3 class="text-lg sm:text-xl font-bold text-white mb-2.5 font-serif leading-snug">Hair Density & Glow</h3>
+          <p class="text-xs text-emerald-100/70 leading-relaxed font-sans mb-6">
+            Stop hair thinning and hydrate deep skin dermal layers with rare Himalayan Omega 7 & bio-antioxidants.
+          </p>
         </div>
-        
-        <h3 class="text-xl md:text-2xl font-bold text-white mb-3 relative z-10">Skin & Hair Health</h3>
-        <p class="text-emerald-100/60 text-sm mb-8 relative z-10 leading-relaxed">External application meets internal purity. Stop hair fall and detoxify your skin with raw topical solutions.</p>
-        <span class="mt-auto text-[#00E676] text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all relative z-10">
-          Start 1-Min Quiz
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+        <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-sans">
+          <span>Explore Formulations</span>
+          <span>→</span>
+        </span>
+      </a>
+
+      {/* 4. 360° Value Combos */}
+      <a 
+        href="#product-ecosystem" 
+        data-goal-filter="combos"
+        class="goal-card group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer shadow-lg hover:-translate-y-1"
+      >
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-purple-400/15 border border-purple-400/30 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
+            📦
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-purple-300 block mb-1 font-sans">Best Household Value</span>
+          <h3 class="text-lg sm:text-xl font-bold text-white mb-2.5 font-serif leading-snug">360° Wellness Combos</h3>
+          <p class="text-xs text-emerald-100/70 leading-relaxed font-sans mb-6">
+            Synergistic kits combining daily spirulina with wild sea buckthorn. Maximum immunity and savings.
+          </p>
+        </div>
+        <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-sans">
+          <span>Explore Combos (Save 30%)</span>
+          <span>→</span>
         </span>
       </a>
 
     </div>
+
   </div>
+
 </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const goalLinks = document.querySelectorAll('[data-goal-select]');
-    goalLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const goalValue = link.getAttribute('data-goal-select');
-        const targetQuiz = document.getElementById('apothecary-quiz');
-        if (targetQuiz) {
-          // Scroll smoothly to the quiz
-          targetQuiz.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          
-          // Wait briefly for scroll to finish, then select the quiz option
-          setTimeout(() => {
-            // Find option and click it
-            const quizOption = targetQuiz.querySelector(`.quiz-option[data-value="${goalValue}"][data-step="1"]`) as HTMLElement;
-            if (quizOption) {
-              const restartBtn = document.getElementById('quiz-restart') as HTMLElement;
-              const step2 = document.getElementById('quiz-step-2') as HTMLElement;
-              const step3 = document.getElementById('quiz-step-3') as HTMLElement;
-              const resultStep = document.getElementById('quiz-result') as HTMLElement;
-
-              if (restartBtn && (!step2.classList.contains('hidden') || !step3.classList.contains('hidden') || !resultStep.classList.contains('hidden'))) {
-                restartBtn.click();
-              }
-
-              // Click the selected option
-              quizOption.click();
-            }
-          }, 600);
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const goalCard = e.target.closest('.goal-card');
+    if (goalCard) {
+      const filter = goalCard.getAttribute('data-goal-filter');
+      if (filter) {
+        const filterBtn = document.querySelector(`.shop-filter-btn[data-filter="${filter}"]`);
+        if (filterBtn) {
+          filterBtn.click();
         }
-      });
-    });
+      }
+    }
   });
 </script>

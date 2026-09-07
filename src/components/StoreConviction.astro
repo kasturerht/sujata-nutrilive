@@ -1,476 +1,189 @@
 ---
 // src/components/StoreConviction.astro
-import { Image } from 'astro:assets';
 ---
 
-<section id="conviction-engine" class="relative bg-[#FCFBF7] py-24 lg:py-32 overflow-hidden font-sans selection:bg-[#166534] selection:text-white">
+<!-- ⚖️ Block 7: "Why Sujata?" Purity Moat & Comparison Matrix -->
+<section id="why-sujata" class="py-16 md:py-24 bg-[#FCFBF7] text-[#111827] font-sans border-t border-gray-200/80 relative overflow-hidden">
   
-  {/* BACKGROUND ELEMENTS - Luxury Texture */}
-  <div class="absolute inset-0 pointer-events-none opacity-40">
-    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"></div>
-    <div class="absolute -right-24 top-1/4 w-96 h-96 bg-[#166534]/5 rounded-full blur-[100px]"></div>
-  </div>
-
-  <div class="max-w-[90rem] mx-auto px-6 md:px-12 relative z-10">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
     
-    {/* 1. EDITORIAL HEADER */}
-    <div class="flex flex-col items-center text-center mb-20">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="h-px w-8 md:w-12 bg-[#B45309]"></div>
-        <span class="text-[#B45309] text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] font-sans">The Science of Heritage</span>
-        <div class="h-px w-8 md:w-12 bg-[#B45309]"></div>
+    {/* Header */}
+    <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100/70 border border-emerald-300/50 mb-3.5 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] font-sans">
+          The Purity Standard
+        </span>
       </div>
-      <h2 class="text-4xl md:text-6xl font-serif font-normal text-[#111827] tracking-tight leading-[1.1] mb-6">
-        Nature Rooted in <br/> <span class="italic text-[#166534]">Surgical Precision.</span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight mb-3">
+        Why Sujata? <span class="italic text-[#166534]">The Clinical Difference.</span>
       </h2>
-      <p class="text-gray-500 max-w-2xl text-sm md:text-base leading-relaxed">
-        भारतातील सर्वात शुद्ध Spirulina बनवण्यासाठी आम्ही ५० वर्षांच्या पारंपरिक ज्ञानाला आधुनिक 'Cold-Press' तंत्रज्ञानाची जोड दिली आहे.
+      <p class="text-xs sm:text-sm md:text-base text-gray-600 font-normal max-w-xl mx-auto leading-relaxed font-sans">
+        Commercial spirulina is often mass spray-dried at extreme heat, killing fragile enzymes. Here is how Sujata's cold-pressed protocol protects your health.
       </p>
     </div>
 
-    {/* 2. THE SYMMETRICAL ANATOMY (The "Wow" Orbital Visual) */}
-    <div class="grid grid-cols-1 lg:grid-cols-3 items-center gap-12 lg:gap-8 mb-32">
-      
-      {/* Left Callouts */}
-      <div class="space-y-12 order-2 lg:order-1 relative z-20">
-        <div class="flex flex-col lg:items-end lg:text-right group">
-          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="sphere-green-main" cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stop-color="#a7f3d0"/>
-                  <stop offset="35%" stop-color="#10b981"/>
-                  <stop offset="70%" stop-color="#047857"/>
-                  <stop offset="100%" stop-color="#022c22"/>
-                </radialGradient>
-                <radialGradient id="sphere-gold-accent" cx="35%" cy="35%" r="65%">
-                  <stop offset="0%" stop-color="#fef08a"/>
-                  <stop offset="35%" stop-color="#f59e0b"/>
-                  <stop offset="70%" stop-color="#b45309"/>
-                  <stop offset="100%" stop-color="#78350f"/>
-                </radialGradient>
-                <linearGradient id="bond-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#34d399" stop-opacity="0.6"/>
-                  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
-                  <stop offset="100%" stop-color="#064e3b" stop-opacity="0.6"/>
-                </linearGradient>
-                <filter id="soft-glow-pep" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-              <circle cx="32" cy="32" r="22" fill="#10b981" fill-opacity="0.08" filter="url(#soft-glow-pep)" />
-              <line x1="32" y1="32" x2="32" y2="14" stroke="url(#bond-grad)" stroke-width="4" stroke-linecap="round"/>
-              <line x1="32" y1="32" x2="16" y2="42" stroke="url(#bond-grad)" stroke-width="4" stroke-linecap="round"/>
-              <line x1="32" y1="32" x2="48" y2="42" stroke="url(#bond-grad)" stroke-width="4" stroke-linecap="round"/>
-              <line x1="32" y1="32" x2="16" y2="22" stroke="url(#bond-grad)" stroke-width="3" stroke-linecap="round"/>
-              <line x1="32" y1="32" x2="48" y2="22" stroke="url(#bond-grad)" stroke-width="3" stroke-linecap="round"/>
-              <path d="M32 14 L48 22 L48 42 L32 32 L16 42 L16 22 Z" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 3" stroke-opacity="0.4"/>
-              <circle cx="32" cy="14" r="7" fill="url(#sphere-green-main)" />
-              <circle cx="30" cy="12" r="2.5" fill="#ffffff" fill-opacity="0.4" />
-              <circle cx="16" cy="22" r="5.5" fill="url(#sphere-gold-accent)" />
-              <circle cx="14.5" cy="20.5" r="1.8" fill="#ffffff" fill-opacity="0.4" />
-              <circle cx="48" cy="22" r="5.5" fill="url(#sphere-green-main)" />
-              <circle cx="46.5" cy="20.5" r="1.8" fill="#ffffff" fill-opacity="0.4" />
-              <circle cx="16" cy="42" r="7.5" fill="url(#sphere-green-main)" />
-              <circle cx="14" cy="40" r="2.5" fill="#ffffff" fill-opacity="0.4" />
-              <circle cx="48" cy="42" r="7.5" fill="url(#sphere-gold-accent)" />
-              <circle cx="46" cy="40" r="2.5" fill="#ffffff" fill-opacity="0.4" />
-              <circle cx="32" cy="32" r="10" fill="url(#sphere-green-main)" filter="url(#soft-glow-pep)"/>
-              <path d="M29 27 C29 27, 33 25, 36 28 C34 26, 30 27, 29 27 Z" fill="#ffffff" fill-opacity="0.6" />
-              <circle cx="29.5" cy="29.5" r="3.2" fill="#ffffff" fill-opacity="0.5" />
-            </svg>
-          </div>
-          <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">60% Protein Bio-Matrix</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">स्नायूंच्या बळकटीसाठी आणि दिवसभर टिकणाऱ्या ऊर्जेसाठी नैसर्गिक प्रोटिनचा सर्वात मोठा स्रोत.</p>
-        </div>
-
-        <div class="flex flex-col lg:items-end lg:text-right group">
-          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffe082"/>
-                  <stop offset="30%" stop-color="#ffb300"/>
-                  <stop offset="55%" stop-color="#ff8f00"/>
-                  <stop offset="85%" stop-color="#ffb300"/>
-                  <stop offset="100%" stop-color="#8d6e63"/>
-                </linearGradient>
-                <linearGradient id="shield-green" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#065f46"/>
-                  <stop offset="100%" stop-color="#022c22"/>
-                </linearGradient>
-                <filter id="seal-shadow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.15"/>
-                </filter>
-              </defs>
-              <circle cx="32" cy="32" r="24" fill="#fbbf24" fill-opacity="0.05" />
-              <path d="M32 6 L35 9 L39 7 L41 11 L45 10 L46 14 L50 15 L50 19 L53 21 L52 25 L54 28 L52 32 L54 36 L52 39 L53 43 L50 45 L50 49 L46 50 L45 54 L41 53 L39 57 L35 55 L32 58 L29 55 L25 57 L23 53 L19 54 L18 50 L14 49 L14 45 L11 43 L12 39 L10 36 L12 32 L10 28 L12 25 L11 21 L14 19 L14 15 L18 14 L19 10 L23 11 L25 7 L29 9 Z" fill="url(#gold-metallic)" filter="url(#seal-shadow)" />
-              <circle cx="32" cy="32" r="21" stroke="#fff8e1" stroke-width="1" stroke-opacity="0.6" />
-              <circle cx="32" cy="32" r="19" stroke="#ffe082" stroke-width="1.5" stroke-dasharray="2 2" />
-              <circle cx="32" cy="32" r="16" fill="url(#gold-metallic)" />
-              <path d="M32 20 C36 20, 39 22, 39 25 C39 31, 36 37, 32 41 C28 37, 25 31, 25 25 C25 22, 28 20, 32 20 Z" fill="url(#shield-green)" stroke="#ffe082" stroke-width="1.5" filter="url(#seal-shadow)" />
-              <path d="M32 24 C34 26, 35 29, 34 32 C33 35, 30 36, 29 34 C28 32, 28 29, 30 26 C31 25, 31 24, 32 24 Z" fill="url(#gold-metallic)" />
-              <path d="M32 28 C31 30, 30 31, 30 33 C31 33, 33 32, 33 30 C33 29, 32 28, 32 28 Z" fill="#fff8e1" />
-              <path d="M22 36 L25 46 L32 43 L39 46 L42 36 Z" fill="url(#gold-metallic)" filter="url(#seal-shadow)" stroke="#fff8e1" stroke-width="0.5" />
-            </svg>
-          </div>
-          <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Lab-Certified Purity</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">प्रत्येक बॅचची ३ स्तरांवर चाचणी केली जाते—Heavy Metals आणि Toxins ची कोणतीही भीती नाही.</p>
-        </div>
-      </div>
-
-      {/* Center Image with Rotating Orbital Dials */}
-      <div class="relative order-1 lg:order-2 flex justify-center items-center py-12 lg:py-0 w-full z-10">
-        {/* Core Glow */}
-        <div class="absolute inset-0 bg-gradient-to-tr from-[#166534]/10 to-[#B45309]/5 rounded-full blur-[80px] animate-pulse motion-reduce:animate-none"></div>
-        
-        {/* THE PRECISION ORBITAL RINGS */}
-        <div class="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] pointer-events-none flex items-center justify-center">
+    {/* DESKTOP TABLE VIEW (md and up) */}
+    <div class="hidden md:block overflow-hidden bg-white rounded-3xl border border-gray-200/90 shadow-xl mb-10">
+      <table class="w-full border-collapse text-left">
+        <thead>
+          <tr class="border-b border-gray-200">
+            <th class="p-5 lg:p-6 text-xs font-bold text-gray-500 uppercase tracking-wider w-[32%] bg-gray-50/70 font-sans">
+              Quality Parameter
+            </th>
+            <th class="p-5 lg:p-6 bg-[#064E3B] text-white text-xs font-black uppercase tracking-wider text-center w-[36%] relative font-sans shadow-md">
+              <span class="text-emerald-300 block text-[10px] tracking-widest uppercase mb-0.5">Gold Standard</span>
+              <span>Sujata Nutrilive Protocol</span>
+            </th>
+            <th class="p-5 lg:p-6 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-wider text-center w-[32%] font-sans">
+              Ordinary Market Spirulina
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 text-sm font-sans">
           
-          {/* Outer Dashed Ring (Slow Reverse Spin) */}
-          <div class="absolute inset-0 border-[1.5px] border-dashed border-[#B45309]/20 rounded-full animate-[spin_30s_linear_infinite_reverse] motion-reduce:animate-none"></div>
-          
-          {/* Middle Ring (Clockwise Spin) */}
-          <div class="absolute inset-4 sm:inset-6 lg:inset-8 border border-[#166534]/15 rounded-full animate-[spin_20s_linear_infinite] motion-reduce:animate-none">
-            {/* Emerald Glowing Dot */}
-            <div class="absolute -top-1.5 left-1/2 w-3 h-3 bg-[#166534] rounded-full shadow-[0_0_12px_rgba(22,101,52,0.8)] -translate-x-1/2"></div>
-          </div>
-          
-          {/* Inner Ring (Fast Reverse Spin) */}
-          <div class="absolute inset-10 sm:inset-12 lg:inset-16 border border-[#B45309]/15 rounded-full animate-[spin_25s_linear_infinite_reverse] motion-reduce:animate-none">
-            {/* Antique Gold Glowing Dot */}
-            <div class="absolute bottom-[-4px] left-1/2 w-2 h-2 bg-[#B45309] rounded-full shadow-[0_0_10px_rgba(180,83,9,0.8)] -translate-x-1/2"></div>
-          </div>
-        </div>
+          {/* Row 1: Extraction */}
+          <tr class="hover:bg-gray-50/40 transition-colors">
+            <td class="p-5 lg:p-6 font-bold text-[#111827]">
+              Extraction Temperature
+              <span class="block text-xs font-normal text-gray-500 mt-0.5">Preserves live therapeutic Phycocyanin</span>
+            </td>
+            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
+              <div class="flex items-center justify-center gap-2">
+                <span class="text-emerald-600 text-base">✓</span>
+                <span>Sub-40°C Cryo-Milling (100% Live Enzymes)</span>
+              </div>
+            </td>
+            <td class="p-5 lg:p-6 text-gray-500 text-center">
+              180°C Spray-Dried (Destroys 80% Nutrients)
+            </td>
+          </tr>
 
-        {/* Floating Product Image optimized via Astro Image */}
-        <Image 
-          src="/spirulina-bottle.png" 
-          alt="Sujata Nutrilive Premium" 
-          width={320}
-          height={400}
-          class="relative z-20 w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[320px] h-auto drop-shadow-[0_40px_80px_rgba(22,101,52,0.15)] product-float motion-reduce:animate-none"
-        />
-      </div>
+          {/* Row 2: Taste & Smell */}
+          <tr class="hover:bg-gray-50/40 transition-colors">
+            <td class="p-5 lg:p-6 font-bold text-[#111827]">
+              Taste, Texture & Odour
+              <span class="block text-xs font-normal text-gray-500 mt-0.5">Crucial for daily habit compliance</span>
+            </td>
+            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
+              <div class="flex items-center justify-center gap-2">
+                <span class="text-emerald-600 text-base">✓</span>
+                <span>Zero Fishy Smell • 100% Odourless Capsules</span>
+              </div>
+            </td>
+            <td class="p-5 lg:p-6 text-gray-500 text-center">
+              Pond-like swampy odour & bitter, gritty taste
+            </td>
+          </tr>
 
-      {/* Right Callouts */}
-      <div class="space-y-12 order-3 relative z-20">
-        <div class="flex flex-col group">
-          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="chrome-steel" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#b0bec5"/>
-                  <stop offset="35%" stop-color="#ffffff"/>
-                  <stop offset="65%" stop-color="#78909c"/>
-                  <stop offset="100%" stop-color="#37474f"/>
-                </linearGradient>
-                <radialGradient id="emerald-droplet" cx="30%" cy="30%" r="70%">
-                  <stop offset="0%" stop-color="#a7f3d0"/>
-                  <stop offset="30%" stop-color="#34d399"/>
-                  <stop offset="70%" stop-color="#059669"/>
-                  <stop offset="100%" stop-color="#022c22"/>
-                </radialGradient>
-                <filter id="drop-shadow-dr" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                  <feOffset dx="0" dy="2" in="blur" result="offset"/>
-                  <feComposite in="SourceGraphic" in2="offset" operator="over"/>
-                </filter>
-              </defs>
-              <circle cx="32" cy="46" r="14" fill="#10b981" fill-opacity="0.08" />
-              <g transform="rotate(-30 32 32)">
-                <path d="M29 6 C29 6, 26 12, 29 16 C32 16, 32 16, 35 16 C38 12, 35 6, 35 6 Z" fill="#37474f" />
-                <path d="M30.5 7.5 C30.5 7.5, 29.5 10, 30.5 12" stroke="#78909c" stroke-width="0.8" stroke-linecap="round" />
-                <rect x="28" y="16" width="8" height="5" rx="1" fill="url(#chrome-steel)" stroke="#455a64" stroke-width="0.5" />
-                <line x1="28.5" y1="18.5" x2="35.5" y2="18.5" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.7"/>
-                <rect x="29" y="21" width="6" height="22" rx="0.5" fill="#ffffff" fill-opacity="0.15" stroke="#cfd8dc" stroke-width="0.8" />
-                <rect x="29.8" y="28" width="4.4" height="14" fill="#10b981" fill-opacity="0.4" />
-                <line x1="30" y1="22" x2="30" y2="42" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.6" stroke-linecap="round" />
-              </g>
-              <path d="M32 38 C32 38, 38 46, 38 50 C38 54.4, 34.4 58, 32 58 C29.6 58, 26 54.4, 26 50 C26 46, 32 38, 32 38 Z" fill="url(#emerald-droplet)" filter="url(#drop-shadow-dr)" />
-              <path d="M29 48.5 C28.5 50.5, 28.5 52, 29.5 53.5 C29 52, 28.8 50.5, 29.5 49 Z" fill="#ffffff" fill-opacity="0.6" />
-              <circle cx="30" cy="44" r="2" fill="#ffffff" fill-opacity="0.5" />
-              <circle cx="34.5" cy="51.5" r="1.2" fill="#ffffff" fill-opacity="0.4" />
-            </svg>
-          </div>
-          <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Zero-Heat Cold Press</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">उष्णतेचा वापर न केल्यामुळे स्पिरुलिनामधील सर्व नैसर्गिक एन्झाईम्स आणि जीवनसत्त्वे जिवंत राहतात.</p>
-        </div>
+          {/* Row 3: Heavy Metal Safety */}
+          <tr class="hover:bg-gray-50/40 transition-colors">
+            <td class="p-5 lg:p-6 font-bold text-[#111827]">
+              Heavy Metal Testing
+              <span class="block text-xs font-normal text-gray-500 mt-0.5">Lead, Mercury, Cadmium & Arsenic</span>
+            </td>
+            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
+              <div class="flex items-center justify-center gap-2">
+                <span class="text-emerald-600 text-base">✓</span>
+                <span>NABL Lab Certified: 0.00% Heavy Metals</span>
+              </div>
+            </td>
+            <td class="p-5 lg:p-6 text-gray-500 text-center">
+              Rarely tested; open pond contamination risk
+            </td>
+          </tr>
 
-        <div class="flex flex-col group">
-          <div class="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-tr from-white to-emerald-50/40 border border-emerald-100/50 shadow-md group-hover:scale-110 group-hover:border-emerald-300 group-hover:shadow-[0_8px_30px_rgba(22,101,52,0.08)] transition-all duration-500 flex items-center justify-center mb-4 relative z-10 shrink-0">
-            <svg class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="swirl-mint" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#34d399"/>
-                  <stop offset="45%" stop-color="#10b981"/>
-                  <stop offset="100%" stop-color="#047857"/>
-                </linearGradient>
-                <linearGradient id="swirl-light" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#a7f3d0"/>
-                  <stop offset="100%" stop-color="#34d399"/>
-                </linearGradient>
-                <radialGradient id="water-drop" cx="30%" cy="30%" r="70%">
-                  <stop offset="0%" stop-color="#ffffff"/>
-                  <stop offset="40%" stop-color="#e0f2fe"/>
-                  <stop offset="85%" stop-color="#bae6fd"/>
-                  <stop offset="100%" stop-color="#0284c7"/>
-                </radialGradient>
-                <filter id="swirl-glow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-              </defs>
-              <path d="M12 28 C20 22, 44 22, 52 28" stroke="#34d399" stroke-width="1" stroke-opacity="0.2" stroke-linecap="round"/>
-              <path d="M10 36 C18 30, 46 30, 54 36" stroke="#34d399" stroke-width="1" stroke-opacity="0.15" stroke-linecap="round"/>
-              <path d="M14 42 C18 46, 26 48, 32 46 C42 42, 48 30, 42 22 C36 14, 24 16, 22 24 C20 32, 28 38, 34 36 C40 34, 42 28, 38 24 C35 21, 30 22, 29 25 C28 28, 31 30, 32 30" stroke="url(#swirl-mint)" stroke-width="5" stroke-linecap="round" fill="none" filter="url(#swirl-glow)" />
-              <path d="M16 40 C20 44, 26 45, 32 43 C40 39, 45 28, 40 21 C35 14, 25 16, 23 23 C21 30, 28 35, 33 33 C37 31, 38 27, 36 24 C34 22, 31 23, 30 25" stroke="url(#swirl-light)" stroke-width="1.8" stroke-linecap="round" fill="none" />
-              <circle cx="16" cy="18" r="4" fill="url(#water-drop)" filter="url(#swirl-glow)" />
-              <circle cx="14.8" cy="16.8" r="1" fill="#ffffff" fill-opacity="0.8" />
-              <circle cx="48" cy="44" r="5" fill="url(#water-drop)" filter="url(#swirl-glow)" />
-              <circle cx="46.5" cy="42.5" r="1.3" fill="#ffffff" fill-opacity="0.8" />
-              <circle cx="50" cy="20" r="3" fill="url(#water-drop)" />
-              <circle cx="49" cy="19" r="0.8" fill="#ffffff" fill-opacity="0.7" />
-              <path d="M26 12 L28 15 L31 16 L28 17 L26 20 L24 17 L21 16 L24 15 Z" fill="#ffe082" />
-              <path d="M42 38 L43.5 40 L45.5 40.5 L43.5 41 L42 43 L40.5 41 L38.5 40.5 L40.5 40 Z" fill="#ffe082" stroke="#fff8e1" stroke-width="0.3" />
-            </svg>
-          </div>
-          <h4 class="text-lg font-black text-[#111827] uppercase tracking-widest mb-2">Odourless & Fresh</h4>
-          <p class="text-gray-500 text-sm leading-relaxed">बाजारातील इतर स्पिरुलिनासारखा घाणेरडा वास येत नाही. हे खाणे सोपे आणि चविष्ट आहे.</p>
-        </div>
-      </div>
+          {/* Row 4: Bio-Absorption */}
+          <tr class="hover:bg-gray-50/40 transition-colors">
+            <td class="p-5 lg:p-6 font-bold text-[#111827]">
+              Human Bio-Absorption
+              <span class="block text-xs font-normal text-gray-500 mt-0.5">Speed of assimilation through intestine</span>
+            </td>
+            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
+              <div class="flex items-center justify-center gap-2">
+                <span class="text-emerald-600 text-base">✓</span>
+                <span>95%+ Fast Absorption in 30 Mins</span>
+              </div>
+            </td>
+            <td class="p-5 lg:p-6 text-gray-500 text-center">
+              20–30% (synthetic fillers block breakdown)
+            </td>
+          </tr>
 
+          {/* Row 5: Formulation Origin */}
+          <tr class="hover:bg-gray-50/40 transition-colors">
+            <td class="p-5 lg:p-6 font-bold text-[#111827]">
+              Formulation Standard
+              <span class="block text-xs font-normal text-gray-500 mt-0.5">Quality governance & expertise</span>
+            </td>
+            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
+              <div class="flex items-center justify-center gap-2">
+                <span class="text-emerald-600 text-base">✓</span>
+                <span>Doctor-Curated Ayurvedic Rasayana Protocol</span>
+              </div>
+            </td>
+            <td class="p-5 lg:p-6 text-gray-500 text-center">
+              White-label bulk powder repackaged
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
     </div>
 
-    {/* 3. THE LUXURY COMPARISON MATRIX (Side-by-Side Table & Cards) */}
-    <div class="w-full max-w-5xl mx-auto relative z-20">
-      
-      <div class="text-center mb-10">
-        <h3 class="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-[#111827]">
-          Sujata Gold Standard vs. Others
-        </h3>
-        <p class="text-xs md:text-sm text-gray-400 mt-2 uppercase tracking-widest font-bold">clinical verification comparison</p>
-      </div>
-
-      {/* TABLE (Hidden on mobile, visible on tablet/desktop) */}
-      <div class="hidden md:block overflow-hidden bg-white rounded-[2rem] border border-gray-100 shadow-[0_40px_100px_rgba(0,0,0,0.06)]">
-        <table class="w-full border-collapse text-left">
-          <thead>
-            <tr class="border-b border-gray-100">
-              <th class="p-6 text-xs font-bold text-gray-400 uppercase tracking-wider w-[30%]">Comparison Parameters</th>
-              <th class="p-6 bg-gradient-to-r from-[#064e3b] to-[#022c22] text-xs font-black text-amber-400 uppercase tracking-widest text-center w-[35%] relative shadow-md">
-                Sujata Gold Standard
-                <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-amber-500 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded tracking-widest shadow-lg">ELITE</span>
-              </th>
-              <th class="p-6 bg-gray-50/80 text-xs font-bold text-gray-400 uppercase tracking-wider text-center w-[35%]">Ordinary Brands</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100 text-sm">
-            {/* Row 1 */}
-            <tr class="hover:bg-gray-50/50 transition-colors">
-              <td class="p-6 font-bold text-gray-700">Protein Concentration</td>
-              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
-                <div class="flex items-center justify-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                  <span>60%+ Bio-Active Protein</span>
-                </div>
-              </td>
-              <td class="p-6 text-gray-500 text-center">40% Typical (Diluted Power)</td>
-            </tr>
-            {/* Row 2 */}
-            <tr class="hover:bg-gray-50/50 transition-colors">
-              <td class="p-6 font-bold text-gray-700">Cultivation Method</td>
-              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
-                <div class="flex items-center justify-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Lab-Grade Aqua Culture</span>
-                </div>
-              </td>
-              <td class="p-6 text-gray-500 text-center">Open Industrial Ponds</td>
-            </tr>
-            {/* Row 3 */}
-            <tr class="hover:bg-gray-50/50 transition-colors">
-              <td class="p-6 font-bold text-gray-700">Extraction & Processing</td>
-              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
-                <div class="flex items-center justify-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Zero-Heat Cold Pressed</span>
-                </div>
-              </td>
-              <td class="p-6 text-gray-500 text-center">High-Heat Spray Dried</td>
-            </tr>
-            {/* Row 4 */}
-            <tr class="hover:bg-gray-50/50 transition-colors">
-              <td class="p-6 font-bold text-gray-700">Toxin & Metal Screening</td>
-              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
-                <div class="flex items-center justify-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Triple-Certified Heavy Metal Free</span>
-                </div>
-              </td>
-              <td class="p-6 text-gray-500 text-center">Unchecked/Vulnerable</td>
-            </tr>
-            {/* Row 5 */}
-            <tr class="hover:bg-gray-50/50 transition-colors">
-              <td class="p-6 font-bold text-gray-700">Chemical Binders/Fillers</td>
-              <td class="p-6 bg-emerald-50/30 text-center font-bold text-[#064e3b] border-x border-[#064e3b]/10">
-                <div class="flex items-center justify-center gap-2">
-                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                  <span>100% Pure Extract (Zero Fillers)</span>
-                </div>
-              </td>
-              <td class="p-6 text-gray-500 text-center">Synthetic Chemical Binders</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* CARDS FOR MOBILE VIEWS (Collapsible panel to save space) */}
-      <div class="md:hidden space-y-4" id="mobile-comparison-container">
-        
-        {/* Toggle Button */}
-        <button 
-          id="toggle-comparison-btn"
-          class="w-full bg-white border border-gray-200 py-4 px-6 rounded-2xl font-bold text-xs uppercase tracking-wider text-gray-700 flex items-center justify-between shadow-sm cursor-pointer outline-none"
-        >
-          <span>Expand Specifications Matrix</span>
-          <svg id="toggle-comparison-icon" class="w-4 h-4 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-
-        {/* Collapsible Content */}
-        <div id="collapsible-comparison-content" class="hidden space-y-4 pt-2 transition-all duration-300">
-          {[
-            { title: "Protein Concentration", sujata: "60%+ Bio-Active Protein", other: "40% Typical" },
-            { title: "Cultivation Method", sujata: "Lab-Grade Aqua Culture", other: "Open Industrial Ponds" },
-            { title: "Extraction & Processing", sujata: "Zero-Heat Cold Pressed", other: "High-Heat Spray Dried" },
-            { title: "Toxin & Metal Screening", sujata: "Triple-Certified Toxin Free", other: "Unchecked/Vulnerable" },
-            { title: "Chemical Binders/Fillers", sujata: "100% Pure (Zero Fillers)", other: "Synthetic Binders" }
-          ].map((item) => (
-            <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm space-y-3">
-              <h4 class="text-sm font-black text-gray-700 border-b border-gray-50 pb-2">{item.title}</h4>
-              
-              <div class="grid grid-cols-2 gap-3 text-xs">
-                <div class="bg-emerald-50/40 p-3 rounded-xl border border-emerald-100 text-[#064e3b] font-bold space-y-1">
-                  <span class="text-[11px] uppercase tracking-widest text-[#B45309]">Sujata</span>
-                  <p class="leading-tight flex items-start gap-1">
-                    <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                    {item.sujata}
-                  </p>
-                </div>
-                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-gray-500 space-y-1">
-                  <span class="text-[11px] uppercase tracking-widest text-gray-400">Others</span>
-                  <p class="leading-tight flex items-start gap-1">
-                    <svg class="w-3.5 h-3.5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    {item.other}
-                  </p>
-                </div>
-              </div>
+    {/* MOBILE CARD DECK (Block by Block, 100% Readable) */}
+    <div class="md:hidden space-y-4 mb-8">
+      {[
+        {
+          param: "Extraction Temperature",
+          sujata: "Sub-40°C Cryo-Milling (100% Live Enzymes)",
+          other: "180°C Spray-Dried (Kills 80% Nutrients)"
+        },
+        {
+          param: "Taste & Odour",
+          sujata: "Zero Fishy Smell • 100% Odourless Capsules",
+          other: "Pond-like swampy odour & gritty taste"
+        },
+        {
+          param: "Heavy Metal Testing",
+          sujata: "NABL Certified: 0.00% Lead & Mercury",
+          other: "Rarely tested; open pond contamination risk"
+        },
+        {
+          param: "Human Bio-Absorption",
+          sujata: "95%+ Fast Absorption in 30 Mins",
+          other: "20–30% (Synthetic binders block breakdown)"
+        },
+        {
+          param: "Formulation Standard",
+          sujata: "Doctor-Curated Ayurvedic Rasayana",
+          other: "Generic bulk powder repackaged"
+        }
+      ].map((item, idx) => (
+        <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm font-sans">
+          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">
+            Parameter 0{idx + 1}
+          </span>
+          <h4 class="text-sm font-bold text-[#111827] mb-3">{item.param}</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-[#064E3B] text-white p-3 rounded-xl">
+              <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-wider block mb-0.5">
+                ✓ Sujata Gold Standard
+              </span>
+              <p class="text-xs font-semibold leading-snug">{item.sujata}</p>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Trust Badges Footer - Premium Scalable SVGs to avoid broken images */}
-      <div class="mt-16 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 hover:opacity-90 transition-all duration-700">
-        
-        {/* FSSAI Seal SVG */}
-        <div class="flex items-center gap-2 group cursor-default">
-          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
-            <path d="M30 52l12 12 28-28" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="50%" y="82%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="12" fill="currentColor">FSSAI</text>
-          </svg>
-          <div class="flex flex-col text-left">
-            <span class="text-xs font-black text-gray-800 uppercase tracking-widest leading-none">fssai</span>
-            <span class="text-[10px] font-medium text-gray-400">REGISTERED</span>
+            <div class="bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-gray-500">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-0.5">
+                ✕ Ordinary Market Brands
+              </span>
+              <p class="text-xs leading-snug">{item.other}</p>
+            </div>
           </div>
         </div>
-
-        {/* GMP Seal SVG */}
-        <div class="flex items-center gap-2 group cursor-default">
-          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
-            <rect x="25" y="30" width="50" height="40" rx="3" stroke="currentColor" stroke-width="3"/>
-            <path d="M35 50h30M50 35v30" stroke="currentColor" stroke-width="3"/>
-            <text x="50%" y="82%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="12" fill="currentColor">GMP</text>
-          </svg>
-          <div class="flex flex-col text-left">
-            <span class="text-xs font-black text-gray-800 uppercase tracking-widest leading-none">gmp</span>
-            <span class="text-[10px] font-medium text-gray-400">CERTIFIED</span>
-          </div>
-        </div>
-
-        {/* 100% Organic Leaf SVG */}
-        <div class="flex items-center gap-2 group cursor-default">
-          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
-            <path d="M50 25c15 0 25 10 25 25S65 75 50 75s-25-10-25-25 10-25 25-25zm0 0v50" stroke="currentColor" stroke-width="3"/>
-            <path d="M50 40c8 0 12 5 12 10s-4 10-12 10" stroke="currentColor" stroke-width="3"/>
-          </svg>
-          <div class="flex flex-col text-left">
-            <span class="text-xs font-black text-gray-800 uppercase tracking-widest leading-none">organic</span>
-            <span class="text-[10px] font-medium text-gray-400">100% NATURAL</span>
-          </div>
-        </div>
-
-        {/* AYUSH Premium SVG */}
-        <div class="flex items-center gap-2 group cursor-default">
-          <svg class="w-10 h-10 text-[#064e3b]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3"/>
-            <path d="M50 22L30 45h40L50 22zm0 23v33" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="78" r="3" fill="currentColor"/>
-          </svg>
-          <div class="flex flex-col text-left">
-            <span class="text-xs font-black text-gray-800 uppercase tracking-widest leading-none">ayush</span>
-            <span class="text-[10px] font-medium text-gray-400">COMPLIANT</span>
-          </div>
-        </div>
-
-      </div>
+      ))}
     </div>
 
   </div>
+
 </section>
-
-<script>
-  function initCollapsibleComparison() {
-    const btn = document.getElementById('toggle-comparison-btn');
-    const content = document.getElementById('collapsible-comparison-content');
-    const icon = document.getElementById('toggle-comparison-icon');
-
-    if (!btn || !content || !icon) return;
-
-    // Reset state on load
-    content.classList.add('hidden');
-    icon.classList.remove('rotate-180');
-    btn.querySelector('span').innerText = 'Expand Specifications Matrix';
-
-    btn.addEventListener('click', () => {
-      const isHidden = content.classList.contains('hidden');
-      if (isHidden) {
-        content.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-        btn.querySelector('span').innerText = 'Collapse Specifications Matrix';
-      } else {
-        content.classList.add('hidden');
-        icon.classList.remove('rotate-180');
-        btn.querySelector('span').innerText = 'Expand Specifications Matrix';
-      }
-    });
-  }
-
-  // Bind for DOMContentLoaded and Astro transitions
-  document.addEventListener('DOMContentLoaded', initCollapsibleComparison);
-  document.addEventListener('astro:page-load', initCollapsibleComparison);
-</script>
-
-<style is:global>
-  @keyframes product-float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-  }
-  .product-float {
-    animation: product-float 6s ease-in-out infinite;
-  }
-</style>
