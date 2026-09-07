@@ -11,55 +11,62 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 <div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} class="fixed top-0 right-0 w-full sm:w-[440px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
   
   {/* 1. Drawer Header (Always Visible & Padded) */}
-  <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
-    <div class="flex items-center gap-3">
-      <h2 class="text-xl font-serif font-normal text-[#111827]">Your Daily Routine</h2>
+  <div class="px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
+    <div class="flex items-center gap-2.5">
+      <h2 class="text-lg sm:text-xl font-serif font-normal text-[#111827]">Your Daily Routine</h2>
       <span class="bg-[#166534] text-white text-[11px] font-bold font-sans px-2.5 py-0.5 rounded-full" id="cart-count-badge">0</span>
     </div>
-    <button id="close-cart-btn" aria-label="Close cart" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-black transition-colors touch-manipulation cursor-pointer">
+    <button id="close-cart-btn" aria-label="Close cart" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black transition-colors touch-manipulation cursor-pointer">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
   </div>
 
   {/* 2. Clean Free Shipping Progress Card */}
-  <div class="px-6 py-4 bg-white border-b border-gray-200 shrink-0 shadow-sm" id="shipping-meter-container">
-    <div class="flex items-center justify-between text-xs mb-2 font-sans">
+  <div class="px-4 sm:px-6 py-3 sm:py-4 bg-white border-b border-gray-200 shrink-0 shadow-sm" id="shipping-meter-container">
+    <div class="flex items-center justify-between text-xs mb-1.5 font-sans">
       <span class="font-bold text-[#166534]" id="shipping-meter-text">Add items for Free Express Shipping 🚚</span>
-      <span class="text-[11px] font-medium text-gray-400 font-sans" id="shipping-threshold-text">Goal: ₹1,500</span>
+      <span class="text-[11px] font-medium text-gray-400 font-sans shrink-0" id="shipping-threshold-text">Goal: ₹1,500</span>
     </div>
-    <div class="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200/60">
+    <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200/60">
       <div class="h-full bg-gradient-to-r from-emerald-600 to-[#166534] rounded-full transition-all duration-500" id="shipping-meter-bar" style="width: 0%;"></div>
     </div>
   </div>
 
   {/* 3. Cart Items Area (Scrollable with smooth momentum) */}
-  <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cart-items-container">
+  <div class="flex-1 overflow-y-auto p-3.5 sm:p-6 space-y-3" id="cart-items-container">
     {/* Dynamic Items rendered via JavaScript */}
   </div>
 
   {/* 4. Drawer Footer (Checkout Section with Safe Area Inset) */}
-  <div class="px-6 pt-5 pb-8 pb-safe bg-white border-t border-gray-200 shadow-lg shrink-0">
+  <div class="px-4 sm:px-6 pt-3.5 sm:pt-5 pb-6 sm:pb-8 pb-safe bg-white border-t border-gray-200 shadow-lg shrink-0">
     
-    <div class="flex items-center justify-between mb-1.5">
+    <div class="flex items-center justify-between mb-1">
       <span class="text-gray-500 font-medium text-xs uppercase tracking-wider font-sans">Subtotal</span>
-      <span class="text-2xl font-black text-[#111827] font-sans" id="cart-subtotal">₹0</span>
+      <span class="text-xl sm:text-2xl font-black text-[#111827] font-sans" id="cart-subtotal">₹0</span>
     </div>
-    <p class="text-xs text-gray-500 mb-4 flex items-center gap-1.5 font-sans">
+    <p class="text-xs text-gray-500 mb-3.5 flex items-center gap-1.5 font-sans">
       <span class="text-[#166534] font-bold">✓</span> Free express shipping & GST included.
     </p>
 
-    <button id="checkout-action-btn" class="w-full bg-[#111827] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-[0.15em] py-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
+    <button id="checkout-action-btn" class="w-full bg-[#111827] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-[0.15em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
       <span>Proceed to Checkout</span>
       <span class="text-base">→</span>
     </button>
     
-    {/* Trust Badges */}
-    <div class="flex items-center justify-center gap-4 mt-4 text-[10px] text-gray-400 uppercase tracking-widest font-sans">
-      <span>🔒 SSL 256-bit</span>
-      <span>•</span>
-      <a href="/refund-policy" target="_blank" class="hover:text-emerald-700 underline transition-colors">🛡️ 30-Day Guarantee</a>
-      <span>•</span>
-      <span>💵 Free COD</span>
+    {/* Clean 3-Column Trust Badges */}
+    <div class="grid grid-cols-3 gap-1 mt-3 pt-2.5 border-t border-gray-100 text-center">
+      <div class="text-[9.5px] sm:text-[10px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
+        <span>🔒</span>
+        <span>256-Bit SSL</span>
+      </div>
+      <a href="/refund-policy" target="_blank" class="text-[9.5px] sm:text-[10px] font-bold text-gray-500 hover:text-[#166534] font-sans flex items-center justify-center gap-1 whitespace-nowrap transition-colors">
+        <span>🛡️</span>
+        <span>30-Day Return</span>
+      </a>
+      <div class="text-[9.5px] sm:text-[10px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
+        <span>💵</span>
+        <span>Free COD</span>
+      </div>
     </div>
   </div>
 
@@ -194,30 +201,30 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       }
 
       container.innerHTML = items.map(item => `
-        <div class="flex gap-4 p-4 bg-white rounded-2xl border border-gray-200 shadow-sm relative group">
-          <div class="w-18 h-20 bg-[#FAF9F6] rounded-xl p-2 flex items-center justify-center shrink-0 border border-gray-100">
+        <div class="flex gap-3 p-3 sm:p-4 bg-white rounded-2xl border border-gray-200 shadow-sm relative group">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#FAF9F6] rounded-xl p-1.5 flex items-center justify-center shrink-0 border border-gray-100">
             <img src="${item.image || '/spirulina-bottle.png'}" alt="${item.title}" class="w-full h-full object-contain drop-shadow-sm" />
           </div>
 
           <div class="flex-1 flex flex-col justify-between min-w-0">
-            <div class="flex items-start justify-between gap-2">
-              <div>
-                <h4 class="text-sm font-bold text-[#111827] font-sans truncate leading-snug">${item.title}</h4>
-                <span class="text-[10px] text-[#166534] font-bold block mt-0.5">${item.subtitle || '100% Pure Cold-Pressed'}</span>
+            <div class="flex items-start justify-between gap-1.5">
+              <div class="min-w-0 flex-1 pr-1">
+                <h4 class="text-xs sm:text-sm font-bold text-[#111827] font-sans truncate leading-snug" title="${item.title}">${item.title}</h4>
+                <span class="text-[10px] text-[#166534] font-semibold block mt-0.5 truncate">${item.subtitle || '100% Pure Cold-Pressed'}</span>
               </div>
-              <button class="cart-remove-btn text-gray-400 hover:text-red-500 text-xs p-1 cursor-pointer transition-colors" data-id="${item.id}" title="Remove item">
+              <button class="cart-remove-btn shrink-0 w-6 h-6 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-400 text-xs flex items-center justify-center transition-colors cursor-pointer touch-manipulation" data-id="${item.id}" title="Remove item" aria-label="Remove ${item.title}">
                 ✕
               </button>
             </div>
 
-            <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+            <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
               <div class="flex items-center gap-2 bg-gray-100 rounded-full px-2 py-0.5">
-                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-5 h-5 flex items-center justify-center cursor-pointer" data-id="${item.id}" data-action="dec">−</button>
+                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-5 h-5 flex items-center justify-center cursor-pointer touch-manipulation" data-id="${item.id}" data-action="dec" aria-label="Decrease quantity">−</button>
                 <span class="text-xs font-bold text-[#111827] px-1">${item.quantity}</span>
-                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-5 h-5 flex items-center justify-center cursor-pointer" data-id="${item.id}" data-action="inc">+</button>
+                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-5 h-5 flex items-center justify-center cursor-pointer touch-manipulation" data-id="${item.id}" data-action="inc" aria-label="Increase quantity">+</button>
               </div>
 
-              <span class="text-sm font-black text-[#111827] font-sans">${formatINR(item.price * item.quantity)}</span>
+              <span class="text-xs sm:text-sm font-black text-[#111827] font-sans">${formatINR(item.price * item.quantity)}</span>
             </div>
           </div>
         </div>
