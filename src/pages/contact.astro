@@ -3,6 +3,7 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -68,7 +69,7 @@ const contactFaqs = [
         
         {/* Channel 1: WhatsApp Vaidya Concierge */}
         <a 
-          href="https://wa.me/919876543210?text=Hello%20Sujata%20Nutrilive,%20I%20have%20a%20question%20regarding%20my%20health%20routine." 
+          href={getWhatsAppLink('Hello Sujata Nutrilive, I have a question regarding my health routine.')} 
           target="_blank" 
           rel="noopener noreferrer" 
           class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-emerald-600/30 hover:border-emerald-600 shadow-[0_15px_40px_rgba(0,0,0,0.03)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-pointer"
@@ -93,7 +94,7 @@ const contactFaqs = [
 
         {/* Channel 2: Phone Helpline */}
         <a 
-          href="tel:+919876543210" 
+          href={`tel:${BRAND_CONFIG.supportPhone.replace(/\s+/g, '')}`} 
           class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 hover:border-emerald-600 shadow-[0_15px_40px_rgba(0,0,0,0.03)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-pointer"
         >
           <div>
@@ -102,7 +103,7 @@ const contactFaqs = [
             </div>
             <span class="text-[10px] font-black uppercase tracking-widest text-amber-800 block mb-1">Direct Phone Desk</span>
             <h3 class="text-lg font-['Playfair_Display'] font-black text-[#111827] mb-2">
-              +91 98765 43210
+              {BRAND_CONFIG.supportPhone}
             </h3>
             <p class="text-xs text-gray-500 font-light leading-relaxed">
               Available Monday to Saturday, 10:00 AM to 6:00 PM IST. Direct telephonic support with zero automated IVR loops.
@@ -116,7 +117,7 @@ const contactFaqs = [
 
         {/* Channel 3: VIP Email Support */}
         <a 
-          href="mailto:support@sujatanutrilive.com" 
+          href={`mailto:${BRAND_CONFIG.supportEmail}`} 
           class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 hover:border-emerald-600 shadow-[0_15px_40px_rgba(0,0,0,0.03)] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-pointer"
         >
           <div>
@@ -125,7 +126,7 @@ const contactFaqs = [
             </div>
             <span class="text-[10px] font-black uppercase tracking-widest text-blue-800 block mb-1">Email Ticketing</span>
             <h3 class="text-lg font-['Playfair_Display'] font-black text-[#111827] mb-2">
-              support@sujatanutrilive.com
+              {BRAND_CONFIG.supportEmail}
             </h3>
             <p class="text-xs text-gray-500 font-light leading-relaxed">
               Official email ticketing desk for order modifications, billing inquiries, and certified laboratory certificate requests.
@@ -133,7 +134,7 @@ const contactFaqs = [
           </div>
           <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-gray-700">
             <span>&lt; 2h Response SLA</span>
-            <span class="group-hover:translate-x-1 transition-transform text-[#166534]">Send Email →</span>
+            <span class="group-hover:translate-x-1 transition-transform text-blue-600">Send Email →</span>
           </div>
         </a>
 

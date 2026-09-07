@@ -66,7 +66,7 @@ import { Image } from 'astro:assets';
 
         <button 
           class="add-to-cart-btn w-full bg-[#111827] hover:bg-[#166534] text-white py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 touch-manipulation"
-          data-variant-ids="gid://shopify/ProductVariant/59276906103118,gid://shopify/ProductVariant/59247880438094"
+          data-variant-ids="gid://shopify/ProductVariant/52738357854340,gid://shopify/ProductVariant/52738357985412"
         >
           Add to Routine
         </button>
@@ -78,73 +78,80 @@ import { Image } from 'astro:assets';
         
         {/* Hot badge */}
         <div class="absolute -top-3.5 left-8 bg-[#D97706] text-white text-[11px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-amber-400/30 shadow-md">
-          Recommended Routine
+          Best Value
         </div>
 
         <div>
-          {/* Images preview */}
-          <div class="h-44 bg-[#F9FAFB] rounded-2xl flex items-center justify-center p-4 gap-4 relative overflow-hidden mb-6">
-            <Image src="/spirulina-bottle.png" alt="Capsules 1" width={90} height={120} class="h-32 object-contain drop-shadow-md transform -rotate-6 translate-x-2 group-hover:translate-x-1 transition-transform duration-500" />
-            <Image src="/spirulina-bottle.png" alt="Capsules 2" width={90} height={120} class="h-32 object-contain drop-shadow-md transform rotate-6 -translate-x-2 group-hover:-translate-x-1 transition-transform duration-500" />
-          </div>
+          <span class="text-xs font-mono font-bold tracking-widest text-emerald-800 uppercase block mb-1">Double Energy Protocol</span>
+          <h3 class="text-2xl font-bold font-['Playfair_Display'] text-gray-900 mb-2">Double Capsules Pack</h3>
+          <p class="text-xs text-gray-500 mb-6 leading-relaxed">
+            Two 60-count bottles of sub-40°C cold-pressed Spirulina capsules. Total 120 capsules for a complete 60-day protocol.
+          </p>
 
-          {/* Details */}
-          <div class="flex items-center gap-1.5 mb-3">
-            <div class="flex text-[#D97706] text-xs">★★★★★</div>
-            <span class="text-xs font-bold text-gray-500 tracking-wider">5.0 (280+ reviews)</span>
-          </div>
-
-          <h3 class="text-xl lg:text-2xl font-['Playfair_Display'] font-black text-gray-900 mb-2">Double Capsules Pack</h3>
-          <p class="text-gray-500 text-xs mb-6">2x Premium Capsules (240 Caps total). Formulated for 60 days of sustained immunity & gut strength.</p>
+          <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+            <li class="flex items-center gap-2">
+              <span class="text-[#166534] font-bold">✓</span>
+              <span><strong>120 Pure Vegan Capsules</strong></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-[#166534] font-bold">✓</span>
+              <span><strong>Full 60-Day Protocol</strong> (Save More)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-[#166534] font-bold">✓</span>
+              <span>Free Air-Express Delivery</span>
+            </li>
+          </ul>
 
           <div class="border-t border-gray-100 pt-4 mb-6">
             <div class="flex items-center gap-2 mb-1">
               <span class="text-xs text-gray-400 line-through">₹2,400</span>
-              <span class="text-[11px] font-black text-[#166534] bg-[#f0fdf4] px-2 py-0.5 rounded-sm uppercase tracking-widest">SAVE ₹401</span>
+              <span class="text-[11px] font-black text-[#166534] bg-[#f0fdf4] px-2 py-0.5 rounded-sm uppercase tracking-widest">SAVE ₹501</span>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="text-3xl font-black text-gray-900">₹1,999</span>
-              <span class="text-xs font-semibold text-gray-500">/ 60 Days Supply</span>
+              <span class="text-3xl font-black text-gray-900">₹1,899</span>
+              <span class="text-xs font-semibold text-gray-500">/ 2 Bottles</span>
             </div>
             <div class="text-xs text-emerald-700 font-bold mt-2 flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Daily Investment: Just ₹33/day
+              Family Pack: Only ₹15/capsule
             </div>
           </div>
         </div>
 
         <button 
           class="add-to-cart-btn w-full bg-[#111827] hover:bg-[#166534] text-white py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 touch-manipulation"
-          data-variant-ids="gid://shopify/ProductVariant/59247880438094,gid://shopify/ProductVariant/59247880438094"
+          data-variant-ids="gid://shopify/ProductVariant/52738357985412,gid://shopify/ProductVariant/52738357985412"
         >
           Add to Routine
         </button>
 
       </div>
 
-      {/* BUNDLE 3: Double Powder Pack */}
+      {/* BUNDLE 3: Powder Double Value */}
       <div class="group relative bg-white border border-gray-200/80 rounded-[2.5rem] p-6 lg:p-8 hover:border-emerald-500/30 hover:shadow-[0_30px_60px_rgba(22,101,52,0.06)] transition-all duration-500 flex flex-col justify-between h-full w-[85vw] md:w-auto snap-center shrink-0">
         
-        {/* Hot badge */}
-        <div class="absolute -top-3.5 left-8 bg-purple-900 text-white text-[11px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-purple-400/30 shadow-md">
-          Family Saver
-        </div>
-
         <div>
-          {/* Images preview */}
-          <div class="h-44 bg-[#F9FAFB] rounded-2xl flex items-center justify-center p-4 gap-4 relative overflow-hidden mb-6">
-            <Image src="/spirulina-powder.png" alt="Powder 1" width={90} height={120} class="h-32 object-contain drop-shadow-md transform -rotate-6 translate-x-2 group-hover:translate-x-1 transition-transform duration-500" />
-            <Image src="/spirulina-powder.png" alt="Powder 2" width={90} height={120} class="h-32 object-contain drop-shadow-md transform rotate-6 -translate-x-2 group-hover:-translate-x-1 transition-transform duration-500" />
-          </div>
+          <span class="text-xs font-mono font-bold tracking-widest text-emerald-800 uppercase block mb-1">Smoothie Lovers Protocol</span>
+          <h3 class="text-2xl font-bold font-['Playfair_Display'] text-gray-900 mb-2">Powder Double Pack</h3>
+          <p class="text-xs text-gray-500 mb-6 leading-relaxed">
+            Two 100g resealable pouches of pure raw cryo-milled spirulina. Total 200g of high-potency green gold.
+          </p>
 
-          {/* Details */}
-          <div class="flex items-center gap-1.5 mb-3">
-            <div class="flex text-[#D97706] text-xs">★★★★★</div>
-            <span class="text-xs font-bold text-gray-500 tracking-wider">4.8 (190+ reviews)</span>
-          </div>
-
-          <h3 class="text-xl lg:text-2xl font-['Playfair_Display'] font-black text-gray-900 mb-2">Double Powder Pack</h3>
-          <p class="text-gray-500 text-xs mb-6">2x Premium Powder (200g total). Best choice for cooking, smoothies, and family consumption.</p>
+          <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+            <li class="flex items-center gap-2">
+              <span class="text-[#166534] font-bold">✓</span>
+              <span><strong>200g Pure Cryo Powder</strong></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-[#166534] font-bold">✓</span>
+              <span><strong>60+ Superfood Smoothies</strong></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-[#166534] font-bold">✓</span>
+              <span>Free Airtight Measuring Scoop</span>
+            </li>
+          </ul>
 
           <div class="border-t border-gray-100 pt-4 mb-6">
             <div class="flex items-center gap-2 mb-1">
@@ -153,18 +160,18 @@ import { Image } from 'astro:assets';
             </div>
             <div class="flex items-baseline gap-2">
               <span class="text-3xl font-black text-gray-900">₹999</span>
-              <span class="text-xs font-semibold text-gray-500">/ 2 Packs</span>
+              <span class="text-xs font-semibold text-gray-500">/ 200 Grams</span>
             </div>
             <div class="text-xs text-emerald-700 font-bold mt-2 flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              Super Value: Only ₹16/day per serving
+              Ultra Economical: ₹5/gram
             </div>
           </div>
         </div>
 
         <button 
           class="add-to-cart-btn w-full bg-[#111827] hover:bg-[#166534] text-white py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 touch-manipulation"
-          data-variant-ids="gid://shopify/ProductVariant/59276906103118,gid://shopify/ProductVariant/59276906103118"
+          data-variant-ids="gid://shopify/ProductVariant/52738357854340,gid://shopify/ProductVariant/52738357854340"
         >
           Add to Routine
         </button>
