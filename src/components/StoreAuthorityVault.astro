@@ -1,5 +1,6 @@
 ---
 // src/components/StoreAuthorityVault.astro
+import { getWhatsAppLink } from '../config/brand';
 const faqs = [
   {
     question: "Can I take Sujata Spirulina if I have Thyroid, Diabetes, or High BP?",
@@ -197,7 +198,7 @@ const faqs = [
       </div>
 
       <a 
-        href="https://wa.me/919876543210?text=Hello%20Sujata%20Nutrilive%2C%20I%20have%20a%20question%20regarding%20Spirulina%20dosage." 
+        href={getWhatsAppLink("Hello Sujata Nutrilive, I have a question regarding Spirulina dosage.")} 
         target="_blank" 
         rel="noopener noreferrer"
         class="bg-[#111827] hover:bg-[#166534] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shrink-0 touch-manipulation font-sans"

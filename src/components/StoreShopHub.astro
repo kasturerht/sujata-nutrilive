@@ -188,7 +188,8 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
 ---
 
 <!-- 🛍️ ZONE 2: The Unified Shop Engine (Featured Kit + Segmented Catalog) -->
-<section id="product-ecosystem" class="pt-7 sm:pt-12 pb-14 md:py-20 bg-[#FBF9F5] text-[#111827]">
+<section id="product-ecosystem" class="pt-7 sm:pt-12 pb-14 md:py-20 bg-[#FBF9F5] text-[#111827] relative">
+  <div id="bundle-offers" class="absolute -top-24 left-0 w-full pointer-events-none"></div>
   <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-12">
     {/* 1. CATALOG HEADER & FILTER PILLS */}
     <div class="mb-4 sm:mb-8">
@@ -358,6 +359,18 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         });
       });
     });
+
+    // 🌟 Auto-activate "Value Combos" filter when navigating to #bundle-offers
+    function checkHashFilter() {
+      if (window.location.hash === '#bundle-offers') {
+        const comboBtn = document.querySelector('.shop-filter-btn[data-filter="combos"]');
+        if (comboBtn) {
+          comboBtn.click();
+        }
+      }
+    }
+    checkHashFilter();
+    window.addEventListener('hashchange', checkHashFilter);
   }
 
   function updateDeliveryEstimators() {

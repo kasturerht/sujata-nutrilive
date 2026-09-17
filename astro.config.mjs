@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://skadas.com',
+  site: process.env.PUBLIC_SITE_URL || 'https://sujatanutrilive.com',
   // 'server' mode: enables SSR for dynamic routes (e.g. /product/[handle])
   // while still allowing individual pages to opt-in to prerendering.
   output: 'server',

@@ -174,8 +174,8 @@
 - हा डेटा एकाच ठिकाणी `src/config/brand.ts` मध्ये ठेवला आहे:
 ```typescript
 export const BRAND_CONFIG = {
-  supportPhone: "+91 98765 43210",
-  supportWhatsAppNumber: "919876543210",
+  supportPhone: "+91 98347 83503",
+  supportWhatsAppNumber: "919834783503",
   supportEmail: "support@sujatanutrilive.com",
   ...
 };
