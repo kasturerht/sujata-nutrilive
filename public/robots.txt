@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://skadas.com/sitemap-index.xml
+# Disallow private checkout and API routes
+Disallow: /api/
+Disallow: /thank-you
+
+Sitemap: https://sujatanutrilive.com/sitemap-index.xml
