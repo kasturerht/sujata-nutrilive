@@ -1135,6 +1135,11 @@ const videoTestimonials = [
   <script is:inline>
     // All code is wrapped in an init function to handle Astro's ViewTransitions and page loads
     function initProductPage() {
+      // 🌟 Idempotency Guard: Prevent duplicate event listener attachments
+      const buyBox = document.getElementById('magnetic-btn-wrapper');
+      if (buyBox && buyBox.dataset.pdpInitialized === 'true') return;
+      if (buyBox) buyBox.dataset.pdpInitialized = 'true';
+
       // 🌟 Meta Ads & GA4: Dispatch ViewContent for Dynamic Product Ads & Retargeting
       try {
         if (typeof window.dispatchStoreEvent === 'function') {
@@ -1622,6 +1627,9 @@ const videoTestimonials = [
       const stickyAtcBtn = document.getElementById('sticky-atc-btn');
       const stickyBtnText = document.getElementById('sticky-btn-text');
       const badgeElement = document.getElementById('display-discount-badge');
+      const tabOnetime = document.getElementById('tab-onetime');
+      const tabSubscribe = document.getElementById('tab-subscribe');
+      const btnTextElement = document.getElementById('btn-text');
 
       function formatINRClient(val) {
         const num = typeof val === 'string' ? parseFloat(val) : val;
@@ -1724,12 +1732,14 @@ const videoTestimonials = [
       // Variant Buttons Interaction
       variantBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
+          const target = e.currentTarget;
+          if (!target) return;
+
           variantBtns.forEach(b => {
             b.classList.remove('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
             b.classList.add('border-gray-200', 'text-gray-500');
           });
 
-          const target = e.currentTarget;
           target.classList.remove('border-gray-200', 'text-gray-500');
           target.classList.add('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
 
@@ -1756,26 +1766,11 @@ const videoTestimonials = [
             }
           } catch(e) {}
 
-          // Smooth fade transition
-          if (priceDisplay) {
-            priceDisplay.style.opacity = '0';
-            priceDisplay.style.transform = 'translateY(-5px)';
-            setTimeout(() => {
-              renderProductPricing();
-              priceDisplay.style.opacity = '1';
-              priceDisplay.style.transform = 'translateY(0)';
-            }, 150);
-          } else {
-            renderProductPricing();
-          }
+          renderProductPricing();
         });
       });
 
       // Purchase Option Segmented Switcher Interactions
-      const tabOnetime = document.getElementById('tab-onetime');
-      const tabSubscribe = document.getElementById('tab-subscribe');
-      const btnTextElement = document.getElementById('btn-text');
-
       tabOnetime?.addEventListener('click', () => {
         if (productState.purchaseMode !== 'onetime') {
           productState.purchaseMode = 'onetime';
@@ -1798,7 +1793,10 @@ const videoTestimonials = [
         setTimeout(() => { isPdpAtcProcessing = false; }, 400);
 
         const id = productState.variantId || btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
-        const title = btn.getAttribute('data-title') || document.querySelector('h1')?.innerText?.trim() || 'Sujata Spirulina Daily Routine';
+        const baseTitle = document.querySelector('h1')?.innerText?.trim() || btn.getAttribute('data-title') || 'Sujata Formulation';
+        const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
+          ? `${baseTitle} - ${productState.variantTitle}`
+          : baseTitle;
         const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
         const isSubscribe = productState.purchaseMode === 'subscribe';
         const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
