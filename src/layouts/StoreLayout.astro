@@ -11,6 +11,7 @@ interface Props {
   image?: string;
   isHomePage?: boolean;
   noindex?: boolean;
+  hideBottomNav?: boolean;
 }
 
 const { 
@@ -18,7 +19,8 @@ const {
   description = "Buy 100% pure cold-pressed Spirulina in India. NABL lab-certified, FSSAI-approved, odorless vegetarian capsules & raw powder. Free express delivery & 30-day money-back guarantee.",
   image = "/products/sujata-combo-spirulina-sea-buckthorn.jpg",
   isHomePage = false,
-  noindex = false
+  noindex = false,
+  hideBottomNav = false
 } = Astro.props;
 
 const siteUrl = BRAND_CONFIG.siteUrl || "https://sujatanutrilive.com";
@@ -448,10 +450,15 @@ const unifiedSchemaGraph = {
     </script>
   </head>
   <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen min-h-[100dvh] relative overflow-x-hidden font-sans">
+    {metaPixelId && (
+      <noscript>
+        <img height="1" width="1" style="display:none" src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`} alt="" />
+      </noscript>
+    )}
     <slot />
     <CartDrawer />
     <StoreSearchModal />
-    <StoreBottomNav />
+    {!hideBottomNav && <StoreBottomNav />}
 
     {/* Global Live Purchase Toast (Docked right above Mobile Bottom Bar) */}
     <div 
