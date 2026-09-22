@@ -536,6 +536,25 @@ const videoTestimonials = [
                 </div>
               </div>
 
+              {/* 🌟 Dynamic Ad-Hook / Goal Personalization Card (Indian Consumer Optimized) */}
+              <div 
+                id="dynamic-ad-hook-card" 
+                class="hidden mb-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-50/95 via-[#f7fdf9] to-amber-50/70 border border-emerald-200/80 shadow-xs transition-all duration-500 ease-out"
+                aria-live="polite"
+              >
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-sm" id="dynamic-hook-icon">⚡</span>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-900 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-300/40" id="dynamic-hook-badge">Ad Solution Match</span>
+                  </div>
+                  <span class="text-[10px] font-bold text-gray-500 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span> 100% शाकाहारी & सुरक्षित
+                  </span>
+                </div>
+                <p class="text-sm sm:text-base font-black text-gray-900 leading-snug tracking-tight font-['Playfair_Display']" id="dynamic-hook-headline"></p>
+                <p class="text-[11px] sm:text-xs text-gray-600 mt-1 font-medium leading-relaxed font-sans" id="dynamic-hook-subline"></p>
+              </div>
+
               {customBadge && (
                 <div class="mb-2">
                   <span class="bg-amber-400 text-black text-[9px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider shadow-xs">
@@ -670,7 +689,7 @@ const videoTestimonials = [
                       <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                     ))}
                   </div>
-                  <span>10,000+ Happy Customers</span>
+                  <span id="pdp-trust-customer-count">10,000+ Happy Customers</span>
                 </div>
                 <div class="h-4 w-[1px] bg-gray-200"></div>
                 <div class="flex items-center gap-1">
@@ -1108,7 +1127,7 @@ const videoTestimonials = [
         <span class="text-xs font-black text-white truncate font-['Playfair_Display']">{product.title}</span>
         <div class="flex items-center gap-2 mt-0.5">
           <span class="text-sm font-black text-emerald-400" id="sticky-display-price">₹{price}</span>
-          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase">Save 30%</span>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase truncate max-w-[140px]" id="sticky-benefit-pill">Save 30%</span>
         </div>
       </div>
     </div>
@@ -1162,6 +1181,169 @@ const videoTestimonials = [
           });
         }
       } catch(e) {}
+
+      // 🌟 Silicon-Grade Dynamic Ad-Hook & Goal Personalization Engine (Indian Consumer Edition)
+      try {
+        const productHandle = (window.location.pathname.split('/product/')[1] || '').replace(/\/$/, '').toLowerCase();
+        
+        // 1. Master Product Compatibility Guardrail
+        const productCompatMap = {
+          'sujata-spirulina-powder': ['fatigue', 'gut_acidity', 'immunity', 'daily_nutrition'],
+          'spirulin-powder': ['fatigue', 'gut_acidity', 'immunity', 'daily_nutrition'],
+          'sujata-spirulina-tablets': ['fatigue', 'gut_acidity', 'immunity', 'daily_nutrition'],
+          'spirulina-tablets': ['fatigue', 'gut_acidity', 'immunity', 'daily_nutrition'],
+          'sujata-spirulina-capsules': ['fatigue', 'daily_nutrition', 'b12_nerve'],
+          'sujata-spirulina-coconut-hair-oil': ['hairfall', 'scalp_health', 'dandruff'],
+          'sujata-spirushine-shampoo-conditioner': ['hairfall', 'frizz', 'scalp_health'],
+          'sujata-plant-based-vitamin-b12': ['b12_nerve', 'fatigue', 'vegetarian'],
+          'sujata-pure-himalayan-shilajit': ['men_stamina', 'workout', 'fatigue'],
+          'sujata-sea-buckthorn-capsules': ['skin_glow', 'gut_acidity', 'heart'],
+          'sujata-spirulina-facewash': ['skin_glow', 'acne_pimples'],
+          'sujata-spirulina-facepack-powder': ['skin_glow', 'tan_removal', 'acne_pimples'],
+          'sujata-spiruglow-bath-soap': ['skin_glow', 'tan_removal'],
+          'sujata-spirulina-korean-cream': ['skin_glow', 'pigmentation_spots'],
+          'sujata-bridal-whitening-cream': ['skin_glow', 'pigmentation_spots'],
+          'sujata-moringa-powder': ['gut_acidity', 'sugar_balance', 'daily_nutrition'],
+          'sujata-spirulina-sea-buckthorn-combo': ['fatigue', 'skin_glow', 'gut_acidity', 'immunity'],
+          'sujata-spirulina-sea-buckthorn-combo-pack': ['fatigue', 'skin_glow', 'gut_acidity', 'immunity']
+        };
+
+        // 2. High-Trust Indian Consumer Intent Buckets
+        const intentDictionary = {
+          fatigue: {
+            icon: '⚡',
+            badge: 'Ad Match: 3 PM Fatigue & Energy Protocol',
+            headline: 'दुपारी येणारा थकवा आणि आळस कायमचा घालवा',
+            subline: 'दररोज सकाळी 1 डोस = दिवसभर नॅचरल ॲक्टिव्ह ऊर्जा. कोणतीही केमिकल्स किंवा कॅफिन क्रॅश नाही.',
+            trustProof: '14,200+ भारतीयांनी थकव्यावर मात केली',
+            stickyTag: '⚡ 3 PM Fatigue Solved',
+            keywords: ['energy', 'fatigue', 'tired', 'slump', 'thakva', 'sust', 'alas', '3pm', 'weakness', 'ashaktpana', 'lethargy', 'exhaust', 'burnout']
+          },
+          hairfall: {
+            icon: '🌿',
+            badge: 'Ad Match: Anti-Hair Fall & Root Nutrition',
+            headline: 'कंगव्यात येणारे केस 21 दिवसांत कमी करा',
+            subline: 'मुळांपासून केसांना पोषण द्या. केस गळणे थांबवून नैसर्गिक दाटपणा आणि चमक मिळवा.',
+            trustProof: '9,800+ ग्राहकांचे केस गळणे थांबले',
+            stickyTag: '🌿 Stop Hair Fall',
+            keywords: ['hair', 'hairfall', 'kes', 'scalp', 'dandruff', 'thinning', 'bald', 'comb', 'kangva', 'shampoo', 'oil', 'biotin']
+          },
+          gut_acidity: {
+            icon: '🍃',
+            badge: 'Ad Match: Pure Gut Detox & Acidity Relief',
+            headline: 'पोटातील गॅस, ॲसिडिटी आणि जळजळीपासून मुक्ती',
+            subline: 'नैसर्गिक सुपरफूड जे पोट शांत करते आणि दररोज सकाळी सहज पोट साफ होण्यास मदत करते.',
+            trustProof: '11,500+ लोकांना पचनाचा त्रास कमी झाला',
+            stickyTag: '🍃 Gas & Acidity Relief',
+            keywords: ['gut', 'digestion', 'acidity', 'gas', 'bloat', 'constipation', 'pachan', 'pot', 'kabz', 'jaljal', 'stomach', 'acid', 'gerd']
+          },
+          skin_glow: {
+            icon: '✨',
+            badge: 'Ad Match: 100% Natural Skin Glow & Anti-Acne',
+            headline: 'पिंपल्स आणि काळे डाग दूर करून मिळवा नॅचरल ग्लो',
+            subline: 'केमिकल क्रिम्स नकोत! सुपरफूड अँटिऑक्सिडंट्सने त्वचेला आतून आणि बाहेरून चमकदार बनवा.',
+            trustProof: '12,800+ महिला व पुरुषांना मिळाला हेल्दी ग्लो',
+            stickyTag: '✨ Natural Skin Glow',
+            keywords: ['skin', 'glow', 'acne', 'pimple', 'tan', 'spots', 'pigment', 'chehra', 'twacha', 'radiance', 'bridal', 'facewash', 'korean', 'fairness']
+          },
+          b12_nerve: {
+            icon: '🌱',
+            badge: 'Ad Match: 100% Plant-Based B12 Formula',
+            headline: 'हाता-पायांत मुंग्या येणे आणि अशक्तपणा थांबवा',
+            subline: 'शाकाहारी लोकांसाठी नैसर्गिक प्लांट-बेस्ड व्हिटॅमिन B12. नसा मजबूत आणि मेंदू कायम अलर्ट.',
+            trustProof: '8,600+ शाकाहारी ग्राहकांचा B12 त्रास दूर झाला',
+            stickyTag: '🌱 Plant B12 Formula',
+            keywords: ['b12', 'nerve', 'tingling', 'mungya', 'numbness', 'veg', 'vegetarian', 'shakahari', 'brain_fog', 'deficiency', 'methylcobalamin']
+          },
+          men_stamina: {
+            icon: '🏔️',
+            badge: 'Ad Match: Himalayan Shilajit & Strength',
+            headline: 'नैसर्गिक शारीरिक ताकद, स्टॅमिना आणि उत्साह वाढवा',
+            subline: '75%+ शुद्ध फुल्व्हिक ॲसिड आणि 84+ खनिजे. वर्कआउट नंतरचा थकवा कमी करून भरपूर ऊर्जा.',
+            trustProof: '9,200+ पुरुषांचा विश्वासू चॉईस',
+            stickyTag: '🏔️ Pure Himalayan Stamina',
+            keywords: ['stamina', 'shilajit', 'power', 'gym', 'workout', 'muscle', 'testosterone', 'vigor', 'strength', 'takad', 'endurance']
+          }
+        };
+
+        // 3. Extract & Tokenize URL Parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        let aggregatedText = '';
+        ['goal', 'problem', 'hook', 'intent', 'benefit', 'target', 'utm_campaign', 'utm_content', 'utm_term', 'ad_name'].forEach(k => {
+          const val = urlParams.get(k);
+          if (val) aggregatedText += ' ' + decodeURIComponent(val).toLowerCase();
+        });
+
+        // 4. Intent Resolution with Fuzzy Match
+        let resolvedKey = null;
+        if (aggregatedText.trim().length > 0) {
+          const normalized = aggregatedText.replace(/[-_+]/g, ' ');
+          for (const [key, item] of Object.entries(intentDictionary)) {
+            if (item.keywords.some(kw => normalized.includes(kw))) {
+              resolvedKey = key;
+              break;
+            }
+          }
+        }
+
+        // Check Session Memory fallback
+        if (!resolvedKey) {
+          const savedHook = sessionStorage.getItem('sujata_active_hook');
+          if (savedHook && intentDictionary[savedHook]) {
+            resolvedKey = savedHook;
+          }
+        }
+
+        // 5. Product Compatibility Verification (Guardrail)
+        const allowedList = productCompatMap[productHandle] || Object.keys(intentDictionary);
+        const isCompatible = resolvedKey && allowedList.includes(resolvedKey);
+
+        if (isCompatible && intentDictionary[resolvedKey]) {
+          const activeIntent = intentDictionary[resolvedKey];
+          sessionStorage.setItem('sujata_active_hook', resolvedKey);
+          localStorage.setItem('sujata_active_hook', resolvedKey);
+
+          // Update Dynamic Card
+          const cardEl = document.getElementById('dynamic-ad-hook-card');
+          const iconEl = document.getElementById('dynamic-hook-icon');
+          const badgeEl = document.getElementById('dynamic-hook-badge');
+          const headlineEl = document.getElementById('dynamic-hook-headline');
+          const sublineEl = document.getElementById('dynamic-hook-subline');
+
+          if (cardEl && iconEl && badgeEl && headlineEl && sublineEl) {
+            iconEl.textContent = activeIntent.icon;
+            badgeEl.textContent = activeIntent.badge;
+            headlineEl.textContent = activeIntent.headline;
+            sublineEl.textContent = activeIntent.subline;
+            cardEl.classList.remove('hidden');
+          }
+
+          // Update Trust Proof Text
+          const trustCountSpan = document.getElementById('pdp-trust-customer-count');
+          if (trustCountSpan && activeIntent.trustProof) {
+            trustCountSpan.textContent = activeIntent.trustProof;
+          }
+
+          // Update Mobile Sticky Pill
+          const stickyPillEl = document.getElementById('sticky-benefit-pill');
+          if (stickyPillEl && activeIntent.stickyTag) {
+            stickyPillEl.textContent = activeIntent.stickyTag;
+            stickyPillEl.classList.remove('bg-emerald-500/20', 'text-emerald-300');
+            stickyPillEl.classList.add('bg-amber-400/20', 'text-amber-300');
+          }
+
+          // Dispatch Analytics Event for Meta Ads ML & GA4
+          if (typeof window.dispatchStoreEvent === 'function') {
+            window.dispatchStoreEvent('PersonalizedHookView', {
+              hook: resolvedKey,
+              product: productHandle,
+              campaign: urlParams.get('utm_campaign') || 'direct_hook'
+            });
+          }
+        }
+      } catch(engineErr) {
+        console.warn('Personalization engine error handled safely:', engineErr);
+      }
 
       // Cinematic Reveal
       setTimeout(() => {

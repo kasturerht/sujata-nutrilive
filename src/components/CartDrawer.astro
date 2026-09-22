@@ -345,6 +345,11 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
             if (parsedUtms[k]) cartAttributes.push({ key: k, value: String(parsedUtms[k]) });
           });
         }
+
+        const activeHook = sessionStorage.getItem('sujata_active_hook') || localStorage.getItem('sujata_active_hook');
+        if (activeHook) {
+          cartAttributes.push({ key: '_ad_hook', value: String(activeHook) });
+        }
       } catch(e) {}
 
       if (lines.length > 0) {
