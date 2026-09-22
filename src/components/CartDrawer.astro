@@ -235,17 +235,19 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     window.addItemToLocalCart = function(product) {
       const items = getLocalCart();
       const existing = items.find(i => i.id === product.id);
+      const safeQty = Math.max(1, Math.min(10, parseInt(product.quantity) || 1));
+      const safePrice = Math.max(1, parseInt(product.price) || 299);
 
       if (existing) {
-        existing.quantity += (product.quantity || 1);
+        existing.quantity = Math.max(1, Math.min(10, (existing.quantity || 1) + safeQty));
       } else {
         items.push({
           id: product.id,
           title: product.title || 'Pure Spirulina Formulation',
           subtitle: product.subtitle || '100% Pure Cold-Pressed',
-          price: product.price || 799,
+          price: safePrice,
           image: product.image || '/spirulina-bottle.png',
-          quantity: product.quantity || 1
+          quantity: safeQty
         });
       }
 
@@ -327,7 +329,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
         .map(i => {
           const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
-          return { merchandiseId, quantity: Math.max(1, parseInt(i.quantity) || 1) };
+          return { merchandiseId, quantity: Math.max(1, Math.min(10, parseInt(i.quantity) || 1)) };
         });
 
       // 🌟 Cross-Domain Tracking: Extract Meta & UTM Attribution to forward to Shopify Checkout
@@ -354,7 +356,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
       if (lines.length > 0) {
         const mutation = `
-          mutation cartCreate($input: CartInput!) {
+          mutation cartCreate($input: CartInput!) @inContext(country: IN) {
             cartCreate(input: $input) {
               cart {
                 id
@@ -447,9 +449,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
         if (item) {
           if (action === 'inc') {
-            item.quantity += 1;
+            item.quantity = Math.min(10, (item.quantity || 1) + 1);
           } else if (action === 'dec') {
-            item.quantity -= 1;
+            item.quantity = (item.quantity || 1) - 1;
             if (item.quantity <= 0) {
               const idx = items.indexOf(item);
               items.splice(idx, 1);
@@ -470,9 +472,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         window.renderSujataCart();
       }
 
-      // Universal "Add to Cart" / "Add to Routine" Clicks
+      // Universal "Add to Cart" / "Add to Routine" Clicks (Catalog Cards / Bundles)
       const atcBtn = e.target.closest('.add-to-cart-btn') || e.target.closest('#add-to-cart-btn');
-      if (atcBtn) {
+      if (atcBtn && !e.target.closest('#magnetic-btn-wrapper') && !e.target.closest('#sticky-atc-btn')) {
         e.preventDefault();
         
         // Find parent product card data if available

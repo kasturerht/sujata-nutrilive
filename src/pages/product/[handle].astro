@@ -10,7 +10,7 @@ const { handle } = Astro.params;
 
 // 🌟 Updated Metafield Keys based on your Shopify Admin
 const productQuery = `
-  query ProductByHandle($handle: String!) {
+  query ProductByHandle($handle: String!) @inContext(country: IN) {
     product(handle: $handle) {
       id title handle descriptionHtml availableForSale vendor tags
       priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } }
@@ -596,6 +596,8 @@ const videoTestimonials = [
                       <button 
                         class={`variant-btn px-4 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-xl border-2 text-xs font-bold transition-all duration-300 touch-manipulation whitespace-nowrap ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
                         data-variant-id={v.id}
+                        data-base-price={vPrice}
+                        data-base-compare={vCompare}
                         data-price={vPrice}
                         data-compare-price={vCompare}
                         data-title={v.title}
@@ -662,9 +664,13 @@ const videoTestimonials = [
                 type="button"
                 data-domain={shopifyDomain} 
                 data-token={storefrontToken}
-                data-default-variant={variants[0]?.id}
+                data-default-variant={variants[0]?.id || (product?.id ? `prod_${product.id}` : '')}
+                data-default-title={product?.title || 'Sujata Formulation'}
                 data-variant-id={variants[0]?.id || `prod_${product.id}`}
                 data-title={product.title}
+                data-base-price={price}
+                data-base-compare={initialComparePrice}
+                data-current-price={price}
                 data-price={price}
                 data-image={primaryImage?.url || '/spirulina-bottle.png'}
                 data-subtitle="Standard Single Shipment"
@@ -1100,8 +1106,11 @@ const videoTestimonials = [
       class="add-to-cart-btn shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg active:scale-95 transition-all touch-manipulation cursor-pointer"
       data-domain={shopifyDomain} 
       data-token={storefrontToken} 
-      data-variant-id={variants[0]?.id || `prod_${product.id}`}
+      data-variant-id={variants[0]?.id || (product?.id ? `prod_${product.id}` : '')}
       data-title={product.title}
+      data-base-price={price}
+      data-base-compare={initialComparePrice}
+      data-current-price={price}
       data-price={price}
       data-image={primaryImage?.url || '/spirulina-bottle.png'}
       data-subtitle="Standard Single Shipment"
@@ -1620,6 +1629,99 @@ const videoTestimonials = [
         return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(num));
       }
 
+      // 🌟 Silicon-Grade Immutable Universal Product State Machine
+      const initialSelectedVariant = document.querySelector('.variant-btn.selected-variant');
+      const fallbackBasePrice = initialSelectedVariant 
+        ? (parseFloat(initialSelectedVariant.getAttribute('data-base-price') || initialSelectedVariant.getAttribute('data-price')) || 600)
+        : (parseFloat(atcBtn?.getAttribute('data-base-price') || atcBtn?.getAttribute('data-price')) || 600);
+      const fallbackBaseCompare = initialSelectedVariant
+        ? (parseFloat(initialSelectedVariant.getAttribute('data-base-compare') || initialSelectedVariant.getAttribute('data-compare-price')) || 0)
+        : (parseFloat(atcBtn?.getAttribute('data-base-compare') || atcBtn?.getAttribute('data-compare-price')) || 0);
+
+      const productState = {
+        basePrice: fallbackBasePrice,
+        baseCompare: fallbackBaseCompare,
+        variantId: initialSelectedVariant ? initialSelectedVariant.getAttribute('data-variant-id') : (atcBtn?.getAttribute('data-variant-id') || ''),
+        variantTitle: initialSelectedVariant ? initialSelectedVariant.getAttribute('data-title') : (atcBtn?.getAttribute('data-title') || ''),
+        purchaseMode: 'onetime' // 'onetime' | 'subscribe'
+      };
+
+      // Pure functional UI render: Computes strictly from productState without mutating base values
+      function renderProductPricing() {
+        const isSubscribe = productState.purchaseMode === 'subscribe';
+        const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
+        const currentCompare = productState.baseCompare > productState.basePrice 
+          ? productState.baseCompare 
+          : (productState.basePrice > 0 ? Math.round(productState.basePrice * 1.3) : 0);
+
+        // 1. Update Main and Sticky Display Prices
+        if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
+        if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
+
+        // 2. Update Compare Price & Discount Badges
+        if (currentCompare > currentPrice) {
+          const totalPct = Math.round(((currentCompare - currentPrice) / currentCompare) * 100);
+          if (comparePriceDisplay) {
+            comparePriceDisplay.innerText = `₹${formatINRClient(currentCompare)}`;
+            comparePriceDisplay.classList.remove('hidden');
+          }
+          if (badgeElement) {
+            badgeElement.innerText = isSubscribe ? `Save ${totalPct}% (10% Sub)` : `Save ${totalPct}%`;
+            badgeElement.classList.remove('hidden');
+          }
+        } else {
+          if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
+          if (badgeElement) badgeElement.classList.add('hidden');
+        }
+
+        // 3. Update Purchase Option Tab Labels (Deterministic from immutable basePrice)
+        const labelOnetime = document.getElementById('onetime-price-label');
+        const labelSubscribe = document.getElementById('subscribe-price-label');
+        const labelOldSubscribe = document.getElementById('subscribe-old-price');
+
+        if (labelOnetime) labelOnetime.innerText = `₹${formatINRClient(productState.basePrice)}`;
+        if (labelSubscribe) labelSubscribe.innerText = `₹${formatINRClient(Math.round(productState.basePrice * 0.9))}`;
+        if (labelOldSubscribe) labelOldSubscribe.innerText = `₹${formatINRClient(productState.basePrice)}`;
+
+        // 4. Update ATC Buttons Payload Attributes (NEVER touch data-base-price!)
+        const atcSubtitle = isSubscribe ? 'Monthly Protocol (10% Off)' : 'Standard Single Shipment';
+        [atcBtn, stickyAtcBtn].forEach(btn => {
+          if (!btn) return;
+          btn.setAttribute('data-purchase-type', productState.purchaseMode);
+          btn.setAttribute('data-current-price', currentPrice);
+          btn.setAttribute('data-price', currentPrice); // For backward compatibility
+          btn.setAttribute('data-variant-id', productState.variantId);
+          btn.setAttribute('data-subtitle', atcSubtitle);
+        });
+
+        // 5. Update Tab Active Visual Styling
+        if (isSubscribe) {
+          tabSubscribe?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabSubscribe?.classList.remove('text-gray-600');
+          tabOnetime?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabOnetime?.classList.add('text-gray-600');
+
+          if (btnTextElement) {
+            btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+          }
+          if (stickyBtnText) stickyBtnText.innerText = "Subscribe & Save";
+        } else {
+          tabOnetime?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabOnetime?.classList.remove('text-gray-600');
+          tabSubscribe?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabSubscribe?.classList.add('text-gray-600');
+
+          if (btnTextElement) {
+            btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+          }
+          if (stickyBtnText) stickyBtnText.innerText = "Add to Routine";
+        }
+      }
+
+      // Initialize Pricing UI immediately
+      renderProductPricing();
+
+      // Variant Buttons Interaction
       variantBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           variantBtns.forEach(b => {
@@ -1631,172 +1733,75 @@ const videoTestimonials = [
           target.classList.remove('border-gray-200', 'text-gray-500');
           target.classList.add('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
 
-          // Sync data-variant-id attribute on the main and sticky ATC buttons
-          const selectedVariantId = target.getAttribute('data-variant-id');
-          if (atcBtn && selectedVariantId) {
-            atcBtn.setAttribute('data-variant-id', selectedVariantId);
-          }
-          if (stickyAtcBtn && selectedVariantId) {
-            stickyAtcBtn.setAttribute('data-variant-id', selectedVariantId);
-          }
+          const rawBasePrice = parseFloat(target.getAttribute('data-base-price') || target.getAttribute('data-price')) || productState.basePrice;
+          const rawBaseCompare = parseFloat(target.getAttribute('data-base-compare') || target.getAttribute('data-compare-price')) || 0;
+          const selectedVariantId = target.getAttribute('data-variant-id') || productState.variantId;
+          const selectedTitle = target.getAttribute('data-title') || productState.variantTitle;
+
+          productState.basePrice = rawBasePrice;
+          productState.baseCompare = rawBaseCompare;
+          productState.variantId = selectedVariantId;
+          productState.variantTitle = selectedTitle;
 
           // 🌟 Re-dispatch ViewContent for Meta Dynamic Retargeting
           try {
             if (typeof window.dispatchStoreEvent === 'function') {
               var pTitle = document.querySelector('h1') ? document.querySelector('h1').innerText.trim() : 'Sujata Formulation';
-              var vPrice = parseFloat(target.getAttribute('data-price')) || 0;
               window.dispatchStoreEvent('ViewContent', {
                 id: selectedVariantId || '',
                 title: pTitle,
-                price: vPrice,
+                price: rawBasePrice,
                 currency: 'INR'
               });
             }
           } catch(e) {}
 
-          // Update Subscription Widget Labels dynamically when size changes
-          const selectedPrice = parseFloat(target.getAttribute('data-price')) || 0;
-          const discountedPrice = Math.round(selectedPrice * 0.9);
-
-          const labelOnetime = document.getElementById('onetime-price-label');
-          const labelSubscribe = document.getElementById('subscribe-price-label');
-          const labelOldSubscribe = document.getElementById('subscribe-old-price');
-
-          if(labelOnetime) labelOnetime.innerText = `₹${formatINRClient(selectedPrice)}`;
-          if(labelSubscribe) labelSubscribe.innerText = `₹${formatINRClient(discountedPrice)}`;
-          if(labelOldSubscribe) labelOldSubscribe.innerText = `₹${formatINRClient(selectedPrice)}`;
-
-          // Update main display price with fade animation
+          // Smooth fade transition
           if (priceDisplay) {
             priceDisplay.style.opacity = '0';
             priceDisplay.style.transform = 'translateY(-5px)';
             setTimeout(() => {
-              updatePurchaseOptionUI();
+              renderProductPricing();
               priceDisplay.style.opacity = '1';
               priceDisplay.style.transform = 'translateY(0)';
             }, 150);
+          } else {
+            renderProductPricing();
           }
         });
       });
 
-      // 1.5. Purchase Option (Subscription vs One-time) Segmented Switcher
+      // Purchase Option Segmented Switcher Interactions
       const tabOnetime = document.getElementById('tab-onetime');
       const tabSubscribe = document.getElementById('tab-subscribe');
       const btnTextElement = document.getElementById('btn-text');
-      let activePurchaseMode = 'onetime';
-
-      function updatePurchaseOptionUI() {
-        const activeVariant = document.querySelector('.variant-btn.selected-variant');
-        const basePrice = activeVariant ? parseFloat(activeVariant.getAttribute('data-price')) : (parseFloat(atcBtn?.getAttribute('data-price')) || 600);
-        const rawCompare = activeVariant ? parseFloat(activeVariant.getAttribute('data-compare-price')) : 0;
-        const baseCompare = rawCompare > basePrice ? rawCompare : (basePrice > 0 ? Math.round(basePrice * 1.3) : 0);
-        
-        if (activePurchaseMode === 'subscribe') {
-          const discountPrice = Math.round(basePrice * 0.9);
-          if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(discountPrice)}`;
-          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(discountPrice)}`;
-          
-          if (baseCompare > discountPrice) {
-            const totalPct = Math.round(((baseCompare - discountPrice) / baseCompare) * 100);
-            if (comparePriceDisplay) {
-              comparePriceDisplay.innerText = `₹${formatINRClient(baseCompare)}`;
-              comparePriceDisplay.classList.remove('hidden');
-            }
-            if (badgeElement) {
-              badgeElement.innerText = `Save ${totalPct}%`;
-              badgeElement.classList.remove('hidden');
-            }
-          } else {
-            if (comparePriceDisplay) {
-              comparePriceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
-              comparePriceDisplay.classList.remove('hidden');
-            }
-            if (badgeElement) {
-              badgeElement.innerText = `Save 10%`;
-              badgeElement.classList.remove('hidden');
-            }
-          }
-
-          if (btnTextElement) {
-            btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
-          }
-          if (stickyBtnText) stickyBtnText.innerText = "Subscribe & Save";
-          if (atcBtn) {
-            atcBtn.setAttribute('data-purchase-type', 'subscribe');
-            atcBtn.setAttribute('data-price', discountPrice);
-            atcBtn.setAttribute('data-subtitle', 'Monthly Protocol (10% Off)');
-          }
-          if (stickyAtcBtn) {
-            stickyAtcBtn.setAttribute('data-purchase-type', 'subscribe');
-            stickyAtcBtn.setAttribute('data-price', discountPrice);
-            stickyAtcBtn.setAttribute('data-subtitle', 'Monthly Protocol (10% Off)');
-          }
-
-          tabSubscribe?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabSubscribe?.classList.remove('text-gray-600');
-          tabOnetime?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabOnetime?.classList.add('text-gray-600');
-        } else {
-          if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
-          if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
-          
-          if (baseCompare > basePrice) {
-            const pct = Math.round(((baseCompare - basePrice) / baseCompare) * 100);
-            if (comparePriceDisplay) {
-              comparePriceDisplay.innerText = `₹${formatINRClient(baseCompare)}`;
-              comparePriceDisplay.classList.remove('hidden');
-            }
-            if (badgeElement) {
-              badgeElement.innerText = `Save ${pct}%`;
-              badgeElement.classList.remove('hidden');
-            }
-          } else {
-            if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
-            if (badgeElement) badgeElement.classList.add('hidden');
-          }
-
-          if (btnTextElement) {
-            btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
-          }
-          if (stickyBtnText) stickyBtnText.innerText = "Add to Routine";
-          if (atcBtn) {
-            atcBtn.setAttribute('data-purchase-type', 'onetime');
-            atcBtn.setAttribute('data-price', basePrice);
-            atcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
-          }
-          if (stickyAtcBtn) {
-            stickyAtcBtn.setAttribute('data-purchase-type', 'onetime');
-            stickyAtcBtn.setAttribute('data-price', basePrice);
-            stickyAtcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
-          }
-
-          tabOnetime?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabOnetime?.classList.remove('text-gray-600');
-          tabSubscribe?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabSubscribe?.classList.add('text-gray-600');
-        }
-      }
 
       tabOnetime?.addEventListener('click', () => {
-        if (activePurchaseMode !== 'onetime') {
-          activePurchaseMode = 'onetime';
-          updatePurchaseOptionUI();
+        if (productState.purchaseMode !== 'onetime') {
+          productState.purchaseMode = 'onetime';
+          renderProductPricing();
         }
       });
 
       tabSubscribe?.addEventListener('click', () => {
-        if (activePurchaseMode !== 'subscribe') {
-          activePurchaseMode = 'subscribe';
-          updatePurchaseOptionUI();
+        if (productState.purchaseMode !== 'subscribe') {
+          productState.purchaseMode = 'subscribe';
+          renderProductPricing();
         }
       });
 
       // 1.8 Direct Add to Cart Click Handlers for PDP Main and Sticky Buttons
+      let isPdpAtcProcessing = false;
       const handlePdpAddToCart = (btn) => {
-        const id = btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
+        if (isPdpAtcProcessing) return;
+        isPdpAtcProcessing = true;
+        setTimeout(() => { isPdpAtcProcessing = false; }, 400);
+
+        const id = productState.variantId || btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
         const title = btn.getAttribute('data-title') || document.querySelector('h1')?.innerText?.trim() || 'Sujata Spirulina Daily Routine';
         const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
-        const priceNum = parseFloat(btn.getAttribute('data-price')) || 600;
+        const isSubscribe = productState.purchaseMode === 'subscribe';
+        const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
         const image = btn.getAttribute('data-image') || document.getElementById('main-pdp-image')?.getAttribute('src') || '/spirulina-bottle.png';
 
         if (typeof window.addItemToLocalCart === 'function') {
@@ -1804,7 +1809,7 @@ const videoTestimonials = [
             id,
             title,
             subtitle,
-            price: Math.round(priceNum),
+            price: Math.round(currentPrice),
             image,
             quantity: 1
           });
@@ -1813,11 +1818,13 @@ const videoTestimonials = [
 
       atcBtn?.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         handlePdpAddToCart(atcBtn);
       });
 
       stickyAtcBtn?.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         handlePdpAddToCart(stickyAtcBtn);
       });
 
