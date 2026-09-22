@@ -536,27 +536,16 @@ const videoTestimonials = [
                 </div>
               </div>
 
-              {/* 🌟 Dynamic Ad-Hook / Goal Personalization Card (Indian Consumer Optimized) */}
-              <div 
-                id="dynamic-ad-hook-card" 
-                class="hidden mb-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-50/95 via-[#f7fdf9] to-amber-50/70 border border-emerald-200/80 shadow-xs transition-all duration-500 ease-out"
-                aria-live="polite"
-              >
-                <div class="flex items-center justify-between gap-2 mb-1.5">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-sm" id="dynamic-hook-icon">⚡</span>
-                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-900 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-300/40" id="dynamic-hook-badge">Ad Solution Match</span>
-                  </div>
-                  <span class="text-[10px] font-bold text-gray-500 flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span> 100% शाकाहारी & सुरक्षित
-                  </span>
-                </div>
-                <p class="text-sm sm:text-base font-black text-gray-900 leading-snug tracking-tight font-['Playfair_Display']" id="dynamic-hook-headline"></p>
-                <p class="text-[11px] sm:text-xs text-gray-600 mt-1 font-medium leading-relaxed font-sans" id="dynamic-hook-subline"></p>
+              {/* 🌟 Dynamic Luxury Ad-Hook Pill (Apothecary Luxury Aesthetic) */}
+              <div id="dynamic-hook-pill-container" class="hidden mb-2.5 animate-[fadeIn_0.3s_ease-out]">
+                <span class="inline-flex items-center gap-2 bg-[#064E3B] text-[#D1FAE5] border border-emerald-600/30 text-[10px] font-black uppercase tracking-[0.16em] px-3 py-1 rounded-full shadow-xs">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span id="dynamic-hook-pill-text"></span>
+                </span>
               </div>
 
               {customBadge && (
-                <div class="mb-2">
+                <div class="mb-2" id="static-badge-container">
                   <span class="bg-amber-400 text-black text-[9px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider shadow-xs">
                     {customBadge}
                   </span>
@@ -567,11 +556,9 @@ const videoTestimonials = [
                 {product?.title || 'Sujata Formulation'}
               </h1>
 
-              {customSubtitle && (
-                <p class="text-xs sm:text-sm font-semibold text-emerald-800/90 mb-3 font-sans">
-                  {customSubtitle}
-                </p>
-              )}
+              <p id="dynamic-product-subtitle" class={`text-xs sm:text-sm font-semibold text-emerald-800/90 mb-3 font-sans leading-relaxed ${customSubtitle ? '' : 'hidden'}`}>
+                {customSubtitle}
+              </p>
 
               {/* Dynamic Price Render */}
               <div class="flex flex-wrap items-baseline gap-2.5 sm:gap-3">
@@ -1208,60 +1195,48 @@ const videoTestimonials = [
           'sujata-spirulina-sea-buckthorn-combo-pack': ['fatigue', 'skin_glow', 'gut_acidity', 'immunity']
         };
 
-        // 2. High-Trust Indian Consumer Intent Buckets
+        // 2. Ultra-Luxury Apothecary Intent Buckets (Silicon Valley & Premium D2C Grade)
         const intentDictionary = {
           fatigue: {
-            icon: '⚡',
-            badge: 'Ad Match: 3 PM Fatigue & Energy Protocol',
-            headline: 'दुपारी येणारा थकवा आणि आळस कायमचा घालवा',
-            subline: 'दररोज सकाळी 1 डोस = दिवसभर नॅचरल ॲक्टिव्ह ऊर्जा. कोणतीही केमिकल्स किंवा कॅफिन क्रॅश नाही.',
-            trustProof: '14,200+ भारतीयांनी थकव्यावर मात केली',
-            stickyTag: '⚡ 3 PM Fatigue Solved',
+            badge: '⚡ 3 PM Fatigue & Cellular Energy Protocol',
+            subtitle: 'Clinically formulated to eliminate afternoon fatigue and brain fog with sustained plant energy — zero caffeine crash.',
+            trustProof: '14,200+ Verified Customers Fighting Chronic Fatigue',
+            stickyTag: '⚡ Sustained All-Day Energy',
             keywords: ['energy', 'fatigue', 'tired', 'slump', 'thakva', 'sust', 'alas', '3pm', 'weakness', 'ashaktpana', 'lethargy', 'exhaust', 'burnout']
           },
           hairfall: {
-            icon: '🌿',
-            badge: 'Ad Match: Anti-Hair Fall & Root Nutrition',
-            headline: 'कंगव्यात येणारे केस 21 दिवसांत कमी करा',
-            subline: 'मुळांपासून केसांना पोषण द्या. केस गळणे थांबवून नैसर्गिक दाटपणा आणि चमक मिळवा.',
-            trustProof: '9,800+ ग्राहकांचे केस गळणे थांबले',
-            stickyTag: '🌿 Stop Hair Fall',
+            badge: '🌿 Follicle Nourishment & Anti-Hair Fall Protocol',
+            subtitle: 'Targets hair fall at the root to visibly strengthen strands and restore natural fullness within 21 days.',
+            trustProof: '9,800+ Verified Customers Reported Reduced Hair Fall',
+            stickyTag: '🌿 Reduced Hair Fall in 21 Days',
             keywords: ['hair', 'hairfall', 'kes', 'scalp', 'dandruff', 'thinning', 'bald', 'comb', 'kangva', 'shampoo', 'oil', 'biotin']
           },
           gut_acidity: {
-            icon: '🍃',
-            badge: 'Ad Match: Pure Gut Detox & Acidity Relief',
-            headline: 'पोटातील गॅस, ॲसिडिटी आणि जळजळीपासून मुक्ती',
-            subline: 'नैसर्गिक सुपरफूड जे पोट शांत करते आणि दररोज सकाळी सहज पोट साफ होण्यास मदत करते.',
-            trustProof: '11,500+ लोकांना पचनाचा त्रास कमी झाला',
+            badge: '🍃 Gut Alkalizing & Acidity Defense Protocol',
+            subtitle: 'Pure chlorophyll and alkaline superfoods to soothe stomach acidity, relieve bloating, and support easy daily digestion.',
+            trustProof: '11,500+ Happy Customers with Smoother Digestion',
             stickyTag: '🍃 Gas & Acidity Relief',
             keywords: ['gut', 'digestion', 'acidity', 'gas', 'bloat', 'constipation', 'pachan', 'pot', 'kabz', 'jaljal', 'stomach', 'acid', 'gerd']
           },
           skin_glow: {
-            icon: '✨',
-            badge: 'Ad Match: 100% Natural Skin Glow & Anti-Acne',
-            headline: 'पिंपल्स आणि काळे डाग दूर करून मिळवा नॅचरल ग्लो',
-            subline: 'केमिकल क्रिम्स नकोत! सुपरफूड अँटिऑक्सिडंट्सने त्वचेला आतून आणि बाहेरून चमकदार बनवा.',
-            trustProof: '12,800+ महिला व पुरुषांना मिळाला हेल्दी ग्लो',
-            stickyTag: '✨ Natural Skin Glow',
+            badge: '✨ Antioxidant Cellular Radiance & Glow Protocol',
+            subtitle: 'Protects skin against oxidative damage and active breakouts to reveal a clear, luminous, natural glow.',
+            trustProof: '12,800+ Customers with Radiant, Clearer Skin',
+            stickyTag: '✨ Natural Skin Radiance',
             keywords: ['skin', 'glow', 'acne', 'pimple', 'tan', 'spots', 'pigment', 'chehra', 'twacha', 'radiance', 'bridal', 'facewash', 'korean', 'fairness']
           },
           b12_nerve: {
-            icon: '🌱',
-            badge: 'Ad Match: 100% Plant-Based B12 Formula',
-            headline: 'हाता-पायांत मुंग्या येणे आणि अशक्तपणा थांबवा',
-            subline: 'शाकाहारी लोकांसाठी नैसर्गिक प्लांट-बेस्ड व्हिटॅमिन B12. नसा मजबूत आणि मेंदू कायम अलर्ट.',
-            trustProof: '8,600+ शाकाहारी ग्राहकांचा B12 त्रास दूर झाला',
-            stickyTag: '🌱 Plant B12 Formula',
+            badge: '🌱 100% Plant-Based Methylcobalamin B12 Protocol',
+            subtitle: 'Essential active B12 designed specifically for Indian vegetarians to combat exhaustion, nerve tingling, and brain fog.',
+            trustProof: '8,600+ Vegetarians Overcoming B12 Deficiency',
+            stickyTag: '🌱 100% Plant-Based B12',
             keywords: ['b12', 'nerve', 'tingling', 'mungya', 'numbness', 'veg', 'vegetarian', 'shakahari', 'brain_fog', 'deficiency', 'methylcobalamin']
           },
           men_stamina: {
-            icon: '🏔️',
-            badge: 'Ad Match: Himalayan Shilajit & Strength',
-            headline: 'नैसर्गिक शारीरिक ताकद, स्टॅमिना आणि उत्साह वाढवा',
-            subline: '75%+ शुद्ध फुल्व्हिक ॲसिड आणि 84+ खनिजे. वर्कआउट नंतरचा थकवा कमी करून भरपूर ऊर्जा.',
-            trustProof: '9,200+ पुरुषांचा विश्वासू चॉईस',
-            stickyTag: '🏔️ Pure Himalayan Stamina',
+            badge: '🏔️ Himalayan Shilajit & Peak Vitality Protocol',
+            subtitle: '75%+ purified fulvic acid to optimize physical endurance, muscle recovery, and sustained vigor throughout the day.',
+            trustProof: '9,200+ Men Experiencing Peak Physical Stamina',
+            stickyTag: '🏔️ Peak Physical Endurance',
             keywords: ['stamina', 'shilajit', 'power', 'gym', 'workout', 'muscle', 'testosterone', 'vigor', 'strength', 'takad', 'endurance']
           }
         };
@@ -1303,19 +1278,22 @@ const videoTestimonials = [
           sessionStorage.setItem('sujata_active_hook', resolvedKey);
           localStorage.setItem('sujata_active_hook', resolvedKey);
 
-          // Update Dynamic Card
-          const cardEl = document.getElementById('dynamic-ad-hook-card');
-          const iconEl = document.getElementById('dynamic-hook-icon');
-          const badgeEl = document.getElementById('dynamic-hook-badge');
-          const headlineEl = document.getElementById('dynamic-hook-headline');
-          const sublineEl = document.getElementById('dynamic-hook-subline');
+          // Update Dynamic Luxury Pill
+          const pillContainer = document.getElementById('dynamic-hook-pill-container');
+          const pillText = document.getElementById('dynamic-hook-pill-text');
+          const staticBadge = document.getElementById('static-badge-container');
 
-          if (cardEl && iconEl && badgeEl && headlineEl && sublineEl) {
-            iconEl.textContent = activeIntent.icon;
-            badgeEl.textContent = activeIntent.badge;
-            headlineEl.textContent = activeIntent.headline;
-            sublineEl.textContent = activeIntent.subline;
-            cardEl.classList.remove('hidden');
+          if (pillContainer && pillText) {
+            pillText.textContent = activeIntent.badge;
+            pillContainer.classList.remove('hidden');
+            if (staticBadge) staticBadge.classList.add('hidden');
+          }
+
+          // Update Product Subtitle seamlessly
+          const subtitleEl = document.getElementById('dynamic-product-subtitle');
+          if (subtitleEl && activeIntent.subtitle) {
+            subtitleEl.textContent = activeIntent.subtitle;
+            subtitleEl.classList.remove('hidden');
           }
 
           // Update Trust Proof Text
