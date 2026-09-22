@@ -25,8 +25,9 @@ const siteUrl = BRAND_CONFIG.siteUrl || "https://sujatanutrilive.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageURL = new URL(image, siteUrl).toString();
 
-const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID || "";
+const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID || "1314112957191765";
 const googleTagId = import.meta.env.PUBLIC_GA4_ID || import.meta.env.PUBLIC_GTAG_ID || "";
+const fbDomainVerification = import.meta.env.PUBLIC_FACEBOOK_DOMAIN_VERIFICATION || "";
 
 // =========================================================================
 // 🌟 SILICON VALLEY UNIFIED SCHEMA.ORG @GRAPH (Knowledge Graph & Rich Snippets)
@@ -186,6 +187,7 @@ const unifiedSchemaGraph = {
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#064E3B" />
     <meta name="generator" content={Astro.generator} />
+    {fbDomainVerification && <meta name="facebook-domain-verification" content={fbDomainVerification} />}
 
     {/* OpenGraph / Facebook / WhatsApp Preview Meta Tags */}
     <meta property="og:type" content="website" />
@@ -218,7 +220,47 @@ const unifiedSchemaGraph = {
 
     {/* 🌟 2026 Resilient Ad Tracking Hub (Meta Pixel & Google Tag) */}
     <script is:inline define:vars={{ metaPixelId, googleTagId }}>
-      // 1. Meta Pixel (Facebook & Instagram Ads)
+      // 1. First-Party Cookie Engine & UTM Attribution Capture
+      (function() {
+        try {
+          var urlParams = new URLSearchParams(window.location.search);
+          var fbclid = urlParams.get('fbclid');
+          
+          // Capture & Persist _fbc (Meta Click ID)
+          if (fbclid) {
+            var fbcVal = 'fb.1.' + Date.now() + '.' + fbclid;
+            document.cookie = '_fbc=' + fbcVal + ';path=/;max-age=' + (90 * 86400) + ';SameSite=Lax';
+            localStorage.setItem('sujata_fbc', fbcVal);
+          }
+          
+          // Ensure _fbp (Meta Browser ID) exists
+          var existingFbp = (document.cookie.match(/(^|;\s*)_fbp=([^;]+)/) || [])[2] || localStorage.getItem('sujata_fbp');
+          if (!existingFbp) {
+            existingFbp = 'fb.1.' + Date.now() + '.' + Math.floor(Math.random() * 1000000000);
+            document.cookie = '_fbp=' + existingFbp + ';path=/;max-age=' + (90 * 86400) + ';SameSite=Lax';
+            localStorage.setItem('sujata_fbp', existingFbp);
+          } else {
+            localStorage.setItem('sujata_fbp', existingFbp);
+          }
+
+          // Capture UTM campaign attribution
+          var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+          var utmData = {};
+          var hasUtm = false;
+          utmKeys.forEach(function(key) {
+            var val = urlParams.get(key);
+            if (val) {
+              utmData[key] = val;
+              hasUtm = true;
+            }
+          });
+          if (hasUtm) {
+            localStorage.setItem('sujata_utms', JSON.stringify(utmData));
+          }
+        } catch(e) {}
+      })();
+
+      // 2. Meta Pixel (Facebook & Instagram Ads)
       window._fbqConfigured = !!metaPixelId;
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -234,7 +276,7 @@ const unifiedSchemaGraph = {
         fbq('track', 'PageView');
       }
 
-      // 2. Google Tag (gtag.js / Google Ads & GA4)
+      // 3. Google Tag (gtag.js / Google Ads & GA4)
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       window.gtag = gtag;
@@ -248,34 +290,75 @@ const unifiedSchemaGraph = {
         gtag('config', googleTagId, { send_page_view: true });
       }
 
-      // Unified Global E-Commerce Analytics Dispatcher (Reusable anywhere in app)
+      // 🌟 4. Unified Full-Funnel E-Commerce Analytics Dispatcher
       window.dispatchStoreEvent = function(eventName, data) {
-        // Meta Pixel
+        data = data || {};
+
+        // === META PIXEL TRACKING ===
         if (typeof window.fbq === 'function') {
-          if (eventName === 'AddToCart') {
+          if (eventName === 'ViewContent') {
+            window.fbq('track', 'ViewContent', {
+              content_name: data.title || '',
+              content_ids: [data.id || ''],
+              content_type: 'product',
+              value: Number(data.price || 0),
+              currency: data.currency || 'INR'
+            });
+          } else if (eventName === 'AddToCart') {
             window.fbq('track', 'AddToCart', {
               content_name: data.title || '',
               content_ids: [data.id || ''],
               content_type: 'product',
               value: Number(data.price || 0),
-              currency: 'INR'
+              currency: data.currency || 'INR'
             });
           } else if (eventName === 'InitiateCheckout') {
             window.fbq('track', 'InitiateCheckout', {
               num_items: Number(data.count || 1),
               value: Number(data.total || 0),
+              currency: data.currency || 'INR',
+              content_ids: (data.items || []).map(function(i) { return i.id || ''; })
+            });
+          } else if (eventName === 'Search') {
+            window.fbq('track', 'Search', {
+              search_string: data.query || data.search_string || ''
+            });
+          } else if (eventName === 'Lead') {
+            window.fbq('track', 'Lead', {
+              content_name: data.lead_type || 'Lead Capture',
+              value: Number(data.value || 0),
               currency: 'INR'
+            });
+          } else if (eventName === 'Contact') {
+            window.fbq('track', 'Contact', {
+              content_name: data.channel || 'WhatsApp Support'
+            });
+          } else if (eventName === 'CompleteRegistration') {
+            window.fbq('track', 'CompleteRegistration', {
+              content_name: data.content_name || 'Routine Quiz Completed',
+              status: true
             });
           } else {
             window.fbq('trackCustom', eventName, data);
           }
         }
 
-        // Google Ads / GA4
+        // === GOOGLE ANALYTICS 4 (GA4) TRACKING ===
         if (typeof window.gtag === 'function') {
-          if (eventName === 'AddToCart') {
+          if (eventName === 'ViewContent') {
+            window.gtag('event', 'view_item', {
+              currency: data.currency || 'INR',
+              value: Number(data.price || 0),
+              items: [{
+                item_id: data.id || '',
+                item_name: data.title || '',
+                price: Number(data.price || 0),
+                quantity: 1
+              }]
+            });
+          } else if (eventName === 'AddToCart') {
             window.gtag('event', 'add_to_cart', {
-              currency: 'INR',
+              currency: data.currency || 'INR',
               value: Number(data.price || 0),
               items: [{
                 item_id: data.id || '',
@@ -286,7 +369,7 @@ const unifiedSchemaGraph = {
             });
           } else if (eventName === 'InitiateCheckout') {
             window.gtag('event', 'begin_checkout', {
-              currency: 'INR',
+              currency: data.currency || 'INR',
               value: Number(data.total || 0),
               items: (data.items || []).map(function(item) {
                 return {
@@ -297,11 +380,71 @@ const unifiedSchemaGraph = {
                 };
               })
             });
+          } else if (eventName === 'Search') {
+            window.gtag('event', 'search', {
+              search_term: data.query || data.search_string || ''
+            });
+          } else if (eventName === 'Lead') {
+            window.gtag('event', 'generate_lead', {
+              currency: 'INR',
+              value: Number(data.value || 0)
+            });
+          } else if (eventName === 'Contact') {
+            window.gtag('event', 'contact', {
+              method: data.channel || 'WhatsApp'
+            });
+          } else if (eventName === 'CompleteRegistration') {
+            window.gtag('event', 'sign_up', {
+              method: data.content_name || 'Routine Quiz'
+            });
           } else {
             window.gtag('event', eventName, data);
           }
         }
       };
+
+      // 🌟 5. Global Delegated Click Listener for WhatsApp & Phone Support
+      document.addEventListener('click', function(e) {
+        var waLink = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+        if (waLink) {
+          window.dispatchStoreEvent('Contact', {
+            channel: 'WhatsApp',
+            url: waLink.getAttribute('href') || ''
+          });
+        }
+        var telLink = e.target.closest('a[href^="tel:"]');
+        if (telLink) {
+          window.dispatchStoreEvent('Contact', {
+            channel: 'Phone Support',
+            url: telLink.getAttribute('href') || ''
+          });
+        }
+      }, { passive: true });
+
+      // 🌟 6. Reading Intent / Scroll Depth Listener (50% & 90%)
+      (function() {
+        var tracked50 = false;
+        var tracked90 = false;
+        window.addEventListener('scroll', function() {
+          var h = document.documentElement, 
+              b = document.body,
+              st = 'scrollTop',
+              sh = 'scrollHeight';
+          var percent = ((h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight)) * 100;
+          if (!tracked50 && percent >= 50) {
+            tracked50 = true;
+            if (typeof window.dispatchStoreEvent === 'function') {
+              window.dispatchStoreEvent('ScrollDepth', { depth: '50%' });
+            }
+          }
+          if (!tracked90 && percent >= 90) {
+            tracked90 = true;
+            if (typeof window.dispatchStoreEvent === 'function') {
+              window.dispatchStoreEvent('ScrollDepth', { depth: '90%' });
+            }
+          }
+        }, { passive: true });
+      })();
     </script>
   </head>
   <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen min-h-[100dvh] relative overflow-x-hidden font-sans">

@@ -330,6 +330,23 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           return { merchandiseId, quantity: Math.max(1, parseInt(i.quantity) || 1) };
         });
 
+      // 🌟 Cross-Domain Tracking: Extract Meta & UTM Attribution to forward to Shopify Checkout
+      const cartAttributes = [];
+      try {
+        const fbp = (document.cookie.match(/(^|;\s*)_fbp=([^;]+)/) || [])[2] || localStorage.getItem('sujata_fbp');
+        const fbc = (document.cookie.match(/(^|;\s*)_fbc=([^;]+)/) || [])[2] || localStorage.getItem('sujata_fbc');
+        if (fbp) cartAttributes.push({ key: '_fbp', value: fbp });
+        if (fbc) cartAttributes.push({ key: '_fbc', value: fbc });
+
+        const rawUtms = localStorage.getItem('sujata_utms');
+        if (rawUtms) {
+          const parsedUtms = JSON.parse(rawUtms);
+          Object.keys(parsedUtms).forEach(k => {
+            if (parsedUtms[k]) cartAttributes.push({ key: k, value: String(parsedUtms[k]) });
+          });
+        }
+      } catch(e) {}
+
       if (lines.length > 0) {
         const mutation = `
           mutation cartCreate($input: CartInput!) {
@@ -347,6 +364,11 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         `;
 
         try {
+          const cartInput = { lines };
+          if (cartAttributes.length > 0) {
+            cartInput.attributes = cartAttributes;
+          }
+
           const response = await fetch(`https://${DOMAIN}/api/2024-01/graphql.json`, {
             method: 'POST',
             headers: {
@@ -355,7 +377,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
             },
             body: JSON.stringify({
               query: mutation,
-              variables: { input: { lines } }
+              variables: { input: cartInput }
             })
           });
 

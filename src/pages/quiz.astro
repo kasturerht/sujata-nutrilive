@@ -531,6 +531,17 @@ try {
           const msg = encodeURIComponent(`Hello Dr. Sujata, I completed the Routine Quiz for ${quizAnswers.goalTitle} and was prescribed ${quizAnswers.formatTitle}. Can you please confirm my dosage?`);
           waLink.setAttribute('href', `https://wa.me/919834783503?text=${msg}`);
         }
+
+        // 🌟 Meta Ads & GA4: Dispatch CompleteRegistration when quiz recommendation is rendered
+        try {
+          if (typeof window.dispatchStoreEvent === 'function') {
+            window.dispatchStoreEvent('CompleteRegistration', {
+              content_name: `Quiz: ${quizAnswers.goalTitle || 'Vitality Protocol'}`,
+              recommended: quizAnswers.formatTitle || 'Sujata Spirulina',
+              value: quizAnswers.price || 599
+            });
+          }
+        } catch(e) {}
       }
 
       // Add To Cart from Quiz Result

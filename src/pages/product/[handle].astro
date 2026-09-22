@@ -1146,6 +1146,23 @@ const videoTestimonials = [
   <script is:inline>
     // All code is wrapped in an init function to handle Astro's ViewTransitions and page loads
     function initProductPage() {
+      // 🌟 Meta Ads & GA4: Dispatch ViewContent for Dynamic Product Ads & Retargeting
+      try {
+        if (typeof window.dispatchStoreEvent === 'function') {
+          var activeVar = document.querySelector('.variant-btn.selected-variant') || document.querySelector('.variant-btn');
+          var mainBtn = document.getElementById('add-to-cart-btn') || document.getElementById('magnetic-atc-btn');
+          var vId = activeVar ? activeVar.getAttribute('data-variant-id') : (mainBtn ? mainBtn.getAttribute('data-variant-id') : '');
+          var vPrice = activeVar ? parseFloat(activeVar.getAttribute('data-price')) : (mainBtn ? parseFloat(mainBtn.getAttribute('data-price')) : 0);
+          var pTitle = document.querySelector('h1') ? document.querySelector('h1').innerText.trim() : 'Sujata Formulation';
+          window.dispatchStoreEvent('ViewContent', {
+            id: vId || '',
+            title: pTitle,
+            price: vPrice || 0,
+            currency: 'INR'
+          });
+        }
+      } catch(e) {}
+
       // Cinematic Reveal
       setTimeout(() => {
         const reveal = document.getElementById('cinematic-reveal');
@@ -1488,6 +1505,20 @@ const videoTestimonials = [
           if (stickyAtcBtn && selectedVariantId) {
             stickyAtcBtn.setAttribute('data-variant-id', selectedVariantId);
           }
+
+          // 🌟 Re-dispatch ViewContent for Meta Dynamic Retargeting
+          try {
+            if (typeof window.dispatchStoreEvent === 'function') {
+              var pTitle = document.querySelector('h1') ? document.querySelector('h1').innerText.trim() : 'Sujata Formulation';
+              var vPrice = parseFloat(target.getAttribute('data-price')) || 0;
+              window.dispatchStoreEvent('ViewContent', {
+                id: selectedVariantId || '',
+                title: pTitle,
+                price: vPrice,
+                currency: 'INR'
+              });
+            }
+          } catch(e) {}
 
           // Update Subscription Widget Labels dynamically when size changes
           const selectedPrice = parseFloat(target.getAttribute('data-price')) || 0;

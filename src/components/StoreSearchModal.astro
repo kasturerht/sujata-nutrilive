@@ -337,6 +337,13 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
       showLoading();
 
+      // 🌟 Meta Ads & GA4 Search Event Dispatch
+      try {
+        if (typeof window.dispatchStoreEvent === 'function') {
+          window.dispatchStoreEvent('Search', { query: searchTerm.trim() });
+        }
+      } catch(e) {}
+
       const graphqlQuery = `
         query SearchProducts($query: String!) {
           products(first: 8, query: $query) {

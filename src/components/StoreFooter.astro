@@ -213,6 +213,17 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
           if (data.success) {
             msg.className = 'text-xs text-center lg:text-right mt-3 text-emerald-400 font-bold block';
             msg.textContent = data.message || 'Thank you for subscribing! Check your inbox.';
+            
+            // 🌟 Meta Ads & GA4 Lead Event
+            try {
+              if (typeof window.dispatchStoreEvent === 'function') {
+                window.dispatchStoreEvent('Lead', {
+                  lead_type: 'Footer Inner Circle 10% Off',
+                  email: email
+                });
+              }
+            } catch(e) {}
+
             input.value = '';
           } else {
             msg.className = 'text-xs text-center lg:text-right mt-3 text-red-400 font-bold block';

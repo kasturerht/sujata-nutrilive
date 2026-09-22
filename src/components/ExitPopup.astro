@@ -194,11 +194,13 @@ import { Image } from 'astro:assets';
       }
     });
 
-    // Form Submission
-    form?.addEventListener('submit', (e) => {
+    // Form Submission with Shopify Customer Sync & Meta Lead Event
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearTimeout(timerTrigger);
       
+      const emailInput = document.getElementById('promo-email') as HTMLInputElement | null;
+      const email = emailInput ? emailInput.value.trim() : '';
       const btnText = unlockBtn?.querySelector('.btn-text') as HTMLElement | null;
       const btnIcon = unlockBtn?.querySelector('.btn-icon');
       
@@ -208,6 +210,27 @@ import { Image } from 'astro:assets';
         btnIcon?.classList.add('hidden');
       }
 
+      // 1. Post lead to Shopify Customers via Newsletter API
+      if (email) {
+        try {
+          fetch('/api/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          }).catch(function(err) { console.warn("Exit lead sync error:", err); });
+        } catch(e) {}
+      }
+
+      // 2. Dispatch Meta Pixel & GA4 Lead Event
+      try {
+        if (typeof window.dispatchStoreEvent === 'function') {
+          window.dispatchStoreEvent('Lead', {
+            lead_type: 'Exit Popup 10% Off',
+            email: email
+          });
+        }
+      } catch(e) {}
+
       setTimeout(() => {
         try {
           localStorage.setItem('sujata_discount_code', 'PEAK10');
@@ -215,7 +238,7 @@ import { Image } from 'astro:assets';
         formContainer?.classList.add('hidden');
         successContainer?.classList.remove('hidden');
         successContainer?.classList.add('flex', 'animate-[fadeInUp_0.5s_ease-out]');
-      }, 800);
+      }, 600);
     });
 
     // Copy Code Feature

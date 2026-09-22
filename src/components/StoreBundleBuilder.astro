@@ -261,9 +261,11 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     if (claimBtn) {
       claimBtn.addEventListener('click', () => {
         const title = `Sujata ${currentFormat === 'capsules' ? 'Capsules' : 'Powder'} (${currentPlan}-Day Protocol Kit)`;
-        const price = currentPlan === '90' ? 2023 : 799;
-        const image = currentFormat === 'capsules' ? '/spirulina-bottle.png' : '/spirulina-powder.png';
-        const variantId = currentPlan === '90' ? 'kit_90_' + currentFormat : 'kit_30_' + currentFormat;
+        const realVariantMap = {
+          'capsules': 'gid://shopify/ProductVariant/52738357985412',
+          'powder': 'gid://shopify/ProductVariant/52738357854340'
+        };
+        const variantId = realVariantMap[currentFormat] || (currentPlan === '90' ? 'kit_90_' + currentFormat : 'kit_30_' + currentFormat);
         const subtitle = currentPlan === '90' ? '90-Day Kit + Free Shaker Bottle' : '30-Day Starter Supply';
 
         if (typeof window.addItemToLocalCart === 'function') {
