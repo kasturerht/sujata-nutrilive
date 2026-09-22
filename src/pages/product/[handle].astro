@@ -489,27 +489,28 @@ const videoTestimonials = [
         </div>
       </nav>
 
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_400px] lg:grid-cols-[1fr_450px] gap-10 lg:gap-16 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        <div class="md:sticky md:top-24 space-y-4">
-          <div id="premium-3d-track" class="relative w-full aspect-[4/5] md:aspect-square bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.02] flex items-center justify-center cursor-none" style="perspective: 1500px;">
-            <div id="ambient-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-emerald-500/40 rounded-full pointer-events-none transition-transform duration-150 ease-out will-change-transform blur-[90px]"></div>
+        {/* 🌟 Left Column: Sensory Gallery & Clinical Assurance */}
+        <div class="lg:col-span-6 lg:sticky lg:top-28 space-y-4">
+          <div id="premium-3d-track" class="relative w-full aspect-[4/5] md:aspect-square bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.03] flex items-center justify-center cursor-none" style="perspective: 1500px;">
+            <div id="ambient-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-emerald-800/10 rounded-full pointer-events-none transition-transform duration-150 ease-out will-change-transform blur-[100px]"></div>
             <div id="image-skeleton" class="absolute inset-0 bg-[#f8faf9] animate-pulse z-10 flex items-center justify-center transition-opacity duration-700">
               <div class="w-8 h-8 border-2 border-[#166534]/20 border-t-[#166534] rounded-full animate-spin"></div>
             </div>
-            <div id="bottle-3d-wrapper" class="relative z-20 w-[70%] h-[70%] flex items-center justify-center transition-transform duration-300 ease-out will-change-transform">
-                <img id="main-pdp-image" src={primaryImage?.url || '/spirulina-bottle.png'} alt={product.title} class="relative z-20 w-full h-full object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out" onload="document.getElementById('image-skeleton').style.opacity='0'; document.getElementById('image-skeleton').style.pointerEvents='none';" />
+            <div id="bottle-3d-wrapper" class="relative z-20 w-[72%] h-[72%] flex items-center justify-center transition-transform duration-300 ease-out will-change-transform">
+                <img id="main-pdp-image" src={primaryImage?.url || '/spirulina-bottle.png'} alt={product.title} class="relative z-20 w-full h-full object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out" onload="document.getElementById('image-skeleton').style.opacity='0'; document.getElementById('image-skeleton').style.pointerEvents='none';" />
                 <div id="bottle-glare" class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent opacity-0 mix-blend-overlay pointer-events-none rounded-full transition-opacity duration-300 transform -translate-x-[100%]"></div>
             </div>
             <div class="absolute top-4 left-4 z-30 pointer-events-none">
-              <span class="bg-white/90 backdrop-blur border border-gray-100 text-[#166534] text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm flex items-center gap-2">
+              <span class="bg-white/90 backdrop-blur border border-gray-100 text-[#166534] text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-xs flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#166534] animate-pulse"></span>Clinical Grade
               </span>
             </div>
           </div>
 
           {images.length > 1 && (
-            <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+            <div class="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
               {images.map((img: any, i: number) => (
                 <button class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border transition-all duration-300 ${i === 0 ? 'border-[#166534] shadow-md opacity-100' : 'border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30'}`} data-src={img.url}>
                   <img src={img.url} alt="Thumbnail" class="w-full h-full object-cover" />
@@ -517,10 +518,25 @@ const videoTestimonials = [
               ))}
             </div>
           )}
+
+          {/* 🌟 Clinical Quality Seals (Directly anchoring the gallery) */}
+          <div class="grid grid-cols-3 gap-2.5 pt-1">
+            {[
+              { icon: '🌿', title: '100% Plant', sub: 'Pure Vegan' },
+              { icon: '🔬', title: 'Lab Tested', sub: 'NABL Certified' },
+              { icon: '⚡', title: 'Bio-Active', sub: 'Fast Absorption' }
+            ].map(item => (
+              <div class="text-center p-3 rounded-2xl bg-white border border-gray-100/90 shadow-2xs hover:border-[#166534]/20 transition-colors">
+                <div class="text-lg mb-1">{item.icon}</div>
+                <div class="text-[11px] font-extrabold text-[#111827] uppercase tracking-wider">{item.title}</div>
+                <div class="text-[10px] text-gray-500 font-medium mt-0.5">{item.sub}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* 🌟 Right Column: Scientific & Commercial Interface */}
-        <div class="space-y-6">
+        {/* 🌟 Right Column: Scientific & Commercial Interface (50% Width) */}
+        <div class="lg:col-span-6 space-y-6">
           <div class="bg-white p-6 sm:p-8 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.02)] border border-gray-100">
             
             {/* Header Block */}
@@ -592,44 +608,45 @@ const videoTestimonials = [
               </div>
             )}
 
-            {/* 🌟 Subscribe & Save 10% Option Widget */}
-            <div class="mb-6 border-t border-gray-50 pt-5">
-              <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Purchase Option</span>
-              <div class="flex flex-col gap-3">
-                {/* One-time Option */}
-                <div class="purchase-option-label relative flex items-center justify-between p-4 rounded-xl border-2 border-[#111827] bg-gray-50/50 cursor-pointer transition-all duration-300 group" id="opt-one-time">
-                  <div class="flex items-center gap-3">
-                    <input type="radio" name="purchase_type" value="onetime" checked class="w-4 h-4 text-[#166534] focus:ring-[#166534] border-gray-300" />
-                    <div class="flex flex-col">
-                      <span class="text-xs font-bold text-[#111827] uppercase tracking-wider">One-time Purchase</span>
-                      <span class="text-[11px] text-gray-500 uppercase tracking-widest mt-0.5">Standard single shipment</span>
-                    </div>
-                  </div>
+            {/* 🌟 Compact Modern Purchase Option Switcher */}
+            <div class="mb-5 border-t border-gray-100 pt-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">Select Purchase Option</span>
+                <span class="text-[10px] text-emerald-800 font-bold uppercase tracking-wider bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/50">Pause or Cancel Anytime</span>
+              </div>
+              <div class="grid grid-cols-2 p-1 bg-gray-100/90 rounded-2xl border border-gray-200/70 gap-1.5" id="purchase-option-tabs">
+                {/* One-Time Button */}
+                <button 
+                  type="button" 
+                  id="tab-onetime"
+                  class="purchase-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-[#111827] bg-white shadow-xs border border-black/5 flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
+                  data-value="onetime"
+                >
+                  <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">One-Time Shipment</span>
                   <span class="text-sm font-black text-[#111827]" id="onetime-price-label">₹{formatINR(initialPrice)}</span>
-                </div>
+                </button>
                 
-                {/* Subscription Option */}
-                <div class="purchase-option-label relative flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 cursor-pointer transition-all duration-300 hover:border-[#111827] group" id="opt-subscribe">
-                  <div class="flex items-center gap-3">
-                    <input type="radio" name="purchase_type" value="subscribe" class="w-4 h-4 text-[#166534] focus:ring-[#166534] border-gray-300" />
-                    <div class="flex flex-col">
-                      <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold text-[#111827] uppercase tracking-wider">Subscribe & Save</span>
-                        <span class="text-[11px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Save 10%</span>
-                      </div>
-                      <span class="text-[11px] text-gray-500 uppercase tracking-widest mt-0.5">Auto-delivers every 30 days</span>
-                    </div>
+                {/* Subscribe & Save Button */}
+                <button 
+                  type="button" 
+                  id="tab-subscribe"
+                  class="purchase-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
+                  data-value="subscribe"
+                >
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Subscribe & Save</span>
+                    <span class="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.2 rounded-full uppercase">10% Off</span>
                   </div>
-                  <div class="flex flex-col items-end">
+                  <div class="flex items-center gap-1.5">
                     <span class="text-sm font-black text-emerald-700" id="subscribe-price-label">₹{formatINR(initialPrice * 0.9)}</span>
-                    <span class="text-[11px] text-gray-400 line-through" id="subscribe-old-price">₹{formatINR(initialPrice)}</span>
+                    <span class="text-[10px] text-gray-400 line-through" id="subscribe-old-price">₹{formatINR(initialPrice)}</span>
                   </div>
-                </div>
+                </button>
               </div>
             </div>
 
             {/* Dynamic Delivery Date Estimator Pill */}
-            <div class="product-delivery-badge flex items-center justify-between gap-1.5 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2 mb-4 text-xs text-[#064E3B]">
+            <div class="product-delivery-badge flex items-center justify-between gap-1.5 bg-emerald-50/70 border border-emerald-100 rounded-xl px-3.5 py-2 mb-4 text-xs text-[#064E3B]">
               <div class="flex items-center gap-2 min-w-0">
                 <span class="text-sm">🚚</span>
                 <span class="truncate">
@@ -654,7 +671,6 @@ const videoTestimonials = [
                 data-purchase-type="onetime"
                 class="add-to-cart-btn absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation cursor-pointer"
               >
-              
                 <div class="absolute inset-0 bg-gradient-to-r from-[#166534] to-[#042f17] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.1,0,0,1)] z-0"></div>
                 
                 <span id="btn-text" class="relative z-10 text-sm font-bold tracking-[0.15em] uppercase flex items-center gap-2 transition-opacity duration-300">
@@ -665,83 +681,41 @@ const videoTestimonials = [
                 <svg id="btn-spinner" class="absolute z-10 w-5 h-5 text-white animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
               </button>
             </div>
-            {/* 🌟 2026 D2C Conversion Elements (Trust & Frictionless) */}
-            <div class="mt-4 flex flex-col gap-4 animate-[fadeInUp_0.5s_ease-out]">
-              
-              {/* Short Trust Bar (Immediately below CTA) */}
-              <div class="flex items-center justify-between border-t border-b border-gray-100 py-3 text-xs font-bold text-gray-500 uppercase tracking-widest">
-                <div class="flex items-center gap-1">
-                  <div class="flex items-center text-amber-500 mr-1">
-                    {[...Array(5)].map(() => (
-                      <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    ))}
-                  </div>
-                  <span id="pdp-trust-customer-count">10,000+ Happy Customers</span>
-                </div>
-                <div class="h-4 w-[1px] bg-gray-200"></div>
-                <div class="flex items-center gap-1">
-                  <svg class="w-3.5 h-3.5 text-emerald-800 mr-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                  <span>FSSAI Approved & Lab Tested</span>
-                </div>
+
+            {/* 🌟 Refined Trust & Payment Security Strip */}
+            <div class="mt-4 pt-3.5 border-t border-gray-100 flex flex-col gap-3">
+              <div class="flex items-center justify-center gap-2 text-xs text-gray-500 font-semibold flex-wrap text-center">
+                <span class="text-amber-500">★★★★★</span>
+                <span id="pdp-trust-customer-count" class="font-bold text-gray-800">10,000+ Happy Customers</span>
+                <span class="text-gray-300">•</span>
+                <span class="text-emerald-800 font-bold flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 text-emerald-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  FSSAI Approved & 100% Lab Tested
+                </span>
               </div>
-                <div class="flex items-center justify-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                  {/* UPI */}
-                  <div class="w-9 h-5 bg-white rounded-md flex items-center justify-center p-0.5 border border-gray-100 shadow-sm">
-                     <img src="/payment/upi.svg" alt="UPI" class="w-full h-full object-contain" />
-                  </div>
-                  {/* GPay */}
-                  <div class="w-9 h-5 bg-white rounded-md flex items-center justify-center p-0.5 border border-gray-100 shadow-sm">
-                     <img src="/payment/gpay.svg" alt="Google Pay" class="w-full h-full object-contain" />
-                  </div>
-                  {/* PhonePe */}
-                  <div class="w-9 h-5 bg-white rounded-md flex items-center justify-center p-0.5 border border-gray-100 shadow-sm">
-                     <img src="/payment/phonepe.svg" alt="PhonePe" class="w-full h-full object-contain" />
-                  </div>
-                  {/* Paytm */}
-                  <div class="w-9 h-5 bg-white rounded-md flex items-center justify-center p-0.5 border border-gray-100 shadow-sm">
-                     <img src="/payment/paytm.svg" alt="Paytm" class="w-full h-full object-contain" />
-                  </div>
-                  {/* Visa */}
-                  <div class="w-9 h-5 bg-white rounded-md flex items-center justify-center p-0.5 border border-gray-100 shadow-sm">
-                     <img src="/payment/visa.svg" alt="Visa" class="w-full h-full object-contain" />
-                  </div>
-                  {/* Mastercard */}
-                  <div class="w-9 h-5 bg-white rounded-md flex items-center justify-center p-0.5 border border-gray-100 shadow-sm">
-                     <img src="/payment/mastercard.svg" alt="Mastercard" class="w-full h-full object-contain" />
-                  </div>
+
+              <div class="flex items-center justify-center gap-2 opacity-75 hover:opacity-100 transition-opacity duration-300">
+                <div class="w-8 h-5 bg-white rounded flex items-center justify-center p-0.5 border border-gray-200 shadow-2xs">
+                   <img src="/payment/upi.svg" alt="UPI" class="w-full h-full object-contain" />
                 </div>
-              </div>
-              
-              {/* WhatsApp Live Updates Opt-in Checkbox Layout */}
-              <div class="flex items-center justify-between bg-[#25D366]/5 hover:bg-[#25D366]/10 px-4 py-3 rounded-xl border border-[#25D366]/10 hover:border-[#25D366]/30 transition-all duration-300 cursor-pointer group" id="whatsapp-toggle-container">
-                <div class="flex items-center gap-2.5">
-                  <svg class="w-5 h-5 text-[#25D366] transition-transform duration-300 group-hover:scale-110 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.042c0 2.124.553 4.195 1.604 6.012L.452 24l6.104-1.601a11.964 11.964 0 005.475 1.328h.005c6.645 0 12.031-5.388 12.031-12.042C24 5.388 18.677 0 12.031 0zm5.351 17.181c-.223.633-1.282 1.206-1.768 1.246-.445.038-.971.21-3.085-.666-2.545-1.054-4.161-3.666-4.288-3.834-.127-.168-1.026-1.365-1.026-2.605 0-1.24.634-1.85 1.026-2.261.353-.372.889-.486 1.185-.486.297 0 .593.004.851.015.275.011.644-.105.992.738.356.862 1.218 2.966 1.326 3.181.107.215.178.468.03.743-.148.275-.222.446-.445.714-.222.268-.466.586-.667.828-.222.268-.458.558-.201.996.258.438 1.144 1.884 2.456 3.051 1.693 1.506 3.093 1.97 3.538 2.185.445.215.707.19 1.002-.148.297-.338 1.282-1.488 1.626-2.001.344-.513.687-.428 1.088-.275.402.153 2.541 1.196 2.977 1.41.436.215.727.322.831.5.105.178.105 1.037-.118 1.67z"></path></svg>
-                  <div class="flex flex-col">
-                    <span class="text-xs font-extrabold text-[#064E3B] uppercase tracking-wider">Get order updates on WhatsApp 📱</span>
-                    <span class="text-[11px] text-[#064E3B]/80 uppercase tracking-widest font-bold mt-0.5">Receive order confirmation & delivery alerts</span>
-                  </div>
+                <div class="w-8 h-5 bg-white rounded flex items-center justify-center p-0.5 border border-gray-200 shadow-2xs">
+                   <img src="/payment/gpay.svg" alt="Google Pay" class="w-full h-full object-contain" />
                 </div>
-                <div class="w-5 h-5 rounded border-2 border-[#166534] flex items-center justify-center bg-white transition-all duration-300" id="whatsapp-checkbox">
-                  <svg class="w-3.5 h-3.5 text-white scale-0 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                <div class="w-8 h-5 bg-white rounded flex items-center justify-center p-0.5 border border-gray-200 shadow-2xs">
+                   <img src="/payment/phonepe.svg" alt="PhonePe" class="w-full h-full object-contain" />
+                </div>
+                <div class="w-8 h-5 bg-white rounded flex items-center justify-center p-0.5 border border-gray-200 shadow-2xs">
+                   <img src="/payment/paytm.svg" alt="Paytm" class="w-full h-full object-contain" />
+                </div>
+                <div class="w-8 h-5 bg-white rounded flex items-center justify-center p-0.5 border border-gray-200 shadow-2xs">
+                   <img src="/payment/visa.svg" alt="Visa" class="w-full h-full object-contain" />
+                </div>
+                <div class="w-8 h-5 bg-white rounded flex items-center justify-center p-0.5 border border-gray-200 shadow-2xs">
+                   <img src="/payment/mastercard.svg" alt="Mastercard" class="w-full h-full object-contain" />
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="grid grid-cols-3 gap-3">
-            {[
-              { icon: '🌿', title: '100% Vegan', sub: 'Plant-Based' },
-              { icon: '🔬', title: 'Lab Tested', sub: 'Zero Toxins' },
-              { icon: '⚡', title: 'Bio-Active', sub: 'High Absorption' }
-            ].map(item => (
-              <div class="text-center p-3 rounded-xl bg-white border border-gray-100 hover:border-[#166534]/20 transition-colors">
-                <div class="text-xl mb-1.5">{item.icon}</div>
-                <div class="text-xs font-bold text-[#111827] uppercase tracking-widest">{item.title}</div>
-                <div class="text-[10px] text-gray-500 mt-0.5">{item.sub}</div>
-              </div>
-            ))}
-          </div>
-
         </div>
       </div>
     </div>
@@ -1705,12 +1679,11 @@ const videoTestimonials = [
         });
       });
 
-      // 1.5. Purchase Option (Subscription vs One-time) Selector Logic
-      const radioOnetime = document.querySelector('input[value="onetime"]');
-      const radioSubscribe = document.querySelector('input[value="subscribe"]');
-      const optOnetime = document.getElementById('opt-one-time');
-      const optSubscribe = document.getElementById('opt-subscribe');
+      // 1.5. Purchase Option (Subscription vs One-time) Segmented Switcher
+      const tabOnetime = document.getElementById('tab-onetime');
+      const tabSubscribe = document.getElementById('tab-subscribe');
       const btnTextElement = document.getElementById('btn-text');
+      let activePurchaseMode = 'onetime';
 
       function updatePurchaseOptionUI() {
         const activeVariant = document.querySelector('.variant-btn.selected-variant');
@@ -1718,7 +1691,7 @@ const videoTestimonials = [
         const rawCompare = activeVariant ? parseFloat(activeVariant.getAttribute('data-compare-price')) : 0;
         const baseCompare = rawCompare > basePrice ? rawCompare : (basePrice > 0 ? Math.round(basePrice * 1.3) : 0);
         
-        if (radioSubscribe && radioSubscribe.checked) {
+        if (activePurchaseMode === 'subscribe') {
           const discountPrice = Math.round(basePrice * 0.9);
           if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(discountPrice)}`;
           if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(discountPrice)}`;
@@ -1758,10 +1731,11 @@ const videoTestimonials = [
             stickyAtcBtn.setAttribute('data-price', discountPrice);
             stickyAtcBtn.setAttribute('data-subtitle', 'Monthly Protocol (10% Off)');
           }
-          optSubscribe?.classList.add('border-[#111827]', 'bg-gray-50/50');
-          optSubscribe?.classList.remove('border-gray-200');
-          optOnetime?.classList.add('border-gray-200');
-          optOnetime?.classList.remove('border-[#111827]', 'bg-gray-50/50');
+
+          tabSubscribe?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabSubscribe?.classList.remove('text-gray-600');
+          tabOnetime?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabOnetime?.classList.add('text-gray-600');
         } else {
           if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
           if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(basePrice)}`;
@@ -1795,28 +1769,24 @@ const videoTestimonials = [
             stickyAtcBtn.setAttribute('data-price', basePrice);
             stickyAtcBtn.setAttribute('data-subtitle', 'Standard Single Shipment');
           }
-          optOnetime?.classList.add('border-[#111827]', 'bg-gray-50/50');
-          optOnetime?.classList.remove('border-gray-200');
-          optSubscribe?.classList.add('border-gray-200');
-          optSubscribe?.classList.remove('border-[#111827]', 'bg-gray-50/50');
+
+          tabOnetime?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabOnetime?.classList.remove('text-gray-600');
+          tabSubscribe?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
+          tabSubscribe?.classList.add('text-gray-600');
         }
       }
 
-      radioOnetime?.addEventListener('change', updatePurchaseOptionUI);
-      radioSubscribe?.addEventListener('change', updatePurchaseOptionUI);
-      
-      optOnetime?.addEventListener('click', () => {
-        const input = optOnetime.querySelector('input[type="radio"]');
-        if (input && !input.checked) {
-          input.checked = true;
+      tabOnetime?.addEventListener('click', () => {
+        if (activePurchaseMode !== 'onetime') {
+          activePurchaseMode = 'onetime';
           updatePurchaseOptionUI();
         }
       });
-      
-      optSubscribe?.addEventListener('click', () => {
-        const input = optSubscribe.querySelector('input[type="radio"]');
-        if (input && !input.checked) {
-          input.checked = true;
+
+      tabSubscribe?.addEventListener('click', () => {
+        if (activePurchaseMode !== 'subscribe') {
+          activePurchaseMode = 'subscribe';
           updatePurchaseOptionUI();
         }
       });
