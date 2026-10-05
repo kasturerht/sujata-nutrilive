@@ -40,7 +40,7 @@ const schemaGraphItems: any[] = [
     "@type": ["Organization", "HealthAndBeautyBusiness"],
     "@id": `${siteUrl}/#organization`,
     "name": BRAND_CONFIG.brandName,
-    "legalName": BRAND_CONFIG.brandName,
+    "legalName": BRAND_CONFIG.legalName || "Sujata Nutrilive Agrotech",
     "url": siteUrl,
     "logo": {
       "@type": "ImageObject",
@@ -62,12 +62,13 @@ const schemaGraphItems: any[] = [
     ],
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "42/B, Prabhat Road, Deccan Gymkhana",
-      "addressLocality": "Pune",
+      "streetAddress": "Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade",
+      "addressLocality": "Nashik",
       "addressRegion": "Maharashtra",
-      "postalCode": "411004",
+      "postalCode": "422008",
       "addressCountry": "IN"
     },
+    "hasMap": "https://share.google/R7aB2MCG9AN5l3RF1",
     "hasCredential": [
       {
         "@type": "EducationalOccupationalCredential",
@@ -124,7 +125,8 @@ const schemaGraphItems: any[] = [
       }
     ],
     "sameAs": [
-      BRAND_CONFIG.instagramUrl
+      BRAND_CONFIG.instagramUrl,
+      BRAND_CONFIG.googleMapsUrl || "https://share.google/R7aB2MCG9AN5l3RF1"
     ]
   },
 
