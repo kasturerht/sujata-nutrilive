@@ -110,7 +110,7 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
 
       {/* 5. CTAS: Continue Shopping + Track Order */}
       <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
-        <a href="/track-order" class="w-full sm:w-auto bg-[#166534] hover:bg-[#064E3B] text-white font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group">
+        <a href={`/track-order?order=${orderNumber}`} class="w-full sm:w-auto bg-[#166534] hover:bg-[#064E3B] text-white font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group">
           <span>Track Live Shipment</span>
           <span class="group-hover:translate-x-1 transition-transform">🚚</span>
         </a>
