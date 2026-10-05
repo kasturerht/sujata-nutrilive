@@ -1,8 +1,64 @@
-User-agent: *
-Allow: /
+# ==============================================================================
+# 🤖 SUJATA NUTRILIVE: AI ENGINE & SEARCH ENGINE CRAWLER DIRECTIVES
+# Configured for Next-Gen Generative Engine Optimization (GEO) & Search Dominance
+# ==============================================================================
 
-# Disallow private checkout and API routes
+# 1. AI Search Engines & LLM Scrapers (Explicit 100% Crawl Permission)
+User-agent: GPTBot
+Allow: /
 Disallow: /api/
 Disallow: /thank-you
 
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+# 2. Universal Search Engine Directives (Google, Bing, Yahoo, DuckDuckGo)
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+# 3. Canonical Sitemap Index
 Sitemap: https://sujatanutrilive.com/sitemap-index.xml
