@@ -484,10 +484,12 @@ const productSchema = {
   "brand": {
     "@type": "Brand",
     "@id": `${siteUrl}/#organization`,
-    "name": BRAND_CONFIG.brandName || "Sujata Nutrilive"
+    "name": BRAND_CONFIG.brandName || "Sujata Nutrilive",
+    "sameAs": "https://www.wikidata.org/wiki/Q141656957"
   },
   "manufacturer": {
-    "@id": `${siteUrl}/#organization`
+    "@id": `${siteUrl}/#organization`,
+    "sameAs": "https://www.wikidata.org/wiki/Q141656957"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
