@@ -12,6 +12,7 @@ interface Props {
   isHomePage?: boolean;
   noindex?: boolean;
   hideBottomNav?: boolean;
+  extraSchema?: any[];
 }
 
 const { 
@@ -20,7 +21,8 @@ const {
   image = "/products/sujata-combo-spirulina-sea-buckthorn.jpg",
   isHomePage = false,
   noindex = false,
-  hideBottomNav = false
+  hideBottomNav = false,
+  extraSchema = []
 } = Astro.props;
 
 const siteUrl = BRAND_CONFIG.siteUrl || "https://sujatanutrilive.com";
@@ -257,6 +259,11 @@ if (isHomePage) {
       }
     ]
   });
+}
+
+// 4. Inject Extra Schema (e.g. Product, Breadcrumb, Merchant Listings)
+if (extraSchema && Array.isArray(extraSchema) && extraSchema.length > 0) {
+  schemaGraphItems.push(...extraSchema);
 }
 
 const unifiedSchemaGraph = {

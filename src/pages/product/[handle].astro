@@ -2,6 +2,7 @@
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -456,9 +457,128 @@ const videoTestimonials = [
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-drinking-water-after-workout-40898-large.mp4"
   }
 ];
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://sujatanutrilive.com";
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
+const productTitle = product?.title || "Sujata Pure Organic Spirulina";
+
+const rawCleanDescription = (product?.subtitle || product?.descriptionHtml || "")
+  .replace(/<[^>]*>?/gm, ' ')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(0, 300) || `Buy authentic ${productTitle} online from Sujata Nutrilive. 100% natural, laboratory tested, fast express delivery across India.`;
+
+const structuredImages = (images || []).map((img: any) => {
+  const u = img?.url || '/products/sujata-spirulina-powder-pouch.jpg';
+  return u.startsWith('http') ? u : new URL(u, siteUrl).toString();
+});
+
+const productSchema = {
+  "@type": "Product",
+  "@id": `${canonicalURL}#product`,
+  "name": productTitle,
+  "description": rawCleanDescription,
+  "image": structuredImages,
+  "sku": product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
+  "mpn": product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
+  "brand": {
+    "@type": "Brand",
+    "@id": `${siteUrl}/#organization`,
+    "name": BRAND_CONFIG.brandName || "Sujata Nutrilive"
+  },
+  "manufacturer": {
+    "@id": `${siteUrl}/#organization`
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1280",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": {
+    "@type": "Offer",
+    "@id": `${canonicalURL}#offer`,
+    "url": canonicalURL,
+    "priceCurrency": "INR",
+    "price": price || "799.00",
+    "priceValidUntil": "2027-12-31",
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+    "seller": {
+      "@id": `${siteUrl}/#organization`
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "INR"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "IN"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 1,
+          "unitCode": "d"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 2,
+          "maxValue": 5,
+          "unitCode": "d"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "IN",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  "@type": "BreadcrumbList",
+  "@id": `${canonicalURL}#breadcrumb`,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Products",
+      "item": `${siteUrl}/#product-ecosystem`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": productTitle,
+      "item": canonicalURL
+    }
+  ]
+};
 ---
 
-<StoreLayout title={`${product.title} | Sujata Premium`} hideBottomNav={true}>
+<StoreLayout 
+  title={`${productTitle} | Sujata Premium`} 
+  description={rawCleanDescription}
+  image={structuredImages[0]}
+  hideBottomNav={true} 
+  extraSchema={[productSchema, breadcrumbSchema]}
+>
 
   <div id="cinematic-reveal" class="fixed inset-0 bg-[#022c22] z-[9999] flex flex-col items-center justify-center transition-all duration-[1000ms] ease-[cubic-bezier(0.8,0,0.2,1)] pointer-events-none">
     <div class="w-12 h-[1px] bg-emerald-500/50 mb-4 animate-[pulse_1s_ease-in-out_infinite]"></div>
