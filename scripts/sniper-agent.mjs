@@ -240,23 +240,43 @@ export async function scanRadarFeeds() {
   return leads;
 }
 
-// 6. CLI Execution
-async function main() {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || '';
-  const chatId = process.env.TELEGRAM_CHAT_ID || '';
-
-  console.log('====================================================');
-  console.log('🎯 SUJATA AI SNIPER LISTENING AGENT INITIALIZED');
-  console.log('====================================================');
-
+async function runOnce(botToken, chatId) {
   const leads = await scanRadarFeeds();
   console.log(`✅ Radar identified ${leads.length} new high-intent opportunities.`);
 
   for (const lead of leads) {
     await sendTelegramAlert(botToken, chatId, lead);
   }
+}
 
-  console.log('🏁 Scan completed successfully.');
+// 6. CLI Execution
+async function main() {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN || '';
+  const chatId = process.env.TELEGRAM_CHAT_ID || '';
+  const isWatch = process.argv.includes('--watch') || process.argv.includes('--daemon');
+
+  console.log('====================================================');
+  console.log('🎯 SUJATA AI SNIPER LISTENING AGENT INITIALIZED');
+  console.log('====================================================');
+
+  await runOnce(botToken, chatId);
+
+  if (isWatch) {
+    const INTERVAL_MINUTES = 30;
+    console.log(`\n🔄 [DAEMON ACTIVE] Monitoring internet 24/7. Auto-scan runs every ${INTERVAL_MINUTES} minutes...`);
+    console.log(`Press Ctrl+C to stop.`);
+
+    setInterval(async () => {
+      console.log(`\n⏰ [${new Date().toLocaleTimeString('en-IN')}] Running scheduled radar sweep...`);
+      try {
+        await runOnce(botToken, chatId);
+      } catch (e) {
+        console.error('Scan error:', e.message);
+      }
+    }, INTERVAL_MINUTES * 60 * 1000);
+  } else {
+    console.log('🏁 Scan completed successfully. (Run with --watch for continuous 24/7 auto-alerts)');
+  }
 }
 
 if (process.argv[1] && process.argv[1].endsWith('sniper-agent.mjs')) {
