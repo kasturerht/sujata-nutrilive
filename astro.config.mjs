@@ -12,6 +12,9 @@ export default defineConfig({
   // while still allowing individual pages to opt-in to prerendering.
   output: 'server',
   adapter: vercel(),
+  redirects: {
+    '/sitemap.xml': '/sitemap-index.xml',
+  },
   integrations: [
     tailwind(),
     react(),
