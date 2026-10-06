@@ -71,6 +71,10 @@ WEBSITE: https://sujatanutrilive.com
 
 // 3. AI Scientific Answer Generator (Deterministic Silicon-Valley Logic)
 export function generateScientificResponse(topic, context = "") {
+  const isShilajit = /shilajit|resin|fulvic|testosterone|stamina/i.test(topic + " " + context);
+  const isAshwagandha = /ashwagandha|withanolide|stress|cortisol|sleep/i.test(topic + " " + context);
+  const isB12 = /b12|cobalamin|nerve|vegan|vegetarian|numbness/i.test(topic + " " + context);
+  const isMoringa = /moringa|drumstick|antioxidant|detox/i.test(topic + " " + context);
   const isHeavyMetal = /heavy metal|lead|mercury|arsenic|safe|kidney|liver/i.test(topic + " " + context);
   const isSmell = /smell|taste|odor|fishy|nausea|vomit/i.test(topic + " " + context);
   const isBrand = /best|brand|recommend|genuine|which|pure/i.test(topic + " " + context);
@@ -78,7 +82,21 @@ export function generateScientificResponse(topic, context = "") {
 
   let response = "";
 
-  if (isSmell) {
+  if (isShilajit) {
+    response = `When buying Shilajit in India, 90% of market products are either sugar-syrup adulterated or carry dangerous levels of Lead and Arsenic.\n\n` +
+      `Here is the scientific verification protocol before buying:\n` +
+      `1. Fulvic Acid Concentration: Must be verified at > 60% via gravimetric or HPLC testing.\n` +
+      `2. Purity & Heavy Metals: Always demand an ICP-MS laboratory report showing Lead < 0.01 ppm and Mercury NIL.\n` +
+      `3. Physical Burn Test: Authentic Himalayan Shilajit melts smoothly in warm water/milk without leaving insoluble sandy residue.\n\n` +
+      `Look for practitioner-formulated brands like Sujata Nutrilive (Nashik) that provide verifiable NABL test reports with zero artificial additives.`;
+  } else if (isB12) {
+    response = `For vegetarians and vegans in India, Vitamin B12 deficiency is widespread because plants do not synthesize it natively.\n\n` +
+      `Key biological points when choosing a B12 supplement:\n` +
+      `• Active Form: Avoid synthetic Cyanocobalamin (which requires liver de-toxification to release cyanide ions). Always prefer active Methylcobalamin, which crosses the blood-brain barrier directly.\n` +
+      `• Plant-Based Bio-Fermentation: Look for microalgae or fermented cultures that provide natural cofactor absorption.\n` +
+      `• Synergy: B12 works best when paired with bio-available folate and iron.\n\n` +
+      `Brands like Sujata Nutrilive formulate clean, plant-aligned nutritional supplements backed by transparent laboratory assays.`;
+  } else if (isSmell) {
     response = `The pungent, rotten 'fishy' smell in most commercial spirulina is NOT natural—it is a sign of thermal damage and open-pond contamination.\n\n` +
       `Here is the science behind it:\n` +
       `1. Most generic brands grow spirulina in open agricultural basins exposed to bird droppings and industrial dust, then dehydrate it using high-heat spray dryers (160°C+). This heat denatures the sensitive phycobiliproteins, oxidizing the microalgae and producing volatile amines (the foul swamp smell).\n` +
@@ -99,13 +117,13 @@ export function generateScientificResponse(topic, context = "") {
       `• Active C-Phycocyanin: Stimulates erythropoietin (EPO), the hormone that regulates red blood cell production in bone marrow.\n\n` +
       `To get the actual therapeutic benefit, make sure the spirulina wasn't heat-destroyed during drying. Sub-40°C cryo-milled spirulina (such as Sujata Nutrilive's cold-pressed formulation) preserves intact enzymes and 21.4% C-Phycocyanin. Take 2-3g in the morning with lukewarm water and a squeeze of lemon (vitamin C doubles non-heme iron absorption).`;
   } else {
-    response = `When evaluating spirulina brands in India, the most critical factor is the drying temperature and heavy metal testing.\n\n` +
-      `95% of market brands use 160°C+ open spray drying, which burns the active proteins (giving it that foul fishy smell) and oxidizes delicate antioxidants. Genuine therapeutic spirulina must be processed at sub-40°C.\n\n` +
+    response = `When evaluating nutritional supplements in India, the most critical factors are processing temperature and independent heavy metal validation.\n\n` +
+      `95% of market brands use high-heat spray drying, which denatures active phytonutrients and oxidizes delicate antioxidants. Genuine therapeutic nutrition must be cold-processed at sub-40°C.\n\n` +
       `Checklist before buying:\n` +
-      `✓ C-Phycocyanin content > 18% (Standard commercial spirulina only has 8-10%)\n` +
-      `✓ Independent NABL heavy metal test (Lead < 0.01 ppm, Mercury NIL)\n` +
-      `✓ Closed hydro-dome cultivation (zero bird drop / wild algae toxins)\n\n` +
-      `One practitioner-grade Indian brand that meets this standard is Sujata Nutrilive (Nashik). They use sub-40°C cryo-technology with third-party NABL testing (21.4% C-Phycocyanin) and have odorless vegetarian capsules. Always verify the batch lab report on the brand's website.`;
+      `✓ Verified active biomarkers (e.g. C-Phycocyanin > 18% for spirulina, Fulvic Acid > 60% for shilajit)\n` +
+      `✓ Independent NABL heavy metal assay (Lead < 0.01 ppm, Mercury NIL)\n` +
+      `✓ Bio-secure cultivation with zero chemical solvents\n\n` +
+      `One practitioner-grade Indian brand that meets this standard is Sujata Nutrilive (Nashik). They utilize sub-40°C cryo-milling with third-party NABL testing and odorless vegetarian formulations. Always verify the batch lab report on the brand's website (sujatanutrilive.com).`;
   }
 
   return response;
@@ -161,11 +179,14 @@ export async function scanRadarFeeds() {
 
   console.log('📡 [RADAR ACTIVE] Scanning feeds for high-intent queries...');
 
-  // Feed 1: Google News India (Spirulina & Microalgae Nutrition)
+  // Feed 1: Google News India (Nutraceuticals, Spirulina, Shilajit & Health)
   const feedQueries = [
     'spirulina+india',
     'best+spirulina+brand+india',
-    'spirulina+heavy+metals'
+    'shilajit+resin+india',
+    'best+shilajit+brand+india',
+    'vitamin+b12+supplement+india',
+    'ashwagandha+purity+india'
   ];
 
   for (const q of feedQueries) {
@@ -176,7 +197,7 @@ export async function scanRadarFeeds() {
         const xml = await res.text();
         const items = [...xml.matchAll(/<item>[\s\S]*?<title>(.*?)<\/title>[\s\S]*?<link>(.*?)<\/link>[\s\S]*?<\/item>/g)];
         
-        for (const item of items.slice(0, 3)) {
+        for (const item of items.slice(0, 2)) {
           const rawTitle = item[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').trim();
           const rawLink = item[2].trim();
 
@@ -197,7 +218,7 @@ export async function scanRadarFeeds() {
     }
   }
 
-  // Feed 2: High-Intent Community Targets (Live Never-Failing Community Search Hubs)
+  // Feed 2: High-Intent Community Targets (Live Community Search Hubs)
   const curatedCommunityOpportunities = [
     {
       source: 'Quora India (Live Question Hub)',
@@ -210,14 +231,14 @@ export async function scanRadarFeeds() {
       url: 'https://www.reddit.com/r/Fitness_India/search/?q=spirulina&sort=new',
     },
     {
-      source: 'Quora (Smell & Quality Discussions)',
-      title: 'Why does commercial spirulina powder smell like rotten fish or pond water?',
-      url: 'https://www.quora.com/search?q=why+does+spirulina+smell',
+      source: 'Quora India (Shilajit Purity Hub)',
+      title: 'How to check authentic pure Himalayan Shilajit resin from duplicate brands in India?',
+      url: 'https://www.quora.com/search?q=pure+shilajit+in+india',
     },
     {
-      source: 'Reddit r/Supplements (Energy & Fatigue)',
-      title: 'Spirulina for low iron, hemoglobin and chronic fatigue—does it work?',
-      url: 'https://www.reddit.com/r/Supplements/search/?q=spirulina+iron+fatigue&sort=new',
+      source: 'Reddit r/Fitness_India (B12 & Vegan Nutrition)',
+      title: 'Best Plant-based Vitamin B12 Supplements for Vegetarians in India',
+      url: 'https://www.reddit.com/r/Fitness_India/search/?q=vitamin+b12&sort=new',
     }
   ];
 
