@@ -197,22 +197,27 @@ export async function scanRadarFeeds() {
     }
   }
 
-  // Feed 2: High-Intent Curated Community Targets (Real Reddit & Quora Benchmarks)
+  // Feed 2: High-Intent Community Targets (Live Never-Failing Community Search Hubs)
   const curatedCommunityOpportunities = [
     {
-      source: 'Reddit r/Fitness_India',
+      source: 'Quora India (Live Question Hub)',
       title: 'Which is the safest and purest spirulina brand in India without heavy metals?',
-      url: 'https://www.reddit.com/r/Fitness_India/comments/1vjjr2o/tried_sanjeevani_spirulina_for_a_month_my/',
+      url: 'https://www.quora.com/search?q=best+spirulina+brand+in+india',
     },
     {
-      source: 'Quora India Health',
-      title: 'Why does spirulina powder smell like fish or sewer water?',
-      url: 'https://www.quora.com/Why-does-spirulina-have-such-a-strong-smell-and-taste',
+      source: 'Reddit r/Fitness_India (Live Community Feed)',
+      title: 'Spirulina Brand Reviews, Heavy Metal Purity & Recommendations',
+      url: 'https://www.reddit.com/r/Fitness_India/search/?q=spirulina&sort=new',
     },
     {
-      source: 'Reddit r/Supplements',
-      title: 'Spirulina for low iron and chronic fatigue—does it actually work?',
-      url: 'https://www.reddit.com/r/Supplements/comments/18og91y/shilajit_scam_or_legit/',
+      source: 'Quora (Smell & Quality Discussions)',
+      title: 'Why does commercial spirulina powder smell like rotten fish or pond water?',
+      url: 'https://www.quora.com/search?q=why+does+spirulina+smell',
+    },
+    {
+      source: 'Reddit r/Supplements (Energy & Fatigue)',
+      title: 'Spirulina for low iron, hemoglobin and chronic fatigue—does it work?',
+      url: 'https://www.reddit.com/r/Supplements/search/?q=spirulina+iron+fatigue&sort=new',
     }
   ];
 
