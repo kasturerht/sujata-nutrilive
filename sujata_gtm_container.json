@@ -1,0 +1,262 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-10-07 11:35:00",
+  "containerVersion": {
+    "path": "accounts/123456789/containers/987654321/versions/0",
+    "accountId": "123456789",
+    "containerId": "987654321",
+    "container": {
+      "name": "Sujata Nutrilive Official",
+      "publicId": "GTM-5BCC6JL8",
+      "usageContext": ["WEB"]
+    },
+    "tag": [
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "1",
+        "name": "Google Ads - Conversion Linker",
+        "type": "gclidw",
+        "firingTriggerId": ["2147479553"],
+        "parameter": [
+          { "type": "BOOLEAN", "key": "enableCookieOverride", "value": "false" }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "2",
+        "name": "Meta Pixel - Base Code & PageView",
+        "type": "html",
+        "firingTriggerId": ["2147479553"],
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n!function(f,b,e,v,n,t,s)\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\nn.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];\ns.parentNode.insertBefore(t,s)}(window, document,'script',\n'https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '{{Const - Meta Pixel ID}}');\nfbq('track', 'PageView');\n</script>"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "3",
+        "name": "Meta Pixel - ViewContent (Product View)",
+        "type": "html",
+        "firingTriggerId": ["101"],
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'ViewContent', {\n    content_name: {{DLV - Event Data}}.title || '',\n    content_ids: [{{DLV - Event Data}}.id || ''],\n    content_type: 'product',\n    value: Number({{DLV - Event Data}}.price || 0),\n    currency: 'INR'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "4",
+        "name": "Meta Pixel - AddToCart",
+        "type": "html",
+        "firingTriggerId": ["102"],
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'AddToCart', {\n    content_name: {{DLV - Event Data}}.title || '',\n    content_ids: [{{DLV - Event Data}}.id || ''],\n    content_type: 'product',\n    value: Number({{DLV - Event Data}}.price || 0),\n    currency: 'INR'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "5",
+        "name": "Meta Pixel - InitiateCheckout",
+        "type": "html",
+        "firingTriggerId": ["103"],
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'InitiateCheckout', {\n    value: Number({{DLV - Event Data}}.total || {{DLV - Event Data}}.value || 0),\n    currency: 'INR',\n    num_items: Number({{DLV - Event Data}}.count || 1)\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "6",
+        "name": "Meta Pixel - Lead (Quiz Routine Completed)",
+        "type": "html",
+        "firingTriggerId": ["104"],
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'Lead', {\n    content_name: '1-Minute Routine Finder Quiz',\n    value: 0,\n    currency: 'INR'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "7",
+        "name": "Meta Pixel - Contact (WhatsApp Concierge)",
+        "type": "html",
+        "firingTriggerId": ["105"],
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'Contact', {\n    content_name: 'WhatsApp Vaidya Support'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "tagId": "8",
+        "name": "GA4 - Configuration Tag",
+        "type": "gaaw_setup",
+        "firingTriggerId": ["2147479553"],
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "{{Const - GA4 Measurement ID}}" },
+          { "type": "BOOLEAN", "key": "sendPageView", "value": "true" }
+        ]
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "triggerId": "2147479553",
+        "name": "All Pages",
+        "type": "PAGEVIEW"
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "triggerId": "101",
+        "name": "Custom Event - ViewContent",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "ViewContent" }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "triggerId": "102",
+        "name": "Custom Event - AddToCart",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "AddToCart" }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "triggerId": "103",
+        "name": "Custom Event - InitiateCheckout",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "InitiateCheckout" }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "triggerId": "104",
+        "name": "Custom Event - CompleteRegistration (Quiz)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "CompleteRegistration" }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "triggerId": "105",
+        "name": "Custom Event - Contact",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "Contact" }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "variableId": "1",
+        "name": "Const - Meta Pixel ID",
+        "type": "c",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "value", "value": "1314112957191765" }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "variableId": "2",
+        "name": "Const - GA4 Measurement ID",
+        "type": "c",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "value", "value": "G-5WZ8DNW2PD" }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "variableId": "3",
+        "name": "DLV - Event ID",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "TEMPLATE", "key": "name", "value": "event_id" }
+        ]
+      },
+      {
+        "accountId": "123456789",
+        "containerId": "987654321",
+        "variableId": "4",
+        "name": "DLV - Event Data",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "TEMPLATE", "key": "name", "value": "event_data" }
+        ]
+      }
+    ]
+  }
+}
