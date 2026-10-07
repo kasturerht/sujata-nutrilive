@@ -21,6 +21,9 @@ pnpm-debug.log*
 .env.production
 *.csv
 scripts/data/
+scripts/*.json
+*-credentials.json
+*service-account*.json
 
 # macOS-specific files
 .DS_Store
