@@ -10,7 +10,8 @@
     "astro": "astro",
     "sniper": "node scripts/sniper-agent.mjs",
     "sniper:watch": "node scripts/sniper-agent.mjs --watch",
-    "seo": "node scripts/seo-brain.mjs"
+    "seo": "node scripts/seo-brain.mjs",
+    "ping": "node scripts/instant-crawler-ping.mjs"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
