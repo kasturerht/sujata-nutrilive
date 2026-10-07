@@ -1,19 +1,19 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-10-07 11:35:00",
+  "exportTime": "2026-10-07 17:15:00",
   "containerVersion": {
-    "path": "accounts/123456789/containers/987654321/versions/0",
-    "accountId": "123456789",
-    "containerId": "987654321",
+    "path": "accounts/6381104411/containers/266369056/versions/0",
+    "accountId": "6381104411",
+    "containerId": "266369056",
     "container": {
-      "name": "Sujata Nutrilive Official",
+      "name": "www.sujatanutrilive.com",
       "publicId": "GTM-5BCC6JL8",
       "usageContext": ["WEB"]
     },
     "tag": [
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "1",
         "name": "Google Ads - Conversion Linker",
         "type": "gclidw",
@@ -23,8 +23,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "2",
         "name": "Meta Pixel - Base Code & PageView",
         "type": "html",
@@ -38,8 +38,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "3",
         "name": "Meta Pixel - ViewContent (Product View)",
         "type": "html",
@@ -48,13 +48,13 @@
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'ViewContent', {\n    content_name: {{DLV - Event Data}}.title || '',\n    content_ids: [{{DLV - Event Data}}.id || ''],\n    content_type: 'product',\n    value: Number({{DLV - Event Data}}.price || 0),\n    currency: 'INR'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'ViewContent', {\n    content_name: '{{DLV - Product Title}}' || 'Sujata Formulation',\n    content_ids: ['{{DLV - Product ID}}'],\n    content_type: 'product',\n    value: Number('{{DLV - Product Price}}') || 0,\n    currency: 'INR'\n  }, { eventID: '{{DLV - Event ID}}' });\n}\n</script>"
           }
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "4",
         "name": "Meta Pixel - AddToCart",
         "type": "html",
@@ -63,13 +63,13 @@
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'AddToCart', {\n    content_name: {{DLV - Event Data}}.title || '',\n    content_ids: [{{DLV - Event Data}}.id || ''],\n    content_type: 'product',\n    value: Number({{DLV - Event Data}}.price || 0),\n    currency: 'INR'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'AddToCart', {\n    content_name: '{{DLV - Product Title}}' || 'Sujata Formulation',\n    content_ids: ['{{DLV - Product ID}}'],\n    content_type: 'product',\n    value: Number('{{DLV - Product Price}}') || 0,\n    currency: 'INR'\n  }, { eventID: '{{DLV - Event ID}}' });\n}\n</script>"
           }
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "5",
         "name": "Meta Pixel - InitiateCheckout",
         "type": "html",
@@ -78,13 +78,13 @@
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'InitiateCheckout', {\n    value: Number({{DLV - Event Data}}.total || {{DLV - Event Data}}.value || 0),\n    currency: 'INR',\n    num_items: Number({{DLV - Event Data}}.count || 1)\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'InitiateCheckout', {\n    value: Number('{{DLV - Order Total}}') || 0,\n    currency: 'INR'\n  }, { eventID: '{{DLV - Event ID}}' });\n}\n</script>"
           }
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "6",
         "name": "Meta Pixel - Lead (Quiz Routine Completed)",
         "type": "html",
@@ -93,13 +93,13 @@
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'Lead', {\n    content_name: '1-Minute Routine Finder Quiz',\n    value: 0,\n    currency: 'INR'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'Lead', {\n    content_name: '1-Minute Routine Finder Quiz',\n    value: 0,\n    currency: 'INR'\n  }, { eventID: '{{DLV - Event ID}}' });\n}\n</script>"
           }
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "7",
         "name": "Meta Pixel - Contact (WhatsApp Concierge)",
         "type": "html",
@@ -108,34 +108,37 @@
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'Contact', {\n    content_name: 'WhatsApp Vaidya Support'\n  }, { eventID: {{DLV - Event ID}} });\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'Contact', {\n    content_name: '{{DLV - Contact Channel}}' || 'WhatsApp Support'\n  }, { eventID: '{{DLV - Event ID}}' });\n}\n</script>"
           }
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "tagId": "8",
-        "name": "GA4 - Configuration Tag",
-        "type": "gaaw_setup",
+        "name": "Google Tag (GA4)",
+        "type": "googtag",
         "firingTriggerId": ["2147479553"],
         "parameter": [
-          { "type": "TEMPLATE", "key": "measurementId", "value": "{{Const - GA4 Measurement ID}}" },
-          { "type": "BOOLEAN", "key": "sendPageView", "value": "true" }
+          {
+            "type": "TEMPLATE",
+            "key": "tagId",
+            "value": "G-5WZ8DNW2PD"
+          }
         ]
       }
     ],
     "trigger": [
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "triggerId": "2147479553",
         "name": "All Pages",
         "type": "PAGEVIEW"
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "triggerId": "101",
         "name": "Custom Event - ViewContent",
         "type": "CUSTOM_EVENT",
@@ -150,8 +153,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "triggerId": "102",
         "name": "Custom Event - AddToCart",
         "type": "CUSTOM_EVENT",
@@ -166,8 +169,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "triggerId": "103",
         "name": "Custom Event - InitiateCheckout",
         "type": "CUSTOM_EVENT",
@@ -182,8 +185,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "triggerId": "104",
         "name": "Custom Event - CompleteRegistration (Quiz)",
         "type": "CUSTOM_EVENT",
@@ -198,8 +201,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "triggerId": "105",
         "name": "Custom Event - Contact",
         "type": "CUSTOM_EVENT",
@@ -216,8 +219,8 @@
     ],
     "variable": [
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "variableId": "1",
         "name": "Const - Meta Pixel ID",
         "type": "c",
@@ -226,8 +229,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "variableId": "2",
         "name": "Const - GA4 Measurement ID",
         "type": "c",
@@ -236,8 +239,8 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "variableId": "3",
         "name": "DLV - Event ID",
         "type": "v",
@@ -247,14 +250,58 @@
         ]
       },
       {
-        "accountId": "123456789",
-        "containerId": "987654321",
+        "accountId": "6381104411",
+        "containerId": "266369056",
         "variableId": "4",
-        "name": "DLV - Event Data",
+        "name": "DLV - Product ID",
         "type": "v",
         "parameter": [
           { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
-          { "type": "TEMPLATE", "key": "name", "value": "event_data" }
+          { "type": "TEMPLATE", "key": "name", "value": "event_data.id" }
+        ]
+      },
+      {
+        "accountId": "6381104411",
+        "containerId": "266369056",
+        "variableId": "5",
+        "name": "DLV - Product Title",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "TEMPLATE", "key": "name", "value": "event_data.title" }
+        ]
+      },
+      {
+        "accountId": "6381104411",
+        "containerId": "266369056",
+        "variableId": "6",
+        "name": "DLV - Product Price",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "TEMPLATE", "key": "name", "value": "event_data.price" }
+        ]
+      },
+      {
+        "accountId": "6381104411",
+        "containerId": "266369056",
+        "variableId": "7",
+        "name": "DLV - Order Total",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "TEMPLATE", "key": "name", "value": "event_data.total" }
+        ]
+      },
+      {
+        "accountId": "6381104411",
+        "containerId": "266369056",
+        "variableId": "8",
+        "name": "DLV - Contact Channel",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "TEMPLATE", "key": "name", "value": "event_data.channel" }
         ]
       }
     ]
