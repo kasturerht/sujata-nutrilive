@@ -443,11 +443,13 @@ const unifiedSchemaGraph = {
               currency: data.currency || 'INR'
             });
           } else if (eventName === 'InitiateCheckout') {
+            var pMode = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
             window.fbq('track', 'InitiateCheckout', {
               num_items: Number(data.count || 1),
               value: Number(data.total || 0),
               currency: data.currency || 'INR',
-              content_ids: (data.items || []).map(function(i) { return i.id || ''; })
+              content_ids: (data.items || []).map(function(i) { return i.id || ''; }),
+              payment_preference: pMode
             });
           } else if (eventName === 'Search') {
             window.fbq('track', 'Search', {
@@ -498,9 +500,11 @@ const unifiedSchemaGraph = {
               }]
             });
           } else if (eventName === 'InitiateCheckout') {
+            var pModeGA = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
             window.gtag('event', 'begin_checkout', {
               currency: data.currency || 'INR',
               value: Number(data.total || 0),
+              payment_type: pModeGA,
               items: (data.items || []).map(function(item) {
                 return {
                   item_id: item.id || '',

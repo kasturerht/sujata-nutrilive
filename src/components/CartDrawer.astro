@@ -385,10 +385,13 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       if (typeof window.dispatchStoreEvent === 'function') {
         const totalAmount = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
         const totalCount = items.reduce((acc, item) => acc + item.quantity, 0);
+        const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+        const finalTotal = selectedMode === 'upi' ? Math.round(totalAmount * 0.9) : totalAmount;
         window.dispatchStoreEvent('InitiateCheckout', {
-          total: totalAmount,
+          total: finalTotal,
           count: totalCount,
-          items: items
+          items: items,
+          payment_mode: selectedMode
         });
       }
 
