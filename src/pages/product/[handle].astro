@@ -596,11 +596,6 @@ const breadcrumbSchema = {
   extraSchema={[productSchema, breadcrumbSchema]}
 >
 
-  <div id="cinematic-reveal" class="fixed inset-0 bg-[#022c22] z-[9999] flex flex-col items-center justify-center transition-all duration-[1000ms] ease-[cubic-bezier(0.8,0,0.2,1)] pointer-events-none">
-    <div class="w-12 h-[1px] bg-emerald-500/50 mb-4 animate-[pulse_1s_ease-in-out_infinite]"></div>
-    <span class="text-white font-['Playfair_Display'] text-xs tracking-[0.5em] uppercase opacity-100 transition-opacity duration-500" id="reveal-text">Initializing Protocol</span>
-  </div>
-
   <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-[#166534] to-emerald-400 z-[1000] transition-all duration-75" style="width: 0%;"></div>
 
   <div id="custom-cursor" class="fixed w-6 h-6 rounded-full border border-[#166534] pointer-events-none z-[100] opacity-0 transition-opacity duration-300 flex items-center justify-center -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:flex">
@@ -1446,17 +1441,6 @@ const breadcrumbSchema = {
       } catch(engineErr) {
         console.warn('Personalization engine error handled safely:', engineErr);
       }
-
-      // Cinematic Reveal
-      setTimeout(() => {
-        const reveal = document.getElementById('cinematic-reveal');
-        const text = document.getElementById('reveal-text');
-        if (text) text.style.opacity = '0';
-        if (reveal) {
-          reveal.style.opacity = '0';
-          setTimeout(() => reveal.remove(), 1000); 
-        }
-      }, 600);
 
       // Scroll Progress
       window.addEventListener('scroll', () => {
