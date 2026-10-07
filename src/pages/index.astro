@@ -42,10 +42,12 @@ const query = `
                 currencyCode
               }
             }
-            variants(first: 1) {
+            variants(first: 10) {
               edges {
                 node {
                   id
+                  title
+                  availableForSale
                   price {
                     amount
                     currencyCode
@@ -53,6 +55,10 @@ const query = `
                   compareAtPrice {
                     amount
                     currencyCode
+                  }
+                  selectedOptions {
+                    name
+                    value
                   }
                 }
               }
@@ -88,10 +94,12 @@ const query = `
               currencyCode
             }
           }
-          variants(first: 1) {
+          variants(first: 10) {
             edges {
               node {
                 id
+                title
+                availableForSale
                 price {
                   amount
                   currencyCode
@@ -99,6 +107,10 @@ const query = `
                 compareAtPrice {
                   amount
                   currencyCode
+                }
+                selectedOptions {
+                  name
+                  value
                 }
               }
             }

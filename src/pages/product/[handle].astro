@@ -110,10 +110,28 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
     { url: '/products/sujata-sea-buckthorn-capsules-poster.jpg', altText: 'Rich in Omega 3 7 9' }
   ],
   'sujata-plant-based-vitamin-b12': [
-    { url: '/products/sujata-plant-based-b12-bottle.jpg', altText: 'Sujata Plant-Based Vitamin B12 90 Capsules' }
+    { url: '/products/sujata-plant-based-b12-bottle.png', altText: 'Sujata Plant-Based Vitamin B12 90 Vegetarian Capsules' },
+    { url: '/products/sujata-b12-plant-vs-synthetic.png', altText: 'Plant Methylcobalamin vs Synthetic B12 Co-Enzyme Comparison' },
+    { url: '/products/sujata-b12-benefits-target-systems.png', altText: 'Full Nervous System & Energy Restoration Health Targets' },
+    { url: '/products/sujata-b12-dosage-how-to-use.png', altText: 'Daily Usage Protocol & NABL Heavy Metal Lab Analysis' }
+  ],
+  'plant-based-vitamin-b12': [
+    { url: '/products/sujata-plant-based-b12-bottle.png', altText: 'Sujata Plant-Based Vitamin B12 90 Vegetarian Capsules' },
+    { url: '/products/sujata-b12-plant-vs-synthetic.png', altText: 'Plant Methylcobalamin vs Synthetic B12 Co-Enzyme Comparison' },
+    { url: '/products/sujata-b12-benefits-target-systems.png', altText: 'Full Nervous System & Energy Restoration Health Targets' },
+    { url: '/products/sujata-b12-dosage-how-to-use.png', altText: 'Daily Usage Protocol & NABL Heavy Metal Lab Analysis' }
   ],
   'sujata-pure-himalayan-shilajit': [
-    { url: '/products/sujata-himalayan-shilajit-bottle.jpg', altText: 'Sujata Pure Himalayan Shilajit 15000mg' }
+    { url: '/products/sujata-himalayan-shilajit-bottle.png', altText: 'Sujata Pure Himalayan Shilajit 15000mg 60 Capsules' },
+    { url: '/products/sujata-shilajit-fulvic-acid-potency.png', altText: '75%+ Active Fulvic Acid Matrix & 84+ Trace Minerals' },
+    { url: '/products/sujata-shilajit-benefits-stamina.png', altText: 'Mitochondrial ATP Energy & Physical Strength Peak Vitality' },
+    { url: '/products/sujata-shilajit-dosage-lab-tested.png', altText: 'Dosage Protocol & NABL ICP-MS Heavy Metal Test Passed 100%' }
+  ],
+  'pure-himalayan-shilajit': [
+    { url: '/products/sujata-himalayan-shilajit-bottle.png', altText: 'Sujata Pure Himalayan Shilajit 15000mg 60 Capsules' },
+    { url: '/products/sujata-shilajit-fulvic-acid-potency.png', altText: '75%+ Active Fulvic Acid Matrix & 84+ Trace Minerals' },
+    { url: '/products/sujata-shilajit-benefits-stamina.png', altText: 'Mitochondrial ATP Energy & Physical Strength Peak Vitality' },
+    { url: '/products/sujata-shilajit-dosage-lab-tested.png', altText: 'Dosage Protocol & NABL ICP-MS Heavy Metal Test Passed 100%' }
   ],
   'sujata-moringa-powder': [
     { url: '/products/sujata-moringa-powder-pouch.jpg', altText: 'Sujata Moringa Powder 100g' },
@@ -167,11 +185,19 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
   ]
 };
 
+const localGallery = (handle && productLocalGalleryMap[handle.toLowerCase()]) || [];
 let images = product?.images?.edges ? product.images.edges.map((e: any) => e.node) : [];
-if (images.length === 0 && handle && productLocalGalleryMap[handle.toLowerCase()]) {
-  images = productLocalGalleryMap[handle.toLowerCase()];
-} else if (images.length === 0) {
-  images = [{ url: '/products/sujata-spirulina-powder-pouch.jpg', altText: product?.title || 'Sujata Formulation' }];
+
+if (images.length === 0) {
+  images = localGallery.length > 0 ? [...localGallery] : [{ url: '/products/sujata-spirulina-powder-pouch.jpg', altText: product?.title || 'Sujata Formulation' }];
+} else if (localGallery.length > 0) {
+  // 🌟 Resilient CRO Merge: Keep Shopify primary image first, and append local infographics!
+  const existingUrls = new Set(images.map((img: any) => img.url));
+  for (const localImg of localGallery) {
+    if (!existingUrls.has(localImg.url)) {
+      images.push(localImg);
+    }
+  }
 }
 const primaryImage = images[0];
 const variants = product?.variants?.edges ? product.variants.edges.map((e: any) => e.node) : [];
@@ -789,7 +815,34 @@ const breadcrumbSchema = {
               <span class="text-[9px] font-bold bg-[#166534] text-white px-2 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
             </div>
 
-            <div class="relative w-full h-14" id="magnetic-btn-wrapper">
+            <div class="flex flex-col gap-3 w-full" id="magnetic-btn-wrapper">
+              <!-- ⚡ High-Conversion 1-Click Buy Now Button -->
+              <button 
+                id="buy-now-btn" 
+                type="button"
+                data-domain={shopifyDomain} 
+                data-token={storefrontToken}
+                data-variant-id={variants[0]?.id || `prod_${product.id}`}
+                data-title={product.title}
+                data-base-price={price}
+                data-base-compare={initialComparePrice}
+                data-current-price={price}
+                data-price={price}
+                data-image={primaryImage?.url || '/spirulina-bottle.png'}
+                data-subtitle="Standard Single Shipment"
+                data-purchase-type="onetime"
+                class="w-full h-14 bg-gradient-to-r from-emerald-600 via-emerald-700 to-[#166534] hover:from-emerald-500 hover:to-emerald-600 text-white rounded-xl font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-[0_10px_25px_rgba(22,101,52,0.3)] hover:shadow-[0_15px_35px_rgba(22,101,52,0.4)] active:scale-[0.99] transition-all cursor-pointer relative overflow-hidden group touch-manipulation"
+              >
+                <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span id="buy-now-btn-text" class="relative z-10 flex items-center gap-2">
+                  <span class="text-base animate-pulse">⚡</span>
+                  <span>Buy Now — Cash on Delivery Available</span>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </span>
+                <svg id="buy-now-spinner" class="absolute z-10 w-5 h-5 text-white animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              </button>
+
+              <!-- Secondary Add to Cart Button -->
               <button 
                 id="add-to-cart-btn" 
                 type="button"
@@ -806,16 +859,11 @@ const breadcrumbSchema = {
                 data-image={primaryImage?.url || '/spirulina-bottle.png'}
                 data-subtitle="Standard Single Shipment"
                 data-purchase-type="onetime"
-                class="add-to-cart-btn absolute inset-0 w-full h-full bg-[#111827] text-white rounded-xl overflow-hidden group shadow-lg hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 flex items-center justify-center gap-3 z-20 will-change-transform disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation cursor-pointer"
+                class="add-to-cart-btn w-full h-12 bg-white hover:bg-gray-50 text-[#111827] border border-gray-300 hover:border-gray-400 rounded-xl font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs active:scale-[0.99] touch-manipulation"
               >
-                <div class="absolute inset-0 bg-gradient-to-r from-[#166534] to-[#042f17] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.1,0,0,1)] z-0"></div>
-                
-                <span id="btn-text" class="relative z-10 text-sm font-bold tracking-[0.15em] uppercase flex items-center gap-2 transition-opacity duration-300">
-                  Add to Routine
-                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </span>
-
-                <svg id="btn-spinner" class="absolute z-10 w-5 h-5 text-white animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <svg class="w-4 h-4 text-[#166534]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                <span id="btn-text">Add to Cart</span>
+                <svg id="btn-spinner" class="w-4 h-4 text-[#111827] animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
               </button>
             </div>
 
@@ -1210,46 +1258,71 @@ const breadcrumbSchema = {
     </div>
   </div>
 
-  <!-- 🌟 Mobile Sticky Bottom "Add to Routine" Bar (High Conversion & Safe Area Fitted) -->
+  <!-- 🌟 Mobile Sticky Bottom Dual "Buy Now & Cart" Bar (High Conversion & Safe Area Fitted) -->
   <div 
     id="mobile-sticky-bottom-bar" 
-    class="fixed bottom-0 left-0 right-0 z-[140] bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-4 py-3 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform translate-y-full md:hidden flex items-center justify-between gap-3"
-    aria-label="Quick Add to Routine Bar"
+    class="fixed bottom-0 left-0 right-0 z-[140] bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-3.5 py-2.5 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform translate-y-full md:hidden flex items-center justify-between gap-2.5"
+    aria-label="Quick Purchase Bar"
   >
     <!-- Left: Product Snapshot -->
-    <div class="flex items-center gap-2.5 min-w-0">
-      <div class="w-11 h-11 rounded-xl bg-white/10 p-1 flex-shrink-0 flex items-center justify-center border border-white/10">
+    <div class="flex items-center gap-2 min-w-0">
+      <div class="w-10 h-10 rounded-xl bg-white/10 p-0.5 flex-shrink-0 flex items-center justify-center border border-white/10">
         <img src={images[0]?.url || "/spirulina-bottle.png"} alt={product.title} class="w-full h-full object-contain" />
       </div>
       <div class="flex flex-col min-w-0">
-        <span class="text-xs font-black text-white truncate font-['Playfair_Display']">{product.title}</span>
-        <div class="flex items-center gap-2 mt-0.5">
+        <span class="text-xs font-bold text-white truncate max-w-[90px] sm:max-w-[130px] font-['Playfair_Display']">{product.title}</span>
+        <div class="flex items-center gap-1.5 mt-0.5">
           <span class="text-sm font-black text-emerald-400" id="sticky-display-price">₹{price}</span>
-          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase truncate max-w-[140px]" id="sticky-benefit-pill">Save 30%</span>
+          <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase" id="sticky-benefit-pill">COD OK</span>
         </div>
       </div>
     </div>
 
-    <!-- Right: Fast Add to Routine Button -->
-    <button 
-      id="sticky-atc-btn" 
-      type="button" 
-      class="add-to-cart-btn shrink-0 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg active:scale-95 transition-all touch-manipulation cursor-pointer"
-      data-domain={shopifyDomain} 
-      data-token={storefrontToken} 
-      data-variant-id={variants[0]?.id || (product?.id ? `prod_${product.id}` : '')}
-      data-title={product.title}
-      data-base-price={price}
-      data-base-compare={initialComparePrice}
-      data-current-price={price}
-      data-price={price}
-      data-image={primaryImage?.url || '/spirulina-bottle.png'}
-      data-subtitle="Standard Single Shipment"
-      data-purchase-type="onetime"
-    >
-      <span id="sticky-btn-text">Add to Routine</span>
-      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    </button>
+    <!-- Right: Dual Action Buttons -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <!-- Add to Cart (Secondary) -->
+      <button 
+        id="sticky-atc-btn" 
+        type="button" 
+        class="add-to-cart-btn shrink-0 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white px-3 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 border border-white/15 active:scale-95 transition-all touch-manipulation cursor-pointer"
+        data-domain={shopifyDomain} 
+        data-token={storefrontToken} 
+        data-variant-id={variants[0]?.id || (product?.id ? `prod_${product.id}` : '')}
+        data-title={product.title}
+        data-base-price={price}
+        data-base-compare={initialComparePrice}
+        data-current-price={price}
+        data-price={price}
+        data-image={primaryImage?.url || '/spirulina-bottle.png'}
+        data-subtitle="Standard Single Shipment"
+        data-purchase-type="onetime"
+      >
+        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        <span id="sticky-btn-text">Cart</span>
+      </button>
+
+      <!-- ⚡ Buy Now (Primary 1-Click Fast Checkout) -->
+      <button 
+        id="sticky-buynow-btn" 
+        type="button" 
+        class="shrink-0 bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-black px-4 py-2.5 rounded-xl font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-[0_4px_15px_rgba(16,185,129,0.35)] active:scale-95 transition-all touch-manipulation cursor-pointer relative overflow-hidden"
+        data-domain={shopifyDomain} 
+        data-token={storefrontToken} 
+        data-variant-id={variants[0]?.id || (product?.id ? `prod_${product.id}` : '')}
+        data-title={product.title}
+        data-base-price={price}
+        data-base-compare={initialComparePrice}
+        data-current-price={price}
+        data-price={price}
+        data-image={primaryImage?.url || '/spirulina-bottle.png'}
+        data-subtitle="Standard Single Shipment"
+        data-purchase-type="onetime"
+      >
+        <span class="animate-pulse text-xs">⚡</span>
+        <span id="sticky-buynow-text">Buy Now</span>
+        <svg id="sticky-buynow-spinner" class="w-3.5 h-3.5 text-black animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+      </button>
+    </div>
   </div>
   
   {/* UNIFIED LUXURY STORE FOOTER */}
@@ -1746,6 +1819,10 @@ const breadcrumbSchema = {
       const stickyPriceDisplay = document.getElementById('sticky-display-price');
       const stickyAtcBtn = document.getElementById('sticky-atc-btn');
       const stickyBtnText = document.getElementById('sticky-btn-text');
+      const buyNowBtn = document.getElementById('buy-now-btn');
+      const stickyBuyNowBtn = document.getElementById('sticky-buynow-btn');
+      const buyNowBtnText = document.getElementById('buy-now-btn-text');
+      const stickyBuyNowText = document.getElementById('sticky-buynow-text');
       const badgeElement = document.getElementById('display-discount-badge');
       const tabOnetime = document.getElementById('tab-onetime');
       const tabSubscribe = document.getElementById('tab-subscribe');
@@ -1811,13 +1888,13 @@ const breadcrumbSchema = {
         if (labelSubscribe) labelSubscribe.innerText = `₹${formatINRClient(Math.round(productState.basePrice * 0.9))}`;
         if (labelOldSubscribe) labelOldSubscribe.innerText = `₹${formatINRClient(productState.basePrice)}`;
 
-        // 4. Update ATC Buttons Payload Attributes (NEVER touch data-base-price!)
+        // 4. Update ATC & Buy Now Buttons Payload Attributes
         const atcSubtitle = isSubscribe ? 'Monthly Protocol (10% Off)' : 'Standard Single Shipment';
-        [atcBtn, stickyAtcBtn].forEach(btn => {
+        [atcBtn, stickyAtcBtn, buyNowBtn, stickyBuyNowBtn].forEach(btn => {
           if (!btn) return;
           btn.setAttribute('data-purchase-type', productState.purchaseMode);
           btn.setAttribute('data-current-price', currentPrice);
-          btn.setAttribute('data-price', currentPrice); // For backward compatibility
+          btn.setAttribute('data-price', currentPrice);
           btn.setAttribute('data-variant-id', productState.variantId);
           btn.setAttribute('data-subtitle', atcSubtitle);
         });
@@ -1829,20 +1906,24 @@ const breadcrumbSchema = {
           tabOnetime?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
           tabOnetime?.classList.add('text-gray-600');
 
-          if (btnTextElement) {
-            btnTextElement.innerHTML = `Subscribe & Save <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+          if (buyNowBtnText) {
+            buyNowBtnText.innerHTML = `<span class="text-base animate-pulse">⚡</span><span>Subscribe Now (Save 10% Every Month)</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
           }
-          if (stickyBtnText) stickyBtnText.innerText = "Subscribe & Save";
+          if (stickyBuyNowText) stickyBuyNowText.innerText = "Subscribe";
+          if (btnTextElement) btnTextElement.innerText = "Add Subscription to Cart";
+          if (stickyBtnText) stickyBtnText.innerText = "Cart";
         } else {
           tabOnetime?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
           tabOnetime?.classList.remove('text-gray-600');
           tabSubscribe?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
           tabSubscribe?.classList.add('text-gray-600');
 
-          if (btnTextElement) {
-            btnTextElement.innerHTML = `Add to Routine <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+          if (buyNowBtnText) {
+            buyNowBtnText.innerHTML = `<span class="text-base animate-pulse">⚡</span><span>Buy Now — Cash on Delivery Available</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
           }
-          if (stickyBtnText) stickyBtnText.innerText = "Add to Routine";
+          if (stickyBuyNowText) stickyBuyNowText.innerText = "Buy Now";
+          if (btnTextElement) btnTextElement.innerText = "Add to Cart";
+          if (stickyBtnText) stickyBtnText.innerText = "Cart";
         }
       }
 
@@ -1934,6 +2015,45 @@ const breadcrumbSchema = {
         }
       };
 
+      // 1.8b Direct 1-Click Fast Buy Now Handler (Immediate Checkout)
+      let isPdpBuyNowProcessing = false;
+      const handlePdpBuyNow = (btn) => {
+        if (isPdpBuyNowProcessing || !btn) return;
+        isPdpBuyNowProcessing = true;
+        setTimeout(() => { isPdpBuyNowProcessing = false; }, 2500);
+
+        const id = productState.variantId || btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
+        const baseTitle = document.querySelector('h1')?.innerText?.trim() || btn.getAttribute('data-title') || 'Sujata Formulation';
+        const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
+          ? `${baseTitle} - ${productState.variantTitle}`
+          : baseTitle;
+        const subtitle = btn.getAttribute('data-subtitle') || 'Standard Single Shipment';
+        const isSubscribe = productState.purchaseMode === 'subscribe';
+        const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
+        const image = btn.getAttribute('data-image') || document.getElementById('main-pdp-image')?.getAttribute('src') || '/spirulina-bottle.png';
+
+        const spinner = btn.querySelector('.animate-spin') || document.getElementById('buy-now-spinner') || document.getElementById('sticky-buynow-spinner');
+        if (spinner) spinner.classList.remove('hidden');
+
+        const productPayload = {
+          id,
+          title,
+          subtitle,
+          price: Math.round(currentPrice),
+          image,
+          quantity: 1
+        };
+
+        if (typeof window.directCheckoutItem === 'function') {
+          window.directCheckoutItem(productPayload);
+        } else if (typeof window.addItemToLocalCart === 'function') {
+          window.addItemToLocalCart(productPayload);
+          if (typeof window.triggerSujataCheckout === 'function') {
+            window.triggerSujataCheckout({ preventDefault: () => {} });
+          }
+        }
+      };
+
       atcBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -1944,6 +2064,18 @@ const breadcrumbSchema = {
         e.preventDefault();
         e.stopPropagation();
         handlePdpAddToCart(stickyAtcBtn);
+      });
+
+      buyNowBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handlePdpBuyNow(buyNowBtn);
+      });
+
+      stickyBuyNowBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handlePdpBuyNow(stickyBuyNowBtn);
       });
 
       // 1.9 Mobile Sticky Bottom Bar Scroll Observer

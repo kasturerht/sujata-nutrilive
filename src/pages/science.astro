@@ -232,9 +232,72 @@ const comparisonMatrix = [
     highlight: true
   }
 ];
+
+// Silicon Valley Medical & Laboratory E-E-A-T Schema.org Entities
+const scienceSchemas = [
+  {
+    "@type": "MedicalWebPage",
+    "@id": "https://sujatanutrilive.com/science/#medical-webpage",
+    "name": "The Science & Sourcing Dossier | Sujata Nutrilive",
+    "description": "Comprehensive scientific dossier on sub-40°C cryo-milled spirulina, 21.4% intact C-phycocyanin, bioavailable non-heme iron, plant-based methylcobalamin B12, and ICP-MS heavy-metal-free Himalayan Shilajit.",
+    "url": "https://sujatanutrilive.com/science",
+    "reviewedBy": advisoryBoard.map(doc => ({
+      "@type": "Person",
+      "name": doc.name,
+      "jobTitle": doc.role,
+      "honorificSuffix": doc.degrees,
+      "description": `${doc.experience}. Clinical assessment: "${doc.quote}"`
+    })),
+    "about": [
+      {
+        "@type": "MedicalEntity",
+        "name": "Arthrospira Platensis",
+        "alternateName": "Spirulina",
+        "code": {
+          "@type": "MedicalCode",
+          "code": "D000069285",
+          "codingSystem": "MeSH"
+        }
+      },
+      {
+        "@type": "MedicalEntity",
+        "name": "C-Phycocyanin",
+        "description": "Fragile light-harvesting biliprotein and primary antioxidant pigment in pristine spirulina."
+      },
+      {
+        "@type": "MedicalEntity",
+        "name": "Methylcobalamin",
+        "description": "Biologically active plant-fermented co-enzyme form of Vitamin B12 without synthetic cyanide."
+      },
+      {
+        "@type": "MedicalEntity",
+        "name": "Fulvic Acid",
+        "description": "Purified low-molecular-weight organo-mineral ionophore facilitating cellular ATP transport."
+      }
+    ]
+  },
+  {
+    "@type": "Dataset",
+    "@id": "https://sujatanutrilive.com/science/#nabl-lab-assay",
+    "name": "NABL Analytical Chemistry & Quality Assay: Batch #SJT-2026-B08",
+    "description": "Batch testing under AOAC 2015.01 (ICP-MS Spectrometry) and UV-Vis spectrophotometry for heavy metals, microcystins, and biliprotein concentration.",
+    "isAccessibleForFree": true,
+    "creator": {
+      "@type": "Organization",
+      "name": "NABL Accredited Analytical Testing Laboratory, Maharashtra",
+      "sameAs": "https://nabl-india.org/"
+    },
+    "variableMeasured": labParameters.map(p => `${p.test}: ${p.result} (FSSAI Limit: ${p.limit}) - ${p.status}`)
+  }
+];
 ---
 
-<StoreLayout title="The Science & Sourcing Dossier | Sujata Nutrilive">
+<StoreLayout 
+  title="The Science & Sourcing Dossier: 21.4% Phycocyanin & 0.00% Heavy Metals | Sujata Nutrilive"
+  description="Discover the cellular science behind Sujata Nutrilive: Sub-40°C cryo-milling, 21.4% bioactive C-Phycocyanin, zero synthetic binders, and ICP-MS NABL certified heavy metal purity."
+  image="/products/sujata-combo-spirulina-sea-buckthorn.jpg"
+  extraSchema={scienceSchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />
@@ -778,6 +841,284 @@ const comparisonMatrix = [
           ))}
         </div>
 
+        {/* =========================================================================
+            SCIENTIFIC PRODUCT BRIDGE 1: DIRECT CLINICAL FORMULATIONS
+            ========================================================================= */}
+        <div class="mt-20 pt-16 border-t border-emerald-800/40">
+          
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-mono uppercase tracking-[0.25em] mb-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Bio-Identical Delivery Systems</span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-white">
+                Clinical Formulations Derived from This Living Matrix.
+              </h3>
+            </div>
+            <p class="text-emerald-100/70 text-xs sm:text-sm font-light max-w-md leading-relaxed">
+              Preserving 21.4% intact C-Phycocyanin and non-heme iron requires specialized zero-heat handling. Available in three unadulterated formats:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            {/* Card 1: Spirulina Tablets */}
+            <div class="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1 shadow-xl">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                    🌱 ZERO BINDERS
+                  </span>
+                  <span class="text-[10px] font-mono font-bold text-amber-300">21.4% C-Phycocyanin</span>
+                </div>
+
+                <div class="w-full aspect-square rounded-2xl overflow-hidden bg-black/30 border border-white/5 mb-5 p-4 flex items-center justify-center relative">
+                  <img 
+                    src="/products/sujata-spirulina-tablets-bottle.jpg" 
+                    alt="Sujata 100% Vegan Spirulina Tablets" 
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                    loading="lazy"
+                  />
+                  <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-[9px] font-mono text-emerald-300 px-2 py-0.5 rounded">60 Tablets (500mg)</span>
+                </div>
+
+                <h4 class="text-lg font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">
+                  100% Vegan Spirulina Tablets
+                </h4>
+                <p class="text-[11px] text-emerald-100/70 font-light leading-relaxed mb-4">
+                  Sub-40°C cold-compressed without magnesium stearate, talc, or chemical binders. Odorless, disintegrates in 8 minutes for duodenal bio-uptake.
+                </p>
+
+                <div class="space-y-1.5 text-[11px] text-gray-300 mb-6">
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>21.4% Intact C-Phycocyanin matrix</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>Zero fishy smell, zero bitter aftertaste</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>NABL certified: Lead &lt; 0.01 ppm</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-black text-white font-sans">₹350</span>
+                    <span class="text-xs text-gray-400 line-through">₹499</span>
+                  </div>
+                  <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 30%</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                  <button 
+                    type="button"
+                    class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
+                    data-id="gid://shopify/ProductVariant/52738357887108"
+                    data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
+                    data-price="350"
+                    data-image="/products/sujata-spirulina-tablets-bottle.jpg"
+                    data-subtitle="21.4% Intact C-Phycocyanin • Zero Binders"
+                  >
+                    <span>⚡ Buy Now</span>
+                  </button>
+                  <button 
+                    type="button"
+                    class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
+                    data-id="gid://shopify/ProductVariant/52738357887108"
+                    data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
+                    data-price="350"
+                    data-image="/products/sujata-spirulina-tablets-bottle.jpg"
+                    data-subtitle="21.4% Intact C-Phycocyanin • Zero Binders"
+                  >
+                    <span>+ Cart</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
+                  <span>COD Available</span>
+                  <a href="/product/sujata-spirulina-tablets" class="hover:text-emerald-300 underline transition-colors">Clinical Specs →</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Spirulina Powder */}
+            <div class="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1 shadow-xl">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                    🔬 CRYO-MILLED BIO-POWDER
+                  </span>
+                  <span class="text-[10px] font-mono font-bold text-amber-300">68.4% Pure Protein</span>
+                </div>
+
+                <div class="w-full aspect-square rounded-2xl overflow-hidden bg-black/30 border border-white/5 mb-5 p-4 flex items-center justify-center relative">
+                  <img 
+                    src="/products/sujata-spirulina-powder-pouch.jpg" 
+                    alt="Sujata Pure Organic Spirulina Powder" 
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                    loading="lazy"
+                  />
+                  <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-[9px] font-mono text-emerald-300 px-2 py-0.5 rounded">100g Pouch</span>
+                </div>
+
+                <h4 class="text-lg font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">
+                  Pure Organic Spirulina Powder
+                </h4>
+                <p class="text-[11px] text-emerald-100/70 font-light leading-relaxed mb-4">
+                  Ultrasonic cell-wall thinning allows 98.4% direct cellular assimilation. Blends instantly into smoothies, water, or morning tonics without grit.
+                </p>
+
+                <div class="space-y-1.5 text-[11px] text-gray-300 mb-6">
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>Sub-40°C dehydration locks in live enzymes</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>Natural non-heme iron: 5.8 mg / 100g</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>100% water-soluble cellular dispersion</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-black text-white font-sans">₹350</span>
+                    <span class="text-xs text-gray-400 line-through">₹499</span>
+                  </div>
+                  <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 30%</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                  <button 
+                    type="button"
+                    class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
+                    data-id="gid://shopify/ProductVariant/52738357854340"
+                    data-title="Sujata Pure Organic Spirulina Powder (100g)"
+                    data-price="350"
+                    data-image="/products/sujata-spirulina-powder-pouch.jpg"
+                    data-subtitle="Sub-40°C Cryo-Milled • 68.4% Protein"
+                  >
+                    <span>⚡ Buy Now</span>
+                  </button>
+                  <button 
+                    type="button"
+                    class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
+                    data-id="gid://shopify/ProductVariant/52738357854340"
+                    data-title="Sujata Pure Organic Spirulina Powder (100g)"
+                    data-price="350"
+                    data-image="/products/sujata-spirulina-powder-pouch.jpg"
+                    data-subtitle="Sub-40°C Cryo-Milled • 68.4% Protein"
+                  >
+                    <span>+ Cart</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
+                  <span>COD Available</span>
+                  <a href="/product/sujata-spirulina-powder" class="hover:text-emerald-300 underline transition-colors">Clinical Specs →</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Plant B12 */}
+            <div class="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1 shadow-xl">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                    🧠 ZERO CYANIDE
+                  </span>
+                  <span class="text-[10px] font-mono font-bold text-amber-300">Active Methyl-B12</span>
+                </div>
+
+                <div class="w-full aspect-square rounded-2xl overflow-hidden bg-black/30 border border-white/5 mb-5 p-4 flex items-center justify-center relative">
+                  <img 
+                    src="/products/sujata-plant-based-b12-bottle.png" 
+                    alt="Sujata Plant-Based Vitamin B12 Capsules" 
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                    loading="lazy"
+                  />
+                  <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-[9px] font-mono text-emerald-300 px-2 py-0.5 rounded">90 Vegan Caps</span>
+                </div>
+
+                <h4 class="text-lg font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">
+                  Plant-Based Vitamin B12
+                </h4>
+                <p class="text-[11px] text-emerald-100/70 font-light leading-relaxed mb-4">
+                  100% bio-identical Methylcobalamin derived from plant bio-fermentation. Eliminates hepatic cyanide toxicity from synthetic cyanocobalamin pills.
+                </p>
+
+                <div class="space-y-1.5 text-[11px] text-gray-300 mb-6">
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>Direct myelin sheath repair & nerve conductivity</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>Non-synthetic cellular methylation pathway</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span>
+                    <span>Synergistic iron absorption catalyst</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-black text-white font-sans">₹699</span>
+                    <span class="text-xs text-gray-400 line-through">₹999</span>
+                  </div>
+                  <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 30%</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                  <button 
+                    type="button"
+                    class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
+                    data-id="gid://shopify/ProductVariant/52738358050948"
+                    data-title="Sujata Plant-Based Vitamin B12 Capsules (90 Vegan Capsules)"
+                    data-price="699"
+                    data-image="/products/sujata-plant-based-b12-bottle.png"
+                    data-subtitle="Active Methylcobalamin • Zero Cyanide"
+                  >
+                    <span>⚡ Buy Now</span>
+                  </button>
+                  <button 
+                    type="button"
+                    class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
+                    data-id="gid://shopify/ProductVariant/52738358050948"
+                    data-title="Sujata Plant-Based Vitamin B12 Capsules (90 Vegan Capsules)"
+                    data-price="699"
+                    data-image="/products/sujata-plant-based-b12-bottle.png"
+                    data-subtitle="Active Methylcobalamin • Zero Cyanide"
+                  >
+                    <span>+ Cart</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
+                  <span>COD Available</span>
+                  <a href="/product/sujata-plant-based-vitamin-b12" class="hover:text-emerald-300 underline transition-colors">Clinical Specs →</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
     </section>
@@ -894,6 +1235,196 @@ const comparisonMatrix = [
 
     </section>
 
+    {/* =========================================================================
+        SCIENTIFIC PRODUCT BRIDGE 2: NABL-VERIFIED CLEAN FORMULATIONS (SHILAJIT & COMBOS)
+        ========================================================================= */}
+    <section class="max-w-[85rem] mx-auto px-6 lg:px-12 -mt-10 mb-24 md:mb-32">
+      <div class="bg-gradient-to-br from-[#064E3B] via-[#033326] to-[#022219] rounded-[2.5rem] p-8 md:p-14 lg:p-16 border border-emerald-500/20 shadow-2xl relative overflow-hidden text-white">
+        
+        {/* Ambient Glow */}
+        <div class="absolute top-0 right-0 w-96 h-96 bg-amber-400/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-3xl mb-12 relative z-10">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-400/30 text-emerald-300 text-[10px] font-mono uppercase tracking-[0.25em] mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Batch #SJT-2026-B08 Verified Pure</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-white leading-tight mb-4">
+            Clean-Assay Formulations: Heavy-Metal-Free Guarantee.
+          </h2>
+          <p class="text-emerald-100/80 text-xs sm:text-sm font-light leading-relaxed">
+            Over 80% of traditional Ayurvedic shilajit and herbal extracts in the market fail ICP-MS heavy metal tests due to raw mountain runoff or uncalibrated processing. Every formulation below is tested in batch assays under AOAC 2015.01 to guarantee 0.00% detectable contamination.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+          
+          {/* Card 1: Shilajit */}
+          <div class="bg-black/30 border border-white/10 hover:border-amber-400/40 rounded-3xl p-6 sm:p-8 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                  ⚡ &gt;75% FULVIC ACID MATRIX
+                </span>
+                <span class="text-[10px] font-mono text-emerald-300 font-bold">ICP-MS LEAD &lt; 0.01 PPM</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center mb-6">
+                <div class="sm:col-span-5 aspect-square rounded-2xl overflow-hidden bg-black/40 border border-white/5 p-3 flex items-center justify-center">
+                  <img 
+                    src="/products/sujata-himalayan-shilajit-bottle.png" 
+                    alt="Sujata Pure Himalayan Shilajit Capsules" 
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                    loading="lazy"
+                  />
+                </div>
+                <div class="sm:col-span-7">
+                  <h4 class="text-xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                    Pure Himalayan Shilajit Capsules
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 font-light leading-relaxed mb-4">
+                    High-altitude Himalayan gold-grade resin, purified via sub-40°C cold extraction. Rich in 84 ionic trace minerals and >75% fulvic acid for mitochondrial ATP generation.
+                  </p>
+                  <div class="space-y-1 text-[11px] text-gray-300 font-mono">
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-amber-400">●</span>
+                      <span>Assay: 15,000mg Potency / 60 Caps</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-emerald-400">●</span>
+                      <span>Mercury (Hg): NIL (0.00 ppm)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/10">
+              <div class="flex items-baseline justify-between mb-4">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-2xl font-black text-white font-sans">₹899</span>
+                  <span class="text-xs text-gray-400 line-through">₹1,499</span>
+                </div>
+                <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 40%</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 mb-2">
+                <button 
+                  type="button"
+                  class="science-direct-buy-btn w-full bg-amber-400 hover:bg-amber-300 text-black py-3.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
+                  data-id="gid://shopify/ProductVariant/52738358083716"
+                  data-title="Sujata Pure Himalayan Shilajit Capsules (15,000mg - 60 Capsules)"
+                  data-price="899"
+                  data-image="/products/sujata-himalayan-shilajit-bottle.png"
+                  data-subtitle=">75% Fulvic Acid • ICP-MS Tested Clean"
+                >
+                  <span>⚡ Buy Now</span>
+                </button>
+                <button 
+                  type="button"
+                  class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
+                  data-id="gid://shopify/ProductVariant/52738358083716"
+                  data-title="Sujata Pure Himalayan Shilajit Capsules (15,000mg - 60 Capsules)"
+                  data-price="899"
+                  data-image="/products/sujata-himalayan-shilajit-bottle.png"
+                  data-subtitle=">75% Fulvic Acid • ICP-MS Tested Clean"
+                >
+                  <span>+ Add to Cart</span>
+                </button>
+              </div>
+
+              <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
+                <span>Free Express Shipping • COD OK</span>
+                <a href="/product/sujata-pure-himalayan-shilajit" class="hover:text-amber-300 underline transition-colors">View Lab Dossier →</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Super Immunity Combo */}
+          <div class="bg-black/30 border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-8 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                  🛡️ CELLULAR SYNERGY COMPLEX
+                </span>
+                <span class="text-[10px] font-mono text-emerald-300 font-bold">DOUBLE NABL ASSAY</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center mb-6">
+                <div class="sm:col-span-5 aspect-square rounded-2xl overflow-hidden bg-black/40 border border-white/5 p-3 flex items-center justify-center">
+                  <img 
+                    src="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png" 
+                    alt="Sujata Daily Super Immunity Combo" 
+                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                    loading="lazy"
+                  />
+                </div>
+                <div class="sm:col-span-7">
+                  <h4 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+                    Daily Super Immunity Synergy Combo
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 font-light leading-relaxed mb-4">
+                    The clinical co-administration of water-soluble C-Phycocyanin and lipophilic Himalayan Sea Buckthorn (Omega 3, 6, 7 & 9) for 360° cellular membrane defense.
+                  </p>
+                  <div class="space-y-1 text-[11px] text-gray-300 font-mono">
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-emerald-400">●</span>
+                      <span>90 Spirulina Tablets + 60 Sea Buckthorn Caps</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-amber-400">●</span>
+                      <span>Zero Synthetic Carotenoids or Preservatives</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/10">
+              <div class="flex items-baseline justify-between mb-4">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-2xl font-black text-white font-sans">₹950</span>
+                  <span class="text-xs text-gray-400 line-through">₹1,498</span>
+                </div>
+                <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 36%</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 mb-2">
+                <button 
+                  type="button"
+                  class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
+                  data-id="gid://shopify/ProductVariant/52738358444164"
+                  data-title="Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)"
+                  data-price="950"
+                  data-image="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png"
+                  data-subtitle="Spirulina Tablets + Sea Buckthorn Capsules Synergy"
+                >
+                  <span>⚡ Buy Now</span>
+                </button>
+                <button 
+                  type="button"
+                  class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
+                  data-id="gid://shopify/ProductVariant/52738358444164"
+                  data-title="Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)"
+                  data-price="950"
+                  data-image="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png"
+                  data-subtitle="Spirulina Tablets + Sea Buckthorn Capsules Synergy"
+                >
+                  <span>+ Add to Cart</span>
+                </button>
+              </div>
+
+              <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
+                <span>Free Express Shipping • COD OK</span>
+                <a href="/product/sujata-spirulina-sea-buckthorn-combo" class="hover:text-emerald-300 underline transition-colors">View Synergy Specs →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 
     {/* =========================================================================
         ZONE 5: MEDICAL ADVISORY COUNCIL (DOCTOR AUTHORITY)
@@ -1026,33 +1557,49 @@ const comparisonMatrix = [
           
           <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-3">Select Format:</span>
 
-          {/* Product Format Selector Radio Buttons */}
-          <div class="grid grid-cols-2 gap-3 mb-6">
+          {/* Product Format Selector Radio Buttons (Real Shopify Variants) */}
+          <div class="grid grid-cols-3 gap-2.5 mb-6">
             
             <button 
               type="button" 
-              class="science-format-btn active-format border-2 border-[#166534] bg-emerald-50/50 p-4 rounded-2xl flex flex-col text-left transition-all cursor-pointer"
-              data-id="sujata_powder_100g"
-              data-title="Raw Spirulina Powder (100g)"
-              data-price="600"
-              data-image="/spirulina-powder.png"
+              class="science-format-btn active-format border-2 border-[#166534] bg-emerald-50/50 p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer"
+              data-id="gid://shopify/ProductVariant/52738357854340"
+              data-title="Sujata Pure Organic Spirulina Powder (100g)"
+              data-price="350"
+              data-image="/products/sujata-spirulina-powder-pouch.jpg"
+              data-subtitle="Sub-40°C Cold Extract"
             >
-              <span class="text-xs font-black text-[#111827]">Powder (100g)</span>
-              <span class="text-[10px] text-gray-500 mt-0.5">Sub-40°C Cold Extract</span>
-              <span class="text-sm font-black text-emerald-800 mt-2">₹600</span>
+              <span class="text-xs font-black text-[#111827]">Powder</span>
+              <span class="text-[10px] text-gray-500 mt-0.5">100g Pouch</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">₹350</span>
             </button>
 
             <button 
               type="button" 
-              class="science-format-btn border-2 border-gray-200 bg-white p-4 rounded-2xl flex flex-col text-left transition-all cursor-pointer hover:border-gray-300"
-              data-id="sujata_capsules_60"
-              data-title="Bio-Spirulina Capsules (60 Caps)"
-              data-price="799"
-              data-image="/spirulina-bottle.png"
+              class="science-format-btn border-2 border-gray-200 bg-white p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer hover:border-gray-300"
+              data-id="gid://shopify/ProductVariant/52738357887108"
+              data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
+              data-price="350"
+              data-image="/products/sujata-spirulina-tablets-bottle.jpg"
+              data-subtitle="500mg • Zero Binders"
             >
-              <span class="text-xs font-black text-[#111827]">Capsules (60s)</span>
-              <span class="text-[10px] text-gray-500 mt-0.5">100% Veggie Caps</span>
-              <span class="text-sm font-black text-emerald-800 mt-2">₹799</span>
+              <span class="text-xs font-black text-[#111827]">Tablets</span>
+              <span class="text-[10px] text-gray-500 mt-0.5">60 Tabs (500mg)</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">₹350</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="science-format-btn border-2 border-gray-200 bg-white p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer hover:border-gray-300"
+              data-id="gid://shopify/ProductVariant/52738357985412"
+              data-title="Sujata Premium Spirulina Capsules (60 Capsules - 500mg)"
+              data-price="499"
+              data-image="/products/sujata-spirulina-capsules-bottle-transparent.png"
+              data-subtitle="100% Veggie Caps"
+            >
+              <span class="text-xs font-black text-[#111827]">Capsules</span>
+              <span class="text-[10px] text-gray-500 mt-0.5">60 Veggie Caps</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">₹499</span>
             </button>
 
           </div>
@@ -1068,16 +1615,37 @@ const comparisonMatrix = [
             <span class="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase shrink-0">SAVE 10%</span>
           </div>
 
-          {/* 1-Click Fast Add to Routine Button */}
-          <button 
-            id="science-buy-btn"
-            type="button"
-            class="w-full bg-[#111827] hover:bg-[#166534] text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 transition-all duration-300 touch-manipulation cursor-pointer group"
-          >
-            <span>Start 30-Day Routine • </span>
-            <span id="science-cta-price">₹600</span>
-            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          </button>
+          {/* Dual Action CTAs: 1-Click Buy Now & Add to Routine */}
+          <div class="space-y-2.5">
+            <button 
+              id="science-direct-checkout-btn"
+              type="button"
+              class="w-full bg-[#166534] hover:bg-[#15803d] text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-900/30 transition-all duration-300 touch-manipulation cursor-pointer group"
+            >
+              <span class="btn-spinner hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              <span class="btn-text flex items-center gap-1.5">
+                <span>⚡ Buy Now — Cash on Delivery OK • </span>
+                <span class="science-cta-dynamic-price">₹350</span>
+              </span>
+            </button>
+
+            <button 
+              id="science-buy-btn"
+              type="button"
+              class="w-full bg-[#111827] hover:bg-black text-white py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-gray-800 transition-all touch-manipulation cursor-pointer group"
+            >
+              <span>+ Add to Daily Routine</span>
+            </button>
+          </div>
+
+          {/* Safe Checkout Trust Signals */}
+          <div class="mt-4 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-center gap-3 text-[10px] text-gray-500 font-mono">
+            <span>🔒 SSL 256-Bit Encrypted</span>
+            <span>•</span>
+            <span>🌿 100% Clean Formulation</span>
+            <span>•</span>
+            <span>🛡️ 30-Day Money-Back</span>
+          </div>
 
         </div>
 
@@ -1170,24 +1738,102 @@ const comparisonMatrix = [
         });
       }
 
-      // 2. Buy Box Format Switching Logic
+      // 2. High-Converting In-Line Scientific Bridge Buttons
+      // 2A. Direct 1-Click Buy Now Buttons across the page
+      document.querySelectorAll('.science-direct-buy-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const id = btn.getAttribute('data-id');
+          const title = btn.getAttribute('data-title');
+          const price = parseFloat(btn.getAttribute('data-price')) || 350;
+          const image = btn.getAttribute('data-image');
+          const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
+
+          const originalHtml = btn.innerHTML;
+          btn.innerHTML = `<span class="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin inline-block"></span><span>Preparing...</span>`;
+          btn.style.pointerEvents = 'none';
+
+          try {
+            if (typeof window.directCheckoutItem === 'function') {
+              await window.directCheckoutItem({
+                id: id,
+                title: title,
+                price: price,
+                image: image,
+                subtitle: subtitle,
+                quantity: 1
+              });
+            } else if (typeof window.addItemToLocalCart === 'function') {
+              window.addItemToLocalCart({
+                id: id,
+                title: title,
+                price: price,
+                image: image,
+                subtitle: subtitle,
+                quantity: 1
+              });
+              btn.innerHTML = originalHtml;
+              btn.style.pointerEvents = '';
+            }
+          } catch (err) {
+            console.error("Direct checkout error:", err);
+            btn.innerHTML = originalHtml;
+            btn.style.pointerEvents = '';
+          }
+        });
+      });
+
+      // 2B. Direct Add to Cart Buttons across the page
+      document.querySelectorAll('.science-add-cart-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = btn.getAttribute('data-id');
+          const title = btn.getAttribute('data-title');
+          const price = parseFloat(btn.getAttribute('data-price')) || 350;
+          const image = btn.getAttribute('data-image');
+          const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
+
+          if (typeof window.addItemToLocalCart === 'function') {
+            window.addItemToLocalCart({
+              id: id,
+              title: title,
+              price: price,
+              image: image,
+              subtitle: subtitle,
+              quantity: 1
+            });
+          }
+          const originalText = btn.innerText;
+          btn.innerText = "✓ Added";
+          btn.classList.add('bg-emerald-600', 'text-white');
+          setTimeout(() => {
+            btn.innerText = originalText;
+            btn.classList.remove('bg-emerald-600');
+          }, 1800);
+        });
+      });
+
+      // 3. Bottom Zone 7 Buy Box Logic
       const formatBtns = document.querySelectorAll('.science-format-btn');
       const subCheckbox = document.getElementById('science-sub-checkbox');
-      const ctaPrice = document.getElementById('science-cta-price');
-      const buyBtn = document.getElementById('science-buy-btn');
+      const dynamicPriceSpans = document.querySelectorAll('.science-cta-dynamic-price');
+      const directCheckoutBtn = document.getElementById('science-direct-checkout-btn');
+      const addCartBtn = document.getElementById('science-buy-btn');
 
       let currentProduct = {
-        id: 'sujata_powder_100g',
-        title: 'Raw Spirulina Powder (100g)',
-        price: 600,
-        image: '/spirulina-powder.png',
+        id: 'gid://shopify/ProductVariant/52738357854340',
+        title: 'Sujata Pure Organic Spirulina Powder (100g)',
+        price: 350,
+        image: '/products/sujata-spirulina-powder-pouch.jpg',
         subtitle: 'Sub-40°C Cold Extract'
       };
 
       function updatePricing() {
         const isSubscribed = subCheckbox ? subCheckbox.checked : false;
         const finalPrice = isSubscribed ? Math.round(currentProduct.price * 0.9) : currentProduct.price;
-        if (ctaPrice) ctaPrice.innerText = `₹${finalPrice}`;
+        dynamicPriceSpans.forEach(el => {
+          el.innerText = `₹${finalPrice}`;
+        });
       }
 
       formatBtns.forEach(btn => {
@@ -1200,11 +1846,11 @@ const comparisonMatrix = [
           btn.classList.remove('border-gray-200', 'bg-white');
           btn.classList.add('border-[#166534]', 'bg-emerald-50/50', 'active-format');
 
-          currentProduct.id = btn.getAttribute('data-id') || 'sujata_powder_100g';
-          currentProduct.title = btn.getAttribute('data-title') || 'Raw Spirulina Powder (100g)';
-          currentProduct.price = parseFloat(btn.getAttribute('data-price')) || 600;
-          currentProduct.image = btn.getAttribute('data-image') || '/spirulina-powder.png';
-          currentProduct.subtitle = currentProduct.id.includes('caps') ? '100% Veggie Capsules' : 'Sub-40°C Cold Extract';
+          currentProduct.id = btn.getAttribute('data-id') || 'gid://shopify/ProductVariant/52738357854340';
+          currentProduct.title = btn.getAttribute('data-title') || 'Sujata Pure Organic Spirulina Powder (100g)';
+          currentProduct.price = parseFloat(btn.getAttribute('data-price')) || 350;
+          currentProduct.image = btn.getAttribute('data-image') || '/products/sujata-spirulina-powder-pouch.jpg';
+          currentProduct.subtitle = btn.getAttribute('data-subtitle') || 'Sub-40°C Cold Extract';
 
           updatePricing();
         });
@@ -1212,8 +1858,52 @@ const comparisonMatrix = [
 
       subCheckbox?.addEventListener('change', updatePricing);
 
-      // 3. Fast Add to Cart Button
-      buyBtn?.addEventListener('click', (e) => {
+      // Direct 1-Click Checkout from Bottom Box
+      directCheckoutBtn?.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const isSubscribed = subCheckbox ? subCheckbox.checked : false;
+        const finalPrice = isSubscribed ? Math.round(currentProduct.price * 0.9) : currentProduct.price;
+        const subText = isSubscribed ? 'Monthly Protocol (10% Off)' : currentProduct.subtitle;
+
+        const spinner = directCheckoutBtn.querySelector('.btn-spinner');
+        const textSpan = directCheckoutBtn.querySelector('.btn-text');
+        spinner?.classList.remove('hidden');
+        if (textSpan) textSpan.innerHTML = `<span>Redirecting to Checkout...</span>`;
+        directCheckoutBtn.style.pointerEvents = 'none';
+
+        try {
+          if (typeof window.directCheckoutItem === 'function') {
+            await window.directCheckoutItem({
+              id: currentProduct.id,
+              title: currentProduct.title,
+              subtitle: subText,
+              price: finalPrice,
+              image: currentProduct.image,
+              quantity: 1
+            });
+          } else if (typeof window.addItemToLocalCart === 'function') {
+            window.addItemToLocalCart({
+              id: currentProduct.id,
+              title: currentProduct.title,
+              subtitle: subText,
+              price: finalPrice,
+              image: currentProduct.image,
+              quantity: 1
+            });
+            spinner?.classList.add('hidden');
+            if (textSpan) textSpan.innerHTML = `<span>⚡ Buy Now — Cash on Delivery OK • ₹${finalPrice}</span>`;
+            directCheckoutBtn.style.pointerEvents = '';
+          }
+        } catch (err) {
+          console.error("Direct checkout error:", err);
+          spinner?.classList.add('hidden');
+          if (textSpan) textSpan.innerHTML = `<span>⚡ Buy Now — Cash on Delivery OK • ₹${finalPrice}</span>`;
+          directCheckoutBtn.style.pointerEvents = '';
+        }
+      });
+
+      // Add to Cart from Bottom Box
+      addCartBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         const isSubscribed = subCheckbox ? subCheckbox.checked : false;
         const finalPrice = isSubscribed ? Math.round(currentProduct.price * 0.9) : currentProduct.price;
@@ -1229,6 +1919,14 @@ const comparisonMatrix = [
             quantity: 1
           });
         }
+
+        const originalText = addCartBtn.innerText;
+        addCartBtn.innerText = "✓ Added to Routine";
+        addCartBtn.classList.add('bg-emerald-700');
+        setTimeout(() => {
+          addCartBtn.innerText = originalText;
+          addCartBtn.classList.remove('bg-emerald-700');
+        }, 1800);
       });
     }
 

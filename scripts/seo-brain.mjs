@@ -224,15 +224,23 @@ function generateSeoActionPlan(gscData, ga4Data) {
   }
 
   // GA4 Status
-  console.log('\n📊 GOOGLE ANALYTICS 4 (GA4) STATUS:');
+  console.log('\n📊 GOOGLE ANALYTICS 4 (GA4) TRAFFIC & ENGAGEMENT:');
   if (ga4Data.status === 'MISSING_PROPERTY_ID') {
     console.log('  ℹ️ Measurement ID (G-5WZ8DNW2PD) is active in StoreLayout.astro.');
     console.log('  👉 To unlock automated GA4 traffic reports, add numeric GA4_PROPERTY_ID to .env.');
-    console.log('     (Find it in GA4 -> Admin -> Property Details at top right, e.g. GA4_PROPERTY_ID="467123456")');
   } else if (ga4Data.status === 'SUCCESS') {
-    console.log('  ✅ GA4 Data API connected successfully!');
+    if (ga4Data.report && ga4Data.report.rows && ga4Data.report.rows.length > 0) {
+      console.table(ga4Data.report.rows.map(r => ({
+        Page: r.dimensionValues[0].value,
+        ActiveUsers: r.metricValues[0].value,
+        Pageviews: r.metricValues[1].value,
+        AvgEngageTime: Math.round(Number(r.metricValues[2].value) / (Number(r.metricValues[0].value) || 1)) + 's'
+      })));
+    } else {
+      console.log('  ℹ️ GA4 connected successfully! Traffic data is currently accumulating.');
+    }
   } else {
-    console.log('  ⚠️ GA4 Notice:', ga4Data.error ? JSON.stringify(ga4Data.error) : 'Check access');
+    console.log('  ⚠️ GA4 Notice:', ga4Data.error && ga4Data.error.message ? ga4Data.error.message : JSON.stringify(ga4Data.error));
   }
 
   console.log('\n=============================================================');

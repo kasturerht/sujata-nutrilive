@@ -174,12 +174,37 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
     oldPrice = 499;
   }
 
+  // Clinical Purity Differentiator (NABL tested & scientifically verified)
+  let purityDifferentiator = "NABL Tested • 0.00% Heavy Metals";
+  if (t.includes('powder') && t.includes('spirulina')) {
+    purityDifferentiator = "Sub-40°C Cryo-Milled • 21.4% Phycocyanin";
+  } else if (t.includes('tablet')) {
+    purityDifferentiator = "Sub-40°C Cold Compressed • Zero Binders";
+  } else if (t.includes('capsule') && t.includes('spirulina')) {
+    purityDifferentiator = "100% Plant Veggie Caps • 500mg Pure";
+  } else if (t.includes('b12')) {
+    purityDifferentiator = "Active Methylcobalamin • Zero Cyanide";
+  } else if (t.includes('shilajit')) {
+    purityDifferentiator = ">75% Fulvic Acid • Lead < 0.01 ppm";
+  } else if (t.includes('sea buckthorn')) {
+    purityDifferentiator = "Wild Himalayan • Rare Omega 7";
+  } else if (t.includes('moringa')) {
+    purityDifferentiator = "Raw Leaves • Zero Artificial Colors";
+  } else if (t.includes('combo') || t.includes('bundle')) {
+    purityDifferentiator = "Synergistic Bio-Absorption Protocol";
+  } else if (t.includes('skin') || t.includes('face') || t.includes('cream')) {
+    purityDifferentiator = "Spirulina Botanical • Zero Parabens";
+  } else if (t.includes('hair') || t.includes('shampoo')) {
+    purityDifferentiator = "Ayurvedic Scalp Therapy • Sulphate Free";
+  }
+
   const finalOldPrice = oldPrice;
   const savedPrice = Math.max(0, finalOldPrice - currentPrice);
 
   return {
     tag: customBadge || defaultTag,
     benefit: customBenefit || defaultBenefit,
+    purityDifferentiator,
     rating,
     oldPrice: finalOldPrice,
     savedPrice
@@ -231,10 +256,16 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
       {filteredProducts.map((edge: any, index: number) => {
         const product = edge.node;
         const category = getProductCategory(product);
-        const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.priceV2?.amount || "799";
+        const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.price?.amount || "799";
         const numPrice = parseFloat(priceAmount) || 799;
         const meta = getProductBadgeAndBenefit(product, numPrice);
         const productImg = getImageUrl(product);
+        
+        const rawVariants = product.variants?.edges?.map((e: any) => e.node) || [];
+        const hasMultipleVariants = rawVariants.length > 1;
+        const firstVariant = rawVariants[0];
+        const initialPrice = firstVariant?.price?.amount ? parseFloat(firstVariant.price.amount) : numPrice;
+        const initialCompare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : meta.oldPrice;
 
         return (
           <div class={`product-card-item bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 md:p-5 border border-gray-200/90 shadow-xs hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={category}>
@@ -269,59 +300,106 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
               </a>
 
               {/* Micro-Benefit / Form subtitle */}
-              <span class="text-[9.5px] sm:text-xs text-gray-500 font-medium block truncate mb-2 sm:mb-3">
+              <span class="text-[9.5px] sm:text-xs text-gray-500 font-medium block truncate mb-2">
                 {meta.benefit}
               </span>
+
+              {/* In-Card Multi-Variant Pill Selector or Purity Differentiator (Symmetric min-h-[26px]) */}
+              {hasMultipleVariants ? (
+                <div class="product-variant-pills flex items-center gap-1 mb-2.5 overflow-x-auto no-scrollbar py-0.5 min-h-[26px]">
+                  {rawVariants.slice(0, 3).map((v: any, vIdx: number) => {
+                    const vPrice = parseFloat(v.price?.amount || "0");
+                    const vCompare = v.compareAtPrice?.amount ? parseFloat(v.compareAtPrice.amount) : 0;
+                    const shortTitle = v.title
+                      .replace(/Tablets/i, 'Tabs')
+                      .replace(/Capsules/i, 'Caps')
+                      .replace(/\(500mg\)/i, '')
+                      .replace(/\(30 Days\)/i, '')
+                      .trim();
+                    return (
+                      <button 
+                        type="button" 
+                        class={`variant-pill-btn text-[8.5px] sm:text-[9.5px] font-bold px-2 py-0.5 rounded-lg border transition-all cursor-pointer whitespace-nowrap ${vIdx === 0 ? 'bg-[#166534] text-white border-[#166534] active-pill shadow-xs' : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-400'}`}
+                        data-variant-id={v.id}
+                        data-price={vPrice}
+                        data-compare-price={vCompare}
+                        data-title={v.title}
+                      >
+                        {shortTitle}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div class="min-h-[26px] flex items-center gap-1.5 mb-2.5 text-[8.5px] sm:text-[9.5px] font-mono text-[#166534] bg-emerald-50/70 border border-emerald-100/80 rounded-lg px-2 py-0.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                  <span class="truncate font-semibold">{meta.purityDifferentiator}</span>
+                </div>
+              )}
             </div>
 
             <div>
               {/* Pricing Line */}
-              <div class="flex items-baseline justify-between gap-1 pt-2 sm:pt-3 border-t border-gray-100 mb-2 sm:mb-2.5">
+              <div class="flex items-baseline justify-between gap-1 pt-2 sm:pt-2.5 border-t border-gray-100 mb-2 sm:mb-2.5">
                 <div class="flex items-baseline gap-1 sm:gap-1.5 flex-wrap">
-                  <span class="text-sm sm:text-base md:text-lg font-black text-[#111827] font-sans">
-                    {formatPrice(numPrice)}
+                  <span class="card-current-price text-sm sm:text-base md:text-lg font-black text-[#111827] font-sans">
+                    {formatPrice(initialPrice)}
                   </span>
-                  {meta.oldPrice > numPrice && (
-                    <span class="text-[10px] sm:text-xs text-gray-400 line-through font-sans">
-                      ₹{meta.oldPrice}
-                    </span>
-                  )}
+                  <span class={`card-old-price text-[10px] sm:text-xs text-gray-400 line-through font-sans ${initialCompare > initialPrice ? '' : 'hidden'}`}>
+                    ₹{Math.round(initialCompare)}
+                  </span>
                 </div>
-                {meta.savedPrice > 0 && (
-                  <span class="text-[8px] sm:text-[9.5px] font-black text-[#166534] bg-emerald-50 border border-emerald-100/60 px-1.5 py-0.5 rounded font-sans shrink-0 whitespace-nowrap">
-                    Save ₹{meta.savedPrice}
-                  </span>
-                )}
+                <span class={`card-save-badge text-[8px] sm:text-[9.5px] font-black text-[#166534] bg-emerald-50 border border-emerald-100/60 px-1.5 py-0.5 rounded font-sans shrink-0 whitespace-nowrap ${initialCompare > initialPrice ? '' : 'hidden'}`}>
+                  Save ₹{Math.round(initialCompare - initialPrice)}
+                </span>
               </div>
 
-              {/* Delivery Micro-Badge: Ultra-compact on mobile, dynamic estimator on desktop */}
-              <div class="block sm:hidden text-[8.5px] text-[#166534] font-medium bg-emerald-50/70 border border-emerald-100/70 rounded-lg px-1.5 py-1 mb-2 truncate text-center">
-                🚚 Free COD • 24h Dispatch
+              {/* Delivery Micro-Badge */}
+              <div class="block sm:hidden text-[8px] text-[#166534] font-medium bg-emerald-50/70 border border-emerald-100/70 rounded-lg px-1.5 py-0.5 mb-2 truncate text-center">
+                🚚 Free COD • Dispatches in 24h
               </div>
 
-              <div class="product-delivery-badge hidden sm:flex items-center justify-between gap-1.5 bg-emerald-50/70 border border-emerald-100 rounded-xl px-2.5 py-1.5 mb-3 text-[10px] text-[#064E3B]">
-                <div class="flex items-center gap-1.5 min-w-0">
+              <div class="product-delivery-badge hidden sm:flex items-center justify-between gap-1.5 bg-emerald-50/70 border border-emerald-100 rounded-xl px-2.5 py-1 mb-2.5 text-[9.5px] text-[#064E3B]">
+                <div class="flex items-center gap-1 min-w-0">
                   <span class="text-xs">🚚</span>
-                  <span class="truncate">
-                    <span class="delivery-date-text font-medium text-gray-700">Dispatch in 24h</span>
-                  </span>
+                  <span class="delivery-date-text truncate text-gray-700 font-medium">Dispatches in 24h</span>
                 </div>
-                <span class="text-[9px] font-bold bg-[#166534] text-white px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
+                <span class="text-[8.5px] font-bold bg-[#166534] text-white px-1.5 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
               </div>
 
-              {/* 1-Tap Add To Cart Button */}
-              <button 
-                class="add-to-cart-btn w-full bg-[#111827] hover:bg-[#166534] text-white py-2 sm:py-3.5 rounded-xl font-bold text-[10.5px] sm:text-xs uppercase tracking-wider transition-all shadow-xs active:scale-95 touch-manipulation cursor-pointer flex items-center justify-center gap-1"
-                data-variant-id={product.variants?.edges[0]?.node?.id || ('prod_' + index)}
-                data-title={product.title}
-                data-price={numPrice.toString()}
-                data-image={productImg}
-                data-domain={shopifyDomain}
-                data-token={storefrontToken}
-              >
-                <span>+ Add</span>
-                <span class="hidden sm:inline">To Routine →</span>
-              </button>
+              {/* Dual Action CTAs: 1-Click Buy Now & Add to Routine */}
+              <div class="grid grid-cols-12 gap-1.5">
+                <button 
+                  type="button"
+                  class="hub-direct-buy-btn col-span-8 bg-[#166534] hover:bg-[#15803d] active:scale-[0.98] text-white py-2 sm:py-2.5 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-1 cursor-pointer touch-manipulation group/buy"
+                  data-variant-id={firstVariant?.id || ('prod_' + index)}
+                  data-title={product.title}
+                  data-price={initialPrice.toString()}
+                  data-image={productImg}
+                  data-subtitle={meta.benefit}
+                >
+                  <span class="hub-btn-spinner hidden w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span class="hub-btn-text flex items-center gap-1">
+                    <span>⚡ Buy Now</span>
+                    <span class="hidden xl:inline text-[9px] font-normal opacity-90">(COD)</span>
+                  </span>
+                </button>
+
+                <button 
+                  type="button"
+                  class="hub-add-cart-btn col-span-4 bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-800 border border-gray-200 py-2 sm:py-2.5 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-0.5 cursor-pointer touch-manipulation"
+                  data-variant-id={firstVariant?.id || ('prod_' + index)}
+                  data-title={product.title}
+                  data-price={initialPrice.toString()}
+                  data-image={productImg}
+                  data-subtitle={meta.benefit}
+                  title="Add to cart"
+                >
+                  <span>+ 🛒</span>
+                  <span class="hidden sm:inline text-[9.5px]">Cart</span>
+                </button>
+              </div>
+
             </div>
 
           </div>
@@ -373,6 +451,148 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
     window.addEventListener('hashchange', checkHashFilter);
   }
 
+  function initShopHubInteractions() {
+    // 1. Variant Pill Switching
+    document.querySelectorAll('.product-card-item').forEach(card => {
+      const pills = card.querySelectorAll('.variant-pill-btn');
+      const directBuyBtn = card.querySelector('.hub-direct-buy-btn');
+      const addCartBtn = card.querySelector('.hub-add-cart-btn');
+      const priceSpan = card.querySelector('.card-current-price');
+      const oldPriceSpan = card.querySelector('.card-old-price');
+      const saveBadge = card.querySelector('.card-save-badge');
+
+      pills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          pills.forEach(p => {
+            p.classList.remove('bg-[#166534]', 'text-white', 'border-[#166534]', 'active-pill');
+            p.classList.add('bg-gray-50', 'text-gray-700', 'border-gray-200');
+          });
+
+          pill.classList.remove('bg-gray-50', 'text-gray-700', 'border-gray-200');
+          pill.classList.add('bg-[#166534]', 'text-white', 'border-[#166534]', 'active-pill');
+
+          const variantId = pill.getAttribute('data-variant-id');
+          const price = parseFloat(pill.getAttribute('data-price') || '0');
+          const comparePrice = parseFloat(pill.getAttribute('data-compare-price') || '0');
+
+          if (directBuyBtn) {
+            directBuyBtn.setAttribute('data-variant-id', variantId);
+            directBuyBtn.setAttribute('data-price', price.toString());
+          }
+          if (addCartBtn) {
+            addCartBtn.setAttribute('data-variant-id', variantId);
+            addCartBtn.setAttribute('data-price', price.toString());
+          }
+
+          if (priceSpan) {
+            priceSpan.innerText = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price);
+          }
+
+          if (comparePrice > price) {
+            if (oldPriceSpan) {
+              oldPriceSpan.innerText = `₹${Math.round(comparePrice)}`;
+              oldPriceSpan.classList.remove('hidden');
+            }
+            if (saveBadge) {
+              saveBadge.innerText = `Save ₹${Math.round(comparePrice - price)}`;
+              saveBadge.classList.remove('hidden');
+            }
+          } else {
+            if (oldPriceSpan) oldPriceSpan.classList.add('hidden');
+            if (saveBadge) saveBadge.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // 2. Direct 1-Click Buy Now
+    document.querySelectorAll('.hub-direct-buy-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const id = btn.getAttribute('data-variant-id');
+        const title = btn.getAttribute('data-title');
+        const price = parseFloat(btn.getAttribute('data-price')) || 350;
+        const image = btn.getAttribute('data-image');
+        const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
+
+        const spinner = btn.querySelector('.hub-btn-spinner');
+        const textSpan = btn.querySelector('.hub-btn-text');
+
+        spinner?.classList.remove('hidden');
+        if (textSpan) textSpan.innerHTML = `<span>Preparing...</span>`;
+        btn.style.pointerEvents = 'none';
+
+        try {
+          if (typeof window.directCheckoutItem === 'function') {
+            await window.directCheckoutItem({
+              id: id,
+              title: title,
+              price: price,
+              image: image,
+              subtitle: subtitle,
+              quantity: 1
+            });
+          } else if (typeof window.addItemToLocalCart === 'function') {
+            window.addItemToLocalCart({
+              id: id,
+              title: title,
+              price: price,
+              image: image,
+              subtitle: subtitle,
+              quantity: 1
+            });
+            spinner?.classList.add('hidden');
+            if (textSpan) textSpan.innerHTML = `<span>⚡ Buy Now</span>`;
+            btn.style.pointerEvents = '';
+          }
+        } catch (err) {
+          console.error("Direct checkout error:", err);
+          spinner?.classList.add('hidden');
+          if (textSpan) textSpan.innerHTML = `<span>⚡ Buy Now</span>`;
+          btn.style.pointerEvents = '';
+        }
+      });
+    });
+
+    // 3. Quick-Add to Cart
+    document.querySelectorAll('.hub-add-cart-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const id = btn.getAttribute('data-variant-id');
+        const title = btn.getAttribute('data-title');
+        const price = parseFloat(btn.getAttribute('data-price')) || 350;
+        const image = btn.getAttribute('data-image');
+        const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
+
+        if (typeof window.addItemToLocalCart === 'function') {
+          window.addItemToLocalCart({
+            id: id,
+            title: title,
+            price: price,
+            image: image,
+            subtitle: subtitle,
+            quantity: 1
+          });
+        }
+
+        const origHtml = btn.innerHTML;
+        btn.innerHTML = `<span>✓</span>`;
+        btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+        setTimeout(() => {
+          btn.innerHTML = origHtml;
+          btn.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-600');
+        }, 1500);
+      });
+    });
+  }
+
   function updateDeliveryEstimators() {
     const savedPincode = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || '411001';
     const badges = document.querySelectorAll('.product-delivery-badge .delivery-date-text');
@@ -390,22 +610,21 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initShopHubFilters();
-      updateDeliveryEstimators();
-    });
-  } else {
+  function initAllShopHub() {
     initShopHubFilters();
+    initShopHubInteractions();
     updateDeliveryEstimators();
   }
 
-  document.addEventListener('astro:page-load', () => {
-    initShopHubFilters();
-    updateDeliveryEstimators();
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllShopHub);
+  } else {
+    initAllShopHub();
+  }
 
-  window.addEventListener('pincode-updated', (e) => {
+  document.addEventListener('astro:page-load', initAllShopHub);
+
+  window.addEventListener('pincode-updated', () => {
     updateDeliveryEstimators();
   });
 </script>
