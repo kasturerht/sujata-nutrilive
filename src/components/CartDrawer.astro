@@ -38,18 +38,50 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
   </div>
 
   {/* 4. Drawer Footer (Checkout Section with Safe Area Inset) */}
-  <div class="px-4 sm:px-6 pt-3.5 sm:pt-5 pb-6 sm:pb-8 pb-safe bg-white border-t border-gray-200 shadow-lg shrink-0">
+  <div class="px-4 sm:px-6 pt-3.5 sm:pt-4 pb-6 sm:pb-8 pb-safe bg-white border-t border-gray-200 shadow-lg shrink-0">
     
+    {/* ⚡ High-Conversion Payment Option Selector: 10% UPI vs COD */}
+    <div class="mb-3 p-2 bg-emerald-50/70 border border-emerald-200/80 rounded-xl" id="cart-payment-container">
+      <div class="flex items-center justify-between mb-1.5 px-0.5">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-950 flex items-center gap-1">
+          <span>⚡ Select Payment Method</span>
+        </span>
+        <span class="text-[9px] font-black text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-full uppercase">10% Off on UPI</span>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5" id="cart-payment-tabs">
+        <button 
+          type="button" 
+          id="cart-tab-upi"
+          class="py-2 px-2 rounded-lg text-xs font-bold transition-all text-emerald-950 bg-white border-2 border-emerald-500 shadow-xs flex flex-col items-center justify-center cursor-pointer touch-manipulation group"
+          data-mode="upi"
+        >
+          <span class="text-[10px] text-emerald-800 font-extrabold flex items-center gap-1">⚡ Pay via UPI</span>
+          <span class="text-xs font-black text-emerald-700 mt-0.5" id="cart-upi-total">₹0</span>
+          <span class="text-[9px] font-semibold text-emerald-600" id="cart-upi-save">Save 10%</span>
+        </button>
+        <button 
+          type="button" 
+          id="cart-tab-cod"
+          class="py-2 px-2 rounded-lg text-xs font-bold transition-all text-gray-600 bg-white/70 border-2 border-transparent hover:border-gray-300 flex flex-col items-center justify-center cursor-pointer touch-manipulation group"
+          data-mode="cod"
+        >
+          <span class="text-[10px] text-gray-500 font-semibold flex items-center gap-1">📦 Cash on Delivery</span>
+          <span class="text-xs font-black text-gray-700 mt-0.5" id="cart-cod-total">₹0</span>
+          <span class="text-[9px] font-medium text-gray-400">Regular Price</span>
+        </button>
+      </div>
+    </div>
+
     <div class="flex items-center justify-between mb-1">
-      <span class="text-gray-500 font-medium text-xs uppercase tracking-wider font-sans">Subtotal</span>
-      <span class="text-xl sm:text-2xl font-black text-[#111827] font-sans" id="cart-subtotal">₹0</span>
+      <span class="text-gray-500 font-medium text-xs uppercase tracking-wider font-sans" id="cart-total-label">UPI Payable (10% OFF)</span>
+      <span class="text-xl sm:text-2xl font-black text-emerald-700 font-sans" id="cart-subtotal">₹0</span>
     </div>
     <p class="text-xs text-gray-500 mb-3.5 flex items-center gap-1.5 font-sans">
       <span class="text-[#166534] font-bold">✓</span> Free express shipping & GST included.
     </p>
 
-    <button id="checkout-action-btn" class="w-full bg-[#111827] hover:bg-[#166534] text-white font-bold text-xs uppercase tracking-[0.15em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
-      <span>Proceed to Checkout</span>
+    <button id="checkout-action-btn" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
+      <span id="checkout-btn-text">⚡ Proceed to Pay with UPI</span>
       <span class="text-base">→</span>
     </button>
     
@@ -163,8 +195,55 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         headerBadgeEl.style.display = totalCount > 0 ? 'flex' : 'none';
       }
 
-      // Update Subtotal
-      if (subtotalEl) subtotalEl.innerText = formatINR(totalAmount);
+      // ⚡ Calculate UPI (10% Discount) vs COD Totals
+      const upiTotal = Math.round(totalAmount * 0.9);
+      const upiSavings = totalAmount - upiTotal;
+      const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+
+      const upiTotalEl = document.getElementById('cart-upi-total');
+      const upiSaveEl = document.getElementById('cart-upi-save');
+      const codTotalEl = document.getElementById('cart-cod-total');
+      const totalLabelEl = document.getElementById('cart-total-label');
+      const tabUpiEl = document.getElementById('cart-tab-upi');
+      const tabCodEl = document.getElementById('cart-tab-cod');
+      const checkoutBtn = document.getElementById('checkout-action-btn');
+      const checkoutBtnText = document.getElementById('checkout-btn-text');
+
+      if (upiTotalEl) upiTotalEl.innerText = formatINR(upiTotal);
+      if (upiSaveEl) upiSaveEl.innerText = `Save ₹${upiSavings}`;
+      if (codTotalEl) codTotalEl.innerText = formatINR(totalAmount);
+
+      if (selectedMode === 'upi') {
+        if (subtotalEl) {
+          subtotalEl.innerText = formatINR(upiTotal);
+          subtotalEl.className = 'text-xl sm:text-2xl font-black text-emerald-700 font-sans';
+        }
+        if (totalLabelEl) totalLabelEl.innerText = 'UPI Payable (10% OFF)';
+        if (checkoutBtn) {
+          checkoutBtn.className = 'w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
+        }
+        if (checkoutBtnText) checkoutBtnText.innerText = '⚡ Proceed to Pay with UPI';
+
+        tabUpiEl?.classList.remove('bg-white/70', 'border-transparent', 'text-gray-600');
+        tabUpiEl?.classList.add('bg-white', 'border-emerald-500', 'text-emerald-950', 'shadow-xs');
+        tabCodEl?.classList.remove('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-xs');
+        tabCodEl?.classList.add('bg-white/70', 'border-transparent', 'text-gray-600');
+      } else {
+        if (subtotalEl) {
+          subtotalEl.innerText = formatINR(totalAmount);
+          subtotalEl.className = 'text-xl sm:text-2xl font-black text-[#111827] font-sans';
+        }
+        if (totalLabelEl) totalLabelEl.innerText = 'Payable on Delivery (COD)';
+        if (checkoutBtn) {
+          checkoutBtn.className = 'w-full bg-[#111827] hover:bg-black text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
+        }
+        if (checkoutBtnText) checkoutBtnText.innerText = '📦 Proceed with Cash on Delivery';
+
+        tabCodEl?.classList.remove('bg-white/70', 'border-transparent', 'text-gray-600');
+        tabCodEl?.classList.add('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-xs');
+        tabUpiEl?.classList.remove('bg-white', 'border-emerald-500', 'text-emerald-950', 'shadow-xs');
+        tabUpiEl?.classList.add('bg-white/70', 'border-transparent', 'text-gray-600');
+      }
 
       // Update Free Shipping Progress
       if (shippingBar && shippingText) {
@@ -271,11 +350,13 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     function resetCheckoutBtn() {
       isCheckoutInProgress = false;
       const checkoutBtn = document.getElementById('checkout-action-btn');
+      const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
       if (checkoutBtn) {
         checkoutBtn.disabled = false;
         checkoutBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+        const btnLabel = selectedMode === 'upi' ? '⚡ Proceed to Pay with UPI' : '📦 Proceed with Cash on Delivery';
         checkoutBtn.innerHTML = `
-          <span>Proceed to Checkout</span>
+          <span id="checkout-btn-text">${btnLabel}</span>
           <span class="text-base">→</span>
         `;
       }
@@ -399,11 +480,23 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           }
 
           if (checkoutUrl) {
-            // 🎁 Auto-Apply Saved Discount Code (e.g. PEAK10 from Exit Popup)
-            const savedDiscount = localStorage.getItem('sujata_discount_code') || 'PEAK10';
-            if (savedDiscount && !checkoutUrl.includes('discount=')) {
-              const sep = checkoutUrl.includes('?') ? '&' : '?';
-              checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(savedDiscount)}`;
+            // 🔒 100% Loophole-Proof Payment Discount Routing
+            const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+
+            if (selectedMode === 'upi') {
+              // 🎁 Auto-Apply 10% UPI/Prepaid Discount Code (UPI10 or active fallback PEAK10)
+              const savedDiscount = localStorage.getItem('sujata_discount_code') || 'PEAK10';
+              if (savedDiscount && !checkoutUrl.includes('discount=')) {
+                const sep = checkoutUrl.includes('?') ? '&' : '?';
+                checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(savedDiscount)}`;
+              }
+            } else {
+              // 📦 Cash on Delivery: STRICTLY FULL PRICE! Strip any discount code!
+              try {
+                const urlObj = new URL(checkoutUrl);
+                urlObj.searchParams.delete('discount');
+                checkoutUrl = urlObj.toString();
+              } catch(e) {}
             }
 
             clearTimeout(recoveryTimer);
@@ -431,6 +524,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     // 🌟 Silicon Valley 1-Click Fast Checkout: Bypasses cart drawer friction for mobile & high-intent buyers
     window.directCheckoutItem = async function(product) {
       if (!product || !product.id) return;
+      if (product.paymentMode) {
+        try { localStorage.setItem('sujata_selected_payment_mode', product.paymentMode); } catch(e) {}
+      }
       const items = getLocalCart();
       const existing = items.find(i => i.id === product.id);
       const safeQty = Math.max(1, Math.min(10, parseInt(product.quantity) || 1));
@@ -474,6 +570,21 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       if (e.target.closest('#cart-drawer-trigger') || e.target.closest('.open-cart-trigger')) {
         e.preventDefault();
         window.openSujataCart();
+      }
+
+      // ⚡ Cart Payment Mode Switcher Clicks
+      const tabUpiClick = e.target.closest('#cart-tab-upi');
+      if (tabUpiClick) {
+        e.preventDefault();
+        try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
+        window.renderSujataCart();
+      }
+
+      const tabCodClick = e.target.closest('#cart-tab-cod');
+      if (tabCodClick) {
+        e.preventDefault();
+        try { localStorage.setItem('sujata_selected_payment_mode', 'cod'); } catch(e) {}
+        window.renderSujataCart();
       }
 
       // Quantity buttons (+ / -)

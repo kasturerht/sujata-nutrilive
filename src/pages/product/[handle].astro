@@ -767,39 +767,44 @@ const breadcrumbSchema = {
               </div>
             )}
 
-            {/* 🌟 Compact Modern Purchase Option Switcher */}
+            {/* 🌟 Silicon Valley High-Conversion Payment Option Selector: 10% UPI vs COD */}
             <div class="mb-5 border-t border-gray-100 pt-4">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">Select Purchase Option</span>
-                <span class="text-[10px] text-emerald-800 font-bold uppercase tracking-wider bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/50">Pause or Cancel Anytime</span>
+                <span class="text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">Select Payment Option</span>
+                <span class="text-[10px] text-emerald-800 font-extrabold uppercase tracking-wider bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  ⚡ Instant 10% Off on UPI
+                </span>
               </div>
-              <div class="grid grid-cols-2 p-1 bg-gray-100/90 rounded-2xl border border-gray-200/70 gap-1.5" id="purchase-option-tabs">
-                {/* One-Time Button */}
+              <div class="grid grid-cols-2 p-1.5 bg-gray-100/90 rounded-2xl border border-gray-200/80 gap-2" id="payment-option-tabs">
+                {/* ⚡ UPI / Online Button (Default / Recommended) */}
                 <button 
                   type="button" 
-                  id="tab-onetime"
-                  class="purchase-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-[#111827] bg-white shadow-xs border border-black/5 flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
-                  data-value="onetime"
+                  id="tab-upi"
+                  class="payment-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-[#064E3B] bg-white shadow-sm border-2 border-emerald-500 flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group relative"
+                  data-value="upi"
                 >
-                  <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">One-Time Shipment</span>
-                  <span class="text-sm font-black text-[#111827]" id="onetime-price-label">₹{formatINR(initialPrice)}</span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-[10px] text-emerald-800 uppercase tracking-wider font-extrabold">⚡ UPI / Online</span>
+                    <span class="text-[9px] bg-emerald-600 text-white font-black px-1.5 py-0.2 rounded-full uppercase">10% OFF</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="text-sm font-black text-emerald-700" id="upi-price-label">₹{formatINR(Math.round(initialPrice * 0.9))}</span>
+                    <span class="text-[10px] text-gray-400 line-through" id="upi-old-price">₹{formatINR(initialPrice)}</span>
+                  </div>
+                  <span class="text-[9px] font-semibold text-emerald-600" id="upi-save-label">Save ₹{formatINR(initialPrice - Math.round(initialPrice * 0.9))} instantly</span>
                 </button>
                 
-                {/* Subscribe & Save Button */}
+                {/* 📦 Cash on Delivery Button */}
                 <button 
                   type="button" 
-                  id="tab-subscribe"
-                  class="purchase-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
-                  data-value="subscribe"
+                  id="tab-cod"
+                  class="payment-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] border-2 border-transparent flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
+                  data-value="cod"
                 >
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Subscribe & Save</span>
-                    <span class="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.2 rounded-full uppercase">10% Off</span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-sm font-black text-emerald-700" id="subscribe-price-label">₹{formatINR(initialPrice * 0.9)}</span>
-                    <span class="text-[10px] text-gray-400 line-through" id="subscribe-old-price">₹{formatINR(initialPrice)}</span>
-                  </div>
+                  <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">📦 Cash on Delivery</span>
+                  <span class="text-sm font-black text-[#111827] mt-0.5" id="cod-price-label">₹{formatINR(initialPrice)}</span>
+                  <span class="text-[9px] font-medium text-gray-400">Regular • Pay at Door</span>
                 </button>
               </div>
             </div>
@@ -1824,8 +1829,8 @@ const breadcrumbSchema = {
       const buyNowBtnText = document.getElementById('buy-now-btn-text');
       const stickyBuyNowText = document.getElementById('sticky-buynow-text');
       const badgeElement = document.getElementById('display-discount-badge');
-      const tabOnetime = document.getElementById('tab-onetime');
-      const tabSubscribe = document.getElementById('tab-subscribe');
+      const tabUpi = document.getElementById('tab-upi');
+      const tabCod = document.getElementById('tab-cod');
       const btnTextElement = document.getElementById('btn-text');
 
       function formatINRClient(val) {
@@ -1848,13 +1853,15 @@ const breadcrumbSchema = {
         baseCompare: fallbackBaseCompare,
         variantId: initialSelectedVariant ? initialSelectedVariant.getAttribute('data-variant-id') : (atcBtn?.getAttribute('data-variant-id') || ''),
         variantTitle: initialSelectedVariant ? initialSelectedVariant.getAttribute('data-title') : (atcBtn?.getAttribute('data-title') || ''),
-        purchaseMode: 'onetime' // 'onetime' | 'subscribe'
+        paymentMode: 'upi' // 'upi' (Default - 10% Instant Off) | 'cod' (Standard Price)
       };
 
       // Pure functional UI render: Computes strictly from productState without mutating base values
       function renderProductPricing() {
-        const isSubscribe = productState.purchaseMode === 'subscribe';
-        const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
+        const isUpi = productState.paymentMode === 'upi';
+        const upiPrice = Math.round(productState.basePrice * 0.9);
+        const upiSave = productState.basePrice - upiPrice;
+        const currentPrice = isUpi ? upiPrice : productState.basePrice;
         const currentCompare = productState.baseCompare > productState.basePrice 
           ? productState.baseCompare 
           : (productState.basePrice > 0 ? Math.round(productState.basePrice * 1.3) : 0);
@@ -1864,64 +1871,77 @@ const breadcrumbSchema = {
         if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
 
         // 2. Update Compare Price & Discount Badges
-        if (currentCompare > currentPrice) {
-          const totalPct = Math.round(((currentCompare - currentPrice) / currentCompare) * 100);
+        if (isUpi) {
           if (comparePriceDisplay) {
-            comparePriceDisplay.innerText = `₹${formatINRClient(currentCompare)}`;
+            comparePriceDisplay.innerText = `₹${formatINRClient(productState.basePrice)}`;
             comparePriceDisplay.classList.remove('hidden');
           }
           if (badgeElement) {
-            badgeElement.innerText = isSubscribe ? `Save ${totalPct}% (10% Sub)` : `Save ${totalPct}%`;
+            badgeElement.innerText = `⚡ 10% UPI OFF (Save ₹${formatINRClient(upiSave)})`;
             badgeElement.classList.remove('hidden');
           }
         } else {
-          if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
-          if (badgeElement) badgeElement.classList.add('hidden');
+          if (currentCompare > currentPrice) {
+            const totalPct = Math.round(((currentCompare - currentPrice) / currentCompare) * 100);
+            if (comparePriceDisplay) {
+              comparePriceDisplay.innerText = `₹${formatINRClient(currentCompare)}`;
+              comparePriceDisplay.classList.remove('hidden');
+            }
+            if (badgeElement) {
+              badgeElement.innerText = `Save ${totalPct}%`;
+              badgeElement.classList.remove('hidden');
+            }
+          } else {
+            if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
+            if (badgeElement) badgeElement.classList.add('hidden');
+          }
         }
 
-        // 3. Update Purchase Option Tab Labels (Deterministic from immutable basePrice)
-        const labelOnetime = document.getElementById('onetime-price-label');
-        const labelSubscribe = document.getElementById('subscribe-price-label');
-        const labelOldSubscribe = document.getElementById('subscribe-old-price');
+        // 3. Update Payment Tab Labels
+        const labelUpi = document.getElementById('upi-price-label');
+        const labelOldUpi = document.getElementById('upi-old-price');
+        const labelSaveUpi = document.getElementById('upi-save-label');
+        const labelCod = document.getElementById('cod-price-label');
 
-        if (labelOnetime) labelOnetime.innerText = `₹${formatINRClient(productState.basePrice)}`;
-        if (labelSubscribe) labelSubscribe.innerText = `₹${formatINRClient(Math.round(productState.basePrice * 0.9))}`;
-        if (labelOldSubscribe) labelOldSubscribe.innerText = `₹${formatINRClient(productState.basePrice)}`;
+        if (labelUpi) labelUpi.innerText = `₹${formatINRClient(upiPrice)}`;
+        if (labelOldUpi) labelOldUpi.innerText = `₹${formatINRClient(productState.basePrice)}`;
+        if (labelSaveUpi) labelSaveUpi.innerText = `Save ₹${formatINRClient(upiSave)} instantly`;
+        if (labelCod) labelCod.innerText = `₹${formatINRClient(productState.basePrice)}`;
 
         // 4. Update ATC & Buy Now Buttons Payload Attributes
-        const atcSubtitle = isSubscribe ? 'Monthly Protocol (10% Off)' : 'Standard Single Shipment';
+        const atcSubtitle = isUpi ? '⚡ 10% Instant UPI / Prepaid Discount' : '📦 Standard Cash on Delivery';
         [atcBtn, stickyAtcBtn, buyNowBtn, stickyBuyNowBtn].forEach(btn => {
           if (!btn) return;
-          btn.setAttribute('data-purchase-type', productState.purchaseMode);
+          btn.setAttribute('data-payment-mode', productState.paymentMode);
           btn.setAttribute('data-current-price', currentPrice);
-          btn.setAttribute('data-price', currentPrice);
+          btn.setAttribute('data-price', productState.basePrice); // Base price for cart
           btn.setAttribute('data-variant-id', productState.variantId);
           btn.setAttribute('data-subtitle', atcSubtitle);
         });
 
         // 5. Update Tab Active Visual Styling
-        if (isSubscribe) {
-          tabSubscribe?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabSubscribe?.classList.remove('text-gray-600');
-          tabOnetime?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabOnetime?.classList.add('text-gray-600');
+        if (isUpi) {
+          tabUpi?.classList.add('bg-white', 'text-[#064E3B]', 'shadow-sm', 'border-emerald-500');
+          tabUpi?.classList.remove('text-gray-600', 'border-transparent');
+          tabCod?.classList.remove('bg-white', 'text-[#111827]', 'shadow-sm', 'border-gray-800');
+          tabCod?.classList.add('text-gray-600', 'border-transparent');
 
           if (buyNowBtnText) {
-            buyNowBtnText.innerHTML = `<span class="text-base animate-pulse">⚡</span><span>Subscribe Now (Save 10% Every Month)</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
+            buyNowBtnText.innerHTML = `<span class="text-base animate-pulse">⚡</span><span>Pay via UPI — ₹${formatINRClient(upiPrice)} (Save ₹${formatINRClient(upiSave)})</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
           }
-          if (stickyBuyNowText) stickyBuyNowText.innerText = "Subscribe";
-          if (btnTextElement) btnTextElement.innerText = "Add Subscription to Cart";
+          if (stickyBuyNowText) stickyBuyNowText.innerText = `UPI ₹${formatINRClient(upiPrice)}`;
+          if (btnTextElement) btnTextElement.innerText = "Add to Cart (10% OFF)";
           if (stickyBtnText) stickyBtnText.innerText = "Cart";
         } else {
-          tabOnetime?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabOnetime?.classList.remove('text-gray-600');
-          tabSubscribe?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-black/5');
-          tabSubscribe?.classList.add('text-gray-600');
+          tabCod?.classList.add('bg-white', 'text-[#111827]', 'shadow-sm', 'border-gray-800');
+          tabCod?.classList.remove('text-gray-600', 'border-transparent');
+          tabUpi?.classList.remove('bg-white', 'text-[#064E3B]', 'shadow-sm', 'border-emerald-500');
+          tabUpi?.classList.add('text-gray-600', 'border-transparent');
 
           if (buyNowBtnText) {
-            buyNowBtnText.innerHTML = `<span class="text-base animate-pulse">⚡</span><span>Buy Now — Cash on Delivery Available</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
+            buyNowBtnText.innerHTML = `<span>📦</span><span>Order with Cash on Delivery — ₹${formatINRClient(productState.basePrice)}</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
           }
-          if (stickyBuyNowText) stickyBuyNowText.innerText = "Buy Now";
+          if (stickyBuyNowText) stickyBuyNowText.innerText = `COD ₹${formatINRClient(productState.basePrice)}`;
           if (btnTextElement) btnTextElement.innerText = "Add to Cart";
           if (stickyBtnText) stickyBtnText.innerText = "Cart";
         }
@@ -1971,17 +1991,19 @@ const breadcrumbSchema = {
         });
       });
 
-      // Purchase Option Segmented Switcher Interactions
-      tabOnetime?.addEventListener('click', () => {
-        if (productState.purchaseMode !== 'onetime') {
-          productState.purchaseMode = 'onetime';
+      // Payment Option Switcher Interactions
+      tabUpi?.addEventListener('click', () => {
+        if (productState.paymentMode !== 'upi') {
+          productState.paymentMode = 'upi';
+          try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
           renderProductPricing();
         }
       });
 
-      tabSubscribe?.addEventListener('click', () => {
-        if (productState.purchaseMode !== 'subscribe') {
-          productState.purchaseMode = 'subscribe';
+      tabCod?.addEventListener('click', () => {
+        if (productState.paymentMode !== 'cod') {
+          productState.paymentMode = 'cod';
+          try { localStorage.setItem('sujata_selected_payment_mode', 'cod'); } catch(e) {}
           renderProductPricing();
         }
       });
@@ -1998,9 +2020,8 @@ const breadcrumbSchema = {
         const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
           ? `${baseTitle} - ${productState.variantTitle}`
           : baseTitle;
-        const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
-        const isSubscribe = productState.purchaseMode === 'subscribe';
-        const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
+        const isUpi = productState.paymentMode === 'upi';
+        const subtitle = isUpi ? '⚡ 10% Instant UPI Discount' : '📦 Standard Cash on Delivery';
         const image = btn.getAttribute('data-image') || document.getElementById('main-pdp-image')?.getAttribute('src') || '/spirulina-bottle.png';
 
         if (typeof window.addItemToLocalCart === 'function') {
@@ -2008,7 +2029,7 @@ const breadcrumbSchema = {
             id,
             title,
             subtitle,
-            price: Math.round(currentPrice),
+            price: Math.round(productState.basePrice),
             image,
             quantity: 1
           });
@@ -2027,10 +2048,13 @@ const breadcrumbSchema = {
         const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
           ? `${baseTitle} - ${productState.variantTitle}`
           : baseTitle;
-        const subtitle = btn.getAttribute('data-subtitle') || 'Standard Single Shipment';
-        const isSubscribe = productState.purchaseMode === 'subscribe';
-        const currentPrice = isSubscribe ? Math.round(productState.basePrice * 0.9) : productState.basePrice;
+        const isUpi = productState.paymentMode === 'upi';
+        const subtitle = isUpi ? '⚡ 10% Instant UPI Discount' : '📦 Standard Cash on Delivery';
         const image = btn.getAttribute('data-image') || document.getElementById('main-pdp-image')?.getAttribute('src') || '/spirulina-bottle.png';
+
+        try {
+          localStorage.setItem('sujata_selected_payment_mode', productState.paymentMode);
+        } catch(e) {}
 
         const spinner = btn.querySelector('.animate-spin') || document.getElementById('buy-now-spinner') || document.getElementById('sticky-buynow-spinner');
         if (spinner) spinner.classList.remove('hidden');
@@ -2039,7 +2063,8 @@ const breadcrumbSchema = {
           id,
           title,
           subtitle,
-          price: Math.round(currentPrice),
+          price: Math.round(productState.basePrice),
+          paymentMode: productState.paymentMode,
           image,
           quantity: 1
         };
