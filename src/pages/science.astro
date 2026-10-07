@@ -1354,14 +1354,14 @@ const scienceSchemas = [
                 <div class="sm:col-span-5 aspect-square rounded-2xl overflow-hidden bg-black/40 border border-white/5 p-3 flex items-center justify-center">
                   <img 
                     src="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png" 
-                    alt="Sujata Daily Super Immunity Combo" 
+                    alt="Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack" 
                     class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
                     loading="lazy"
                   />
                 </div>
                 <div class="sm:col-span-7">
                   <h4 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
-                    Daily Super Immunity Synergy Combo
+                    Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack
                   </h4>
                   <p class="text-xs text-emerald-100/70 font-light leading-relaxed mb-4">
                     The clinical co-administration of water-soluble C-Phycocyanin and lipophilic Himalayan Sea Buckthorn (Omega 3, 6, 7 & 9) for 360° cellular membrane defense.
@@ -1369,7 +1369,7 @@ const scienceSchemas = [
                   <div class="space-y-1 text-[11px] text-gray-300 font-mono">
                     <div class="flex items-center gap-1.5">
                       <span class="text-emerald-400">●</span>
-                      <span>90 Spirulina Tablets + 60 Sea Buckthorn Caps</span>
+                      <span>Spirulina + Sea Buckthorn Daily Synergy</span>
                     </div>
                     <div class="flex items-center gap-1.5">
                       <span class="text-amber-400">●</span>
@@ -1378,37 +1378,76 @@ const scienceSchemas = [
                   </div>
                 </div>
               </div>
+
+              {/* Plan Switcher Pills */}
+              <div class="science-combo-pills flex items-center gap-1.5 mb-4 overflow-x-auto no-scrollbar py-0.5">
+                <button 
+                  type="button" 
+                  class="science-combo-pill active-combo-pill text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer whitespace-nowrap bg-emerald-500 text-black border-emerald-400 shadow-sm"
+                  data-variant-id="gid://shopify/ProductVariant/52759081779332"
+                  data-price="1100"
+                  data-old-price="1430"
+                  data-save="330"
+                  data-title="1-Month Plan"
+                >
+                  1-Month Plan
+                </button>
+                <button 
+                  type="button" 
+                  class="science-combo-pill text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer whitespace-nowrap bg-white/10 text-gray-300 border-white/10 hover:border-white/30"
+                  data-variant-id="gid://shopify/ProductVariant/52759081812100"
+                  data-price="1900"
+                  data-old-price="2470"
+                  data-save="570"
+                  data-title="2-Month Plan"
+                >
+                  2-Month Plan
+                </button>
+                <button 
+                  type="button" 
+                  class="science-combo-pill text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer whitespace-nowrap bg-white/10 text-gray-300 border-white/10 hover:border-white/30"
+                  data-variant-id="gid://shopify/ProductVariant/52759081844868"
+                  data-price="2700"
+                  data-old-price="3510"
+                  data-save="810"
+                  data-title="3-Month Plan"
+                >
+                  3-Month Plan
+                </button>
+              </div>
             </div>
 
             <div class="pt-4 border-t border-white/10">
               <div class="flex items-baseline justify-between mb-4">
                 <div class="flex items-baseline gap-2">
-                  <span class="text-2xl font-black text-white font-sans">₹950</span>
-                  <span class="text-xs text-gray-400 line-through">₹1,498</span>
+                  <span id="science-combo-price" class="text-2xl font-black text-white font-sans">₹1,100</span>
+                  <span id="science-combo-old-price" class="text-xs text-gray-400 line-through">₹1,430</span>
                 </div>
-                <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 36%</span>
+                <span id="science-combo-save-badge" class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE ₹330</span>
               </div>
 
               <div class="grid grid-cols-2 gap-3 mb-2">
                 <button 
+                  id="science-combo-buy-btn"
                   type="button"
                   class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
-                  data-id="gid://shopify/ProductVariant/52738358444164"
-                  data-title="Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)"
-                  data-price="950"
+                  data-id="gid://shopify/ProductVariant/52759081779332"
+                  data-title="Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack"
+                  data-price="1100"
                   data-image="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png"
-                  data-subtitle="Spirulina Tablets + Sea Buckthorn Capsules Synergy"
+                  data-subtitle="1-Month Plan • All-Day Energy, Immunity & Skin Synergy"
                 >
                   <span>⚡ Buy Now</span>
                 </button>
                 <button 
+                  id="science-combo-cart-btn"
                   type="button"
                   class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
-                  data-id="gid://shopify/ProductVariant/52738358444164"
-                  data-title="Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)"
-                  data-price="950"
+                  data-id="gid://shopify/ProductVariant/52759081779332"
+                  data-title="Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack"
+                  data-price="1100"
                   data-image="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png"
-                  data-subtitle="Spirulina Tablets + Sea Buckthorn Capsules Synergy"
+                  data-subtitle="1-Month Plan • All-Day Energy, Immunity & Skin Synergy"
                 >
                   <span>+ Add to Cart</span>
                 </button>
@@ -1416,7 +1455,7 @@ const scienceSchemas = [
 
               <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
                 <span>Free Express Shipping • COD OK</span>
-                <a href="/product/sujata-spirulina-sea-buckthorn-combo" class="hover:text-emerald-300 underline transition-colors">View Synergy Specs →</a>
+                <a href="/product/sujata-spirulina-sea-buckthorn-combo-pack" class="hover:text-emerald-300 underline transition-colors">View Synergy Specs →</a>
               </div>
             </div>
           </div>
@@ -1810,6 +1849,48 @@ const scienceSchemas = [
             btn.innerText = originalText;
             btn.classList.remove('bg-emerald-600');
           }, 1800);
+        });
+      });
+
+      // 2C. Combo Plan Switcher Pills on Science Page
+      const comboPills = document.querySelectorAll('.science-combo-pill');
+      const comboBuyBtn = document.getElementById('science-combo-buy-btn');
+      const comboCartBtn = document.getElementById('science-combo-cart-btn');
+      const comboPriceEl = document.getElementById('science-combo-price');
+      const comboOldPriceEl = document.getElementById('science-combo-old-price');
+      const comboSaveBadge = document.getElementById('science-combo-save-badge');
+
+      comboPills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.preventDefault();
+          comboPills.forEach(p => {
+            p.classList.remove('bg-emerald-500', 'text-black', 'border-emerald-400', 'shadow-sm', 'active-combo-pill');
+            p.classList.add('bg-white/10', 'text-gray-300', 'border-white/10');
+          });
+
+          pill.classList.remove('bg-white/10', 'text-gray-300', 'border-white/10');
+          pill.classList.add('bg-emerald-500', 'text-black', 'border-emerald-400', 'shadow-sm', 'active-combo-pill');
+
+          const variantId = pill.getAttribute('data-variant-id');
+          const price = parseFloat(pill.getAttribute('data-price') || '1100');
+          const oldPrice = pill.getAttribute('data-old-price') || '1430';
+          const save = pill.getAttribute('data-save') || '330';
+          const title = pill.getAttribute('data-title') || '1-Month Plan';
+
+          if (comboBuyBtn) {
+            comboBuyBtn.setAttribute('data-id', variantId);
+            comboBuyBtn.setAttribute('data-price', price.toString());
+            comboBuyBtn.setAttribute('data-subtitle', `${title} • All-Day Energy, Immunity & Skin Synergy`);
+          }
+          if (comboCartBtn) {
+            comboCartBtn.setAttribute('data-id', variantId);
+            comboCartBtn.setAttribute('data-price', price.toString());
+            comboCartBtn.setAttribute('data-subtitle', `${title} • All-Day Energy, Immunity & Skin Synergy`);
+          }
+
+          if (comboPriceEl) comboPriceEl.innerText = `₹${price.toLocaleString('en-IN')}`;
+          if (comboOldPriceEl) comboOldPriceEl.innerText = `₹${oldPrice}`;
+          if (comboSaveBadge) comboSaveBadge.innerText = `SAVE ₹${save}`;
         });
       });
 
