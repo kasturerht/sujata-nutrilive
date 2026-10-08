@@ -38,7 +38,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const SITE_URL = env.PUBLIC_SITE_URL ? env.PUBLIC_SITE_URL.replace(/\/$/, '') + '/' : 'https://sujatanutrilive.com/';
+const SITE_URL = env.PUBLIC_SITE_URL ? env.PUBLIC_SITE_URL.replace(/\/$/, '') + '/' : 'https://www.sujatanutrilive.com/';
 const GA4_PROPERTY_ID = env.GA4_PROPERTY_ID || '';
 
 // 2. Google OAuth2 JWT Generator (Native zero-dependency RSA-SHA256)

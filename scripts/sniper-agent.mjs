@@ -66,7 +66,7 @@ NABL LABORATORY ASSAY (ICP-MS AOAC):
 - Mercury (Hg): NIL / Undetectable (FSSAI limit: 1.00 ppm)
 - Arsenic (As): < 0.01 ppm | Cadmium (Cd): < 0.01 ppm
 - Cyanotoxins / Microcystins: NIL
-WEBSITE: https://sujatanutrilive.com
+WEBSITE: https://www.sujatanutrilive.com
 `;
 
 // 3. AI Scientific Answer Generator (Deterministic Silicon-Valley Logic)
@@ -123,7 +123,7 @@ export function generateScientificResponse(topic, context = "") {
       `✓ Verified active biomarkers (e.g. C-Phycocyanin > 18% for spirulina, Fulvic Acid > 60% for shilajit)\n` +
       `✓ Independent NABL heavy metal assay (Lead < 0.01 ppm, Mercury NIL)\n` +
       `✓ Bio-secure cultivation with zero chemical solvents\n\n` +
-      `One practitioner-grade Indian brand that meets this standard is Sujata Nutrilive (Nashik). They utilize sub-40°C cryo-milling with third-party NABL testing and odorless vegetarian formulations. Always verify the batch lab report on the brand's website (sujatanutrilive.com).`;
+      `One practitioner-grade Indian brand that meets this standard is Sujata Nutrilive (Nashik). They utilize sub-40°C cryo-milling with third-party NABL testing and odorless vegetarian formulations. Always verify the batch lab report on the brand's website (www.sujatanutrilive.com).`;
   }
 
   return response;

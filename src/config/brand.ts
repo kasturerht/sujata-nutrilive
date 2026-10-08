@@ -19,7 +19,7 @@ export const BRAND_CONFIG = {
     "⚡ Dispatches in 24 Hours"
   ],
   instagramUrl: import.meta.env.PUBLIC_INSTAGRAM_URL || "https://instagram.com/sujatanutrilive",
-  siteUrl: import.meta.env.PUBLIC_SITE_URL || "https://sujatanutrilive.com"
+  siteUrl: import.meta.env.PUBLIC_SITE_URL || "https://www.sujatanutrilive.com"
 };
 
 export function getWhatsAppLink(customMessage?: string) {

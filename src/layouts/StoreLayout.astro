@@ -25,7 +25,7 @@ const {
   extraSchema = []
 } = Astro.props;
 
-const siteUrl = BRAND_CONFIG.siteUrl || "https://sujatanutrilive.com";
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageURL = new URL(image, siteUrl).toString();
 

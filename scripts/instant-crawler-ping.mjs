@@ -38,7 +38,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const SITE_URL = env.PUBLIC_SITE_URL ? env.PUBLIC_SITE_URL.replace(/\/$/, '') : 'https://sujatanutrilive.com';
+const SITE_URL = env.PUBLIC_SITE_URL ? env.PUBLIC_SITE_URL.replace(/\/$/, '') : 'https://www.sujatanutrilive.com';
 const INDEXNOW_KEY = 'sujatanutrilive2026indexer';
 
 // 2. Google OAuth2 JWT Generator
@@ -108,9 +108,9 @@ async function pingIndexNow(urls) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
-        host: 'sujatanutrilive.com',
+        host: 'www.sujatanutrilive.com',
         key: INDEXNOW_KEY,
-        keyLocation: 'https://sujatanutrilive.com/indexnow-key.txt',
+        keyLocation: 'https://www.sujatanutrilive.com/indexnow-key.txt',
         urlList: urls
       })
     });

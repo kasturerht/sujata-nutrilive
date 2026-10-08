@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
-const siteUrl = process.env.PUBLIC_SITE_URL || 'https://sujatanutrilive.com';
+const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.sujatanutrilive.com';
 
 export default defineConfig({
   site: siteUrl,

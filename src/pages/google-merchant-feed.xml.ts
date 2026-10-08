@@ -56,7 +56,7 @@ function sanitizeForGoogleCompliance(title: string, desc: string): { title: stri
 }
 
 export const GET: APIRoute = async () => {
-  const siteUrl = BRAND_CONFIG.siteUrl || 'https://sujatanutrilive.com';
+  const siteUrl = BRAND_CONFIG.siteUrl || 'https://www.sujatanutrilive.com';
   const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || 'tvczdq-nu.myshopify.com';
   const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || '7e0a0176aede63ce4c6b199e18684018';
 

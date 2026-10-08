@@ -61,4 +61,4 @@ Disallow: /api/
 Disallow: /thank-you
 
 # 3. Canonical Sitemap Index
-Sitemap: https://sujatanutrilive.com/sitemap-index.xml
+Sitemap: https://www.sujatanutrilive.com/sitemap-index.xml
