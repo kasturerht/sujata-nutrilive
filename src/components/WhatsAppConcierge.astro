@@ -1,0 +1,42 @@
+---
+// src/components/WhatsAppConcierge.astro
+import { getWhatsAppLink } from '../config/brand';
+
+interface Props {
+  customMessage?: string;
+}
+
+const { 
+  customMessage = "Hello Sujata Nutrilive! I have a question regarding your Spirulina & Sea Buckthorn products before ordering."
+} = Astro.props;
+
+const waUrl = getWhatsAppLink(customMessage);
+---
+
+<!-- 💬 SILICON VALLEY-STYLE LUXURY WHATSAPP CONCIERGE (Desktop / Tablet) -->
+<aside 
+  id="desktop-whatsapp-concierge" 
+  class="hidden md:flex fixed bottom-6 right-6 z-[95] items-center gap-3 bg-[#022C22]/95 backdrop-blur-xl border border-emerald-500/30 pl-3.5 pr-4 py-2.5 rounded-full shadow-[0_12px_32px_rgba(0,0,0,0.35)] hover:border-emerald-400 hover:scale-[1.03] active:scale-95 transition-all duration-300 group cursor-pointer"
+>
+  <a 
+    href={waUrl}
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="flex items-center gap-2.5 text-white no-underline"
+    aria-label="Chat with Nutritionist on WhatsApp"
+  >
+    <div class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#25D366] text-white shadow-md group-hover:rotate-12 transition-transform">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.83.896 2.796.896 3.182 0 5.768-2.587 5.768-5.766.001-3.182-2.585-5.783-5.768-5.783zm9.969 5.766c0 5.516-4.484 10-10 10-1.748 0-3.385-.45-4.814-1.238l-7.186 1.883 1.916-7.004c-.854-1.488-1.348-3.218-1.348-5.054 0-5.517 4.484-10 10-10 5.516 0 10 4.483 10 10z"/>
+      </svg>
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-300 absolute -top-0.5 -right-0.5 border-2 border-[#022C22] animate-pulse"></span>
+    </div>
+    <div class="flex flex-col text-left">
+      <span class="text-[11px] font-bold text-white font-sans flex items-center gap-1.5 leading-tight">
+        <span>Chat with Nutritionist</span>
+        <span class="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-1 py-0.2 rounded font-sans uppercase font-extrabold">Online</span>
+      </span>
+      <span class="text-[9.5px] text-emerald-200/70 font-sans leading-tight">Free Advice & Instant Orders</span>
+    </div>
+  </a>
+</aside>

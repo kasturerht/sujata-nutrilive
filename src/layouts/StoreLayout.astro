@@ -3,6 +3,7 @@
 import CartDrawer from '../components/CartDrawer.astro';
 import StoreSearchModal from '../components/StoreSearchModal.astro';
 import StoreBottomNav from '../components/StoreBottomNav.astro';
+import WhatsAppConcierge from '../components/WhatsAppConcierge.astro';
 import { BRAND_CONFIG } from '../config/brand';
 
 interface Props {
@@ -649,6 +650,7 @@ const unifiedSchemaGraph = {
     )}
     <slot />
     <CartDrawer />
+    <WhatsAppConcierge />
     <StoreSearchModal />
     {!hideBottomNav && <StoreBottomNav />}
 

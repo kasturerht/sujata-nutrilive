@@ -2,7 +2,7 @@
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
-import { BRAND_CONFIG } from '../../config/brand';
+import { BRAND_CONFIG, getWhatsAppLink } from '../../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -870,6 +870,28 @@ const breadcrumbSchema = {
                 <span id="btn-text">Add to Cart</span>
                 <svg id="btn-spinner" class="w-4 h-4 text-[#111827] animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
               </button>
+            </div>
+
+            <!-- 💬 WhatsApp Consultation & Quick Order (High Trust for Indian Health Shoppers) -->
+            <div class="mt-3.5 p-3 rounded-xl bg-emerald-50/80 border border-emerald-200 flex items-center justify-between gap-3 shadow-xs">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.83.896 2.796.896 3.182 0 5.768-2.587 5.768-5.766.001-3.182-2.585-5.783-5.768-5.783zm9.969 5.766c0 5.516-4.484 10-10 10-1.748 0-3.385-.45-4.814-1.238l-7.186 1.883 1.916-7.004c-.854-1.488-1.348-3.218-1.348-5.054 0-5.517 4.484-10 10-10 5.516 0 10 4.483 10 10z"/></svg>
+                </div>
+                <div>
+                  <p class="text-[11px] font-bold text-emerald-950 leading-tight">Have dosage or health questions?</p>
+                  <p class="text-[10px] text-emerald-800 leading-tight">Free Doctor Advice • Instant WhatsApp Order</p>
+                </div>
+              </div>
+              <a 
+                href={getWhatsAppLink(`Hello Sujata Nutrilive! I have a question about ${productTitle} before ordering.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shrink-0 transition-all shadow-xs"
+              >
+                <span>Chat</span>
+                <span>→</span>
+              </a>
             </div>
 
             {/* 🌟 Refined Trust & Payment Security Strip */}

@@ -1,5 +1,6 @@
 ---
 // src/components/StoreBottomNav.astro
+import { getWhatsAppLink } from '../config/brand';
 ---
 
 <!-- 📱 THE SILICON VALLEY-GRADE MOBILE THUMB DOCK (Zero Local Agency Feel, Pure Luxury D2C) -->
@@ -43,21 +44,24 @@
       <span class="active-dot w-1 h-1 rounded-full bg-amber-400 mt-0.5 scale-0 transition-transform"></span>
     </a>
 
-    {/* 3. Search Trigger Tab */}
-    <button 
-      type="button"
-      id="bottom-tab-search"
+    {/* 3. WhatsApp Nutritionist Consultation Tab */}
+    <a 
+      href={getWhatsAppLink("Hello Sujata Nutrilive, I would like to consult a nutritionist regarding my daily health routine.")}
+      target="_blank"
+      rel="noopener noreferrer"
+      id="bottom-tab-whatsapp"
       class="bottom-nav-item flex flex-col items-center justify-center py-1 px-3 rounded-2xl transition-all duration-300 group cursor-pointer touch-manipulation"
-      aria-label="Search Catalog"
+      aria-label="Chat with Nutritionist on WhatsApp"
     >
       <div class="relative flex items-center justify-center">
-        <svg class="w-5 h-5 text-emerald-100/60 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#25D366] absolute -top-0.5 -right-0.5 animate-pulse"></span>
+        <svg class="w-5 h-5 text-[#25D366] transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.83.896 2.796.896 3.182 0 5.768-2.587 5.768-5.766.001-3.182-2.585-5.783-5.768-5.783zm9.969 5.766c0 5.516-4.484 10-10 10-1.748 0-3.385-.45-4.814-1.238l-7.186 1.883 1.916-7.004c-.854-1.488-1.348-3.218-1.348-5.054 0-5.517 4.484-10 10-10 5.516 0 10 4.483 10 10z"/>
         </svg>
       </div>
-      <span class="text-[10px] font-medium tracking-tight text-emerald-100/70 group-hover:text-white mt-0.5 font-sans">Search</span>
-      <span class="active-dot w-1 h-1 rounded-full bg-amber-400 mt-0.5 scale-0 transition-transform"></span>
-    </button>
+      <span class="text-[10px] font-semibold tracking-tight text-emerald-300 mt-0.5 font-sans">Consult</span>
+      <span class="active-dot w-1 h-1 rounded-full bg-emerald-400 mt-0.5 scale-0 transition-transform"></span>
+    </a>
 
     {/* 4. Cart / Daily Routine Trigger Tab (With Real-Time Dynamic Badge) */}
     <button 
