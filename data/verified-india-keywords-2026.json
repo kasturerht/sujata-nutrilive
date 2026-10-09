@@ -198,6 +198,27 @@
       }
     ]
   },
+  "verified_questions": {
+    "sea_buckthorn_questions": [
+      { "question": "what is sea buckthorn", "volume": ">1000", "kd": "Medium", "use_case": "Educational Hero Accordion" },
+      { "question": "how to use sea buckthorn juice", "volume": ">1000", "kd": "Easy", "use_case": "Usage / Dosage Guide" },
+      { "question": "how to consume sea buckthorn juice", "volume": ">100", "kd": "Easy", "use_case": "PDP How to Consume" },
+      { "question": "sea buckthorn kya hota hai / kya hai in hindi", "volume": ">100", "kd": "Easy", "use_case": "Hindi Vernacular FAQ" },
+      { "question": "which company sea buckthorn is best", "volume": ">100", "kd": "Easy", "use_case": "Brand Comparison / Sujata Supremacy" },
+      { "question": "when to take sea buckthorn juice", "volume": ">100", "kd": "Easy", "use_case": "Daily Routine Anchor" },
+      { "question": "sea buckthorn berry where to buy", "volume": ">100", "kd": "Easy", "use_case": "Direct Buyer Conversion" }
+    ],
+    "spirulina_questions": [
+      { "question": "what is spirulina", "volume": ">1000", "kd": "Hard", "use_case": "PDP Intro Summary" },
+      { "question": "spirulina kya hota hai / kya hai in hindi", "volume": ">100", "kd": "Easy", "use_case": "Hindi Vernacular FAQ" },
+      { "question": "what is spirulina in hindi", "volume": ">100", "kd": "Easy", "use_case": "Hindi Schema Markup" },
+      { "question": "spirulina me kitna protein hota hai", "volume": ">100", "kd": "Easy", "use_case": "Nutrition Table (65% Protein)" },
+      { "question": "spirulina kaha milta hai / where to buy spirulina", "volume": ">100", "kd": "Easy", "use_case": "Direct Buyer Conversion" },
+      { "question": "how much spirulina per day", "volume": ">100", "kd": "Easy", "use_case": "Dosage Guide (2 caps/day)" },
+      { "question": "how to consume spirulina / how to take", "volume": ">100", "kd": "Easy", "use_case": "Directions for Use" },
+      { "question": "spirulina mhanje kay / kase ghyave (marathi)", "volume": ">100", "kd": "Easy", "use_case": "Marathi Vernacular Moat" }
+    ]
+  },
   "combo_pack_synergy": {
     "target_url": "/product/sujata-spirulina-sea-buckthorn-combo-pack",
     "value_anchor": "Just ₹18/day (2 Bottles - 120 Capsules)",

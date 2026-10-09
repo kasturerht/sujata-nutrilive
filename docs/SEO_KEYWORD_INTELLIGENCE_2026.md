@@ -49,7 +49,30 @@
 
 ---
 
-## 4. Usage Instructions for Next AI Agent
+## 4. ❓ High-Intent Customer Questions (Ahrefs Verified Questions Data)
+These questions represent exact consumer search behavior in India and must be directly answered in our PDP FAQ sections and `@type": "FAQPage"` JSON-LD schema for Google AI Overviews:
+
+### Sea Buckthorn Questions:
+- `what is sea buckthorn` (>1000/mo, Medium)
+- `how to use sea buckthorn juice` (>1000/mo, 🟢 Easy)
+- `how to consume sea buckthorn juice` (>100/mo, 🟢 Easy)
+- `sea buckthorn kya hota hai / kya hai in hindi` (>100/mo, 🟢 Easy)
+- `which company sea buckthorn is best` (>100/mo, 🟢 Easy) ➔ *Positions Sujata Nutrilive over diluted competitors!*
+- `when to take sea buckthorn juice` (>100/mo, 🟢 Easy) ➔ *Morning dosage guide.*
+- `sea buckthorn berry where to buy` (>100/mo, 🟢 Easy) ➔ *Direct high-converting purchase intent.*
+
+### Spirulina Questions:
+- `what is spirulina` (>1000/mo, Hard)
+- `spirulina kya hota hai / kya hai in hindi` (>100/mo, 🟢 Easy)
+- `what is spirulina in hindi` (>100/mo, 🟢 Easy)
+- `spirulina me kitna protein hota hai` (>100/mo, 🟢 Easy) ➔ *Highlights 65%+ plant protein.*
+- `spirulina kaha milta hai / where to buy spirulina` (>100/mo, 🟢 Easy) ➔ *Direct buyer intent.*
+- `how much spirulina per day` (>100/mo, 🟢 Easy) ➔ *2 capsules/day dosage guide.*
+- `how to consume spirulina / how to take` (>100/mo, 🟢 Easy)
+
+---
+
+## 5. Usage Instructions for Next AI Agent
 When optimizing or creating new Astro pages, Markdown blogs, or Meta tags:
 1. Always import `scripts/data/verified-india-keywords-2026.json`.
 2. Do not invent arbitrary keywords or unverified estimates.
