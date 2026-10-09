@@ -21,14 +21,17 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
     </button>
   </div>
 
-  {/* 2. Clean Free Shipping Progress Card */}
-  <div class="px-4 sm:px-6 py-3 sm:py-4 bg-white border-b border-gray-200 shrink-0 shadow-sm" id="shipping-meter-container">
-    <div class="flex items-center justify-between text-xs mb-1.5 font-sans">
-      <span class="font-bold text-[#166534]" id="shipping-meter-text">Add items for Free Express Shipping 🚚</span>
-      <span class="text-[11px] font-medium text-gray-400 font-sans shrink-0" id="shipping-threshold-text">Goal: ₹1,500</span>
+  {/* 2. Silicon Valley Institutional Delivery & Guarantee Card */}
+  <div class="px-4 sm:px-6 py-3 bg-gradient-to-r from-emerald-50 to-teal-50/70 border-b border-emerald-100 shrink-0 shadow-xs" id="shipping-meter-container">
+    <div class="flex items-center justify-between text-xs font-sans">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-black shrink-0 shadow-xs">✓</span>
+        <span class="font-bold text-emerald-950 text-xs tracking-tight" id="shipping-meter-text">Free All-India Express Delivery Unlocked</span>
+      </div>
+      <span class="text-[9.5px] font-black text-emerald-800 bg-emerald-200/70 px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0">₹0 Delivery</span>
     </div>
-    <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden p-0.5 border border-gray-200/60">
-      <div class="h-full bg-gradient-to-r from-emerald-600 to-[#166534] rounded-full transition-all duration-500" id="shipping-meter-bar" style="width: 0%;"></div>
+    <div class="w-full h-1.5 bg-emerald-200/60 rounded-full overflow-hidden mt-2">
+      <div class="h-full bg-emerald-600 rounded-full w-full transition-all duration-500" id="shipping-meter-bar"></div>
     </div>
   </div>
 
@@ -76,28 +79,36 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       <span class="text-gray-500 font-medium text-xs uppercase tracking-wider font-sans" id="cart-total-label">UPI Payable (10% OFF)</span>
       <span class="text-xl sm:text-2xl font-black text-emerald-700 font-sans" id="cart-subtotal">₹0</span>
     </div>
-    <p class="text-xs text-gray-500 mb-3.5 flex items-center gap-1.5 font-sans">
-      <span class="text-[#166534] font-bold">✓</span> Free express shipping & GST included.
-    </p>
+    {/* 🛡️ 30-Day Empty-Bottle Guarantee Assurance Seal */}
+    <div class="mb-3 px-3 py-2.5 bg-gradient-to-r from-amber-50/90 to-emerald-50/80 border border-amber-200/80 rounded-xl flex items-center gap-2.5">
+      <span class="text-base shrink-0">🛡️</span>
+      <p class="text-[10px] sm:text-[10.5px] text-emerald-950 font-medium leading-snug">
+        <strong class="font-bold text-emerald-900">30-Day Empty-Bottle Guarantee:</strong> Take consistently for 30 days. If you don't feel a measurable surge in energy & digestion, 100% refund. Zero interrogations.
+      </p>
+    </div>
 
     <button id="checkout-action-btn" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
       <span id="checkout-btn-text">⚡ Proceed to Pay with UPI</span>
       <span class="text-base">→</span>
     </button>
     
-    {/* Clean 3-Column Trust Badges */}
-    <div class="grid grid-cols-3 gap-1 mt-3 pt-2.5 border-t border-gray-100 text-center">
-      <div class="text-[9.5px] sm:text-[10px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
+    {/* Clean 4-Column Silicon Valley Institutional Trust Badges */}
+    <div class="grid grid-cols-4 gap-1 mt-3 pt-2.5 border-t border-gray-100 text-center">
+      <div class="text-[9px] sm:text-[9.5px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
         <span>🔒</span>
         <span>256-Bit SSL</span>
       </div>
-      <a href="/refund-policy" target="_blank" class="text-[9.5px] sm:text-[10px] font-bold text-gray-500 hover:text-[#166534] font-sans flex items-center justify-center gap-1 whitespace-nowrap transition-colors">
+      <a href="/refund-policy" target="_blank" class="text-[9px] sm:text-[9.5px] font-bold text-gray-500 hover:text-[#166534] font-sans flex items-center justify-center gap-1 whitespace-nowrap transition-colors">
         <span>🛡️</span>
         <span>30-Day Return</span>
       </a>
-      <div class="text-[9.5px] sm:text-[10px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
+      <div class="text-[9px] sm:text-[9.5px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
         <span>💵</span>
         <span>Free COD</span>
+      </div>
+      <div class="text-[9px] sm:text-[9.5px] font-bold text-emerald-700 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
+        <span>⚡</span>
+        <span>10% UPI Off</span>
       </div>
     </div>
   </div>
@@ -245,19 +256,13 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         tabUpiEl?.classList.add('bg-white/70', 'border-transparent', 'text-gray-600');
       }
 
-      // Update Free Shipping Progress
+      // 🚚 Silicon Valley CRO: Guaranteed 100% Unlocked Free Express Delivery (Zero Shipping Anxiety)
       if (shippingBar && shippingText) {
+        shippingBar.style.width = '100%';
         if (totalAmount === 0) {
-          shippingBar.style.width = '0%';
-          shippingText.innerHTML = `Add <strong>₹${SHIPPING_THRESHOLD}</strong> for Free Express Shipping 🚚`;
-        } else if (totalAmount >= SHIPPING_THRESHOLD) {
-          shippingBar.style.width = '100%';
-          shippingText.innerHTML = `Free Express Shipping Unlocked! 🎉`;
+          shippingText.innerText = 'Free All-India Express Delivery Unlocked';
         } else {
-          const diff = SHIPPING_THRESHOLD - totalAmount;
-          const pct = Math.min((totalAmount / SHIPPING_THRESHOLD) * 100, 100);
-          shippingBar.style.width = `${pct}%`;
-          shippingText.innerHTML = `Add <strong>₹${diff}</strong> more for Free Shipping 🚚`;
+          shippingText.innerHTML = 'Free All-India Express Delivery Unlocked <span class="text-xs">🚚</span>';
         }
       }
 
