@@ -1,0 +1,442 @@
+---
+// src/pages/learn/spirulina-in-marathi.astro
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+
+const pageTitle = "Spirulina in Marathi: स्पिरुलिनाचे फायदे, उपयोग आणि खाण्याची योग्य पद्धत | Sujata Nutrilive";
+const pageDescription = "Spirulina in Marathi: स्पिरुलिना म्हणजे काय? जाणून घ्या त्याचे 10 आरोग्यदायी फायदे, 65% वनस्पती प्रथिने, 4x नैसर्गिक लोह, सेवन करण्याची पद्धत आणि अस्सल सुजाता स्पिरुलिना.";
+const pageUrl = "https://www.sujatanutrilive.com/learn/spirulina-in-marathi";
+
+// Structured Schema for Google Rich Snippets & AI Overviews
+const articleAndFaqSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}/#article`,
+    "headline": "Spirulina in Marathi: स्पिरुलिनाचे फायदे, उपयोग आणि संपूर्ण माहिती (2026)",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-spirulina-transparent.png",
+    "inLanguage": "mr-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-01-15T09:00:00+05:30",
+    "dateModified": "2026-10-09T16:00:00+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Clinical Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png"
+      }
+    }
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "स्पिरुलिना म्हणजे काय? (What is Spirulina in Marathi?)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "स्पिरुलिना (Spirulina) हे निसर्गातील सर्वात शक्तिशाली निळे-हिरवे एकपेशीय शैवाल (Blue-Green Microalgae) आहे. जागतिक आरोग्य संघटना (WHO) आणि नासा (NASA) ने याला भविष्यातील सर्वोत्तम सुपरफूड म्हणून घोषित केले आहे. यात 65% पेक्षा जास्त वनस्पती प्रथिने (Plant Protein), पालकापेक्षा 4 पट जास्त नैसर्गिक लोह (Bio-Iron), व्हिटॅमिन B12, आणि शक्तिशाली सी-फायकोसायनिन (C-Phycocyanin) अँटीऑक्सिडंट असते."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "स्पिरुलिना खाण्याचे मुख्य फायदे काय आहेत? (Spirulina che fayde)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1. रक्ताची कमतरता (ॲनिमिया) दूर करून हिमोग्लोबिन झपाट्याने वाढवते. 2. दुपारचा थकवा आणि अशक्तपणा घालवून दिवसभर अखंड ऊर्जा टिकवून ठेवते. 3. शरीरातील विषारी घटक बाहेर टाकून (डिटॉक्स) रोगप्रतिकारशक्ती मजबूत करते. 4. त्वचा उजळ व चमकदार बनवते आणि केस गळणे थांबवते. 5. रक्तातील साखर आणि कोलेस्ट्रॉल संतुलित ठेवण्यास मदत करते."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "सुजाता स्पिरुलिना इतर सामान्य ब्रँड्सपेक्षा वेगळे का आहे?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "बाजारातील 95% स्पिरुलिना उघड्या तळ्यांमध्ये वाढवले जाते आणि 160°C पेक्षा जास्त तापमानात वाळवले जाते, ज्यामुळे त्याची पोषणमूल्ये नष्ट होतात आणि घाण वास येतो. सुजाता स्पिरुलिना हे संपूर्ण बंद हायड्रो-डोम्समध्ये शुद्ध पाण्याने पिकवले जाते आणि 40°C पेक्षा कमी तापमानात (Cold-Pressed) तयार केले जाते. त्यामुळे यात 21.4% सक्रिय फायकोसायनिन टिकून राहते, वास येत नाही आणि NABL लॅब टेस्टनुसार यात 0.00% हेवी मेटल्स असतात."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "स्पिरुलिना रोज किती आणि कधी खावे? (Spirulina Dosage)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सुजाता स्पिरुलिना कॅप्सूल्स किंवा गोळ्या: दररोज सकाळी नाश्त्यानंतर 1 ते 2 कॅप्सूल्स कोमट पाण्यासोबत घ्याव्यात. अधिक थकवा किंवा व्यायामाची सवय असल्यास सायंकाळी 1 कॅप्सूल अतिरिक्त घेता येते."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "स्पिरुलिना कोणासाठी सुरक्षित आहे?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "100% शाकाहारी असल्यामुळे 18 वर्षांवरील सर्व महिला, पुरुष, ज्येष्ठ नागरिक आणि खेळाडू हे दररोज घेऊ शकतात. थायरॉईड किंवा मधुमेह असणारे नागरिकही हे सुरक्षितपणे घेऊ शकतात, फक्त आपल्या ॲलोपॅथी गोळ्या आणि स्पिरुलिनामध्ये 1 तासाचे अंतर ठेवावे."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "सुजाता स्पिरुलिना कॅप्सूल्सची किंमत किती आहे?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सुजाता स्पिरुलिना 60 कॅप्सूल्सची 1 महिन्याची बाटली फक्त ₹649 मध्ये उपलब्ध आहे (म्हणजेच दिवसाला फक्त ₹21). तसेच स्पिरुलिना + हिमालयन सी बकथॉर्न कॉम्बो पॅक (2 महिन्यांचा डोस) फक्त ₹1,100 मध्ये मिळतो, म्हणजेच दिवसाला फक्त ₹18. सोबत मोफत कॅश ऑन डिलिव्हरी (Free COD) उपलब्ध आहे."
+        }
+      }
+    ]
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.sujatanutrilive.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "आरोग्य ज्ञान केंद्र (Learn)",
+        "item": "https://www.sujatanutrilive.com/science"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Spirulina in Marathi",
+        "item": pageUrl
+      }
+    ]
+  }
+];
+---
+
+<StoreLayout 
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-spirulina-transparent.png"
+  extraSchema={articleAndFaqSchema}
+>
+  <StoreHeader />
+
+  <!-- Breadcrumbs & Hero Header -->
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">होम</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">वैज्ञानिक संशोधन</a>
+        <span>/</span>
+        <span class="text-white">स्पिरुलिना मराठी माहिती</span>
+      </nav>
+
+      <!-- Pill Badge -->
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>महाराष्ट्रातील लाखो नागरिकांचा विश्वास • 100% सेंद्रिय व शाकाहारी</span>
+      </div>
+
+      <!-- Main H1 Title -->
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Spirulina in Marathi: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">स्पिरुलिनाचे फायदे, उपयोग आणि खाण्याची खरी पद्धत</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        थकवा, रक्ताची कमतरता (ॲनिमिया) आणि अशक्तपणा दूर करणारे जागतिक दर्जाचे सुपरफूड. जाणून घ्या स्पिरुलिना म्हणजे काय आणि रोजच्या आहारात याचा कसा फायदा होतो.
+      </p>
+
+      <!-- Quick Trust Indicators -->
+      <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-white/10 text-xs text-gray-300">
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> FSSAI अधिकृत</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> NABL लॅब टेस्टेड (0.00% हेवी मेटल्स)</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> पालकापेक्षा 4 पट जास्त लोह</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> 100% शाकाहारी</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Article Body -->
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+      
+      <!-- Section 1: स्पिरुलिना म्हणजे काय? -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">१.</span> स्पिरुलिना म्हणजे काय? (What is Spirulina?)
+        </h2>
+        <div class="text-sm sm:text-base leading-relaxed text-gray-300 space-y-4">
+          <p>
+            <strong>स्पिरुलिना (Spirulina)</strong> हे निसर्गातील एक अतिसूक्ष्म निळे-हिरवे शैवाल (Blue-Green Microalgae) आहे. हे पृथ्वीवरील सर्वात जुन्या आणि पौष्टिक वनस्पतींपैकी एक मानले जाते. जगातील आघाडीच्या आरोग्य संस्था, जसे की <strong>जागतिक आरोग्य संघटना (WHO)</strong> आणि <strong>नासा (NASA)</strong> यांनी स्पिरुलिनाला <em class="text-amber-300">"मानवजातीसाठी भविष्यातील सर्वोत्तम अन्न"</em> म्हणून घोषित केले आहे.
+          </p>
+          <p>
+            या छोट्या शैवालामध्ये अंड्यापेक्षा जास्त प्रथिने (Protein), पालकापेक्षा कितीतरी पटीने जास्त लोह (Iron), गाजरापेक्षा जास्त बीटा-कॅरोटीन आणि दुधापेक्षा जास्त कॅल्शियम नैसर्गिक स्वरूपात असते.
+          </p>
+        </div>
+
+        <!-- Nutrient Equivalence Box -->
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-amber-400 font-sans">65%+</div>
+            <div class="text-[11px] text-gray-300 mt-1">शुद्ध वनस्पती प्रोटीन</div>
+          </div>
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-emerald-400 font-sans">4x</div>
+            <div class="text-[11px] text-gray-300 mt-1">पालकापेक्षा जास्त लोह</div>
+          </div>
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-sky-400 font-sans">21.4%</div>
+            <div class="text-[11px] text-gray-300 mt-1">सक्रिय फायकोसायनिन</div>
+          </div>
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-purple-400 font-sans">0.00%</div>
+            <div class="text-[11px] text-gray-300 mt-1">हानिकारक केमिकल्स</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Section 2: स्पिरुलिनाचे शरीरासाठी १० प्रमुख फायदे -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">२.</span> स्पिरुलिना खाण्याचे १० जबरदस्त फायदे (Spirulina che Fayde)
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5 flex items-center gap-2">
+              <span>🩸</span> १. रक्ताची कमतरता (ॲनिमिया) दूर करते
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              स्पिरुलिनामध्ये नैसर्गिक नॉन-हेम आयर्न (Non-Heme Iron) असते जे शरीरात सहज शोषले जाते. रासायनिक आयर्नच्या गोळ्यांप्रमाणे यामुळे बद्धकोष्ठता (Constipation) किंवा मळमळ होत नाही.
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5 flex items-center gap-2">
+              <span>⚡</span> २. दिवसभर फ्रेश आणि उत्साही ऊर्जा
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              दुपारी ३ वाजता येणारा सुस्तीपणा, डोळ्यांवर येणारी झाप आणि थकवा स्पिरुलिनामुळे पूर्णपणे निघून जातो. पेशींना नैसर्गिक ऑक्सिजन पुरवठा होतो.
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5 flex items-center gap-2">
+              <span>🛡️</span> ३. रोगप्रतिकारशक्ती (Immunity) वाढवते
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              यात असलेले C-फायकोसायनिन (C-Phycocyanin) हे शरीरातील रोगप्रतिकारक पेशी (White Blood Cells) वाढवून वारंवार होणाऱ्या आजारांपासून रक्षण करते.
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5 flex items-center gap-2">
+              <span>✨</span> ४. त्वचा तजेलदार आणि निरोगी केस
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              क्लोरोफिल आणि अँटीऑक्सिडंट्स शरीरातील विषारी घटक बाहेर टाकतात, ज्यामुळे चेहऱ्यावरील मुरुमे कमी होतात आणि केस गळणे थांबून चमकदार बनतात.
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5 flex items-center gap-2">
+              <span>💪</span> ५. शाकाहारी लोकांसाठी उत्तम प्रोटीन
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              स्पिरुलिनामध्ये ६५% पेक्षा जास्त शुद्ध वनस्पती प्रथिने असतात ज्यात सर्व ९ आवश्यक अमिनो ॲसिड्स (Essential Amino Acids) समाविष्ट आहेत.
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5 flex items-center gap-2">
+              <span>❤️</span> ६. कोलेस्ट्रॉल आणि रक्तदाब नियंत्रण
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              खराब कोलेस्ट्रॉल (LDL) कमी करून चांगल्या कोलेस्ट्रॉलची (HDL) पातळी वाढवण्यास मदत करते, ज्यामुळे हृदयाचे आरोग्य उत्तम राहते.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Conversion Banner (Sujata Spirulina Capsules) -->
+      <section class="relative bg-gradient-to-r from-emerald-950 via-[#064E3B] to-emerald-900 border-2 border-emerald-400/40 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4 text-center sm:text-left">
+          <img 
+            src="/products/sujata-spirulina-capsules-bottle-transparent.png" 
+            alt="Sujata Spirulina Capsules 60 Veg Caps" 
+            class="h-28 sm:h-36 w-auto object-contain drop-shadow-2xl" 
+          />
+          <div>
+            <div class="inline-block bg-amber-400 text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full mb-1">
+              महाराष्ट्रातील नंबर १ पसंती
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white font-serif">सुजाता कोल्ड-प्रेस्ड स्पिरुलिना कॅप्सूल्स</h3>
+            <p class="text-xs sm:text-sm text-emerald-100/90 mt-1">
+              ६० शाकाहारी कॅप्सूल्स • दररोज फक्त ₹२१ चा खर्च • वास न येणाऱ्या शुद्ध कॅप्सूल्स
+            </p>
+            <div class="flex items-baseline gap-2 mt-2">
+              <span class="text-2xl font-black text-white font-sans">₹६४९</span>
+              <span class="text-xs text-gray-400 line-through">₹८५०</span>
+              <span class="text-xs text-amber-300 font-bold">मोफत कॅश ऑन डिलिव्हरी</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 w-full sm:w-auto shrink-0">
+          <a 
+            href="/product/sujata-spirulina-capsules" 
+            class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold text-sm uppercase px-6 py-3.5 rounded-xl shadow-lg text-center transition-all cursor-pointer font-sans"
+          >
+            आत्ताच खरेदी करा (Order Now) →
+          </a>
+          <span class="text-[10px] text-center text-emerald-200">UPI द्वारे १०% अतिरिक्त सवलत</span>
+        </div>
+      </section>
+
+      <!-- Section 3: सुजाता स्पिरुलिना विरूद्ध इतर सामान्य ब्रँड्स -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">३.</span> बाजारातील इतर स्पिरुलिना आणि सुजाता मधील खरा फरक
+        </h2>
+        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+          बऱ्याच लोकांना स्पिरुलिनाचा उग्र घाण वास येतो म्हणून ते खाणे बंद करतात. सुजाता स्पिरुलिनामध्ये वास का येत नाही हे खालील तक्त्यावरून समजून घ्या:
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">वैशिष्ट्य (Feature)</th>
+                <th class="py-3 px-3 text-amber-400 font-bold bg-emerald-950/60">सुजाता स्पिरुलिना (Sujata)</th>
+                <th class="py-3 px-3 text-gray-400">इतर सामान्य ब्रँड्स</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">वाळवण्याची पद्धत</td>
+                <td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">४०°C पेक्षा कमी (Cold-Pressed)</td>
+                <td class="py-3 px-3 text-gray-400">१६०°C उष्णतेने जाळले जाते</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">सक्रिय अँटीऑक्सिडंट (Phycocyanin)</td>
+                <td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">२१.४% जिवंत पोषणमूल्य</td>
+                <td class="py-3 px-3 text-gray-400">केवळ ३% ते ५% (उष्णतेने नष्ट)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">वास आणि चव (Smell Profile)</td>
+                <td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">१००% वास नसलेले व ताजे</td>
+                <td class="py-3 px-3 text-gray-400">उग्र, घाण तळ्याचा वास</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">हेवी मेटल्स तपासणी (Lead/Mercury)</td>
+                <td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">०.००% (NABL लॅब रिपोर्ट प्रमाणित)</td>
+                <td class="py-3 px-3 text-gray-400">धोकादायक रसायनांची भीती</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- Section 4: सेवन करण्याची योग्य पद्धत आणि डोस -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">४.</span> स्पिरुलिना कसे आणि केव्हा खावे? (How to Consume)
+        </h2>
+        <div class="space-y-4 text-sm sm:text-base text-gray-300">
+          <div class="flex items-start gap-3 bg-black/40 border border-white/5 p-4 rounded-xl">
+            <span class="text-xl">☀️</span>
+            <div>
+              <strong class="text-white">सकाळचा सर्वोत्तम वेळ:</strong>
+              <p class="text-xs sm:text-sm text-gray-300 mt-1">
+                सकाळी नाश्त्यानंतर १ ते २ सुजाता स्पिरुलिना कॅप्सूल्स एका ग्लास कोमट पाण्यासोबत घ्याव्यात. यामुळे दिवसभर शरीराला संथ गतीने ऊर्जा मिळते.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 bg-black/40 border border-white/5 p-4 rounded-xl">
+            <span class="text-xl">💧</span>
+            <div>
+              <strong class="text-white">पाणी भरपूर प्या:</strong>
+              <p class="text-xs sm:text-sm text-gray-300 mt-1">
+                स्पिरुलिना शरीराला डिटॉक्स करत असल्यामुळे दिवसभरात २.५ ते ३ लिटर पाणी पिणे आवश्यक आहे.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Section 5: वारंवार विचारले जाणारे प्रश्न (FAQ Accordion) -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">५.</span> वारंवार विचारले जाणारे प्रश्न (FAQs)
+        </h2>
+
+        <div class="space-y-4">
+          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
+              <span>स्पिरुलिना महिलांसाठी सुरक्षित आहे का?</span>
+              <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
+              होय, महिलांसाठी स्पिरुलिना अत्यंत गुणकारी आहे. मासिक पाळीदरम्यान होणारा थकवा, रक्ताची कमतरता आणि केस गळती रोखण्यासाठी यातील लोह आणि प्रथिने अत्यंत महत्त्वाची भूमिका बजावतात.
+            </p>
+          </details>
+
+          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
+              <span>थायरॉईड किंवा बीपी असलेल्या रुग्णांनी हे घ्यावे का?</span>
+              <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
+              होय, हे १००% नैसर्गिक अन्न असल्यामुळे थायरॉईड आणि बीपी असणारे नागरिक सुरक्षितपणे घेऊ शकतात. फक्त नेहमीच्या औषधांनंतर १ तासाचे अंतर ठेवून स्पिरुलिना घ्यावे.
+            </p>
+          </details>
+
+          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
+              <span>निकाल जाणवायला किती दिवस लागतात?</span>
+              <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
+              पहिल्या ७ ते १० दिवसांतच सकाळचा सुस्तपणा आणि थकवा दूर होऊन शरीरात उत्साह जाणवतो. हिमोग्लोबिन वाढ आणि त्वचेतील सुधारणेसाठी किमान ३० ते ६० दिवस सलग सेवन करावे.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Ultimate Combo Banner -->
+      <section class="bg-gradient-to-br from-[#064E3B] to-[#011F18] border-2 border-amber-400/50 rounded-3xl p-6 sm:p-10 shadow-2xl text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="bg-amber-400 text-black text-xs font-black uppercase px-3 py-1 rounded-full">
+            सुपर सेव्हर कॉम्बो पॅक
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-serif font-black text-white mt-3">
+            स्पिरुलिना + हिमालयन सी बकथॉर्न
+          </h3>
+          <p class="text-emerald-100 text-sm mt-2 max-w-lg">
+            अखंड ऊर्जा + तेजस्वी त्वचा! स्पिरुलिनाचे ६५% प्रोटीन आणि सी बकथॉर्नचा दुर्मिळ ओमेगा-७ एकत्र मिळवा. २ महिन्यांचा संपूर्ण डोस फक्त <strong>₹१८/दिवस</strong> खर्चात.
+          </p>
+        </div>
+        <div class="shrink-0 flex flex-col items-center gap-2">
+          <div class="text-2xl font-black text-white font-sans">फक्त ₹१,१०० <span class="text-xs text-gray-400 line-through">₹१,५९८</span></div>
+          <a 
+            href="/product/sujata-spirulina-sea-buckthorn-combo-pack" 
+            class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm uppercase px-8 py-3.5 rounded-xl shadow-xl transition-all cursor-pointer font-sans"
+          >
+            कॉम्बो पॅक ऑर्डर करा →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <StoreFooter />
+</StoreLayout>

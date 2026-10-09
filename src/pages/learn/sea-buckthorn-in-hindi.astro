@@ -1,0 +1,424 @@
+---
+// src/pages/learn/sea-buckthorn-in-hindi.astro
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+
+const pageTitle = "Sea Buckthorn in Hindi: सी बकथॉर्न के फायदे, उपयोग और सही तरीका | Sujata Nutrilive";
+const pageDescription = "Sea Buckthorn in Hindi: सी बकथॉर्न क्या है? जानिए इसके चमत्कारी फायदे, दुर्लभ ओमेगा 7, 3, 6, 9, त्वचा की चमक, जूस बनाम कैप्सूल की सच्चाई और शुद्ध सुजाता सी बकथॉर्न।";
+const pageUrl = "https://www.sujatanutrilive.com/learn/sea-buckthorn-in-hindi";
+
+// Structured Schema for Google AI Overviews & Search
+const articleAndFaqSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}/#article`,
+    "headline": "Sea Buckthorn in Hindi: सी बकथॉर्न के फायदे, उपयोग और संपूर्ण जानकारी (2026)",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-sea-buckthorn-capsules-bottle-transparent.png",
+    "inLanguage": "hi-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-01-20T09:00:00+05:30",
+    "dateModified": "2026-10-09T16:00:00+05:30",
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Clinical Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png"
+      }
+    }
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "सी बकथॉर्न क्या है? (What is Sea Buckthorn in Hindi?)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सी बकथॉर्न (Sea Buckthorn) हिमालय और लेह-लद्दाख की 12,000 फीट से अधिक बर्फीली ऊंचाइयों पर उगने वाला एक औषधीय जंगली फल (Berry) है। इसे प्राचीन भारतीय आयुर्वेद और तिब्बती चिकित्सा में 'संजीवनी बूटी' और 'गोल्डन बेरी' कहा जाता है। इसमें कुदरती तौर पर 190 से अधिक बायो-एक्टिव पोषक तत्व, दुर्लभ ओमेगा-7 (Palmitoleic Acid), ओमेगा 3, 6, 9 और संतरे से 12 गुना अधिक प्राकृतिक विटामिन C पाया जाता है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "सी बकथॉर्न के मुख्य फायदे क्या हैं? (Sea Buckthorn ke Fayde)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1. त्वचा में प्राकृतिक चमक लाता है और झुर्रियों/मुंहासों से बचाता है। 2. पेट की अंदरूनी परत (Mucosal Lining) की मरम्मत कर एसिडिटी और अल्सर में आराम देता है। 3. दुर्लभ ओमेगा-7 दिल की नसों के लचीलेपन और लिवर के स्वास्थ्य को मजबूत करता है। 4. आंखों और त्वचा के सूखेपन (Dryness) को जड़ से खत्म करता है। 5. विटामिन C और एंटीऑक्सीडेंट्स की मदद से मौसमी बीमारियों से रक्षा करता है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "सी बकथॉर्न जूस बनाम कैप्सूल: कौन सा बेहतर है?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सी बकथॉर्न कैप्सूल, बोतलबंद जूस से कहीं बेहतर और असरदार होते हैं। बाजार में मिलने वाले जूस में 80% तक पानी, कृत्रिम स्वाद और हानिकारक प्रिजर्वेटिव्स (Sodium Benzoate) होते हैं और उन्हें तेज आंच पर गर्म किया जाता है जिससे ओमेगा-7 नष्ट हो जाता है। सुजाता सी बकथॉर्न कैप्सूल्स 100% कोल्ड-प्रेस्ड होते हैं जिनमें 0% चीनी, 0% प्रिजर्वेटिव और पूरे 190+ सक्रिय पोषक तत्व सुरक्षित रहते हैं।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "सी बकथॉर्न का सेवन कैसे और कब करना चाहिए? (How to take Sea Buckthorn)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सुजाता सी बकथॉर्न कैप्सूल्स: रोजाना भोजन के बाद (सुबह नाश्ते के बाद 1 कैप्सूल और रात के खाने के बाद 1 कैप्सूल) ताजे पानी के साथ लें। चबाने की जरूरत नहीं है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "भारत में सबसे अच्छा सी बकथॉर्न कौन सी कंपनी बनाती है? (Which company sea buckthorn is best?)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सुजाता न्यूट्रीलाइव (Sujata Nutrilive) भारत में सबसे भरोसेमंद सी बकथॉर्न ब्रांड माना जाता है। सुजाता सीधे लद्दाख की ऊंची पहाड़ियों से प्राकृतिक बेरीज प्राप्त कर सब-40°C कोल्ड-प्रेस तकनीक से शुद्ध शाकाहारी कैप्सूल बनाती है। यह NABL लैब द्वारा भारी धातुओं से मुक्त प्रमाणित है और प्रतिदिन केवल ₹18 से ₹25 के किफायती खर्च में उपलब्ध है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "सुजाता सी बकथॉर्न कैप्सूल्स की कीमत कितनी है? (Sea Buckthorn Price)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "सुजाता सी बकथॉर्न 60 वेज कैप्सूल्स की कीमत सिर्फ ₹749 है (30 दिन का डोस, रोजाना केवल ₹25)। इसके अलावा स्पिरुलिना + सी बकथॉर्न कॉम्बो पैक सिर्फ ₹1,100 में मिलता है (रोजाना सिर्फ ₹18)। पूरे भारत में कैश ऑन डिलीवरी (Free COD) उपलब्ध है।"
+        }
+      }
+    ]
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.sujatanutrilive.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "स्वास्थ्य ज्ञान केंद्र (Learn)",
+        "item": "https://www.sujatanutrilive.com/science"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Sea Buckthorn in Hindi",
+        "item": pageUrl
+      }
+    ]
+  }
+];
+---
+
+<StoreLayout 
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png"
+  extraSchema={articleAndFaqSchema}
+>
+  <StoreHeader />
+
+  <!-- Breadcrumbs & Hero Header -->
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#1a0f03] via-[#022C22] to-[#050B08] text-white border-b border-amber-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-amber-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">होम</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">वैज्ञानिक शोध</a>
+        <span>/</span>
+        <span class="text-white">सी बकथॉर्न हिंदी जानकारी</span>
+      </nav>
+
+      <!-- Pill Badge -->
+      <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span>हिमालय का दुर्लभ संजीवनी फल • 12,000 फीट लद्दाख हार्वेस्ट</span>
+      </div>
+
+      <!-- Main H1 Title -->
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Sea Buckthorn in Hindi: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">सी बकथॉर्न के चमत्कारी फायदे, उपयोग और सही तरीका</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        दुर्लभ ओमेगा-7, त्वचा में कुदरती चमक और मजबूत इम्युनिटी का प्राकृतिक स्रोत। जानिए बोतलबंद जूस बनाम शुद्ध कोल्ड-प्रेस्ड कैप्सूल्स की पूरी सच्चाई।
+      </p>
+
+      <!-- Quick Trust Indicators -->
+      <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-white/10 text-xs text-gray-300">
+        <span class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> दुर्लभ ओमेगा 7, 3, 6, 9</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> संतरे से 12 गुना ज्यादा विटामिन C</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> 0% चीनी व 0% प्रिजर्वेटिव्स</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> 100% शाकाहारी वेज कैप्सूल्स</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Article Body -->
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+      
+      <!-- Section 1: सी बकथॉर्न क्या है? -->
+      <article class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">१.</span> सी बकथॉर्न क्या है? (What is Sea Buckthorn?)
+        </h2>
+        <div class="text-sm sm:text-base leading-relaxed text-gray-300 space-y-4">
+          <p>
+            <strong>सी बकथॉर्न (Hippophae Rhamnoides)</strong> हिमालय की अत्यधिक ठंडी और दुर्गम घाटियों (जैसे लेह, लद्दाख और स्पीति) में 12,000 फीट से अधिक ऊंचाई पर उगने वाला एक नारंगी रंग का दुर्लभ फल है। इसे दुनिया भर में <em>"हिमालयन वंडर बेरी"</em> और <em>"संजीवनी बूटी"</em> के रूप में जाना जाता है।
+          </p>
+          <p>
+            कड़ाके की ठंड और अत्यधिक यूवी किरणों वाले वातावरण में उगने के कारण, इस पौधे में आत्मरक्षा के लिए असाधारण रूप से शक्तिशाली एंटीऑक्सीडेंट्स और फैटी एसिड्स बनते हैं। यह प्रकृति का एकमात्र ऐसा पौधा है जिसमें <strong>ओमेगा 3, 6, 9 के साथ-साथ दुर्लभ ओमेगा-7 (Palmitoleic Acid)</strong> प्रचुर मात्रा में मौजूद होता है।
+          </p>
+        </div>
+
+        <!-- Nutrient Highlights -->
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+          <div class="bg-black/40 border border-amber-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-amber-400 font-sans">ओमेगा-7</div>
+            <div class="text-[11px] text-gray-300 mt-1">त्वचा व अंगों की नमी</div>
+          </div>
+          <div class="bg-black/40 border border-amber-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-emerald-400 font-sans">12x Vit C</div>
+            <div class="text-[11px] text-gray-300 mt-1">संतरे से 12 गुना अधिक</div>
+          </div>
+          <div class="bg-black/40 border border-amber-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-sky-400 font-sans">190+</div>
+            <div class="text-[11px] text-gray-300 mt-1">सक्रिय बायो-एक्टिव्स</div>
+          </div>
+          <div class="bg-black/40 border border-amber-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-purple-400 font-sans">0g Sugar</div>
+            <div class="text-[11px] text-gray-300 mt-1">शुद्ध कोल्ड-प्रेस्ड</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Section 2: सी बकथॉर्न के प्रमुख फायदे -->
+      <article class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">२.</span> सी बकथॉर्न के ५ सबसे बड़े फायदे (Sea Buckthorn Benefits)
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5 flex items-center gap-2">
+              <span>✨</span> १. चेहरे की चमक और झुर्रियों से मुक्ति
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              ओमेगा-7 त्वचा के भीतर कोलेजन (Collagen) के उत्पादन को सक्रिय करता है। यह रूखी त्वचा, समय से पहले पड़ने वाली झुर्रियों और दाग-धब्बों को दूर कर प्राकृतिक ग्लो प्रदान करता है।
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5 flex items-center gap-2">
+              <span>🫀</span> २. दिल और धमनियों का स्वास्थ्य
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              ओमेगा-3 और 7 रक्त वाहिकाओं की दीवारों को लचीला बनाए रखते हैं, जिससे ब्लड प्रेशर सामान्य रहता है और खराब कोलेस्ट्रॉल जमा नहीं होता।
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5 flex items-center gap-2">
+              <span>🌱</span> ३. एसिडिटी और पेट की आंतों की सुरक्षा
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              सी बकथॉर्न पेट की आंतरिक श्लेष्मा झिल्ली (Mucosal Lining) को ठीक करता है, जिससे पुरानी एसिडिटी, सीने में जलन और गैस से स्थायी राहत मिलती है।
+            </p>
+          </div>
+
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5 flex items-center gap-2">
+              <span>🛡️</span> ४. लिवर डिटॉक्स और इम्युनिटी
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">
+              उच्च एंटीऑक्सीडेंट क्षमता लिवर में फैट के जमाव (Fatty Liver) को रोकती है और शरीर से जहरीले टॉक्सिन्स को सुरक्षित रूप से बाहर निकालती है।
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Conversion Banner (Sujata Sea Buckthorn Capsules) -->
+      <section class="relative bg-gradient-to-r from-amber-950 via-[#1c1204] to-emerald-950 border-2 border-amber-400/40 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4 text-center sm:text-left">
+          <img 
+            src="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png" 
+            alt="Sujata Sea Buckthorn Capsules 60 Veg Caps" 
+            class="h-28 sm:h-36 w-auto object-contain drop-shadow-2xl" 
+          />
+          <div>
+            <div class="inline-block bg-amber-400 text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full mb-1">
+              100% शुद्ध हिमालयन ओमेगा-7
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white font-serif">सुजाता शुद्ध सी बकथॉर्न कैप्सूल्स</h3>
+            <p class="text-xs sm:text-sm text-amber-100/90 mt-1">
+              ६० शाकाहारी कैप्सूल्स • रोजाना केवल ₹२५ • ०% चीनी और ०% प्रिजर्वेटिव्स
+            </p>
+            <div class="flex items-baseline gap-2 mt-2">
+              <span class="text-2xl font-black text-white font-sans">₹७४९</span>
+              <span class="text-xs text-gray-400 line-through">₹९९९</span>
+              <span class="text-xs text-emerald-400 font-bold">फ्री कैश ऑन डिलीवरी</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 w-full sm:w-auto shrink-0">
+          <a 
+            href="/product/sujata-sea-buckthorn-capsules" 
+            class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-sm uppercase px-6 py-3.5 rounded-xl shadow-lg text-center transition-all cursor-pointer font-sans"
+          >
+            सी बकथॉर्न ऑर्डर करें →
+          </a>
+          <span class="text-[10px] text-center text-amber-200">UPI पेमेंट पर 10% तुरंत छूट</span>
+        </div>
+      </section>
+
+      <!-- Section 3: जूस बनाम कैप्सूल: कौन सा बेहतर है? -->
+      <article class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">३.</span> सी बकथॉर्न जूस बनाम सुजाता कैप्सूल: सच क्या है?
+        </h2>
+        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+          अक्सर लोग बाजार से सी बकथॉर्न का सिरप या जूस खरीद लेते हैं, लेकिन बोतल के पीछे की सामग्री (Ingredients) नहीं देखते। आइए देखें दोनों में क्या फर्क है:
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-amber-800 text-amber-300">
+                <th class="py-3 px-3">मापदंड (Parameter)</th>
+                <th class="py-3 px-3 text-emerald-400 font-bold bg-black/40">सुजाता वेज कैप्सूल्स</th>
+                <th class="py-3 px-3 text-gray-400">बाजार का बोतलबंद जूस</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">पानी की मिलावट (Dilution)</td>
+                <td class="py-3 px-3 bg-black/20 text-emerald-300 font-bold">०% (100% शुद्ध कोल्ड-प्रेस्ड ऑयल व पल्प)</td>
+                <td class="py-3 px-3 text-red-300">७०% से ८०% तक पानी</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">प्रिजर्वेटिव्स (Sodium Benzoate E211)</td>
+                <td class="py-3 px-3 bg-black/20 text-emerald-300 font-bold">शून्य (Zero Preservatives)</td>
+                <td class="py-3 px-3 text-red-300">केमिकल प्रिजर्वेटिव्स मिले होते हैं</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">ओमेगा-7 की सक्रियता</td>
+                <td class="py-3 px-3 bg-black/20 text-emerald-300 font-bold">सब-40°C कोल्ड प्रेस से पूर्ण सुरक्षित</td>
+                <td class="py-3 px-3 text-gray-400">उबालने से (Pasteurization) नष्ट हो जाता है</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3 font-semibold text-white">प्रतिदिन का खर्च</td>
+                <td class="py-3 px-3 bg-black/20 text-emerald-300 font-bold">मात्र ₹१८ से ₹२५/दिन</td>
+                <td class="py-3 px-3 text-gray-400">₹३० से ₹४५/दिन</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- Section 4: सेवन की विधि -->
+      <article class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">४.</span> सी बकथॉर्न का सेवन कैसे करें? (How to Consume)
+        </h2>
+        <div class="space-y-4 text-sm sm:text-base text-gray-300">
+          <div class="flex items-start gap-3 bg-black/40 border border-white/5 p-4 rounded-xl">
+            <span class="text-xl">🥗</span>
+            <div>
+              <strong class="text-white">भोजन के बाद सेवन करें:</strong>
+              <p class="text-xs sm:text-sm text-gray-300 mt-1">
+                क्योंकि सी बकथॉर्न में कुदरती फैटी एसिड्स (ओमेगा 7, 3, 6, 9) होते हैं, इसलिए सुबह नाश्ते या दोपहर के भोजन के बाद 1 कैप्सूल पानी के साथ लें।
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 bg-black/40 border border-white/5 p-4 rounded-xl">
+            <span class="text-xl">⏳</span>
+            <div>
+              <strong class="text-white">नियमितता सबसे जरूरी है:</strong>
+              <p class="text-xs sm:text-sm text-gray-300 mt-1">
+                त्वचा और आंतरिक अंगों के पुनर्जीवन के लिए कम से कम 30 से 60 दिनों तक बिना नागा नियमित सेवन करें।
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Section 5: अक्सर पूछे जाने वाले सवाल (FAQs) -->
+      <section class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">५.</span> अक्सर पूछे जाने वाले सवाल (FAQs)
+        </h2>
+
+        <div class="space-y-4">
+          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
+              <span>क्या सी बकथॉर्न का कोई साइड इफेक्ट है?</span>
+              <span class="text-amber-400 text-lg transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
+              सी बकथॉर्न 100% प्राकृतिक हिमालयन फल है और यह पूरी तरह सुरक्षित है। सुजाता सी बकथॉर्न में कोई कृत्रिम रसायन या स्टेबलाइजर नहीं होते, इसलिए यह पेट में कोई जलन या गैस नहीं करता।
+            </p>
+          </details>
+
+          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
+              <span>क्या डायबिटीज या बीपी के मरीज इसे ले सकते हैं?</span>
+              <span class="text-amber-400 text-lg transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
+              हां, बिल्कुल। क्योंकि सुजाता कैप्सूल्स में 0 ग्राम चीनी होती है (जबकि जूस में अक्सर मिठास मिलाई जाती है), इसलिए यह डायबिटीज के मरीजों के लिए भी पूरी तरह सुरक्षित है और शुगर संतुलन में मदद करता है।
+            </p>
+          </details>
+
+          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
+              <span>स्पिरुलिना और सी बकथॉर्न को एक साथ ले सकते हैं?</span>
+              <span class="text-amber-400 text-lg transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
+              जी हां, यह दोनों मिलकर सबसे शक्तिशाली संयोजन (Synergy Combo) बनाते हैं। स्पिरुलिना शरीर को 65% प्रोटीन, आयरन और दिनभर की ऊर्जा देता है, जबकि सी बकथॉर्न ओमेगा-7 और विटामिन C देकर त्वचा और इम्युनिटी को मजबूत करता है।
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Ultimate Combo Banner -->
+      <section class="bg-gradient-to-br from-[#064E3B] to-[#1a0f03] border-2 border-amber-400/50 rounded-3xl p-6 sm:p-10 shadow-2xl text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="bg-amber-400 text-black text-xs font-black uppercase px-3 py-1 rounded-full">
+            सुपर सेवर कॉम्बो पैक
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-serif font-black text-white mt-3">
+            स्पिरुलिना + हिमालयन सी बकथॉर्न
+          </h3>
+          <p class="text-emerald-100 text-sm mt-2 max-w-lg">
+            पूरे 60 दिनों का सम्पूर्ण शारीरिक कायाकल्प! दिनभर ताजगी, प्राकृतिक ऊर्जा और चेहरे की बेदाग चमक। सिर्फ <strong>₹18/दिन</strong> के किफायती खर्च में।
+          </p>
+        </div>
+        <div class="shrink-0 flex flex-col items-center gap-2">
+          <div class="text-2xl font-black text-white font-sans">मात्र ₹1,100 <span class="text-xs text-gray-400 line-through">₹1,598</span></div>
+          <a 
+            href="/product/sujata-spirulina-sea-buckthorn-combo-pack" 
+            class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm uppercase px-8 py-3.5 rounded-xl shadow-xl transition-all cursor-pointer font-sans"
+          >
+            कॉम्बो पैक अभी ऑर्डर करें →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <StoreFooter />
+</StoreLayout>

@@ -30,6 +30,10 @@ export default defineConfig({
         `${siteUrl}/privacy-policy`,
         `${siteUrl}/terms-of-service`,
         `${siteUrl}/shipping-policy`,
+        // 🚀 High-Volume Traffic & AI Overview Content Pillars
+        `${siteUrl}/learn/spirulina-in-marathi`,
+        `${siteUrl}/learn/sea-buckthorn-in-hindi`,
+        `${siteUrl}/learn/which-company-sea-buckthorn-is-best`,
         // 🌟 All 16 Active Shopify Products for Google Shopping & GSC Indexing
         `${siteUrl}/product/sujata-spirulina-powder`,
         `${siteUrl}/product/sujata-spirulina-tablets`,
