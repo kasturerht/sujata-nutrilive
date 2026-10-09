@@ -6,6 +6,9 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
+import dns from 'dns';
+
+dns.setDefaultResultOrder('ipv4first');
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -172,9 +175,19 @@ async function main() {
   console.log('🤖 DISPATCHING GOOGLEBOT (Google Web Search Indexing API):');
   let googleSuccessCount = 0;
   for (const url of targetUrls) {
-    const result = await pingGoogle(url, googleToken);
+    let googleUrl = url;
+    let result = await pingGoogle(googleUrl, googleToken);
+    if (!result.success && googleUrl.includes('://www.')) {
+      // Fallback to verified non-www property in Google Search Console
+      const nonWwwUrl = googleUrl.replace('://www.', '://');
+      const nonWwwResult = await pingGoogle(nonWwwUrl, googleToken);
+      if (nonWwwResult.success) {
+        result = nonWwwResult;
+        googleUrl = nonWwwUrl;
+      }
+    }
     if (result.success) {
-      console.log(`  🟢 [INVITED] ${url} (Time: ${result.notifyTime})`);
+      console.log(`  🟢 [INVITED] ${googleUrl} (Time: ${result.notifyTime})`);
       googleSuccessCount++;
     } else {
       console.log(`  ⚠️ [FAILED] ${url} -> ${result.error}`);
