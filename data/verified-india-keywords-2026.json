@@ -1,0 +1,212 @@
+{
+  "_meta": {
+    "title": "Sujata Nutrilive - Official India Search Keyword Intelligence (2026)",
+    "source": "Ahrefs Google India Live Database & Search Analytics",
+    "updatedAt": "2026-10-09T16:10:00+05:30",
+    "description": "Permanent store of verified high-volume and high-intent keywords for Sujata Nutrilive products. Preserved across sessions for AI agents and developers."
+  },
+  "market_summary": {
+    "total_monthly_demand": "200,000+ searches/month (India)",
+    "primary_flagships": [
+      "Sujata Spirulina Capsules (60 caps)",
+      "Sujata Spirulina Tablets (60 tabs)",
+      "Sujata Sea Buckthorn Capsules (60 caps)",
+      "Sujata Spirulina & Sea Buckthorn Synergy Combo Pack"
+    ]
+  },
+  "sea_buckthorn": {
+    "total_market_keywords": 8643,
+    "seed_volume": ">100,000/month",
+    "seed_kd": "Easy",
+    "target_url": "/product/sujata-sea-buckthorn-capsules",
+    "keywords": [
+      {
+        "keyword": "sea buckthorn",
+        "volume": ">100,000",
+        "kd": "Easy",
+        "intent": "High Awareness / Seed",
+        "priority": "P0"
+      },
+      {
+        "keyword": "sea buckthorn juice",
+        "volume": ">10,000",
+        "kd": "Easy",
+        "intent": "Commercial / Product Format",
+        "priority": "P1"
+      },
+      {
+        "keyword": "sea buckthorn in hindi",
+        "volume": ">10,000",
+        "kd": "Easy",
+        "intent": "Vernacular High Volume",
+        "priority": "P0"
+      },
+      {
+        "keyword": "sea buckthorn juice benefits",
+        "volume": ">10,000",
+        "kd": "Easy",
+        "intent": "Informational / Problem-Aware",
+        "priority": "P1"
+      },
+      {
+        "keyword": "wellwith sea buckthorn",
+        "volume": ">10,000",
+        "kd": "Easy",
+        "intent": "Competitor Displacement (Wellwith)",
+        "priority": "P1"
+      },
+      {
+        "keyword": "sea buckthorn capsules",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Direct Product Match (Buyer Intent)",
+        "priority": "P0"
+      },
+      {
+        "keyword": "sea buckthorn price",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "High Commercial Intent (Ready to Buy)",
+        "priority": "P0"
+      },
+      {
+        "keyword": "sea buckthorn patanjali",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Competitor Conquesting (Patanjali Alternative)",
+        "priority": "P1"
+      },
+      {
+        "keyword": "sea buckthorn benefits in hindi",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Vernacular Educational",
+        "priority": "P1"
+      },
+      {
+        "keyword": "sea buckthorn powder",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Alternative Format",
+        "priority": "P2"
+      },
+      {
+        "keyword": "sea buckthorn fruit",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Natural Source Research",
+        "priority": "P2"
+      },
+      {
+        "keyword": "sea buckthorn oil",
+        "volume": ">1,000",
+        "kd": "Medium",
+        "intent": "Omega-7 Skincare & Cellular Health",
+        "priority": "P2"
+      },
+      {
+        "keyword": "sea buckthorn in marathi",
+        "volume": ">500",
+        "kd": "Easy",
+        "intent": "Maharashtra Regional Moat",
+        "priority": "P0"
+      }
+    ]
+  },
+  "spirulina": {
+    "total_market_keywords": 22882,
+    "seed_volume": ">100,000/month",
+    "seed_kd": "Hard",
+    "target_url": "/product/sujata-spirulina-capsules",
+    "keywords": [
+      {
+        "keyword": "spirulina",
+        "volume": ">100,000",
+        "kd": "Hard",
+        "intent": "High Awareness / Seed",
+        "priority": "P1"
+      },
+      {
+        "keyword": "spirulina capsules",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Direct Product Match (Buyer Intent)",
+        "priority": "P0"
+      },
+      {
+        "keyword": "spirulina tablets",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Direct Product Match (Buyer Intent)",
+        "priority": "P0"
+      },
+      {
+        "keyword": "spirulina in marathi",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Maharashtra Regional Moat (Uncontested)",
+        "priority": "P0"
+      },
+      {
+        "keyword": "spirulina in hindi",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Vernacular Intent",
+        "priority": "P1"
+      },
+      {
+        "keyword": "spirulina powder",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Product Match (Sujata Powder)",
+        "priority": "P1"
+      },
+      {
+        "keyword": "spirulina protein",
+        "volume": ">1,000",
+        "kd": "Medium",
+        "intent": "Fitness / Vegan Protein Intent",
+        "priority": "P1"
+      },
+      {
+        "keyword": "spirulina powder benefits",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Informational / Bio-Iron Energy",
+        "priority": "P1"
+      },
+      {
+        "keyword": "spirulina tablet",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Direct Buyer Singular Search",
+        "priority": "P0"
+      },
+      {
+        "keyword": "spirulina meaning in hindi",
+        "volume": ">1,000",
+        "kd": "Easy",
+        "intent": "Vernacular Awareness",
+        "priority": "P2"
+      },
+      {
+        "keyword": "blue spirulina",
+        "volume": ">1,000",
+        "kd": "Medium",
+        "intent": "Phycocyanin Luxury Skincare",
+        "priority": "P2"
+      }
+    ]
+  },
+  "combo_pack_synergy": {
+    "target_url": "/product/sujata-spirulina-sea-buckthorn-combo-pack",
+    "value_anchor": "Just ₹18/day (2 Bottles - 120 Capsules)",
+    "keywords": [
+      "spirulina and sea buckthorn benefits",
+      "spirulina sea buckthorn combo",
+      "natural energy and skin supplements india",
+      "plant based omega 7 and bio iron",
+      "best ayurvedic multivitamin alternative india"
+    ]
+  }
+}
