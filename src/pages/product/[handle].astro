@@ -822,7 +822,9 @@ const seaBuckthornVideoDef = {
   headline: 'National Recognition: PM Modi on Ladakh Sea Buckthorn',
   subheadline: 'Watch the historic address explaining the extreme -40°C survival power, 8th-century Tibetan literature, and natural Vitamin C density of Himalayan Sea Buckthorn.',
   speechAuthor: 'Hon. Prime Minister Narendra Modi',
-  speechQuote: 'लद्दाख क्षेत्र में पाए जाने वाला यह प्लांट -40 से +40 डिग्री सेंटीग्रेड में कठोरतम तापमान को सहन करने की ताकत रखता है... ब्लड प्रेशर, अल्सर या सर्दी-खांसी हो, सीबकथोन से बनी दवाइयां इनमें लाभ देती हैं। दुनिया में उपलब्ध सीबकथोन में पूरी मानव जाति की विटामिन सी की जरूरत अकेले ही पूरी करने की क्षमता है।'
+  speechQuote: 'लद्दाख क्षेत्र में पाए जाने वाला यह प्लांट -40 से +40 डिग्री सेंटीग्रेड में कठोरतम तापमान को सहन करने की ताकत रखता है... ब्लड प्रेशर, अल्सर या सर्दी-खांसी हो, सीबकथोन से बनी दवाइयां इनमें लाभ देती हैं। दुनिया में उपलब्ध सीबकथोन में पूरी मानव जाति की विटामिन सी की जरूरत अकेले ही पूरी करने की क्षमता है।',
+  posterImage: '/pm_modi_sea_buckthorn_cover.jpg',
+  endSecond: 51
 };
 
 const productVideoMap: Record<string, typeof seaBuckthornVideoDef> = {
@@ -1347,10 +1349,11 @@ const productVideoSchema = videoData ? {
               class="youtube-lite-player group relative w-full max-w-[340px] aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] border-2 border-emerald-500/30 bg-black cursor-pointer"
               data-video-id={videoData.videoId}
               data-video-title={videoData.title}
+              data-video-end={videoData.endSecond || ''}
             >
               {/* High-Res Poster Thumbnail */}
               <img 
-                src={`https://i.ytimg.com/vi/${videoData.videoId}/hqdefault.jpg`} 
+                src={videoData.posterImage || `https://i.ytimg.com/vi/${videoData.videoId}/hqdefault.jpg`} 
                 alt={videoData.title}
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
@@ -2714,7 +2717,9 @@ const productVideoSchema = videoData ? {
         player.addEventListener('click', function() {
           const id = this.getAttribute('data-video-id');
           const title = this.getAttribute('data-video-title');
-          this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="${title}" class="absolute inset-0 w-full h-full object-cover" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+          const endSec = this.getAttribute('data-video-end');
+          const endParam = endSec ? `&end=${endSec}` : '';
+          this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1${endParam}" title="${title}" class="absolute inset-0 w-full h-full object-cover" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
         });
       });
     } // End of initProductPage
