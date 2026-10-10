@@ -11,7 +11,12 @@ export default defineConfig({
   // 'server' mode: enables SSR for dynamic routes (e.g. /product/[handle])
   // while still allowing individual pages to opt-in to prerendering.
   output: 'server',
-  adapter: vercel(),
+  adapter: vercel({
+    isr: {
+      expiration: 3600,
+      exclude: ['/api/(.*)'],
+    },
+  }),
   redirects: {
     '/sitemap.xml': '/sitemap-index.xml',
   },
