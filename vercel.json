@@ -1,5 +1,26 @@
 {
   "framework": "astro",
   "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "regions": ["bom1"],
+  "headers": [
+    {
+      "source": "/(product|learn|science|quiz|contact|track-order|refund-policy|privacy-policy|terms-of-service|shipping-policy)(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=120, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }

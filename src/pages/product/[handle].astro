@@ -1341,17 +1341,32 @@ const productVideoSchema = videoData ? {
         {/* Video Player + Clinical Transcript Grid */}
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white/[0.03] border border-emerald-500/20 rounded-[2.5rem] p-6 md:p-10 backdrop-blur-xl shadow-2xl">
           
-          {/* Left Column: Embed Player */}
+          {/* Left Column: Instant Lite YouTube Player Facade */}
           <div class="lg:col-span-5 flex justify-center">
-            <div class="relative w-full max-w-[340px] aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] border-2 border-emerald-500/30 bg-black">
-              <iframe 
-                src={`https://www.youtube-nocookie.com/embed/${videoData.videoId}?rel=0&modestbranding=1`} 
-                title={videoData.title}
-                class="absolute inset-0 w-full h-full object-cover"
+            <div 
+              class="youtube-lite-player group relative w-full max-w-[340px] aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] border-2 border-emerald-500/30 bg-black cursor-pointer"
+              data-video-id={videoData.videoId}
+              data-video-title={videoData.title}
+            >
+              {/* High-Res Poster Thumbnail */}
+              <img 
+                src={`https://i.ytimg.com/vi/${videoData.videoId}/hqdefault.jpg`} 
+                alt={videoData.title}
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
+              />
+              {/* Luxury Ambient Overlay */}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40"></div>
+              
+              {/* Center Play Button & Badge */}
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/90 text-white flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.5)] border-2 border-white/60 transition-all duration-300 group-hover:scale-110 group-hover:bg-emerald-400">
+                  <svg class="w-7 h-7 translate-x-0.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span class="text-[11px] font-black tracking-widest uppercase text-emerald-200 bg-black/60 px-3.5 py-1.5 rounded-full border border-emerald-500/30 backdrop-blur-md">
+                  Watch Clinical Proof
+                </span>
+              </div>
             </div>
           </div>
 
@@ -2693,6 +2708,15 @@ const productVideoSchema = videoData ? {
           }
         });
       }
+
+      // 3. Lite YouTube Player Facade (Instant Play on Click, 0ms initial render block)
+      document.querySelectorAll('.youtube-lite-player').forEach(player => {
+        player.addEventListener('click', function() {
+          const id = this.getAttribute('data-video-id');
+          const title = this.getAttribute('data-video-title');
+          this.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="${title}" class="absolute inset-0 w-full h-full object-cover" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        });
+      });
     } // End of initProductPage
 
     // Guarantee execution regardless of Astro's router state
