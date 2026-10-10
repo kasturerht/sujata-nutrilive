@@ -805,7 +805,24 @@ const productFaqSchema = resolvedFaqs.length > 0 ? {
 } : null;
 
 // 🎬 YouTube Verified Video Commerce & Schema.org VideoObject Map
-const seaBuckthornVideoDef = {
+interface ProductVideoDefinition {
+  videoId: string;
+  title: string;
+  description: string;
+  uploadDate: string;
+  duration: string;
+  clips: { name: string; start: number; end: number }[];
+  badgeText: string;
+  headline: string;
+  subheadline: string;
+  speechAuthor: string;
+  speechQuote: string;
+  posterImage: string;
+  endSecond?: number | null;
+  assurances: string[];
+}
+
+const seaBuckthornVideoDef: ProductVideoDefinition = {
   videoId: 'bQ-wflWzQ_0',
   title: 'PM Modi Explains Ladakh Sea Buckthorn Benefits (सीबकथॉर्न) | Sujata Nutrilive',
   description: 'Why did Prime Minister Narendra Modi highlight Ladakh Sea Buckthorn as a miraculous natural superfood? Discover the science of Ladakh wild harvest Sea Buckthorn and organic Spirulina by Sujata Nutrilive.',
@@ -824,16 +841,53 @@ const seaBuckthornVideoDef = {
   speechAuthor: 'Hon. Prime Minister Narendra Modi',
   speechQuote: 'लद्दाख क्षेत्र में पाए जाने वाला यह प्लांट -40 से +40 डिग्री सेंटीग्रेड में कठोरतम तापमान को सहन करने की ताकत रखता है... ब्लड प्रेशर, अल्सर या सर्दी-खांसी हो, सीबकथोन से बनी दवाइयां इनमें लाभ देती हैं। दुनिया में उपलब्ध सीबकथोन में पूरी मानव जाति की विटामिन सी की जरूरत अकेले ही पूरी करने की क्षमता है।',
   posterImage: '/pm_modi_sea_buckthorn_cover.jpg',
-  endSecond: 51
+  endSecond: 51,
+  assurances: [
+    '100% Wild Ladakh Harvest (12,000+ ft)',
+    'Rare Omega-7 Palmitoleic Acid',
+    'NABL Certified Purity'
+  ]
 };
 
-const productVideoMap: Record<string, typeof seaBuckthornVideoDef> = {
+const moringaVideoDef: ProductVideoDefinition = {
+  videoId: 'qRtGC6BnHh8',
+  title: 'सिर्फ 1 चम्मच से पेट की चर्बी कम? Moringa Powder for Weight Loss | Sujata Nutrilive',
+  description: 'क्या सिर्फ १ चम्मच हरा पाउडर बिना किसी सख्त डाइटिंग के पेट की चर्बी और जिद्दी वजन कम कर सकता है? जानिए मोरिंगा (सहजन के पत्तों का पाउडर) का प्राचीन और वैज्ञानिक रहस्य!',
+  uploadDate: '2026-08-20T01:45:00Z',
+  duration: 'PT1M2S',
+  clips: [
+    { name: 'चमत्कारी हरा पाउडर: पेट की चर्बी और जिद्दी वजन कम करने का रहस्य', start: 0, end: 6 },
+    { name: 'ऋग्वेद में वर्णित सबसे शक्तिशाली पेड़: मोरिंगा (सहजन)', start: 6, end: 14 },
+    { name: 'पालक से २५ गुना अधिक आयरन व दूध से ४ गुना कैल्शियम', start: 14, end: 21 },
+    { name: 'भूख नियंत्रण व तेज मेटाबॉलिज्म (सोते हुए फैट बर्निंग)', start: 21, end: 34 },
+    { name: 'टॅब्लेट्स ऐवजी १००% शुद्ध मोरिंगा पावडर का सर्वोत्तम?', start: 34, end: 44 },
+    { name: 'सुजाता न्यूट्रीलाईव्ह: नाशिक शेतातून १००% केमिकल-फ्री मोरिंगा', start: 44, end: 62 }
+  ],
+  badgeText: 'Ancient Vedic Supertree • Dual Action Fat Loss',
+  headline: 'Scientific Fat Loss: Moringa for Weight Loss & Metabolism',
+  subheadline: 'Discover how 100% farm-fresh, shade-dried Moringa leaf powder curbs stubborn appetite, accelerates resting metabolic rate, and provides 25x more iron than spinach.',
+  speechAuthor: 'Clinical Nutrition Overview • Sujata Nutrilive',
+  speechQuote: 'ऋग्वेद में मोरिंगा को प्रकृति का सबसे शक्तिशाली और चमत्कारी वृक्ष कहा गया है। इसके पत्तों में पालक से २५ गुना अधिक प्राकृतिक आयरन, दूध से ४ गुना अधिक कैल्शियम और संतरे से ७ गुना अधिक विटामिन सी पाया जाता है। क्लोरोजेनिक एसिड और घुलनशील फाइबर मेटाबॉलिज्म तेज करके जिद्दी चर्बी घटाने में मदद करते हैं।',
+  posterImage: '/moringa_video_cover.jpg',
+  endSecond: null,
+  assurances: [
+    '100% Farm Fresh Harvest (Nashik, MH)',
+    '25x Spinach Iron & 90+ Nutrients',
+    'Zero Fillers • Dual Fat Loss Action'
+  ]
+};
+
+const productVideoMap: Record<string, ProductVideoDefinition> = {
   'sujata-spirulina-sea-buckthorn-combo-pack': seaBuckthornVideoDef,
   'sujata-spirulina-sea-buckthorn-combo': seaBuckthornVideoDef,
   'spirulina-sea-buckthorn-combo-pack': seaBuckthornVideoDef,
   'spirulina-sea-buckthorn-combo': seaBuckthornVideoDef,
   'sujata-sea-buckthorn-capsules': seaBuckthornVideoDef,
-  'sea-buckthorn-capsules': seaBuckthornVideoDef
+  'sea-buckthorn-capsules': seaBuckthornVideoDef,
+  'sujata-moringa-powder': moringaVideoDef,
+  'moringa-powder': moringaVideoDef,
+  'sujata-organic-moringa-powder': moringaVideoDef,
+  'organic-moringa-powder': moringaVideoDef
 };
 
 const videoData = productVideoMap[currentHandleKey] || null;
@@ -1407,18 +1461,12 @@ const productVideoSchema = videoData ? {
 
             {/* Direct Purity Assurances */}
             <div class="pt-4 border-t border-emerald-900/50 flex flex-wrap items-center gap-4 text-[11px] text-emerald-200/80 font-medium">
-              <span class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                100% Wild Ladakh Harvest (12,000+ ft)
-              </span>
-              <span class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Rare Omega-7 Palmitoleic Acid
-              </span>
-              <span class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                NABL Certified Purity
-              </span>
+              {videoData.assurances.map((assurance) => (
+                <span class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  {assurance}
+                </span>
+              ))}
             </div>
 
           </div>
