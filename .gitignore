@@ -25,6 +25,7 @@ scripts/*.json
 *-credentials.json
 *service-account*.json
 scratch/
+content_vault/
 
 # macOS-specific files
 .DS_Store

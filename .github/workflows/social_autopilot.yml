@@ -1,0 +1,39 @@
+name: 🚀 Sujata Social Media Autopilot Engine
+
+on:
+  schedule:
+    # Runs automatically twice daily at 9:30 AM IST (4:00 UTC) & 5:30 PM IST (12:00 UTC)
+    - cron: '0 4 * * *'
+    - cron: '0 12 * * *'
+  workflow_dispatch: # Allows manual 1-click trigger from GitHub Actions tab
+
+jobs:
+  autopilot-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Execute Social Media Autopilot
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_DRIVE_QUEUE_FOLDER_ID: "1_Ojcl3nsEDEt6ia0WdgUcnun30C_Q2Zv"
+          GOOGLE_DRIVE_POSTED_FOLDER_ID: "1qDgrCxOQQ3xuVS5YJtzt-qfL23rxd1u-"
+          META_PAGE_ID: "356279144243520"
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_INSTAGRAM_ACCOUNT_ID: "17841468384194114"
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN || '8922846279:AAFZXUeM6lZc4t0x1AtKjOwPHAE0IBeugSI' }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '847419012' }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: node scripts/autopilot_social_publisher.mjs
