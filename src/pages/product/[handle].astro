@@ -2440,31 +2440,24 @@ const productVideoSchema = videoData ? {
         if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
         if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
 
-        // 2. Update Compare Price & Discount Badges
-        if (isUpi) {
+        // 2. Update Compare Price & Discount Badges (Rock-Solid Anchored MRP: Never jumps or changes!)
+        if (currentCompare > productState.basePrice) {
           if (comparePriceDisplay) {
-            comparePriceDisplay.innerText = `₹${formatINRClient(productState.basePrice)}`;
+            comparePriceDisplay.innerText = `₹${formatINRClient(currentCompare)}`;
             comparePriceDisplay.classList.remove('hidden');
           }
           if (badgeElement) {
-            badgeElement.innerText = `⚡ 10% UPI OFF (Save ₹${formatINRClient(upiSave)})`;
+            if (isUpi) {
+              badgeElement.innerText = `⚡ 10% UPI OFF (Save ₹${formatINRClient(upiSave)})`;
+            } else {
+              const totalPct = Math.round(((currentCompare - productState.basePrice) / currentCompare) * 100);
+              badgeElement.innerText = `Save ${totalPct}% off MRP`;
+            }
             badgeElement.classList.remove('hidden');
           }
         } else {
-          if (currentCompare > currentPrice) {
-            const totalPct = Math.round(((currentCompare - currentPrice) / currentCompare) * 100);
-            if (comparePriceDisplay) {
-              comparePriceDisplay.innerText = `₹${formatINRClient(currentCompare)}`;
-              comparePriceDisplay.classList.remove('hidden');
-            }
-            if (badgeElement) {
-              badgeElement.innerText = `Save ${totalPct}%`;
-              badgeElement.classList.remove('hidden');
-            }
-          } else {
-            if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
-            if (badgeElement) badgeElement.classList.add('hidden');
-          }
+          if (comparePriceDisplay) comparePriceDisplay.classList.add('hidden');
+          if (badgeElement) badgeElement.classList.add('hidden');
         }
 
         // 3. Update Payment Tab Labels

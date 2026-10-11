@@ -210,6 +210,10 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       const upiTotal = Math.round(totalAmount * 0.9);
       const upiSavings = totalAmount - upiTotal;
       const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+      const savedDiscount = localStorage.getItem('sujata_discount_code');
+      const hasCoupon = !!savedDiscount;
+      const codDiscount = hasCoupon ? Math.round(totalAmount * 0.1) : 0;
+      const codPayable = totalAmount - codDiscount;
 
       const upiTotalEl = document.getElementById('cart-upi-total');
       const upiSaveEl = document.getElementById('cart-upi-save');
@@ -222,14 +226,14 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
       if (upiTotalEl) upiTotalEl.innerText = formatINR(upiTotal);
       if (upiSaveEl) upiSaveEl.innerText = `Save ₹${upiSavings}`;
-      if (codTotalEl) codTotalEl.innerText = formatINR(totalAmount);
+      if (codTotalEl) codTotalEl.innerText = formatINR(codPayable);
 
       if (selectedMode === 'upi') {
         if (subtotalEl) {
           subtotalEl.innerText = formatINR(upiTotal);
           subtotalEl.className = 'text-xl sm:text-2xl font-black text-emerald-700 font-sans';
         }
-        if (totalLabelEl) totalLabelEl.innerText = 'UPI Payable (10% OFF)';
+        if (totalLabelEl) totalLabelEl.innerText = 'UPI Payable (10% Instant Off)';
         if (checkoutBtn) {
           checkoutBtn.className = 'w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
         }
@@ -241,10 +245,10 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         tabCodEl?.classList.add('bg-white/70', 'border-transparent', 'text-gray-600');
       } else {
         if (subtotalEl) {
-          subtotalEl.innerText = formatINR(totalAmount);
+          subtotalEl.innerText = formatINR(codPayable);
           subtotalEl.className = 'text-xl sm:text-2xl font-black text-[#111827] font-sans';
         }
-        if (totalLabelEl) totalLabelEl.innerText = 'Payable on Delivery (COD)';
+        if (totalLabelEl) totalLabelEl.innerText = hasCoupon ? `Payable on Delivery (${savedDiscount} Applied)` : 'Payable on Delivery (COD)';
         if (checkoutBtn) {
           checkoutBtn.className = 'w-full bg-[#111827] hover:bg-black text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
         }
@@ -488,23 +492,25 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           }
 
           if (checkoutUrl) {
-            // 🔒 100% Loophole-Proof Payment Discount Routing
+            // 🔒 Silicon Valley High-Conversion Discount Routing (Zero Friction, 100% Trust)
             const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+            const savedDiscount = localStorage.getItem('sujata_discount_code');
 
             if (selectedMode === 'upi') {
               // 🎁 Auto-Apply 10% UPI/Prepaid Discount Code (UPI10 or active fallback PEAK10)
-              const savedDiscount = localStorage.getItem('sujata_discount_code') || 'PEAK10';
+              const discountToApply = savedDiscount || 'PEAK10';
+              if (discountToApply && !checkoutUrl.includes('discount=')) {
+                const sep = checkoutUrl.includes('?') ? '&' : '?';
+                checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(discountToApply)}`;
+              }
+            } else {
+              // 📦 Cash on Delivery:
+              // If the customer legitimately earned a welcome/first-time coupon (e.g. PEAK10), HONOR IT!
+              // Never strip it and breach customer trust!
               if (savedDiscount && !checkoutUrl.includes('discount=')) {
                 const sep = checkoutUrl.includes('?') ? '&' : '?';
                 checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(savedDiscount)}`;
               }
-            } else {
-              // 📦 Cash on Delivery: STRICTLY FULL PRICE! Strip any discount code!
-              try {
-                const urlObj = new URL(checkoutUrl);
-                urlObj.searchParams.delete('discount');
-                checkoutUrl = urlObj.toString();
-              } catch(e) {}
             }
 
             clearTimeout(recoveryTimer);
