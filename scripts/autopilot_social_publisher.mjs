@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
+import { createMotionReel, selectAudioTheme } from './motion_reel_generator.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -209,64 +210,110 @@ ${customHashtags}`;
   return caption;
 }
 
-// --- 4.1 SMART SCHEDULING PARSER ---
-// Analyzes filename for scheduled dates (e.g. '15-oct_navaratri.jpg' or '2026-10-15_post.png')
-// If date is in the future, file stays in queue safely.
-// If date is today or no date is specified, it is ready for publication.
+// --- 4.1 SMART SCHEDULING PARSER (DATE & TIME) ---
+// Analyzes filename for scheduled dates and times (e.g. '2026-10-11_14-30_post.png', '11-oct_2-30pm_post.png', '2026-10-15_post.png')
+// If date & time are in the future, file stays in queue safely with minute-level countdown.
+// If scheduled time has arrived/passed, or no schedule is specified, it is ready for immediate publication.
 function checkFileSchedule(fileName) {
   const now = new Date();
-  const istFormatter = new Intl.DateTimeFormat('en-IN', {
-    timeZone: 'Asia/Kolkata',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  });
-  const parts = istFormatter.formatToParts(now);
-  const currentDay = parseInt(parts.find(p => p.type === 'day').value, 10);
-  const currentMonth = parseInt(parts.find(p => p.type === 'month').value, 10);
-  const currentYear = parseInt(parts.find(p => p.type === 'year').value, 10);
+
+  // Current time in IST (UTC+5:30)
+  const istOffsetMs = (5 * 60 + 30) * 60 * 1000;
+  const istNow = new Date(now.getTime() + istOffsetMs);
+  const currentYear = istNow.getUTCFullYear();
+  const currentMonth = istNow.getUTCMonth() + 1; // 1-12
+  const currentDay = istNow.getUTCDate();
 
   const monthNames = {
     jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
     jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12
   };
 
-  const lower = fileName.toLowerCase();
-  const match1 = lower.match(/(?:^|[\-_])(\d{1,2})[\-_]?(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/);
-  const match2 = lower.match(/(\d{4})[\-_](\d{1,2})[\-_](\d{1,2})/);
-  const match3 = lower.match(/(\d{1,2})[\-_](\d{1,2})[\-_](\d{4})/);
+  let cleanName = fileName.toLowerCase();
 
-  let targetDay = null;
-  let targetMonth = null;
+  // 1. DATE PARSING
   let targetYear = currentYear;
+  let targetMonth = null;
+  let targetDay = null;
 
-  if (match1) {
-    targetDay = parseInt(match1[1], 10);
-    targetMonth = monthNames[match1[2]];
-  } else if (match2) {
-    targetYear = parseInt(match2[1], 10);
-    targetMonth = parseInt(match2[2], 10);
-    targetDay = parseInt(match2[3], 10);
-  } else if (match3) {
-    targetDay = parseInt(match3[1], 10);
-    targetMonth = parseInt(match3[2], 10);
-    targetYear = parseInt(match3[3], 10);
+  const matchYMD = cleanName.match(/(\d{4})[\-_](\d{1,2})[\-_](\d{1,2})/);
+  const matchDMY = cleanName.match(/(?:^|[\-_])(\d{1,2})[\-_](\d{1,2})[\-_](\d{4})/);
+  const matchDMon = cleanName.match(/(?:^|[\-_])(\d{1,2})[\-_]?(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/);
+
+  if (matchYMD) {
+    targetYear = parseInt(matchYMD[1], 10);
+    targetMonth = parseInt(matchYMD[2], 10);
+    targetDay = parseInt(matchYMD[3], 10);
+    cleanName = cleanName.replace(matchYMD[0], ' ');
+  } else if (matchDMY) {
+    targetDay = parseInt(matchDMY[1], 10);
+    targetMonth = parseInt(matchDMY[2], 10);
+    targetYear = parseInt(matchDMY[3], 10);
+    cleanName = cleanName.replace(matchDMY[0], ' ');
+  } else if (matchDMon) {
+    targetDay = parseInt(matchDMon[1], 10);
+    targetMonth = monthNames[matchDMon[2]];
+    cleanName = cleanName.replace(matchDMon[0], ' ');
   }
 
-  if (targetDay !== null && targetMonth !== null) {
-    const targetDate = new Date(targetYear, targetMonth - 1, targetDay, 23, 59, 59);
-    const currentDateStart = new Date(currentYear, currentMonth - 1, currentDay, 0, 0, 0);
+  // 2. TIME PARSING on remainder (supports 12-hr with am/pm or 24-hr formats)
+  let targetHour = null;
+  let targetMinute = 0;
 
-    if (currentYear === targetYear && currentMonth === targetMonth && currentDay === targetDay) {
-      return { isReady: true, exactToday: true, scheduledDate: `${targetDay}/${targetMonth}/${targetYear}` };
-    } else if (targetDate < currentDateStart) {
-      return { isReady: true, exactToday: false, isOverdue: true, scheduledDate: `${targetDay}/${targetMonth}/${targetYear}` };
+  // 12-hour: e.g., 2-30pm, 02-30-pm, 2pm, 11-45am, 11am
+  const match12h = cleanName.match(/(?:^|[\-_\s])(\d{1,2})(?:[\-_:h](\d{2}))?\s*(am|pm)(?:$|[\-_\s\.])/);
+  // 24-hour: e.g., 14-30, 14:30, 09-15, 18h30
+  const match24h = cleanName.match(/(?:^|[\-_\s])([01]?\d|2[0-3])[\-_:h]([0-5]\d)(?:$|[\-_\s\.])/);
+
+  if (match12h) {
+    let h = parseInt(match12h[1], 10);
+    const m = match12h[2] ? parseInt(match12h[2], 10) : 0;
+    const meridian = match12h[3];
+    if (meridian === 'pm' && h < 12) h += 12;
+    if (meridian === 'am' && h === 12) h = 0;
+    targetHour = h;
+    targetMinute = m;
+  } else if (match24h) {
+    targetHour = parseInt(match24h[1], 10);
+    targetMinute = parseInt(match24h[2], 10);
+  }
+
+  // If no date was given:
+  if (targetDay === null || targetMonth === null) {
+    if (targetHour !== null) {
+      // Time given without date -> assume today
+      targetDay = currentDay;
+      targetMonth = currentMonth;
+      targetYear = currentYear;
     } else {
-      return { isReady: false, isFuture: true, scheduledDate: `${targetDay}/${targetMonth}/${targetYear}` };
+      // No date and no time -> ready immediately!
+      return { isReady: true, noSchedule: true, label: 'Immediate' };
     }
   }
 
-  return { isReady: true, exactToday: false, noDateGiven: true };
+  // If date was given, but NO time:
+  // If date is today or past, ready immediately; if future, default to 00:00:00 (start of that day)
+  if (targetHour === null) {
+    targetHour = 0;
+    targetMinute = 0;
+  }
+
+  // Target timestamp in UTC (IST is UTC+5:30)
+  const targetUtcMs = Date.UTC(targetYear, targetMonth - 1, targetDay, targetHour, targetMinute, 0) - istOffsetMs;
+  const currentUtcMs = now.getTime();
+
+  const isReady = currentUtcMs >= targetUtcMs;
+  const diffMinutes = Math.round((targetUtcMs - currentUtcMs) / 60000);
+
+  const formattedTarget = `${targetDay.toString().padStart(2, '0')}/${targetMonth.toString().padStart(2, '0')}/${targetYear} ${targetHour.toString().padStart(2, '0')}:${targetMinute.toString().padStart(2, '0')} IST`;
+
+  return {
+    isReady,
+    isFuture: !isReady,
+    targetUtcMs,
+    diffMinutes,
+    scheduledDateTime: formattedTarget
+  };
 }
 
 // --- 5. GOOGLE DRIVE QUEUE OPERATIONS ---
@@ -423,6 +470,98 @@ async function publishToInstagramFeed(driveFileId, caption) {
   };
 }
 
+// --- 7.1 META INSTAGRAM REELS (VIDEO/MOTION WITH MUSIC) PUBLISHING ---
+async function publishToInstagramReel(videoBuffer, caption) {
+  console.log('📸 Publishing to Instagram Reels (@sujatanutrilive) with Thematic Music...');
+
+  // Step 1: Initialize Resumable Upload Container
+  const createUrl = `https://graph.facebook.com/v21.0/${META_INSTAGRAM_ACCOUNT_ID}/media`;
+  const initRes = await fetch(createUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      media_type: 'REELS',
+      upload_type: 'resumable',
+      caption: caption,
+      access_token: META_PAGE_ACCESS_TOKEN
+    })
+  });
+
+  const initData = await initRes.json();
+  if (!initData.id || !initData.uri) {
+    throw new Error('Instagram Reels container init failed: ' + JSON.stringify(initData));
+  }
+
+  const containerId = initData.id;
+  const uploadUri = initData.uri;
+  console.log(`⏳ Instagram Reel container initialized (ID: ${containerId}). Uploading video binary...`);
+
+  // Step 2: Upload Video Bytes directly to Meta's rupload endpoint
+  const uploadRes = await fetch(uploadUri, {
+    method: 'POST',
+    headers: {
+      Authorization: `OAuth ${META_PAGE_ACCESS_TOKEN}`,
+      offset: '0',
+      file_size: videoBuffer.length.toString(),
+      'Content-Type': 'application/octet-stream'
+    },
+    body: videoBuffer
+  });
+
+  const uploadResult = await uploadRes.json();
+  if (!uploadResult.success && uploadResult.status !== 200 && !uploadResult.id) {
+    console.log('Note on Meta upload response:', uploadResult);
+  }
+
+  // Step 3: Poll status until Meta finishes video encoding (usually 5-15s)
+  console.log('⏳ Waiting for Meta video processing (usually 5-15s)...');
+  let isFinished = false;
+  for (let attempt = 0; attempt < 15; attempt++) {
+    await new Promise(r => setTimeout(r, 4000));
+    const statusRes = await fetch(`https://graph.facebook.com/v21.0/${containerId}?fields=status_code&access_token=${META_PAGE_ACCESS_TOKEN}`);
+    const statusData = await statusRes.json();
+    console.log(`⏳ Processing attempt ${attempt + 1}: status = ${statusData.status_code}`);
+    if (statusData.status_code === 'FINISHED') {
+      isFinished = true;
+      break;
+    } else if (statusData.status_code === 'ERROR') {
+      throw new Error('Meta video processing failed with ERROR status');
+    }
+  }
+
+  // Step 4: Publish Reel Container
+  const publishRes = await fetch(`https://graph.facebook.com/v21.0/${META_INSTAGRAM_ACCOUNT_ID}/media_publish`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      creation_id: containerId,
+      access_token: META_PAGE_ACCESS_TOKEN
+    })
+  });
+
+  const publishData = await publishRes.json();
+  if (!publishData.id) {
+    throw new Error('Instagram Reels media_publish failed: ' + JSON.stringify(publishData));
+  }
+
+  console.log('✅ Instagram Reel with Music published successfully! ID:', publishData.id);
+
+  let permalink = 'https://www.instagram.com/sujatanutrilive/';
+  try {
+    const mediaInfoRes = await fetch(`https://graph.facebook.com/v21.0/${publishData.id}?fields=permalink,shortcode&access_token=${META_PAGE_ACCESS_TOKEN}`);
+    const mediaInfo = await mediaInfoRes.json();
+    if (mediaInfo.permalink) permalink = mediaInfo.permalink;
+  } catch (e) {
+    console.warn('Could not retrieve exact IG permalink:', e.message);
+  }
+
+  return {
+    success: true,
+    id: publishData.id,
+    url: permalink
+  };
+}
+
 // --- 8. YOUTUBE REFRESH TOKEN ACCESS ---
 async function getYouTubeAccessToken() {
   const res = await fetch('https://oauth2.googleapis.com/token', {
@@ -538,123 +677,167 @@ async function runAutopilot() {
       readyFiles.push({ file, sched });
     } else {
       futureFiles.push({ file, sched });
-      console.log(`⏳ Post '${file.name}' is scheduled for future date (${sched.scheduledDate}). Holding in queue.`);
+      const countdownStr = sched.diffMinutes > 0 ? ` (in ${sched.diffMinutes} mins)` : '';
+      console.log(`⏳ Post '${file.name}' is scheduled for ${sched.scheduledDateTime}${countdownStr}. Holding in queue.`);
     }
   }
 
   if (readyFiles.length === 0) {
-    console.log(`✨ All remaining files (${futureFiles.length}) are scheduled for future dates. Nothing to post right now.`);
+    console.log(`✨ All remaining files (${futureFiles.length}) are scheduled for future times. Waiting for scheduled slot.`);
     return;
   }
 
-  // Priority: 1st preference to today's exact date match, then oldest unconstrained file (FIFO)
-  readyFiles.sort((a, b) => {
-    if (a.sched.exactToday && !b.sched.exactToday) return -1;
-    if (!a.sched.exactToday && b.sched.exactToday) return 1;
-    return 0;
-  });
+  // Priority: Earliest scheduled timestamp first (FIFO)
+  readyFiles.sort((a, b) => (a.sched.targetUtcMs || 0) - (b.sched.targetUtcMs || 0));
 
-  const targetFile = readyFiles[0].file;
-  console.log(`🎯 Selected media file for publishing: ${targetFile.name} (Type: ${targetFile.mimeType})`);
+  for (let i = 0; i < readyFiles.length; i++) {
+    const targetFile = readyFiles[i].file;
+    console.log(`\n🎯 [${i + 1}/${readyFiles.length}] Publishing ready media file: ${targetFile.name} (Type: ${targetFile.mimeType})`);
 
-  // Detect custom caption file matching this specific media file
-  let customCaption = '';
-  let companionTextFile = null;
-  const baseName = targetFile.name.substring(0, targetFile.name.lastIndexOf('.'));
-  const matchedTextFile = captionFiles.find(f => f.name.startsWith(baseName)) || (captionFiles.length === 1 ? captionFiles[0] : null);
+    // Detect custom caption file matching this specific media file
+    let customCaption = '';
+    let companionTextFile = null;
+    const baseName = targetFile.name.substring(0, targetFile.name.lastIndexOf('.'));
+    const matchedTextFile = captionFiles.find(f => f.name.startsWith(baseName)) || (captionFiles.length === 1 ? captionFiles[0] : null);
 
-  if (matchedTextFile) {
-    companionTextFile = matchedTextFile;
-    const textBuffer = await downloadDriveFile(companionTextFile.id);
-    customCaption = textBuffer.toString('utf-8');
-    console.log(`📝 Detected matching custom caption file: ${companionTextFile.name}`);
-  }
-
-  const fileBuffer = await downloadDriveFile(targetFile.id);
-  const caption = generateBrandCaption(targetFile.name, customCaption);
-
-  const isVideo = targetFile.mimeType.startsWith('video/') || targetFile.name.endsWith('.mp4') || targetFile.name.endsWith('.mov');
-  const isImage = targetFile.mimeType.startsWith('image/') || targetFile.name.match(/\.(jpg|jpeg|png|webp)$/i);
-
-  const results = {
-    facebook: null,
-    instagram: null,
-    youtube: null
-  };
-
-  if (isImage) {
-    // 1. Post to Facebook
-    try {
-      results.facebook = await publishToFacebookPage(fileBuffer, targetFile.mimeType || 'image/jpeg', caption);
-    } catch (e) {
-      console.error('❌ Facebook error:', e.message);
-      results.facebook = { error: e.message };
+    if (matchedTextFile) {
+      companionTextFile = matchedTextFile;
+      const textBuffer = await downloadDriveFile(companionTextFile.id);
+      customCaption = textBuffer.toString('utf-8');
+      console.log(`📝 Detected matching custom caption file: ${companionTextFile.name}`);
     }
 
-    // 2. Post to Instagram
-    try {
-      results.instagram = await publishToInstagramFeed(targetFile.id, caption);
-    } catch (e) {
-      console.error('❌ Instagram error:', e.message);
-      results.instagram = { error: e.message };
-    }
-  } else if (isVideo) {
-    // 1. Post to YouTube Shorts
-    try {
-      const cleanTitle = targetFile.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-      results.youtube = await publishToYouTubeShorts(fileBuffer, targetFile.mimeType || 'video/mp4', cleanTitle, caption);
-    } catch (e) {
-      console.error('❌ YouTube error:', e.message);
-      results.youtube = { error: e.message };
-    }
+    const fileBuffer = await downloadDriveFile(targetFile.id);
+    const caption = generateBrandCaption(targetFile.name, customCaption);
 
-    // 2. Post to Facebook (as Video)
-    try {
-      // For FB video
-      const boundary = '----WebKitFormBoundary' + crypto.randomBytes(16).toString('hex');
-      const formDataParts = [
-        `--${boundary}\r\nContent-Disposition: form-data; name="description"\r\n\r\n${caption}\r\n`,
-        `--${boundary}\r\nContent-Disposition: form-data; name="access_token"\r\n\r\n${META_PAGE_ACCESS_TOKEN}\r\n`,
-        `--${boundary}\r\nContent-Disposition: form-data; name="source"; filename="${targetFile.name}"\r\nContent-Type: ${targetFile.mimeType || 'video/mp4'}\r\n\r\n`
-      ];
-      const part1Buffer = Buffer.from(formDataParts.join(''));
-      const part2Buffer = Buffer.from(`\r\n--${boundary}--\r\n`);
-      const fullBody = Buffer.concat([part1Buffer, fileBuffer, part2Buffer]);
+    const isVideo = targetFile.mimeType.startsWith('video/') || targetFile.name.endsWith('.mp4') || targetFile.name.endsWith('.mov');
+    const isImage = targetFile.mimeType.startsWith('image/') || targetFile.name.match(/\.(jpg|jpeg|png|webp)$/i);
 
-      const fbVidRes = await fetch(`https://graph.facebook.com/v21.0/${META_PAGE_ID}/videos`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': `multipart/form-data; boundary=${boundary}`,
-          'Content-Length': fullBody.length.toString()
-        },
-        body: fullBody
-      });
-      const fbVidData = await fbVidRes.json();
-      if (fbVidData.id) {
-        results.facebook = { success: true, id: fbVidData.id, url: `https://www.facebook.com/${fbVidData.id}` };
+    const results = {
+      facebook: null,
+      instagram: null,
+      youtube: null
+    };
+
+    if (isImage) {
+      console.log(`🎨 Static image detected: ${targetFile.name}`);
+      console.log(`🎵 Automatically pairing smart background music theme...`);
+
+      // 1. Select matching theme audio track
+      const audioSelection = selectAudioTheme(targetFile.name, caption);
+      console.log(`🎼 Selected Music Theme: ${audioSelection.theme} (${path.basename(audioSelection.file)})`);
+
+      // 2. Render 1080x1920 HD Motion Reel with Music
+      const tempDir = path.join(__dirname, '..', 'scratch');
+      if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+
+      const safeBase = targetFile.name.replace(/\.[^/.]+$/, '').replace(/[^a-zA-Z0-9_\-]/g, '_');
+      const tempImgPath = path.join(tempDir, `input_${Date.now()}_${targetFile.name}`);
+      const tempReelPath = path.join(tempDir, `reel_${Date.now()}_${safeBase}.mp4`);
+
+      fs.writeFileSync(tempImgPath, fileBuffer);
+
+      let motionReelBuffer = null;
+      try {
+        await createMotionReel(tempImgPath, audioSelection.file, tempReelPath, 12);
+        motionReelBuffer = fs.readFileSync(tempReelPath);
+        console.log(`✨ Motion Reel with Music ready! Size: ${(motionReelBuffer.length / (1024 * 1024)).toFixed(2)} MB`);
+      } catch (err) {
+        console.warn(`⚠️ FFmpeg Motion Reel notice: ${err.message}. Falling back to standard image.`);
       }
-    } catch (e) {
-      console.error('❌ Facebook Video error:', e.message);
-      results.facebook = { error: e.message };
+
+      // 3. Post to Facebook (High-res Photo Feed)
+      try {
+        results.facebook = await publishToFacebookPage(fileBuffer, targetFile.mimeType || 'image/jpeg', caption);
+      } catch (e) {
+        console.error('❌ Facebook photo error:', e.message);
+        results.facebook = { error: e.message };
+      }
+
+      // 4. Post to Instagram (As Music Reel if motion reel generated, else fallback to standard image)
+      try {
+        if (motionReelBuffer) {
+          results.instagram = await publishToInstagramReel(motionReelBuffer, caption);
+        } else {
+          results.instagram = await publishToInstagramFeed(targetFile.id, caption);
+        }
+      } catch (e) {
+        console.error('❌ Instagram error:', e.message);
+        results.instagram = { error: e.message };
+      }
+
+      // 5. Post to YouTube Shorts (Since we now have a full 9:16 vertical video with music!)
+      if (motionReelBuffer) {
+        try {
+          const cleanTitle = targetFile.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+          results.youtube = await publishToYouTubeShorts(motionReelBuffer, 'video/mp4', cleanTitle, caption);
+        } catch (e) {
+          console.warn('YouTube Shorts notice:', e.message);
+        }
+      }
+
+      // Clean up temp files
+      try {
+        if (fs.existsSync(tempImgPath)) fs.unlinkSync(tempImgPath);
+        if (fs.existsSync(tempReelPath)) fs.unlinkSync(tempReelPath);
+      } catch (e) {}
+    } else if (isVideo) {
+      console.log(`🎬 Video detected: ${targetFile.name}. Keeping original audio intact (no music added).`);
+      // 1. Post to YouTube Shorts
+      try {
+        const cleanTitle = targetFile.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+        results.youtube = await publishToYouTubeShorts(fileBuffer, targetFile.mimeType || 'video/mp4', cleanTitle, caption);
+      } catch (e) {
+        console.error('❌ YouTube error:', e.message);
+        results.youtube = { error: e.message };
+      }
+
+      // 2. Post to Facebook (as Video)
+      try {
+        const boundary = '----WebKitFormBoundary' + crypto.randomBytes(16).toString('hex');
+        const formDataParts = [
+          `--${boundary}\r\nContent-Disposition: form-data; name="description"\r\n\r\n${caption}\r\n`,
+          `--${boundary}\r\nContent-Disposition: form-data; name="access_token"\r\n\r\n${META_PAGE_ACCESS_TOKEN}\r\n`,
+          `--${boundary}\r\nContent-Disposition: form-data; name="source"; filename="${targetFile.name}"\r\nContent-Type: ${targetFile.mimeType || 'video/mp4'}\r\n\r\n`
+        ];
+        const part1Buffer = Buffer.from(formDataParts.join(''));
+        const part2Buffer = Buffer.from(`\r\n--${boundary}--\r\n`);
+        const fullBody = Buffer.concat([part1Buffer, fileBuffer, part2Buffer]);
+
+        const fbVidRes = await fetch(`https://graph.facebook.com/v21.0/${META_PAGE_ID}/videos`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': `multipart/form-data; boundary=${boundary}`,
+            'Content-Length': fullBody.length.toString()
+          },
+          body: fullBody
+        });
+        const fbVidData = await fbVidRes.json();
+        if (fbVidData.id) {
+          results.facebook = { success: true, id: fbVidData.id, url: `https://www.facebook.com/${fbVidData.id}` };
+        }
+      } catch (e) {
+        console.error('❌ Facebook Video error:', e.message);
+        results.facebook = { error: e.message };
+      }
     }
-  }
 
-  // Move files to Posted folder
-  await moveFileToPosted(targetFile.id);
-  if (companionTextFile) {
-    await moveFileToPosted(companionTextFile.id);
-  }
+    // Move files to Posted folder
+    await moveFileToPosted(targetFile.id);
+    if (companionTextFile) {
+      await moveFileToPosted(companionTextFile.id);
+    }
 
-  // Compose Telegram Alert
-  const linksHtml = [];
-  if (results.facebook?.url) linksHtml.push(`📘 <b>Facebook:</b> <a href="${results.facebook.url}">पोस्ट पहा</a>`);
-  if (results.instagram?.url) linksHtml.push(`📸 <b>Instagram:</b> <a href="${results.instagram.url}">इन्स्टाग्राम पोस्ट पहा</a>`);
-  if (results.youtube?.url) linksHtml.push(`📺 <b>YouTube Shorts:</b> <a href="${results.youtube.url}">शॉर्ट्स व्हिडिओ पहा</a>`);
+    // Compose Telegram Alert
+    const linksHtml = [];
+    if (results.facebook?.url) linksHtml.push(`📘 <b>Facebook:</b> <a href="${results.facebook.url}">पोस्ट पहा</a>`);
+    if (results.instagram?.url) linksHtml.push(`📸 <b>Instagram:</b> <a href="${results.instagram.url}">इन्स्टाग्राम पोस्ट पहा</a>`);
+    if (results.youtube?.url) linksHtml.push(`📺 <b>YouTube Shorts:</b> <a href="${results.youtube.url}">शॉर्ट्स व्हिडिओ पहा</a>`);
 
-  const telegramMsg = `🚀 <b>सुजाता न्युट्रीलाईव्ह ऑटोपायलट: पोस्ट यशस्वीरीत्या प्रसिद्ध झाली!</b>
+    const telegramMsg = `🚀 <b>सुजाता न्युट्रीलाईव्ह ऑटोपायलट: पोस्ट यशस्वीरीत्या प्रसिद्ध झाली!</b>
 
 📁 <b>फाईल:</b> <code>${targetFile.name}</code>
-🗓️ <b>तारीख:</b> ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+🗓️ <b>तारीख व वेळ:</b> ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
 
 🌐 <b>लाइव्ह लिंक्स:</b>
 ${linksHtml.length > 0 ? linksHtml.join('\n') : '<i>प्रक्रिया पूर्ण झाली.</i>'}
@@ -664,11 +847,51 @@ ${linksHtml.length > 0 ? linksHtml.join('\n') : '<i>प्रक्रिया 
 
 📦 <i>ही फाईल Drive मधील <b>'Posted'</b> आर्काइव्ह फोल्डरमध्ये हलवली आहे.</i>`;
 
-  await sendTelegramAlert(telegramMsg);
-  console.log('🎉 Omni-Channel publishing round completed successfully!');
+    await sendTelegramAlert(telegramMsg);
+    console.log(`🎉 [${i + 1}/${readyFiles.length}] Publishing completed for: ${targetFile.name}`);
+
+    // Pause between multiple uploads to avoid rate limits
+    if (i < readyFiles.length - 1) {
+      console.log('⏳ Pausing 5s before next post...');
+      await new Promise(r => setTimeout(r, 5000));
+    }
+  }
+
+  console.log('✨ All scheduled ready posts have been published!');
 }
 
-runAutopilot().catch(err => {
+// --- 11. ENTRY POINT (SINGLE RUN OR CONTINUOUS WATCH MODE) ---
+const isWatchMode = process.argv.includes('--watch');
+
+async function main() {
+  if (isWatchMode) {
+    console.log('👀 ========================================================');
+    console.log('👀 SUJATA AUTOPILOT: 24/7 CONTINUOUS WATCH MODE ACTIVATED');
+    console.log('👀 Checking Google Drive queue every 60 seconds...');
+    console.log('👀 Day-time & exact minute schedule posts will fire on time!');
+    console.log('👀 ========================================================');
+
+    let isBusy = false;
+    const pollCycle = async () => {
+      if (isBusy) return;
+      isBusy = true;
+      try {
+        await runAutopilot();
+      } catch (err) {
+        console.error('⚠️ Watch loop warning:', err.message);
+      } finally {
+        isBusy = false;
+      }
+    };
+
+    await pollCycle();
+    setInterval(pollCycle, 60000); // 60s polling
+  } else {
+    await runAutopilot();
+  }
+}
+
+main().catch(err => {
   console.error('💥 FATAL AUTOPILOT ERROR:', err);
   process.exit(1);
 });

@@ -21,6 +21,7 @@ pnpm-debug.log*
 .env.production
 *.csv
 scripts/data/
+scripts/bin/
 scripts/*.json
 *-credentials.json
 *service-account*.json
