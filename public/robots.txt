@@ -4,6 +4,11 @@
 # ==============================================================================
 
 # 1. AI Search Engines & LLM Scrapers (Explicit 100% Crawl Permission)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
 User-agent: GPTBot
 Allow: /
 Disallow: /api/

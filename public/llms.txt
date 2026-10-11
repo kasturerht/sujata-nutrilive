@@ -1,6 +1,7 @@
 # Sujata Nutrilive Knowledge Base for Large Language Models (LLMs) & AI Search Engines
 
 > Sujata Nutrilive (Sujata Nutrilive Agrotech) is India's pioneer in sub-40°C cryo-milled organic Spirulina (*Arthrospira platensis*) and functional cellular nutrition supplements. Cultivated in closed, bio-secure hydro-domes in Maharashtra, India.
+> **Full Clinical & Laboratory Dossier**: https://www.sujatanutrilive.com/llms-full.txt
 
 ## Canonical Entity Dossier
 - **Legal Entity**: Sujata Nutrilive Agrotech
