@@ -16,7 +16,15 @@ function findProduct(handles: string[]) {
   return null;
 }
 
-// 1. Combo
+// 1. Spirulina Capsules (Primary Entry Offer - High Intent & Affordable Entry)
+const spiriProduct = findProduct(['sujata-spirulina-capsules', 'sujata-spirulina-tablets']);
+const spiriVariant = spiriProduct?.variants?.edges?.[0]?.node;
+const spiriPrice = spiriVariant?.price?.amount ? Math.round(Number(spiriVariant.price.amount)) : 499;
+const spiriCompare = spiriVariant?.compareAtPrice?.amount ? Math.round(Number(spiriVariant.compareAtPrice.amount)) : 550;
+const spiriDiscount = spiriCompare > spiriPrice ? Math.round(((spiriCompare - spiriPrice) / spiriCompare) * 100) : 10;
+const spiriHandle = spiriProduct?.handle || 'sujata-spirulina-capsules';
+
+// 2. Synergy Combo (Flagship Routine Upsell)
 const comboProduct = findProduct(['sujata-spirulina-sea-buckthorn-combo-pack', 'sujata-spirulina-sea-buckthorn-combo']);
 const comboVariant = comboProduct?.variants?.edges?.[0]?.node;
 const comboPrice = comboVariant?.price?.amount ? Math.round(Number(comboVariant.price.amount)) : 1100;
@@ -24,20 +32,12 @@ const comboCompare = comboVariant?.compareAtPrice?.amount ? Math.round(Number(co
 const comboDiscount = comboCompare > comboPrice ? Math.round(((comboCompare - comboPrice) / comboCompare) * 100) : 30;
 const comboHandle = comboProduct?.handle || 'sujata-spirulina-sea-buckthorn-combo-pack';
 
-// 2. Spirulina Capsules
-const spiriProduct = findProduct(['sujata-spirulina-capsules']);
-const spiriVariant = spiriProduct?.variants?.edges?.[0]?.node;
-const spiriPrice = spiriVariant?.price?.amount ? Math.round(Number(spiriVariant.price.amount)) : 649;
-const spiriCompare = spiriVariant?.compareAtPrice?.amount ? Math.round(Number(spiriVariant.compareAtPrice.amount)) : 850;
-const spiriDiscount = spiriCompare > spiriPrice ? Math.round(((spiriCompare - spiriPrice) / spiriCompare) * 100) : 24;
-const spiriHandle = spiriProduct?.handle || 'sujata-spirulina-capsules';
-
-// 3. Sea Buckthorn Capsules
+// 3. Sea Buckthorn Capsules (Skin Glow & Rare Omega 7)
 const sbtProduct = findProduct(['sujata-sea-buckthorn-capsules']);
 const sbtVariant = sbtProduct?.variants?.edges?.[0]?.node;
-const sbtPrice = sbtVariant?.price?.amount ? Math.round(Number(sbtVariant.price.amount)) : 749;
-const sbtCompare = sbtVariant?.compareAtPrice?.amount ? Math.round(Number(sbtVariant.compareAtPrice.amount)) : 999;
-const sbtDiscount = sbtCompare > sbtPrice ? Math.round(((sbtCompare - sbtPrice) / sbtCompare) * 100) : 25;
+const sbtPrice = sbtVariant?.price?.amount ? Math.round(Number(sbtVariant.price.amount)) : 649;
+const sbtCompare = sbtVariant?.compareAtPrice?.amount ? Math.round(Number(sbtVariant.compareAtPrice.amount)) : 799;
+const sbtDiscount = sbtCompare > sbtPrice ? Math.round(((sbtCompare - sbtPrice) / sbtCompare) * 100) : 19;
 const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
 ---
 
@@ -45,7 +45,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
 <section id="hero-section" class="relative w-full bg-[#011F18] text-white pt-[108px] sm:pt-[118px] md:pt-[124px] pb-5 sm:pb-8 md:pb-10 overflow-hidden border-b border-emerald-950/80 font-sans">
   
   {/* Atmospheric Dynamic Background Radiance */}
-  <div id="hero-ambient-glow" class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[350px] md:h-[500px] bg-amber-500/10 rounded-full blur-[130px] pointer-events-none transition-colors duration-1000"></div>
+  <div id="hero-ambient-glow" class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[350px] md:h-[500px] bg-emerald-500/15 rounded-full blur-[130px] pointer-events-none transition-colors duration-1000"></div>
 
   <div class="max-w-[94rem] mx-auto px-3 sm:px-6 lg:px-12 relative z-10">
     
@@ -59,7 +59,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
         role="tablist"
         aria-label="Flagship Protocols"
       >
-        {/* Tab 0: Combo */}
+        {/* Tab 0: Pure Spirulina (Primary Low-Ticket Anchor) */}
         <button 
           type="button" 
           role="tab" 
@@ -68,13 +68,13 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           data-tab-index="0"
           class="hero-tab-btn active relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap bg-[#064E3B] text-white shadow-md border border-emerald-400/40"
         >
-          <span class="text-amber-400 text-xs sm:text-sm">⭐</span>
-          <span>Combo Pack</span>
-          <span class="bg-amber-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">-{comboDiscount}%</span>
-          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
+          <span class="text-emerald-400 text-xs sm:text-sm">🌿</span>
+          <span>Spirulina</span>
+          <span class="bg-emerald-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">₹{spiriPrice}</span>
+          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-emerald-400 rounded-full scale-x-0 origin-left"></div>
         </button>
 
-        {/* Tab 1: Spirulina */}
+        {/* Tab 1: Synergy Combo Pack */}
         <button 
           type="button" 
           role="tab" 
@@ -83,9 +83,10 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           data-tab-index="1"
           class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
         >
-          <span class="text-emerald-400 text-xs sm:text-sm">🌿</span>
-          <span>Spirulina</span>
-          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-emerald-400 rounded-full scale-x-0 origin-left"></div>
+          <span class="text-amber-400 text-xs sm:text-sm">⭐</span>
+          <span>Combo Pack</span>
+          <span class="bg-amber-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">-{comboDiscount}%</span>
+          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
         </button>
 
         {/* Tab 2: Sea Buckthorn */}
@@ -114,7 +115,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
     >
       
       {/* -------------------------------------------------------------
-          SLIDE 0: HEALTHY LIFE COMBO (Flagship Synergy)
+          SLIDE 0: PURE SPIRULINA PROTOCOL (Energy & Bio-Iron - #1 High-Intent Entry)
           ------------------------------------------------------------- */}
       <div 
         id="hero-slide-0" 
@@ -125,24 +126,24 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           
           {/* Visual: On Mobile = Order 1 (TOP), On Desktop = Order 2 (RIGHT) */}
           <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
-            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-amber-500/15 rounded-full blur-[60px] pointer-events-none"></div>
+            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-emerald-500/20 rounded-full blur-[60px] pointer-events-none"></div>
 
             {/* Floating Trust Pill */}
-            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-amber-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-amber-200 font-sans">★ #1 Bestseller • 60-Day Complete Daily Routine</span>
+            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-emerald-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
+              <div class="flex text-amber-400 text-[10px]">★★★★★</div>
+              <span class="text-[9px] sm:text-[10px] font-bold tracking-wide text-emerald-200 font-sans">4.9/5 • 10,000+ Daily Energy Routines</span>
             </div>
 
             {/* Product Image */}
             <div class="relative z-10 flex flex-col items-center justify-center group">
               <img 
-                src="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png" 
-                alt="Sujata Nutrilive 100% Pure Cold-Pressed Spirulina and Himalayan Sea Buckthorn Capsules Synergy Combo" 
+                src="/products/sujata-spirulina-capsules-bottle-transparent.png" 
+                alt="Sujata Pure Cold-Pressed Spirulina Capsules Bottle" 
                 class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-500 ease-out"
                 loading="eager"
                 fetchpriority="high"
               />
-              <div class="w-3/4 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
+              <div class="w-1/2 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
             </div>
           </div>
 
@@ -150,12 +151,12 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
             <h1 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
-              All-Day Natural Energy & Radiant Skin.<br/>
-              <span class="italic text-amber-300 font-serif">Spirulina + Himalayan Sea Buckthorn.</span>
+              Double Your Daily Energy.<br/>
+              <span class="italic text-emerald-300 font-serif">Zero 3 PM Fatigue.</span>
             </h1>
 
             <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
-              India's purest cold-pressed Spirulina (4x bio-iron & complete plant protein) paired with wild Ladakh Sea Buckthorn (rare Omega 7 & 12x Vitamin C). Fixes 3 PM fatigue, boosts daily stamina, and nourishes skin from within.
+              100% Pure, sub-40°C cold-pressed Spirulina. Packed with 4x bio-iron, 65% complete plant protein, and active Phycocyanin. Wake up refreshed and energized all day without caffeine crashes.
             </p>
 
             {/* 3 Clinical Pills */}
@@ -165,39 +166,39 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
                 <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Pure Veg</span>
               </div>
               <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">⚡</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">4x Bio-Iron</span>
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🌿</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Zero Fishy Odour</span>
               </div>
               <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">🧪</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">NABL Lab Tested</span>
+                <span class="text-emerald-400 text-[10px] sm:text-xs">⚡</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">4x Bio-Iron</span>
               </div>
             </div>
 
             {/* Pricing Bar with Daily Cost Anchor (Silicon Valley / Top D2C Framing) */}
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
               <div class="flex items-baseline gap-2">
-                <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{comboPrice.toLocaleString('en-IN')}</span>
-                {comboCompare > comboPrice && (
-                  <span class="text-xs sm:text-sm text-gray-400 line-through font-sans">₹{comboCompare.toLocaleString('en-IN')}</span>
-                  <span class="bg-amber-400 text-black text-[8.5px] sm:text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded font-sans shadow-sm">
-                    SAVE {comboDiscount}%
+                <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{spiriPrice.toLocaleString('en-IN')}</span>
+                {spiriCompare > spiriPrice && (
+                  <span class="text-xs sm:text-sm text-gray-400 line-through font-sans">₹{spiriCompare.toLocaleString('en-IN')}</span>
+                  <span class="bg-emerald-400 text-black text-[8.5px] sm:text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded font-sans shadow-sm">
+                    SAVE {spiriDiscount}%
                   </span>
                 )}
               </div>
-              <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-amber-300 font-sans">
+              <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-emerald-300 font-sans">
                 <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Just ₹18/day • 2 Bottles (120 Caps)</span>
+                <span>Just ₹16/day • 60 Veg Caps (30 Days)</span>
               </div>
             </div>
 
             {/* Single High-Converting Primary CTA on Mobile */}
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
-                href={`/product/${comboHandle}`} 
-                class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                href={`/product/${spiriHandle}`} 
+                class="bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(52,211,153,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
-                <span>ORDER COMBO PACK • ₹{comboPrice.toLocaleString('en-IN')}</span>
+                <span>ORDER PURE SPIRULINA • ₹{spiriPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
               </a>
 
@@ -226,7 +227,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
       </div>
 
       {/* -------------------------------------------------------------
-          SLIDE 1: PURE SPIRULINA PROTOCOL (Energy & Bio-Iron)
+          SLIDE 1: HEALTHY LIFE COMBO (Synergy Routine Upgrade)
           ------------------------------------------------------------- */}
       <div 
         id="hero-slide-1" 
@@ -235,36 +236,38 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
       >
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
-          {/* Visual */}
+          {/* Visual: On Mobile = Order 1 (TOP), On Desktop = Order 2 (RIGHT) */}
           <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
-            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-emerald-500/20 rounded-full blur-[60px] pointer-events-none"></div>
+            <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-amber-500/15 rounded-full blur-[60px] pointer-events-none"></div>
 
-            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-emerald-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
-              <div class="flex text-amber-400 text-[10px]">★★★★★</div>
-              <span class="text-[9px] sm:text-[10px] font-bold tracking-wide text-emerald-200 font-sans">4.9/5 • 10,000+ Daily Routines</span>
+            {/* Floating Trust Pill */}
+            <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-amber-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-amber-200 font-sans">★ Complete Synergy • 60-Day Dual Routine</span>
             </div>
 
+            {/* Product Image */}
             <div class="relative z-10 flex flex-col items-center justify-center group">
               <img 
-                src="/products/sujata-spirulina-capsules-bottle-transparent.png" 
-                alt="Sujata Pure Spirulina Capsules Seamless Bottle Cutout" 
+                src="/products/sujata-combo-spirulina-sea-buckthorn-transparent.png" 
+                alt="Sujata Nutrilive Pure Spirulina and Himalayan Sea Buckthorn Capsules Synergy Combo" 
                 class="h-[150px] sm:h-[200px] md:h-[250px] lg:h-[300px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-500 ease-out"
                 loading="lazy"
               />
-              <div class="w-1/2 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
+              <div class="w-3/4 h-2.5 bg-black/70 rounded-[100%] blur-md -mt-1.5 pointer-events-none"></div>
             </div>
           </div>
 
-          {/* Copy */}
+          {/* Copy & Offer */}
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
             <h2 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
-              Double Your Daily Energy.<br/>
-              <span class="italic text-emerald-300 font-serif">Zero 3 PM Fatigue.</span>
+              All-Day Natural Energy & Radiant Skin.<br/>
+              <span class="italic text-amber-300 font-serif">Spirulina + Himalayan Sea Buckthorn.</span>
             </h2>
 
             <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
-              100% Pure, sub-40°C cold-pressed Spirulina. Packed with 4x bio-iron, 65% complete plant protein, and active Phycocyanin. Wake up refreshed and energized all day without caffeine crashes.
+              India's purest cold-pressed Spirulina (4x bio-iron & complete plant protein) paired with wild Ladakh Sea Buckthorn (rare Omega 7 & 12x Vitamin C). Fixes 3 PM fatigue, boosts daily stamina, and nourishes skin from within.
             </p>
 
             {/* 3 Clinical Pills */}
@@ -274,39 +277,39 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
                 <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Pure Veg</span>
               </div>
               <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">🌿</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Zero Fishy Odour</span>
-              </div>
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
                 <span class="text-emerald-400 text-[10px] sm:text-xs">⚡</span>
                 <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">4x Bio-Iron</span>
               </div>
+              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
+                <span class="text-emerald-400 text-[10px] sm:text-xs">🧪</span>
+                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">NABL Lab Tested</span>
+              </div>
             </div>
 
-            {/* Pricing Bar with Daily Cost Anchor */}
+            {/* Pricing Bar */}
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
               <div class="flex items-baseline gap-2">
-                <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{spiriPrice.toLocaleString('en-IN')}</span>
-                {spiriCompare > spiriPrice && (
-                  <span class="text-xs sm:text-sm text-gray-400 line-through font-sans">₹{spiriCompare.toLocaleString('en-IN')}</span>
-                  <span class="bg-emerald-400 text-black text-[8.5px] sm:text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded font-sans shadow-sm">
-                    SAVE {spiriDiscount}%
+                <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{comboPrice.toLocaleString('en-IN')}</span>
+                {comboCompare > comboPrice && (
+                  <span class="text-xs sm:text-sm text-gray-400 line-through font-sans">₹{comboCompare.toLocaleString('en-IN')}</span>
+                  <span class="bg-amber-400 text-black text-[8.5px] sm:text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded font-sans shadow-sm">
+                    SAVE {comboDiscount}%
                   </span>
                 )}
               </div>
-              <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-emerald-300 font-sans">
+              <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-amber-300 font-sans">
                 <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Just ₹21/day • 60 Veg Caps (30 Days)</span>
+                <span>Just ₹18/day • 2 Bottles (120 Caps)</span>
               </div>
             </div>
 
             {/* CTA */}
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
-                href={`/product/${spiriHandle}`} 
-                class="bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(52,211,153,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                href={`/product/${comboHandle}`} 
+                class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
-                <span>ORDER PURE SPIRULINA • ₹{spiriPrice.toLocaleString('en-IN')}</span>
+                <span>ORDER COMBO PACK • ₹{comboPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
               </a>
 
@@ -318,7 +321,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
               </a>
             </div>
 
-            {/* 4-Pillar High-Trust Reassurance Strip */}
+            {/* Trust Strip */}
             <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
@@ -405,7 +408,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
               </div>
               <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-amber-300 font-sans">
                 <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                <span>Just ₹25/day • 60 Veg Caps (30 Days)</span>
+                <span>Just ₹22/day • 60 Veg Caps (30 Days)</span>
               </div>
             </div>
 
@@ -427,7 +430,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
               </a>
             </div>
 
-            {/* 4-Pillar High-Trust Reassurance Strip */}
+            {/* Trust Strip */}
             <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
@@ -451,7 +454,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
     <div class="flex items-center justify-center gap-2 mt-3 sm:mt-4">
       <button 
         type="button" 
-        class="hero-dot-indicator w-6 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer" 
+        class="hero-dot-indicator w-6 h-1.5 rounded-full bg-emerald-400 transition-all duration-300 cursor-pointer" 
         data-dot-index="0" 
         aria-label="Go to slide 1"
       ></button>
@@ -490,9 +493,9 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
     const SLIDE_DURATION = 6000; // 6s per protocol
 
     const glowColors = [
-      'rgba(245, 158, 11, 0.14)', // Combo (Warm Amber Gold)
-      'rgba(16, 185, 129, 0.16)', // Spirulina (Luminous Emerald)
-      'rgba(217, 119, 6, 0.15)',  // Sea Buckthorn (Himalayan Amber)
+      'rgba(16, 185, 129, 0.16)', // Spirulina (Luminous Emerald) - index 0
+      'rgba(245, 158, 11, 0.14)', // Combo (Warm Amber Gold) - index 1
+      'rgba(217, 119, 6, 0.15)',  // Sea Buckthorn (Himalayan Amber) - index 2
     ];
 
     function updateUI(targetIndex) {
@@ -530,7 +533,9 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
       dotIndicators.forEach((dot, idx) => {
         const isCurrent = idx === currentIndex;
         if (isCurrent) {
-          dot.className = 'hero-dot-indicator w-6 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer';
+          dot.className = currentIndex === 0
+            ? 'hero-dot-indicator w-6 h-1.5 rounded-full bg-emerald-400 transition-all duration-300 cursor-pointer'
+            : 'hero-dot-indicator w-6 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer';
         } else {
           dot.className = 'hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer';
         }
