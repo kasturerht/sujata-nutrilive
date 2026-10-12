@@ -16,10 +16,21 @@ yarn-error.log*
 pnpm-debug.log*
 
 
-# environment variables
-.env
-.env.production
+# environment variables & backups
+.env*
+
+# spreadsheets & tabular data
 *.csv
+*.xlsx
+
+# private data dumps, master dumps & customer orders
+data/
+!data/verified-india-keywords-2026.json
+
+# brand & legal registry documents
+Brand_Registry_Files/
+README_OFFICE_SETUP.txt
+
 scripts/data/
 scripts/bin/
 scripts/*.json

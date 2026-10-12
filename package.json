@@ -18,7 +18,8 @@
     "amazon:master": "node scripts/amazon-master-catalog-engine.mjs",
     "amazon:sync-inventory": "node scripts/amazon-inventory-sync.mjs",
     "autopilot": "node scripts/autopilot_social_publisher.mjs",
-    "autopilot:watch": "node scripts/autopilot_social_publisher.mjs --watch"
+    "autopilot:watch": "node scripts/autopilot_social_publisher.mjs --watch",
+    "meta": "node scripts/meta-ads-brain.mjs"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",

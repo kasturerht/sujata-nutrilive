@@ -1,5 +1,14 @@
 ---
 // src/pages/index.astro
+
+// 🎯 SMART AD CAMPAIGN TRAFFIC ROUTER:
+// If visitor clicks the Meta Video Ad for Spirulina + Sea Buckthorn Combo,
+// instantly route them directly to the combo product page without breaking Meta Ad status or triggering review!
+const utmCampaign = Astro.url.searchParams.get('utm_campaign') || '';
+if (utmCampaign.includes('spirulina_seabuckthorn') || utmCampaign.includes('sales_asc_spirulina_seabuckthorn_oct2026')) {
+  return Astro.redirect(`/product/sujata-spirulina-sea-buckthorn-combo-pack${Astro.url.search}`, 302);
+}
+
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreHero from '../components/StoreHero.astro';
@@ -160,6 +169,15 @@ try {
   description="India's leading cold-pressed Spirulina (65% protein, 4x bio-iron) & wild Himalayan Sea Buckthorn Capsules (rare Omega-7, 3, 6, 9). 100% vegetarian, NABL lab tested, FSSAI certified. Free COD."
   isHomePage={true}
 >
+  <script is:inline>
+    (() => {
+      const p = new URLSearchParams(window.location.search);
+      const c = p.get('utm_campaign') || '';
+      if (c.includes('spirulina_seabuckthorn') || c.includes('sales_asc_spirulina_seabuckthorn_oct2026')) {
+        window.location.replace('/product/sujata-spirulina-sea-buckthorn-combo-pack' + window.location.search);
+      }
+    })();
+  </script>
   
   {/* GLOBAL HEADER */}
   <StoreHeader />
