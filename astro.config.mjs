@@ -36,6 +36,7 @@ export default defineConfig({
         `${siteUrl}/terms-of-service`,
         `${siteUrl}/shipping-policy`,
         // 🚀 High-Volume Traffic & AI Overview Content Pillars
+        `${siteUrl}/learn/best-spirulina-brand-in-india`,
         `${siteUrl}/learn/spirulina-in-marathi`,
         `${siteUrl}/learn/sea-buckthorn-in-hindi`,
         `${siteUrl}/learn/which-company-sea-buckthorn-is-best`,
