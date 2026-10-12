@@ -2,13 +2,42 @@
 // src/components/CartDrawer.astro
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
+
+let noCodHandles = ["sujata-spiruglow-bath-soap"];
+try {
+  if (shopifyDomain && storefrontToken) {
+    const catalogRes = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': storefrontToken },
+      body: JSON.stringify({
+        query: `{ products(first: 50) { edges { node { id handle tags } } } }`
+      })
+    });
+    const catalogData = await catalogRes.json();
+    const fetchedNoCod: string[] = [];
+    (catalogData?.data?.products?.edges || []).forEach(({ node }: any) => {
+      const isNoCod = (node.tags || []).some((t: string) => {
+        const s = String(t).toLowerCase().trim();
+        return s === 'no-cod' || s === 'prepaid-only' || s === 'no_cod';
+      });
+      if (isNoCod) {
+        fetchedNoCod.push(node.handle);
+      }
+    });
+    if (fetchedNoCod.length > 0) {
+      noCodHandles = fetchedNoCod;
+    }
+  }
+} catch (e) {
+  console.warn("Could not fetch no-cod tags from storefront:", e);
+}
 ---
 
 {/* The Dark Overlay (Background blur) */}
 <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-opacity duration-300 ease-out"></div>
 
 {/* The Premium Drawer (Slides from Right with high z-index above everything) */}
-<div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} class="fixed top-0 right-0 w-full sm:w-[440px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
+<div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} data-no-cod-handles={JSON.stringify(noCodHandles)} class="fixed top-0 right-0 w-full sm:w-[440px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
   
   {/* 1. Drawer Header (Always Visible & Padded) */}
   <div class="px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
@@ -213,10 +242,28 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       }
 
       // ⚡ Calculate UPI (10% Discount) vs COD Totals
-      const COD_MINIMUM_THRESHOLD = 299;
       const upiTotal = Math.round(totalAmount * 0.9);
       const upiSavings = totalAmount - upiTotal;
-      const isCodEligible = totalAmount >= COD_MINIMUM_THRESHOLD;
+
+      const drawerEl = document.getElementById('cart-drawer');
+      let noCodList = ["sujata-spiruglow-bath-soap"];
+      try {
+        const raw = drawerEl?.getAttribute('data-no-cod-handles');
+        if (raw) noCodList = JSON.parse(raw);
+      } catch(e) {}
+
+      const isItemNoCod = (item) => {
+        if (item.noCod === true) return true;
+        if (item.handle && noCodList.includes(item.handle)) return true;
+        if (item.title && /soap|spiruglow/i.test(item.title)) return true;
+        return false;
+      };
+
+      // ⚡ Smart Tag-Driven COD Rule (No Blanket Price Constraint):
+      // If the cart has ONLY "no-cod" items (e.g. only 1 or 2 soaps, no regular products) -> COD is disabled!
+      // If the cart contains ANY regular product (e.g. Spirulina Powder, Tablets, etc.) -> COD is 100% UNLOCKED!
+      const hasOnlyNoCodItems = items.length > 0 && items.every(item => isItemNoCod(item));
+      const isCodEligible = !hasOnlyNoCodItems;
 
       let selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
       if (!isCodEligible && selectedMode === 'cod') {
@@ -245,13 +292,12 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       if (upiSaveEl) upiSaveEl.innerText = `Save ₹${upiSavings} (10%)`;
       if (codTotalEl) codTotalEl.innerText = formatINR(codPayable);
 
-      // Handle COD Threshold Locking Visuals
+      // Handle COD Locking Visuals
       if (!isCodEligible && totalAmount > 0) {
         tabCodEl?.classList.add('opacity-60', 'cursor-not-allowed', 'border-dashed');
-        if (codSubtextEl) codSubtextEl.innerText = 'Min ₹299 for COD 🔒';
+        if (codSubtextEl) codSubtextEl.innerText = 'Prepaid Only 🔒';
         if (codNoticeEl && codNoticeText) {
-          const needed = COD_MINIMUM_THRESHOLD - totalAmount;
-          codNoticeText.innerHTML = `<span>📦 Add <strong>₹${needed}</strong> more to unlock Cash on Delivery</span>`;
+          codNoticeText.innerHTML = `<span>🔒 <strong>हा प्रॉडक्ट फक्त UPI/Prepaid वर उपलब्ध आहे.</strong> COD साठी इतर उत्पादने जोडा!</span>`;
           codNoticeEl.classList.remove('hidden');
         }
       } else {
@@ -360,6 +406,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
       if (existing) {
         existing.quantity = Math.max(1, Math.min(10, (existing.quantity || 1) + safeQty));
+        if (product.noCod !== undefined) existing.noCod = product.noCod;
       } else {
         items.push({
           id: product.id,
@@ -367,7 +414,8 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           subtitle: product.subtitle || '100% Pure Cold-Pressed',
           price: safePrice,
           image: product.image || '/spirulina-bottle.png',
-          quantity: safeQty
+          quantity: safeQty,
+          noCod: !!product.noCod
         });
       }
 
@@ -523,10 +571,21 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
             console.warn("⚠️ Shopify cart userErrors:", userErrors);
           }
 
-            // 🔒 Silicon Valley High-Conversion Discount Routing (Zero Friction, 100% Trust)
-            const COD_MINIMUM_THRESHOLD = 299;
-            const totalAmount = items.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
-            const isCodEligible = totalAmount >= COD_MINIMUM_THRESHOLD;
+            // 🔒 Silicon Valley Tag-Driven COD Check (Managed directly from Shopify)
+            const drawerEl = document.getElementById('cart-drawer');
+            let noCodList = ["sujata-spiruglow-bath-soap"];
+            try {
+              const raw = drawerEl?.getAttribute('data-no-cod-handles');
+              if (raw) noCodList = JSON.parse(raw);
+            } catch(e) {}
+            const isItemNoCod = (item) => {
+              if (item.noCod === true) return true;
+              if (item.handle && noCodList.includes(item.handle)) return true;
+              if (item.title && /soap|spiruglow/i.test(item.title)) return true;
+              return false;
+            };
+            const hasOnlyNoCodItems = items.length > 0 && items.every(item => isItemNoCod(item));
+            const isCodEligible = !hasOnlyNoCodItems;
 
             let selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
             if (!isCodEligible && selectedMode === 'cod') {
@@ -587,6 +646,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
       if (existing) {
         existing.quantity = Math.max(1, Math.min(10, (existing.quantity || 1) + safeQty));
+        if (product.noCod !== undefined) existing.noCod = product.noCod;
       } else {
         items.push({
           id: product.id,
@@ -594,7 +654,8 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           subtitle: product.subtitle || '100% Pure Cold-Pressed',
           price: safePrice,
           image: product.image || '/spirulina-bottle.png',
-          quantity: safeQty
+          quantity: safeQty,
+          noCod: !!product.noCod
         });
       }
 
@@ -637,9 +698,22 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       if (tabCodClick) {
         e.preventDefault();
         const items = getLocalCart();
-        const totalAmount = items.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
-        const COD_MINIMUM_THRESHOLD = 299;
-        if (totalAmount < COD_MINIMUM_THRESHOLD && totalAmount > 0) {
+        const drawerEl = document.getElementById('cart-drawer');
+        let noCodList = ["sujata-spiruglow-bath-soap"];
+        try {
+          const raw = drawerEl?.getAttribute('data-no-cod-handles');
+          if (raw) noCodList = JSON.parse(raw);
+        } catch(e) {}
+
+        const isItemNoCod = (item) => {
+          if (item.noCod === true) return true;
+          if (item.handle && noCodList.includes(item.handle)) return true;
+          if (item.title && /soap|spiruglow/i.test(item.title)) return true;
+          return false;
+        };
+
+        const hasOnlyNoCodItems = items.length > 0 && items.every(item => isItemNoCod(item));
+        if (hasOnlyNoCodItems) {
           const noticeEl = document.getElementById('cart-cod-threshold-notice');
           if (noticeEl) {
             noticeEl.classList.remove('hidden');
