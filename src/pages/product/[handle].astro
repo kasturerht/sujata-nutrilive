@@ -1113,8 +1113,14 @@ const productVideoSchema = videoData ? {
                 >
                   <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">📦 Cash on Delivery</span>
                   <span class="text-sm font-black text-[#111827] mt-0.5" id="cod-price-label">₹{formatINR(initialPrice)}</span>
-                  <span class="text-[9px] font-medium text-gray-400">Regular • Pay at Door</span>
+                  <span class="text-[9px] font-medium text-gray-400" id="cod-subtext-label">Regular • Pay at Door</span>
                 </button>
+              </div>
+
+              {/* 📦 Smart COD Threshold Notice (Items < ₹299) */}
+              <div id="pdp-cod-threshold-notice" class="hidden mt-2 px-2.5 py-1.5 bg-amber-50/90 border border-amber-200/90 rounded-lg flex items-center justify-between text-[10px] text-amber-900 font-medium">
+                <span id="pdp-cod-notice-text">📦 Cash on Delivery starts on orders above ₹299</span>
+                <span class="text-[9px] font-bold text-amber-800 bg-amber-200/80 px-1.5 py-0.5 rounded shrink-0">Min ₹299</span>
               </div>
             </div>
 
@@ -2460,7 +2466,33 @@ const productVideoSchema = videoData ? {
           if (badgeElement) badgeElement.classList.add('hidden');
         }
 
-        // 3. Update Payment Tab Labels
+        // 3. Update Payment Tab Labels & COD Threshold State
+        const COD_MINIMUM_THRESHOLD = 299;
+        const isEligibleForCod = productState.basePrice >= COD_MINIMUM_THRESHOLD;
+        const pdpCodNotice = document.getElementById('pdp-cod-threshold-notice');
+        const pdpCodNoticeText = document.getElementById('pdp-cod-notice-text');
+        const codSubtextLabel = document.getElementById('cod-subtext-label');
+
+        if (!isEligibleForCod) {
+          if (productState.paymentMode === 'cod') {
+            productState.paymentMode = 'upi';
+            try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
+          }
+          tabCod?.classList.add('opacity-60', 'cursor-not-allowed', 'border-dashed');
+          if (codSubtextLabel) codSubtextLabel.innerText = 'Min ₹299 Order 🔒';
+          if (pdpCodNotice) {
+            const needed = COD_MINIMUM_THRESHOLD - productState.basePrice;
+            if (pdpCodNoticeText) {
+              pdpCodNoticeText.innerHTML = `<span>📦 Cash on Delivery requires min ₹299 cart value. Add <strong>₹${needed}</strong> more in cart to unlock COD!</span>`;
+            }
+            pdpCodNotice.classList.remove('hidden');
+          }
+        } else {
+          tabCod?.classList.remove('opacity-60', 'cursor-not-allowed', 'border-dashed');
+          if (codSubtextLabel) codSubtextLabel.innerText = 'Regular • Pay at Door';
+          if (pdpCodNotice) pdpCodNotice.classList.add('hidden');
+        }
+
         const labelUpi = document.getElementById('upi-price-label');
         const labelOldUpi = document.getElementById('upi-old-price');
         const labelSaveUpi = document.getElementById('upi-save-label');
@@ -2564,6 +2596,17 @@ const productVideoSchema = videoData ? {
       });
 
       tabCod?.addEventListener('click', () => {
+        if (productState.basePrice < 299) {
+          const pdpCodNotice = document.getElementById('pdp-cod-threshold-notice');
+          if (pdpCodNotice) {
+            pdpCodNotice.classList.remove('hidden');
+            pdpCodNotice.classList.add('ring-2', 'ring-amber-500', 'animate-pulse');
+            setTimeout(() => {
+              pdpCodNotice.classList.remove('ring-2', 'ring-amber-500', 'animate-pulse');
+            }, 1800);
+          }
+          return;
+        }
         if (productState.paymentMode !== 'cod') {
           productState.paymentMode = 'cod';
           try { localStorage.setItem('sujata_selected_payment_mode', 'cod'); } catch(e) {}
@@ -2611,12 +2654,18 @@ const productVideoSchema = videoData ? {
         const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
           ? `${baseTitle} - ${productState.variantTitle}`
           : baseTitle;
-        const isUpi = productState.paymentMode === 'upi';
+
+        let effectivePaymentMode = productState.paymentMode;
+        if (productState.basePrice < 299 && effectivePaymentMode === 'cod') {
+          effectivePaymentMode = 'upi';
+        }
+
+        const isUpi = effectivePaymentMode === 'upi';
         const subtitle = isUpi ? '⚡ 10% Instant UPI Discount' : '📦 Standard Cash on Delivery';
         const image = btn.getAttribute('data-image') || document.getElementById('main-pdp-image')?.getAttribute('src') || '/spirulina-bottle.png';
 
         try {
-          localStorage.setItem('sujata_selected_payment_mode', productState.paymentMode);
+          localStorage.setItem('sujata_selected_payment_mode', effectivePaymentMode);
         } catch(e) {}
 
         const spinner = btn.querySelector('.animate-spin') || document.getElementById('buy-now-spinner') || document.getElementById('sticky-buynow-spinner');
@@ -2627,7 +2676,7 @@ const productVideoSchema = videoData ? {
           title,
           subtitle,
           price: Math.round(productState.basePrice),
-          paymentMode: productState.paymentMode,
+          paymentMode: effectivePaymentMode,
           image,
           quantity: 1
         };

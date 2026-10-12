@@ -70,8 +70,14 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         >
           <span class="text-[10px] text-gray-500 font-semibold flex items-center gap-1">📦 Cash on Delivery</span>
           <span class="text-xs font-black text-gray-700 mt-0.5" id="cart-cod-total">₹0</span>
-          <span class="text-[9px] font-medium text-gray-400">Regular Price</span>
+          <span class="text-[9px] font-medium text-gray-400" id="cart-cod-subtext">Regular Price</span>
         </button>
+      </div>
+
+      {/* 📦 Smart COD Threshold Notice (Orders < ₹299) */}
+      <div id="cart-cod-threshold-notice" class="hidden mt-2 px-2.5 py-1.5 bg-amber-50/90 border border-amber-200/90 rounded-lg flex items-center justify-between text-[10px] text-amber-900 font-medium">
+        <span id="cart-cod-notice-text">📦 Add ₹0 more to unlock Cash on Delivery</span>
+        <span class="text-[9px] font-bold text-amber-800 bg-amber-200/80 px-1.5 py-0.5 rounded shrink-0">Min ₹299</span>
       </div>
     </div>
 
@@ -207,9 +213,17 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       }
 
       // ⚡ Calculate UPI (10% Discount) vs COD Totals
+      const COD_MINIMUM_THRESHOLD = 299;
       const upiTotal = Math.round(totalAmount * 0.9);
       const upiSavings = totalAmount - upiTotal;
-      const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+      const isCodEligible = totalAmount >= COD_MINIMUM_THRESHOLD;
+
+      let selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+      if (!isCodEligible && selectedMode === 'cod') {
+        selectedMode = 'upi';
+        try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
+      }
+
       const savedDiscount = localStorage.getItem('sujata_discount_code');
       const hasCoupon = !!savedDiscount;
       const codDiscount = hasCoupon ? Math.round(totalAmount * 0.1) : 0;
@@ -218,6 +232,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       const upiTotalEl = document.getElementById('cart-upi-total');
       const upiSaveEl = document.getElementById('cart-upi-save');
       const codTotalEl = document.getElementById('cart-cod-total');
+      const codSubtextEl = document.getElementById('cart-cod-subtext');
+      const codNoticeEl = document.getElementById('cart-cod-threshold-notice');
+      const codNoticeText = document.getElementById('cart-cod-notice-text');
       const totalLabelEl = document.getElementById('cart-total-label');
       const tabUpiEl = document.getElementById('cart-tab-upi');
       const tabCodEl = document.getElementById('cart-tab-cod');
@@ -225,10 +242,25 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       const checkoutBtnText = document.getElementById('checkout-btn-text');
 
       if (upiTotalEl) upiTotalEl.innerText = formatINR(upiTotal);
-      if (upiSaveEl) upiSaveEl.innerText = `Save ₹${upiSavings}`;
+      if (upiSaveEl) upiSaveEl.innerText = `Save ₹${upiSavings} (10%)`;
       if (codTotalEl) codTotalEl.innerText = formatINR(codPayable);
 
-      if (selectedMode === 'upi') {
+      // Handle COD Threshold Locking Visuals
+      if (!isCodEligible && totalAmount > 0) {
+        tabCodEl?.classList.add('opacity-60', 'cursor-not-allowed', 'border-dashed');
+        if (codSubtextEl) codSubtextEl.innerText = 'Min ₹299 for COD 🔒';
+        if (codNoticeEl && codNoticeText) {
+          const needed = COD_MINIMUM_THRESHOLD - totalAmount;
+          codNoticeText.innerHTML = `<span>📦 Add <strong>₹${needed}</strong> more to unlock Cash on Delivery</span>`;
+          codNoticeEl.classList.remove('hidden');
+        }
+      } else {
+        tabCodEl?.classList.remove('opacity-60', 'cursor-not-allowed', 'border-dashed');
+        if (codSubtextEl) codSubtextEl.innerText = hasCoupon ? `Save ₹${codDiscount} (10%)` : 'Pay at Doorstep';
+        if (codNoticeEl) codNoticeEl.classList.add('hidden');
+      }
+
+      if (selectedMode === 'upi' || !isCodEligible) {
         if (subtotalEl) {
           subtotalEl.innerText = formatINR(upiTotal);
           subtotalEl.className = 'text-xl sm:text-2xl font-black text-emerald-700 font-sans';
@@ -248,7 +280,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
           subtotalEl.innerText = formatINR(codPayable);
           subtotalEl.className = 'text-xl sm:text-2xl font-black text-[#111827] font-sans';
         }
-        if (totalLabelEl) totalLabelEl.innerText = hasCoupon ? `Payable on Delivery (${savedDiscount} Applied)` : 'Payable on Delivery (COD)';
+        if (totalLabelEl) totalLabelEl.innerText = hasCoupon ? `Payable on Delivery (${savedDiscount} 10% Off)` : 'Payable on Delivery (COD)';
         if (checkoutBtn) {
           checkoutBtn.className = 'w-full bg-[#111827] hover:bg-black text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
         }
@@ -491,14 +523,21 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
             console.warn("⚠️ Shopify cart userErrors:", userErrors);
           }
 
-          if (checkoutUrl) {
             // 🔒 Silicon Valley High-Conversion Discount Routing (Zero Friction, 100% Trust)
-            const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+            const COD_MINIMUM_THRESHOLD = 299;
+            const totalAmount = items.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
+            const isCodEligible = totalAmount >= COD_MINIMUM_THRESHOLD;
+
+            let selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+            if (!isCodEligible && selectedMode === 'cod') {
+              selectedMode = 'upi';
+              try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
+            }
             const savedDiscount = localStorage.getItem('sujata_discount_code');
 
             if (selectedMode === 'upi') {
-              // 🎁 Auto-Apply 10% UPI/Prepaid Discount Code (UPI10 or active fallback PEAK10)
-              const discountToApply = savedDiscount || 'PEAK10';
+              // 🎁 Auto-Apply 10% UPI/Prepaid Discount Code (UPI10 or saved coupon)
+              const discountToApply = savedDiscount || 'UPI10';
               if (discountToApply && !checkoutUrl.includes('discount=')) {
                 const sep = checkoutUrl.includes('?') ? '&' : '?';
                 checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(discountToApply)}`;
@@ -597,6 +636,20 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       const tabCodClick = e.target.closest('#cart-tab-cod');
       if (tabCodClick) {
         e.preventDefault();
+        const items = getLocalCart();
+        const totalAmount = items.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 1), 0);
+        const COD_MINIMUM_THRESHOLD = 299;
+        if (totalAmount < COD_MINIMUM_THRESHOLD && totalAmount > 0) {
+          const noticeEl = document.getElementById('cart-cod-threshold-notice');
+          if (noticeEl) {
+            noticeEl.classList.remove('hidden');
+            noticeEl.classList.add('ring-2', 'ring-amber-500', 'animate-pulse');
+            setTimeout(() => {
+              noticeEl.classList.remove('ring-2', 'ring-amber-500', 'animate-pulse');
+            }, 1800);
+          }
+          return;
+        }
         try { localStorage.setItem('sujata_selected_payment_mode', 'cod'); } catch(e) {}
         window.renderSujataCart();
       }
