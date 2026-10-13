@@ -137,7 +137,7 @@ export const POST: APIRoute = async ({ request }) => {
     // If Prepaid ➡️ Dispatch WhatsApp Group (for immediate packing & shipping)
     const waInstance = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_INSTANCE_ID) || 'instance194236';
     const waToken = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_TOKEN) || '0s7b878kudvmjwrq';
-    const telecallerPhone = (typeof process !== 'undefined' && process.env?.TELECALLER_WHATSAPP_NUMBER) || '';
+    const telecallerPhone = (typeof process !== 'undefined' && process.env?.TELECALLER_WHATSAPP_NUMBER) || '919272471529';
     const dispatchGroupId = (typeof process !== 'undefined' && process.env?.DISPATCH_WHATSAPP_GROUP_ID) || '';
 
     const waRecipient = isCod ? telecallerPhone : dispatchGroupId;
