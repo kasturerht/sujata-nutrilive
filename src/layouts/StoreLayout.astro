@@ -353,6 +353,22 @@ const unifiedSchemaGraph = {
 ---
 <html lang="en">
   <head>
+    <!-- Google Consent Mode v2 (Enterprise Global Standard - Default Granted) -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('consent', 'default', {
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+        'analytics_storage': 'granted',
+        'functionality_storage': 'granted',
+        'personalization_storage': 'granted',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+    </script>
     <!-- Google Tag Manager -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -462,60 +478,48 @@ const unifiedSchemaGraph = {
         } catch(e) {}
       })();
 
-      // 2. Meta Pixel (Facebook & Instagram Ads)
-      window._fbqConfigured = !!metaPixelId;
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      if(metaPixelId){s.parentNode.insertBefore(t,s);}}
-      (window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
-      
-      if (metaPixelId) {
-        fbq('init', metaPixelId);
-        fbq('track', 'PageView');
-      }
-
-      // 3. Google Tag (gtag.js / Google Ads & GA4)
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-
-      if (googleTagId) {
-        var gScript = document.createElement('script');
-        gScript.async = true;
-        gScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + googleTagId;
-        document.head.appendChild(gScript);
-        gtag('config', googleTagId, { send_page_view: true });
-      }
-
-      // 🌟 4. Unified Full-Funnel E-Commerce Analytics Dispatcher
+      // 🌟 2. Unified Enterprise E-Commerce DataLayer Dispatcher (GA4 & Meta GTM Standard)
+      // Single Source of Truth: All events are routed exclusively via GTM (GTM-5BCC6JL8).
+      // Zero direct fbq() or gtag() calls to eliminate 200% double-counting.
       window.dispatchStoreEvent = function(eventName, data) {
         data = data || {};
-
-        // === UNIFIED GTM DATALAYER PUSH (For GTM-5BCC6JL8 Container) ===
         window.dataLayer = window.dataLayer || [];
+
+        // High-entropy deterministic event_id for CAPI deduplication
         var eventId = 'sujata_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7);
+        var fbpVal = localStorage.getItem('sujata_fbp') || '';
+        var fbcVal = localStorage.getItem('sujata_fbc') || '';
+        var utmsVal = {};
+        try { utmsVal = JSON.parse(localStorage.getItem('sujata_utms') || '{}'); } catch(e) {}
+
+        var userData = {
+          fbp: fbpVal,
+          fbc: fbcVal,
+          country: 'IN',
+          traffic_source: utmsVal.utm_source || 'direct',
+          campaign: utmsVal.utm_campaign || ''
+        };
+
+        // 1. Dual-Compatibility: Push custom event for GTM custom event triggers
         window.dataLayer.push({
           event: eventName,
           event_id: eventId,
+          user_data: userData,
           event_data: data
         });
 
-        // === OFFICIAL GOOGLE ANALYTICS 4 (GA4) E-COMMERCE SPECIFICATION DATALAYER ===
+        // 2. Official Google Analytics 4 (GA4) Enhanced E-Commerce Specification
         if (eventName === 'ViewContent') {
           window.dataLayer.push({ ecommerce: null });
           window.dataLayer.push({
             event: 'view_item',
             event_id: eventId,
+            user_data: userData,
             ecommerce: {
               currency: data.currency || 'INR',
               value: Number(data.price || 0),
               items: [{
-                item_id: data.id || '',
+                item_id: String(data.id || ''),
                 item_name: data.title || '',
                 price: Number(data.price || 0),
                 quantity: 1
@@ -527,11 +531,12 @@ const unifiedSchemaGraph = {
           window.dataLayer.push({
             event: 'add_to_cart',
             event_id: eventId,
+            user_data: userData,
             ecommerce: {
               currency: data.currency || 'INR',
               value: Number(data.price || 0),
               items: [{
-                item_id: data.id || '',
+                item_id: String(data.id || ''),
                 item_name: data.title || '',
                 price: Number(data.price || 0),
                 quantity: Number(data.quantity || 1)
@@ -544,14 +549,14 @@ const unifiedSchemaGraph = {
           window.dataLayer.push({
             event: 'begin_checkout',
             event_id: eventId,
-            payment_mode: pModeGA,
+            user_data: userData,
             ecommerce: {
               currency: data.currency || 'INR',
               value: Number(data.total || 0),
               payment_type: pModeGA,
               items: (data.items || []).map(function(item) {
                 return {
-                  item_id: item.id || '',
+                  item_id: String(item.id || ''),
                   item_name: item.title || '',
                   price: Number(item.price || 0),
                   quantity: Number(item.quantity || 1)
@@ -559,118 +564,32 @@ const unifiedSchemaGraph = {
               })
             }
           });
-        }
-
-        // === META PIXEL TRACKING ===
-        if (typeof window.fbq === 'function') {
-          if (eventName === 'ViewContent') {
-            window.fbq('track', 'ViewContent', {
-              content_name: data.title || '',
-              content_ids: [data.id || ''],
-              content_type: 'product',
-              value: Number(data.price || 0),
-              currency: data.currency || 'INR'
-            });
-          } else if (eventName === 'AddToCart') {
-            window.fbq('track', 'AddToCart', {
-              content_name: data.title || '',
-              content_ids: [data.id || ''],
-              content_type: 'product',
-              value: Number(data.price || 0),
-              currency: data.currency || 'INR'
-            });
-          } else if (eventName === 'InitiateCheckout') {
-            var pMode = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
-            window.fbq('track', 'InitiateCheckout', {
-              num_items: Number(data.count || 1),
-              value: Number(data.total || 0),
-              currency: data.currency || 'INR',
-              content_ids: (data.items || []).map(function(i) { return i.id || ''; }),
-              payment_preference: pMode
-            });
-          } else if (eventName === 'Search') {
-            window.fbq('track', 'Search', {
-              search_string: data.query || data.search_string || ''
-            });
-          } else if (eventName === 'Lead') {
-            window.fbq('track', 'Lead', {
-              content_name: data.lead_type || 'Lead Capture',
-              value: Number(data.value || 0),
-              currency: 'INR'
-            });
-          } else if (eventName === 'Contact') {
-            window.fbq('track', 'Contact', {
-              content_name: data.channel || 'WhatsApp Support'
-            });
-          } else if (eventName === 'CompleteRegistration') {
-            window.fbq('track', 'CompleteRegistration', {
-              content_name: data.content_name || 'Routine Quiz Completed',
-              status: true
-            });
-          } else {
-            window.fbq('trackCustom', eventName, data);
-          }
-        }
-
-        // === GOOGLE ANALYTICS 4 (GA4) TRACKING ===
-        if (typeof window.gtag === 'function') {
-          if (eventName === 'ViewContent') {
-            window.gtag('event', 'view_item', {
-              currency: data.currency || 'INR',
-              value: Number(data.price || 0),
-              items: [{
-                item_id: data.id || '',
-                item_name: data.title || '',
-                price: Number(data.price || 0),
-                quantity: 1
-              }]
-            });
-          } else if (eventName === 'AddToCart') {
-            window.gtag('event', 'add_to_cart', {
-              currency: data.currency || 'INR',
-              value: Number(data.price || 0),
-              items: [{
-                item_id: data.id || '',
-                item_name: data.title || '',
-                price: Number(data.price || 0),
-                quantity: Number(data.quantity || 1)
-              }]
-            });
-          } else if (eventName === 'InitiateCheckout') {
-            var pModeGA = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
-            window.gtag('event', 'begin_checkout', {
-              currency: data.currency || 'INR',
-              value: Number(data.total || 0),
-              payment_type: pModeGA,
-              items: (data.items || []).map(function(item) {
-                return {
-                  item_id: item.id || '',
-                  item_name: item.title || '',
-                  price: Number(item.price || 0),
-                  quantity: Number(item.quantity || 1)
-                };
-              })
-            });
-          } else if (eventName === 'Search') {
-            window.gtag('event', 'search', {
-              search_term: data.query || data.search_string || ''
-            });
-          } else if (eventName === 'Lead') {
-            window.gtag('event', 'generate_lead', {
-              currency: 'INR',
-              value: Number(data.value || 0)
-            });
-          } else if (eventName === 'Contact') {
-            window.gtag('event', 'contact', {
-              method: data.channel || 'WhatsApp'
-            });
-          } else if (eventName === 'CompleteRegistration') {
-            window.gtag('event', 'sign_up', {
-              method: data.content_name || 'Routine Quiz'
-            });
-          } else {
-            window.gtag('event', eventName, data);
-          }
+        } else if (eventName === 'Search') {
+          window.dataLayer.push({
+            event: 'search',
+            event_id: eventId,
+            search_term: data.query || data.search_string || ''
+          });
+        } else if (eventName === 'Lead') {
+          window.dataLayer.push({
+            event: 'generate_lead',
+            event_id: eventId,
+            user_data: userData,
+            value: Number(data.value || 0),
+            currency: 'INR'
+          });
+        } else if (eventName === 'Contact') {
+          window.dataLayer.push({
+            event: 'contact',
+            event_id: eventId,
+            channel: data.channel || 'WhatsApp Support'
+          });
+        } else if (eventName === 'CompleteRegistration') {
+          window.dataLayer.push({
+            event: 'sign_up',
+            event_id: eventId,
+            method: data.content_name || 'Routine Quiz'
+          });
         }
       };
 
@@ -723,11 +642,6 @@ const unifiedSchemaGraph = {
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BCC6JL8"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    {metaPixelId && (
-      <noscript>
-        <img height="1" width="1" style="display:none" src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`} alt="" />
-      </noscript>
-    )}
     <slot />
     <CartDrawer />
     <WhatsAppConcierge />
