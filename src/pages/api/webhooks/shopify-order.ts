@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import process from 'node:process';
 
 export const prerender = false;
 
@@ -34,7 +35,7 @@ function formatCorporateOrderMessage(order: any): string {
   // 4. Source / Attribution
   const utms: Record<string, string> = {};
   (order.note_attributes || []).forEach((attr: any) => {
-    if (attr.name && attr.value) utms[attr.name] = attr.value;
+    if (attr && attr.name && attr.value) utms[attr.name] = attr.value;
   });
   const campaign = utms['utm_campaign'] || utms['utm_source'] || 'Website Direct';
 
@@ -52,27 +53,38 @@ function formatCorporateOrderMessage(order: any): string {
 ━━━━━━━━━━━━━━━━━━━━━━━━`;
 }
 
+// Health check endpoint for testing
+export const GET: APIRoute = async () => {
+  return new Response(JSON.stringify({ 
+    status: 'ok', 
+    service: 'Sujata Shopify-Telegram Live Alert Engine',
+    timestamp: new Date().toISOString()
+  }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' }
+  });
+};
+
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const rawBody = await request.text();
-    if (!rawBody) {
-      return new Response(JSON.stringify({ error: 'Empty body' }), { status: 400 });
+    let order: any = null;
+    try {
+      order = await request.json();
+    } catch {
+      const text = await request.text();
+      order = JSON.parse(text);
     }
 
-    const order = JSON.parse(rawBody);
+    if (!order) {
+      return new Response(JSON.stringify({ error: 'Invalid or empty order payload' }), { status: 400 });
+    }
 
     const botToken =
-      import.meta.env.TELEGRAM_BOT_TOKEN ||
-      process.env.TELEGRAM_BOT_TOKEN ||
+      (typeof process !== 'undefined' && process.env?.TELEGRAM_BOT_TOKEN) ||
       '8922846279:AAFZXUeM6lZc4t0x1AtKjOwPHAE0IBeugSI';
     const chatId =
-      import.meta.env.TELEGRAM_CHAT_ID ||
-      process.env.TELEGRAM_CHAT_ID ||
+      (typeof process !== 'undefined' && process.env?.TELEGRAM_CHAT_ID) ||
       '847419012';
-
-    if (!botToken || !chatId) {
-      return new Response(JSON.stringify({ error: 'Telegram credentials missing' }), { status: 500 });
-    }
 
     const text = formatCorporateOrderMessage(order);
 
@@ -88,15 +100,20 @@ export const POST: APIRoute = async ({ request }) => {
 
     const telegramData = await telegramRes.json();
     return new Response(
-      JSON.stringify({ success: true, messageId: telegramData.result?.message_id }),
+      JSON.stringify({
+        success: true,
+        delivered: telegramData.ok,
+        messageId: telegramData.result?.message_id
+      }),
       {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       }
     );
   } catch (err: any) {
-    return new Response(JSON.stringify({ success: false, error: err.message }), {
-      status: 500,
+    console.error('Webhook error:', err);
+    return new Response(JSON.stringify({ success: false, error: err.message || 'Unknown server error' }), {
+      status: 200, // Return 200 so Shopify does not repeatedly fail
       headers: { 'Content-Type': 'application/json' }
     });
   }
