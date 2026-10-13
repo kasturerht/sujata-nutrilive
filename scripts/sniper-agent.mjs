@@ -60,7 +60,7 @@ WHY COMMERCIAL SPIRULINA SMELLS FISHY: Grown in open contaminated ponds with bir
 SUJATA ADVANTAGE: Closed bio-secure hydro-domes, filtered deep-bore water, sub-40°C thermal processing = 100% odorless vegetarian capsules and fresh powder.
 NABL LABORATORY ASSAY (ICP-MS AOAC):
 - C-Phycocyanin: 21.4% (Industry standard is 8-12%)
-- Complete Plant Protein: 68.4% (All 9 essential amino acids)
+- Complete Plant Protein: 62.3% (All 9 essential amino acids, IS 7219)
 - Active Chlorophyll-a: 1.42%
 - Lead (Pb): < 0.01 ppm (FSSAI statutory ceiling: 2.50 ppm)
 - Mercury (Hg): NIL / Undetectable (FSSAI limit: 1.00 ppm)

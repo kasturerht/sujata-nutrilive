@@ -197,16 +197,16 @@ def generate_cover_page():
             Paragraph("Below Limit of Quantification (Heart Safe)", body_style)
         ],
         [
-            Paragraph("<b>Statutory Safety Limits</b>", body_style),
-            Paragraph("<b>100% Compliant</b>", body_bold),
-            Paragraph("FSSAI Statutory Safety Limits", body_style),
-            Paragraph("Adheres to statutory edible food ceilings", body_style)
+            Paragraph("<b>Total Mineral Ash</b>", body_style),
+            Paragraph("<b>6.72%</b>", body_bold),
+            Paragraph("Gravimetric Protocol", body_style),
+            Paragraph("Natural Endogenous Mineral Matrix", body_style)
         ],
         [
-            Paragraph("<b>Synthetic Binders / Talc</b>", body_style),
-            Paragraph("<b>0.00% (Zero Binders)</b>", body_bold),
-            Paragraph("Pure Compressed Microalgae", body_style),
-            Paragraph("Zero magnesium stearate, talc, or excipients", body_style)
+            Paragraph("<b>Residual Moisture</b>", body_style),
+            Paragraph("<b>3.28%</b>", body_bold),
+            Paragraph("Sub-40°C Low-Moisture Dehydration", body_style),
+            Paragraph("Stable Shelf Life & Microbial Safety", body_style)
         ]
     ]
     
@@ -237,9 +237,10 @@ def generate_cover_page():
         "<b>Legal & Regulatory Statement:</b> This official document serves as the unified Quality & Regulatory Compliance Dossier "
         "for Sujata Nutrilive Agrotech. Sujata Nutrilive markets pure functional Spirulina supplements under valid Government of Maharashtra "
         "FSSAI Registration #21526027000179 (Category 13: Foodstuffs intended for particular nutritional uses). Production is conducted in partnership "
-        "with dedicated contract manufacturer Spiru Swastha India Pvt Ltd (Surat, Gujarat). The analytical testing compiled herein was conducted "
-        "by Lilaba Analytical Laboratories (Surat), an independent laboratory notified by FSSAI (#52/W/FSSAI/2018) and accredited by NABL (#TC-7179). "
-        "All values reflect empirical laboratory determinations under official Bureau of Indian Standards and FSSAI analytical protocols.<br/><br/>"
+        "with dedicated contract manufacturer Spiru Swastha India Pvt Ltd (Surat, Gujarat). The analytical testing compiled in Table 2 was conducted "
+        "by Lilaba Analytical Laboratories (Surat), an independent laboratory notified by FSSAI (#52/W/FSSAI/2018) and accredited by NABL (#TC-7179).<br/>"
+        "<b>Formulation Specification:</b> Finished products are single-ingredient formulations consisting exclusively of pure Arthrospira platensis biomass. "
+        "Sujata Tablets contain zero added tableting binders or lubricants (zero magnesium stearate, zero talc). Sujata Capsules contain 500 mg pure spirulina powder fill encased in vegetarian plant-derived HPMC shells (zero animal gelatin, zero silicon dioxide / INS 551).<br/>"
         "<b>Document Index:</b> Pages 2–3: Lilaba Analytical Laboratories Test Report (#LAL-NN-121023002) | Pages 4–8: Government of Maharashtra FSSAI Registration Certificate (#21526027000179)."
     )
     story.append(Paragraph(notice_text, body_style))
