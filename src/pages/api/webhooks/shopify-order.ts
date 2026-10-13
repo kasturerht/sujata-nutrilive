@@ -135,8 +135,8 @@ export const POST: APIRoute = async ({ request }) => {
     // 2. WhatsApp Smart Routing:
     // If COD ➡️ Telecaller Personal WhatsApp Number (for reconfirmation call)
     // If Prepaid ➡️ Dispatch WhatsApp Group (for immediate packing & shipping)
-    const waInstance = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_INSTANCE_ID) || '';
-    const waToken = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_TOKEN) || '';
+    const waInstance = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_INSTANCE_ID) || 'instance194236';
+    const waToken = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_TOKEN) || '0s7b878kudvmjwrq';
     const telecallerPhone = (typeof process !== 'undefined' && process.env?.TELECALLER_WHATSAPP_NUMBER) || '';
     const dispatchGroupId = (typeof process !== 'undefined' && process.env?.DISPATCH_WHATSAPP_GROUP_ID) || '';
 
