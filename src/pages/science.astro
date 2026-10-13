@@ -180,7 +180,7 @@ const labParameters = [
     test: "Synthetic Excipients & Binders", 
     method: "Clean-Label Matrix Verification", 
     limit: "Industry Avg 20-30%", 
-    result: "0.00% (Zero Binders)", 
+    result: "Zero Added Binders (100% Pure)", 
     status: "PURE MATRIX", 
     verdict: "Zero Magnesium Stearate, Talc, or Fillers",
     pass: true 
@@ -207,14 +207,14 @@ const comparisonMatrix = [
     parameter: "Heavy Metal Concentration (Lead / Mercury)",
     sunDried: "High Risk (Open Pond / Dust Infiltration)",
     sprayDried: "0.80 – 2.20 ppm (Near Limit)",
-    sujataCryo: "0.00% Detectable (Lead < 0.01 ppm, ICP-MS)",
+    sujataCryo: "Below Detectable Limits (Lead < 0.01 ppm, ICP-MS)",
     highlight: true
   },
   {
     parameter: "Microcystin Cyanotoxin Safety",
     sunDried: "Severe Risk from Bird Droppings & Wild Algae",
     sprayDried: "Variable Batch Integrity",
-    sujataCryo: "0.00 µg/g (100% Absent & Biosecure)",
+    sujataCryo: "< 0.1 µg/g (Below LOQ, 100% Biosecure)",
     highlight: true
   },
   {
@@ -319,8 +319,8 @@ const scienceSchemas = [
 ---
 
 <StoreLayout 
-  title="The Science & Sourcing Dossier: 21.4% Phycocyanin & 0.00% Heavy Metals | Sujata Nutrilive"
-  description="Discover the cellular science behind Sujata Nutrilive: Sub-40°C cryo-milling, 21.4% bioactive C-Phycocyanin, zero synthetic binders, and ICP-MS NABL certified heavy metal purity."
+  title="The Science & Sourcing Dossier: 62.3% Bio-Protein & Zero-Binder Purity | Sujata Nutrilive"
+  description="Discover the cellular science behind Sujata Nutrilive: Sub-40°C gentle dehydration, lab-certified 62.3% plant protein (IS 7219), zero synthetic binders, and FSSAI statutory safety compliance."
   image="/products/sujata-combo-spirulina-sea-buckthorn.jpg"
   extraSchema={scienceSchemas}
 >
@@ -375,30 +375,30 @@ const scienceSchemas = [
               
               <div class="flex flex-col">
                 <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-amber-400 mb-1">
-                  0.00%
+                  62.3%
                 </span>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Heavy Metals</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Plant Protein</span>
               </div>
 
               <div class="flex flex-col">
                 <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-emerald-300 mb-1">
                   &lt; 40°C
                 </span>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Cold Extract</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Cold Processed</span>
               </div>
 
               <div class="flex flex-col">
                 <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-white mb-1">
-                  98.4%
+                  291 mg
                 </span>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Absorption</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Bio-Iron / kg</span>
               </div>
 
               <div class="flex flex-col">
-                <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-amber-400 mb-1">
-                  420+
+                <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-emerald-300 mb-1">
+                  100%
                 </span>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Clinical Trials</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Zero Binders</span>
               </div>
 
             </div>
@@ -449,7 +449,7 @@ const scienceSchemas = [
             
             <p class="text-xs sm:text-sm text-emerald-50/95 leading-relaxed font-light">
               <strong class="font-bold text-white">What differentiates Sujata Nutrilive Spirulina?</strong><br class="hidden sm:inline" />
-              Sujata Nutrilive is a practitioner-governed cellular wellness supplement manufactured by <strong>Sujata Nutrilive Agrotech in Nashik, Maharashtra</strong>. Produced exclusively via sub-40°C cryo-milling in biosecure closed hydro-domes, it preserves <strong>21.4% bioactive C-Phycocyanin</strong> and delivers <strong>0.00% detectable heavy metals</strong> (Lead &lt; 0.01 ppm, Mercury NIL via ICP-MS spectrometry), completely eliminating the thermal damage, foul odor, and digestive distress characteristic of conventional spray-dried brands.
+              Sujata Nutrilive is a practitioner-governed cellular wellness supplement marketed by <strong>Sujata Nutrilive Agrotech in Nashik, Maharashtra (FSSAI Reg #21526027000179)</strong> and contract manufactured by Spiru Swastha India Pvt Ltd. Produced exclusively via sub-40°C gentle low-temperature dehydration in biosecure aquaculture, it delivers <strong>lab-certified 62.3% complete plant protein (IS 7219)</strong>, <strong>291 mg/kg bio-available iron</strong>, and strict statutory FSSAI food safety compliance, completely eliminating the thermal damage, foul odor, and digestive distress characteristic of conventional spray-dried brands.
             </p>
           </div>
         </div>
@@ -526,8 +526,8 @@ const scienceSchemas = [
           </div>
 
           <div class="mt-8 pt-4 border-t border-emerald-900/10 flex items-center justify-between text-xs font-bold text-emerald-900">
-            <span>Heavy Metal Level: <strong>0.00%</strong></span>
-            <span>Microbial Status: <strong>Sterile</strong></span>
+            <span>Heavy Metal Level: <strong>FSSAI Safe / BDL</strong></span>
+            <span>Microbial Status: <strong>Compliant</strong></span>
           </div>
         </div>
 
@@ -754,7 +754,7 @@ const scienceSchemas = [
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
-            ✓ 0.00% Environmental Runoff
+            ✓ Zero Environmental Runoff
           </div>
         </div>
 
@@ -788,7 +788,7 @@ const scienceSchemas = [
             </div>
             <h3 class="text-base font-bold text-[#111827] mb-2">Micro-Cell Thinning</h3>
             <p class="text-xs text-gray-500 font-light leading-relaxed">
-              Ultrasonic milling creates fragile, instant-dissolving cell walls for 98.4% bio-absorption without chemical binders.
+              Ultrasonic milling creates fragile, instant-dissolving cell walls for rapid bio-absorption without chemical binders.
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
@@ -811,7 +811,7 @@ const scienceSchemas = [
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
-            ✓ 0.00% Heavy Metals Certified
+            ✓ Heavy Metal Safety Verified
           </div>
         </div>
 
@@ -997,7 +997,7 @@ const scienceSchemas = [
                   Pure Organic Spirulina Powder
                 </h4>
                 <p class="text-[11px] text-emerald-100/70 font-light leading-relaxed mb-4">
-                  Ultrasonic cell-wall thinning allows 98.4% direct cellular assimilation. Blends instantly into smoothies, water, or morning tonics without grit.
+                  Ultrasonic cell-wall thinning allows rapid direct cellular assimilation. Blends instantly into smoothies, water, or morning tonics without grit.
                 </p>
 
                 <div class="space-y-1.5 text-[11px] text-gray-300 mb-6">
@@ -1167,7 +1167,7 @@ const scienceSchemas = [
 
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-6">
             We Prove Our Purity. <br/>
-            <span class="text-emerald-700 italic">With 0.00% Excuses.</span>
+            <span class="text-emerald-700 italic">With Zero Excuses.</span>
           </h2>
 
           <div class="w-full aspect-[16/9] rounded-2xl overflow-hidden border border-emerald-900/10 shadow-md mb-6 relative">
@@ -1279,7 +1279,7 @@ const scienceSchemas = [
             Clean-Assay Formulations: Heavy-Metal-Free Guarantee.
           </h2>
           <p class="text-emerald-100/80 text-xs sm:text-sm font-light leading-relaxed">
-            Over 80% of traditional Ayurvedic shilajit and herbal extracts in the market fail ICP-MS heavy metal tests due to raw mountain runoff or uncalibrated processing. Every formulation below is tested in batch assays under AOAC 2015.01 to guarantee 0.00% detectable contamination.
+            Over 80% of traditional Ayurvedic shilajit and herbal extracts in the market fail ICP-MS heavy metal tests due to raw mountain runoff or uncalibrated processing. Every formulation below is tested in batch assays under AOAC 2015.01 to guarantee heavy metals remain strictly below detectable limits (BDL).
           </p>
         </div>
 
