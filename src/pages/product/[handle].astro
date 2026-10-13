@@ -550,6 +550,7 @@ const productSchema = {
     "url": canonicalURL,
     "priceCurrency": "INR",
     "price": price || "799.00",
+    "validFrom": "2024-01-01",
     "priceValidUntil": "2027-12-31",
     "itemCondition": "https://schema.org/NewCondition",
     "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
