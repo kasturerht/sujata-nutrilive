@@ -513,12 +513,25 @@ const unifiedSchemaGraph = {
         if (storedEmail) userData.email = storedEmail;
         if (storedPhone) userData.phone = storedPhone;
 
+        function cleanShopifyId(rawId) {
+          if (!rawId) return '';
+          var s = String(rawId).trim();
+          var match = s.match(/(?:ProductVariant|Product)\/(\d+)/);
+          return match ? match[1] : (s.replace(/^gid:\/\/shopify\/[^\/]+\//, '') || s);
+        }
+
+        var cleanId = cleanShopifyId(data.id || (data.items && data.items[0] && data.items[0].id) || '');
+        var enrichedData = Object.assign({}, data, {
+          clean_id: cleanId,
+          content_ids: cleanId ? [cleanId, String(data.id || '')] : [String(data.id || '')]
+        });
+
         // 1. Dual-Compatibility: Push custom event for GTM custom event triggers
         window.dataLayer.push({
           event: eventName,
           event_id: eventId,
           user_data: userData,
-          event_data: data
+          event_data: enrichedData
         });
 
         // 2. Official Google Analytics 4 (GA4) Enhanced E-Commerce Specification
@@ -532,7 +545,7 @@ const unifiedSchemaGraph = {
               currency: data.currency || 'INR',
               value: Number(data.price || 0),
               items: [{
-                item_id: String(data.id || ''),
+                item_id: cleanId || String(data.id || ''),
                 item_name: data.title || '',
                 price: Number(data.price || 0),
                 quantity: 1
@@ -540,6 +553,8 @@ const unifiedSchemaGraph = {
             }
           });
         } else if (eventName === 'AddToCart') {
+          var atcQty = Number(data.quantity || 1);
+          var atcTotalVal = Number(data.price || 0) * atcQty;
           window.dataLayer.push({ ecommerce: null });
           window.dataLayer.push({
             event: 'add_to_cart',
@@ -547,29 +562,31 @@ const unifiedSchemaGraph = {
             user_data: userData,
             ecommerce: {
               currency: data.currency || 'INR',
-              value: Number(data.price || 0),
+              value: atcTotalVal,
               items: [{
-                item_id: String(data.id || ''),
+                item_id: cleanId || String(data.id || ''),
                 item_name: data.title || '',
                 price: Number(data.price || 0),
-                quantity: Number(data.quantity || 1)
+                quantity: atcQty
               }]
             }
           });
         } else if (eventName === 'InitiateCheckout') {
           var pModeGA = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
+          var totalNumItems = (data.items || []).reduce(function(sum, it) { return sum + Number(it.quantity || 1); }, 0) || (data.items || []).length || 1;
           window.dataLayer.push({ ecommerce: null });
           window.dataLayer.push({
             event: 'begin_checkout',
             event_id: eventId,
             user_data: userData,
+            num_items: totalNumItems,
             ecommerce: {
               currency: data.currency || 'INR',
               value: Number(data.total || 0),
               payment_type: pModeGA,
               items: (data.items || []).map(function(item) {
                 return {
-                  item_id: String(item.id || ''),
+                  item_id: cleanShopifyId(item.id || ''),
                   item_name: item.title || '',
                   price: Number(item.price || 0),
                   quantity: Number(item.quantity || 1)
