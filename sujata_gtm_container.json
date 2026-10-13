@@ -1,13 +1,13 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-10-13 09:57:45",
+  "exportTime": "2026-10-13 10:05:31",
   "containerVersion": {
-    "path": "accounts/6381104411/containers/266369056/versions/9",
+    "path": "accounts/6381104411/containers/266369056/versions/10",
     "accountId": "6381104411",
     "containerId": "266369056",
-    "containerVersionId": "9",
-    "name": "v9.0.0 - Production Tracking Core Release",
-    "description": "Forensic audit resolution: (1) Eradicated duplicate ViewContent tag 24, (2) Implemented native dataLayer safe item extraction for InitiateCheckout and Purchase (content_ids, contents, num_items), (3) Enabled true AddToCart quantity price multiplier, (4) Aligned dual-path DataLayer variables.",
+    "containerVersionId": "10",
+    "name": "v9.1.0 - Edge-Case Refinements & Verified DLV Mapping",
+    "description": "Aligned DLV - Quantity to event_data.quantity per specification. 100% ready for full production.",
     "container": {
       "path": "accounts/6381104411/containers/266369056",
       "accountId": "6381104411",
@@ -945,13 +945,13 @@
           {
             "type": "template",
             "key": "name",
-            "value": "quantity"
+            "value": "event_data.quantity"
           }
         ],
-        "fingerprint": "1791885426781"
+        "fingerprint": "1791885925629"
       }
     ],
-    "fingerprint": "1791885457743",
-    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6381104411/containers/266369056/versions/9?apiLink=version"
+    "fingerprint": "1791885927374",
+    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6381104411/containers/266369056/versions/10?apiLink=version"
   }
 }
