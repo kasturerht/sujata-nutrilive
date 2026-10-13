@@ -605,6 +605,10 @@ const unifiedSchemaGraph = {
           event: eventName,
           event_id: eventId,
           user_data: userData,
+          order_total: data.total || data.price || 0,
+          contact_channel: data.channel || 'WhatsApp Support',
+          quantity: Number(data.quantity || 1),
+          clean_id: cleanId,
           event_data: enrichedData
         });
 

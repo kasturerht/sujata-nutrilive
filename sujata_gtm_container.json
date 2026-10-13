@@ -1,13 +1,13 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-10-13 09:30:27",
+  "exportTime": "2026-10-13 09:57:45",
   "containerVersion": {
-    "path": "accounts/6381104411/containers/266369056/versions/8",
+    "path": "accounts/6381104411/containers/266369056/versions/9",
     "accountId": "6381104411",
     "containerId": "266369056",
-    "containerVersionId": "8",
-    "name": "Version 8 - Ultra-Refined Silicon Valley Tracking Architecture",
-    "description": "Implemented Meta Catalog Dual-ID match (clean numeric + Shopify gid), AddToCart quantity price multiplier, dynamic InitiateCheckout num_items, and Tag Sequencing.",
+    "containerVersionId": "9",
+    "name": "v9.0.0 - Production Tracking Core Release",
+    "description": "Forensic audit resolution: (1) Eradicated duplicate ViewContent tag 24, (2) Implemented native dataLayer safe item extraction for InitiateCheckout and Purchase (content_ids, contents, num_items), (3) Enabled true AddToCart quantity price multiplier, (4) Aligned dual-path DataLayer variables.",
     "container": {
       "path": "accounts/6381104411/containers/266369056",
       "accountId": "6381104411",
@@ -50,10 +50,10 @@
           {
             "type": "template",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  var eId = '{{DLV - Event ID}}' || '';\n  var itemsArr = [];\n  try { itemsArr = {{DLV - Ecommerce Items}} || []; } catch(e) {}\n  var numItems = (itemsArr && itemsArr.length) ? itemsArr.reduce(function(acc, i){ return acc + (parseInt(i.quantity)||1); }, 0) : 1;\n  fbq('track', 'InitiateCheckout', {\n    num_items: numItems,\n    value: parseFloat('{{DLV - Ecommerce Value}}') || parseFloat('{{DLV - Order Total}}') || 0,\n    currency: 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  var eId = '{{DLV - Event ID}}' || '';\n  var totalVal = parseFloat('{{DLV - Ecommerce Value}}') || parseFloat('{{DLV - Order Total}}') || 0;\n  \n  var items = [];\n  try {\n    if (window.google_tag_manager && window.google_tag_manager['GTM-5BCC6JL8']) {\n      items = window.google_tag_manager['GTM-5BCC6JL8'].dataLayer.get('ecommerce.items') || [];\n    }\n  } catch(e) {}\n  \n  if (!items || !items.length) {\n    try {\n      if (window.dataLayer && window.dataLayer.length) {\n        for (var i = window.dataLayer.length - 1; i >= 0; i--) {\n          var d = window.dataLayer[i];\n          if (d && d.ecommerce && d.ecommerce.items && d.ecommerce.items.length) {\n            items = d.ecommerce.items;\n            break;\n          }\n        }\n      }\n    } catch(e) {}\n  }\n  \n  var contentIds = [];\n  var contents = [];\n  var numItems = 0;\n  \n  if (items && items.length) {\n    for (var j = 0; j < items.length; j++) {\n      var it = items[j];\n      if (it) {\n        var raw = String(it.item_id || it.id || '');\n        var clean = raw.replace(/^gid:\\/\\/shopify\\/(ProductVariant|Product)\\//, '');\n        var cId = clean || raw;\n        var q = parseInt(it.quantity) || 1;\n        var p = parseFloat(it.price) || 0;\n        if (cId) contentIds.push(cId);\n        contents.push({ id: cId, quantity: q, item_price: p });\n        numItems += q;\n      }\n    }\n  }\n  \n  fbq('track', 'InitiateCheckout', {\n    content_ids: contentIds,\n    contents: contents,\n    num_items: numItems || 1,\n    value: totalVal,\n    currency: 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
           }
         ],
-        "fingerprint": "1791883705176",
+        "fingerprint": "1791885444603",
         "firingTriggerId": [
           "4"
         ],
@@ -160,10 +160,10 @@
           {
             "type": "template",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  var eId = '{{DLV - Event ID}}' || '';\n  var rawId = '{{DLV - Product ID}}' || '';\n  var cleanId = rawId.replace(/^gid:\\/\\/shopify\\/(ProductVariant|Product)\\//, '');\n  var cIds = cleanId ? (cleanId !== rawId ? [cleanId, rawId] : [cleanId]) : (rawId ? [rawId] : []);\n  var totalVal = parseFloat('{{DLV - Ecommerce Value}}') || parseFloat('{{DLV - Product Price}}') || 0;\n  fbq('track', 'AddToCart', {\n    content_name: '{{DLV - Product Title}}',\n    content_ids: cIds,\n    content_type: 'product',\n    value: totalVal,\n    currency: 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  var eId = '{{DLV - Event ID}}' || '';\n  var rawId = '{{DLV - Product ID}}' || '';\n  var cleanId = rawId.replace(/^gid:\\/\\/shopify\\/(ProductVariant|Product)\\//, '');\n  var cIds = cleanId ? (cleanId !== rawId ? [cleanId, rawId] : [cleanId]) : (rawId ? [rawId] : []);\n  var unitPrice = parseFloat('{{DLV - Product Price}}') || 0;\n  var qty = parseInt('{{DLV - Quantity}}') || 1;\n  var totalVal = parseFloat('{{DLV - Ecommerce Value}}') || (unitPrice * qty);\n\n  fbq('track', 'AddToCart', {\n    content_name: '{{DLV - Product Title}}',\n    content_ids: cIds,\n    contents: [{\n      id: cleanId || rawId,\n      quantity: qty,\n      item_price: unitPrice\n    }],\n    content_type: 'product',\n    value: totalVal,\n    currency: 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
           }
         ],
-        "fingerprint": "1791883700982",
+        "fingerprint": "1791885440462",
         "firingTriggerId": [
           "20"
         ],
@@ -205,27 +205,6 @@
       {
         "accountId": "6381104411",
         "containerId": "266369056",
-        "tagId": "24",
-        "name": "Meta Pixel - ViewContent (Product View)",
-        "type": "html",
-        "parameter": [
-          {
-            "type": "template",
-            "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  fbq('track', 'ViewContent', {\n    content_name: '{{DLV - Product Title}}' || 'Sujata Formulation',\n    content_ids: ['{{DLV - Product ID}}'],\n    content_type: 'product',\n    value: Number('{{DLV - Product Price}}') || 0,\n    currency: 'INR'\n  }, { eventID: '{{DLV - Event ID}}' });\n}\n</script>"
-          }
-        ],
-        "fingerprint": "1791373835664",
-        "firingTriggerId": [
-          "18"
-        ],
-        "consentSettings": {
-          "consentStatus": "notSet"
-        }
-      },
-      {
-        "accountId": "6381104411",
-        "containerId": "266369056",
         "tagId": "38",
         "name": "Meta Pixel - ViewContent",
         "type": "html",
@@ -233,10 +212,10 @@
           {
             "type": "template",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  var eId = '{{DLV - Event ID}}' || '';\n  var rawId = '{{DLV - Product ID}}' || '';\n  var cleanId = rawId.replace(/^gid:\\/\\/shopify\\/(ProductVariant|Product)\\//, '');\n  var cIds = cleanId ? (cleanId !== rawId ? [cleanId, rawId] : [cleanId]) : (rawId ? [rawId] : []);\n  fbq('track', 'ViewContent', {\n    content_name: '{{DLV - Product Title}}',\n    content_ids: cIds,\n    content_type: 'product',\n    value: parseFloat('{{DLV - Product Price}}') || 0,\n    currency: 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  var eId = '{{DLV - Event ID}}' || '';\n  var rawId = '{{DLV - Product ID}}' || '';\n  var cleanId = rawId.replace(/^gid:\\/\\/shopify\\/(ProductVariant|Product)\\//, '');\n  var cIds = cleanId ? (cleanId !== rawId ? [cleanId, rawId] : [cleanId]) : (rawId ? [rawId] : []);\n  var price = parseFloat('{{DLV - Product Price}}') || 0;\n  \n  fbq('track', 'ViewContent', {\n    content_name: '{{DLV - Product Title}}',\n    content_ids: cIds,\n    content_type: 'product',\n    value: price,\n    currency: 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
           }
         ],
-        "fingerprint": "1791883696809",
+        "fingerprint": "1791885452897",
         "firingTriggerId": [
           "18"
         ],
@@ -259,10 +238,10 @@
           {
             "type": "template",
             "key": "html",
-            "value": "<script>\nif (typeof fbq === 'function') {\n  var txId = '{{DLV - Ecommerce Transaction ID}}' || '';\n  var eId = '{{DLV - Event ID}}' || (txId ? ('order_' + txId) : '');\n  fbq('track', 'Purchase', {\n    content_type: 'product',\n    value: parseFloat('{{DLV - Ecommerce Value}}') || parseFloat('{{DLV - Order Total}}') || 0,\n    currency: '{{DLV - Ecommerce Currency}}' || 'INR'\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
+            "value": "<script>\nif (typeof fbq === 'function') {\n  var txId = '{{DLV - Ecommerce Transaction ID}}' || '';\n  var eId = '{{DLV - Event ID}}' || (txId ? ('order_' + txId) : '');\n  var totalVal = parseFloat('{{DLV - Ecommerce Value}}') || parseFloat('{{DLV - Order Total}}') || 0;\n  var currency = '{{DLV - Ecommerce Currency}}' || 'INR';\n  \n  var items = [];\n  try {\n    if (window.google_tag_manager && window.google_tag_manager['GTM-5BCC6JL8']) {\n      items = window.google_tag_manager['GTM-5BCC6JL8'].dataLayer.get('ecommerce.items') || [];\n    }\n  } catch(e) {}\n  \n  if (!items || !items.length) {\n    try {\n      if (window.dataLayer && window.dataLayer.length) {\n        for (var i = window.dataLayer.length - 1; i >= 0; i--) {\n          var d = window.dataLayer[i];\n          if (d && d.ecommerce && d.ecommerce.items && d.ecommerce.items.length) {\n            items = d.ecommerce.items;\n            break;\n          }\n        }\n      }\n    } catch(e) {}\n  }\n  \n  var contentIds = [];\n  var contents = [];\n  var numItems = 0;\n  \n  if (items && items.length) {\n    for (var j = 0; j < items.length; j++) {\n      var it = items[j];\n      if (it) {\n        var raw = String(it.item_id || it.id || '');\n        var clean = raw.replace(/^gid:\\/\\/shopify\\/(ProductVariant|Product)\\//, '');\n        var cId = clean || raw;\n        var q = parseInt(it.quantity) || 1;\n        var p = parseFloat(it.price) || 0;\n        if (cId) contentIds.push(cId);\n        contents.push({ id: cId, quantity: q, item_price: p });\n        numItems += q;\n      }\n    }\n  }\n  \n  fbq('track', 'Purchase', {\n    content_name: 'Order ' + txId,\n    content_type: 'product',\n    content_ids: contentIds,\n    contents: contents,\n    num_items: numItems || 1,\n    value: totalVal,\n    currency: currency\n  }, eId ? { eventID: eId } : undefined);\n}\n</script>"
           }
         ],
-        "fingerprint": "1791883709334",
+        "fingerprint": "1791885448722",
         "firingTriggerId": [
           "33"
         ],
@@ -696,10 +675,10 @@
           {
             "type": "template",
             "key": "name",
-            "value": "order_total"
+            "value": "event_data.total"
           }
         ],
-        "fingerprint": "1791883343248"
+        "fingerprint": "1791885430401"
       },
       {
         "accountId": "6381104411",
@@ -731,10 +710,10 @@
           {
             "type": "template",
             "key": "name",
-            "value": "contact_channel"
+            "value": "event_data.channel"
           }
         ],
-        "fingerprint": "1791883346376"
+        "fingerprint": "1791885434237"
       },
       {
         "accountId": "6381104411",
@@ -950,9 +929,29 @@
           }
         ],
         "fingerprint": "1791883341656"
+      },
+      {
+        "accountId": "6381104411",
+        "containerId": "266369056",
+        "variableId": "44",
+        "name": "DLV - Quantity",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "integer",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "template",
+            "key": "name",
+            "value": "quantity"
+          }
+        ],
+        "fingerprint": "1791885426781"
       }
     ],
-    "fingerprint": "1791883714078",
-    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6381104411/containers/266369056/versions/8?apiLink=version"
+    "fingerprint": "1791885457743",
+    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6381104411/containers/266369056/versions/9?apiLink=version"
   }
 }
