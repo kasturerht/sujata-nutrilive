@@ -53,30 +53,11 @@ function formatCorporateOrderMessage(order: any): string {
 ━━━━━━━━━━━━━━━━━━━━━━━━`;
 }
 
-async function sendWhatsAppAlert(to: string, message: string, instanceId: string, token: string) {
-  try {
-    const url = `https://api.ultramsg.com/${instanceId}/messages/chat`;
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        token: token,
-        to: to,
-        body: message
-      })
-    });
-    return await res.json();
-  } catch (err: any) {
-    console.error('WhatsApp dispatch error:', err.message);
-    return null;
-  }
-}
-
 // Health check endpoint for testing
 export const GET: APIRoute = async () => {
   return new Response(JSON.stringify({ 
     status: 'ok', 
-    service: 'Sujata Shopify Smart Routing Engine (Telegram + WhatsApp Dispatch)',
+    service: 'Sujata Shopify Order Alerts Engine (100% Free Forever via Telegram)',
     timestamp: new Date().toISOString()
   }), {
     status: 200,
@@ -107,7 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const text = formatCorporateOrderMessage(order);
 
-    // 1. Founder Telegram Alert
+    // Telegram Alert (100% Free, Official Bot API, Zero Cost Forever)
     const botToken =
       (typeof process !== 'undefined' && process.env?.TELEGRAM_BOT_TOKEN) ||
       '8922846279:AAFZXUeM6lZc4t0x1AtKjOwPHAE0IBeugSI';
@@ -116,6 +97,7 @@ export const POST: APIRoute = async ({ request }) => {
       '847419012';
 
     let telegramSuccess = false;
+    let tgData = null;
     try {
       const telegramRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
@@ -126,35 +108,18 @@ export const POST: APIRoute = async ({ request }) => {
           parse_mode: 'Markdown'
         })
       });
-      const tgData = await telegramRes.json();
+      tgData = await telegramRes.json();
       telegramSuccess = !!tgData.ok;
     } catch (e) {
       console.error('Telegram error:', e);
-    }
-
-    // 2. WhatsApp Smart Routing:
-    // If COD ➡️ Telecaller Personal WhatsApp Number (for reconfirmation call)
-    // If Prepaid ➡️ Dispatch WhatsApp Group (for immediate packing & shipping)
-    const waInstance = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_INSTANCE_ID) || 'instance194236';
-    const waToken = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_TOKEN) || '0s7b878kudvmjwrq';
-    const telecallerPhone = (typeof process !== 'undefined' && process.env?.TELECALLER_WHATSAPP_NUMBER) || '919272471529';
-    const dispatchGroupId = (typeof process !== 'undefined' && process.env?.DISPATCH_WHATSAPP_GROUP_ID) || '';
-
-    const waRecipient = isCod ? telecallerPhone : dispatchGroupId;
-    let waResult = null;
-
-    if (waInstance && waToken && waRecipient) {
-      waResult = await sendWhatsAppAlert(waRecipient, text, waInstance, waToken);
     }
 
     return new Response(
       JSON.stringify({
         success: true,
         orderType: isCod ? 'COD' : 'PREPAID',
-        routedTo: isCod ? 'TELECALLER_WHATSAPP' : 'DISPATCH_WHATSAPP_GROUP',
         telegramDelivered: telegramSuccess,
-        whatsappDelivered: waResult?.sent === 'true' || waResult?.id ? true : false,
-        whatsappResponse: waResult
+        telegramResponse: tgData
       }),
       {
         status: 200,
