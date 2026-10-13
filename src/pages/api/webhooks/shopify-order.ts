@@ -29,6 +29,7 @@ function formatCorporateOrderMessage(order: any): string {
   const phone = addr.phone || order.customer?.phone || order.phone || 'N/A';
   const city = [addr.city, addr.province_code || addr.province, addr.zip].filter(Boolean).join(', ') || 'N/A';
   const street = [addr.address1, addr.address2].filter(Boolean).join(', ');
+  const fullAddress = street ? `${street}, ${city}` : city;
 
   // 4. Source / Attribution
   const utms: Record<string, string> = {};
@@ -39,10 +40,14 @@ function formatCorporateOrderMessage(order: any): string {
 
   return `🌿 *SUJATA NUTRILIVE — NEW ORDER*
 ━━━━━━━━━━━━━━━━━━━━━━━━
+
 🛒 *Order:* #${orderNum} • *₹${order.total_price}* (${payType})
 📦 *Item:* ${items}
+
 👤 *Client:* ${name} • \`${phone}\`
-📍 *Address:* ${street ? street + ', ' : ''}${city}
+
+📍 *Address:* ${fullAddress}
+
 🌐 *Source:* Website Direct (${campaign})
 ━━━━━━━━━━━━━━━━━━━━━━━━`;
 }
