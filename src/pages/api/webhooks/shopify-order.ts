@@ -28,6 +28,7 @@ async function sendMetaCapiPurchase(order: any, pixelId: string, accessToken: st
       if (attr && attr.name && attr.value) notes[attr.name] = attr.value;
     });
 
+    const addr = order.shipping_address || order.billing_address || {};
     const email = order.email || order.customer?.email || notes['_lead_email'] || '';
     const phone = addr.phone || order.customer?.phone || order.phone || notes['_lead_phone'] || '';
     const firstName = addr.first_name || order.customer?.first_name || '';
