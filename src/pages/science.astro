@@ -50,7 +50,7 @@ const activeCompounds = [
   },
   {
     symbol: "Fe",
-    name: "Raw Bio-Iron",
+    name: "Natural Algal Iron (Fe)",
     purity: "29.1 mg / 100g",
     color: "text-amber-400",
     border: "border-amber-500/30",
@@ -123,10 +123,10 @@ const labParameters = [
     pass: true 
   },
   { 
-    test: "Bio-Available Iron (Fe)", 
+    test: "Total Iron (as Fe)", 
     method: "FSSAI Manual Metals 5.0", 
     limit: "Nutritional Benchmark", 
-    result: "291.15 mg/kg", 
+    result: "291.15 mg/kg (29.1 mg/100g)", 
     status: "HIGH POTENCY", 
     verdict: "Supports Hemoglobin & Natural Cellular Energy",
     pass: true 
@@ -391,7 +391,7 @@ const scienceSchemas = [
                 <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-white mb-1">
                   291 mg
                 </span>
-                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Bio-Iron / kg</span>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Total Iron / kg</span>
               </div>
 
               <div class="flex flex-col">
@@ -449,7 +449,7 @@ const scienceSchemas = [
             
             <p class="text-xs sm:text-sm text-emerald-50/95 leading-relaxed font-light">
               <strong class="font-bold text-white">What differentiates Sujata Nutrilive Spirulina?</strong><br class="hidden sm:inline" />
-              Sujata Nutrilive is a practitioner-governed cellular wellness supplement marketed by <strong>Sujata Nutrilive Agrotech in Nashik, Maharashtra (FSSAI Reg #21526027000179)</strong> and contract manufactured by Spiru Swastha India Pvt Ltd. Produced exclusively via sub-40°C gentle low-temperature dehydration in biosecure aquaculture, it delivers <strong>lab-certified 62.3% complete plant protein (IS 7219)</strong>, <strong>291 mg/kg bio-available iron</strong>, and strict statutory FSSAI food safety compliance, completely eliminating the thermal damage, foul odor, and digestive distress characteristic of conventional spray-dried brands.
+              Sujata Nutrilive is a practitioner-governed cellular wellness supplement marketed by <strong>Sujata Nutrilive Agrotech in Nashik, Maharashtra (FSSAI Reg #21526027000179)</strong> and contract manufactured by Spiru Swastha India Pvt Ltd. Produced exclusively via sub-40°C gentle low-temperature dehydration in biosecure aquaculture, it delivers <strong>lab-certified 62.3% complete plant protein (IS 7219)</strong>, <strong>291.15 mg/kg total iron (as Fe)</strong>, and strict statutory FSSAI food safety compliance, completely eliminating the thermal damage, foul odor, and digestive distress characteristic of conventional spray-dried brands.
             </p>
           </div>
         </div>
@@ -1748,8 +1748,8 @@ const scienceSchemas = [
           <span class="text-emerald-400 font-bold">62.3% (IS 7219 Certified)</span>
         </div>
         <div class="flex justify-between border-b border-white/5 pb-1.5">
-          <span>Bio-Available Iron (Fe):</span>
-          <span class="text-emerald-400 font-bold">291.15 mg/kg (High Potency)</span>
+          <span>Total Iron (as Fe):</span>
+          <span class="text-emerald-400 font-bold">291.15 mg/kg (29.1 mg/100g)</span>
         </div>
         <div class="flex justify-between">
           <span>Heavy Metal Compliance:</span>

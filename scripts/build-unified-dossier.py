@@ -104,7 +104,7 @@ def generate_cover_page():
         ],
         [
             Paragraph("<b>Independent Testing Laboratory:</b>", body_style),
-            Paragraph("<b>Lilaba Analytical Laboratories</b> (Surat, Gujarat)<br/><b>FSSAI Notified Laboratory Reg:</b> #52/W/FSSAI/2018 | <b>NABL Certificate:</b> #TC-7179 (Chemical Testing Valid to 19 Oct 2027)", body_style)
+            Paragraph("<b>Lilaba Analytical Laboratories</b> (Surat, Gujarat)<br/><b>FSSAI Notified Laboratory Reg:</b> #52/W/FSSAI/2018 | <b>NABL Certificate:</b> #TC-7179 (Analyzed and issued during active NABL accreditation validity period)", body_style)
         ],
         [
             Paragraph("<b>Official Test Report Reference:</b>", body_style),
@@ -143,10 +143,10 @@ def generate_cover_page():
             Paragraph("Gold Standard (Min 55.0% FSSAI standard)", body_style)
         ],
         [
-            Paragraph("<b>Bio-Available Iron (as Fe)</b>", body_style),
-            Paragraph("<b>291.15 mg/kg</b>", body_bold),
+            Paragraph("<b>Total Iron (as Fe)</b>", body_style),
+            Paragraph("<b>291.15 mg/kg (29.1 mg/100g)</b>", body_bold),
             Paragraph("FSSAI Manual - Metals Method 5.0", body_style),
-            Paragraph("High Potency Cellular Bio-Iron", body_style)
+            Paragraph("Natural Algal Mineral Iron", body_style)
         ],
         [
             Paragraph("<b>Natural Calcium (as Ca)</b>", body_style),
