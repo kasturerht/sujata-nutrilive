@@ -52,7 +52,7 @@ function saveState(state) {
 // 2. Official Scientific Knowledge Base (Sujata Truth Engine)
 const SUJATA_AUTHORITY_KNOWLEDGE = `
 BRAND: Sujata Nutrilive (Sujata Nutrilive Agrotech, Nashik, Maharashtra)
-FSSAI LICENSE: #11521999000284
+FSSAI REGISTRATION: #21526027000179 (Govt of Maharashtra, Category 13)
 FACILITY: Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik 422008
 GOOGLE MAPS: 5.0 ★ Rated (https://share.google/R7aB2MCG9AN5l3RF1)
 CORE TECHNOLOGY: Sub-40°C Cryo-Milling vs Commercial 160°C Open Spray-Drying.

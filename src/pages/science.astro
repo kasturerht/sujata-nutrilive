@@ -111,78 +111,78 @@ const timelineMilestones = [
   }
 ];
 
-// NABL Analytical Chemistry & Quality Assay Data
+// Verified Analytical Chemistry & Nutritional Quality Assay Data (Lilaba Analytical Laboratories #LAL-NN-121023002)
 const labParameters = [
   { 
-    test: "Lead (Pb)", 
-    method: "ICP-MS (AOAC 2015.01)", 
-    limit: "Max 2.50 ppm", 
-    result: "< 0.01 ppm", 
-    status: "0.00% UNDETECTED", 
-    verdict: "99.6% Below Govt Ceiling",
-    pass: true 
-  },
-  { 
-    test: "Mercury (Hg)", 
-    method: "Cold Vapor AAS (AOAC 974.14)", 
-    limit: "Max 1.00 ppm", 
-    result: "NIL (0.00 ppm)", 
-    status: "100% UNDETECTED", 
-    verdict: "Zero Toxic Traces",
-    pass: true 
-  },
-  { 
-    test: "Cadmium (Cd)", 
-    method: "ICP-MS (AOAC 2015.01)", 
-    limit: "Max 1.50 ppm", 
-    result: "< 0.005 ppm", 
-    status: "0.00% UNDETECTED", 
-    verdict: "99.7% Below Govt Ceiling",
-    pass: true 
-  },
-  { 
-    test: "Arsenic (As)", 
-    method: "Hydride Generation AAS", 
-    limit: "Max 3.00 ppm", 
-    result: "< 0.01 ppm", 
-    status: "0.00% UNDETECTED", 
-    verdict: "99.0% Below Govt Ceiling",
-    pass: true 
-  },
-  { 
-    test: "C-Phycocyanin (Pure)", 
-    method: "UV-Vis Spectrophotometry", 
-    limit: "Industry Avg ~6.0%", 
-    result: "21.4% Bioactive Purity", 
+    test: "Total Plant Protein", 
+    method: "IS 7219 Protocol", 
+    limit: "Min 55.0% FSSAI", 
+    result: "62.3% Pure Protein", 
     status: "GOLD STANDARD", 
-    verdict: "4.1x Higher Therapeutic Index",
+    verdict: "Complete 9 Essential Amino Acids",
     pass: true 
   },
   { 
-    test: "Total Crude Protein", 
-    method: "Kjeldahl Assay (N x 6.25)", 
-    limit: "Min 55.0%", 
-    result: "68.4% Pure Protein", 
-    status: "GOLD STANDARD", 
-    verdict: "Complete Plant Amino Profile",
+    test: "Bio-Available Iron (Fe)", 
+    method: "FSSAI Manual Metals 5.0", 
+    limit: "Nutritional Benchmark", 
+    result: "291.15 mg/kg", 
+    status: "HIGH POTENCY", 
+    verdict: "Supports Hemoglobin & Natural Cellular Energy",
     pass: true 
   },
   { 
-    test: "Microcystins (Cyanotoxins)", 
-    method: "ELISA Immunoassay", 
-    limit: "Max 1.00 µg/g", 
-    result: "0.00 µg/g (ABSENT)", 
-    status: "100% STERILE", 
-    verdict: "Zero Wild Cyanotoxin Contamination",
+    test: "Natural Calcium (Ca)", 
+    method: "FSSAI Manual Metals 5.0", 
+    limit: "Nutritional Benchmark", 
+    result: "1293.64 mg/kg", 
+    status: "HIGH ABSORPTION", 
+    verdict: "Bone Density & Cellular Function",
     pass: true 
   },
   { 
-    test: "Microbial Bio-Burden", 
-    method: "Culture Protocol (ISO 6579)", 
-    limit: "Absent in 25g", 
-    result: "Zero Pathogens Detected", 
-    status: "100% STERILE", 
-    verdict: "Pristine Biological Safety",
+    test: "Natural Vitamin A", 
+    method: "IS 5886 Protocol", 
+    limit: "Nutritional Benchmark", 
+    result: "183.12 µg/100g", 
+    status: "100% ORGANIC", 
+    verdict: "Natural Vision & Epithelial Health",
+    pass: true 
+  },
+  { 
+    test: "Natural Vitamin C & E", 
+    method: "IS 5838 & IS 7235", 
+    limit: "Nutritional Benchmark", 
+    result: "17.41 mg/100g Combined", 
+    status: "ACTIVE ANTIOXIDANT", 
+    verdict: "Antioxidant Cellular Defense",
+    pass: true 
+  },
+  { 
+    test: "Dietary Fiber & Carbohydrates", 
+    method: "IS 11062 & IS 1656", 
+    limit: "Nutritional Benchmark", 
+    result: "3.72% Fiber / 24.77% Carbs", 
+    status: "GUT FRIENDLY", 
+    verdict: "Prebiotic Support & Smooth Digestion",
+    pass: true 
+  },
+  { 
+    test: "Heavy Metal Safety (Lead, Hg, As, Cd)", 
+    method: "FSSAI Statutory Safety Standards", 
+    limit: "Statutory Food Ceiling", 
+    result: "FSSAI Compliant", 
+    status: "100% EDIBLE SAFE", 
+    verdict: "Complies with Statutory Food Safety Limits",
+    pass: true 
+  },
+  { 
+    test: "Synthetic Excipients & Binders", 
+    method: "Clean-Label Matrix Verification", 
+    limit: "Industry Avg 20-30%", 
+    result: "0.00% (Zero Binders)", 
+    status: "PURE MATRIX", 
+    verdict: "Zero Magnesium Stearate, Talc, or Fillers",
     pass: true 
   }
 ];
@@ -304,16 +304,16 @@ const scienceSchemas = [
   },
   {
     "@type": "Dataset",
-    "@id": "https://www.sujatanutrilive.com/science/#nabl-lab-assay",
-    "name": "NABL Analytical Chemistry & Quality Assay: Batch #SJT-2026-B08",
-    "description": "Batch testing under AOAC 2015.01 (ICP-MS Spectrometry) and UV-Vis spectrophotometry for heavy metals, microcystins, and biliprotein concentration.",
+    "@id": "https://www.sujatanutrilive.com/science/#lab-assay",
+    "name": "Analytical Nutritional & Quality Assay: Report #LAL-NN-121023002",
+    "description": "Certified analytical testing by Lilaba Analytical Laboratories under Bureau of Indian Standards (IS 7219) and FSSAI Manual standards for pure Arthrospira platensis biomass.",
     "isAccessibleForFree": true,
     "creator": {
       "@type": "Organization",
-      "name": "NABL Accredited Analytical Testing Laboratory, Maharashtra",
-      "sameAs": "https://nabl-india.org/"
+      "name": "Lilaba Analytical Laboratories, Surat, Gujarat",
+      "sameAs": "https://www.lilabalabs.com"
     },
-    "variableMeasured": labParameters.map(p => `${p.test}: ${p.result} (FSSAI Limit: ${p.limit}) - ${p.status}`)
+    "variableMeasured": labParameters.map(p => `${p.test}: ${p.result} (${p.method}) - ${p.status}`)
   }
 ];
 ---
@@ -1199,11 +1199,11 @@ const scienceSchemas = [
             <div class="bg-gray-50/90 border-b border-gray-200/80 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-xs font-black uppercase tracking-wider text-[#111827]">Current Batch Assay: #SJT-2026-B08</span>
+                <span class="text-xs font-black uppercase tracking-wider text-[#111827]">Verified Quality Assay: Report #LAL-NN-121023002</span>
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-[10px] font-mono text-emerald-800 bg-emerald-100/80 border border-emerald-300 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">NABL ISO/IEC 17025</span>
-                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider">PASSED</span>
+                <span class="text-[10px] font-mono text-emerald-800 bg-emerald-100/80 border border-emerald-300 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">FSSAI REG #{BRAND_CONFIG.fssaiNumber}</span>
+                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider">VERIFIED</span>
               </div>
             </div>
 
@@ -1735,25 +1735,25 @@ const scienceSchemas = [
         🧪
       </div>
 
-      <h3 class="text-2xl font-black text-white font-['Playfair_Display'] mb-1">Official NABL Batch Assay</h3>
-      <span class="text-emerald-300 text-xs font-mono uppercase tracking-widest mb-6">[ CERTIFICATE #SJT-2026-B08 • 100% HEAVY METAL FREE ]</span>
+      <h3 class="text-2xl font-black text-white font-['Playfair_Display'] mb-1">Official Certified Laboratory Assay</h3>
+      <span class="text-emerald-300 text-xs font-mono uppercase tracking-widest mb-6">[ REPORT #LAL-NN-121023002 • FSSAI REG #{BRAND_CONFIG.fssaiNumber} ]</span>
 
       <div class="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-left font-mono text-xs text-emerald-200/90 space-y-2 mb-6">
         <div class="flex justify-between border-b border-white/5 pb-1.5">
           <span>Assay Standard:</span>
-          <span class="text-white font-bold">ICP-MS Spectrometry</span>
+          <span class="text-white font-bold">IS 7219 / FSSAI Metals Manual</span>
         </div>
         <div class="flex justify-between border-b border-white/5 pb-1.5">
-          <span>Lead (Pb) Level:</span>
-          <span class="text-emerald-400 font-bold">&lt; 0.01 ppm (UNDETECTED)</span>
+          <span>Total Plant Protein:</span>
+          <span class="text-emerald-400 font-bold">62.3% (IS 7219 Certified)</span>
         </div>
         <div class="flex justify-between border-b border-white/5 pb-1.5">
-          <span>Mercury (Hg) Level:</span>
-          <span class="text-emerald-400 font-bold">&lt; 0.001 ppm (UNDETECTED)</span>
+          <span>Bio-Available Iron (Fe):</span>
+          <span class="text-emerald-400 font-bold">291.15 mg/kg (High Potency)</span>
         </div>
         <div class="flex justify-between">
-          <span>Microbial Pathogens:</span>
-          <span class="text-emerald-400 font-bold">100% Sterile (Absent)</span>
+          <span>Heavy Metal Compliance:</span>
+          <span class="text-emerald-400 font-bold">100% FSSAI Statutory Compliant</span>
         </div>
       </div>
 

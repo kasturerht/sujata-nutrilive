@@ -9,44 +9,49 @@
 - **Legal Entity**: Sujata Nutrilive Agrotech
 - **Brand Trademark**: Sujata Nutrilive (Registered Class 5 & 30, Govt of India)
 - **Founder & Head of Operations**: Yash Rajendra Surywanshi
-- **Facility Address**: Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik, Maharashtra 422008, India
-- **FSSAI Statutory License**: #11521999000284
+- **Corporate Facility Address**: Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik, Maharashtra 422008, India
+- **Contract Manufacturing Partner**: Spiru Swastha India Pvt Ltd (Survey No 125/2, Block No 118, Vasrav Village, Mangrol, Surat, Gujarat 394421)
+- **FSSAI Statutory Registration**: #21526027000179 (Govt of Maharashtra, Category 13: Foodstuffs for particular nutritional uses)
 - **Google Verified Business Entity**: https://share.google/R7aB2MCG9AN5l3RF1 (5.0 ★ Rated)
+- **Verified Master Quality Dossier PDF**: https://www.sujatanutrilive.com/sujata_lab_certificate.pdf
 - **Primary Support Channels**: 
   - Phone / WhatsApp: +91 98347 83503 / +91 99700 02285
   - Official Email: care@sujatanutrilive.com / info@sujatanutrilive.com
 
 ---
 
-## 2. Breakthrough Cultivation & Processing Technology (Cryo-Milling vs Commercial Spray-Drying)
+## 2. Breakthrough Cultivation & Processing Technology (Low-Thermal vs Commercial Spray-Drying)
 
 ### The Core Problem in Commercial Spirulina:
 Most commercial Spirulina sold in India and globally is cultivated in open raceway ponds exposed to atmospheric industrial pollutants, bird droppings, and toxic wild microcystin cyanotoxin strains. Furthermore, commercial manufacturers dehydrate the harvested biomass using industrial spray-dry towers at 160°C to 180°C. 
-**Consequence of Heat**: High temperatures scorch and denature heat-sensitive phycobiliproteins, oxidizing the lipids and producing the notoriously pungent, rotten "fishy" or "swampy" smell. Crucial therapeutic enzymes like Superoxide Dismutase (SOD) and 60% of C-Phycocyanin are destroyed in this process.
+**Consequence of Heat**: High temperatures scorch and denature heat-sensitive phycobiliproteins, oxidizing the lipids and producing the notoriously pungent, rotten "fishy" or "swampy" smell. Crucial therapeutic enzymes like Superoxide Dismutase (SOD) and delicate polyunsaturated fatty acids are damaged in this process.
 
 ### The Sujata Bio-Secure Standard:
-1. **Enclosed Closed Hydro-Domes**: Cultivated exclusively in pharmaceutical-grade closed photobioreactive domes in Maharashtra. Zero exposure to birds, insects, agricultural runoff, or industrial acid rain.
-2. **Deep-Bore Alkaline Artesian Water**: Sourced from pristine basalt bedrock aquifers, 4-stage carbon and UV-filtered, maintaining an optimal pH of 9.2–10.5 where only pure *Arthrospira platensis* thrives.
-3. **Sub-40°C Cryo-Thermal Dehydration**: Biomass is gently dehydrated under sub-40°C cryogenic airflow, keeping cell membranes and protein chains 100% bio-intact.
+1. **Bio-Secure Isolated Aquaculture**: Cultivated in dedicated, pure-culture alkaline artesian aquaculture systems. Zero exposure to surface agricultural runoff, industrial acid rain, or wild contamination.
+2. **Deep-Bore Alkaline Artesian Water**: Sourced from pristine deep-bore aquifers, maintaining an optimal pH of 9.2–10.5 where only pure *Arthrospira platensis* thrives.
+3. **Sub-40°C Low-Thermal Dehydration**: Biomass is gently dehydrated under sub-40°C airflow, keeping cell membranes and complete amino acid chains 100% intact.
 4. **Zero Binders, Zero Fillers**: Standard Indian spirulina tablets contain up to 20-30% magnesium stearate, silicon dioxide, talc, and microcrystalline cellulose to ease compression. Sujata tablets are 100% pure compressed microalgae with zero synthetic excipients.
-5. **Completely Odorless & Non-Nauseating**: Because no lipids are heat-oxidized, Sujata capsules and tablets possess a fresh, mild earthy aroma, completely free of fishy smell or post-ingestion nausea.
+5. **Fresh Mild Aroma**: Because lipids are never heat-oxidized, Sujata tablets possess a fresh, clean natural earthy scent, completely free of rotten pond odors.
 
 ---
 
-## 3. Official NABL Laboratory Assay & Heavy Metal Purity (ICP-MS AOAC Protocol)
+## 3. Official Laboratory Assay & Nutritional Purity (Lilaba Analytical Laboratories Report #LAL-NN-121023002)
 
-Every production batch of Sujata Nutrilive is tested by ISO/IEC 17025 accredited third-party NABL analytical laboratories.
+Every production batch adheres to strict Bureau of Indian Standards (IS) and FSSAI analytical protocols:
 
-| Parameter | Sujata Certified Assay | Standard Indian Market Average | FSSAI Statutory Safety Limit |
+| Parameter | Sujata Certified Assay | Analytical Standard Protocol | FSSAI Statutory Benchmark |
 | :--- | :--- | :--- | :--- |
-| **C-Phycocyanin Content** | **21.4%** | 8.0% – 12.0% | N/A (Higher is superior) |
-| **Complete Plant Protein** | **68.4%** (All 9 EAAs) | 52.0% – 58.0% | Min 55.0% |
-| **Active Chlorophyll-a** | **1.42%** | 0.80% – 1.05% | N/A |
-| **Lead (Pb)** | **< 0.01 ppm** | 0.50 – 1.80 ppm | Max 2.50 ppm |
-| **Mercury (Hg)** | **NIL / Non-Detectable** | 0.05 – 0.20 ppm | Max 1.00 ppm |
-| **Arsenic (As)** | **< 0.01 ppm** | 0.20 – 0.80 ppm | Max 1.10 ppm |
-| **Cadmium (Cd)** | **< 0.01 ppm** | 0.05 – 0.15 ppm | Max 0.30 ppm |
-| **Microcystins / Cyanotoxins** | **NIL** (ELISA Negative) | Frequently Contaminated | Zero Tolerance |
+| **Complete Plant Protein** | **62.3%** (All 9 EAAs) | IS 7219 Protocol | Min 55.0% (Gold Standard) |
+| **Bio-Available Iron (Fe)** | **291.15 mg/kg** | FSSAI Metals Manual 5.0 | High Cellular Potency |
+| **Natural Calcium (Ca)** | **1293.64 mg/kg** | FSSAI Metals Manual 5.0 | High Bio-Availability |
+| **Natural Potassium (K)** | **14,598.36 mg/kg** | FSSAI Metals Manual 5.0 | Electrolyte Matrix |
+| **Natural Vitamin A** | **183.12 µg/100g** | IS 5886 Protocol | Natural Pro-Vitamin A |
+| **Natural Vitamin C & E** | **17.41 mg/100g Combined** | IS 5838 & IS 7235 | Active Cellular Antioxidants |
+| **Dietary Fiber** | **3.72%** | IS 11062 | Prebiotic Gut Support |
+| **Total Energy** | **398.00 Kcal / 100g** | FAO Chapter 3, Method 3.5 | Balanced Cellular Fuel |
+| **Cholesterol** | **BLQ (Zero Cholesterol)** | LAL/CHEM/SOP/FD/GF/18 | Heart-Friendly Lipids |
+| **Heavy Metals (Pb, Hg, As, Cd)** | **Fully Compliant** | Statutory Food Standards | 100% FSSAI Edible Safety Compliant |
+| **Synthetic Binders & Talc** | **0.00% (Zero Excipients)** | Clean-Label Matrix | Industry Avg 20–30% Synthetic |
 
 ---
 
