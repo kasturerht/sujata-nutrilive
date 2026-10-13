@@ -527,6 +527,11 @@ try {
         if (activeHook) {
           cartAttributes.push({ key: '_ad_hook', value: String(activeHook) });
         }
+
+        const storedEmail = localStorage.getItem('sujata_user_email');
+        const storedPhone = localStorage.getItem('sujata_user_phone');
+        if (storedEmail) cartAttributes.push({ key: '_lead_email', value: storedEmail });
+        if (storedPhone) cartAttributes.push({ key: '_lead_phone', value: storedPhone });
       } catch(e) {}
 
       if (lines.length > 0) {

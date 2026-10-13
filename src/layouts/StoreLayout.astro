@@ -492,6 +492,17 @@ const unifiedSchemaGraph = {
         var utmsVal = {};
         try { utmsVal = JSON.parse(localStorage.getItem('sujata_utms') || '{}'); } catch(e) {}
 
+        // 🌟 Meta Advanced Matching: Capture & persist email / phone if available
+        if (data.email) {
+          try { localStorage.setItem('sujata_user_email', String(data.email).trim().toLowerCase()); } catch(e) {}
+        }
+        if (data.phone) {
+          try { localStorage.setItem('sujata_user_phone', String(data.phone).trim()); } catch(e) {}
+        }
+
+        var storedEmail = localStorage.getItem('sujata_user_email') || '';
+        var storedPhone = localStorage.getItem('sujata_user_phone') || '';
+
         var userData = {
           fbp: fbpVal,
           fbc: fbcVal,
@@ -499,6 +510,8 @@ const unifiedSchemaGraph = {
           traffic_source: utmsVal.utm_source || 'direct',
           campaign: utmsVal.utm_campaign || ''
         };
+        if (storedEmail) userData.email = storedEmail;
+        if (storedPhone) userData.phone = storedPhone;
 
         // 1. Dual-Compatibility: Push custom event for GTM custom event triggers
         window.dataLayer.push({

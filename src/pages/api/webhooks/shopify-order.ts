@@ -22,20 +22,19 @@ function normalizePhone(phone: string | undefined): string | undefined {
 
 async function sendMetaCapiPurchase(order: any, pixelId: string, accessToken: string) {
   try {
-    const addr = order.shipping_address || order.billing_address || {};
-    const email = order.email || order.customer?.email || '';
-    const phone = addr.phone || order.customer?.phone || order.phone || '';
+    // Extract _fbp, _fbc, and lead attribution from note attributes
+    const notes: Record<string, string> = {};
+    (order.note_attributes || []).forEach((attr: any) => {
+      if (attr && attr.name && attr.value) notes[attr.name] = attr.value;
+    });
+
+    const email = order.email || order.customer?.email || notes['_lead_email'] || '';
+    const phone = addr.phone || order.customer?.phone || order.phone || notes['_lead_phone'] || '';
     const firstName = addr.first_name || order.customer?.first_name || '';
     const lastName = addr.last_name || order.customer?.last_name || '';
     const city = addr.city || '';
     const zip = addr.zip || '';
     const country = addr.country_code || 'in';
-
-    // Extract _fbp & _fbc from note attributes if passed from checkout
-    const notes: Record<string, string> = {};
-    (order.note_attributes || []).forEach((attr: any) => {
-      if (attr && attr.name && attr.value) notes[attr.name] = attr.value;
-    });
 
     const fbp = notes['_fbp'] || notes['fbp'] || undefined;
     const fbc = notes['_fbc'] || notes['fbc'] || undefined;
