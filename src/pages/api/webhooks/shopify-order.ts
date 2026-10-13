@@ -53,11 +53,30 @@ function formatCorporateOrderMessage(order: any): string {
 ━━━━━━━━━━━━━━━━━━━━━━━━`;
 }
 
+async function sendWhatsAppAlert(to: string, message: string, instanceId: string, token: string) {
+  try {
+    const url = `https://api.ultramsg.com/${instanceId}/messages/chat`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        token: token,
+        to: to,
+        body: message
+      })
+    });
+    return await res.json();
+  } catch (err: any) {
+    console.error('WhatsApp dispatch error:', err.message);
+    return null;
+  }
+}
+
 // Health check endpoint for testing
 export const GET: APIRoute = async () => {
   return new Response(JSON.stringify({ 
     status: 'ok', 
-    service: 'Sujata Shopify-Telegram Live Alert Engine',
+    service: 'Sujata Shopify Smart Routing Engine (Telegram + WhatsApp Dispatch)',
     timestamp: new Date().toISOString()
   }), {
     status: 200,
@@ -79,6 +98,16 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Invalid or empty order payload' }), { status: 400 });
     }
 
+    const gateways = (order.payment_gateway_names || []).join(' ').toLowerCase();
+    const isCod =
+      order.gateway === 'cash_on_delivery' ||
+      gateways.includes('cod') ||
+      gateways.includes('cash') ||
+      order.financial_status === 'pending';
+
+    const text = formatCorporateOrderMessage(order);
+
+    // 1. Founder Telegram Alert
     const botToken =
       (typeof process !== 'undefined' && process.env?.TELEGRAM_BOT_TOKEN) ||
       '8922846279:AAFZXUeM6lZc4t0x1AtKjOwPHAE0IBeugSI';
@@ -86,24 +115,46 @@ export const POST: APIRoute = async ({ request }) => {
       (typeof process !== 'undefined' && process.env?.TELEGRAM_CHAT_ID) ||
       '847419012';
 
-    const text = formatCorporateOrderMessage(order);
+    let telegramSuccess = false;
+    try {
+      const telegramRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text,
+          parse_mode: 'Markdown'
+        })
+      });
+      const tgData = await telegramRes.json();
+      telegramSuccess = !!tgData.ok;
+    } catch (e) {
+      console.error('Telegram error:', e);
+    }
 
-    const telegramRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: text,
-        parse_mode: 'Markdown'
-      })
-    });
+    // 2. WhatsApp Smart Routing:
+    // If COD ➡️ Telecaller Personal WhatsApp Number (for reconfirmation call)
+    // If Prepaid ➡️ Dispatch WhatsApp Group (for immediate packing & shipping)
+    const waInstance = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_INSTANCE_ID) || '';
+    const waToken = (typeof process !== 'undefined' && process.env?.WHATSAPP_GATEWAY_TOKEN) || '';
+    const telecallerPhone = (typeof process !== 'undefined' && process.env?.TELECALLER_WHATSAPP_NUMBER) || '';
+    const dispatchGroupId = (typeof process !== 'undefined' && process.env?.DISPATCH_WHATSAPP_GROUP_ID) || '';
 
-    const telegramData = await telegramRes.json();
+    const waRecipient = isCod ? telecallerPhone : dispatchGroupId;
+    let waResult = null;
+
+    if (waInstance && waToken && waRecipient) {
+      waResult = await sendWhatsAppAlert(waRecipient, text, waInstance, waToken);
+    }
+
     return new Response(
       JSON.stringify({
         success: true,
-        delivered: telegramData.ok,
-        messageId: telegramData.result?.message_id
+        orderType: isCod ? 'COD' : 'PREPAID',
+        routedTo: isCod ? 'TELECALLER_WHATSAPP' : 'DISPATCH_WHATSAPP_GROUP',
+        telegramDelivered: telegramSuccess,
+        whatsappDelivered: waResult?.sent === 'true' || waResult?.id ? true : false,
+        whatsappResponse: waResult
       }),
       {
         status: 200,
@@ -113,7 +164,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (err: any) {
     console.error('Webhook error:', err);
     return new Response(JSON.stringify({ success: false, error: err.message || 'Unknown server error' }), {
-      status: 200, // Return 200 so Shopify does not repeatedly fail
+      status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   }
