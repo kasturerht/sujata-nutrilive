@@ -137,7 +137,7 @@ def generate_cover_page():
             Paragraph("<b>Quality & Regulatory Benchmark</b>", body_bold)
         ],
         [
-            Paragraph("<b>Total Complete Plant Protein</b>", body_style),
+            Paragraph("<b>Total Plant Protein</b>", body_style),
             Paragraph("<b>62.3%</b>", body_bold),
             Paragraph("IS 7219 Protocol", body_style),
             Paragraph("Gold Standard (Min 55.0% FSSAI standard)", body_style)
@@ -158,7 +158,7 @@ def generate_cover_page():
             Paragraph("<b>Natural Potassium (as K)</b>", body_style),
             Paragraph("<b>14598.36 mg/kg</b>", body_bold),
             Paragraph("FSSAI Manual - Metals Method 5.0", body_style),
-            Paragraph("High Bio-Available Cellular Electrolyte", body_style)
+            Paragraph("Natural Algal Cellular Electrolyte", body_style)
         ],
         [
             Paragraph("<b>Natural Vitamin A</b>", body_style),
@@ -350,9 +350,13 @@ def build_master_dossier():
     with open(out_path, 'wb') as f:
         writer.write(f)
         
-    # Copy alias
+    # Copy aliases
     alias_path = r'd:\Sujata Nutrilive\Website\Sujata-Nutrilive - v1\public\sujata-quality-dossier.pdf'
     with open(alias_path, 'wb') as f:
+        writer.write(f)
+        
+    alias_2026_path = r'd:\Sujata Nutrilive\Website\Sujata-Nutrilive - v1\public\sujata-quality-dossier-2026.pdf'
+    with open(alias_2026_path, 'wb') as f:
         writer.write(f)
         
     print(f"Master Dossier successfully built! Total pages: {len(writer.pages)}")
