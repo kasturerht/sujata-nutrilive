@@ -1,13 +1,42 @@
 ---
 // src/components/StoreConviction.astro
+// ⚖️ "Why Sujata?" Purity Moat & Comparison Matrix + 🏭 Living Proof Nashik Facility Video Tour
+// Silicon Valley Clean Editorial Architecture (Oct 2026)
+
+const tourVideoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Inside Sujata Nutrilive Nashik Spirulina Cultivation Facility",
+  "description": "Comprehensive 1-minute facility tour showing closed bio-dome ponds, pure groundwater paddlewheel circulation, hygienic harvesting, and sub-40°C cryo-milling in Nashik, Maharashtra.",
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/WbhJp-tZVj4/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/WbhJp-tZVj4/hqdefault.jpg"
+  ],
+  "uploadDate": "2026-10-10",
+  "duration": "PT1M1S",
+  "contentUrl": "https://www.youtube.com/watch?v=WbhJp-tZVj4",
+  "embedUrl": "https://www.youtube-nocookie.com/embed/WbhJp-tZVj4",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sujata Nutrilive",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.sujatanutrilive.com/favicon.svg"
+    }
+  }
+};
 ---
 
-<!-- ⚖️ Block 7: "Why Sujata?" Purity Moat & Comparison Matrix -->
+<!-- 🎯 Google & AI Engine Schema Injection -->
+<script type="application/ld+json" set:html={JSON.stringify(tourVideoSchema)} />
+
 <section id="why-sujata" class="py-16 md:py-24 bg-[#FCFBF7] text-[#111827] font-sans border-t border-gray-200/80 relative overflow-hidden">
   
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
     
-    {/* Header */}
+    {/* ==============================================================
+        ZONE 1: CLINICAL PURITY COMPARISON MATRIX
+        ============================================================== */}
     <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100/70 border border-emerald-300/50 mb-3.5 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
@@ -184,6 +213,166 @@
       ))}
     </div>
 
+    {/* ==============================================================
+        ZONE 2: 🏭 THE LIVING PROOF: INSIDE OUR NASHIK CULTIVATION FACILITY
+        ============================================================== */}
+    <div class="mt-14 md:mt-20 pt-12 md:pt-16 border-t border-gray-200/80">
+      
+      <!-- Sub-header -->
+      <div class="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/70 mb-3.5 shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#166534] animate-pulse"></span>
+          <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] font-sans">
+            100% Farm-To-Bottle Transparency
+          </span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl md:text-4xl font-serif font-normal text-[#111827] tracking-tight mb-2.5">
+          Don't Just Take Our Word For It. <span class="italic text-[#166534]">Step Inside Our Nashik Facility.</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
+          Watch how single-strain Arthrospira platensis is cultivated in closed bio-domes, gently harvested, and cryo-milled below 40°C in Maharashtra.
+        </p>
+      </div>
+
+      <!-- Video Tour Grid (Video on Left, 3 Pillars on Right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-gray-200/80 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
+        
+        <!-- Video Player Frame (Lite Facade - Zero Lag) -->
+        <div class="lg:col-span-7">
+          <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-gray-900 border border-gray-200/90 shadow-md group cursor-pointer" id="facility-video-card">
+            
+            <!-- Poster Image -->
+            <img 
+              src="https://i.ytimg.com/vi/WbhJp-tZVj4/maxresdefault.jpg" 
+              alt="Inside Sujata Nutrilive Nashik Spirulina Cultivation Facility" 
+              loading="lazy" 
+              decoding="async"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+            />
+            
+            <!-- Subtle Vignette -->
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+
+            <!-- Top Corner Pill -->
+            <div class="absolute top-3.5 left-3.5 z-10">
+              <span class="bg-black/60 backdrop-blur-md text-white/90 px-3 py-1 rounded-full text-[11px] font-mono font-medium border border-white/20 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
+                Nashik Facility Tour • 1:01 Min
+              </span>
+            </div>
+
+            <!-- Minimalist Center Play Button -->
+            <div class="absolute inset-0 flex items-center justify-center z-10" id="facility-play-button-overlay">
+              <div class="w-15 h-15 sm:w-16 sm:h-16 rounded-full bg-white/95 text-[#166534] flex items-center justify-center shadow-xl backdrop-blur-sm group-hover:scale-115 group-hover:bg-white transition-all duration-300">
+                <svg class="w-7 h-7 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Dynamic Iframe Container (Injected on Click) -->
+            <div id="facility-video-container" class="absolute inset-0 w-full h-full hidden bg-black"></div>
+          </div>
+        </div>
+
+        <!-- 3 Pillars on Right -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+          <div>
+            <h4 class="text-lg font-serif font-bold text-[#111827] mb-4">
+              Cultivated with Bio-Pharmaceutical Rigor:
+            </h4>
+            
+            <div class="space-y-4">
+              <!-- Pillar 1 -->
+              <div class="flex items-start gap-3.5">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center shrink-0 text-sm font-bold border border-emerald-200/60 mt-0.5">
+                  💧
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-[#111827]">Closed-Dome Hydroponic Ponds</h5>
+                  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
+                    Grown with filtered deep-bore groundwater, entirely protected from outdoor dust, open-air bird droppings, and toxic agricultural runoff.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Pillar 2 -->
+              <div class="flex items-start gap-3.5">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center shrink-0 text-sm font-bold border border-emerald-200/60 mt-0.5">
+                  ❄️
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-[#111827]">Sub-40°C Cryo-Dehydration</h5>
+                  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
+                    Unlike commercial spray-drying at 80°C that kills nutrients, our cold-milled protocol keeps delicate Phycocyanin (20%+) and enzymes alive.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Pillar 3 -->
+              <div class="flex items-start gap-3.5">
+                <div class="w-8 h-8 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center shrink-0 text-sm font-bold border border-emerald-200/60 mt-0.5">
+                  🔬
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold text-[#111827]">Batch ICP-MS Heavy Metal Clearance</h5>
+                  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
+                    Every harvest is cleared by certified NABL labs. Lead levels are strictly under 0.01 ppm — 100x purer than national government limits.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Micro-Trust Strip -->
+          <div class="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3 text-[11px] text-gray-500 font-medium">
+            <span class="flex items-center gap-1.5 text-gray-700">
+              <svg class="w-3.5 h-3.5 text-[#166534]" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              FSSAI Lic. #11521999000284
+            </span>
+            <span class="text-[#166534] font-bold">Maharashtra Agrotech Hub</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
 </section>
+
+<!-- 🎥 INLINE FACILITY TOUR PLAYER SCRIPT -->
+<script>
+  function initFacilityTourPlayer() {
+    const card = document.getElementById('facility-video-card');
+    const container = document.getElementById('facility-video-container');
+    const playBtn = document.getElementById('facility-play-button-overlay');
+    
+    if (card && container) {
+      card.addEventListener('click', () => {
+        container.innerHTML = `
+          <iframe 
+            src="https://www.youtube-nocookie.com/embed/WbhJp-tZVj4?autoplay=1&rel=0&modestbranding=1&playsinline=1" 
+            title="Inside Sujata Nutrilive Nashik Spirulina Cultivation Facility" 
+            class="w-full h-full border-0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        `;
+        container.classList.remove('hidden');
+        if (playBtn) playBtn.classList.add('hidden');
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFacilityTourPlayer);
+  } else {
+    initFacilityTourPlayer();
+  }
+  document.addEventListener('astro:page-load', initFacilityTourPlayer);
+</script>
