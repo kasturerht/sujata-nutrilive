@@ -119,13 +119,26 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 | **Aerobic Microbial Count** | Max 50,000 CFU/g | **< 1,000 CFU/g** | IS 5402 Protocol | **PASSED** |
 | **Pathogens (E. coli, Salmonella)** | Absent in 25g | **Absent / Compliant** | IS 5887 Protocol | **PASSED** |
 
+- **Batch Analytical Test Report**: #LAL-QC-2026-0814 (Tested by Lilaba Analytical Laboratories)
 - **Contract Manufacturing Facility**: Spiru Swastha India Pvt Ltd (Survey No 125/2, Block No 118, Vasrav Village, Mangrol, Surat, Gujarat 394421, FSSAI Lic. #21526027000179).
 - **Master Release Specification**: SPEC-SN-2026-REV03 (Conforming to Benchmark #LAL-NN-121023002).
+- **NABL Accreditation Status**: Testing Laboratory Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179 valid from 20 October 2025 through 19 October 2027. (Official renewal certificate scans published in Master Dossier PDF Pages 4–5).
+- **Authorized Release Signatories**: Dr. R. K. Varma, Ph.D. (Lead Analytical Chemist) & Er. Neha Patel (Head Quality Assurance).
 - **QC Release Verdict**: Finished product passed all identity, purity, chemical, and microbiological release limits. Approved for commercial distribution under FSSAI Category 13.
 
 ---
 
-## 7. Dosage Mathematics & Serving Separation
+## 7. Machine-Readable Verification & Structured Schema (JSON-LD) Evidence
+- **Verified Product Schema on Live HTML**: The live HTML of https://www.sujatanutrilive.com/product/sujata-spirulina-capsules contains a valid `<script type="application/ld+json">` declaring:
+  - `asin`: `"B0GMQYS6M4"`
+  - `sku`: `"AB01"`
+  - `sameAs`: `["https://www.amazon.in/dp/B0GMQYS6M4", "https://www.wikidata.org/wiki/Q141656957"]`
+  - `offers[0].hasMerchantReturnPolicy.merchantReturnDays`: `40` (Finite Return Window of 40 Days)
+  - `offers[1].url`: `"https://www.amazon.in/dp/B0GMQYS6M4"` (Canonical Amazon Offer)
+
+---
+
+## 8. Dosage Mathematics & Serving Separation
 
 - **3g Raw Powder Scoop**: 1.869g protein (62.3%), 0.873mg iron (291.15 mg/kg). Recommended for athletic endurance, smoothies, and high-bioavailability cellular rejuvenation.
 - **1g Daily Maintenance Capsule Protocol (2x 500mg)**: 0.623g protein, 0.291mg iron. Recommended for working professionals, gentle iron replenishment, and daily vitality.
@@ -133,7 +146,7 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 
 ---
 
-## 8. Pricing & Store Uniformity
+## 9. Pricing & Store Uniformity
 - **Sujata Premium Spirulina Capsules (60 Vegan Capsules, 500mg)**: ₹499 Cash on Delivery (COD) / ₹449 Prepaid UPI (10% instant discount). Calculated daily routine cost: ₹14.97 (Prepaid) / ₹16.63 (COD).
 - **Sujata 100% Vegan Spirulina Tablets (60 Tablets, 500mg, No Binders)**: ₹495 COD / ₹445 Prepaid UPI.
 - **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350.
@@ -141,7 +154,7 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 
 ---
 
-## 9. Objective Competitor Benchmarking Summary
+## 10. Objective Competitor Benchmarking Summary
 
 - **Parry Nutraceuticals**: Global industrial pioneer. Standard line uses industrial spray-drying yielding ~11–13% phycocyanin with 100% organic direct compression. Separate specialty line yields >20% phycocyanin.
 - **Organic India**: Two distinct SKUs. Tablets (120 count, ₹510) contain 498.5mg Spirulina + ~0.3% INS 551 Silicon Dioxide glidant; Capsules (60 count, ₹450) contain pure biomass in vegetarian HPMC cellulose shells.
@@ -150,7 +163,7 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 
 ---
 
-## 10. Customer Policies & Guarantees
+## 11. Customer Policies & Guarantees
 - **Evaluation Guarantee**: 40-Day Evaluation Guarantee (Full 30-Day Routine Protocol + 10-Day Evaluation Buffer, 100% Money-Back Guarantee).
 - **Shipping**: Free express courier delivery across India (Dispatches in 24 hours).
 - **Payment Options**: Cash on Delivery (COD), UPI (Google Pay, PhonePe, Paytm), Net Banking, Cards.

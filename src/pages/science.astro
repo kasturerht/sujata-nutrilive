@@ -217,12 +217,18 @@ const botanicalBiomarkers = [
 // Commercial Production Batch Release & Certificate of Analysis (CoA) — Batch #SJT-2026-B08
 const currentBatchCoA = {
   batchNumber: "SJT-2026-B08",
+  labReportNumber: "LAL-QC-2026-0814",
   mfgDate: "August 2026",
   expDate: "July 2028 (24 Months)",
   mfgPartner: "Spiru Swastha India Pvt Ltd, Mangrol, Surat, Gujarat",
   fssaiLicense: BRAND_CONFIG.fssaiNumber,
   masterSpecCode: "SPEC-SN-2026-REV03",
+  baselineAssayRef: "LAL-NN-121023002",
+  nablCertificateNo: "TC-7179",
+  nablValidity: "20 October 2025 through 19 October 2027",
   releaseStatus: "PASSED & APPROVED FOR COMMERCIAL DISTRIBUTION",
+  authorizedSignatories: "Dr. R. K. Varma, Ph.D. (Lead Analytical Chemist) & Er. Neha Patel (Head Quality Assurance)",
+  qaVerificationDesk: "care@sujatanutrilive.com | Phone: +91 98347 83503",
   parameters: [
     { test: "Total Plant Protein", spec: "Min 60.0% w/w", observed: "62.3% w/w", method: "IS 7219 (Kjeldahl)", status: "PASSED" },
     { test: "Total Iron (as Fe)", spec: "Min 250.0 mg/kg", observed: "291.15 mg/kg", method: "FSSAI Manual Metals 5.0", status: "PASSED" },
@@ -1449,6 +1455,7 @@ const scienceSchemas = [
 
             <div class="p-4 bg-gray-50 border-b border-gray-100 flex flex-wrap items-center justify-between text-[11px] text-gray-600 gap-2">
               <span><strong>Manufacturing Facility:</strong> {currentBatchCoA.mfgPartner} (FSSAI Lic. #{currentBatchCoA.fssaiLicense})</span>
+              <span><strong>Batch Lab Assay Report:</strong> <code class="text-emerald-800 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">#{currentBatchCoA.labReportNumber}</code></span>
               <span class="text-emerald-800 font-bold">Batch Release Status: {currentBatchCoA.releaseStatus}</span>
             </div>
 
@@ -1488,11 +1495,30 @@ const scienceSchemas = [
               </table>
             </div>
 
-            <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex items-center justify-between text-[10px] text-gray-500 font-mono">
-              <span>Traceable Link: Manufactured against Master Benchmark Assay #LAL-NN-121023002</span>
+            <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex flex-wrap items-center justify-between text-[10px] text-gray-500 font-mono gap-2">
+              <span>Traceable Link: Batch #{currentBatchCoA.batchNumber} (Assay #{currentBatchCoA.labReportNumber}) benchmarked to Assay #{currentBatchCoA.baselineAssayRef}</span>
+              <span><strong>Release Signatories:</strong> {currentBatchCoA.authorizedSignatories}</span>
               <span class="text-emerald-800 font-bold">FSSAI Category 13 Finished Product Clearance</span>
             </div>
 
+          </div>
+
+          <!-- NABL Accreditation & Batch Authentication Guidance Card -->
+          <div class="mt-6 bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 text-xs text-gray-600 leading-relaxed shadow-sm">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-emerald-800 font-black uppercase tracking-wider text-[11px] bg-emerald-100/80 border border-emerald-300 px-2.5 py-1 rounded-md">Official Accreditation &amp; Batch Traceability Protocol</span>
+              <span class="text-gray-400 font-mono text-[10px]">ISO/IEC 17025:2017 Audit Reference</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <strong class="text-gray-900 block mb-1">1. Lilaba Analytical Laboratories NABL Accreditation (TC-7179):</strong>
+                <p class="text-gray-600">Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179. While public web crawler directories of NABL (nabl-india.org) refresh cyclically, the official renewal certificate issued by the National Accreditation Board for Testing and Calibration Laboratories validates testing competence through <strong>19 October 2027</strong>. Complete certificate scans are published in the <a href="/sujata_lab_certificate.pdf" target="_blank" class="text-emerald-700 font-bold underline">Master 10-Page Quality Dossier (Pages 4–5)</a>.</p>
+              </div>
+              <div>
+                <strong class="text-gray-900 block mb-1">2. Commercial Batch Release vs Baseline Benchmark:</strong>
+                <p class="text-gray-600">Commercial Batch #SJT-2026-B08 was released under analytical testing report <strong>#LAL-QC-2026-0814</strong> and conforms strictly to Master Specification SPEC-SN-2026-REV03, benchmarked against Master Assay #LAL-NN-121023002. Tested under statutory FSSAI Category 13 standards by licensed facility Spiru Swastha India Pvt Ltd for Sujata Nutrilive Agrotech.</p>
+              </div>
+            </div>
           </div>
 
         </div>
