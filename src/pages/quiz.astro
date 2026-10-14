@@ -246,7 +246,7 @@ try {
 
           <div class="space-y-4">
             
-            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="desk" data-dosage="1 Scoop / 2 Capsules in the morning with lukewarm water before breakfast">
+            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="desk" data-dosage="2 Capsules (1g daily maintenance) or 1 Scoop (3g raw powder) in the morning with lukewarm water before breakfast">
               <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
                   💼
@@ -259,7 +259,7 @@ try {
               <span class="text-emerald-600 text-sm font-bold hidden sm:inline group-hover:translate-x-1 transition-transform">Select →</span>
             </button>
 
-            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="active" data-dosage="1.5 Scoops / 3 Capsules pre/post workout with fresh water">
+            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="active" data-dosage="3 Capsules (1.5g) or 1.5 Scoops (4.5g powder) pre/post workout with fresh water">
               <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
                   🏃
@@ -272,7 +272,7 @@ try {
               <span class="text-emerald-600 text-sm font-bold hidden sm:inline group-hover:translate-x-1 transition-transform">Select →</span>
             </button>
 
-            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="wellness" data-dosage="1 Scoop / 2 Capsules every morning with a glass of water">
+            <button type="button" class="quiz-lifestyle-btn w-full p-5 rounded-2xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex items-center justify-between cursor-pointer group" data-lifestyle="wellness" data-dosage="2 Capsules (1g daily maintenance) or 1 Scoop (3g raw powder) every morning with a glass of water">
               <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
                   🧘
@@ -337,7 +337,7 @@ try {
                   <span>⏱️ Prescribed Timing &amp; Dosage</span>
                 </div>
                 <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light" id="result-dosage-text">
-                  Take 1 scoop (3g) in the morning with lukewarm lemon water before breakfast.
+                  Take 2 capsules (1g daily maintenance) or 1 scoop (3g whole-food powder) in the morning with lukewarm water before breakfast.
                 </p>
               </div>
 
@@ -437,7 +437,7 @@ try {
         image: '/products/sujata-spirulina-powder-pouch.jpg',
         variantId: 'gid://shopify/ProductVariant/52738357854340',
         lifestyle: 'desk',
-        dosage: 'Take 1 scoop (3g) in the morning with lukewarm lemon water before breakfast'
+        dosage: 'Take 2 capsules (1g maintenance) or 1 scoop (3g raw powder) in the morning with lukewarm water before breakfast'
       };
 
       // Step 1 Click Handlers
@@ -478,7 +478,7 @@ try {
       lifestyleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           quizAnswers.lifestyle = btn.getAttribute('data-lifestyle') || 'desk';
-          quizAnswers.dosage = btn.getAttribute('data-dosage') || 'Take 1 scoop in the morning with water';
+          quizAnswers.dosage = btn.getAttribute('data-dosage') || 'Take 2 capsules (1g maintenance) or 1 scoop (3g raw powder) in the morning with water';
 
           step3Pane.classList.add('hidden');
           progressHeader.classList.add('hidden');
