@@ -519,23 +519,44 @@ const structuredImages = (images || []).map((img: any) => {
   return u.startsWith('http') ? u : new URL(u, siteUrl).toString();
 });
 
+const amazonAsinMap: Record<string, { asin: string; sku: string }> = {
+  'sujata-spirulina-capsules': { asin: 'B0GMQYS6M4', sku: 'AB01' },
+  'spirulina-capsules': { asin: 'B0GMQYS6M4', sku: 'AB01' },
+  'sujata-spirulina-tablets': { asin: 'B0DNSXGGTN', sku: '8X-HQKV-14T7' },
+  'spirulina-tablets': { asin: 'B0DNSXGGTN', sku: '8X-HQKV-14T7' },
+  'sujata-spirulina-powder': { asin: 'B0DP2FWN4J', sku: 'L5-UK79-BHXE' },
+  'spirulina-powder': { asin: 'B0DP2FWN4J', sku: 'L5-UK79-BHXE' }
+};
+
+const amazonProduct = handle ? amazonAsinMap[handle] : null;
+
 const productSchema = {
   "@type": "Product",
   "@id": `${canonicalURL}#product`,
   "name": productTitle,
   "description": rawCleanDescription,
   "image": structuredImages,
-  "sku": product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
-  "mpn": product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
+  "sku": amazonProduct?.sku || product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
+  "mpn": amazonProduct?.sku || product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
+  ...(amazonProduct ? { "asin": amazonProduct.asin } : {}),
+  "sameAs": [
+    ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : []),
+    "https://www.wikidata.org/wiki/Q141656957"
+  ],
   "brand": {
     "@type": "Brand",
     "@id": `${siteUrl}/#organization`,
     "name": BRAND_CONFIG.brandName || "Sujata Nutrilive",
-    "sameAs": "https://www.wikidata.org/wiki/Q141656957"
+    "alternateName": ["Sujata Nutrilive Agrotech", "SUJATA NUTRITIVE"],
+    "sameAs": [
+      "https://www.wikidata.org/wiki/Q141656957",
+      ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : [])
+    ]
   },
   "manufacturer": {
-    "@id": `${siteUrl}/#organization`,
-    "sameAs": "https://www.wikidata.org/wiki/Q141656957"
+    "@type": "Organization",
+    "name": "Spiru Swastha India Pvt Ltd",
+    "description": "Licensed Contract Manufacturer (FSSAI Lic. #21526027000179). Formulation and brand owned exclusively by Sujata Nutrilive Agrotech."
   },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -544,55 +565,74 @@ const productSchema = {
     "bestRating": "5",
     "worstRating": "1"
   },
-  "offers": {
-    "@type": "Offer",
-    "@id": `${canonicalURL}#offer`,
-    "url": canonicalURL,
-    "priceCurrency": "INR",
-    "price": price || "499.00",
-    "validFrom": "2024-01-01",
-    "priceValidUntil": "2027-12-31",
-    "itemCondition": "https://schema.org/NewCondition",
-    "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-    "seller": {
-      "@id": `${siteUrl}/#organization`
-    },
-    "shippingDetails": {
-      "@type": "OfferShippingDetails",
-      "shippingRate": {
-        "@type": "MonetaryAmount",
-        "value": "0",
-        "currency": "INR"
+  "offers": [
+    {
+      "@type": "Offer",
+      "@id": `${canonicalURL}#offer`,
+      "url": canonicalURL,
+      "priceCurrency": "INR",
+      "price": price || "499.00",
+      "validFrom": "2024-01-01",
+      "priceValidUntil": "2027-12-31",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Sujata Nutrilive Official Direct Store",
+        "@id": `${siteUrl}/#organization`
       },
-      "shippingDestination": {
-        "@type": "DefinedRegion",
-        "addressCountry": "IN"
-      },
-      "deliveryTime": {
-        "@type": "ShippingDeliveryTime",
-        "handlingTime": {
-          "@type": "QuantitativeValue",
-          "minValue": 0,
-          "maxValue": 1,
-          "unitCode": "d"
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "INR"
         },
-        "transitTime": {
-          "@type": "QuantitativeValue",
-          "minValue": 2,
-          "maxValue": 5,
-          "unitCode": "d"
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "IN"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "d"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 5,
+            "unitCode": "d"
+          }
         }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "IN",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 40,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
       }
     },
-    "hasMerchantReturnPolicy": {
-      "@type": "MerchantReturnPolicy",
-      "applicableCountry": "IN",
-      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-      "merchantReturnDays": 40,
-      "returnMethod": "https://schema.org/ReturnByMail",
-      "returnFees": "https://schema.org/FreeReturn"
-    }
-  }
+    ...(amazonProduct ? [{
+      "@type": "Offer",
+      "@id": `https://www.amazon.in/dp/${amazonProduct.asin}#offer`,
+      "url": `https://www.amazon.in/dp/${amazonProduct.asin}`,
+      "priceCurrency": "INR",
+      "price": "499.00",
+      "validFrom": "2024-01-01",
+      "priceValidUntil": "2027-12-31",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Sujata Nutrilive Agrotech on Amazon India"
+      }
+    }] : [])
+  ]
 };
 
 const breadcrumbSchema = {
