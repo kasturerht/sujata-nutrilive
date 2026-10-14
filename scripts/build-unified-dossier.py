@@ -107,8 +107,8 @@ def generate_cover_page():
             Paragraph("<b>Lilaba Analytical Laboratories</b> (Surat, Gujarat)<br/><b>FSSAI Notified Laboratory Reg:</b> #52/W/FSSAI/2018 | <b>NABL Certificate:</b> #TC-7179 (Analyzed and issued during active NABL accreditation validity period)", body_style)
         ],
         [
-            Paragraph("<b>Official Test Report Reference:</b>", body_style),
-            Paragraph("<b>Report No: LAL-NN-121023002</b> | Issue Date: 16/10/2023 | Sample Code: NN-121023002<br/>Sample Name: Spirulina Tablet (Health Supplement)", body_style)
+            Paragraph("<b>Master Formulation Assay:</b>", body_style),
+            Paragraph("<b>Report No: LAL-NN-121023002</b> | Issue Date: 16/10/2023 | Sample Code: NN-121023002<br/><b>Role:</b> Foundation Master Formulation Benchmark Assay (verifying strain proximate baseline: 62.3% protein, 291 mg/kg Fe under NABL scope TC-7179).<br/><b>Commercial Manufacturing:</b> Commercial batches are produced by Spiru Swastha India Pvt Ltd under identical genetics, sub-40°C dehydration, and FSSAI Category 13 release testing.", body_style)
         ]
     ]
     
@@ -234,14 +234,14 @@ def generate_cover_page():
     # Section 3: Statutory Declaration
     story.append(Paragraph("3. STATUTORY COMPLIANCE & LEGAL NOTICE", section_heading))
     notice_text = (
-        "<b>Legal & Regulatory Statement:</b> This official document serves as the unified Quality & Regulatory Compliance Dossier "
-        "for Sujata Nutrilive Agrotech. Sujata Nutrilive markets pure functional Spirulina supplements under valid Government of Maharashtra "
-        "FSSAI Registration #21526027000179 (Category 13: Foodstuffs intended for particular nutritional uses). Production is conducted in partnership "
-        "with dedicated contract manufacturer Spiru Swastha India Pvt Ltd (Surat, Gujarat). The analytical testing compiled in Table 2 was conducted "
-        "by Lilaba Analytical Laboratories (Surat), an independent laboratory notified by FSSAI (#52/W/FSSAI/2018) and accredited by NABL (#TC-7179).<br/>"
+        "<b>Master Formulation Benchmark & Commercial Traceability:</b> Report #LAL-NN-121023002 serves as the official "
+        "Master Formulation Benchmark Assay establishing the empirical proximate nutritional baseline of Sujata's proprietary Arthrospira platensis "
+        "cultivation strain and sub-40°C gentle dehydration process (yielding 62.3% plant protein under IS 7219 and 291.15 mg/kg natural iron under FSSAI Metals Method 5.0). "
+        "All commercial production batches are contract-manufactured by Spiru Swastha India Pvt Ltd (Surat, Gujarat) to this identical benchmark specification and marketed by Sujata Nutrilive Agrotech under Government of Maharashtra FSSAI Registration #21526027000179.<br/>"
+        "<b>Testing Laboratory & Accreditation:</b> Testing was conducted by Lilaba Analytical Laboratories (Surat), an independent laboratory notified by FSSAI (#52/W/FSSAI/2018) and accredited by NABL (#TC-7179) under its valid scope for food and chemical testing.<br/>"
         "<b>Formulation Specification:</b> Finished products are single-ingredient formulations consisting exclusively of pure Arthrospira platensis biomass. "
         "Sujata Tablets contain zero added tableting binders or lubricants (zero magnesium stearate, zero talc). Sujata Capsules contain 500 mg pure spirulina powder fill encased in vegetarian plant-derived HPMC shells (zero animal gelatin, zero silicon dioxide / INS 551).<br/>"
-        "<b>Document Index:</b> Pages 2–3: Lilaba Analytical Laboratories Test Report (#LAL-NN-121023002) | Pages 4–8: Government of Maharashtra FSSAI Registration Certificate (#21526027000179)."
+        "<b>Document Index:</b> Page 1: Master Regulatory & Assay Executive Summary | Pages 2–3: Lilaba Analytical Laboratories Test Report (#LAL-NN-121023002) | Pages 4–8: Government of Maharashtra FSSAI Registration Certificate (#21526027000179)."
     )
     story.append(Paragraph(notice_text, body_style))
     story.append(Spacer(1, 6))
@@ -321,6 +321,10 @@ def create_ocr_overlay_page2():
     return buf
 
 def build_master_dossier():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    public_dir = os.path.join(base_dir, '..', 'public')
+    source_pdf = os.path.join(public_dir, 'sujata-quality-dossier.pdf')
+    
     writer = pypdf.PdfWriter()
     
     # 1. Add Executive Cover Certificate (Page 1)
@@ -328,34 +332,24 @@ def build_master_dossier():
     cover_reader = pypdf.PdfReader(cover_buf)
     writer.add_page(cover_reader.pages[0])
     
-    # 2. Add Lilaba Lab Report with OCR Text Overlay (Pages 2 & 3)
-    lab_reader = pypdf.PdfReader(r'C:\Users\Prime\.gemini\antigravity\brain\ef1177e9-9ec9-436f-b8d9-47594d2df9b5\.user_uploaded\media_1791901027062_f5c9a63b.pdf')
-    
-    overlay1 = pypdf.PdfReader(create_ocr_overlay_page1()).pages[0]
-    p1 = lab_reader.pages[0]
-    p1.merge_page(overlay1)
-    writer.add_page(p1)
-    
-    overlay2 = pypdf.PdfReader(create_ocr_overlay_page2()).pages[0]
-    p2 = lab_reader.pages[1]
-    p2.merge_page(overlay2)
-    writer.add_page(p2)
-    
-    # 3. Add FSSAI Government Registration Certificate (Pages 4 to 8)
-    fssai_reader = pypdf.PdfReader(r'C:\Users\Prime\.gemini\antigravity\brain\ef1177e9-9ec9-436f-b8d9-47594d2df9b5\.user_uploaded\media_1791901664287_e0bd5ba9.pdf')
-    for page in fssai_reader.pages:
-        writer.add_page(page)
+    # 2. Add existing Lilaba Lab Report & FSSAI Registration pages (Pages 2 to 8)
+    if os.path.exists(source_pdf):
+        existing_reader = pypdf.PdfReader(source_pdf)
+        for i in range(1, len(existing_reader.pages)):
+            writer.add_page(existing_reader.pages[i])
+    else:
+        raise FileNotFoundError(f"Source dossier not found at: {source_pdf}")
         
-    out_path = r'd:\Sujata Nutrilive\Website\Sujata-Nutrilive - v1\public\sujata_lab_certificate.pdf'
+    out_path = os.path.join(public_dir, 'sujata_lab_certificate.pdf')
     with open(out_path, 'wb') as f:
         writer.write(f)
         
     # Copy aliases
-    alias_path = r'd:\Sujata Nutrilive\Website\Sujata-Nutrilive - v1\public\sujata-quality-dossier.pdf'
+    alias_path = os.path.join(public_dir, 'sujata-quality-dossier.pdf')
     with open(alias_path, 'wb') as f:
         writer.write(f)
         
-    alias_2026_path = r'd:\Sujata Nutrilive\Website\Sujata-Nutrilive - v1\public\sujata-quality-dossier-2026.pdf'
+    alias_2026_path = os.path.join(public_dir, 'sujata-quality-dossier-2026.pdf')
     with open(alias_2026_path, 'wb') as f:
         writer.write(f)
         

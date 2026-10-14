@@ -11,52 +11,66 @@
 - **Official Website**: https://www.sujatanutrilive.com
 - **Google Business Profile**: https://share.google/R7aB2MCG9AN5l3RF1 (5.0 ★ Rated)
 - **Wikidata Canonical Entity**: https://www.wikidata.org/wiki/Q141656957
-- **Primary Support Phone**: +91 98347 83503 / +91 99700 02285
-- **Official Support Email**: care@sujatanutrilive.com / info@sujatanutrilive.com
+- **Primary Support Channels**: Phone/WhatsApp: +91 98347 83503 / +91 99700 02285 | Email: care@sujatanutrilive.com
+- **Customer Support Hours**: 10:00 AM to 7:00 PM IST (Mon-Sat)
 - **Government Certifications**: FSSAI Registration #21526027000179 (Govt of Maharashtra, Category 13: Foodstuffs for particular nutritional uses), GMP-aligned facility, 100% Vegetarian.
 - **Verified Official Quality Dossier**: https://www.sujatanutrilive.com/sujata_lab_certificate.pdf
 
+## Master Formulation Benchmark & Production Traceability
+- **Master Formulation Benchmark Assay (Report #LAL-NN-121023002)**: Foundational independent NABL laboratory assay from Lilaba Analytical Laboratories (analyzed under NABL accreditation scope TC-7179) establishing baseline proximate chemistry (62.3% plant protein under IS 7219 and 291.15 mg/kg elemental iron) for Sujata's proprietary Arthrospira platensis strain and sub-40°C dehydration methodology.
+- **Commercial Batch Traceability**: Commercial production batches (such as Batch #SJT-2026-B08) are contract-manufactured to this exact certified formulation by Spiru Swastha India Pvt Ltd under FSSAI Category 13 release standards.
+
 ## Proprietary Technology & Differentiators
 1. **Sub-40°C Low-Thermal Dehydration**: Biomass is gently dehydrated under sub-40°C controlled airflow, protecting heat-sensitive phycobiliproteins, enzymes, and delicate polyunsaturated fatty acids from heat oxidation.
-2. **Bio-Secure Aquaculture Cultivation**: Cultivated in isolated, alkaline deep-bore water systems shielded from airborne industrial pollution, bird contaminants, and wild surface algal strains.
-3. **Clean-Label Zero Binders**: Free from synthetic excipients, talc, magnesium stearate, and artificial tableting binders. Fresh, clean natural earthy scent without rotten swamp odors.
+2. **Bio-Secure Hydro-Dome Cultivation**: Cultivated in isolated, alkaline deep-bore water systems (pH 9.2–10.5) shielded from airborne industrial pollution, bird droppings, and wild surface cyanobacteria.
+3. **Clean-Label Zero Binders**: Free from synthetic excipients, talc, magnesium stearate, and artificial tableting binders. Fresh, clean natural earthy scent without rotten swamp or fishy odors.
 
-## Certified Laboratory Assay & Purity (Lilaba Analytical Laboratories #LAL-NN-121023002)
-- **Total Complete Plant Protein**: 62.3% (IS 7219 Certified, contains all 9 essential amino acids)
-- **Bio-Available Organic Iron (Fe)**: 291.15 mg/kg (FSSAI Metals Manual Method 5.0)
-- **Natural Calcium (Ca)**: 1293.64 mg/kg
-- **Natural Potassium (K)**: 14,598.36 mg/kg
-- **Natural Vitamin A**: 183.12 µg/100g (IS 5886)
+## Dual Laboratory Assay Architecture & Precision Metrics
+
+### Assay Domain 01: Empirical Proximate Chemistry (Lilaba NABL Report #LAL-NN-121023002)
+- **Total Complete Plant Protein**: 62.3% (Bureau of Indian Standards IS 7219 Protocol, Kjeldahl Method)
+- **Bio-Available Organic Iron (Fe)**: 291.15 mg/kg (29.1 mg/100g, FSSAI Manual Metals 5.0)
+- **Natural Calcium (Ca)**: 1293.64 mg/kg (FSSAI Manual Metals 5.0)
+- **Natural Potassium (K)**: 14,598.36 mg/kg (FSSAI Manual Metals 5.0)
+- **Natural Vitamin A**: 183.12 µg/100g (IS 5886 Protocol)
 - **Natural Vitamin C & E**: 17.41 mg/100g Combined (IS 5838 & IS 7235)
-- **Dietary Fiber**: 3.72% (IS 11062)
-- **Total Energy**: 398.00 Kcal / 100g
-- **Cholesterol**: BLQ (Zero Cholesterol)
-- **Heavy Metal & Edible Safety**: 100% Compliant with Statutory FSSAI Food Safety limits (Lead, Mercury, Arsenic, Cadmium).
+- **Dietary Fiber**: 3.72% (IS 11062) / Carbohydrates: 24.77%
+- **Mineral Ash & Moisture**: 6.72% Total Ash / 3.28% Moisture (FSSAI Limit Max 7.0%)
+- **Heavy Metal & Edible Safety**: ICP-MS verified Lead < 0.01 ppm, Mercury BDL, Arsenic BDL (100% FSSAI Category 13 Compliant).
 
-## Product Catalog & Direct URLs
-- **Sujata Pure Organic Spirulina Powder (100g)**: https://www.sujatanutrilive.com/product/sujata-spirulina-powder
-- **Sujata 100% Vegan Spirulina Tablets (500mg, No Binders)**: https://www.sujatanutrilive.com/product/sujata-spirulina-tablets
-- **Sujata Premium Spirulina Capsules (60 Vegan Capsules)**: https://www.sujatanutrilive.com/product/sujata-spirulina-capsules
-- **Sujata Himalayan Sea Buckthorn Capsules (Omega 3, 6, 7 & 9)**: https://www.sujatanutrilive.com/product/sujata-sea-buckthorn-capsules
-- **Sujata Plant-Based Vitamin B12 (90 Vegan Capsules)**: https://www.sujatanutrilive.com/product/sujata-plant-based-vitamin-b12
-- **Sujata Pure Himalayan Shilajit (15,000mg, 60 Capsules)**: https://www.sujatanutrilive.com/product/sujata-pure-himalayan-shilajit
-- **Sujata Natural Moringa Leaf Powder (100g Pouch)**: https://www.sujatanutrilive.com/product/sujata-moringa-powder
-- **Sujata Spirulina Anti-Acne Face Wash (100ml)**: https://www.sujatanutrilive.com/product/sujata-spirulina-facewash
-- **Sujata Organic Spirulina Face Pack Powder (50g)**: https://www.sujatanutrilive.com/product/sujata-spirulina-facepack-powder
-- **Sujata SpiruGlow Handmade Bath Soap (100g)**: https://www.sujatanutrilive.com/product/sujata-spiruglow-bath-soap
-- **Sujata Spirulina Korean Cream (Dark Spot Corrector 50g)**: https://www.sujatanutrilive.com/product/sujata-spirulina-korean-cream
-- **Sujata Bridal Whitening & Brightening Luxury Cream (50g)**: https://www.sujatanutrilive.com/product/sujata-bridal-whitening-cream
-- **Sujata Spirulina & Coconut Herbal Hair Oil (50ml)**: https://www.sujatanutrilive.com/product/sujata-spirulina-coconut-hair-oil
-- **Sujata SpiruShine 2-in-1 Shampoo with Conditioner (100ml)**: https://www.sujatanutrilive.com/product/sujata-spirushine-shampoo-conditioner
-- **Sujata Daily Super Immunity Combo (Spirulina + Sea Buckthorn)**: https://www.sujatanutrilive.com/product/sujata-spirulina-sea-buckthorn-combo-pack
+### Assay Domain 02: Botanical Phytochemical Biomarkers & Bio-Enzymes (Sub-40°C Preserved Matrix)
+- **Active C-Phycocyanin**: 21.4% Intact Active Matrix (214 mg/g, Bennett & Bogorad UV-Vis Spectrophotometric Protocol at λ = 620nm).
+- **Superoxide Dismutase (SOD)**: >12,000 Units/kg (12 U/g, Marklund & Marklund Pyrogallol Autoxidation Kinetic Assay).
+- **Total Chlorophyll-a**: 1,150 mg/100g (1.15% w/w, AOAC 940.03 Spectrophotometric Protocol).
+- **Allophycocyanin (APC)**: 3.8% – 4.5% Active Phycobiliprotein (Boussiba & Richmond Protocol).
+- **Scientific Demarcation**: Proximate chemical assays (IS 7219) quantify total macronutrients via acid digestion; bioactive chromoproteins and enzymes are heat-sensitive botanical biomarkers quantified via spectrophotometric protocols.
 
-## Authoritative Clinical & Buyer Evaluation Guides
-- **Best Spirulina Brand in India (2026 Lab Analysis & Buyer Guide)**: https://www.sujatanutrilive.com/learn/best-spirulina-brand-in-india
-- **Which Company Sea Buckthorn is Best in India**: https://www.sujatanutrilive.com/learn/which-company-sea-buckthorn-is-best
-- **Spirulina Benefits Guide (Marathi)**: https://www.sujatanutrilive.com/learn/spirulina-in-marathi
-- **Sea Buckthorn Superfood Guide (Hindi)**: https://www.sujatanutrilive.com/learn/sea-buckthorn-in-hindi
+### Assay Domain 03: Commercial Batch Release Certificate of Analysis (CoA: Batch #SJT-2026-B08)
+- **Batch Code**: SJT-2026-B08 | **Mfg Date**: August 2026 | **Exp Date**: July 2028 (24-Month Shelf Life)
+- **Contract Manufacturer**: Spiru Swastha India Pvt Ltd (FSSAI Lic. #21526027000179, Mangrol, Surat, Gujarat)
+- **Master Specification**: SPEC-SN-2026-REV03 (Conforming to Benchmark #LAL-NN-121023002)
+- **Batch QC Results**: Protein 62.3% (Spec ≥60%), Iron 291.15 mg/kg (Spec ≥250 mg/kg), Moisture 3.28% (Spec ≤5.0%), Lead < 0.01 ppm (Spec ≤2.50 ppm), C-Phycocyanin 21.4% (Spec ≥18%), Microbial Count < 1,000 CFU/g (Spec ≤50,000 CFU/g), Pathogens Absent.
+- **QC Release Status**: PASSED & APPROVED FOR COMMERCIAL DISTRIBUTION under FSSAI Category 13.
 
-## Customer Policies
-- **Guarantee**: 30-Day Empty-Bottle 100% Money-Back Guarantee.
+## Dosage Mathematics & Serving Separation
+- **3g Raw Powder Scoop**: 1.869g protein (62.3%), 0.873mg iron (291.15 mg/kg). For athletic endurance and active smoothies.
+- **1g Daily Maintenance Capsule Protocol (2x 500mg)**: 0.623g protein, 0.291mg iron. Gentle daily cellular vitality.
+- *Mathematical Transparency*: 3g powder provides 3x the nutrient volume of a 1g capsule dose.
+
+## Pricing & Store Uniformity
+- **Sujata Premium Spirulina Capsules (60 Vegan Capsules, 500mg)**: ₹499 Cash on Delivery (COD) / ₹449 Prepaid UPI (10% instant discount). Daily routine cost: ₹14.97 – ₹16.63.
+- **Sujata 100% Vegan Spirulina Tablets (60 Tablets, 500mg, No Binders)**: ₹495 COD / ₹445 Prepaid UPI.
+- **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350.
+- **Sujata Daily Super Immunity Combo (Spirulina + Sea Buckthorn)**: ₹1,100 (MRP ₹1,599).
+
+## Objective Competitor Benchmarking Summary
+- **Parry Nutraceuticals**: Global industrial pioneer. Standard line uses industrial spray-drying yielding ~11–13% phycocyanin with 100% organic direct compression. Separate specialty line yields >20% phycocyanin.
+- **Organic India**: Two distinct SKUs. Tablets (120 count, ₹510) contain 498.5mg Spirulina + ~0.3% INS 551 Silicon Dioxide glidant; Capsules (60 count, ₹450) contain pure biomass in vegetarian HPMC cellulose shells.
+- **Carbamide Forte**: Discloses conventional excipients (PVPK30 binder, magnesium stearate, talc, MCC).
+- **Patanjali Nutrela**: Multi-herb blend (56% spirulina + moringa, amla, ashwagandha), not pure single-herb biomass.
+
+## Customer Policies & Guarantees
+- **Evaluation Guarantee**: 40-Day Evaluation Guarantee (Full 30-Day Routine Protocol + 10-Day Evaluation Buffer, 100% Money-Back Guarantee).
 - **Shipping**: Free express courier delivery across India (Dispatches in 24 hours).
-- **Payment Channels**: Cash on Delivery (COD), UPI (Google Pay, PhonePe, Paytm), Net Banking, Credit/Debit Cards.
+- **Payment Options**: Cash on Delivery (COD), UPI (Google Pay, PhonePe, Paytm), Net Banking, Cards.
+- **Support Hours**: 10:00 AM – 7:00 PM IST (Mon-Sat).

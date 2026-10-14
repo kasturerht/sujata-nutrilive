@@ -114,11 +114,11 @@ try {
       <span class="text-gray-500 font-medium text-xs uppercase tracking-wider font-sans" id="cart-total-label">UPI Payable (10% OFF)</span>
       <span class="text-xl sm:text-2xl font-black text-emerald-700 font-sans" id="cart-subtotal">₹0</span>
     </div>
-    {/* 🛡️ 30-Day Empty-Bottle Guarantee Assurance Seal */}
+    {/* 🛡️ 40-Day Evaluation Guarantee Assurance Seal (30-Day Routine + 10-Day Buffer) */}
     <div class="mb-3 px-3 py-2.5 bg-gradient-to-r from-amber-50/90 to-emerald-50/80 border border-amber-200/80 rounded-xl flex items-center gap-2.5">
       <span class="text-base shrink-0">🛡️</span>
       <p class="text-[10px] sm:text-[10.5px] text-emerald-950 font-medium leading-snug">
-        <strong class="font-bold text-emerald-900">30-Day Empty-Bottle Guarantee:</strong> Take consistently for 30 days. If you don't feel a measurable surge in energy & digestion, 100% refund. Zero interrogations.
+        <strong class="font-bold text-emerald-900">40-Day Evaluation Guarantee:</strong> Complete your full 30-day bottle protocol with a generous 10-day evaluation buffer. If not completely satisfied, receive a 100% full refund. Zero return friction.
       </p>
     </div>
 
@@ -135,7 +135,7 @@ try {
       </div>
       <a href="/refund-policy" target="_blank" class="text-[9px] sm:text-[9.5px] font-bold text-gray-500 hover:text-[#166534] font-sans flex items-center justify-center gap-1 whitespace-nowrap transition-colors">
         <span>🛡️</span>
-        <span>30-Day Return</span>
+        <span>40-Day Guarantee</span>
       </a>
       <div class="text-[9px] sm:text-[9.5px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
         <span>💵</span>
@@ -297,7 +297,7 @@ try {
         tabCodEl?.classList.add('opacity-60', 'cursor-not-allowed', 'border-dashed');
         if (codSubtextEl) codSubtextEl.innerText = 'Prepaid Only 🔒';
         if (codNoticeEl && codNoticeText) {
-          codNoticeText.innerHTML = `<span>🔒 <strong>हा प्रॉडक्ट फक्त UPI/Prepaid वर उपलब्ध आहे.</strong> COD साठी इतर उत्पादने जोडा!</span>`;
+          codNoticeText.innerHTML = `<span>🔒 <strong>Low-ticket items are available via UPI/Prepaid only.</strong> Add any Spirulina or wellness product to unlock Cash on Delivery! (कॅश ऑन डिलिव्हरीसाठी इतर सप्लीमेंट्स जोडा).</span>`;
           codNoticeEl.classList.remove('hidden');
         }
       } else {

@@ -588,7 +588,7 @@ const productSchema = {
       "@type": "MerchantReturnPolicy",
       "applicableCountry": "IN",
       "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-      "merchantReturnDays": 30,
+      "merchantReturnDays": 40,
       "returnMethod": "https://schema.org/ReturnByMail",
       "returnFees": "https://schema.org/FreeReturn"
     }
@@ -644,7 +644,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "Which company Sea Buckthorn is best in India?",
-        answer: "Sujata Nutrilive is rated the #1 premium choice in India because unlike commercial liquid juices that contain 70%+ water, chemical preservatives (sodium benzoate), and added sugar, Sujata delivers 100% pure wild-crafted Himalayan berry extract in vegetarian cellulose capsules. Cold-pressed under 40°C, zero-sugar, 100% NABL lab tested for heavy metal purity, and backed by a 30-Day Empty-Bottle Guarantee.",
+        answer: "Sujata Nutrilive is rated the #1 premium choice in India because unlike commercial liquid juices that contain 70%+ water, chemical preservatives (sodium benzoate), and added sugar, Sujata delivers 100% pure wild-crafted Himalayan berry extract in vegetarian cellulose capsules. Cold-pressed under 40°C, zero-sugar, 100% NABL lab tested for heavy metal purity, and backed by a 40-Day Evaluation Guarantee.",
         tag: "Comparative Evaluation"
       },
       {
@@ -682,13 +682,13 @@ const productSeoConfigMap: Record<string, {
         { feature: "Source & Sourcing Height", sujata: "Wild-Crafted Ladakh Himalayas (12,000+ ft)", generic: "Commercial Farm Cultivation", competitors: "Unknown third-party brokers" },
         { feature: "Omega-7 Bioactive Retention", sujata: "Sub-40°C Cold Press (190+ Actives Intact)", generic: "Heat Pasteurized (Severe lipid loss)", competitors: "High heat spray dried" },
         { feature: "Heavy Metal Testing", sujata: "FSSAI & NABL Lab Certified (Safe Limits)", generic: "Rarely tested per batch", competitors: "Self-certified only" },
-        { feature: "Daily Cost & Guarantee", sujata: "Just ₹18/day + 30-Day Empty-Bottle Guarantee", generic: "₹25–₹35/day (Spills & oxidizes)", competitors: "₹30+/day with strict return rules" }
+        { feature: "Daily Cost & Guarantee", sujata: "Just ₹18/day + 40-Day Evaluation Guarantee", generic: "₹25–₹35/day (Spills & oxidizes)", competitors: "₹30+/day with strict return rules" }
       ]
     }
   },
   'sujata-spirulina-capsules': {
     seoTitle: 'Spirulina Capsules India (60 Veg Caps) — 100% Pure 62.3% Plant Protein & Iron | Sujata Nutrilive',
-    metaDescription: 'Buy 100% pure cold-pressed Spirulina Capsules in India. 291 mg/kg natural iron (as Fe), 62.3% plant protein (IS 7219) for zero 3 PM fatigue. 30-day money back guarantee & Free COD.',
+    metaDescription: 'Buy 100% pure cold-pressed Spirulina Capsules in India. 291 mg/kg natural iron (as Fe), 62.3% plant protein (IS 7219) for zero 3 PM fatigue. 40-day evaluation guarantee & Free COD.',
     badgeHeading: '🌿 100% Pure Cold-Pressed Spirulina (Zero Synthetic Binders)',
     faqs: [
       {
@@ -698,7 +698,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "How much Spirulina should I take per day? (Dosage Protocol)",
-        answer: "For general energy and immunity, take 2 vegetarian capsules daily with lukewarm water 20-30 minutes after breakfast. For intense athletic workouts or combating chronic fatigue, 3 to 4 capsules daily can be safely consumed.",
+        answer: "For daily maintenance and vitality, take 2 vegetarian capsules daily with lukewarm water 20-30 minutes after breakfast. A 2-capsule dose provides exactly 1g pure biomass containing 0.623g complete plant protein and 0.291mg natural non-heme iron. For active fitness or loose whole-food powder, 1 level scoop (3g) delivers 1.869g protein and 0.873mg iron.",
         tag: "Dosage Protocol"
       },
       {
@@ -713,7 +713,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "Where to buy authentic cold-pressed Spirulina in India?",
-        answer: "You can buy 100% authentic, lab-certified Sujata Cold-Pressed Spirulina directly from our official website (www.sujatanutrilive.com) with Free All-India Express Delivery via BlueDart/Delhivery, Free COD, and a 30-Day Empty-Bottle Guarantee.",
+        answer: "You can buy 100% authentic, lab-certified Sujata Cold-Pressed Spirulina directly from our official website (www.sujatanutrilive.com) with Free All-India Express Delivery via BlueDart/Delhivery, Free COD, and a 40-Day Evaluation Guarantee.",
         tag: "Direct Purchase Channel"
       },
       {
@@ -725,7 +725,7 @@ const productSeoConfigMap: Record<string, {
   },
   'sujata-spirulina-tablets': {
     seoTitle: 'Spirulina Tablets India (60 Pure Tablets) — 100% Organic Microalgae Natural Iron | Sujata Nutrilive',
-    metaDescription: 'Buy pure Spirulina Tablets online in India. Rich in natural plant iron (291 mg/kg), GLA, and essential vitamins for daily stamina & endurance. 30-day empty bottle guarantee.',
+    metaDescription: 'Buy pure Spirulina Tablets online in India. Rich in natural plant iron (291 mg/kg), GLA, and essential vitamins for daily stamina & endurance. 40-day evaluation guarantee.',
     badgeHeading: '🌿 100% Pure Compressed Microalgae (Zero Chemical Binders)',
     faqs: [
       {
@@ -1124,11 +1124,24 @@ const productVideoSchema = videoData ? {
                 </button>
               </div>
 
-              {/* 📦 Smart COD Product-Level Notice */}
-              <div id="pdp-cod-threshold-notice" class="hidden mt-2 px-2.5 py-1.5 bg-amber-50/90 border border-amber-200/90 rounded-lg flex items-center justify-between text-[10px] text-amber-900 font-medium">
-                <span id="pdp-cod-notice-text"></span>
-                <span class="text-[9px] font-bold text-amber-800 bg-amber-200/80 px-1.5 py-0.5 rounded shrink-0">Prepaid Only</span>
-              </div>
+              {/* 📦 Smart COD Product-Level Notice (Rendered strictly if item is tagged no-cod) */}
+              {isNoCodProduct ? (
+                <div id="pdp-cod-threshold-notice" class="mt-2.5 px-3 py-2 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between text-xs text-amber-900 font-medium shadow-2xs">
+                  <span id="pdp-cod-notice-text" class="flex items-center gap-1.5">
+                    <span>🔒</span>
+                    <span>This specialty item is available exclusively via secure UPI / Prepaid payment.</span>
+                  </span>
+                  <span class="text-[10px] font-bold text-amber-800 bg-amber-200/80 px-2 py-0.5 rounded uppercase tracking-wider shrink-0">Prepaid Only</span>
+                </div>
+              ) : (
+                <div class="mt-2 text-center text-[10px] text-gray-500 font-medium flex items-center justify-center gap-2">
+                  <span>✓ Standard Cash on Delivery Available</span>
+                  <span>•</span>
+                  <span>⚡ 10% Instant UPI Prepaid Discount</span>
+                  <span>•</span>
+                  <span>🚚 Free Express Shipping</span>
+                </div>
+              )}
             </div>
 
             {/* Dynamic Delivery Date Estimator Pill */}
@@ -2490,7 +2503,7 @@ const productVideoSchema = videoData ? {
           if (codSubtextLabel) codSubtextLabel.innerText = 'Prepaid Only 🔒';
           if (pdpCodNotice) {
             if (pdpCodNoticeText) {
-              pdpCodNoticeText.innerHTML = `<span>🔒 हा प्रॉडक्ट फक्त UPI / प्रीपेड पेमेंटवर उपलब्ध आहे (१०% झटपट सवलतीसह).</span>`;
+              pdpCodNoticeText.innerHTML = `<span>🔒 Available exclusively via secure UPI / Prepaid payment (10% instant discount applied).</span>`;
             }
             pdpCodNotice.classList.remove('hidden');
           }
