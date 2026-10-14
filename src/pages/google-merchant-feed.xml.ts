@@ -125,7 +125,7 @@ export const GET: APIRoute = async () => {
     if (!p || !p.handle) continue;
 
     const variant = p.variants?.edges?.[0]?.node;
-    const rawPrice = variant?.price?.amount || p.priceRange?.minVariantPrice?.amount || '649.00';
+    const rawPrice = variant?.price?.amount || p.priceRange?.minVariantPrice?.amount || '499.00';
     const formattedPrice = `${parseFloat(rawPrice).toFixed(2)} INR`;
     const productUrl = `${siteUrl}/product/${p.handle}`;
     

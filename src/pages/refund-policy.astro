@@ -79,12 +79,25 @@ try {
       </div>
 
       {/* Structured Legal Content */}
-      <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed">
-        {policy?.body ? (
-          <div class="prose prose-emerald max-w-none text-gray-700 leading-relaxed font-sans" set:html={policy.body} />
-        ) : (
-          <>
-            {/* Section 1 */}
+        {/* Master Clause: 30-Day Empty-Bottle Performance Guarantee Supersedes Standard Terms */}
+        <div class="bg-emerald-950 text-white p-6 sm:p-8 rounded-2xl border-2 border-emerald-500/50">
+          <span class="text-amber-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Official Governing Policy Directive</span>
+          <h3 class="text-base sm:text-lg font-bold font-serif mb-2 text-white">
+            Precedence of 30-Day Empty-Bottle Performance Guarantee Over Standard Merchandise Terms
+          </h3>
+          <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light mb-3">
+            For all dietary supplement products purchased directly from Sujata Nutrilive (including Spirulina Capsules and Sea Buckthorn Capsules), our <strong>30-Day 100% Empty-Bottle Performance Guarantee takes absolute precedence</strong> over generic ecommerce return conditions.
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-xs text-emerald-200">
+            <li>You are entitled to open, consume, and finish all 60 capsules over a 30-day period.</li>
+            <li>If you do not experience noticeable improvements in energy, stamina, or well-being, you will receive a 100% full refund with zero deductions.</li>
+            <li>You are NOT required to return an unused product, maintain sealed packaging, or ship back empty containers for your first bottle.</li>
+            <li>Standard "unopened in original packaging" conditions apply strictly to transit-damaged units seeking immediate replacement or unopened extra bottles in multi-bottle bundles.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] p-6 sm:p-10 md:p-12 border border-emerald-900/10 shadow-[0_20px_50px_rgba(0,0,0,0.03)] space-y-10 text-xs sm:text-sm text-gray-600 font-light leading-relaxed mt-8">
+          {/* Section 1 */}
             <div>
               <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
                 1. Eligibility &amp; 30-Day Window
@@ -138,9 +151,7 @@ try {
                 </div>
               </div>
             </div>
-          </>
-        )}
-      </div>
+        </div>
 
     </div>
 

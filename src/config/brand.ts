@@ -8,7 +8,7 @@ export const BRAND_CONFIG = {
   secondaryPhone: "+91 99700 02285",
   supportWhatsAppNumber: import.meta.env.PUBLIC_SUPPORT_WHATSAPP || "919834783503",
   supportEmail: import.meta.env.PUBLIC_SUPPORT_EMAIL || "support@sujatanutrilive.com",
-  operatingHours: "10:00 AM - 6:00 PM IST (Mon-Sat)",
+  operatingHours: "10:00 AM - 7:00 PM IST (Mon-Sat)",
   fssaiNumber: "21526027000179",
   address: "Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik, Maharashtra 422008, India",
   googleMapsUrl: "https://share.google/R7aB2MCG9AN5l3RF1",
