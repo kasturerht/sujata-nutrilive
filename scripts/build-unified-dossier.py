@@ -4,7 +4,7 @@
 # Page 1: Master Executive Regulatory Compliance & 3-Domain Quality Dossier
 # Page 2: Commercial Production Lot Release Certificate of Analysis (CoA: Batch #SJT-2026-B08)
 # Page 3: Botanical Biomarkers, Bio-Enzymes & Scientific Demarcation Report
-# Page 4-5: Lilaba Analytical Laboratories Test Report (#LAL-NN-121023002)
+# Page 4-5: Lilaba Analytical Laboratories Test Report (#LAL-NN-131125023)
 # Page 6-10: Government of Maharashtra FSSAI Registration Certificate (#21526027000179)
 
 import os
@@ -144,7 +144,7 @@ def generate_page1_executive_cover():
     arch_data = [
         [
             Paragraph("<b>Assay Domain 01</b><br/><b>Master Formulation Baseline</b>", st['bold']),
-            Paragraph("<b>Report #LAL-NN-121023002 (Lilaba NABL Scope TC-7179):</b> Foundation proximate assay establishing the empirical botanical baseline: 62.3% protein (IS 7219 Kjeldahl), 291.15 mg/kg natural iron (FSSAI Metals 5.0), and 398.00 kcal/100g.", st['body'])
+            Paragraph("<b>Report #LAL-NN-131125023 (Lilaba NABL Scope TC-7179):</b> Foundation proximate assay establishing the empirical botanical baseline: 62.39% protein (IS 7219 Kjeldahl), 290.89 mg/kg natural iron (FSSAI Metals 5.0), and 398.91 kcal/100g.", st['body'])
         ],
         [
             Paragraph("<b>Assay Domain 02</b><br/><b>Preserved Bio-Actives</b>", st['bold']),
@@ -152,7 +152,7 @@ def generate_page1_executive_cover():
         ],
         [
             Paragraph("<b>Assay Domain 03</b><br/><b>Commercial Release CoA</b>", st['bold']),
-            Paragraph("<b>Batch #SJT-2026-B08 Certificate of Analysis (Mfg: Aug 2026, Exp: Jul 2028):</b> Official release certificate conforming to Master Specification SPEC-SN-2026-REV03 with full ICP-MS heavy metal and microbiological clearance (see Page 2).", st['body'])
+            Paragraph("<b>Batch #SP/SS/Nov01/2025 Certificate of Analysis (Mfg: Nov 2025, Exp: Oct 2027):</b> Official release certificate conforming to Master Specification SPEC-SN-2026-REV03 with full ICP-MS heavy metal and microbiological clearance (see Page 2).", st['body'])
         ]
     ]
     t_arch = Table(arch_data, colWidths=[150, 388])
@@ -178,18 +178,18 @@ def generate_page1_executive_cover():
             Paragraph("<font color='white'><b>Analytical Method Protocol</b></font>", st['bold']),
             Paragraph("<font color='white'><b>Regulatory & Quality Benchmark</b></font>", st['bold'])
         ],
-        [Paragraph("<b>Total Plant Protein</b>", st['body']), Paragraph("<b>62.3% w/w</b>", st['bold']), Paragraph("IS 7219 Protocol", st['body']), Paragraph("Gold Standard (Min 55.0% FSSAI standard)", st['body'])],
-        [Paragraph("<b>Total Iron (as Fe)</b>", st['body']), Paragraph("<b>291.15 mg/kg (29.1 mg/100g)</b>", st['bold']), Paragraph("FSSAI Manual - Metals Method 5.0", st['body']), Paragraph("Natural Bioavailable Algal Iron", st['body'])],
-        [Paragraph("<b>Natural Calcium (as Ca)</b>", st['body']), Paragraph("<b>1293.64 mg/kg</b>", st['bold']), Paragraph("FSSAI Manual - Metals Method 5.0", st['body']), Paragraph("Natural Bone & Cellular Nutrient", st['body'])],
-        [Paragraph("<b>Natural Potassium (as K)</b>", st['body']), Paragraph("<b>14598.36 mg/kg</b>", st['bold']), Paragraph("FSSAI Manual - Metals Method 5.0", st['body']), Paragraph("Natural Algal Cellular Electrolyte", st['body'])],
-        [Paragraph("<b>Natural Vitamin A</b>", st['body']), Paragraph("<b>183.12 mcg / 100g</b>", st['bold']), Paragraph("IS 5886 Protocol", st['body']), Paragraph("Natural Bioactive Retinoid Precursor", st['body'])],
-        [Paragraph("<b>Natural Vitamin C</b>", st['body']), Paragraph("<b>12.18 mg / 100g</b>", st['bold']), Paragraph("IS 5838 Protocol", st['body']), Paragraph("Endogenous Cellular Antioxidant", st['body'])],
-        [Paragraph("<b>Natural Vitamin E</b>", st['body']), Paragraph("<b>5.23 mg / 100g</b>", st['bold']), Paragraph("IS 7235 Protocol", st['body']), Paragraph("Cellular Membrane Lipid Protection", st['body'])],
-        [Paragraph("<b>Dietary Fiber</b>", st['body']), Paragraph("<b>3.72%</b>", st['bold']), Paragraph("IS 11062 Protocol", st['body']), Paragraph("Prebiotic Algal Matrix", st['body'])],
-        [Paragraph("<b>Total Energy</b>", st['body']), Paragraph("<b>398.00 Kcal / 100g</b>", st['bold']), Paragraph("FAO Chap 3, Method 3.5", st['body']), Paragraph("Nutritive Functional Cellular Fuel", st['body'])],
-        [Paragraph("<b>Cholesterol & Trans-Fat</b>", st['body']), Paragraph("<b>BLQ / 0.50%</b>", st['bold']), Paragraph("LAL/CHEM/SOP/FD/GF/18", st['body']), Paragraph("Below Limit of Quantification (Heart Safe)", st['body'])],
-        [Paragraph("<b>Total Mineral Ash</b>", st['body']), Paragraph("<b>6.72%</b>", st['bold']), Paragraph("Gravimetric Protocol", st['body']), Paragraph("Natural Endogenous Mineral Matrix", st['body'])],
-        [Paragraph("<b>Residual Moisture</b>", st['body']), Paragraph("<b>3.28%</b>", st['bold']), Paragraph("Sub-40 deg C Dehydration", st['body']), Paragraph("Stable Shelf Life & Microbial Safety", st['body'])]
+        [Paragraph("<b>Total Plant Protein</b>", st['body']), Paragraph("<b>62.39% w/w</b>", st['bold']), Paragraph("IS 7219 Protocol", st['body']), Paragraph("Gold Standard (Min 55.0% FSSAI standard)", st['body'])],
+        [Paragraph("<b>Total Iron (as Fe)</b>", st['body']), Paragraph("<b>290.89 mg/kg (29.09 mg/100g)</b>", st['bold']), Paragraph("FSSAI Manual - Metals Method 5.0", st['body']), Paragraph("Natural Bioavailable Algal Iron", st['body'])],
+        [Paragraph("<b>Natural Calcium (as Ca)</b>", st['body']), Paragraph("<b>1407.91 mg/kg</b>", st['bold']), Paragraph("FSSAI Manual - Metals Method 5.0", st['body']), Paragraph("Natural Bone & Cellular Nutrient", st['body'])],
+        [Paragraph("<b>Natural Potassium (as K)</b>", st['body']), Paragraph("<b>13972.57 mg/kg</b>", st['bold']), Paragraph("FSSAI Manual - Metals Method 5.0", st['body']), Paragraph("Natural Algal Cellular Electrolyte", st['body'])],
+        [Paragraph("<b>Natural Vitamin A</b>", st['body']), Paragraph("<b>182.47 mcg / 100g</b>", st['bold']), Paragraph("IS 5886: 1970", st['body']), Paragraph("Natural Bioactive Retinoid Precursor", st['body'])],
+        [Paragraph("<b>Natural Vitamin C</b>", st['body']), Paragraph("<b>12.79 mg / 100g</b>", st['bold']), Paragraph("IS 5838: 1970", st['body']), Paragraph("Endogenous Cellular Antioxidant", st['body'])],
+        [Paragraph("<b>Natural Vitamin E</b>", st['body']), Paragraph("<b>5.61 mg / 100g</b>", st['bold']), Paragraph("IS 7235: 1974", st['body']), Paragraph("Cellular Membrane Lipid Protection", st['body'])],
+        [Paragraph("<b>Dietary Fiber</b>", st['body']), Paragraph("<b>3.59%</b>", st['bold']), Paragraph("LAL/CHEM/SOP/FD/GF/21", st['body']), Paragraph("Prebiotic Algal Matrix", st['body'])],
+        [Paragraph("<b>Total Energy</b>", st['body']), Paragraph("<b>398.91 Kcal / 100g</b>", st['bold']), Paragraph("LAL/CHEM/SOP/FD/GF/07", st['body']), Paragraph("Nutritive Functional Cellular Fuel", st['body'])],
+        [Paragraph("<b>Cholesterol & Trans-Fat</b>", st['body']), Paragraph("<b>BLQ (Zero Cholesterol & Trans-Fat)</b>", st['bold']), Paragraph("LAL/CHEM/SOP/FD/GC/02", st['body']), Paragraph("Below Limit of Quantification (Heart Safe)", st['body'])],
+        [Paragraph("<b>Total Mineral Ash</b>", st['body']), Paragraph("<b>5.79%</b>", st['bold']), Paragraph("LAL/CHEM/SOP/FD/GF/02", st['body']), Paragraph("Natural Endogenous Mineral Matrix", st['body'])],
+        [Paragraph("<b>Residual Moisture</b>", st['body']), Paragraph("<b>4.12%</b>", st['bold']), Paragraph("LAL/CHEM/SOP/FD/GF/01", st['body']), Paragraph("Stable Shelf Life & Microbial Safety (Max 7.0%)", st['body'])]
     ]
     t_assay = Table(assay_data, colWidths=[140, 108, 140, 150])
     t_assay.setStyle(TableStyle([
@@ -209,11 +209,11 @@ def generate_page1_executive_cover():
     # Section 4: Statutory Legal Declaration & Document Index
     story.append(Paragraph("4. STATUTORY DECLARATION & DOSSIER INDEX", st['heading']))
     decl_text = (
-        "<b>Master Formulation Benchmark & Commercial Traceability:</b> Report #LAL-NN-121023002 serves as the official "
+        "<b>Master Formulation Benchmark & Commercial Traceability:</b> Report #LAL-NN-131125023 serves as the official "
         "Master Formulation Benchmark Assay establishing the empirical proximate nutritional baseline of Sujata's proprietary Arthrospira platensis "
-        "cultivation strain and sub-40 deg C gentle dehydration process (yielding 62.3% plant protein under IS 7219 and 291.15 mg/kg natural iron under FSSAI Metals Method 5.0). "
+        "cultivation strain and sub-40 deg C gentle dehydration process (yielding 62.39% plant protein under IS 7219 and 290.89 mg/kg natural iron under FSSAI Metals Method 5.0). "
         "All commercial production batches are contract-manufactured by Spiru Swastha India Pvt Ltd (Surat, Gujarat) to this identical benchmark specification and marketed by Sujata Nutrilive Agrotech under Government of Maharashtra FSSAI Registration #21526027000179.<br/>"
-        "<b>Document Index:</b> Page 1: Master Executive Compliance Dossier | Page 2: Commercial Batch CoA (Batch #SJT-2026-B08) | Page 3: Botanical Biomarkers & Scientific Demarcation | Pages 4-5: Lilaba Analytical Laboratories Test Report (#LAL-NN-121023002) | Pages 6-10: Government of Maharashtra FSSAI Registration Certificate (#21526027000179)."
+        "<b>Document Index:</b> Page 1: Master Executive Compliance Dossier | Page 2: Commercial Batch CoA (Batch #SP/SS/Nov01/2025) | Page 3: Botanical Biomarkers & Scientific Demarcation | Pages 4-5: Lilaba Analytical Laboratories Test Report (#LAL-NN-131125023) | Pages 6-10: Government of Maharashtra FSSAI Registration Certificate (#21526027000179)."
     )
     story.append(Paragraph(decl_text, st['body']))
     story.append(Spacer(1, 4))
@@ -272,14 +272,14 @@ def generate_page2_batch_coa():
             Paragraph("<font color='white'><b>QC Status</b></font>", st['bold'])
         ],
         # Nutritional / Active
-        [Paragraph("<b>Total Plant Protein</b>", st['body']), Paragraph("IS 7219 (Kjeldahl Protocol)", st['body']), Paragraph("Min 60.0% w/w", st['body']), Paragraph("<b>62.3% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
-        [Paragraph("<b>Total Elemental Iron (as Fe)</b>", st['body']), Paragraph("FSSAI Manual - Metals 5.0", st['body']), Paragraph("Min 250.0 mg/kg", st['body']), Paragraph("<b>291.15 mg/kg</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
+        [Paragraph("<b>Total Plant Protein</b>", st['body']), Paragraph("IS 7219 (Kjeldahl Protocol)", st['body']), Paragraph("Min 60.0% w/w", st['body']), Paragraph("<b>62.39% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
+        [Paragraph("<b>Total Elemental Iron (as Fe)</b>", st['body']), Paragraph("FSSAI Manual - Metals 5.0", st['body']), Paragraph("Min 250.0 mg/kg", st['body']), Paragraph("<b>290.89 mg/kg</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
         [Paragraph("<b>Active C-Phycocyanin</b>", st['body']), Paragraph("Bennett & Bogorad (UV-Vis 620nm)", st['body']), Paragraph("Min 18.0% w/w", st['body']), Paragraph("<b>21.4% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
         [Paragraph("<b>Superoxide Dismutase (SOD)</b>", st['body']), Paragraph("Marklund Pyrogallol Kinetic", st['body']), Paragraph("Min 10,000 U/kg", st['body']), Paragraph("<b>12,450 U/kg</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
         [Paragraph("<b>Total Chlorophyll-a</b>", st['body']), Paragraph("AOAC Official Method 940.03", st['body']), Paragraph("Min 1,000 mg/100g", st['body']), Paragraph("<b>1,150 mg/100g</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
         # Physical
-        [Paragraph("<b>Residual Moisture / LOD</b>", st['body']), Paragraph("Oven Dehydration @ 105 deg C", st['body']), Paragraph("Max 5.0% w/w", st['body']), Paragraph("<b>3.28% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
-        [Paragraph("<b>Total Mineral Ash</b>", st['body']), Paragraph("IS 11062 (Gravimetric)", st['body']), Paragraph("Max 8.0% w/w", st['body']), Paragraph("<b>6.72% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
+        [Paragraph("<b>Residual Moisture / LOD</b>", st['body']), Paragraph("Oven Dehydration @ 105 deg C", st['body']), Paragraph("Max 5.0% w/w", st['body']), Paragraph("<b>4.12% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
+        [Paragraph("<b>Total Mineral Ash</b>", st['body']), Paragraph("IS 11062 (Gravimetric)", st['body']), Paragraph("Max 8.0% w/w", st['body']), Paragraph("<b>5.79% w/w</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
         # Heavy Metals (ICP-MS)
         [Paragraph("<b>Lead (Pb)</b>", st['body']), Paragraph("ICP-MS (AOAC 2015.01)", st['body']), Paragraph("Max 2.50 ppm (FSSAI)", st['body']), Paragraph("<b>&lt; 0.01 ppm</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
         [Paragraph("<b>Arsenic (As)</b>", st['body']), Paragraph("ICP-MS (AOAC 2015.01)", st['body']), Paragraph("Max 1.10 ppm (FSSAI)", st['body']), Paragraph("<b>BDL (&lt; 0.01 ppm)</b>", st['bold']), Paragraph("<font color='#065F46'><b>CONFORMS</b></font>", st['bold'])],
@@ -424,7 +424,7 @@ def generate_page3_biomarkers_demarcation():
     story.append(Paragraph("2. SCIENTIFIC DEMARCATION: WHY KJELDAHL TESTING DESTROYS DELICATE BIOMARKERS", st['heading']))
     demarcation_text = (
         "<b>Analytical Separation Rationale:</b> Standard proximate laboratory testing (such as the IS 7219 protocol used in Lilaba "
-        "Report #LAL-NN-121023002) measures total elemental nitrogen via destructive Kjeldahl digestion. In this protocol, biomass is boiled "
+        "Report #LAL-NN-131125023) measures total elemental nitrogen via destructive Kjeldahl digestion. In this protocol, biomass is boiled "
         "in concentrated sulfuric acid (H2SO4) at 420 deg C in the presence of heavy-metal catalysts. This aggressive chemical digestion completely "
         "hydrolyzes all peptide bonds into basic ammonium ions to calculate crude protein.<br/>"
         "However, biologically intact chromoproteins like <b>C-Phycocyanin</b> and complex cellular enzymes like <b>Superoxide Dismutase (SOD)</b> "
@@ -528,14 +528,19 @@ def build_master_dossier():
     p3_reader = pypdf.PdfReader(p3_buf)
     writer.add_page(p3_reader.pages[0])
     
-    # 4. Add existing Lilaba Lab Report (Pages 1 & 2 of source_pdf) and FSSAI Registration pages (Pages 3 to 7)
+    # 4. Add NEW Lilaba Lab Report (Pages 1 & 2 of lilaba_lab_report_2025_2027.pdf)
+    lilaba_pdf = os.path.join(public_dir, 'lilaba_lab_report_2025_2027.pdf')
+    if os.path.exists(lilaba_pdf):
+        lilaba_reader = pypdf.PdfReader(lilaba_pdf)
+        for page in lilaba_reader.pages:
+            writer.add_page(page)
+    else:
+        raise FileNotFoundError(f"Lilaba report not found at: {lilaba_pdf}")
+        
+    # 5. Add FSSAI Registration Certificate pages (Pages 5 to 9 of source_pdf)
     if os.path.exists(source_pdf):
         existing_reader = pypdf.PdfReader(source_pdf)
-        # In current 8-page dossier:
-        # page 0 is old cover
-        # page 1 & 2 is Lilaba report
-        # page 3 to 7 is FSSAI
-        for i in range(1, len(existing_reader.pages)):
+        for i in range(5, len(existing_reader.pages)):
             writer.add_page(existing_reader.pages[i])
     else:
         raise FileNotFoundError(f"Source dossier not found at: {source_pdf}")

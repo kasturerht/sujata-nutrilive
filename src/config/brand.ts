@@ -14,7 +14,7 @@ export const BRAND_CONFIG = {
   googleMapsUrl: "https://share.google/R7aB2MCG9AN5l3RF1",
   announcementTickers: [
     "🌿 100% Pure Cryo-Extracted Spirulina",
-    "🧪 Lab Certified 62.3% Pure Plant Protein",
+    "🧪 Lab Certified 62.39% Pure Plant Protein",
     "💵 Free Cash on Delivery (COD) Pan-India",
     "⚡ Dispatches in 24 Hours"
   ],

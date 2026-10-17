@@ -197,7 +197,7 @@ export function resolveDynamicProductEntity(
         name: 'National Accreditation Board for Testing and Calibration Laboratories (NABL)',
         url: 'https://nabl-india.org'
       },
-      identifier: 'Report #LAL-NN-121023002'
+      identifier: 'Report #LAL-NN-131125023'
     }
   ];
 

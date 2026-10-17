@@ -111,13 +111,13 @@ const timelineMilestones = [
   }
 ];
 
-// Verified Analytical Chemistry & Nutritional Quality Assay Data (Lilaba Analytical Laboratories #LAL-NN-121023002)
+// Verified Analytical Chemistry & Nutritional Quality Assay Data (Lilaba Analytical Laboratories #LAL-NN-131125023)
 const labParameters = [
   { 
     test: "Total Plant Protein", 
     method: "IS 7219 Protocol", 
     limit: "Min 55.0% FSSAI", 
-    result: "62.3% Pure Protein", 
+    result: "62.39% Pure Protein", 
     status: "GOLD STANDARD", 
     verdict: "Complete 9 Essential Amino Acids",
     pass: true 
@@ -126,7 +126,7 @@ const labParameters = [
     test: "Total Iron (as Fe)", 
     method: "FSSAI Manual Metals 5.0", 
     limit: "Nutritional Benchmark", 
-    result: "291.15 mg/kg (29.1 mg/100g)", 
+    result: "290.89 mg/kg (29.09 mg/100g)", 
     status: "HIGH POTENCY", 
     verdict: "Supports Hemoglobin & Natural Cellular Energy",
     pass: true 
@@ -135,7 +135,7 @@ const labParameters = [
     test: "Natural Calcium (Ca)", 
     method: "FSSAI Manual Metals 5.0", 
     limit: "Nutritional Benchmark", 
-    result: "1293.64 mg/kg", 
+    result: "1407.91 mg/kg", 
     status: "HIGH ABSORPTION", 
     verdict: "Bone Density & Cellular Function",
     pass: true 
@@ -144,7 +144,7 @@ const labParameters = [
     test: "Natural Vitamin A", 
     method: "IS 5886 Protocol", 
     limit: "Nutritional Benchmark", 
-    result: "183.12 µg/100g", 
+    result: "182.47 µg/100g", 
     status: "100% ORGANIC", 
     verdict: "Natural Vision & Epithelial Health",
     pass: true 
@@ -153,7 +153,7 @@ const labParameters = [
     test: "Natural Vitamin C & E", 
     method: "IS 5838 & IS 7235", 
     limit: "Nutritional Benchmark", 
-    result: "17.41 mg/100g Combined", 
+    result: "18.40 mg/100g Combined", 
     status: "ACTIVE ANTIOXIDANT", 
     verdict: "Antioxidant Cellular Defense",
     pass: true 
@@ -162,7 +162,7 @@ const labParameters = [
     test: "Dietary Fiber & Carbohydrates", 
     method: "IS 11062 & IS 1656", 
     limit: "Nutritional Benchmark", 
-    result: "3.72% Fiber / 24.77% Carbs", 
+    result: "3.59% Fiber / 19.99% Carbs", 
     status: "GUT FRIENDLY", 
     verdict: "Prebiotic Support & Smooth Digestion",
     pass: true 
@@ -171,7 +171,7 @@ const labParameters = [
     test: "Total Mineral Ash & Moisture", 
     method: "Gravimetric Analysis", 
     limit: "FSSAI Moisture Max 7.0%", 
-    result: "6.72% Ash / 3.28% Moisture", 
+    result: "5.79% Ash / 4.12% Moisture", 
     status: "OPTIMAL STABILITY", 
     verdict: "Pure Dry Biomass with High Microbial Stability",
     pass: true 
@@ -214,26 +214,26 @@ const botanicalBiomarkers = [
   }
 ];
 
-// Commercial Production Batch Release & Certificate of Analysis (CoA) — Batch #SJT-2026-B08
+// Commercial Production Batch Release & Certificate of Analysis (CoA) — Batch #SP/SS/Nov01/2025
 const currentBatchCoA = {
-  batchNumber: "SJT-2026-B08",
-  labReportNumber: "LAL-QC-2026-0814",
-  mfgDate: "August 2026",
-  expDate: "July 2028 (24 Months)",
+  batchNumber: "SP/SS/Nov01/2025",
+  labReportNumber: "LAL-NN-131125023",
+  mfgDate: "November 2025",
+  expDate: "October 2027 (24 Months)",
   mfgPartner: "Spiru Swastha India Pvt Ltd, Mangrol, Surat, Gujarat",
   fssaiLicense: BRAND_CONFIG.fssaiNumber,
   masterSpecCode: "SPEC-SN-2026-REV03",
-  baselineAssayRef: "LAL-NN-121023002",
+  baselineAssayRef: "LAL-NN-131125023",
   nablCertificateNo: "TC-7179",
   nablValidity: "20 October 2025 through 19 October 2027",
   releaseStatus: "PASSED & APPROVED FOR COMMERCIAL DISTRIBUTION",
   authorizedSignatories: "Dr. R. K. Varma, Ph.D. (Lead Analytical Chemist) & Er. Neha Patel (Head Quality Assurance)",
   qaVerificationDesk: "care@sujatanutrilive.com | Phone: +91 98347 83503",
   parameters: [
-    { test: "Total Plant Protein", spec: "Min 60.0% w/w", observed: "62.3% w/w", method: "IS 7219 (Kjeldahl)", status: "PASSED" },
-    { test: "Total Iron (as Fe)", spec: "Min 250.0 mg/kg", observed: "291.15 mg/kg", method: "FSSAI Manual Metals 5.0", status: "PASSED" },
-    { test: "Loss on Drying (Moisture)", spec: "Max 5.0% w/w", observed: "3.28% w/w", method: "Gravimetric Dehydration", status: "PASSED" },
-    { test: "Total Mineral Ash", spec: "Max 8.0% w/w", observed: "6.72% w/w", method: "IS 14433 Protocol", status: "PASSED" },
+    { test: "Total Plant Protein", spec: "Min 60.0% w/w", observed: "62.39% w/w", method: "IS 7219 (Kjeldahl)", status: "PASSED" },
+    { test: "Total Iron (as Fe)", spec: "Min 250.0 mg/kg", observed: "290.89 mg/kg", method: "FSSAI Manual Metals 5.0", status: "PASSED" },
+    { test: "Loss on Drying (Moisture)", spec: "Max 5.0% w/w", observed: "4.12% w/w", method: "Gravimetric Dehydration", status: "PASSED" },
+    { test: "Total Mineral Ash", spec: "Max 8.0% w/w", observed: "5.79% w/w", method: "IS 14433 Protocol", status: "PASSED" },
     { test: "Lead (Pb)", spec: "Max 2.50 ppm", observed: "< 0.01 ppm (BDL)", method: "AOAC 2015.01 / ICP-MS", status: "PASSED" },
     { test: "Mercury (Hg)", spec: "Max 1.00 ppm", observed: "< 0.005 ppm (BDL)", method: "ICP-MS Spectrometry", status: "PASSED" },
     { test: "Arsenic (As)", spec: "Max 1.10 ppm", observed: "< 0.01 ppm (BDL)", method: "ICP-MS Spectrometry", status: "PASSED" },
@@ -367,7 +367,7 @@ const scienceSchemas = [
   {
     "@type": "Dataset",
     "@id": "https://www.sujatanutrilive.com/science/#lab-assay",
-    "name": "Analytical Nutritional & Quality Assay: Report #LAL-NN-121023002",
+    "name": "Analytical Nutritional & Quality Assay: Report #LAL-NN-131125023",
     "description": "Certified analytical testing by Lilaba Analytical Laboratories under Bureau of Indian Standards (IS 7219) and FSSAI Manual standards for pure Arthrospira platensis biomass.",
     "isAccessibleForFree": true,
     "distribution": [
@@ -395,9 +395,9 @@ const scienceSchemas = [
   },
   {
     "@type": "Dataset",
-    "@id": "https://www.sujatanutrilive.com/science/#batch-sjt-2026-b08-coa",
-    "name": "Commercial Certificate of Analysis: Batch #SJT-2026-B08",
-    "description": "Commercial batch release certificate for Batch #SJT-2026-B08 contract manufactured by Spiru Swastha India Pvt Ltd conforming to Master Specification SPEC-SN-2026-REV03.",
+    "@id": "https://www.sujatanutrilive.com/science/#batch-sp-ss-nov01-2025-coa",
+    "name": "Commercial Certificate of Analysis: Batch #SP/SS/Nov01/2025",
+    "description": "Commercial batch release certificate for Batch #SP/SS/Nov01/2025 contract manufactured by Spiru Swastha India Pvt Ltd conforming to Master Specification SPEC-SN-2026-REV03.",
     "isAccessibleForFree": true,
     "variableMeasured": currentBatchCoA.parameters.map(p => `${p.test}: ${p.observed} (Spec: ${p.spec}) - ${p.status}`)
   },
@@ -423,8 +423,8 @@ const scienceSchemas = [
 ---
 
 <StoreLayout 
-  title="The Science & Sourcing Dossier: 62.3% Bio-Protein & Zero-Binder Purity | Sujata Nutrilive"
-  description="Discover the cellular science behind Sujata Nutrilive: Sub-40°C gentle dehydration, lab-certified 62.3% plant protein (IS 7219), zero synthetic binders, and FSSAI statutory safety compliance."
+  title="The Science & Sourcing Dossier: 62.39% Bio-Protein & Zero-Binder Purity | Sujata Nutrilive"
+  description="Discover the cellular science behind Sujata Nutrilive: Sub-40°C gentle dehydration, lab-certified 62.39% plant protein (IS 7219), zero synthetic binders, and FSSAI statutory safety compliance."
   image="/products/sujata-combo-spirulina-sea-buckthorn.jpg"
   extraSchema={scienceSchemas}
 >
@@ -479,7 +479,7 @@ const scienceSchemas = [
               
               <div class="flex flex-col">
                 <span class="text-2xl sm:text-3xl lg:text-4xl font-['Playfair_Display'] font-black text-amber-400 mb-1">
-                  62.3%
+                  62.39%
                 </span>
                 <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-200/70">Plant Protein</span>
               </div>
@@ -553,7 +553,7 @@ const scienceSchemas = [
             
             <p class="text-xs sm:text-sm text-emerald-50/95 leading-relaxed font-light">
               <strong class="font-bold text-white">What differentiates Sujata Nutrilive Spirulina?</strong><br class="hidden sm:inline" />
-              Sujata Nutrilive is a practitioner-governed cellular wellness supplement marketed by <strong>Sujata Nutrilive Agrotech in Nashik, Maharashtra (FSSAI Reg #21526027000179)</strong> and contract manufactured by Spiru Swastha India Pvt Ltd. Produced exclusively via sub-40°C gentle low-temperature dehydration in biosecure aquaculture, it delivers <strong>lab-certified 62.3% total plant protein (IS 7219)</strong>, <strong>291.15 mg/kg total iron (as Fe)</strong>, and strict statutory FSSAI food safety compliance, completely eliminating the thermal damage, foul odor, and digestive distress characteristic of conventional spray-dried brands.
+              Sujata Nutrilive is a practitioner-governed cellular wellness supplement marketed by <strong>Sujata Nutrilive Agrotech in Nashik, Maharashtra (FSSAI Reg #21526027000179)</strong> and contract manufactured by Spiru Swastha India Pvt Ltd. Produced exclusively via sub-40°C gentle low-temperature dehydration in biosecure aquaculture, it delivers <strong>lab-certified 62.39% total plant protein (IS 7219)</strong>, <strong>290.89 mg/kg total iron (as Fe)</strong>, and strict statutory FSSAI food safety compliance, completely eliminating the thermal damage, foul odor, and digestive distress characteristic of conventional spray-dried brands.
             </p>
           </div>
         </div>
@@ -1084,7 +1084,7 @@ const scienceSchemas = [
                   <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                     🔬 CRYO-MILLED BIO-POWDER
                   </span>
-                  <span class="text-[10px] font-mono font-bold text-amber-300">62.3% Pure Protein (IS 7219)</span>
+                  <span class="text-[10px] font-mono font-bold text-amber-300">62.39% Pure Protein (IS 7219)</span>
                 </div>
 
                 <div class="w-full aspect-square rounded-2xl overflow-hidden bg-black/30 border border-white/5 mb-5 p-4 flex items-center justify-center relative">
@@ -1111,7 +1111,7 @@ const scienceSchemas = [
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="text-emerald-400 font-bold">✓</span>
-                    <span>Natural non-heme iron: 29.1 mg / 100g (291 mg/kg)</span>
+                    <span>Natural non-heme iron: 29.09 mg / 100g (290.89 mg/kg)</span>
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="text-emerald-400 font-bold">✓</span>
@@ -1131,24 +1131,24 @@ const scienceSchemas = [
 
                 <div class="grid grid-cols-2 gap-2 mb-2">
                   <button 
-                    type="button"
+                    type="button" 
                     class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357854340"
                     data-title="Sujata Pure Organic Spirulina Powder (100g)"
                     data-price="350"
                     data-image="/products/sujata-spirulina-powder-pouch.jpg"
-                    data-subtitle="Sub-40°C Cryo-Milled • 62.3% Protein"
+                    data-subtitle="Sub-40°C Cryo-Milled • 62.39% Protein"
                   >
                     <span>⚡ Buy Now</span>
                   </button>
                   <button 
-                    type="button"
+                    type="button" 
                     class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357854340"
                     data-title="Sujata Pure Organic Spirulina Powder (100g)"
                     data-price="350"
                     data-image="/products/sujata-spirulina-powder-pouch.jpg"
-                    data-subtitle="Sub-40°C Cryo-Milled • 62.3% Protein"
+                    data-subtitle="Sub-40°C Cryo-Milled • 62.39% Protein"
                   >
                     <span>+ Cart</span>
                   </button>
@@ -1286,15 +1286,15 @@ const scienceSchemas = [
           </p>
 
           <div class="p-4 bg-emerald-50/80 border border-emerald-200/90 rounded-2xl mb-6 text-xs text-[#064E3B] leading-relaxed">
-            <strong class="font-bold text-emerald-950 block mb-1">🏛️ Master Formulation Benchmark Assay (Report #LAL-NN-121023002):</strong>
-            This foundational independent NABL laboratory assay from Lilaba Analytical Laboratories establishes the empirical baseline proximate chemistry (62.3% plant protein under IS 7219 and 291.15 mg/kg elemental iron) for Sujata's proprietary Arthrospira platensis strain and sub-40°C dehydration methodology. All routine commercial production batches are contract-manufactured by Spiru Swastha India Pvt Ltd under identical genetics, sub-40°C temperature parameters, and FSSAI Category 13 release standards.
+            <strong class="font-bold text-emerald-950 block mb-1">🏛️ Master Formulation Benchmark Assay (Report #LAL-NN-131125023):</strong>
+            This foundational independent NABL laboratory assay from Lilaba Analytical Laboratories establishes the empirical baseline proximate chemistry (62.39% plant protein under IS 7219 and 290.89 mg/kg elemental iron) for Sujata's proprietary Arthrospira platensis strain and sub-40°C dehydration methodology. All routine commercial production batches are contract-manufactured by Spiru Swastha India Pvt Ltd under identical genetics, sub-40°C temperature parameters, and FSSAI Category 13 release standards.
           </div>
 
           <div class="grid grid-cols-3 gap-2.5 mb-6 text-left">
             <div class="p-2.5 bg-white rounded-xl border border-gray-200 shadow-sm">
               <span class="text-[8px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Domain 01</span>
               <span class="text-[11px] font-bold text-[#111827] block mt-0.5">Benchmark Assay</span>
-              <span class="text-[10px] text-emerald-700 font-semibold block mt-0.5">62.3% Protein (IS 7219)</span>
+              <span class="text-[10px] text-emerald-700 font-semibold block mt-0.5">62.39% Protein (IS 7219)</span>
             </div>
             <div class="p-2.5 bg-white rounded-xl border border-emerald-200 shadow-sm bg-emerald-50/40">
               <span class="text-[8px] font-mono font-bold text-emerald-800 uppercase tracking-wider block">Domain 02</span>
@@ -1303,7 +1303,7 @@ const scienceSchemas = [
             </div>
             <div class="p-2.5 bg-white rounded-xl border border-gray-900 shadow-sm bg-gray-900 text-white">
               <span class="text-[8px] font-mono font-bold text-emerald-400 uppercase tracking-wider block">Domain 03</span>
-              <span class="text-[11px] font-bold text-white block mt-0.5">Batch #B08 CoA</span>
+              <span class="text-[11px] font-bold text-white block mt-0.5">Batch CoA</span>
               <span class="text-[10px] text-emerald-300 font-semibold block mt-0.5">100% Passed &amp; Cleared</span>
             </div>
           </div>
@@ -1328,7 +1328,7 @@ const scienceSchemas = [
             <div class="bg-gray-50/90 border-b border-gray-200/80 px-6 py-4 flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-xs font-black uppercase tracking-wider text-[#111827]">Assay 01: Empirical Proximate Chemistry (#LAL-NN-121023002)</span>
+                <span class="text-xs font-black uppercase tracking-wider text-[#111827]">Assay 01: Empirical Proximate Chemistry (#LAL-NN-131125023)</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[10px] font-mono text-emerald-800 bg-emerald-100/80 border border-emerald-300 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">FSSAI REG #{BRAND_CONFIG.fssaiNumber}</span>
@@ -1395,7 +1395,7 @@ const scienceSchemas = [
                 </strong>
                 <p class="text-amber-900/90 font-light text-[11px] sm:text-xs leading-relaxed">
                   <strong>Why are C-Phycocyanin and SOD separated into Assay 02?</strong><br/>
-                  Lilaba Report #LAL-NN-121023002 is an <em>Empirical Proximate Chemical Assay</em>. It relies on destructive chemical digestion (boiling sulfuric acid under IS 7219 Kjeldahl digestion for nitrogen/protein, and concentrated acid digestion for FSSAI Metals 5.0). While definitive for total protein and minerals, this digestion destroys all intact pigment biliproteins and active bio-enzymes.<br/>
+                  Lilaba Report #LAL-NN-131125023 is an <em>Empirical Proximate Chemical Assay</em>. It relies on destructive chemical digestion (boiling sulfuric acid under IS 7219 Kjeldahl digestion for nitrogen/protein, and concentrated acid digestion for FSSAI Metals 5.0). While definitive for total protein and minerals, this digestion destroys all intact pigment biliproteins and active bio-enzymes.<br/>
                   Conversely, <strong>21.4% C-Phycocyanin</strong> and <strong>&gt;12,000 U/kg Superoxide Dismutase (SOD)</strong> are <em>Botanical Phytochemical Biomarkers</em>. They require specialized non-destructive UV-Vis spectrophotometry (Bennett &amp; Bogorad 1973) and pyrogallol autoxidation kinetics (Marklund &amp; Marklund). They remain bioactive exclusively because Sujata utilizes a proprietary sub-40°C cryo-dehydration protocol, whereas conventional brands expose biomass to 160°C–200°C spray-drying towers that irreversibly denature these compounds.
                 </p>
               </div>
@@ -1542,7 +1542,7 @@ const scienceSchemas = [
               </div>
               <div>
                 <strong class="text-gray-900 block mb-1">2. Commercial Batch Release vs Baseline Benchmark:</strong>
-                <p class="text-gray-600">Commercial Batch #SJT-2026-B08 was released under analytical testing report <strong>#LAL-QC-2026-0814</strong> and conforms strictly to Master Specification SPEC-SN-2026-REV03, benchmarked against Master Assay #LAL-NN-121023002. Tested under statutory FSSAI Category 13 standards by licensed facility Spiru Swastha India Pvt Ltd for Sujata Nutrilive Agrotech.</p>
+                <p class="text-gray-600">Commercial Batch #SP/SS/Nov01/2025 was released under analytical testing report <strong>#LAL-NN-131125023</strong> and conforms strictly to Master Specification SPEC-SN-2026-REV03, benchmarked against Master Assay #LAL-NN-131125023. Tested under statutory FSSAI Category 13 standards by licensed facility Spiru Swastha India Pvt Ltd for Sujata Nutrilive Agrotech.</p>
               </div>
             </div>
           </div>
@@ -2028,7 +2028,7 @@ const scienceSchemas = [
       </div>
 
       <h3 class="text-2xl font-black text-white font-['Playfair_Display'] mb-1">Official Certified Laboratory Assay</h3>
-      <span class="text-emerald-300 text-xs font-mono uppercase tracking-widest mb-6">[ REPORT #LAL-NN-121023002 • FSSAI REG #{BRAND_CONFIG.fssaiNumber} ]</span>
+      <span class="text-emerald-300 text-xs font-mono uppercase tracking-widest mb-6">[ REPORT #LAL-NN-131125023 • FSSAI REG #{BRAND_CONFIG.fssaiNumber} ]</span>
 
       <div class="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-left font-mono text-xs text-emerald-200/90 space-y-2 mb-6">
         <div class="flex justify-between border-b border-white/5 pb-1.5">
@@ -2037,11 +2037,11 @@ const scienceSchemas = [
         </div>
         <div class="flex justify-between border-b border-white/5 pb-1.5">
           <span>Total Plant Protein:</span>
-          <span class="text-emerald-400 font-bold">62.3% (IS 7219 Certified)</span>
+          <span class="text-emerald-400 font-bold">62.39% (IS 7219 Certified)</span>
         </div>
         <div class="flex justify-between border-b border-white/5 pb-1.5">
           <span>Total Iron (as Fe):</span>
-          <span class="text-emerald-400 font-bold">291.15 mg/kg (29.1 mg/100g)</span>
+          <span class="text-emerald-400 font-bold">290.89 mg/kg (29.09 mg/100g)</span>
         </div>
         <div class="flex justify-between">
           <span>Heavy Metal Compliance:</span>
