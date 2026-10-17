@@ -497,8 +497,11 @@ const videoTestimonials = [
 const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
 const productTitle = product?.title || "Sujata Pure Organic Spirulina";
+const rawDescSource = typeof product?.subtitle?.value === 'string' 
+  ? product.subtitle.value 
+  : (typeof product?.subtitle === 'string' ? product.subtitle : (typeof product?.descriptionHtml === 'string' ? product.descriptionHtml : ''));
 
-let rawCleanDescription = (product?.subtitle || product?.descriptionHtml || "")
+let rawCleanDescription = rawDescSource
   .replace(/<[^>]*>?/gm, ' ')
   .replace(/\s+/g, ' ')
   .trim()
@@ -1523,6 +1526,7 @@ const productSeoConfigMap: Record<string, {
 const currentHandleKey = (handle || '').toLowerCase();
 const seoConfig = productSeoConfigMap[currentHandleKey];
 const finalSeoTitle = seoConfig?.seoTitle || `${productTitle} | Sujata Premium`;
+const finalMetaDescription = seoConfig?.metaDescription || rawCleanDescription;
 let resolvedFaqs = seoConfig?.faqs || [];
 try {
   if (product?.faqs?.value && product.faqs.value.trim().length > 2) {
