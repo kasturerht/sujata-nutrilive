@@ -52,6 +52,59 @@
     - Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G` | Amazon SKU: `L5-UK79-BHXE`
     - Amazon India ASIN: `B0DP2FWN4J`
     - Canonical Web URL: https://www.sujatanutrilive.com/product/sujata-spirulina-powder
+  - **Comprehensive Sujata Nutrilive Ayurvedic & Cellular Nutrition Portfolio**:
+    - **Sujata Himalayan Sea Buckthorn Capsules (60 Vegan Capsules, 500mg)**:
+      - Price: ₹649.00 | MPN `SJT-SB-CAP-60` | Web SKU `SJT-SB-CAP-60`
+      - Active Profile: Nature's complete plant source of rare Omega 7, 3, 6, 9 & 12x Vitamin C.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-sea-buckthorn-capsules
+    - **Sujata Pure Himalayan Shilajit Capsules (60 Veg Capsules)**:
+      - Price: ₹649.00 | MPN `SJT-SHIL-CAP-60` | Web SKU `SJT-SHIL-CAP-60`
+      - Active Profile: Gold-grade purified Himalayan Shilajit standardized to >75% Fulvic Acid + 84+ ionic trace minerals.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-pure-himalayan-shilajit
+    - **Sujata Plant-Based Vitamin B12 Capsules (90 Veg Capsules)**:
+      - Price: ₹649.00 | MPN `SJT-B12-CAP-90` | Web SKU `SJT-B12-CAP-90`
+      - Active Profile: Fermented botanical culture & Spirulina biomass formula for clean cellular energy metabolism.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-plant-based-vitamin-b12
+    - **Sujata Natural Moringa Leaf Powder (100g Pouch)**:
+      - Price: ₹249.00 | MPN `SJT-MOR-PWD-100G` | Web SKU `SJT-MOR-PWD-100G`
+      - Active Profile: 100% pure shade-dried Moringa Oleifera leaf powder with 90+ nutrients and 46 antioxidants.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-moringa-powder
+    - **Sujata Spirulina Anti-Acne Face Wash (100ml Pump Bottle)**:
+      - Price: ₹199.00 | MPN `SJT-SKIN-FW-100ML` | Web SKU `SJT-SKIN-FW-100ML`
+      - Active Profile: Deep pore cleansing & gentle microalgae exfoliation without stripping lipid barriers.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-facewash
+    - **Sujata Organic Spirulina Face Pack Powder (50g Pouch)**:
+      - Price: ₹199.00 | MPN `SJT-SKIN-FP-50G` | Web SKU `SJT-SKIN-FP-50G`
+      - Active Profile: Multani Mitti, Sandalwood, and Organic Spirulina detox and radiance formula.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-facepack-powder
+    - **Sujata SpiruGlow Handmade Organic Bath Soap (100g Bar)**:
+      - Price: ₹60.00 | MPN `SJT-SKIN-SOAP-100G` | Web SKU `SJT-SKIN-SOAP-100G`
+      - Active Profile: 100% handcrafted herbal bathing bar with cold-pressed coconut oil, turmeric, and spirulina.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spiruglow-bath-soap
+    - **Sujata Spirulina Korean Cream (25g Jar)**:
+      - Price: ₹999.00 | MPN `SJT-SKIN-KC-25G` | Web SKU `SJT-SKIN-KC-25G`
+      - Active Profile: K-Beauty inspired Spirulina glass skin & dark spot corrector with niacinamide & hyaluronic acid.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-korean-cream
+    - **Sujata Bridal Whitening & Brightening Luxury Cream (50g Jar)**:
+      - Price: ₹1,199.00 | MPN `SJT-SKIN-BC-50G` | Web SKU `SJT-SKIN-BC-50G`
+      - Active Profile: Saffron (Kesar), Sandalwood essential oil, and Spirulina bio-compounds for luminous bridal glow.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-bridal-whitening-cream
+    - **Sujata Spirulina & Coconut Herbal Hair Oil (50ml Bottle)**:
+      - Price: ₹249.00 | MPN `SJT-HAIR-OIL-50ML` | Web SKU `SJT-HAIR-OIL-50ML`
+      - Active Profile: Non-sticky Ayurvedic hair growth and anti-dandruff oil with cold-pressed virgin coconut & biotin.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-coconut-hair-oil
+    - **Sujata SpiruShine Spirulina Shampoo with Conditioner (100ml Bottle)**:
+      - Price: ₹250.00 | MPN `SJT-HAIR-SHMP-100ML` | Web SKU `SJT-HAIR-SHMP-100ML`
+      - Active Profile: 2-in-1 anti-thinning shampoo + deep conditioner with plant keratin and wheat protein.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirushine-shampoo-conditioner
+    - **Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)**:
+      - Price: ₹950.00 (Save ₹300) | MPN `SJT-CMB-IMMUNITY` | Web SKU `SJT-CMB-IMMUNITY`
+      - Active Profile: 360° cellular synergy combining complete plant protein & iron with rare Omega 3, 6, 7 & 9.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-sea-buckthorn-combo
+    - **Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack (1, 2 & 3 Months)**:
+      - Price: ₹1,100.00 | MPN `SJT-CMB-HEALTHYLIFE` | Web SKU `SJT-CMB-HEALTHYLIFE-1M`
+      - Active Profile: Structured multi-month daily protocol with progressive savings up to ₹600.
+      - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-sea-buckthorn-combo-pack
 
 ---
 
@@ -167,7 +220,12 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
   - **60 Tablets (30 Days)**: **₹350.00** COD/Prepaid (MRP ₹400.00). Calculated daily routine cost: ₹11.66. Product Identifier: MPN `SJT-SP-TAB-60` | Web SKU `SJT-SP-TAB-60`.
   - **120 Tablets Value Pack (60 Days)**: **₹550.00** COD/Prepaid (MRP ₹699.00). Calculated daily routine cost: ₹9.16. Product Identifier: MPN `SJT-SP-TAB-120` | Web SKU `SJT-SP-TAB-120`.
 - **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350.00 (MRP ₹499.00). Daily routine cost: ₹10.50. Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G`.
-- **Sujata Daily Super Immunity Combo (Spirulina + Sea Buckthorn)**: ₹1,100 (MRP ₹1,599).
+- **Sujata Himalayan Sea Buckthorn Capsules (60 Capsules)**: ₹649.00. Product Identifier: MPN `SJT-SB-CAP-60`.
+- **Sujata Pure Himalayan Shilajit Capsules (60 Capsules)**: ₹649.00. Product Identifier: MPN `SJT-SHIL-CAP-60`.
+- **Sujata Plant-Based Vitamin B12 Capsules (90 Capsules)**: ₹649.00. Product Identifier: MPN `SJT-B12-CAP-90`.
+- **Sujata Natural Moringa Leaf Powder (100g Pouch)**: ₹249.00. Product Identifier: MPN `SJT-MOR-PWD-100G`.
+- **Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)**: ₹950.00 (MRP ₹1,299). Product Identifier: MPN `SJT-CMB-IMMUNITY`.
+- **Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack (Multi-Month Protocol)**: ₹1,100.00 (MRP ₹1,599). Product Identifier: MPN `SJT-CMB-HEALTHYLIFE`.
 
 ---
 

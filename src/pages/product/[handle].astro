@@ -532,8 +532,8 @@ const amazonAsinMap: Record<string, { asin: string; sku: string }> = {
 
 const amazonProduct = handle ? amazonAsinMap[handle] : null;
 
-// 🌟 Authoritative Brand SKU & MPN Registry (Google Merchant Center & Schema.org Compliant)
-// Sujata Nutrilive proprietary formulations utilize Brand + MPN (Manufacturer Part Number) hierarchy
+// 🌟 Authoritative Brand SKU & MPN Master Catalog Registry (Google Merchant Center & Schema.org Compliant)
+// Sujata Nutrilive proprietary formulations utilize Brand + MPN (Manufacturer Part Number) hierarchy across all 16 SKUs
 const authoritativeSkuMap: Record<string, { defaultSku: string; defaultMpn: string; variants: Record<string, { sku: string; mpn: string; count: number; unit: string }> }> = {
   'sujata-spirulina-tablets': {
     defaultSku: 'SJT-SP-TAB-60',
@@ -590,6 +590,185 @@ const authoritativeSkuMap: Record<string, { defaultSku: string; defaultMpn: stri
     defaultMpn: 'SJT-SB-CAP-60',
     variants: {
       '60': { sku: 'SJT-SB-CAP-60', mpn: 'SJT-SB-CAP-60', count: 60, unit: 'Vegetarian Capsules' }
+    }
+  },
+  'sea-buckthorn-capsules': {
+    defaultSku: 'SJT-SB-CAP-60',
+    defaultMpn: 'SJT-SB-CAP-60',
+    variants: {
+      '60': { sku: 'SJT-SB-CAP-60', mpn: 'SJT-SB-CAP-60', count: 60, unit: 'Vegetarian Capsules' }
+    }
+  },
+  'sujata-plant-based-vitamin-b12': {
+    defaultSku: 'SJT-B12-CAP-90',
+    defaultMpn: 'SJT-B12-CAP-90',
+    variants: {
+      '90': { sku: 'SJT-B12-CAP-90', mpn: 'SJT-B12-CAP-90', count: 90, unit: 'Vegetarian Capsules' }
+    }
+  },
+  'plant-based-vitamin-b12': {
+    defaultSku: 'SJT-B12-CAP-90',
+    defaultMpn: 'SJT-B12-CAP-90',
+    variants: {
+      '90': { sku: 'SJT-B12-CAP-90', mpn: 'SJT-B12-CAP-90', count: 90, unit: 'Vegetarian Capsules' }
+    }
+  },
+  'sujata-pure-himalayan-shilajit': {
+    defaultSku: 'SJT-SHIL-CAP-60',
+    defaultMpn: 'SJT-SHIL-CAP-60',
+    variants: {
+      '60': { sku: 'SJT-SHIL-CAP-60', mpn: 'SJT-SHIL-CAP-60', count: 60, unit: 'Vegetarian Capsules' }
+    }
+  },
+  'pure-himalayan-shilajit': {
+    defaultSku: 'SJT-SHIL-CAP-60',
+    defaultMpn: 'SJT-SHIL-CAP-60',
+    variants: {
+      '60': { sku: 'SJT-SHIL-CAP-60', mpn: 'SJT-SHIL-CAP-60', count: 60, unit: 'Vegetarian Capsules' }
+    }
+  },
+  'sujata-moringa-powder': {
+    defaultSku: 'SJT-MOR-PWD-100G',
+    defaultMpn: 'SJT-MOR-PWD-100G',
+    variants: {
+      '100': { sku: 'SJT-MOR-PWD-100G', mpn: 'SJT-MOR-PWD-100G', count: 100, unit: 'g' }
+    }
+  },
+  'moringa-powder': {
+    defaultSku: 'SJT-MOR-PWD-100G',
+    defaultMpn: 'SJT-MOR-PWD-100G',
+    variants: {
+      '100': { sku: 'SJT-MOR-PWD-100G', mpn: 'SJT-MOR-PWD-100G', count: 100, unit: 'g' }
+    }
+  },
+  'sujata-spirulina-facewash': {
+    defaultSku: 'SJT-SKIN-FW-100ML',
+    defaultMpn: 'SJT-SKIN-FW-100ML',
+    variants: {
+      '100': { sku: 'SJT-SKIN-FW-100ML', mpn: 'SJT-SKIN-FW-100ML', count: 100, unit: 'ml' }
+    }
+  },
+  'spirulina-facewash': {
+    defaultSku: 'SJT-SKIN-FW-100ML',
+    defaultMpn: 'SJT-SKIN-FW-100ML',
+    variants: {
+      '100': { sku: 'SJT-SKIN-FW-100ML', mpn: 'SJT-SKIN-FW-100ML', count: 100, unit: 'ml' }
+    }
+  },
+  'sujata-spirulina-facepack-powder': {
+    defaultSku: 'SJT-SKIN-FP-50G',
+    defaultMpn: 'SJT-SKIN-FP-50G',
+    variants: {
+      '50': { sku: 'SJT-SKIN-FP-50G', mpn: 'SJT-SKIN-FP-50G', count: 50, unit: 'g' }
+    }
+  },
+  'spirulina-facepack-powder': {
+    defaultSku: 'SJT-SKIN-FP-50G',
+    defaultMpn: 'SJT-SKIN-FP-50G',
+    variants: {
+      '50': { sku: 'SJT-SKIN-FP-50G', mpn: 'SJT-SKIN-FP-50G', count: 50, unit: 'g' }
+    }
+  },
+  'sujata-spiruglow-bath-soap': {
+    defaultSku: 'SJT-SKIN-SOAP-100G',
+    defaultMpn: 'SJT-SKIN-SOAP-100G',
+    variants: {
+      '100': { sku: 'SJT-SKIN-SOAP-100G', mpn: 'SJT-SKIN-SOAP-100G', count: 100, unit: 'g Bar' }
+    }
+  },
+  'spiruglow-bath-soap': {
+    defaultSku: 'SJT-SKIN-SOAP-100G',
+    defaultMpn: 'SJT-SKIN-SOAP-100G',
+    variants: {
+      '100': { sku: 'SJT-SKIN-SOAP-100G', mpn: 'SJT-SKIN-SOAP-100G', count: 100, unit: 'g Bar' }
+    }
+  },
+  'sujata-spirulina-korean-cream': {
+    defaultSku: 'SJT-SKIN-KC-25G',
+    defaultMpn: 'SJT-SKIN-KC-25G',
+    variants: {
+      '25': { sku: 'SJT-SKIN-KC-25G', mpn: 'SJT-SKIN-KC-25G', count: 25, unit: 'g Jar' }
+    }
+  },
+  'spirulina-korean-cream': {
+    defaultSku: 'SJT-SKIN-KC-25G',
+    defaultMpn: 'SJT-SKIN-KC-25G',
+    variants: {
+      '25': { sku: 'SJT-SKIN-KC-25G', mpn: 'SJT-SKIN-KC-25G', count: 25, unit: 'g Jar' }
+    }
+  },
+  'sujata-bridal-whitening-cream': {
+    defaultSku: 'SJT-SKIN-BC-50G',
+    defaultMpn: 'SJT-SKIN-BC-50G',
+    variants: {
+      '50': { sku: 'SJT-SKIN-BC-50G', mpn: 'SJT-SKIN-BC-50G', count: 50, unit: 'g Jar' }
+    }
+  },
+  'bridal-whitening-cream': {
+    defaultSku: 'SJT-SKIN-BC-50G',
+    defaultMpn: 'SJT-SKIN-BC-50G',
+    variants: {
+      '50': { sku: 'SJT-SKIN-BC-50G', mpn: 'SJT-SKIN-BC-50G', count: 50, unit: 'g Jar' }
+    }
+  },
+  'sujata-spirulina-coconut-hair-oil': {
+    defaultSku: 'SJT-HAIR-OIL-50ML',
+    defaultMpn: 'SJT-HAIR-OIL-50ML',
+    variants: {
+      '50': { sku: 'SJT-HAIR-OIL-50ML', mpn: 'SJT-HAIR-OIL-50ML', count: 50, unit: 'ml Bottle' }
+    }
+  },
+  'spirulina-coconut-hair-oil': {
+    defaultSku: 'SJT-HAIR-OIL-50ML',
+    defaultMpn: 'SJT-HAIR-OIL-50ML',
+    variants: {
+      '50': { sku: 'SJT-HAIR-OIL-50ML', mpn: 'SJT-HAIR-OIL-50ML', count: 50, unit: 'ml Bottle' }
+    }
+  },
+  'sujata-spirushine-shampoo-conditioner': {
+    defaultSku: 'SJT-HAIR-SHMP-100ML',
+    defaultMpn: 'SJT-HAIR-SHMP-100ML',
+    variants: {
+      '100': { sku: 'SJT-HAIR-SHMP-100ML', mpn: 'SJT-HAIR-SHMP-100ML', count: 100, unit: 'ml Bottle' }
+    }
+  },
+  'spirushine-shampoo-conditioner': {
+    defaultSku: 'SJT-HAIR-SHMP-100ML',
+    defaultMpn: 'SJT-HAIR-SHMP-100ML',
+    variants: {
+      '100': { sku: 'SJT-HAIR-SHMP-100ML', mpn: 'SJT-HAIR-SHMP-100ML', count: 100, unit: 'ml Bottle' }
+    }
+  },
+  'sujata-spirulina-sea-buckthorn-combo': {
+    defaultSku: 'SJT-CMB-IMMUNITY',
+    defaultMpn: 'SJT-CMB-IMMUNITY',
+    variants: {
+      'combo': { sku: 'SJT-CMB-IMMUNITY', mpn: 'SJT-CMB-IMMUNITY', count: 2, unit: 'Bottle Super Immunity Combo' }
+    }
+  },
+  'spirulina-sea-buckthorn-combo': {
+    defaultSku: 'SJT-CMB-IMMUNITY',
+    defaultMpn: 'SJT-CMB-IMMUNITY',
+    variants: {
+      'combo': { sku: 'SJT-CMB-IMMUNITY', mpn: 'SJT-CMB-IMMUNITY', count: 2, unit: 'Bottle Super Immunity Combo' }
+    }
+  },
+  'sujata-spirulina-sea-buckthorn-combo-pack': {
+    defaultSku: 'SJT-CMB-HEALTHYLIFE-1M',
+    defaultMpn: 'SJT-CMB-HEALTHYLIFE-1M',
+    variants: {
+      '1': { sku: 'SJT-CMB-HEALTHYLIFE-1M', mpn: 'SJT-CMB-HEALTHYLIFE-1M', count: 1, unit: 'Month Supply Protocol' },
+      '2': { sku: 'SJT-CMB-HEALTHYLIFE-2M', mpn: 'SJT-CMB-HEALTHYLIFE-2M', count: 2, unit: 'Month Supply Protocol' },
+      '3': { sku: 'SJT-CMB-HEALTHYLIFE-3M', mpn: 'SJT-CMB-HEALTHYLIFE-3M', count: 3, unit: 'Month Supply Protocol' }
+    }
+  },
+  'spirulina-sea-buckthorn-combo-pack': {
+    defaultSku: 'SJT-CMB-HEALTHYLIFE-1M',
+    defaultMpn: 'SJT-CMB-HEALTHYLIFE-1M',
+    variants: {
+      '1': { sku: 'SJT-CMB-HEALTHYLIFE-1M', mpn: 'SJT-CMB-HEALTHYLIFE-1M', count: 1, unit: 'Month Supply Protocol' },
+      '2': { sku: 'SJT-CMB-HEALTHYLIFE-2M', mpn: 'SJT-CMB-HEALTHYLIFE-2M', count: 2, unit: 'Month Supply Protocol' },
+      '3': { sku: 'SJT-CMB-HEALTHYLIFE-3M', mpn: 'SJT-CMB-HEALTHYLIFE-3M', count: 3, unit: 'Month Supply Protocol' }
     }
   }
 };
@@ -689,6 +868,13 @@ const variantOfferList = variants.length > 0
         "availability": v.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
         "sku": vIdent.sku,
         "mpn": vIdent.mpn,
+        ...(vIdent.sizeDetails ? {
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "value": vIdent.sizeDetails.count,
+            "unitText": vIdent.sizeDetails.unit
+          }
+        } : {}),
         "seller": {
           "@type": "Organization",
           "name": "Sujata Nutrilive Official Direct Store",
@@ -712,6 +898,13 @@ const variantOfferList = variants.length > 0
         "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
         "sku": primaryIdentifiers.sku,
         "mpn": primaryIdentifiers.mpn,
+        ...(primaryIdentifiers.sizeDetails ? {
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "value": primaryIdentifiers.sizeDetails.count,
+            "unitText": primaryIdentifiers.sizeDetails.unit
+          }
+        } : {}),
         "seller": {
           "@type": "Organization",
           "name": "Sujata Nutrilive Official Direct Store",
@@ -932,6 +1125,14 @@ const productSchema = {
   "sku": primaryIdentifiers.sku,
   "mpn": primaryIdentifiers.mpn,
   "productID": `sku:${primaryIdentifiers.sku}`,
+  ...(primaryIdentifiers.sizeDetails ? {
+    "size": `${primaryIdentifiers.sizeDetails.count} ${primaryIdentifiers.sizeDetails.unit}`,
+    "hasMeasurement": {
+      "@type": "QuantitativeValue",
+      "value": primaryIdentifiers.sizeDetails.count,
+      "unitText": primaryIdentifiers.sizeDetails.unit
+    }
+  } : {}),
   ...(amazonProduct ? { "asin": amazonProduct.asin } : {}),
   "sameAs": [
     ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : []),
