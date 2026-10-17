@@ -3,6 +3,7 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -21,9 +22,64 @@ try {
 } catch (e) {
   console.warn("Shopify shippingPolicy fetch fallback active:", e);
 }
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
+const pageUrl = `${siteUrl}/shipping-policy`;
+
+const shippingPolicySchemas = [
+  {
+    "@type": "WebPage",
+    "@id": `${pageUrl}/#webpage`,
+    "name": "Shipping & Express Delivery Policy | Sujata Nutrilive",
+    "description": "Priority air freight across 26,000+ Indian pincodes. 24h dispatch SLA, 48–72h doorstep delivery, and free Cash on Delivery pan-India.",
+    "url": pageUrl,
+    "mainEntity": {
+      "@type": "DeliveryTimeSettings",
+      "@id": `${siteUrl}/#shipping-policy-details`,
+      "transitTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 2,
+        "maxValue": 5,
+        "unitCode": "d"
+      },
+      "handlingTime": {
+        "@type": "QuantitativeValue",
+        "minValue": 0,
+        "maxValue": 1,
+        "unitCode": "d"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "IN"
+      }
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Shipping & Express Delivery Policy",
+        "item": pageUrl
+      }
+    ]
+  }
+];
 ---
 
-<StoreLayout title="Shipping & Express Delivery Policy | Sujata Nutrilive">
+<StoreLayout 
+  title="Shipping & Express Delivery Policy | Sujata Nutrilive"
+  description="Official Shipping Policy from Sujata Nutrilive Agrotech. 24h dispatch SLA, 48–72h priority express delivery across 26,000+ Indian pincodes. 100% Free Express Shipping & COD."
+  extraSchema={shippingPolicySchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />

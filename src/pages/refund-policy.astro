@@ -3,6 +3,7 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -21,9 +22,56 @@ try {
 } catch (e) {
   console.warn("Shopify refundPolicy fetch fallback active:", e);
 }
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
+const pageUrl = `${siteUrl}/refund-policy`;
+
+const refundPolicySchemas = [
+  {
+    "@type": "WebPage",
+    "@id": `${pageUrl}/#webpage`,
+    "name": "40-Day Evaluation Guarantee & Refund Policy | Sujata Nutrilive",
+    "description": "Official 40-Day Evaluation Guarantee: 30-day bottle routine plus 10-day evaluation buffer with 100% full refund promise, even on empty bottles.",
+    "url": pageUrl,
+    "mainEntity": {
+      "@type": "MerchantReturnPolicy",
+      "@id": `${siteUrl}/#merchant-return-policy`,
+      "name": "Sujata 40-Day Evaluation Guarantee",
+      "applicableCountry": "IN",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 40,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn",
+      "refundType": "https://schema.org/FullRefund",
+      "customerRemorseReturnFees": "https://schema.org/FreeReturn"
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Refund Policy & 40-Day Guarantee",
+        "item": pageUrl
+      }
+    ]
+  }
+];
 ---
 
-<StoreLayout title="40-Day Evaluation Guarantee & Refund Policy | Sujata Nutrilive">
+<StoreLayout 
+  title="40-Day Evaluation Guarantee & Refund Policy | Sujata Nutrilive"
+  description="Official 40-Day Evaluation Guarantee from Sujata Nutrilive Agrotech. 30-day daily routine plus 10-day evaluation buffer with 100% full refund even on empty bottles. Free returns pan-India."
+  extraSchema={refundPolicySchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />
