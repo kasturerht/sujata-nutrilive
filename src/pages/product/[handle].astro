@@ -25,6 +25,8 @@ const productQuery = `
             price { amount currencyCode } 
             compareAtPrice { amount currencyCode }
             selectedOptions { name value } 
+            sku
+            barcode
           } 
         } 
       }
@@ -530,6 +532,108 @@ const amazonAsinMap: Record<string, { asin: string; sku: string }> = {
 
 const amazonProduct = handle ? amazonAsinMap[handle] : null;
 
+// 🌟 Silicon Valley Dynamic Multi-Variant Offer Graph (Google Merchant Center 2026 Compliant)
+const offerShippingDetails = {
+  "@type": "OfferShippingDetails",
+  "shippingRate": {
+    "@type": "MonetaryAmount",
+    "value": "0",
+    "currency": "INR"
+  },
+  "shippingDestination": {
+    "@type": "DefinedRegion",
+    "addressCountry": "IN"
+  },
+  "deliveryTime": {
+    "@type": "ShippingDeliveryTime",
+    "handlingTime": {
+      "@type": "QuantitativeValue",
+      "minValue": 0,
+      "maxValue": 1,
+      "unitCode": "d"
+    },
+    "transitTime": {
+      "@type": "QuantitativeValue",
+      "minValue": 2,
+      "maxValue": 4,
+      "unitCode": "d"
+    }
+  }
+};
+
+const offerReturnPolicy = {
+  "@type": "MerchantReturnPolicy",
+  "applicableCountry": "IN",
+  "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+  "merchantReturnDays": 40,
+  "returnMethod": "https://schema.org/ReturnByMail",
+  "returnFees": "https://schema.org/FreeReturn"
+};
+
+const variantOfferList = variants.length > 0 
+  ? variants.map((v: any, idx: number) => {
+      const vPrice = parseFloat(v.price?.amount || "0").toFixed(2);
+      const vIdClean = v.id ? v.id.replace('gid://shopify/ProductVariant/', '') : String(idx + 1);
+      return {
+        "@type": "Offer",
+        "@id": `${canonicalURL}#offer-variant-${vIdClean}`,
+        "name": `${productTitle} - ${v.title}`,
+        "url": `${canonicalURL}?variant=${vIdClean}`,
+        "priceCurrency": v.price?.currencyCode || "INR",
+        "price": vPrice,
+        "validFrom": "2024-01-01",
+        "priceValidUntil": "2027-12-31",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": v.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        "sku": v.sku || amazonProduct?.sku || handle || `sujata-variant-${vIdClean}`,
+        "seller": {
+          "@type": "Organization",
+          "name": "Sujata Nutrilive Official Direct Store",
+          "@id": `${siteUrl}/#organization`
+        },
+        "shippingDetails": offerShippingDetails,
+        "hasMerchantReturnPolicy": offerReturnPolicy
+      };
+    })
+  : [
+      {
+        "@type": "Offer",
+        "@id": `${canonicalURL}#offer-default`,
+        "name": productTitle,
+        "url": canonicalURL,
+        "priceCurrency": "INR",
+        "price": price || "350.00",
+        "validFrom": "2024-01-01",
+        "priceValidUntil": "2027-12-31",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        "sku": amazonProduct?.sku || handle || "sujata-product",
+        "seller": {
+          "@type": "Organization",
+          "name": "Sujata Nutrilive Official Direct Store",
+          "@id": `${siteUrl}/#organization`
+        },
+        "shippingDetails": offerShippingDetails,
+        "hasMerchantReturnPolicy": offerReturnPolicy
+      }
+    ];
+
+const validOfferPrices = variantOfferList.map((o: any) => parseFloat(o.price)).filter((p: number) => !isNaN(p) && p > 0);
+const minVariantPrice = validOfferPrices.length > 0 ? Math.min(...validOfferPrices).toFixed(2) : (price || "350.00");
+const maxVariantPrice = validOfferPrices.length > 0 ? Math.max(...validOfferPrices).toFixed(2) : (maxPrice || minVariantPrice);
+
+const structuredProductOffers = variantOfferList.length > 1
+  ? {
+      "@type": "AggregateOffer",
+      "@id": `${canonicalURL}#aggregate-offer`,
+      "priceCurrency": "INR",
+      "lowPrice": minVariantPrice,
+      "highPrice": maxVariantPrice,
+      "offerCount": variantOfferList.length.toString(),
+      "offers": variantOfferList
+    }
+  : variantOfferList[0];
+
 const productSchema = {
   "@type": "Product",
   "@id": `${canonicalURL}#product`,
@@ -565,74 +669,7 @@ const productSchema = {
     "bestRating": "5",
     "worstRating": "1"
   },
-  "offers": [
-    {
-      "@type": "Offer",
-      "@id": `${canonicalURL}#offer`,
-      "url": canonicalURL,
-      "priceCurrency": "INR",
-      "price": price || "499.00",
-      "validFrom": "2024-01-01",
-      "priceValidUntil": "2027-12-31",
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Sujata Nutrilive Official Direct Store",
-        "@id": `${siteUrl}/#organization`
-      },
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": "INR"
-        },
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "IN"
-        },
-        "deliveryTime": {
-          "@type": "ShippingDeliveryTime",
-          "handlingTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 0,
-            "maxValue": 1,
-            "unitCode": "d"
-          },
-          "transitTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 2,
-            "maxValue": 5,
-            "unitCode": "d"
-          }
-        }
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "applicableCountry": "IN",
-        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 40,
-        "returnMethod": "https://schema.org/ReturnByMail",
-        "returnFees": "https://schema.org/FreeReturn"
-      }
-    },
-    ...(amazonProduct ? [{
-      "@type": "Offer",
-      "@id": `https://www.amazon.in/dp/${amazonProduct.asin}#offer`,
-      "url": `https://www.amazon.in/dp/${amazonProduct.asin}`,
-      "priceCurrency": "INR",
-      "price": "499.00",
-      "validFrom": "2024-01-01",
-      "priceValidUntil": "2027-12-31",
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Sujata Nutrilive Agrotech on Amazon India"
-      }
-    }] : [])
-  ]
+  "offers": structuredProductOffers
 };
 
 const breadcrumbSchema = {
