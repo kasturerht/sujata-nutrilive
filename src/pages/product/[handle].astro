@@ -1836,26 +1836,55 @@ const productVideoSchema = videoData ? {
                 <span class={`text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-emerald-200/60 whitespace-nowrap shrink-0 ${hasInitialDiscount ? '' : 'hidden'}`} id="display-discount-badge">Save {initialDiscountPct}%</span>
                 <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest whitespace-nowrap shrink-0">Taxes Included</span>
               </div>
+
+              {/* 🌟 Micro-Cost Per Day Anchoring Indicator */}
+              <div id="pdp-per-day-anchor" class="mt-2.5 flex flex-wrap items-center gap-2 text-xs font-bold text-emerald-900 bg-emerald-50/80 px-3 py-1.5 rounded-xl border border-emerald-200/60 w-fit">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                <span id="pdp-per-day-text" class="font-extrabold text-emerald-950">Daily Routine Cost</span>
+                <span id="pdp-per-day-savings" class="text-[10px] bg-emerald-200/70 text-emerald-900 px-2 py-0.5 rounded-md font-black uppercase tracking-wider hidden"></span>
+              </div>
             </div>
 
             {variants.length > 1 && (
               <div class="mb-6 border-t border-gray-50 pt-5">
                 <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size / Duration</span>
-                <div class="flex flex-wrap gap-2" id="variant-selector">
+                <div class="flex flex-wrap gap-2.5" id="variant-selector">
                   {variants.map((v: any, i: number) => {
                     const vPrice = v.price?.amount || "0";
                     const vCompare = v.compareAtPrice?.amount || "";
+                    const numericPrice = parseFloat(vPrice) || 0;
+                    const countMatch = (v.title || '').match(/(\d+)\s*(Tablets?|Capsules?|Pouch|Bar|ml|g)?/i);
+                    const count = countMatch ? parseInt(countMatch[1]) : 0;
+                    const isTabletOrCap = /tablet|capsule/i.test(v.title || '') || /tablet|capsule/i.test(productTitle || '');
+                    const dailyServing = isTabletOrCap ? 2 : 1;
+                    const daysSupply = (count > 0 && isTabletOrCap) ? Math.round(count / dailyServing) : 0;
+                    const perDayCost = (daysSupply > 0 && numericPrice > 0) ? (numericPrice / daysSupply).toFixed(2) : null;
+                    const isBestValue = /120|180/i.test(v.title || '');
+
                     return (
                       <button 
-                        class={`variant-btn px-4 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-xl border-2 text-xs font-bold transition-all duration-300 touch-manipulation whitespace-nowrap ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                        class={`variant-btn relative px-4 sm:px-5 py-2.5 sm:py-3 min-h-[50px] rounded-xl border-2 text-left transition-all duration-300 touch-manipulation whitespace-nowrap flex flex-col justify-center ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
                         data-variant-id={v.id}
                         data-base-price={vPrice}
                         data-base-compare={vCompare}
                         data-price={vPrice}
                         data-compare-price={vCompare}
                         data-title={v.title}
+                        data-per-day={perDayCost || ''}
+                        data-days-supply={daysSupply || ''}
+                        data-is-best-value={isBestValue ? 'true' : 'false'}
                       >
-                        {v.title}
+                        <div class="flex items-center gap-1.5">
+                          <span class="text-xs font-bold">{v.title}</span>
+                          {isBestValue && (
+                            <span class="text-[9px] font-black bg-emerald-700 text-white px-1.5 py-0.5 rounded-full uppercase tracking-wider">Best Value</span>
+                          )}
+                        </div>
+                        {perDayCost && (
+                          <span class="text-[10px] font-semibold text-emerald-700 mt-0.5">
+                            ₹{perDayCost}/day • {daysSupply}-Day Supply
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -3245,6 +3274,35 @@ const productVideoSchema = videoData ? {
         // 1. Update Main and Sticky Display Prices
         if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
         if (stickyPriceDisplay) stickyPriceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
+
+        // 1.1 Dynamic Micro-Cost Per Day Anchoring
+        const activeVariantBtn = document.querySelector('.variant-btn.selected-variant') || document.querySelector('.variant-btn');
+        const perDay = activeVariantBtn?.getAttribute('data-per-day');
+        const daysSupply = activeVariantBtn?.getAttribute('data-days-supply');
+        const isBestVal = activeVariantBtn?.getAttribute('data-is-best-value') === 'true';
+
+        const perDayContainer = document.getElementById('pdp-per-day-anchor');
+        const perDayText = document.getElementById('pdp-per-day-text');
+        const perDaySavings = document.getElementById('pdp-per-day-savings');
+
+        if (perDay && perDayText && daysSupply && parseFloat(daysSupply) > 0) {
+          const effectivePrice = isUpi ? upiPrice : productState.basePrice;
+          const effectivePerDay = (effectivePrice / parseFloat(daysSupply)).toFixed(2);
+          perDayText.innerText = `Daily Routine: Just ₹${effectivePerDay} / day (${daysSupply}-Day Supply)`;
+          
+          if (perDaySavings) {
+            if (isBestVal) {
+              const diffSavings = productState.baseCompare > productState.basePrice ? (productState.baseCompare - productState.basePrice) : 150;
+              perDaySavings.innerText = `🔥 Best Value • Save ₹${diffSavings}`;
+              perDaySavings.classList.remove('hidden');
+            } else {
+              perDaySavings.classList.add('hidden');
+            }
+          }
+          perDayContainer?.classList.remove('hidden');
+        } else {
+          perDayContainer?.classList.add('hidden');
+        }
 
         // 2. Update Compare Price & Discount Badges (Rock-Solid Anchored MRP: Never jumps or changes!)
         if (currentCompare > productState.basePrice) {
