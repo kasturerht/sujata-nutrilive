@@ -54,8 +54,24 @@ const schemaGraphItems: any[] = [
     "foundingDate": "2024",
     "founder": {
       "@type": "Person",
-      "name": "Rohit Kasture",
-      "jobTitle": "Founder & Managing Director"
+      "@id": `${siteUrl}/#founder`,
+      "name": "Yash Rajendra Surywanshi",
+      "alternateName": ["Yash Suryavanshi"],
+      "jobTitle": "Founder & Head of Operations",
+      "worksFor": {
+        "@id": `${siteUrl}/#organization`
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nashik",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      },
+      "knowsAbout": [
+        "Cold-Compressed Spirulina Cultivation",
+        "Dietary Supplement Manufacturing & FSSAI Compliance",
+        "Phycocyanin Bio-Extraction"
+      ]
     },
     "description": "India's pioneer in sub-40°C cold-pressed Spirulina and cellular wellness supplements. Certified pure, odorless, zero synthetic binders, and FSSAI statutory safety compliant.",
     "telephone": BRAND_CONFIG.supportPhone,
