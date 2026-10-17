@@ -56,8 +56,8 @@ const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW
   </div>
 </section>
 
-<!-- Official Judge.me Global Assets & Dynamic Hydration Engine -->
-<link rel="stylesheet" href="https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/shopify_v2.css" media="all" />
+<!-- Official Judge.me Global Assets & Dynamic Hydration Engine (Decoupled Canonical Edge CDN) -->
+<link rel="stylesheet" href="https://cdnwidget.judge.me/shopify_v2.css" media="all" />
 
 <style is:global>
   /* 🌟 Official Judge.me Star Icon Font Face (Base64 Embedded WOFF Engine) */
@@ -229,11 +229,16 @@ const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW
   jdgm.CDN_HOST = "https://cdnwidget.judge.me/";
   jdgm.CDN_HOST_ALT = "https://cdn2.judge.me/cdn/widget_frontend/";
   jdgm.API_HOST = "https://api.judge.me/";
-  jdgm.CDN_BASE_URL = "https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/";
+  jdgm.CDN_BASE_URL = "https://cdnwidget.judge.me/";
   jdgm.CDN_API_HOST = "https://cdn.judge.me/";
   jdgm.SHOP_DOMAIN = shopifyDomain;
   jdgm.PLATFORM = "shopify";
   jdgm.PUBLIC_TOKEN = publicToken;
 </script>
 
-<script src="https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/shopify_v2.js" defer></script>
+<script 
+  src="https://cdnwidget.judge.me/shopify_v2.js" 
+  data-shop-domain={shopifyDomain}
+  onerror="this.onerror=null; this.src='https://cdn.judge.me/shopify_v2.js';"
+  defer
+></script>
