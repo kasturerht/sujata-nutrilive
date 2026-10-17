@@ -4,6 +4,7 @@
 
 import type { APIRoute } from 'astro';
 import { BRAND_CONFIG } from '../config/brand';
+import { resolveDynamicProductEntity } from '../lib/product-entity-resolver';
 
 export const prerender = false;
 
@@ -85,6 +86,7 @@ export const GET: APIRoute = async () => {
                   id
                   title
                   sku
+                  barcode
                   availableForSale
                   price {
                     amount
@@ -165,6 +167,7 @@ export const GET: APIRoute = async () => {
       const itemTitle = isDefaultTitle ? compliantTitle : `${compliantTitle} (${variant.title})`;
 
       const isAvailable = variant.availableForSale ?? p.availableForSale;
+      const entity = resolveDynamicProductEntity(p, variant);
 
       itemsXml += `
     <item>
@@ -177,10 +180,16 @@ export const GET: APIRoute = async () => {
       <g:condition>new</g:condition>
       <g:availability>${isAvailable ? 'in_stock' : 'out_of_stock'}</g:availability>
       <g:price>${escapeXml(formattedPrice)}</g:price>
-      <g:brand>Sujata Nutrilive</g:brand>
+      <g:brand>${escapeXml(entity.brand)}</g:brand>
+      <g:mpn>${escapeXml(entity.mpn)}</g:mpn>
+      <g:identifier_exists>${entity.identifierExists}</g:identifier_exists>
+      ${entity.gtin ? `<g:gtin>${escapeXml(entity.gtin)}</g:gtin>` : ''}
+      <g:product_type>${escapeXml(entity.productType)}</g:product_type>
       <g:google_product_category>${googleCategory}</g:google_product_category>
-      <g:identifier_exists>no</g:identifier_exists>
-      ${variant.sku ? `<g:mpn>${escapeXml(variant.sku)}</g:mpn>` : `<g:mpn>${escapeXml(variantId)}</g:mpn>`}
+      <g:custom_label_0>${escapeXml(entity.customLabels.label0)}</g:custom_label_0>
+      <g:custom_label_1>${escapeXml(entity.customLabels.label1)}</g:custom_label_1>
+      <g:custom_label_2>${escapeXml(entity.customLabels.label2)}</g:custom_label_2>
+      <g:custom_label_3>${escapeXml(entity.customLabels.label3)}</g:custom_label_3>
       <g:shipping>
         <g:country>IN</g:country>
         <g:service>Priority Express Courier</g:service>

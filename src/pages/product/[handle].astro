@@ -5,6 +5,7 @@ import StoreFooter from '../../components/StoreFooter.astro';
 import JudgeMeReviews from '../../components/JudgeMeReviews.astro';
 import { BRAND_CONFIG, getWhatsAppLink } from '../../config/brand';
 import { getJudgeMeSsrData } from '../../lib/judgeme-ssr';
+import { resolveDynamicProductEntity } from '../../lib/product-entity-resolver';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -871,6 +872,7 @@ const variantOfferList = variants.length > 0
       const vPrice = parseFloat(v.price?.amount || "0").toFixed(2);
       const vIdClean = v.id ? v.id.replace('gid://shopify/ProductVariant/', '') : String(idx + 1);
       const vIdent = resolveVariantIdentifiers(v, idx);
+      const vEntity = resolveDynamicProductEntity(product || { handle, title: productTitle }, v);
       return {
         "@type": "Offer",
         "@id": `${canonicalURL}#offer-variant-${vIdClean}`,
@@ -882,8 +884,9 @@ const variantOfferList = variants.length > 0
         "priceValidUntil": "2027-12-31",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": v.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-        "sku": vIdent.sku,
-        "mpn": vIdent.mpn,
+        "sku": vEntity.sku || vIdent.sku,
+        "mpn": vEntity.mpn || vIdent.mpn,
+        ...(vEntity.gtin ? { "gtin13": vEntity.gtin } : {}),
         ...(vIdent.sizeDetails ? {
           "eligibleQuantity": {
             "@type": "QuantitativeValue",
@@ -1132,15 +1135,21 @@ const productProperties = (handle && productAdditionalProperties[handle])
       { "@type": "PropertyValue", "name": "Country of Origin", "value": "India" }
     ];
 
+const dynamicPrimaryEntity = resolveDynamicProductEntity(
+  product || { handle, title: productTitle },
+  variants[0]
+);
+
 const productSchema = {
   "@type": "Product",
   "@id": `${canonicalURL}#product`,
   "name": productTitle,
   "description": rawCleanDescription,
   "image": structuredImages,
-  "sku": primaryIdentifiers.sku,
-  "mpn": primaryIdentifiers.mpn,
-  "productID": `sku:${primaryIdentifiers.sku}`,
+  "sku": dynamicPrimaryEntity.sku || primaryIdentifiers.sku,
+  "mpn": dynamicPrimaryEntity.mpn || primaryIdentifiers.mpn,
+  "productID": `sku:${dynamicPrimaryEntity.sku || primaryIdentifiers.sku}`,
+  ...(dynamicPrimaryEntity.gtin ? { "gtin13": dynamicPrimaryEntity.gtin } : {}),
   ...(primaryIdentifiers.sizeDetails ? {
     "size": `${primaryIdentifiers.sizeDetails.count} ${primaryIdentifiers.sizeDetails.unit}`,
     "hasMeasurement": {
@@ -1149,11 +1158,16 @@ const productSchema = {
       "unitText": primaryIdentifiers.sizeDetails.unit
     }
   } : {}),
-  ...(amazonProduct ? { "asin": amazonProduct.asin } : {}),
+  ...(dynamicPrimaryEntity.asin ? { "asin": dynamicPrimaryEntity.asin } : (amazonProduct ? { "asin": amazonProduct.asin } : {})),
   "sameAs": [
-    ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : []),
-    "https://www.wikidata.org/wiki/Q141656957"
+    ...new Set([
+      ...dynamicPrimaryEntity.sameAs,
+      ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : []),
+      "https://www.wikidata.org/wiki/Q141656957"
+    ])
   ],
+  "hasCredential": dynamicPrimaryEntity.hasCredentials,
+  "about": dynamicPrimaryEntity.aboutEntities,
   "brand": {
     "@type": "Brand",
     "@id": `${siteUrl}/#organization`,
