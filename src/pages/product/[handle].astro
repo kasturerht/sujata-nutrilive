@@ -809,6 +809,97 @@ const verifiedProductReviews = productReviewsList.map((r, idx) => ({
   }
 }));
 
+// 🌟 Silicon Valley NutritionInformation & Regulatory Compliance Schema (AEO / SGE Grounding)
+const productNutritionMap: Record<string, any> = {
+  'sujata-spirulina-tablets': {
+    "@type": "NutritionInformation",
+    "servingSize": "2 Tablets (1,000 mg)",
+    "calories": "4 kcal",
+    "proteinContent": "0.623 g",
+    "carbohydrateContent": "0.15 g",
+    "fatContent": "0.06 g",
+    "ironContent": "0.291 mg"
+  },
+  'spirulina-tablets': {
+    "@type": "NutritionInformation",
+    "servingSize": "2 Tablets (1,000 mg)",
+    "calories": "4 kcal",
+    "proteinContent": "0.623 g",
+    "carbohydrateContent": "0.15 g",
+    "fatContent": "0.06 g",
+    "ironContent": "0.291 mg"
+  },
+  'sujata-spirulina-capsules': {
+    "@type": "NutritionInformation",
+    "servingSize": "2 Veg Capsules (1,000 mg)",
+    "calories": "4 kcal",
+    "proteinContent": "0.65 g",
+    "carbohydrateContent": "0.14 g",
+    "fatContent": "0.05 g",
+    "ironContent": "0.285 mg"
+  },
+  'spirulina-capsules': {
+    "@type": "NutritionInformation",
+    "servingSize": "2 Veg Capsules (1,000 mg)",
+    "calories": "4 kcal",
+    "proteinContent": "0.65 g",
+    "carbohydrateContent": "0.14 g",
+    "fatContent": "0.05 g",
+    "ironContent": "0.285 mg"
+  },
+  'sujata-spirulina-powder': {
+    "@type": "NutritionInformation",
+    "servingSize": "1 Scoop (3 g)",
+    "calories": "11 kcal",
+    "proteinContent": "1.95 g",
+    "carbohydrateContent": "0.45 g",
+    "fatContent": "0.18 g",
+    "ironContent": "0.87 mg"
+  },
+  'spirulina-powder': {
+    "@type": "NutritionInformation",
+    "servingSize": "1 Scoop (3 g)",
+    "calories": "11 kcal",
+    "proteinContent": "1.95 g",
+    "carbohydrateContent": "0.45 g",
+    "fatContent": "0.18 g",
+    "ironContent": "0.87 mg"
+  }
+};
+
+const productAdditionalProperties: Record<string, Array<{ name: string; value: string }>> = {
+  'sujata-spirulina-tablets': [
+    { name: "FSSAI Brand License", value: "10723998000433" },
+    { name: "FSSAI Manufacturer License", value: "21526027000179" },
+    { name: "Protein Concentration", value: "62.3% (NABL IS 7219 Certified)" },
+    { name: "Natural Plant Iron", value: "291 mg/kg" },
+    { name: "Heavy Metals Safety", value: "Lead < 0.5 ppm, Arsenic < 0.1 ppm, Mercury < 0.01 ppm (100% Safe)" },
+    { name: "Binder Formulation", value: "Zero Chemical Binders, Zero Talc, Zero Synthetic Glazes" },
+    { name: "Country of Origin", value: "India" }
+  ],
+  'spirulina-tablets': [
+    { name: "FSSAI Brand License", value: "10723998000433" },
+    { name: "FSSAI Manufacturer License", value: "21526027000179" },
+    { name: "Protein Concentration", value: "62.3% (NABL IS 7219 Certified)" },
+    { name: "Natural Plant Iron", value: "291 mg/kg" },
+    { name: "Heavy Metals Safety", value: "Lead < 0.5 ppm, Arsenic < 0.1 ppm, Mercury < 0.01 ppm (100% Safe)" },
+    { name: "Binder Formulation", value: "Zero Chemical Binders, Zero Talc, Zero Synthetic Glazes" },
+    { name: "Country of Origin", value: "India" }
+  ]
+};
+
+const productNutrition = handle ? productNutritionMap[handle] : null;
+const productProperties = (handle && productAdditionalProperties[handle])
+  ? productAdditionalProperties[handle].map(p => ({
+      "@type": "PropertyValue",
+      "name": p.name,
+      "value": p.value
+    }))
+  : [
+      { "@type": "PropertyValue", "name": "FSSAI Brand License", "value": "10723998000433" },
+      { "@type": "PropertyValue", "name": "Country of Origin", "value": "India" }
+    ];
+
 const productSchema = {
   "@type": "Product",
   "@id": `${canonicalURL}#product`,
@@ -846,6 +937,8 @@ const productSchema = {
     "worstRating": "1"
   },
   "review": verifiedProductReviews,
+  ...(productNutrition ? { "nutrition": productNutrition } : {}),
+  "additionalProperty": productProperties,
   "offers": structuredProductOffers
 };
 

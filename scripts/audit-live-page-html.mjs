@@ -68,6 +68,13 @@ async function run() {
                 console.log(`       Review #${ridx + 1}: ${r.author?.name} (${r.reviewRating?.ratingValue}★) - "${r.name}"`);
               });
             }
+            if (item.nutrition) {
+              console.log('     Product Nutrition: Serving:', item.nutrition.servingSize, '| Protein:', item.nutrition.proteinContent, '| Iron:', item.nutrition.ironContent, '| Calories:', item.nutrition.calories);
+            }
+            if (Array.isArray(item.additionalProperty)) {
+              console.log(`     Product Additional Properties (${item.additionalProperty.length}):`);
+              item.additionalProperty.forEach(p => console.log(`       - ${p.name}: ${p.value}`));
+            }
           }
           if (item['@type'] === 'FAQPage') {
             console.log('     FAQ count:', item.mainEntity?.length);
