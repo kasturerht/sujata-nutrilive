@@ -91,9 +91,13 @@ export function resolveDynamicProductEntity(
     : `SJT-${handle.replace(/^sujata-/, '').toUpperCase() || 'PRODUCT'}`;
   const finalSku = rawSku || derivedMpn;
 
-  // 2. Safe Mathematical GS1 Barcode Resolution
+  // 2. Safe Identifier Resolution:
+  // Since brand currently operates as a direct manufacturer without registered GS1 barcodes,
+  // we strictly omit GTIN and emit identifierExists: 'no' to guarantee 100% Google Merchant Center immunity.
+  // When official GS1 barcodes are registered with GS1 India, setting ENABLE_GS1_GTIN = true will instantly activate them.
+  const ENABLE_GS1_GTIN = false;
   const rawBarcode = variant?.barcode?.trim();
-  const hasValidBarcode = isValidGS1GTIN(rawBarcode);
+  const hasValidBarcode = ENABLE_GS1_GTIN && isValidGS1GTIN(rawBarcode);
   const identifierExists = hasValidBarcode ? 'yes' : 'no';
   const gtin = hasValidBarcode ? rawBarcode : undefined;
 
