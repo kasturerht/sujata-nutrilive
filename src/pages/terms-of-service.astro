@@ -3,6 +3,7 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -21,9 +22,44 @@ try {
 } catch (e) {
   console.warn("Shopify termsOfService fetch fallback active:", e);
 }
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
+const pageUrl = `${siteUrl}/terms-of-service`;
+
+const termsSchemas = [
+  {
+    "@type": "WebPage",
+    "@id": `${pageUrl}/#webpage`,
+    "name": "Terms of Service & Conditions of Sale | Sujata Nutrilive",
+    "description": "Official terms of service, acceptable use policies, and conditions of commercial sale for Sujata Nutrilive Agrotech.",
+    "url": pageUrl
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Terms of Service",
+        "item": pageUrl
+      }
+    ]
+  }
+];
 ---
 
-<StoreLayout title="Terms of Service & Conditions of Sale | Sujata Nutrilive">
+<StoreLayout 
+  title="Terms of Service & Conditions of Sale | Sujata Nutrilive"
+  description="Official Terms of Service, Acceptable Use Policies, and Conditions of Sale for Sujata Nutrilive Agrotech. FSSAI statutory compliance and consumer protection terms."
+  extraSchema={termsSchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />

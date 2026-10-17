@@ -3,6 +3,7 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -60,9 +61,51 @@ try {
 } catch (e) {
   console.warn("Shopify fetch fallback active in quiz.astro:", e);
 }
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
+const pageUrl = `${siteUrl}/quiz`;
+
+const quizSchemas = [
+  {
+    "@type": "WebApplication",
+    "@id": `${pageUrl}/#webapp`,
+    "name": "Sujata 1-Minute Routine Finder & Cellular Dosage Calculator",
+    "description": "Interactive personalized assessment tool to discover your ideal daily Spirulina and Sea Buckthorn protocol based on lifestyle, energy levels, and health goals.",
+    "url": pageUrl,
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All modern web browsers",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Apothecary Routine Finder",
+        "item": pageUrl
+      }
+    ]
+  }
+];
 ---
 
-<StoreLayout title="1-Minute Routine Finder & Cellular Quiz | Sujata Nutrilive">
+<StoreLayout 
+  title="1-Minute Routine Finder & Cellular Quiz | Sujata Nutrilive"
+  description="Take our 60-second interactive wellness quiz to find your personalized Spirulina & Sea Buckthorn dosage, ideal product format, and 30-day biological routine."
+  extraSchema={quizSchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />

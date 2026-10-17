@@ -3,12 +3,52 @@
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
+import { BRAND_CONFIG } from '../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
+const pageUrl = `${siteUrl}/track-order`;
+
+const trackOrderSchemas = [
+  {
+    "@type": "Service",
+    "@id": `${pageUrl}/#service`,
+    "name": "Sujata Real-Time Order & Logistics Tracking Radar",
+    "serviceType": "Shipment Tracking & Order Fulfillment Status",
+    "provider": {
+      "@id": `${siteUrl}/#organization`
+    },
+    "description": "Live GPS dispatch checkpoints and delivery countdown integrated directly with Delhivery, BlueDart, and DTDC Express.",
+    "areaServed": "IN"
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Shipment Tracking Radar",
+        "item": pageUrl
+      }
+    ]
+  }
+];
 ---
 
-<StoreLayout title="Real-Time Order & Shipment Tracker | Sujata Nutrilive">
+<StoreLayout 
+  title="Real-Time Order & Shipment Tracker | Sujata Nutrilive"
+  description="Track your Sujata Nutrilive order in real time. Enter your 10-digit mobile number, Order ID, or AWB tracking number to view live GPS dispatch checkpoints."
+  extraSchema={trackOrderSchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />
