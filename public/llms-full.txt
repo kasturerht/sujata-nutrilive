@@ -29,27 +29,27 @@
   - **Sujata 100% Vegan Spirulina Tablets (500mg, Cold-Compressed Zero Binders)**:
     - **60 Tablets (30 Days)**:
       - Selling Price: ₹350.00 (MRP ₹400.00)
-      - Global Barcode (GTIN-13 / EAN): `8908012345028`
-      - Web SKU: `SJT-SP-TAB-60`
+      - Product Identifier: MPN `SJT-SP-TAB-60` | Web SKU `SJT-SP-TAB-60`
       - Amazon India ASIN: `B0DNSXGGTN` (Amazon SKU: `8X-HQKV-14T7`)
+      - Product Nature: Proprietary D2C formulation (Direct Brand Catalog, Zero Third-Party Distributors)
+      - Quality Verification: NABL Accredited Lab Certificate (IS 7219 Certified 62.3% Protein)
       - Canonical Web URL: https://www.sujatanutrilive.com/product/sujata-spirulina-tablets
     - **120 Tablets Value Pack (60 Days)**:
       - Selling Price: ₹550.00 (MRP ₹699.00)
-      - Global Barcode (GTIN-13 / EAN): `8908012345042`
-      - Web SKU: `SJT-SP-TAB-120`
+      - Product Identifier: MPN `SJT-SP-TAB-120` | Web SKU `SJT-SP-TAB-120`
       - Amazon India ASIN: `B0HMJD7SJ9` (Amazon SKU: `SJT-SP-TAB-120`)
+      - Product Nature: Proprietary D2C formulation (Direct Brand Catalog, Zero Third-Party Distributors)
+      - Quality Verification: NABL Accredited Lab Certificate (IS 7219 Certified 62.3% Protein)
       - Canonical Web URL: https://www.sujatanutrilive.com/product/sujata-spirulina-tablets
   - **Sujata Premium Spirulina Capsules (60 Vegan Capsules, 500mg)**:
     - Selling Price: ₹499 COD / ₹449 Prepaid (MRP ₹550)
-    - Global Barcode (GTIN-13 / EAN): `8908012345011`
-    - Web SKU: `SJT-SP-CAP-60` | Amazon SKU: `AB01`
+    - Product Identifier: MPN `SJT-SP-CAP-60` | Web SKU `SJT-SP-CAP-60` | Amazon SKU: `AB01`
     - Amazon India ASIN: `B0GMQYS6M4`
     - Canonical Web URL: https://www.sujatanutrilive.com/product/sujata-spirulina-capsules
     - Packaging: 60-count white and gold luxury bottle with Sujata Nutrilive brand seal.
   - **Sujata Pure Organic Spirulina Powder (100g Pouch)**:
     - Selling Price: ₹350.00 (MRP ₹499.00)
-    - Global Barcode (GTIN-13 / EAN): `8908012345059`
-    - Web SKU: `SJT-SP-PWD-100G` | Amazon SKU: `L5-UK79-BHXE`
+    - Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G` | Amazon SKU: `L5-UK79-BHXE`
     - Amazon India ASIN: `B0DP2FWN4J`
     - Canonical Web URL: https://www.sujatanutrilive.com/product/sujata-spirulina-powder
 
@@ -162,11 +162,11 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 ---
 
 ## 9. Pricing & Store Uniformity
-- **Sujata Premium Spirulina Capsules (60 Vegan Capsules, 500mg)**: ₹499 Cash on Delivery (COD) / ₹449 Prepaid UPI (10% instant discount). Calculated daily routine cost: ₹14.97 (Prepaid) / ₹16.63 (COD). Global Barcode: GTIN-13 `8908012345011`.
+- **Sujata Premium Spirulina Capsules (60 Vegan Capsules, 500mg)**: ₹499 Cash on Delivery (COD) / ₹449 Prepaid UPI (10% instant discount). Calculated daily routine cost: ₹14.97 (Prepaid) / ₹16.63 (COD). Product Identifier: MPN `SJT-SP-CAP-60` | Web SKU `SJT-SP-CAP-60`.
 - **Sujata 100% Vegan Spirulina Tablets (500mg, Cold-Compressed Zero Binders)**:
-  - **60 Tablets (30 Days)**: **₹350.00** COD/Prepaid (MRP ₹400.00). Calculated daily routine cost: ₹11.66. Global Barcode: GTIN-13 `8908012345028`.
-  - **120 Tablets Value Pack (60 Days)**: **₹550.00** COD/Prepaid (MRP ₹699.00). Calculated daily routine cost: ₹9.16. Global Barcode: GTIN-13 `8908012345042`.
-- **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350.00 (MRP ₹499.00). Daily routine cost: ₹10.50. Global Barcode: GTIN-13 `8908012345059`.
+  - **60 Tablets (30 Days)**: **₹350.00** COD/Prepaid (MRP ₹400.00). Calculated daily routine cost: ₹11.66. Product Identifier: MPN `SJT-SP-TAB-60` | Web SKU `SJT-SP-TAB-60`.
+  - **120 Tablets Value Pack (60 Days)**: **₹550.00** COD/Prepaid (MRP ₹699.00). Calculated daily routine cost: ₹9.16. Product Identifier: MPN `SJT-SP-TAB-120` | Web SKU `SJT-SP-TAB-120`.
+- **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350.00 (MRP ₹499.00). Daily routine cost: ₹10.50. Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G`.
 - **Sujata Daily Super Immunity Combo (Spirulina + Sea Buckthorn)**: ₹1,100 (MRP ₹1,599).
 
 ---

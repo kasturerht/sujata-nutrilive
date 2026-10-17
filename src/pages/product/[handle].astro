@@ -532,83 +532,106 @@ const amazonAsinMap: Record<string, { asin: string; sku: string }> = {
 
 const amazonProduct = handle ? amazonAsinMap[handle] : null;
 
-// 🌟 Silicon Valley Authoritative GS1 India GTIN-13 / EAN Barcode Registry (Google 2026 Compliant)
-const authoritativeBarcodeMap: Record<string, { defaultGtin: string; variants: Record<string, string> }> = {
+// 🌟 Authoritative Brand SKU & MPN Registry (Google Merchant Center & Schema.org Compliant)
+// Sujata Nutrilive proprietary formulations utilize Brand + MPN (Manufacturer Part Number) hierarchy
+const authoritativeSkuMap: Record<string, { defaultSku: string; defaultMpn: string; variants: Record<string, { sku: string; mpn: string; count: number; unit: string }> }> = {
   'sujata-spirulina-tablets': {
-    defaultGtin: '8908012345028',
+    defaultSku: 'SJT-SP-TAB-60',
+    defaultMpn: 'SJT-SP-TAB-60',
     variants: {
-      '60': '8908012345028',
-      '120': '8908012345042'
+      '60': { sku: 'SJT-SP-TAB-60', mpn: 'SJT-SP-TAB-60', count: 60, unit: 'Tablets' },
+      '120': { sku: 'SJT-SP-TAB-120', mpn: 'SJT-SP-TAB-120', count: 120, unit: 'Tablets' }
     }
   },
   'spirulina-tablets': {
-    defaultGtin: '8908012345028',
+    defaultSku: 'SJT-SP-TAB-60',
+    defaultMpn: 'SJT-SP-TAB-60',
     variants: {
-      '60': '8908012345028',
-      '120': '8908012345042'
+      '60': { sku: 'SJT-SP-TAB-60', mpn: 'SJT-SP-TAB-60', count: 60, unit: 'Tablets' },
+      '120': { sku: 'SJT-SP-TAB-120', mpn: 'SJT-SP-TAB-120', count: 120, unit: 'Tablets' }
     }
   },
   'sujata-spirulina-capsules': {
-    defaultGtin: '8908012345011',
+    defaultSku: 'SJT-SP-CAP-60',
+    defaultMpn: 'SJT-SP-CAP-60',
     variants: {
-      '60': '8908012345011',
-      '120': '8908012345035',
-      '180': '8908012345080'
+      '60': { sku: 'SJT-SP-CAP-60', mpn: 'SJT-SP-CAP-60', count: 60, unit: 'Vegetarian Capsules' },
+      '120': { sku: 'SJT-SP-CAP-120', mpn: 'SJT-SP-CAP-120', count: 120, unit: 'Vegetarian Capsules' },
+      '180': { sku: 'SJT-SP-CAP-180', mpn: 'SJT-SP-CAP-180', count: 180, unit: 'Vegetarian Capsules' }
     }
   },
   'spirulina-capsules': {
-    defaultGtin: '8908012345011',
+    defaultSku: 'SJT-SP-CAP-60',
+    defaultMpn: 'SJT-SP-CAP-60',
     variants: {
-      '60': '8908012345011',
-      '120': '8908012345035',
-      '180': '8908012345080'
+      '60': { sku: 'SJT-SP-CAP-60', mpn: 'SJT-SP-CAP-60', count: 60, unit: 'Vegetarian Capsules' },
+      '120': { sku: 'SJT-SP-CAP-120', mpn: 'SJT-SP-CAP-120', count: 120, unit: 'Vegetarian Capsules' },
+      '180': { sku: 'SJT-SP-CAP-180', mpn: 'SJT-SP-CAP-180', count: 180, unit: 'Vegetarian Capsules' }
     }
   },
   'sujata-spirulina-powder': {
-    defaultGtin: '8908012345059',
+    defaultSku: 'SJT-SP-PWD-100G',
+    defaultMpn: 'SJT-SP-PWD-100G',
     variants: {
-      '100': '8908012345059',
-      '200': '8908012345066'
+      '100': { sku: 'SJT-SP-PWD-100G', mpn: 'SJT-SP-PWD-100G', count: 100, unit: 'g' },
+      '200': { sku: 'SJT-SP-PWD-200G', mpn: 'SJT-SP-PWD-200G', count: 200, unit: 'g' }
     }
   },
   'spirulina-powder': {
-    defaultGtin: '8908012345059',
+    defaultSku: 'SJT-SP-PWD-100G',
+    defaultMpn: 'SJT-SP-PWD-100G',
     variants: {
-      '100': '8908012345059',
-      '200': '8908012345066'
+      '100': { sku: 'SJT-SP-PWD-100G', mpn: 'SJT-SP-PWD-100G', count: 100, unit: 'g' },
+      '200': { sku: 'SJT-SP-PWD-200G', mpn: 'SJT-SP-PWD-200G', count: 200, unit: 'g' }
     }
   },
   'sujata-sea-buckthorn-capsules': {
-    defaultGtin: '8908012345073',
+    defaultSku: 'SJT-SB-CAP-60',
+    defaultMpn: 'SJT-SB-CAP-60',
     variants: {
-      '60': '8908012345073'
+      '60': { sku: 'SJT-SB-CAP-60', mpn: 'SJT-SB-CAP-60', count: 60, unit: 'Vegetarian Capsules' }
     }
   }
 };
 
-const resolveVariantGtin13 = (v: any, idx: number): string | null => {
-  if (v?.barcode && /^\d{8,14}$/.test(String(v.barcode).trim())) {
-    return String(v.barcode).trim();
-  }
-  const productMapping = handle ? authoritativeBarcodeMap[handle] : null;
-  if (!productMapping) return null;
-
+const resolveVariantIdentifiers = (v: any, idx: number) => {
+  const productMapping = handle ? authoritativeSkuMap[handle] : null;
   const vTitle = String(v?.title || '').toLowerCase();
-  for (const [key, gtin] of Object.entries(productMapping.variants)) {
-    if (vTitle.includes(key.toLowerCase())) {
-      return gtin;
+  
+  if (productMapping) {
+    for (const [key, details] of Object.entries(productMapping.variants)) {
+      if (vTitle.includes(key.toLowerCase())) {
+        return {
+          sku: v?.sku || details.sku,
+          mpn: details.mpn,
+          sizeDetails: details
+        };
+      }
     }
+    const variantList = Object.values(productMapping.variants);
+    if (variantList[idx]) {
+      return {
+        sku: v?.sku || variantList[idx].sku,
+        mpn: variantList[idx].mpn,
+        sizeDetails: variantList[idx]
+      };
+    }
+    return {
+      sku: v?.sku || productMapping.defaultSku,
+      mpn: productMapping.defaultMpn,
+      sizeDetails: null
+    };
   }
 
-  const variantList = Object.values(productMapping.variants);
-  if (variantList[idx]) {
-    return variantList[idx];
-  }
-
-  return productMapping.defaultGtin || null;
+  const fallbackSku = v?.sku || amazonProduct?.sku || handle || `sujata-variant-${idx + 1}`;
+  return {
+    sku: fallbackSku,
+    mpn: fallbackSku,
+    sizeDetails: null
+  };
 };
 
-const primaryGtin13 = resolveVariantGtin13(variants[0], 0) || (handle ? authoritativeBarcodeMap[handle]?.defaultGtin : null);
+const primaryIdentifiers = resolveVariantIdentifiers(variants[0], 0);
 
 // 🌟 Silicon Valley Dynamic Multi-Variant Offer Graph (Google Merchant Center 2026 Compliant)
 const offerShippingDetails = {
@@ -652,7 +675,7 @@ const variantOfferList = variants.length > 0
   ? variants.map((v: any, idx: number) => {
       const vPrice = parseFloat(v.price?.amount || "0").toFixed(2);
       const vIdClean = v.id ? v.id.replace('gid://shopify/ProductVariant/', '') : String(idx + 1);
-      const vGtin = resolveVariantGtin13(v, idx);
+      const vIdent = resolveVariantIdentifiers(v, idx);
       return {
         "@type": "Offer",
         "@id": `${canonicalURL}#offer-variant-${vIdClean}`,
@@ -664,8 +687,8 @@ const variantOfferList = variants.length > 0
         "priceValidUntil": "2027-12-31",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": v.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-        "sku": v.sku || amazonProduct?.sku || handle || `sujata-variant-${vIdClean}`,
-        ...(vGtin ? { "gtin13": vGtin, "gtin": vGtin } : {}),
+        "sku": vIdent.sku,
+        "mpn": vIdent.mpn,
         "seller": {
           "@type": "Organization",
           "name": "Sujata Nutrilive Official Direct Store",
@@ -687,8 +710,8 @@ const variantOfferList = variants.length > 0
         "priceValidUntil": "2027-12-31",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": product?.availableForSale !== false ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-        "sku": amazonProduct?.sku || handle || "sujata-product",
-        ...(primaryGtin13 ? { "gtin13": primaryGtin13, "gtin": primaryGtin13 } : {}),
+        "sku": primaryIdentifiers.sku,
+        "mpn": primaryIdentifiers.mpn,
         "seller": {
           "@type": "Organization",
           "name": "Sujata Nutrilive Official Direct Store",
@@ -906,9 +929,9 @@ const productSchema = {
   "name": productTitle,
   "description": rawCleanDescription,
   "image": structuredImages,
-  "sku": amazonProduct?.sku || product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
-  "mpn": amazonProduct?.sku || product?.id?.replace('gid://shopify/Product/', '') || handle || "sujata-product",
-  ...(primaryGtin13 ? { "gtin13": primaryGtin13, "gtin": primaryGtin13 } : {}),
+  "sku": primaryIdentifiers.sku,
+  "mpn": primaryIdentifiers.mpn,
+  "productID": `sku:${primaryIdentifiers.sku}`,
   ...(amazonProduct ? { "asin": amazonProduct.asin } : {}),
   "sameAs": [
     ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : []),
