@@ -27,9 +27,88 @@ const contactFaqs = [
     a: "You have complete freedom. You can pause, skip an upcoming delivery, change your delivery address, or cancel anytime with 1-click via your account page or by messaging our WhatsApp support desk at +91 98347 83503."
   }
 ];
+
+const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
+const pageUrl = `${siteUrl}/contact`;
+
+const contactSchemas = [
+  {
+    "@type": "ContactPage",
+    "@id": `${pageUrl}/#contact-page`,
+    "name": "Contact Us & Ayurvedic Vaidya Concierge | Sujata Nutrilive",
+    "description": "Official support desk, Ayurvedic dosage consultations, Nashik headquarters address, and customer grievance redressal for Sujata Nutrilive Agrotech.",
+    "url": pageUrl,
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#local-business`,
+      "name": BRAND_CONFIG.brandName,
+      "legalName": BRAND_CONFIG.legalName || "Sujata Nutrilive Agrotech",
+      "url": siteUrl,
+      "telephone": BRAND_CONFIG.supportPhone,
+      "email": BRAND_CONFIG.supportEmail,
+      "image": `${siteUrl}/sujata-logo-transparent.png`,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade",
+        "addressLocality": "Nashik",
+        "addressRegion": "Maharashtra",
+        "postalCode": "422008",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.9866,
+        "longitude": 73.7438
+      },
+      "hasMap": BRAND_CONFIG.googleMapsUrl || "https://share.google/R7aB2MCG9AN5l3RF1",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ]
+    }
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": contactFaqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Customer Concierge & Support Desk",
+        "item": pageUrl
+      }
+    ]
+  }
+];
 ---
 
-<StoreLayout title="Contact Us, Practitioner Concierge & Grievance Desk | Sujata Nutrilive">
+<StoreLayout 
+  title="Contact Us, Practitioner Concierge & Grievance Desk | Sujata Nutrilive"
+  description="Connect with Sujata Nutrilive Agrotech, Nashik. Direct WhatsApp Ayurvedic Vaidya support, telephone desk +91 98347 83503, email ticketing, and office address."
+  extraSchema={contactSchemas}
+>
 
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />
