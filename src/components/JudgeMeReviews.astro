@@ -58,27 +58,142 @@ const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW
 <link rel="stylesheet" href="https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/shopify_v2.css" media="all" />
 
 <style is:global>
+  /* 🌟 Official Judge.me Star Icon Font Face (Base64 Embedded WOFF Engine) */
+  @font-face {
+    font-family: 'JudgemeStar';
+    src: url("data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAAAScAA0AAAAABrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAEgAAAABoAAAAcbyQ+3kdERUYAAARgAAAAHgAAACAAMwAGT1MvMgAAAZgAAABGAAAAVi+vS9xjbWFwAAAB8AAAAEAAAAFKwBMjvmdhc3AAAARYAAAACAAAAAj//wADZ2x5ZgAAAkAAAAEJAAABdH33LXtoZWFkAAABMAAAAC0AAAA2BroQKWhoZWEAAAFgAAAAHAAAACQD5QHQaG10eAAAAeAAAAAPAAAAFAYAAABsb2NhAAACMAAAAA4AAAAOAO4AeG1heHAAAAF8AAAAHAAAACAASgAvbmFtZQAAA0wAAADeAAABkorWfVZwb3N0AAAELAAAACkAAABEp3ubLXgBY2BkYADhPPP4OfH8Nl8ZuJkYQODS2fRrCPr/aSYGxq1ALgcDWBoAO60LkwAAAHgBY2BkYGDc+v80gx4TAwgASaAICmABAFB+Arl4AWNgZGBgYGPQYWBiAAIwyQgWc2AAAwAHVQB6eAFjYGRiYJzAwMrAwejDmMbAwOAOpb8ySDK0MDAwMbByMsCBAAMCBKS5pjA4PGB4wMR44P8BBj3GrQymQGFGkBwAjtgK/gAAeAFjYoAAEA1jAwAAZAAHAHgB3crBCcAwDEPRZydkih567CDdf4ZskmLwFBV8xBfCaC4BXkOUmx4sU0h2ngNb9V0vQCxaRKIAevT7fGWuBrEAAAAAAAAAAAA0AHgAugAAeAF9z79Kw1AUx/FzTm7un6QmJtwmQ5Bg1abgEGr/BAqlU6Gju+Cgg1MkQ/sA7Vj7BOnmO/gUvo2Lo14NqIO6/IazfD8HEODtmQCfoANwNsyp2/GJt3WKQrd1NLiYYWx2PBqOsmJMEOznPOTzfSCrhAtbbLdmeFLJV9eKd63WLrZcIcuaEVdssWCKM6pLCfTVOYbz/0pNSMSZKLIZpvh78sAUH6PlMrreTCabP9r+Z/puPZ2ur/RqpQHgh+MIegCnXeM4MRAPjYN//5tj4ZtTjkFqEdmeMShlEJ7tVAly2TAkx6R68Fl4E/aVvn8JqHFQ4JS1434gXKcuL31dDhzs3YbsEOAd/IU88gAAAHgBfY4xTgMxEEVfkk0AgRCioKFxQYd2ZRtpixxgRU2RfhU5q5VWseQ4JdfgAJyBlmNwAM7ABRhZQ0ORwp7nr+eZAa54YwYg9zm3ynPOeFRe8MCrciXOh/KSS76UV5L/iDmrLiS5AeU519wrL3jmSbkS5115yR2fyivJv9kx0ZMZ2RLZw27q87iNQi8EBo5FSPIMw3HqBboi5lKTGAGDp8FKXWP+t9TU01Lj5His1Ba6uM9dTEMwvrFmbf5GC/q2drW3ruXUhhsCiQOjznFlCzYhHUZp4xp76vsvQh89CQAAeAFjYGJABowM6IANLMrEyMTIzMjCXpyRWJBqZshWXJJYBKOMAFHFBucAAAAAAAAB//8AAngBY2BkYGDgA2IJBhBgAvKZGViBJAuYxwAABJsAOgAAeAFjYGBgZACCk535hiD60tn0azAaAEqpB6wAAA==") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+
+  /* 🌟 Star Rating Glyphs & Global Display Rules */
+  .jdgm-star {
+    font-family: 'JudgemeStar' !important;
+    display: inline-block !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    user-select: none !important;
+    cursor: pointer !important;
+  }
+
+  /* Empty / Unselected Star */
+  .jdgm-star.jdgm--off:before {
+    content: "\e001" !important;
+    color: #cbd5e1 !important; /* Elegant gray-300 */
+  }
+
+  /* Filled / Selected Star */
+  .jdgm-star.jdgm--on:before {
+    content: "\e000" !important;
+    color: #f59e0b !important; /* Luxury Amber Gold */
+  }
+
+  /* Half Star */
+  .jdgm-star.jdgm--half:before {
+    content: "\e002" !important;
+    color: #f59e0b !important;
+  }
+
+  /* 🌟 Review Form Rating Selector (Under "Your Rating") */
+  .jdgm-form__rating {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 0 !important;
+    min-height: 36px !important;
+  }
+
+  .jdgm-form__rating .jdgm-star {
+    font-size: 32px !important;
+    cursor: pointer !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 2px !important;
+  }
+
+  .jdgm-form__rating .jdgm-star:hover {
+    transform: scale(1.22) !important;
+  }
+
+  /* 🌟 Review List & Preview Badge Star Sizing */
+  .jdgm-preview-badge .jdgm-star,
+  .jdgm-rev-widg__summary-stars .jdgm-star,
+  .jdgm-rev__rating .jdgm-star {
+    font-size: 18px !important;
+    margin-right: 2px !important;
+  }
+
   /* Custom Luxury Polish for Judge.me in Sujata Emerald Palette */
   .jdgm-rev-widg__title {
     font-family: 'Playfair Display', serif !important;
     font-weight: 900 !important;
     color: #111827 !important;
   }
+
   .jdgm-write-rev-link, .jdgm-submit-rev {
     background-color: #064E3B !important;
     color: #ffffff !important;
     border-radius: 9999px !important;
     font-weight: 700 !important;
-    padding: 10px 24px !important;
+    padding: 12px 28px !important;
+    letter-spacing: 0.02em !important;
     transition: all 0.2s ease-out !important;
+    box-shadow: 0 4px 14px rgba(6, 78, 59, 0.2) !important;
+    border: none !important;
+    cursor: pointer !important;
   }
+
   .jdgm-write-rev-link:hover, .jdgm-submit-rev:hover {
     background-color: #022c22 !important;
     transform: scale(1.02) !important;
+    box-shadow: 0 6px 20px rgba(6, 78, 59, 0.3) !important;
   }
-  .jdgm-star.jdgm--on {
-    color: #f59e0b !important;
+
+  /* Form Inputs Luxury Aesthetic */
+  .jdgm-form input[type="text"],
+  .jdgm-form input[type="email"],
+  .jdgm-form textarea {
+    border: 1.5px solid #e5e7eb !important;
+    border-radius: 14px !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
+
+  .jdgm-form input[type="text"]:focus,
+  .jdgm-form input[type="email"]:focus,
+  .jdgm-form textarea:focus {
+    border-color: #059669 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+    outline: none !important;
+  }
+
+  /* Form Validation Error Message */
+  .jdgm-input-error,
+  .jdgm-form .error {
+    color: #b45309 !important;
+  }
+
+  .jdgm-form #score-error {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    margin-top: 6px !important;
+    display: inline-block !important;
+    border: 1px solid #fde68a !important;
+  }
+
   .jdgm-histogram__bar-content {
     background-color: #10b981 !important;
   }
