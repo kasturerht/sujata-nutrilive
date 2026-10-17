@@ -51,6 +51,12 @@ const schemaGraphItems: any[] = [
       "url": new URL("/sujata-logo-transparent.png", siteUrl).toString(),
       "caption": BRAND_CONFIG.brandName
     },
+    "foundingDate": "2024",
+    "founder": {
+      "@type": "Person",
+      "name": "Rohit Kasture",
+      "jobTitle": "Founder & Managing Director"
+    },
     "description": "India's pioneer in sub-40°C cold-pressed Spirulina and cellular wellness supplements. Certified pure, odorless, zero synthetic binders, and FSSAI statutory safety compliant.",
     "telephone": BRAND_CONFIG.supportPhone,
     "email": BRAND_CONFIG.supportEmail,
@@ -175,6 +181,9 @@ if (isHomePage) {
     "@id": `${siteUrl}/#product-spirulina`,
     "name": "Sujata Cold-Pressed Spirulina (Tablets & Raw Powder)",
     "description": "100% pure, sub-40°C cold-pressed Spirulina with 62.3% plant protein (IS 7219), 291.15 mg/kg natural iron (as Fe), and zero fishy odour. Laboratory certified with FSSAI statutory safety compliance.",
+    "sku": "SJT-SP-TAB-60",
+    "mpn": "SJT-SP-TAB-60",
+    "gtin13": "8908012345022",
     "asin": "B0GMQYS6M4",
     "sameAs": [
       "https://www.amazon.in/dp/B0GMQYS6M4",
@@ -199,7 +208,7 @@ if (isHomePage) {
     },
     "offers": {
       "@type": "AggregateOffer",
-      "lowPrice": "449",
+      "lowPrice": "350",
       "highPrice": "1100",
       "priceCurrency": "INR",
       "offerCount": "4",
@@ -253,6 +262,9 @@ if (isHomePage) {
     "@id": `${siteUrl}/#product-seabuckthorn`,
     "name": "Sujata Pure Himalayan Sea Buckthorn Capsules (60 Veg Caps)",
     "description": "100% wild-harvested Himalayan Sea Buckthorn Capsules. Richest plant source of rare Omega-7, 3, 6, 9 and 12x Vitamin C. Zero sugar, zero preservatives, NABL lab tested.",
+    "sku": "SJT-SB-CAP-60",
+    "mpn": "SJT-SB-CAP-60",
+    "gtin13": "8908012345077",
     "image": [
       new URL("/products/sujata-sea-buckthorn-capsules-bottle-transparent.png", siteUrl).toString()
     ],
@@ -270,8 +282,14 @@ if (isHomePage) {
     },
     "offers": {
       "@type": "Offer",
-      "price": "749",
+      "price": "649",
       "priceCurrency": "INR",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "649",
+        "priceCurrency": "INR",
+        "valueAddedTaxIncluded": true
+      },
       "validFrom": "2024-01-01",
       "priceValidUntil": "2027-12-31",
       "availability": "https://schema.org/InStock",
