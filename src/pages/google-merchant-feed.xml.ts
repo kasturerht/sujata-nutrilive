@@ -79,17 +79,22 @@ export const GET: APIRoute = async () => {
             featuredImage {
               url
             }
-            variants(first: 1) {
+            variants(first: 20) {
               edges {
                 node {
                   id
+                  title
                   sku
+                  availableForSale
                   price {
                     amount
                     currencyCode
                   }
                   compareAtPrice {
                     amount
+                  }
+                  image {
+                    url
                   }
                 }
               }
@@ -124,39 +129,65 @@ export const GET: APIRoute = async () => {
     const p = edge.node;
     if (!p || !p.handle) continue;
 
-    const variant = p.variants?.edges?.[0]?.node;
-    const rawPrice = variant?.price?.amount || p.priceRange?.minVariantPrice?.amount || '499.00';
-    const formattedPrice = `${parseFloat(rawPrice).toFixed(2)} INR`;
-    const productUrl = `${siteUrl}/product/${p.handle}`;
-    
+    const variantEdges = p.variants?.edges || [];
+    if (variantEdges.length === 0) continue;
+
+    // Determine specific Google Category based on product type
+    let googleCategory = 'Health &amp; Beauty &gt; Health Care &gt; Fitness &amp; Nutrition &gt; Vitamins &amp; Supplements';
+    if (/soap|bath/i.test(p.handle)) {
+      googleCategory = 'Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Bath &amp; Body &gt; Bar Soap';
+    } else if (/hair|oil/i.test(p.handle)) {
+      googleCategory = 'Health &amp; Beauty &gt; Personal Care &gt; Hair Care &gt; Hair Oil';
+    }
+
     // High-resolution featured image fallback
-    const rawImg = p.featuredImage?.url || `${siteUrl}/products/sujata-spirulina-powder-pouch.jpg`;
-    const imageUrl = rawImg.startsWith('http') ? rawImg : `${siteUrl}${rawImg}`;
-    
-    const id = variant?.id?.replace('gid://shopify/ProductVariant/', '') || p.handle;
+    const rawDefaultImg = p.featuredImage?.url || `${siteUrl}/products/sujata-spirulina-powder-pouch.jpg`;
+    const defaultImageUrl = rawDefaultImg.startsWith('http') ? rawDefaultImg : `${siteUrl}${rawDefaultImg}`;
+
     const rawCleanDesc = cleanText(p.description) || `Buy authentic ${p.title} from Sujata Nutrilive. 100% natural, NABL laboratory tested with zero detectable heavy metals and fast express shipping.`;
     const { title: compliantTitle, desc: compliantDesc } = sanitizeForGoogleCompliance(p.title, rawCleanDesc);
 
-    itemsXml += `
+    for (const vEdge of variantEdges) {
+      const variant = vEdge.node;
+      if (!variant) continue;
+
+      const rawPrice = variant.price?.amount || p.priceRange?.minVariantPrice?.amount || '499.00';
+      const formattedPrice = `${parseFloat(rawPrice).toFixed(2)} INR`;
+      
+      const variantId = variant.id?.replace('gid://shopify/ProductVariant/', '') || p.handle;
+      const productUrl = `${siteUrl}/product/${p.handle}?variant=${variantId}`;
+      
+      const variantImg = variant.image?.url || defaultImageUrl;
+      const imageUrl = variantImg.startsWith('http') ? variantImg : `${siteUrl}${variantImg}`;
+
+      // Variant title formatting (if not default title)
+      const isDefaultTitle = !variant.title || variant.title.toLowerCase() === 'default title';
+      const itemTitle = isDefaultTitle ? compliantTitle : `${compliantTitle} (${variant.title})`;
+
+      const isAvailable = variant.availableForSale ?? p.availableForSale;
+
+      itemsXml += `
     <item>
-      <g:id>${escapeXml(id)}</g:id>
-      <g:title>${escapeXml(compliantTitle)}</g:title>
+      <g:id>${escapeXml(variantId)}</g:id>
+      <g:item_group_id>${escapeXml(p.handle)}</g:item_group_id>
+      <g:title>${escapeXml(itemTitle)}</g:title>
       <g:description>${escapeXml(compliantDesc.slice(0, 500))}</g:description>
       <g:link>${escapeXml(productUrl)}</g:link>
       <g:image_link>${escapeXml(imageUrl)}</g:image_link>
       <g:condition>new</g:condition>
-      <g:availability>${p.availableForSale ? 'in_stock' : 'out_of_stock'}</g:availability>
+      <g:availability>${isAvailable ? 'in_stock' : 'out_of_stock'}</g:availability>
       <g:price>${escapeXml(formattedPrice)}</g:price>
       <g:brand>Sujata Nutrilive</g:brand>
-      <g:google_product_category>Health &amp; Beauty &gt; Health Care &gt; Fitness &amp; Nutrition &gt; Vitamins &amp; Supplements</g:google_product_category>
-      <g:identifier_exists>${variant?.sku ? 'yes' : 'no'}</g:identifier_exists>
-      ${variant?.sku ? `<g:mpn>${escapeXml(variant.sku)}</g:mpn>` : ''}
+      <g:google_product_category>${googleCategory}</g:google_product_category>
+      <g:identifier_exists>no</g:identifier_exists>
+      ${variant.sku ? `<g:mpn>${escapeXml(variant.sku)}</g:mpn>` : `<g:mpn>${escapeXml(variantId)}</g:mpn>`}
       <g:shipping>
         <g:country>IN</g:country>
         <g:service>Priority Express Courier</g:service>
         <g:price>0.00 INR</g:price>
       </g:shipping>
     </item>`;
+    }
   }
 
   const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
