@@ -78,6 +78,30 @@ try {
   console.error("❌ Failed to fetch product details from Shopify:", error);
 }
 
+// 🌟 Official Judge.me SSR Widget & Preview Badge Pre-fetch Engine (Zero Layout Shift)
+const publicJudgemeToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW_H_S1B-s";
+let judgeMeBadgeHtml = '';
+let judgeMeWidgetHtml = '';
+
+if (handle && shopifyDomain && publicJudgemeToken) {
+  try {
+    const [bRes, wRes] = await Promise.all([
+      fetch(`https://judge.me/api/v1/widgets/preview_badge?api_token=${publicJudgemeToken}&shop_domain=${shopifyDomain}&handle=${handle}`),
+      fetch(`https://judge.me/api/v1/widgets/product_review?api_token=${publicJudgemeToken}&shop_domain=${shopifyDomain}&handle=${handle}`)
+    ]);
+    if (bRes.ok) {
+      const bData = await bRes.json();
+      judgeMeBadgeHtml = bData.badge || '';
+    }
+    if (wRes.ok) {
+      const wData = await wRes.json();
+      judgeMeWidgetHtml = wData.widget || '';
+    }
+  } catch (err) {
+    console.warn("⚠️ Failed to pre-fetch Judge.me widget SSR HTML:", err);
+  }
+}
+
 const productLocalGalleryMap: Record<string, Array<{ url: string; altText: string }>> = {
   'sujata-spirulina-powder': [
     { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Organic Spirulina Powder Pouch' },
@@ -1804,10 +1828,14 @@ const productVideoSchema = videoData ? {
               <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div class="flex items-center gap-1.5 text-amber-500 whitespace-nowrap">
                   <div class="jdgm-widget jdgm-preview-badge" data-id={rawNumericProductId}>
-                    <a href="#reviews-section" class="flex items-center gap-1 text-amber-500 hover:text-amber-600 transition-colors">
-                      <span class="text-xs">★★★★★</span>
-                      <span class="text-xs font-bold text-gray-600 ml-1">Write a Review</span>
-                    </a>
+                    {judgeMeBadgeHtml ? (
+                      <Fragment set:html={judgeMeBadgeHtml.replace("style='display:none'", "style='display:inline-flex; align-items:center; gap:6px;'")} />
+                    ) : (
+                      <a href="#reviews-section" class="flex items-center gap-1 text-amber-500 hover:text-amber-600 transition-colors">
+                        <span class="text-xs">★★★★★</span>
+                        <span class="text-xs font-bold text-gray-600 ml-1">Write a Review</span>
+                      </a>
+                    )}
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/60 whitespace-nowrap shrink-0">
@@ -2748,7 +2776,11 @@ const productVideoSchema = videoData ? {
 
   <!-- 🌟 Official Judge.me Verified Customer Reviews Section -->
   {rawNumericProductId && product?.title && (
-    <JudgeMeReviews productId={rawNumericProductId} productTitle={product.title} />
+    <JudgeMeReviews 
+      productId={rawNumericProductId} 
+      productTitle={product.title} 
+      initialWidgetHtml={judgeMeWidgetHtml}
+    />
   )}
 
   {/* UNIFIED LUXURY STORE FOOTER */}

@@ -4,9 +4,10 @@
 interface Props {
   productId: string | number;
   productTitle: string;
+  initialWidgetHtml?: string;
 }
 
-const { productId, productTitle } = Astro.props;
+const { productId, productTitle, initialWidgetHtml = '' } = Astro.props;
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW_H_S1B-s";
 ---
@@ -35,6 +36,7 @@ const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW
         class="jdgm-widget jdgm-review-widget" 
         data-id={productId}
         data-product-title={productTitle}
+        set:html={initialWidgetHtml}
       ></div>
     </div>
 
