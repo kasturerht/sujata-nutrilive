@@ -4,6 +4,7 @@ import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
 import JudgeMeReviews from '../../components/JudgeMeReviews.astro';
 import { BRAND_CONFIG, getWhatsAppLink } from '../../config/brand';
+import { getJudgeMeSsrData } from '../../lib/judgeme-ssr';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
@@ -78,33 +79,15 @@ try {
   console.error("❌ Failed to fetch product details from Shopify:", error);
 }
 
-// 🌟 Official Judge.me SSR Widget & Preview Badge Pre-fetch Engine (Zero Layout Shift)
+// 🌟 Official Judge.me SSR Widget & Preview Badge Pre-fetch Engine with SWR & Timeout Guard
 const publicJudgemeToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW_H_S1B-s";
-let judgeMeBadgeHtml = '';
-let judgeMeWidgetHtml = '';
-let hasVerifiedReviews = false;
-
 const targetHandle = product?.handle || handle;
 
-if (targetHandle && shopifyDomain && publicJudgemeToken) {
-  try {
-    const [bRes, wRes] = await Promise.all([
-      fetch(`https://judge.me/api/v1/widgets/preview_badge?api_token=${publicJudgemeToken}&shop_domain=${shopifyDomain}&handle=${targetHandle}`),
-      fetch(`https://judge.me/api/v1/widgets/product_review?api_token=${publicJudgemeToken}&shop_domain=${shopifyDomain}&handle=${targetHandle}`)
-    ]);
-    if (bRes.ok) {
-      const bData = await bRes.json();
-      judgeMeBadgeHtml = bData.badge || '';
-      hasVerifiedReviews = Boolean(judgeMeBadgeHtml && !judgeMeBadgeHtml.includes("data-number-of-reviews='0'"));
-    }
-    if (wRes.ok) {
-      const wData = await wRes.json();
-      judgeMeWidgetHtml = wData.widget || '';
-    }
-  } catch (err) {
-    console.warn("⚠️ Failed to pre-fetch Judge.me widget SSR HTML:", err);
-  }
-}
+const {
+  badgeHtml: judgeMeBadgeHtml,
+  widgetHtml: judgeMeWidgetHtml,
+  hasVerifiedReviews
+} = await getJudgeMeSsrData(targetHandle, shopifyDomain, publicJudgemeToken);
 
 const productLocalGalleryMap: Record<string, Array<{ url: string; altText: string }>> = {
   'sujata-spirulina-powder': [
