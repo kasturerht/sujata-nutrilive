@@ -370,6 +370,14 @@ const scienceSchemas = [
     "name": "Analytical Nutritional & Quality Assay: Report #LAL-NN-121023002",
     "description": "Certified analytical testing by Lilaba Analytical Laboratories under Bureau of Indian Standards (IS 7219) and FSSAI Manual standards for pure Arthrospira platensis biomass.",
     "isAccessibleForFree": true,
+    "distribution": [
+      {
+        "@type": "DataDownload",
+        "name": "NABL Accredited Third-Party Analytical Purity Assay Report (IS 7219 / FSSAI)",
+        "encodingFormat": "application/pdf",
+        "contentUrl": "https://www.sujatanutrilive.com/sujata_lab_certificate.pdf"
+      }
+    ],
     "creator": {
       "@type": "Organization",
       "name": "Lilaba Analytical Laboratories, Surat, Gujarat",
@@ -392,6 +400,24 @@ const scienceSchemas = [
     "description": "Commercial batch release certificate for Batch #SJT-2026-B08 contract manufactured by Spiru Swastha India Pvt Ltd conforming to Master Specification SPEC-SN-2026-REV03.",
     "isAccessibleForFree": true,
     "variableMeasured": currentBatchCoA.parameters.map(p => `${p.test}: ${p.observed} (Spec: ${p.spec}) - ${p.status}`)
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": "https://www.sujatanutrilive.com/science/#breadcrumb",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.sujatanutrilive.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "The Science & Sourcing Dossier",
+        "item": "https://www.sujatanutrilive.com/science"
+      }
+    ]
   }
 ];
 ---
