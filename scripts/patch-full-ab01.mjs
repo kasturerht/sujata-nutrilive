@@ -62,7 +62,7 @@ async function patchFull() {
         },
         {
           language_tag: 'en_IN',
-          value: 'HIGH BIOAVAILABLE C-PHYCOCYANIN & PLANT IRON: Preserves 21.4% active C-Phycocyanin and 291 mg/kg elemental iron via sub-40°C gentle low-thermal drying.',
+          value: 'HIGH BIOAVAILABLE C-PHYCOCYANIN & PLANT IRON: Preserves 21.4% active C-Phycocyanin and 290.89 mg/kg elemental iron via sub-40°C gentle low-thermal drying.',
           marketplace_id: marketplaceId
         },
         {
