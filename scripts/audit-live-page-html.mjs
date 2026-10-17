@@ -62,6 +62,12 @@ async function run() {
               item.offers.forEach(o => console.log('       Offer:', o.priceCurrency, o.price, o['@type'], o.seller?.name || '', 'GTIN13:', o.gtin13 || 'none'));
             }
             console.log('     Product aggregateRating:', item.aggregateRating?.ratingValue, `(${item.aggregateRating?.reviewCount} reviews)`);
+            if (Array.isArray(item.review)) {
+              console.log(`     Product individual reviews (${item.review.length}):`);
+              item.review.forEach((r, ridx) => {
+                console.log(`       Review #${ridx + 1}: ${r.author?.name} (${r.reviewRating?.ratingValue}★) - "${r.name}"`);
+              });
+            }
           }
           if (item['@type'] === 'FAQPage') {
             console.log('     FAQ count:', item.mainEntity?.length);
