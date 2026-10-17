@@ -2,6 +2,7 @@
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
+import JudgeMeReviews from '../../components/JudgeMeReviews.astro';
 import { BRAND_CONFIG, getWhatsAppLink } from '../../config/brand';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
@@ -1546,6 +1547,8 @@ try {
   console.warn("Could not parse product.comparisonTable metafield JSON:", e);
 }
 
+const rawNumericProductId = product?.id ? product.id.replace('gid://shopify/Product/', '').split('?')[0] : '';
+
 const productFaqSchema = resolvedFaqs.length > 0 ? {
   "@type": "FAQPage",
   "@id": `${canonicalURL}#faq`,
@@ -1796,8 +1799,12 @@ const productVideoSchema = videoData ? {
             <div class="border-b border-gray-50 pb-6 mb-6">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div class="flex items-center gap-1.5 text-amber-500 whitespace-nowrap">
-                  <span class="text-xs">★★★★★</span>
-                  <span class="text-xs font-bold text-gray-600 ml-1">4.9 (420+ Verified Customer Ratings)</span>
+                  <div class="jdgm-widget jdgm-preview-badge" data-id={rawNumericProductId}>
+                    <a href="#reviews-section" class="flex items-center gap-1 text-amber-500 hover:text-amber-600 transition-colors">
+                      <span class="text-xs">★★★★★</span>
+                      <span class="text-xs font-bold text-gray-600 ml-1">Write a Review</span>
+                    </a>
+                  </div>
                 </div>
                 <div class="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/60 whitespace-nowrap shrink-0">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
@@ -2734,7 +2741,12 @@ const productVideoSchema = videoData ? {
       </button>
     </div>
   </div>
-  
+
+  <!-- 🌟 Official Judge.me Verified Customer Reviews Section -->
+  {rawNumericProductId && product?.title && (
+    <JudgeMeReviews productId={rawNumericProductId} productTitle={product.title} />
+  )}
+
   {/* UNIFIED LUXURY STORE FOOTER */}
   <StoreFooter />
 

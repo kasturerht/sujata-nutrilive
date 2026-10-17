@@ -1,0 +1,120 @@
+---
+// src/components/JudgeMeReviews.astro
+// 🌟 Official Judge.me Customer Reviews & Verified Buyer Component
+interface Props {
+  productId: string | number;
+  productTitle: string;
+}
+
+const { productId, productTitle } = Astro.props;
+const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
+const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW_H_S1B-s";
+---
+
+<!-- 🌟 Official Judge.me Verified Customer Reviews Section (Silicon Valley Headless Architecture) -->
+<section id="reviews-section" class="py-16 sm:py-24 bg-[#fcfdfd] border-t border-gray-100 scroll-mt-20">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Title & Verified Anchor -->
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 text-emerald-800 text-[10px] font-black uppercase tracking-[0.2em] mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        100% Verified Buyer Feed • Judge.me Authenticated
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-black text-[#111827] font-['Playfair_Display'] tracking-tight mb-2">
+        Customer Clinical Experiences
+      </h2>
+      <p class="text-xs sm:text-sm text-gray-500 leading-relaxed font-light">
+        Real customer experiences and laboratory-verified feedback from buyers across India using pure sub-40°C cold-pressed {productTitle}.
+      </p>
+    </div>
+
+    <!-- Judge.me Main Review Widget Container -->
+    <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-gray-100">
+      <div 
+        class="jdgm-widget jdgm-review-widget" 
+        data-id={productId}
+        data-product-title={productTitle}
+      ></div>
+    </div>
+
+    <!-- Verified Review Guarantee Badge Bar -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-gray-500 font-medium">
+      <span class="flex items-center gap-2">
+        <span class="text-emerald-600 font-bold">✓</span> Verified Purchase Orders Authenticated
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="text-emerald-600 font-bold">🛡️</span> FSSAI Statutory Purity Standard Compliant
+      </span>
+      <span class="flex items-center gap-2">
+        <span class="text-emerald-600 font-bold">⚡</span> 100% Zero-Binder Formulation
+      </span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Official Judge.me Global Assets & Dynamic Hydration Engine -->
+<link rel="stylesheet" href="https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/shopify_v2.css" media="all" />
+
+<style is:global>
+  /* Custom Luxury Polish for Judge.me in Sujata Emerald Palette */
+  .jdgm-rev-widg__title {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 900 !important;
+    color: #111827 !important;
+  }
+  .jdgm-write-rev-link, .jdgm-submit-rev {
+    background-color: #064E3B !important;
+    color: #ffffff !important;
+    border-radius: 9999px !important;
+    font-weight: 700 !important;
+    padding: 10px 24px !important;
+    transition: all 0.2s ease-out !important;
+  }
+  .jdgm-write-rev-link:hover, .jdgm-submit-rev:hover {
+    background-color: #022c22 !important;
+    transform: scale(1.02) !important;
+  }
+  .jdgm-star.jdgm--on {
+    color: #f59e0b !important;
+  }
+  .jdgm-histogram__bar-content {
+    background-color: #10b981 !important;
+  }
+</style>
+
+<script is:inline define:vars={{ shopifyDomain, publicToken }}>
+  window.jdgmSettings = window.jdgmSettings || {
+    pagination: 5,
+    disable_web_reviews: false,
+    enable_review_pictures: true,
+    widget_title: "Customer Reviews",
+    widget_summary_text: "Based on {{ number_of_reviews }} reviews",
+    widget_no_review_text: "Be the first to write a review",
+    widget_open_form_text: "Write a Review",
+    widget_close_form_text: "Cancel Review",
+    widget_submit_review_text: "Submit Verified Review",
+    widget_name_field_text: "Your Name",
+    widget_email_field_text: "Email Address",
+    widget_rating_field_text: "Your Rating",
+    widget_review_title_field_text: "Review Title",
+    widget_review_body_field_text: "Share your experience with purity, energy, or lab results...",
+    widget_pictures_field_text: "Upload Photos (Optional)",
+    verified_badge_text: "Verified Buyer",
+    shop_currency: "INR",
+    platform: "shopify"
+  };
+
+  window.jdgm = window.jdgm || {};
+  jdgm.CDN_HOST = "https://cdnwidget.judge.me/";
+  jdgm.CDN_HOST_ALT = "https://cdn2.judge.me/cdn/widget_frontend/";
+  jdgm.API_HOST = "https://api.judge.me/";
+  jdgm.CDN_BASE_URL = "https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/";
+  jdgm.CDN_API_HOST = "https://cdn.judge.me/";
+  jdgm.SHOP_DOMAIN = shopifyDomain;
+  jdgm.PLATFORM = "shopify";
+  jdgm.PUBLIC_TOKEN = publicToken;
+</script>
+
+<script src="https://cdn.shopify.com/extensions/01a14416-995f-7951-a981-854ef92a0fd4/judgeme-786/assets/shopify_v2.js" defer></script>
