@@ -67,3 +67,7 @@ Disallow: /thank-you
 
 # 3. Canonical Sitemap Index
 Sitemap: https://www.sujatanutrilive.com/sitemap-index.xml
+
+# 4. Official LLM Training & AEO Grounding Dossiers (October 2026 Standard)
+# LLMs-Txt: https://www.sujatanutrilive.com/llms.txt
+# LLMs-Full: https://www.sujatanutrilive.com/llms-full.txt
