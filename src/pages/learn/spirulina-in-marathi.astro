@@ -9,7 +9,37 @@ const pageTitle = "Spirulina in Marathi: स्पिरुलिना म्�
 const pageDescription = "Spirulina in Marathi: स्पिरुलिना म्हणजे काय? जाणून घ्या त्याचे आरोग्यदायी फायदे, मराठी नाव, खाण्याची योग्य पद्धत आणि 100% शुद्ध सुजाता स्पिरुलिना.";
 const pageUrl = "https://www.sujatanutrilive.com/learn/spirulina-in-marathi";
 
-// Structured Schema for Google Rich Snippets & AI Overviews
+const faqs = [
+  {
+    question: "स्पिरुलिना म्हणजे काय आणि त्याचे मराठी नाव काय आहे? (What is Spirulina in Marathi?)",
+    answer: "स्पिरुलिना (Spirulina) हे निसर्गातील सर्वात शक्तिशाली निळे-हिरवे एकपेशीय शेवाळ (Blue-Green Microalgae - Arthrospira platensis) आहे. मराठीत याला 'निळसर-हिरवे शेवाळ' म्हटले जाते. जागतिक आरोग्य संघटना (WHO) आणि नासा (NASA) ने याला 'भविष्यातील सर्वोत्तम सुपरफूड' घोषित केले आहे. यात NABL लॅब-प्रमाणित ६२.३९% वनस्पती प्रथिने (IS 7219 प्रमाणित), २९०.८९ mg/kg नैसर्गिक लोह (Fe), आणि २१.४% सी-फायकोसायनिन अँटीऑक्सिडंट नैसर्गिक स्वरूपात असते."
+  },
+  {
+    question: "स्पिरुलिना खाण्याचे मुख्य फायदे काय आहेत? (Spirulina che fayde)",
+    answer: "१. नैसर्गिक लोह आणि हिमोग्लोबिन वाढवून ॲनिमिया दूर करते. २. दुपारचा थकवा आणि सुस्ती घालवून दिवसभर अखंड ऊर्जा टिकवून ठेवते. ३. C-फायकोसायनिनद्वारे रोगप्रतिकारशक्ती मजबूत करते. ४. त्वचा तजेलदार बनवून केस गळणे थांबवते. ५. रक्तातील साखर, कोलेस्ट्रॉल आणि रक्तदाब संतुलित ठेवण्यास मदत करते. ६. डोळ्यांचे आरोग्य व नजर तीक्ष्ण करते."
+  },
+  {
+    question: "स्पिरुलिना पावडर, टॅब्लेट की कॅप्सूल - यातील काय सर्वोत्तम आहे?",
+    answer: "सुजाता स्पिरुलिनाचे तिन्ही प्रकार ६२.३९% शुद्ध प्रथिनांचे आहेत: १. पावडर (100g): स्मूदी, ज्यूस किंवा फेसपॅकसाठी सर्वोत्तम. २. टॅब्लेट्स (500mg): शून्य केमिकल बाईंडरसह प्रवासात सहज घेण्यासाठी सोयीस्कर. ३. व्हेगन कॅप्सूल्स (500mg): अजिबात वास नसलेल्या आणि पोटात अवघ्या ५ मिनिटांत विरघळणाऱ्या वनस्पती शेल कॅप्सूल्स."
+  },
+  {
+    question: "स्पिरुलिनाचे काही दुष्परिणाम किंवा नुकसान आहे का?",
+    answer: "शुद्ध स्पिरुलिनाचे कोणतेही दुष्परिणाम नसतात. सुजाता स्पिरुलिना हे बंद हायड्रो-डोम्समध्ये शुद्ध पाण्याने पिकवले जाते आणि NABL प्रयोगशाळेत १००% जड धातूमुक्त (०.००% Lead & Mercury) प्रमाणित आहे. फक्त सुरुवातीच्या ३-५ दिवसांत शरीर डिटॉक्स होताना लघवीचा रंग किंचित गडद होऊ शकतो, त्यासाठी २.५ ते ३ लिटर पाणी पिण्याचा सल्ला दिला जातो."
+  },
+  {
+    question: "स्पिरुलिना कोणी घेऊ नये? (Who should not take Spirulina?)",
+    answer: "१. फेनिलकेटोन्यूरिया (PKU) हा दुर्मिळ जनुकीय विकार असणाऱ्या रुग्णांनी. २. गंभीर ऑटोइम्यून आजार (उदा. Lupus, MS) असणाऱ्यांनी डॉक्टरांच्या सल्ल्याशिवाय घेऊ नये. ३. ज्या किडनी रुग्णांना प्रथिने व पोटॅशियमवर कडक वैद्यकीय निर्बंध आहेत त्यांनी डॉक्टरांचा सल्ला घ्यावा."
+  },
+  {
+    question: "थायरॉईड, मधुमेह किंवा महिलांसाठी हे सुरक्षित आहे का?",
+    answer: "होय, १००% सुरक्षित व अत्यंत गुणकारी आहे. महिलांमधील मासिक पाळीदरम्यानचा थकवा, रक्ताची कमतरता आणि केस गळती रोखण्यासाठी हे वरदान मानले जाते. थायरॉईड किंवा मधुमेह असणारे नागरिकही हे सुरक्षित पूरक पोषण म्हणून घेऊ शकतात; फक्त नेहमीच्या औषधांमध्ये आणि स्पिरुलिनामध्ये १ तासाचे अंतर ठेवावे."
+  },
+  {
+    question: "सुजाता स्पिरुलिनाची किंमत किती आहे आणि कशी ऑर्डर करावी?",
+    answer: "सुजाता स्पिरुलिना ६० कॅप्सूल्सची १ महिन्याची बाटली फक्त ₹४९९ मध्ये उपलब्ध आहे (ऑनलाइन UPI पेमेंटवर १०% झटपट सवलतीसह फक्त ₹४४९, म्हणजेच दिवसाला फक्त ₹१५). तसेच स्पिरुलिना + सी बकथॉर्न २ महिन्यांचा कॉम्बो पॅक फक्त ₹१,१०० मध्ये मिळतो. संपूर्ण भारतात मोफत कॅश ऑन डिलिव्हरी (Free COD) आणि WhatsApp वर थेट ऑर्डरची सुविधा उपलब्ध आहे."
+  }
+];
+
 const articleAndFaqSchema = [
   {
     "@type": "Article",
@@ -20,7 +50,7 @@ const articleAndFaqSchema = [
     "inLanguage": "mr-IN",
     "mainEntityOfPage": pageUrl,
     "datePublished": "2026-01-15T09:00:00+05:30",
-    "dateModified": "2026-10-09T16:00:00+05:30",
+    "dateModified": "2026-10-18T16:00:00+05:30",
     "author": {
       "@type": "Organization",
       "name": "Sujata Nutrilive Clinical Research Team",
@@ -58,56 +88,14 @@ const articleAndFaqSchema = [
   {
     "@type": "FAQPage",
     "@id": `${pageUrl}/#faq`,
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "स्पिरुलिना म्हणजे काय? (What is Spirulina in Marathi?)",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "स्पिरुलिना (Spirulina) हे निसर्गातील सर्वात शक्तिशाली निळे-हिरवे एकपेशीय शैवाल (Blue-Green Microalgae) आहे. जागतिक आरोग्य संघटना (WHO) आणि नासा (NASA) ने याला भविष्यातील सर्वोत्तम सुपरफूड म्हणून घोषित केले आहे. यात 62.39% वनस्पती प्रथिने (Plant Protein, IS 7219 प्रमाणित), 290.89 mg/kg नैसर्गिक लोह (Iron as Fe), व्हिटॅमिन B12, आणि शक्तिशाली सी-फायकोसायनिन (C-Phycocyanin) अँटीऑक्सिडंट असते."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "स्पिरुलिना खाण्याचे मुख्य फायदे काय आहेत? (Spirulina che fayde)",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "1. रक्तातील नैसर्गिक लोह आणि हिमोग्लोबिन वाढवण्यास मदत करते. 2. दुपारचा थकवा आणि अशक्तपणा घालवून दिवसभर अखंड ऊर्जा टिकवून ठेवते. 3. शरीरातील विषारी घटक बाहेर टाकून (डिटॉक्स) रोगप्रतिकारशक्ती मजबूत करते. 4. त्वचा उजळ व चमकदार बनवते आणि केस गळणे थांबवते. 5. रक्तातील साखर आणि कोलेस्ट्रॉल संतुलित ठेवण्यास मदत करते."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "सुजाता स्पिरुलिना इतर सामान्य ब्रँड्सपेक्षा वेगळे का आहे?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "बाजारातील 95% स्पिरुलिना उघड्या तळ्यांमध्ये वाढवले जाते आणि 160°C पेक्षा जास्त तापमानात वाळवले जाते, ज्यामुळे त्याची पोषणमूल्ये नष्ट होतात आणि घाण वास येतो. सुजाता स्पिरुलिना हे संपूर्ण बंद हायड्रो-डोम्समध्ये शुद्ध पाण्याने पिकवले जाते आणि 40°C पेक्षा कमी तापमानात (Cold-Pressed) तयार केले जाते. यात लॅब-प्रमाणित 62.39% प्रथिने, 290.89 mg/kg लोह टिकून राहते, 100% शून्य बाईंडर असून ते FSSAI व NABL मानकांनुसार सुरक्षित आहे."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "स्पिरुलिना रोज किती आणि कधी खावे? (Spirulina Dosage)",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "सुजाता स्पिरुलिना कॅप्सूल्स किंवा गोळ्या: दररोज सकाळी नाश्त्यानंतर 1 ते 2 कॅप्सूल्स कोमट पाण्यासोबत घ्याव्यात. अधिक थकवा किंवा व्यायामाची सवय असल्यास सायंकाळी 1 कॅप्सूल अतिरिक्त घेता येते."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "स्पिरुलिना कोणासाठी सुरक्षित आहे?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "100% शाकाहारी असल्यामुळे 18 वर्षांवरील सर्व महिला, पुरुष, ज्येष्ठ नागरिक आणि खेळाडू हे दररोज घेऊ शकतात. थायरॉईड किंवा मधुमेह असणारे नागरिकही हे सुरक्षित पूरक पोषण म्हणून घेऊ शकतात; फक्त आपल्या नेहमीच्या औषधांमध्ये आणि स्पिरुलिनामध्ये 1 तासाचे अंतर ठेवावे व गरजेनुसार डॉक्टरांचा सल्ला घ्यावा."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "सुजाता स्पिरुलिना कॅप्सूल्सची किंमत किती आहे?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "सुजाता स्पिरुलिना 60 कॅप्सूल्सची 1 महिन्याची बाटली फक्त ₹499 मध्ये उपलब्ध आहे (ऑनलाइन UPI पेमेंटवर 10% झटपट सवलतीसह फक्त ₹449, म्हणजेच दिवसाला फक्त ₹15). तसेच स्पिरुलिना + हिमालयन सी बकथॉर्न कॉम्बो पॅक (2 महिन्यांचा डोस) फक्त ₹1,100 मध्ये मिळतो, म्हणजेच दिवसाला फक्त ₹18. सोबत मोफत कॅश ऑन डिलिव्हरी (Free COD) उपलब्ध आहे."
-        }
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer
       }
-    ]
+    }))
   },
   {
     "@type": "BreadcrumbList",
@@ -619,35 +607,20 @@ const articleAndFaqSchema = [
         </h2>
 
         <div class="space-y-4">
-          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
-            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
-              <span>स्पिरुलिना महिलांसाठी सुरक्षित आहे का?</span>
-              <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180">↓</span>
-            </summary>
-            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
-              होय, महिलांसाठी स्पिरुलिना अत्यंत गुणकारी आहे. मासिक पाळीदरम्यान होणारा थकवा, रक्ताची कमतरता आणि केस गळती रोखण्यासाठी यातील लोह आणि प्रथिने अत्यंत महत्त्वाची भूमिका बजावतात.
-            </p>
-          </details>
-
-          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
-            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
-              <span>थायरॉईड किंवा बीपी असलेल्या रुग्णांनी हे घ्यावे का?</span>
-              <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180">↓</span>
-            </summary>
-            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
-              होय, हे १००% नैसर्गिक वनस्पतीजन्य अन्न असल्यामुळे थायरॉईड आणि बीपी असणारे नागरिक पूरक पोषण म्हणून सुरक्षितपणे घेऊ शकतात. तरीही नेहमीच्या औषधांमध्ये आणि स्पिरुलिनामध्ये १ तासाचे अंतर ठेवावे व गरजेनुसार डॉक्टरांचा सल्ला घ्यावा.
-            </p>
-          </details>
-
-          <details class="group bg-black/40 border border-white/10 rounded-xl p-4 cursor-pointer">
-            <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base">
-              <span>निकाल जाणवायला किती दिवस लागतात?</span>
-              <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180">↓</span>
-            </summary>
-            <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
-              पहिल्या ७ ते १० दिवसांतच सकाळचा सुस्तपणा आणि थकवा दूर होऊन शरीरात उत्साह जाणवतो. हिमोग्लोबिन वाढ आणि त्वचेतील सुधारणेसाठी किमान ३० ते ६० दिवस सलग सेवन करावे.
-            </p>
-          </details>
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">
+                {faq.answer}
+              </p>
+            </details>
+          ))}
         </div>
       </section>
 
