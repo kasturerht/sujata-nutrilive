@@ -8,6 +8,7 @@ const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.sujatanutrilive.com'
 
 export default defineConfig({
   site: siteUrl,
+  trailingSlash: 'never',
   // 'server' mode: enables SSR for dynamic routes (e.g. /product/[handle])
   // while still allowing individual pages to opt-in to prerendering.
   output: 'server',
@@ -19,7 +20,12 @@ export default defineConfig({
     tailwind(),
     react(),
     sitemap({
-      filter: (page) => !page.includes('/api/') && !page.includes('/thank-you'),
+      filter: (page) => {
+        if (page.includes('/api/') || page.includes('/thank-you')) return false;
+        // Strictly filter out any trailing slash URL except the root homepage
+        if (page.endsWith('/') && page !== `${siteUrl}/`) return false;
+        return true;
+      },
       customPages: [
         `${siteUrl}/`,
         `${siteUrl}/science`,
