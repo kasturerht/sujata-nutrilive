@@ -3,6 +3,7 @@ import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
 import JudgeMeReviews from '../../components/JudgeMeReviews.astro';
+import StoreRelatedFormulations from '../../components/StoreRelatedFormulations.astro';
 import { BRAND_CONFIG, getWhatsAppLink } from '../../config/brand';
 import { getJudgeMeSsrData } from '../../lib/judgeme-ssr';
 import { resolveDynamicProductEntity } from '../../lib/product-entity-resolver';
@@ -2783,6 +2784,9 @@ const productVideoSchema = videoData ? {
       initialWidgetHtml={judgeMeWidgetHtml}
     />
   )}
+
+  {/* 🧬 NEURAL MESH CROSS-LINKING ENGINE (Related Formulations Grid for Googlebot & Shoppers) */}
+  <StoreRelatedFormulations currentHandle={handle} />
 
   {/* UNIFIED LUXURY STORE FOOTER */}
   <StoreFooter />

@@ -1,0 +1,286 @@
+---
+// src/components/StoreRelatedFormulations.astro
+// 🧬 NEURAL MESH INTERNAL LINKING ENGINE (Silicon Valley 2026 Spec)
+// Bridges PageRank & Crawl Priority across all 16 Formulations
+
+interface Props {
+  currentHandle: string;
+}
+
+const { currentHandle } = Astro.props;
+
+interface CatalogItem {
+  handle: string;
+  title: string;
+  subtitle: string;
+  price: string;
+  comparePrice?: string;
+  image: string;
+  badge: string;
+  rating: string;
+  category: 'nutrition' | 'skincare' | 'haircare' | 'combos';
+}
+
+const ALL_CATALOG: CatalogItem[] = [
+  {
+    handle: 'sujata-spirulina-tablets',
+    title: 'Sujata Spirulina Tablets (500mg)',
+    subtitle: 'Cold-Compressed • Zero Chemical Binders',
+    price: '₹499',
+    comparePrice: '₹799',
+    image: '/products/sujata-spirulina-tablets-bottle.jpg',
+    badge: 'Flagship Superfood',
+    rating: '4.9 ★ (1,840)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-spirulina-powder',
+    title: 'Sujata Pure Spirulina Powder (100g)',
+    subtitle: 'Cryo-Milled • 21.4% Phycocyanin',
+    price: '₹499',
+    comparePrice: '₹799',
+    image: '/products/sujata-spirulina-powder-pouch.jpg',
+    badge: 'Cryo-Milled Pure',
+    rating: '4.9 ★ (1,420)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-spirulina-capsules',
+    title: 'Sujata Spirulina Veggie Capsules',
+    subtitle: '500mg Plant Shell • Instant Absorption',
+    price: '₹499',
+    comparePrice: '₹799',
+    image: '/products/sujata-spirulina-capsules-bottle.jpg',
+    badge: '100% Veggie Shell',
+    rating: '4.9 ★ (1,150)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-pure-himalayan-shilajit',
+    title: 'Pure Himalayan Shilajit Resin (Gold Grade)',
+    subtitle: '>75% Fulvic Acid • NABL Certified Purity',
+    price: '₹999',
+    comparePrice: '₹1,299',
+    image: '/products/sujata-himalayan-shilajit-bottle.jpg',
+    badge: 'Gold Grade >75%',
+    rating: '5.0 ★ (1,580)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-sea-buckthorn-capsules',
+    title: 'Wild Himalayan Sea Buckthorn Capsules',
+    subtitle: 'Rare Omega 7 & 12x Natural Vitamin C',
+    price: '₹699',
+    comparePrice: '₹999',
+    image: '/products/sujata-sea-buckthorn-capsules-bottle.jpg',
+    badge: 'Rare Omega 7',
+    rating: '4.9 ★ (1,230)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-plant-based-vitamin-b12',
+    title: 'Plant-Based Vitamin B12 (Active Co-Enzyme)',
+    subtitle: 'Methylcobalamin • 0% Synthetic Cyanide',
+    price: '₹799',
+    comparePrice: '₹1,099',
+    image: '/products/sujata-plant-based-b12-bottle.png',
+    badge: 'Active Co-Enzyme',
+    rating: '4.8 ★ (940)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-moringa-powder',
+    title: 'Raw Moringa Leaf Detox Powder (100g)',
+    subtitle: 'Shade-Dried Organic Moringa • Natural Detox',
+    price: '₹249',
+    comparePrice: '₹299',
+    image: '/products/sujata-moringa-powder-pouch.jpg',
+    badge: 'Super Detox Leaf',
+    rating: '4.8 ★ (820)',
+    category: 'nutrition'
+  },
+  {
+    handle: 'sujata-spirulina-facewash',
+    title: 'Spirulina Botanical Detox Face Wash',
+    subtitle: 'Anti-Acne • Deep Pore Cleansing & Zinc',
+    price: '₹349',
+    comparePrice: '₹499',
+    image: '/products/sujata-spirulina-facewash-bottle.jpg',
+    badge: 'Anti-Acne Detox',
+    rating: '4.9 ★ (1,910)',
+    category: 'skincare'
+  },
+  {
+    handle: 'sujata-spiruglow-bath-soap',
+    title: 'SpiruGlow Ayurvedic Herbal Bath Bar',
+    subtitle: 'Handcrafted Cold-Pressed Coconut & Spirulina',
+    price: '₹149',
+    comparePrice: '₹249',
+    image: '/products/sujata-spiruglow-bath-soap-box.jpg',
+    badge: 'Handcrafted Herbal',
+    rating: '4.9 ★ (1,120)',
+    category: 'skincare'
+  },
+  {
+    handle: 'sujata-spirulina-korean-cream',
+    title: 'Spirulina Korean Glass Skin Night Cream',
+    subtitle: 'K-Beauty Radiance Peptide Infusion',
+    price: '₹599',
+    comparePrice: '₹799',
+    image: '/products/sujata-spirulina-korean-cream-jar.jpg',
+    badge: 'K-Beauty Glass Skin',
+    rating: '4.9 ★ (880)',
+    category: 'skincare'
+  },
+  {
+    handle: 'sujata-bridal-whitening-cream',
+    title: 'Bridal Whitening & Radiance Day Cream',
+    subtitle: 'Pure Sandalwood & Saffron Botanical Glow',
+    price: '₹699',
+    comparePrice: '₹899',
+    image: '/products/sujata-bridal-whitening-cream-jar.jpg',
+    badge: 'Luxury Bridal Glow',
+    rating: '5.0 ★ (620)',
+    category: 'skincare'
+  },
+  {
+    handle: 'sujata-spirulina-facepack-powder',
+    title: 'Spirulina Tan-Removal Face Pack Powder',
+    subtitle: 'Instant Botanical Radiance & Blemish Detox',
+    price: '₹299',
+    comparePrice: '₹399',
+    image: '/products/sujata-spirulina-facepack-pouch.jpg',
+    badge: 'Instant Glow Pack',
+    rating: '4.8 ★ (750)',
+    category: 'skincare'
+  },
+  {
+    handle: 'sujata-spirulina-coconut-hair-oil',
+    title: 'Spirulina & Biotin Cold-Pressed Hair Oil',
+    subtitle: 'Active Scalp Therapy • Hair Fall Defense',
+    price: '₹299',
+    comparePrice: '₹399',
+    image: '/products/sujata-spirulina-hair-oil-bottle.png',
+    badge: 'Scalp Root Defense',
+    rating: '4.9 ★ (1,450)',
+    category: 'haircare'
+  },
+  {
+    handle: 'sujata-spirushine-shampoo-conditioner',
+    title: 'SpiruShine 2-in-1 Shampoo & Conditioner',
+    subtitle: 'Keratin & Spirulina Anti-Thinning Wash',
+    price: '₹399',
+    comparePrice: '₹499',
+    image: '/products/sujata-spirushine-shampoo-bottle.jpg',
+    badge: '2-in-1 Therapy',
+    rating: '4.8 ★ (910)',
+    category: 'haircare'
+  },
+  {
+    handle: 'sujata-spirulina-sea-buckthorn-combo-pack',
+    title: 'Spirulina + Sea Buckthorn 2-Month Combo',
+    subtitle: 'Cellular Immunity & Rare Omega 7 Protocol',
+    price: '₹1,100',
+    comparePrice: '₹1,600',
+    image: '/products/sujata-combo-spirulina-sea-buckthorn.jpg',
+    badge: 'Save ₹500 Protocol',
+    rating: '5.0 ★ (2,100)',
+    category: 'combos'
+  },
+  {
+    handle: 'sujata-spirulina-sea-buckthorn-combo',
+    title: 'Spirulina + Sea Buckthorn Synergy Duo',
+    subtitle: '1-Month Cellular Rejuvenation Duo',
+    price: '₹1,049',
+    comparePrice: '₹1,498',
+    image: '/products/sujata-combo-spirulina-sea-buckthorn.jpg',
+    badge: 'Synergy Duo',
+    rating: '4.9 ★ (980)',
+    category: 'combos'
+  }
+];
+
+// Determine related items: prioritize same category + cross-category flagship, excluding self
+const currentItem = ALL_CATALOG.find(i => i.handle === currentHandle);
+const currentCat = currentItem?.category || 'nutrition';
+
+let recommendations = ALL_CATALOG.filter(i => i.handle !== currentHandle && i.category === currentCat);
+
+// If less than 4, pad with flagship nutrition formulations
+if (recommendations.length < 4) {
+  const others = ALL_CATALOG.filter(i => i.handle !== currentHandle && !recommendations.some(r => r.handle === i.handle));
+  recommendations = [...recommendations, ...others];
+}
+
+const displayItems = recommendations.slice(0, 4);
+---
+
+<section class="py-12 sm:py-16 bg-[#FBF9F5] border-t border-gray-200/80 text-[#111827]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+      <div>
+        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#166534] block mb-1">
+          Synergistic Bio-Active Protocol
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-[#111827] tracking-tight">
+          Explore Related <span class="italic text-[#166534]">Formulations</span>
+        </h2>
+      </div>
+      <a href="/#product-ecosystem" class="text-xs sm:text-sm font-bold text-[#166534] hover:text-[#111827] transition-colors flex items-center gap-1">
+        <span>View Complete Catalog (16)</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+      {displayItems.map((item) => (
+        <div class="bg-white rounded-2xl p-3 sm:p-4 border border-gray-200/90 hover:border-[#166534]/50 hover:shadow-md transition-all flex flex-col justify-between group">
+          <div>
+            <a href={`/product/${item.handle}`} class="block relative aspect-square bg-[#FAF9F6] rounded-xl p-2 mb-2.5 overflow-hidden group-hover:bg-emerald-50/20 transition-colors flex items-center justify-center">
+              <span class="absolute top-1.5 left-1.5 z-10 text-[8px] sm:text-[9px] font-bold uppercase tracking-wider bg-[#064E3B] text-white px-2 py-0.5 rounded-full shadow-xs">
+                {item.badge}
+              </span>
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                class="w-full h-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </a>
+
+            <a href={`/product/${item.handle}`} class="block mb-1">
+              <h3 class="text-xs sm:text-sm font-bold text-[#111827] group-hover:text-[#166534] transition-colors leading-tight line-clamp-2 min-h-[2.5em]">
+                {item.title}
+              </h3>
+            </a>
+
+            <p class="text-[9.5px] sm:text-[11px] text-gray-500 font-medium truncate mb-2">
+              {item.subtitle}
+            </p>
+          </div>
+
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between gap-1">
+            <div class="flex items-baseline gap-1">
+              <span class="text-sm sm:text-base font-black text-[#111827]">
+                {item.price}
+              </span>
+              {item.comparePrice && (
+                <span class="text-[10px] text-gray-400 line-through">
+                  {item.comparePrice}
+                </span>
+              )}
+            </div>
+            <a 
+              href={`/product/${item.handle}`} 
+              class="bg-[#166534] hover:bg-[#15803d] text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+            >
+              View ➔
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

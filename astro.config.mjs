@@ -26,6 +26,21 @@ export default defineConfig({
         if (page.endsWith('/') && page !== `${siteUrl}/`) return false;
         return true;
       },
+      serialize: (item) => {
+        if (item.url.endsWith('/') && item.url !== `${siteUrl}/`) return undefined;
+        item.lastmod = new Date().toISOString();
+        if (item.url.includes('/product/')) {
+          item.priority = 0.9;
+          item.changefreq = 'daily';
+        } else if (item.url === `${siteUrl}/`) {
+          item.priority = 1.0;
+          item.changefreq = 'daily';
+        } else {
+          item.priority = 0.8;
+          item.changefreq = 'weekly';
+        }
+        return item;
+      },
       customPages: [
         `${siteUrl}/`,
         `${siteUrl}/science`,
