@@ -1021,10 +1021,6 @@ const productReviewsList = (handle && verifiedReviewsMap[handle])
 const verifiedProductReviews = productReviewsList.map((r, idx) => ({
   "@type": "Review",
   "@id": `${canonicalURL}#review-${idx + 1}`,
-  "itemReviewed": {
-    "@type": "Product",
-    "name": productTitle
-  },
   "author": {
     "@type": "Person",
     "name": r.author

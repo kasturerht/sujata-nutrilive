@@ -87,46 +87,23 @@ const videoStories: VideoStory[] = [
   }
 ];
 
-// Rich Google Search Schema (VideoObject & Review for AI & SEO)
+// Rich Google Search Schema (VideoObject for AI & Video Rich Snippets)
 const socialProofSchema = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Product",
-      "name": "Sujata Nutrilive Organic Superfoods",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "50000",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": videoStories.map((story) => ({
-        "@type": "Review",
-        "author": { "@type": "Person", "name": story.patientName },
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": `${story.highlight} - ${story.quote}`,
-        "itemReviewed": {
-          "@type": "Product",
-          "name": story.productTitle
-        }
-      }))
-    },
-    ...videoStories.map((story) => ({
-      "@type": "VideoObject",
-      "name": story.highlight,
-      "description": story.quote,
-      "thumbnailUrl": [story.posterUrl],
-      "uploadDate": "2026-10-10",
-      "contentUrl": `https://www.youtube.com/watch?v=${story.videoId}`,
-      "embedUrl": `https://www.youtube-nocookie.com/embed/${story.videoId}`,
-      "publisher": {
-        "@type": "Organization",
-        "name": "Sujata Nutrilive",
-        "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/favicon.svg" }
-      }
-    }))
-  ]
+  "@graph": videoStories.map((story) => ({
+    "@type": "VideoObject",
+    "name": story.highlight,
+    "description": story.quote,
+    "thumbnailUrl": [story.posterUrl],
+    "uploadDate": "2026-10-10",
+    "contentUrl": `https://www.youtube.com/watch?v=${story.videoId}`,
+    "embedUrl": `https://www.youtube-nocookie.com/embed/${story.videoId}`,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive",
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/favicon.svg" }
+    }
+  }))
 };
 ---
 
