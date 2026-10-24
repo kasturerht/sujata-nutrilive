@@ -293,7 +293,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
           {/* Visual: On Mobile = Order 1 (TOP), On Desktop = Order 2 (RIGHT) */}
-          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
+          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1 hero-reveal-elem hero-reveal-visual">
             <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-emerald-500/20 rounded-full blur-[60px] pointer-events-none"></div>
 
             {/* Floating Trust Pill */}
@@ -317,22 +317,22 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           {/* Copy & Offer: On Mobile = Order 2 (BOTTOM), On Desktop = Order 1 (LEFT) */}
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            <span class="inline-flex items-center gap-1.5 text-[9.5px] sm:text-xs font-mono font-bold uppercase tracking-[0.2em] text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30 mb-2">
+            <span class="hero-reveal-elem hero-reveal-tag inline-flex items-center gap-1.5 text-[9.5px] sm:text-xs font-mono font-bold uppercase tracking-[0.2em] text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30 mb-2">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               Sujata Nutrilive Agrotech • Official Store
             </span>
 
-            <h1 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
+            <h1 class="hero-reveal-elem hero-reveal-heading text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
               Double Your Daily Energy.<br/>
               <span class="italic text-emerald-300 font-serif">Zero 3 PM Fatigue.</span>
             </h1>
 
-            <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
+            <p class="hero-reveal-elem hero-reveal-desc text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
               100% Pure, sub-40°C cold-pressed Spirulina. Packed with 290.89 mg/kg natural iron (as Fe), 62.39% plant protein (IS 7219), and active Phycocyanin. Wake up refreshed and energized all day without caffeine crashes.
             </p>
 
             {/* 3 Clinical Pills */}
-            <div class="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
+            <div class="hero-reveal-elem hero-reveal-pills grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
               <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
                 <span class="text-emerald-400 text-[10px] sm:text-xs">🟢</span>
                 <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Pure Veg</span>
@@ -348,7 +348,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* Pricing Bar with Daily Cost Anchor (Silicon Valley / Top D2C Framing) */}
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
+            <div class="hero-reveal-elem hero-reveal-price flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
               <div class="flex items-baseline gap-2">
                 <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{spiriPrice.toLocaleString('en-IN')}</span>
                 {spiriCompare > spiriPrice && (
@@ -365,10 +365,10 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* Single High-Converting Primary CTA on Mobile */}
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+            <div class="hero-reveal-elem hero-reveal-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
                 href={`/product/${spiriHandle}`} 
-                class="bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(52,211,153,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                class="btn-emerald-sweep bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(52,211,153,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
                 <span>ORDER PURE SPIRULINA • ₹{spiriPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
@@ -383,7 +383,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* 4-Pillar High-Trust Reassurance Strip */}
-            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
+            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
               <span class="flex items-center gap-1"><span class="text-emerald-400">💵</span> Free Cash on Delivery</span>
@@ -409,7 +409,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
           {/* Visual: On Mobile = Order 1 (TOP), On Desktop = Order 2 (RIGHT) */}
-          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
+          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1 hero-reveal-elem hero-reveal-visual">
             <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-amber-500/15 rounded-full blur-[60px] pointer-events-none"></div>
 
             {/* Floating Trust Pill */}
@@ -433,17 +433,17 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           {/* Copy & Offer */}
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            <h2 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
+            <h2 class="hero-reveal-elem hero-reveal-heading text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
               All-Day Natural Energy & Radiant Skin.<br/>
               <span class="italic text-amber-300 font-serif">Spirulina + Himalayan Sea Buckthorn.</span>
             </h2>
 
-            <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
+            <p class="hero-reveal-elem hero-reveal-desc text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
               India's purest cold-pressed Spirulina (natural plant iron & 62.39% plant protein) paired with wild Ladakh Sea Buckthorn (rare Omega 7 & 12x Vitamin C). Fixes 3 PM fatigue, boosts daily stamina, and nourishes skin from within.
             </p>
 
             {/* 3 Clinical Pills */}
-            <div class="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
+            <div class="hero-reveal-elem hero-reveal-pills grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
               <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
                 <span class="text-emerald-400 text-[10px] sm:text-xs">🟢</span>
                 <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Pure Veg</span>
@@ -459,7 +459,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* Pricing Bar */}
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
+            <div class="hero-reveal-elem hero-reveal-price flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
               <div class="flex items-baseline gap-2">
                 <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{comboPrice.toLocaleString('en-IN')}</span>
                 {comboCompare > comboPrice && (
@@ -476,10 +476,10 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* CTA */}
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+            <div class="hero-reveal-elem hero-reveal-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
                 href={`/product/${comboHandle}`} 
-                class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                class="btn-gold-sweep bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
                 <span>ORDER COMBO PACK • ₹{comboPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
@@ -494,7 +494,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* Trust Strip */}
-            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
+            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
               <span class="flex items-center gap-1"><span class="text-emerald-400">💵</span> Free Cash on Delivery</span>
@@ -520,7 +520,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
           {/* Visual */}
-          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1">
+          <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col items-center justify-center relative w-full py-1 hero-reveal-elem hero-reveal-visual">
             <div class="absolute w-[200px] sm:w-[280px] lg:w-[340px] h-[200px] sm:h-[280px] lg:h-[340px] bg-amber-500/20 rounded-full blur-[60px] pointer-events-none"></div>
 
             <div class="relative z-20 mb-1 bg-black/75 backdrop-blur-md border border-amber-400/30 px-3 py-0.5 rounded-full flex items-center gap-1.5 shadow-lg">
@@ -542,17 +542,17 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           {/* Copy */}
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            <h2 class="text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
+            <h2 class="hero-reveal-elem hero-reveal-heading text-xl sm:text-3xl lg:text-[2.5rem] xl:text-[2.85rem] font-serif font-normal text-white leading-[1.15] tracking-tight mb-1.5 sm:mb-2">
               Radiant Skin Glow & Cellular Youth.<br/>
               <span class="italic text-amber-400 font-serif">Powered by Wild Himalayan Omega-7.</span>
             </h2>
 
-            <p class="text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
+            <p class="hero-reveal-elem hero-reveal-desc text-xs sm:text-sm text-emerald-100/80 font-normal leading-relaxed max-w-xl mb-2 sm:mb-3 font-sans">
               Nature's rarest source of Omega 7, 3, 6, 9 with 12x Vitamin C of fresh oranges. Deeply hydrates cellular mucosal linings, supports heart elasticity, and restores clear skin glow naturally.
             </p>
 
             {/* 3 Clinical Pills */}
-            <div class="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
+            <div class="hero-reveal-elem hero-reveal-pills grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-md mb-2.5 sm:mb-3 text-center sm:text-left">
               <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
                 <span class="text-amber-400 text-[10px] sm:text-xs">💧</span>
                 <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Skin Hydration</span>
@@ -568,7 +568,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* Pricing Bar with Daily Cost Anchor */}
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
+            <div class="hero-reveal-elem hero-reveal-price flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
               <div class="flex items-baseline gap-2">
                 <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{sbtPrice.toLocaleString('en-IN')}</span>
                 {sbtCompare > sbtPrice && (
@@ -585,10 +585,10 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* CTA */}
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+            <div class="hero-reveal-elem hero-reveal-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
               <a 
                 href={`/product/${sbtHandle}`} 
-                class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                class="btn-gold-sweep bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
                 <span>ORDER SEA BUCKTHORN • ₹{sbtPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
@@ -603,7 +603,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
             </div>
 
             {/* Trust Strip */}
-            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
+            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
               <span class="flex items-center gap-1"><span class="text-emerald-400">💵</span> Free Cash on Delivery</span>
@@ -731,25 +731,25 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
         ambientGlow.style.backgroundColor = glowColors[currentIndex];
       }
 
-      // 4. Staggered Entrance Reveal for Diwali Slide (Slide 0)
-      const slide0 = document.getElementById('hero-slide-0');
-      if (slide0) {
-        if (targetIndex === 0) {
-          slide0.classList.remove('active-reveal', 'reveal-done');
-          void slide0.offsetWidth; // Force CSS reflow to cleanly re-trigger the reveal sequence
-          slide0.classList.add('active-reveal');
-          if (slide0Timeout) clearTimeout(slide0Timeout);
-          slide0Timeout = setTimeout(() => {
-            if (currentIndex === 0) {
-              slide0.classList.remove('active-reveal');
-              slide0.classList.add('reveal-done');
-            }
-          }, 1350);
+      // 4. Staggered Entrance Reveal for ALL Protocols/Banners (Slide 0, 1, 2, 3)
+      slides.forEach((slide, idx) => {
+        if (idx === targetIndex) {
+          slide.classList.remove('active-reveal', 'reveal-done');
+          void slide.offsetWidth; // Force CSS reflow to cleanly trigger entrance reveal
+          slide.classList.add('active-reveal');
         } else {
-          slide0.classList.remove('active-reveal', 'reveal-done');
-          if (slide0Timeout) clearTimeout(slide0Timeout);
+          slide.classList.remove('active-reveal', 'reveal-done');
         }
-      }
+      });
+
+      if (slide0Timeout) clearTimeout(slide0Timeout);
+      slide0Timeout = setTimeout(() => {
+        const activeSlide = slides[currentIndex];
+        if (activeSlide) {
+          activeSlide.classList.remove('active-reveal');
+          activeSlide.classList.add('reveal-done');
+        }
+      }, 1350);
     }
 
     function scrollToIndex(targetIndex) {
@@ -996,6 +996,146 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
     100% {
       opacity: 1;
       transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  /* 🌿 EMERALD SHEEN SWEEP ON SPIRULINA CTA */
+  .btn-emerald-sweep {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-emerald-sweep::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.45) 45%,
+      rgba(167, 243, 208, 0.65) 50%,
+      transparent 55%
+    );
+    transform: translateX(-100%) skewX(-20deg);
+    animation: goldSheenSweep 4.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* 🌟 UNIVERSAL PROTOCOL STAGGERED ENTRANCE REVEAL (SLIDES 1, 2, 3) */
+  @keyframes slideVisualReveal {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 22px, 0) scale(0.93);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes slideElemFadeUp {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes slideCardCascade {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes slideCtaGlideIn {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  /* When any slide has .active-reveal, stagger its elements */
+  .hero-slide-card.active-reveal .hero-reveal-elem {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-visual {
+    animation-name: slideVisualReveal;
+    animation-duration: 0.65s;
+    animation-delay: 0.06s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-tag {
+    animation-name: slideElemFadeUp;
+    animation-duration: 0.50s;
+    animation-delay: 0.16s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-heading {
+    animation-name: slideElemFadeUp;
+    animation-duration: 0.55s;
+    animation-delay: 0.24s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-desc {
+    animation-name: slideElemFadeUp;
+    animation-duration: 0.50s;
+    animation-delay: 0.34s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-pills {
+    animation-name: slideCardCascade;
+    animation-duration: 0.50s;
+    animation-delay: 0.44s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-price {
+    animation-name: slideElemFadeUp;
+    animation-duration: 0.50s;
+    animation-delay: 0.54s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-cta {
+    animation-name: slideCtaGlideIn;
+    animation-duration: 0.52s;
+    animation-delay: 0.64s;
+  }
+
+  .hero-slide-card.active-reveal .hero-reveal-trust {
+    animation-name: slideElemFadeUp;
+    animation-duration: 0.45s;
+    animation-delay: 0.74s;
+  }
+
+  /* Unlock native hover transformations once reveal completes */
+  .hero-slide-card.reveal-done .hero-reveal-elem {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide-card.active-reveal .hero-reveal-elem {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 
