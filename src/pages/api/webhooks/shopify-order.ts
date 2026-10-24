@@ -207,6 +207,14 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 2. Server-Side Meta Conversions API (CAPI v21.0) Purchase Event Dispatch
+    // 🛡️ SILICON VALLEY ARCHITECTURE FIX (OCTOBER 2026):
+    // Shopify Official "Facebook & Instagram" App (App ID 2329312) is already active
+    // on tvczdq-nu.myshopify.com and sends native Server CAPI.
+    // Firing an un-deduplicated CAPI call here with custom event_id ('order_...') creates 
+    // a duplicate purchase event (300% overcounting in Meta Ads Manager).
+    // Gated behind ENABLE_WEBHOOK_META_CAPI flag to maintain single source of truth.
+    const enableWebhookCapi =
+      typeof process !== 'undefined' && process.env?.ENABLE_WEBHOOK_META_CAPI === 'true';
     const metaPixelId =
       (typeof process !== 'undefined' && process.env?.PUBLIC_META_PIXEL_ID) ||
       '1314112957191765';
@@ -215,7 +223,7 @@ export const POST: APIRoute = async ({ request }) => {
       'EAAZAmug8oChABSqxHeW0lbtHCwkwMaQQsx5UqcYgYxLfn3qep4z4avHUZC26Nlv2OYU0Qqw0OkfIg4TcZBWVJJGCntlwH8kQiKzmLid0eyCQZC70ZBK56ZCt3mMoolHewqj2R07NVZAQV6ifdZBlyZBSoGVzZAqKHt7vaof15TcZBzmGzpYpmyHFM7ykDPOfoAhfQZDZD';
 
     let capiResult = null;
-    if (metaPixelId && metaAccessToken) {
+    if (enableWebhookCapi && metaPixelId && metaAccessToken) {
       capiResult = await sendMetaCapiPurchase(order, metaPixelId, metaAccessToken);
     }
 

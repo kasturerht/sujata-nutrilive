@@ -33,8 +33,8 @@ const VERIFIED_AMAZON_ASINS: Record<string, string> = {
   'sujata-spirulina-tablets:60': 'B0GMQYS6M4',
   'sujata-spirulina-tablets:120': 'B0DNSXGGTN',
   'sujata-spirulina-tablets': 'B0GMQYS6M4',
-  'sujata-spirulina-sea-buckthorn-combo': 'B0DP2FWN4J',
-  'sujata-spirulina-sea-buckthorn-combo-pack': 'B0DP2FWN4J',
+  'sujata-spirulina-sea-buckthorn-combo': 'B0HMJNJ2LP',
+  'sujata-spirulina-sea-buckthorn-combo-pack': 'B0HMJNHVNH',
   'sujata-spirulina-capsules:60': 'B0GMQYS6M4'
 };
 

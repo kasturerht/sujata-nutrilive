@@ -197,8 +197,9 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
     { url: '/products/sujata-combo-synergy-infographic-hindi.jpg', altText: 'Ayurvedic Synergy Infographic' }
   ],
   'sujata-spirulina-sea-buckthorn-combo-pack': [
-    { url: '/products/sujata-combo-spirulina-sea-buckthorn.jpg', altText: 'Spirulina + Sea Buckthorn Super Combo' },
-    { url: '/products/sujata-combo-synergy-infographic-hindi.jpg', altText: 'Ayurvedic Synergy Infographic' }
+    { url: '/products/sujata-spirulina-capsules-bottle.jpg', altText: 'Sujata Spirulina 100% Veg Capsules' },
+    { url: '/products/sujata-sea-buckthorn-capsules-bottle.jpg', altText: 'Sujata Sea Buckthorn Capsules' },
+    { url: '/products/sujata-combo-synergy-infographic-hindi.jpg', altText: 'Dual Cellular Synergy Infographic' }
   ]
 };
 
@@ -436,6 +437,19 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
       { time: "Week 02", title: "Immunity & Radiant Skin", desc: "Omega 7 hydrates dermal layers from within while antioxidants fortify immune defense." },
       { time: "Day 30+", title: "360° Complete Wellness", desc: "Optimal cardiovascular wellness, radiant skin elasticity, and sustained high energy." }
     ]
+  },
+  'sujata-spirulina-sea-buckthorn-combo-pack': {
+    ingredients: [
+      { symbol: "Spi", name: "Pure Spirulina (Veg Capsules)", desc: "Delivers 62.39% complete vegan protein (IS 7219), organic iron, and all-day physical stamina in odorless plant capsules.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "SBT", name: "Himalayan Sea Buckthorn (Capsules)", desc: "Provides rare Omega 7, 3, 6, 9 and natural Vitamin C for radiant skin glow, gut mucosal hydration, and heart health.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Ph-Fla", name: "Dual Bio-Shield", desc: "Synergy of Phycocyanin and Flavonoids creates a 360° antioxidant defense against cellular aging.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Syn", name: "360° Cellular Synergy", desc: "100% Vegetarian Capsules combo delivering sustained energy, deep hydration, and immune protection with zero bitter aftertaste.", color: "text-amber-400", border: "border-amber-500/30" }
+    ],
+    timeline: [
+      { time: "Week 01", title: "Synergistic Energy Surge", desc: "Natural plant iron and omega fatty acids combine to boost daily stamina and mental sharpness." },
+      { time: "Week 02", title: "Immunity & Radiant Skin", desc: "Omega 7 hydrates dermal layers from within while antioxidants fortify immune defense." },
+      { time: "Day 30+", title: "360° Complete Wellness", desc: "Optimal cardiovascular wellness, radiant skin elasticity, and sustained high energy." }
+    ]
   }
 };
 
@@ -453,6 +467,7 @@ const resolvedDossier = (handle && productClinicalDossierMap[handle.toLowerCase(
   : (handle && handle.toLowerCase().includes('b12')) ? productClinicalDossierMap['sujata-plant-based-vitamin-b12']
   : (handle && handle.toLowerCase().includes('moringa')) ? productClinicalDossierMap['sujata-moringa-powder']
   : (handle && handle.toLowerCase().includes('buckthorn')) ? productClinicalDossierMap['sujata-sea-buckthorn-capsules']
+  : (handle && handle.toLowerCase().includes('combo-pack')) ? productClinicalDossierMap['sujata-spirulina-sea-buckthorn-combo-pack']
   : (handle && handle.toLowerCase().includes('combo')) ? productClinicalDossierMap['sujata-spirulina-sea-buckthorn-combo']
   : (handle && handle.toLowerCase().includes('tablet')) ? productClinicalDossierMap['sujata-spirulina-tablets']
   : (handle && handle.toLowerCase().includes('capsule')) ? productClinicalDossierMap['sujata-spirulina-capsules']
@@ -772,23 +787,23 @@ const authoritativeSkuMap: Record<string, { defaultSku: string; defaultMpn: stri
     }
   },
   'sujata-spirulina-sea-buckthorn-combo-pack': {
-    defaultSku: 'SJT-CMB-HEALTHYLIFE-1M',
-    defaultMpn: 'SJT-CMB-HEALTHYLIFE-1M',
+    defaultSku: 'SJT-CMBO-HL-1M',
+    defaultMpn: 'SJT-CMBO-HL-1M',
     variants: {
-      '1': { sku: 'SJT-CMB-HEALTHYLIFE-1M', mpn: 'SJT-CMB-HEALTHYLIFE-1M', count: 1, unit: 'Month Supply Protocol' },
-      '2': { sku: 'SJT-CMB-HEALTHYLIFE-2M', mpn: 'SJT-CMB-HEALTHYLIFE-2M', count: 2, unit: 'Month Supply Protocol' },
-      '3': { sku: 'SJT-CMB-HEALTHYLIFE-3M', mpn: 'SJT-CMB-HEALTHYLIFE-3M', count: 3, unit: 'Month Supply Protocol' }
+      '1': { sku: 'SJT-CMBO-HL-1M', mpn: 'SJT-CMBO-HL-1M', count: 1, unit: 'Month Supply (120 Veg Capsules)' },
+      '2': { sku: 'SJT-CMBO-HL-2M', mpn: 'SJT-CMBO-HL-2M', count: 2, unit: 'Month Supply (240 Veg Capsules)' },
+      '3': { sku: 'SJT-CMBO-HL-3M', mpn: 'SJT-CMBO-HL-3M', count: 3, unit: 'Month Supply (360 Veg Capsules)' }
     }
   },
   'spirulina-sea-buckthorn-combo-pack': {
-    defaultSku: 'SJT-CMB-HEALTHYLIFE-1M',
-    defaultMpn: 'SJT-CMB-HEALTHYLIFE-1M',
+    defaultSku: 'SJT-CMBO-HL-1M',
+    defaultMpn: 'SJT-CMBO-HL-1M',
     variants: {
-      '1': { sku: 'SJT-CMB-HEALTHYLIFE-1M', mpn: 'SJT-CMB-HEALTHYLIFE-1M', count: 1, unit: 'Month Supply Protocol' },
-      '2': { sku: 'SJT-CMB-HEALTHYLIFE-2M', mpn: 'SJT-CMB-HEALTHYLIFE-2M', count: 2, unit: 'Month Supply Protocol' },
-      '3': { sku: 'SJT-CMB-HEALTHYLIFE-3M', mpn: 'SJT-CMB-HEALTHYLIFE-3M', count: 3, unit: 'Month Supply Protocol' }
+      '1': { sku: 'SJT-CMBO-HL-1M', mpn: 'SJT-CMBO-HL-1M', count: 1, unit: 'Month Supply (120 Veg Capsules)' },
+      '2': { sku: 'SJT-CMBO-HL-2M', mpn: 'SJT-CMBO-HL-2M', count: 2, unit: 'Month Supply (240 Veg Capsules)' },
+      '3': { sku: 'SJT-CMBO-HL-3M', mpn: 'SJT-CMBO-HL-3M', count: 3, unit: 'Month Supply (360 Veg Capsules)' }
     }
-  }
+  },
 };
 
 const resolveVariantIdentifiers = (v: any, idx: number) => {
