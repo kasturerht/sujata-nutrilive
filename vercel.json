@@ -6,17 +6,12 @@
   "redirects": [
     {
       "source": "/products/sujata-daily-super-immunity-combo",
-      "destination": "/product/sujata-spirulina-sea-buckthorn-combo",
+      "destination": "/product/sujata-spirulina-sea-buckthorn-combo-pack",
       "permanent": true
     },
     {
       "source": "/product/sujata-daily-super-immunity-combo",
-      "destination": "/product/sujata-spirulina-sea-buckthorn-combo",
-      "permanent": true
-    },
-    {
-      "source": "/products/sujata-spirulina-sea-buckthorn-combo",
-      "destination": "/product/sujata-spirulina-sea-buckthorn-combo",
+      "destination": "/product/sujata-spirulina-sea-buckthorn-combo-pack",
       "permanent": true
     },
     {

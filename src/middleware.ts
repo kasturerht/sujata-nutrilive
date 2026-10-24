@@ -29,10 +29,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Preserves ?fbclid=... & UTM parameters for 100% pixel attribution
   if (
     pathname === '/products/sujata-daily-super-immunity-combo' ||
-    pathname === '/product/sujata-daily-super-immunity-combo' ||
-    pathname === '/products/sujata-spirulina-sea-buckthorn-combo'
+    pathname === '/product/sujata-daily-super-immunity-combo'
   ) {
-    return context.redirect(`/product/sujata-spirulina-sea-buckthorn-combo${search}`, 301);
+    return context.redirect(`/product/sujata-spirulina-sea-buckthorn-combo-pack${search}`, 301);
   }
 
   if (pathname.startsWith('/products/')) {
