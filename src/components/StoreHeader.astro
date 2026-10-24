@@ -25,8 +25,8 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
   </div>
 
   {/* 2. THE LUXURY UTILITY HEADER */}
-  <nav id="main-nav" class="bg-[#064E3B] border-b border-[#043d2e] px-4 md:px-8 py-2.5 lg:py-2 shadow-xl transition-all duration-500 ease-in-out">
-    <div class="max-w-[95rem] mx-auto flex items-center justify-between gap-4 md:gap-8">
+  <nav id="main-nav" class="bg-[#064E3B] border-b border-[#043d2e] px-3 sm:px-6 lg:px-8 py-1.5 lg:py-1.5 shadow-xl transition-all duration-300">
+    <div class="max-w-[95rem] mx-auto flex items-center justify-between gap-2 sm:gap-4 lg:gap-6">
       
       {/* Left: Mobile Menu Button & Brand Logo */}
       <div class="flex items-center gap-3">
@@ -50,16 +50,16 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
       </div>
 
       {/* Desktop Links (Hidden on small screens) */}
-      <div class="hidden xl:flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-emerald-100/80">
-        <a href="/#product-ecosystem" class="hover:text-emerald-300 transition-colors">Products</a>
-        <a href="/science" class="hover:text-emerald-300 transition-colors">The Science</a>
-        <a href="/quiz" class="hover:text-emerald-300 transition-colors flex items-center gap-1.5"><span class="text-amber-400">⚡</span> <span>Routine Quiz</span></a>
-        <a href="/#bundle-offers" class="hover:text-emerald-300 transition-colors">Value Bundles</a>
-        <a href="/#social-proof-engine" class="hover:text-emerald-300 transition-colors">Reviews</a>
+      <div class="hidden xl:flex items-center gap-3.5 2xl:gap-6 text-[11px] 2xl:text-xs font-bold uppercase tracking-wider text-emerald-100/80 shrink-0">
+        <a href="/#product-ecosystem" class="hover:text-emerald-300 transition-colors whitespace-nowrap">Products</a>
+        <a href="/science" class="hover:text-emerald-300 transition-colors whitespace-nowrap">The Science</a>
+        <a href="/quiz" class="hover:text-emerald-300 transition-colors flex items-center gap-1 whitespace-nowrap"><span class="text-amber-400">⚡</span> <span>Routine Quiz</span></a>
+        <a href="/#bundle-offers" class="hover:text-emerald-300 transition-colors whitespace-nowrap">Value Bundles</a>
+        <a href="/#social-proof-engine" class="hover:text-emerald-300 transition-colors whitespace-nowrap">Reviews</a>
       </div>
 
       {/* Desktop Pincode Tracker */}
-      <div class="hidden lg:flex items-center gap-2.5 cursor-pointer group relative" id="pincode-trigger">
+      <div class="hidden lg:flex items-center gap-2 cursor-pointer group relative shrink-0" id="pincode-trigger">
         <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors border border-white/10">
           <svg class="w-4 h-4 text-emerald-100 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
         </div>
@@ -80,12 +80,12 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
       </div>
 
       {/* Main Search Trigger (Desktop) */}
-      <div id="desktop-search-trigger" class="hidden md:block flex-1 max-w-md lg:max-w-lg relative group cursor-pointer" role="button" tabindex="0" aria-label="Open Product Search">
-        <div class="w-full bg-black/20 hover:bg-black/30 border border-white/10 text-white rounded-full px-4 py-2 lg:py-1.5 text-xs flex items-center justify-between transition-all pl-12 shadow-inner group-hover:border-emerald-400/40">
-          <span class="text-emerald-100/60 font-medium">Search formulations, powders, capsules...</span>
-          <kbd class="hidden lg:inline-flex items-center gap-0.5 px-2 py-0.5 bg-white/10 rounded text-[10px] font-mono text-emerald-200/80 border border-white/10">⌘K</kbd>
+      <div id="desktop-search-trigger" class="hidden md:block flex-1 max-w-xs xl:max-w-sm 2xl:max-w-md relative group cursor-pointer" role="button" tabindex="0" aria-label="Open Product Search">
+        <div class="w-full h-8 lg:h-9 bg-black/20 hover:bg-black/30 border border-white/10 text-white rounded-full px-3 text-xs flex items-center justify-between transition-all pl-8 shadow-inner group-hover:border-emerald-400/40 overflow-hidden">
+          <span class="text-emerald-100/60 font-medium whitespace-nowrap truncate text-[11px] lg:text-xs">Search formulations, capsules...</span>
+          <kbd class="hidden xl:inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-white/10 rounded text-[9px] font-mono text-emerald-200/80 border border-white/10 ml-1 shrink-0">⌘K</kbd>
         </div>
-        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-100/60 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-emerald-100/60 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
       </div>
 
       {/* Action Icons */}
@@ -512,16 +512,25 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
       }
     });
 
-    // 3. Header Scroll Glassmorphism
+    // 3. Header Scroll Glassmorphism & Dynamic Height Synchronizer
     const nav = document.getElementById('main-nav');
+    const headerElem = document.getElementById('main-header');
+
+    function syncHeaderHeight() {
+      if (headerElem) {
+        const h = Math.round(headerElem.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--store-header-h', h + 'px');
+      }
+    }
+    syncHeaderHeight();
+    window.addEventListener('resize', syncHeaderHeight, { passive: true });
+
     if (nav) {
       const handleScroll = () => {
-        if (window.scrollY > 50) {
-          nav.classList.remove('bg-[#064E3B]', 'py-3', 'lg:py-4', 'border-[#043d2e]');
-          nav.classList.add('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-b', 'border-[#043d2e]/50', 'shadow-lg');
+        if (window.scrollY > 30) {
+          nav.classList.add('bg-[#064E3B]/95', 'backdrop-blur-md', 'border-b', 'border-[#043d2e]/60', 'shadow-lg');
         } else {
-          nav.classList.remove('bg-[#064E3B]/90', 'backdrop-blur-md', 'py-2.5', 'lg:py-3', 'border-b', 'border-[#043d2e]/50', 'shadow-lg');
-          nav.classList.add('bg-[#064E3B]', 'py-3', 'lg:py-4', 'border-[#043d2e]');
+          nav.classList.remove('bg-[#064E3B]/95', 'backdrop-blur-md', 'border-[#043d2e]/60');
         }
       };
       window.addEventListener('scroll', handleScroll, { passive: true });
