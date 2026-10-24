@@ -434,10 +434,12 @@ try {
       window.openSujataCart();
     };
 
-    // Reset Checkout Button State (Self-Healing State Machine)
+    // Reset Checkout Button State (Institutional-Grade Self-Healing State Machine)
     let isCheckoutInProgress = false;
     function resetCheckoutBtn() {
       isCheckoutInProgress = false;
+
+      // 1. Reset Cart Drawer Checkout Action Button
       const checkoutBtn = document.getElementById('checkout-action-btn');
       const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
       if (checkoutBtn) {
@@ -449,7 +451,81 @@ try {
           <span class="text-base">→</span>
         `;
       }
+
+      // 2. Reset All Shop Hub "1-Click Buy Now" Buttons across the DOM
+      document.querySelectorAll('.hub-direct-buy-btn').forEach(btn => {
+        btn.style.pointerEvents = '';
+        btn.removeAttribute('data-busy');
+        const spinner = btn.querySelector('.hub-btn-spinner');
+        if (spinner) spinner.classList.add('hidden');
+        const textSpan = btn.querySelector('.hub-btn-text');
+        if (textSpan) {
+          textSpan.innerHTML = `
+            <span>⚡ Buy Now</span>
+            <span class="hidden xl:inline text-[9px] font-normal opacity-90">(COD)</span>
+          `;
+        }
+      });
+
+      // 3. Reset PDP Buy Now & Sticky Buy Now Spinners and Buttons
+      const pdpBuySpinner = document.getElementById('buy-now-spinner');
+      if (pdpBuySpinner) pdpBuySpinner.classList.add('hidden');
+      const pdpStickySpinner = document.getElementById('sticky-buynow-spinner');
+      if (pdpStickySpinner) pdpStickySpinner.classList.add('hidden');
+      const pdpAtcSpinner = document.getElementById('btn-spinner');
+      if (pdpAtcSpinner) pdpAtcSpinner.classList.add('hidden');
+      const buyNowBtn = document.getElementById('buy-now-btn');
+      if (buyNowBtn) {
+        buyNowBtn.style.pointerEvents = '';
+        buyNowBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
+      const stickyBuyNowBtn = document.getElementById('sticky-buynow-btn');
+      if (stickyBuyNowBtn) {
+        stickyBuyNowBtn.style.pointerEvents = '';
+        stickyBuyNowBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
+
+      // 4. Reset Science Page Direct Buy Buttons
+      document.querySelectorAll('.science-direct-buy-btn').forEach(btn => {
+        btn.style.pointerEvents = '';
+        btn.removeAttribute('data-busy');
+        const origText = btn.getAttribute('data-original-html');
+        if (origText) {
+          btn.innerHTML = origText;
+        } else {
+          btn.innerHTML = `<span>⚡ Buy Now (COD Available)</span>`;
+        }
+      });
+
+      const scienceBottomBtn = document.getElementById('science-direct-checkout-btn');
+      if (scienceBottomBtn) {
+        scienceBottomBtn.style.pointerEvents = '';
+        scienceBottomBtn.removeAttribute('data-busy');
+        const sSpinner = scienceBottomBtn.querySelector('.btn-spinner');
+        if (sSpinner) sSpinner.classList.add('hidden');
+        const sText = scienceBottomBtn.querySelector('.btn-text');
+        if (sText) {
+          const price = scienceBottomBtn.getAttribute('data-price') || '799';
+          sText.innerHTML = `<span>⚡ Buy Now — Cash on Delivery OK • ₹${price}</span>`;
+        }
+      }
+
+      // 5. Reset Catalog "Add to Routine" Buttons
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.style.pointerEvents = '';
+        btn.disabled = false;
+        const spinner = btn.querySelector('.btn-spinner');
+        if (spinner) spinner.classList.add('opacity-0', 'pointer-events-none');
+        const btnText = btn.querySelector('.btn-text');
+        if (btnText) btnText.style.opacity = '1';
+      });
+
+      // 6. Broadcast global custom event
+      try {
+        window.dispatchEvent(new CustomEvent('sujata:buttons-reset'));
+      } catch(e) {}
     }
+    window.resetAllPurchaseButtons = resetCheckoutBtn;
     window.resetSujataCheckoutBtn = resetCheckoutBtn;
 
     // Checkout Action Button Handler (Shopify GraphQL Mutation with Self-Healing)

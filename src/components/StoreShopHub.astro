@@ -508,11 +508,31 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
       });
     });
 
-    // 2. Direct 1-Click Buy Now
+    // 2. Direct 1-Click Buy Now (Silicon Valley Self-Healing Lifecycle Architecture)
+    function resetHubBuyButtons() {
+      document.querySelectorAll('.hub-direct-buy-btn').forEach(btn => {
+        btn.style.pointerEvents = '';
+        btn.removeAttribute('data-busy');
+        const spinner = btn.querySelector('.hub-btn-spinner');
+        if (spinner) spinner.classList.add('hidden');
+        const textSpan = btn.querySelector('.hub-btn-text');
+        if (textSpan) {
+          textSpan.innerHTML = `
+            <span>⚡ Buy Now</span>
+            <span class="hidden xl:inline text-[9px] font-normal opacity-90">(COD)</span>
+          `;
+        }
+      });
+    }
+    window.resetHubBuyButtons = resetHubBuyButtons;
+
     document.querySelectorAll('.hub-direct-buy-btn').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
+
+        if (btn.getAttribute('data-busy') === 'true') return;
+        btn.setAttribute('data-busy', 'true');
 
         const id = btn.getAttribute('data-variant-id');
         const title = btn.getAttribute('data-title');
@@ -527,6 +547,9 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         if (textSpan) textSpan.innerHTML = `<span>Preparing...</span>`;
         btn.style.pointerEvents = 'none';
 
+        // 🛡️ Circuit Breaker: Auto-reset button after 5 seconds if navigation takes long or user cancels
+        const circuitBreaker = setTimeout(resetHubBuyButtons, 5000);
+
         try {
           if (typeof window.directCheckoutItem === 'function') {
             await window.directCheckoutItem({
@@ -538,6 +561,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
               quantity: 1
             });
           } else if (typeof window.addItemToLocalCart === 'function') {
+            clearTimeout(circuitBreaker);
             window.addItemToLocalCart({
               id: id,
               title: title,
@@ -546,18 +570,24 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
               subtitle: subtitle,
               quantity: 1
             });
-            spinner?.classList.add('hidden');
-            if (textSpan) textSpan.innerHTML = `<span>⚡ Buy Now</span>`;
-            btn.style.pointerEvents = '';
+            resetHubBuyButtons();
           }
         } catch (err) {
           console.error("Direct checkout error:", err);
-          spinner?.classList.add('hidden');
-          if (textSpan) textSpan.innerHTML = `<span>⚡ Buy Now</span>`;
-          btn.style.pointerEvents = '';
+          clearTimeout(circuitBreaker);
+          resetHubBuyButtons();
         }
       });
     });
+
+    // 🚀 Silicon Valley Standard: Back-Forward Cache (bfcache) & Tab Lifecycle Listeners
+    window.addEventListener('pageshow', (e) => { resetHubBuyButtons(); });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') resetHubBuyButtons(); });
+    window.addEventListener('focus', resetHubBuyButtons);
+    window.addEventListener('popstate', resetHubBuyButtons);
+    window.addEventListener('sujata:buttons-reset', resetHubBuyButtons);
+    document.addEventListener('astro:page-load', resetHubBuyButtons);
+    document.addEventListener('astro:after-swap', resetHubBuyButtons);
 
     // 3. Quick-Add to Cart
     document.querySelectorAll('.hub-add-cart-btn').forEach(btn => {

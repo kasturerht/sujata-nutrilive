@@ -2106,9 +2106,10 @@ const scienceSchemas = [
           const image = btn.getAttribute('data-image');
           const subtitle = btn.getAttribute('data-subtitle') || '100% Pure Cold-Pressed';
 
-          const originalHtml = btn.innerHTML;
+          const originalHtml = btn.getAttribute('data-original-html') || btn.innerHTML;
           btn.innerHTML = `<span class="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin inline-block"></span><span>Preparing...</span>`;
           btn.style.pointerEvents = 'none';
+          const circuitBreaker = setTimeout(resetScienceBuyButtons, 5000);
 
           try {
             if (typeof window.directCheckoutItem === 'function') {
@@ -2134,8 +2135,8 @@ const scienceSchemas = [
             }
           } catch (err) {
             console.error("Direct checkout error:", err);
-            btn.innerHTML = originalHtml;
-            btn.style.pointerEvents = '';
+            clearTimeout(circuitBreaker);
+            resetScienceBuyButtons();
           }
         });
       });
@@ -2269,6 +2270,7 @@ const scienceSchemas = [
         spinner?.classList.remove('hidden');
         if (textSpan) textSpan.innerHTML = `<span>Redirecting to Checkout...</span>`;
         directCheckoutBtn.style.pointerEvents = 'none';
+        const bottomCircuitBreaker = setTimeout(resetScienceBuyButtons, 5000);
 
         try {
           if (typeof window.directCheckoutItem === 'function') {

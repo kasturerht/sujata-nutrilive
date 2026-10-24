@@ -3552,12 +3552,32 @@ const productVideoSchema = videoData ? {
         }
       };
 
-      // 1.8b Direct 1-Click Fast Buy Now Handler (Immediate Checkout)
+      // 1.8b Direct 1-Click Fast Buy Now Handler (Silicon Valley Self-Healing State Machine)
       let isPdpBuyNowProcessing = false;
+      function resetPdpBuyButtons() {
+        isPdpBuyNowProcessing = false;
+        const buyNowSpinner = document.getElementById('buy-now-spinner');
+        if (buyNowSpinner) buyNowSpinner.classList.add('hidden');
+        const stickyBuySpinner = document.getElementById('sticky-buynow-spinner');
+        if (stickyBuySpinner) stickyBuySpinner.classList.add('hidden');
+        const atcSpinner = document.getElementById('btn-spinner');
+        if (atcSpinner) atcSpinner.classList.add('hidden');
+        if (buyNowBtn) {
+          buyNowBtn.style.pointerEvents = '';
+          buyNowBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+        }
+        if (stickyBuyNowBtn) {
+          stickyBuyNowBtn.style.pointerEvents = '';
+          stickyBuyNowBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+        }
+      }
+      window.resetPdpBuyButtons = resetPdpBuyButtons;
+
       const handlePdpBuyNow = (btn) => {
         if (isPdpBuyNowProcessing || !btn) return;
         isPdpBuyNowProcessing = true;
-        setTimeout(() => { isPdpBuyNowProcessing = false; }, 2500);
+        // 🛡️ Circuit Breaker: Auto-reset after 5 seconds
+        setTimeout(resetPdpBuyButtons, 5000);
 
         const id = productState.variantId || btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
         const baseTitle = document.querySelector('h1')?.innerText?.trim() || btn.getAttribute('data-title') || 'Sujata Formulation';
@@ -3626,6 +3646,13 @@ const productVideoSchema = videoData ? {
         e.stopPropagation();
         handlePdpBuyNow(stickyBuyNowBtn);
       });
+
+      // 🚀 Silicon Valley Standard: BFCache & Tab Lifecycle Listeners for PDP
+      window.addEventListener('pageshow', () => { resetPdpBuyButtons(); });
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') resetPdpBuyButtons(); });
+      window.addEventListener('focus', resetPdpBuyButtons);
+      window.addEventListener('popstate', resetPdpBuyButtons);
+      window.addEventListener('sujata:buttons-reset', resetPdpBuyButtons);
 
       // 1.9 Mobile Sticky Bottom Bar Scroll Observer
       const buyBoxWrapper = document.getElementById('magnetic-btn-wrapper') || atcBtn;
