@@ -576,6 +576,8 @@ try {
             console.warn("⚠️ Shopify cart userErrors:", userErrors);
           }
 
+          if (checkoutUrl) {
+
             // 🔒 Silicon Valley Tag-Driven COD Check (Managed directly from Shopify)
             const drawerEl = document.getElementById('cart-drawer');
             let noCodList = ["sujata-spiruglow-bath-soap"];

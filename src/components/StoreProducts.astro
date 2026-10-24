@@ -118,7 +118,7 @@ const conversionData = [
         const meta = conversionData[index] || conversionData[0];
 
         return (
-          <div class="group relative bg-white rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(22,101,52,0.08)] transition-all duration-500 flex flex-col overflow-hidden border border-gray-100 hover:border-[#166534]/20 h-full">
+          <div class="product-card-item group relative bg-white rounded-[2rem] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(22,101,52,0.08)] transition-all duration-500 flex flex-col overflow-hidden border border-gray-100 hover:border-[#166534]/20 h-full">
             
             {/* TOP HALF: STUDIO IMAGE */}
             <a href={`/product/${product.handle}`} class="relative w-full h-[280px] md:h-[320px] bg-[#F8FAFC] flex items-center justify-center p-6 overflow-hidden">
@@ -187,6 +187,10 @@ const conversionData = [
               {/* THE DIRECT CHECKOUT BUTTON */}
               <button class="add-to-cart-btn relative w-full overflow-hidden bg-[#111827] text-white py-3.5 md:py-4 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-[0.15em] shadow-[0_10px_20px_rgba(17,24,39,0.08)] hover:shadow-[0_15px_30px_rgba(22,101,52,0.25)] transition-all duration-300 group/btn disabled:opacity-80 disabled:cursor-not-allowed touch-manipulation"
                 data-variant-id={product.variants?.edges[0]?.node?.id}
+                data-title={product.title}
+                data-price={priceAmount}
+                data-image={getImageUrl(product)}
+                data-subtitle={meta.benefit}
                 data-domain={shopifyDomain}
                 data-token={storefrontToken}
               >
