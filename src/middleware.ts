@@ -23,6 +23,22 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const request = context.request;
   const userAgent = request.headers.get('user-agent') || '';
   const pathname = context.url.pathname;
+  const search = context.url.search || '';
+
+  // 🚀 CRITICAL REDIRECT ENGINE: Auto-heal Meta Ad & Shopify Plural /products/ URLs
+  // Preserves ?fbclid=... & UTM parameters for 100% pixel attribution
+  if (
+    pathname === '/products/sujata-daily-super-immunity-combo' ||
+    pathname === '/product/sujata-daily-super-immunity-combo' ||
+    pathname === '/products/sujata-spirulina-sea-buckthorn-combo'
+  ) {
+    return context.redirect(`/product/sujata-spirulina-sea-buckthorn-combo${search}`, 301);
+  }
+
+  if (pathname.startsWith('/products/')) {
+    const handle = pathname.replace('/products/', '');
+    return context.redirect(`/product/${handle}${search}`, 301);
+  }
 
   let detectedBot: string | null = null;
   let botLabel: string | null = null;

@@ -3,6 +3,28 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "regions": ["bom1"],
+  "redirects": [
+    {
+      "source": "/products/sujata-daily-super-immunity-combo",
+      "destination": "/product/sujata-spirulina-sea-buckthorn-combo",
+      "permanent": true
+    },
+    {
+      "source": "/product/sujata-daily-super-immunity-combo",
+      "destination": "/product/sujata-spirulina-sea-buckthorn-combo",
+      "permanent": true
+    },
+    {
+      "source": "/products/sujata-spirulina-sea-buckthorn-combo",
+      "destination": "/product/sujata-spirulina-sea-buckthorn-combo",
+      "permanent": true
+    },
+    {
+      "source": "/products/:path*",
+      "destination": "/product/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(product|learn|science|quiz|contact|track-order|refund-policy|privacy-policy|terms-of-service|shipping-policy)(.*)",
