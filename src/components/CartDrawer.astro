@@ -36,99 +36,97 @@ try {
 {/* The Dark Overlay (Background blur) */}
 <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-opacity duration-300 ease-out"></div>
 
-{/* The Premium Drawer (Slides from Right with high z-index above everything) */}
-<div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} data-no-cod-handles={JSON.stringify(noCodHandles)} class="fixed top-0 right-0 w-full sm:w-[440px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
+{/* The Premium Drawer (Responsive width across Mobile, Tablet, Laptop, Desktop) */}
+<div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} data-no-cod-handles={JSON.stringify(noCodHandles)} class="fixed top-0 right-0 w-full sm:w-[440px] md:w-[460px] lg:w-[475px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
   
-  {/* 1. Drawer Header (Always Visible & Padded) */}
-  <div class="px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
-    <div class="flex items-center gap-2.5">
-      <h2 class="text-lg sm:text-xl font-serif font-normal text-[#111827]">Your Daily Routine</h2>
-      <span class="bg-[#166534] text-white text-[11px] font-bold font-sans px-2.5 py-0.5 rounded-full" id="cart-count-badge">0</span>
+  {/* 1. Drawer Header (Compact & Crisp) */}
+  <div class="px-4 sm:px-5 py-3 sm:py-3.5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
+    <div class="flex items-center gap-2">
+      <h2 class="text-base sm:text-lg font-serif font-semibold text-[#111827]">Your Daily Routine</h2>
+      <span class="bg-[#166534] text-white text-[10.5px] font-bold font-sans px-2 py-0.5 rounded-full" id="cart-count-badge">0</span>
     </div>
-    <button id="close-cart-btn" aria-label="Close cart" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black transition-colors touch-manipulation cursor-pointer">
+    <button id="close-cart-btn" aria-label="Close cart" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black transition-colors touch-manipulation cursor-pointer">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
   </div>
 
-  {/* 2. Silicon Valley Institutional Delivery & Guarantee Card */}
-  <div class="px-4 sm:px-6 py-3 bg-gradient-to-r from-emerald-50 to-teal-50/70 border-b border-emerald-100 shrink-0 shadow-xs" id="shipping-meter-container">
+  {/* 2. Sleek Free Shipping Banner (1-Line Compact) */}
+  <div class="px-4 sm:px-5 py-2 bg-gradient-to-r from-emerald-50 to-teal-50/70 border-b border-emerald-100 shrink-0" id="shipping-meter-container">
     <div class="flex items-center justify-between text-xs font-sans">
-      <div class="flex items-center gap-2">
-        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-black shrink-0 shadow-xs">✓</span>
-        <span class="font-bold text-emerald-950 text-xs tracking-tight" id="shipping-meter-text">Free All-India Express Delivery Unlocked</span>
+      <div class="flex items-center gap-1.5">
+        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[9px] font-black shrink-0 shadow-2xs">✓</span>
+        <span class="font-bold text-emerald-950 text-[11px] sm:text-xs tracking-tight" id="shipping-meter-text">Free All-India Express Delivery Unlocked 🚚</span>
       </div>
-      <span class="text-[9.5px] font-black text-emerald-800 bg-emerald-200/70 px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0">₹0 Delivery</span>
+      <span class="text-[9px] font-black text-emerald-800 bg-emerald-200/70 px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0">₹0 Delivery</span>
     </div>
-    <div class="w-full h-1.5 bg-emerald-200/60 rounded-full overflow-hidden mt-2">
+    <div class="w-full h-1 bg-emerald-200/60 rounded-full overflow-hidden mt-1.5">
       <div class="h-full bg-emerald-600 rounded-full w-full transition-all duration-500" id="shipping-meter-bar"></div>
     </div>
   </div>
 
-  {/* 3. Cart Items Area (Scrollable with smooth momentum) */}
-  <div class="flex-1 overflow-y-auto p-3.5 sm:p-6 space-y-3" id="cart-items-container">
+  {/* 3. Cart Items Area (Scrollable with custom sleek scrollbar) */}
+  <div class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2.5 cart-custom-scrollbar" id="cart-items-container">
     {/* Dynamic Items rendered via JavaScript */}
   </div>
 
-  {/* 4. Drawer Footer (Checkout Section with Safe Area Inset) */}
-  <div class="px-4 sm:px-6 pt-3.5 sm:pt-4 pb-6 sm:pb-8 pb-safe bg-white border-t border-gray-200 shadow-lg shrink-0">
+  {/* 4. Drawer Footer (Ultra-Compact High-Converting Checkout Zone) */}
+  <div class="px-4 sm:px-5 pt-2.5 pb-4 sm:pb-5 pb-safe bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] shrink-0">
     
-    {/* ⚡ High-Conversion Payment Option Selector: 10% UPI vs COD */}
-    <div class="mb-3 p-2 bg-emerald-50/70 border border-emerald-200/80 rounded-xl" id="cart-payment-container">
-      <div class="flex items-center justify-between mb-1.5 px-0.5">
-        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-950 flex items-center gap-1">
-          <span>⚡ Select Payment Method</span>
-        </span>
-        <span class="text-[9px] font-black text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-full uppercase">10% Off on UPI</span>
-      </div>
-      <div class="grid grid-cols-2 gap-1.5" id="cart-payment-tabs">
-        <button 
-          type="button" 
-          id="cart-tab-upi"
-          class="py-2 px-2 rounded-lg text-xs font-bold transition-all text-emerald-950 bg-white border-2 border-emerald-500 shadow-xs flex flex-col items-center justify-center cursor-pointer touch-manipulation group"
-          data-mode="upi"
-        >
-          <span class="text-[10px] text-emerald-800 font-extrabold flex items-center gap-1">⚡ Pay via UPI</span>
-          <span class="text-xs font-black text-emerald-700 mt-0.5" id="cart-upi-total">₹0</span>
-          <span class="text-[9px] font-semibold text-emerald-600" id="cart-upi-save">Save 10%</span>
-        </button>
-        <button 
-          type="button" 
-          id="cart-tab-cod"
-          class="py-2 px-2 rounded-lg text-xs font-bold transition-all text-gray-600 bg-white/70 border-2 border-transparent hover:border-gray-300 flex flex-col items-center justify-center cursor-pointer touch-manipulation group"
-          data-mode="cod"
-        >
-          <span class="text-[10px] text-gray-500 font-semibold flex items-center gap-1">📦 Cash on Delivery</span>
-          <span class="text-xs font-black text-gray-700 mt-0.5" id="cart-cod-total">₹0</span>
-          <span class="text-[9px] font-medium text-gray-400" id="cart-cod-subtext">Regular Price</span>
-        </button>
-      </div>
+    {/* Segmented Payment Mode Switcher (Sleek Apple-style 38px toggle) */}
+    <div class="p-1 bg-gray-100/90 rounded-xl grid grid-cols-2 gap-1 mb-2" id="cart-payment-container">
+      <button 
+        type="button" 
+        id="cart-tab-upi"
+        class="py-1.5 px-2 rounded-lg text-xs font-bold transition-all text-emerald-950 bg-white border border-emerald-500/50 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation group"
+        data-mode="upi"
+      >
+        <span class="text-xs">⚡</span>
+        <div class="flex flex-col text-left">
+          <span class="text-[10px] font-black text-emerald-950 leading-tight">Pay via UPI</span>
+          <span class="text-[9px] font-bold text-emerald-700 leading-tight" id="cart-upi-total">₹0</span>
+        </div>
+        <span class="ml-auto bg-emerald-600 text-white text-[8px] sm:text-[8.5px] font-black uppercase px-1.5 py-0.5 rounded-full shadow-2xs">10% OFF</span>
+      </button>
+      <button 
+        type="button" 
+        id="cart-tab-cod"
+        class="py-1.5 px-2 rounded-lg text-xs font-bold transition-all text-gray-600 bg-transparent hover:bg-white/50 border border-transparent flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation group"
+        data-mode="cod"
+      >
+        <span class="text-xs">📦</span>
+        <div class="flex flex-col text-left">
+          <span class="text-[10px] font-bold text-gray-700 leading-tight">Cash on Delivery</span>
+          <span class="text-[9px] font-semibold text-gray-500 leading-tight" id="cart-cod-total">₹0</span>
+        </div>
+      </button>
+    </div>
 
-      {/* 📦 Smart COD Threshold Notice (Orders < ₹299) */}
-      <div id="cart-cod-threshold-notice" class="hidden mt-2 px-2.5 py-1.5 bg-amber-50/90 border border-amber-200/90 rounded-lg flex items-center justify-between text-[10px] text-amber-900 font-medium">
-        <span id="cart-cod-notice-text">📦 Add ₹0 more to unlock Cash on Delivery</span>
-        <span class="text-[9px] font-bold text-amber-800 bg-amber-200/80 px-1.5 py-0.5 rounded shrink-0">Min ₹299</span>
+    {/* Smart COD Threshold Notice (When low-ticket items exist) */}
+    <div id="cart-cod-threshold-notice" class="hidden mb-2 px-2.5 py-1.5 bg-amber-50/90 border border-amber-200/90 rounded-lg flex items-center justify-between text-[10px] text-amber-900 font-medium">
+      <span id="cart-cod-notice-text">📦 Low-ticket items: Add supplements to unlock COD</span>
+      <span class="text-[9px] font-bold text-amber-800 bg-amber-200/80 px-1.5 py-0.5 rounded shrink-0">Prepaid</span>
+    </div>
+
+    {/* Subtotal & Instant Savings Row */}
+    <div class="flex items-center justify-between mb-2 px-0.5">
+      <div class="flex flex-col">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 font-sans" id="cart-total-label">UPI Payable (10% Instant Off)</span>
+        <span class="text-[9.5px] font-bold text-emerald-700 font-sans" id="cart-upi-save">Save 10%</span>
+      </div>
+      <div class="flex items-baseline gap-1.5 font-sans">
+        <span class="text-xl sm:text-2xl font-black text-emerald-700" id="cart-subtotal">₹0</span>
+        <span class="text-xs text-gray-400 line-through hidden font-sans" id="cart-regular-price"></span>
       </div>
     </div>
 
-    <div class="flex items-center justify-between mb-1">
-      <span class="text-gray-500 font-medium text-xs uppercase tracking-wider font-sans" id="cart-total-label">UPI Payable (10% OFF)</span>
-      <span class="text-xl sm:text-2xl font-black text-emerald-700 font-sans" id="cart-subtotal">₹0</span>
-    </div>
-    {/* 🛡️ 90-Day Vitality Money-Back Guarantee Assurance Seal */}
-    <div class="mb-3 px-3 py-2.5 bg-gradient-to-r from-amber-50/90 to-emerald-50/80 border border-amber-200/80 rounded-xl flex items-center gap-2.5">
-      <span class="text-base shrink-0">🛡️</span>
-      <p class="text-[10px] sm:text-[10.5px] text-emerald-950 font-medium leading-snug">
-        <strong class="font-bold text-emerald-900">90-Day Vitality Guarantee:</strong> Follow your routine for 90 days to align with natural cellular renewal. If not completely satisfied, receive a 100% full refund. Zero friction.
-      </p>
-    </div>
-
-    <button id="checkout-action-btn" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
+    {/* Primary Checkout Action CTA */}
+    <button id="checkout-action-btn" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer">
       <span id="checkout-btn-text">⚡ Proceed to Pay with UPI</span>
       <span class="text-base">→</span>
     </button>
     
-    {/* Clean 4-Column Silicon Valley Institutional Trust Badges */}
-    <div class="grid grid-cols-4 gap-1 mt-3 pt-2.5 border-t border-gray-100 text-center">
+    {/* Clean 4-Column Institutional Trust Badges */}
+    <div class="grid grid-cols-4 gap-1 mt-2 pt-2 border-t border-gray-100 text-center">
       <div class="text-[9px] sm:text-[9.5px] font-bold text-gray-500 font-sans flex items-center justify-center gap-1 whitespace-nowrap">
         <span>🔒</span>
         <span>256-Bit SSL</span>
@@ -149,6 +147,26 @@ try {
   </div>
 
 </div>
+
+<style is:inline>
+  .cart-custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .cart-custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .cart-custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 9999px;
+  }
+  .cart-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  .cart-custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+  }
+</style>
 
 <script is:inline>
   // High-Performance Hybrid Cart Engine (Shopify GraphQL + Optimistic Local State)
@@ -276,10 +294,10 @@ try {
       const codDiscount = hasCoupon ? Math.round(totalAmount * 0.1) : 0;
       const codPayable = totalAmount - codDiscount;
 
+            const regularPriceEl = document.getElementById('cart-regular-price');
       const upiTotalEl = document.getElementById('cart-upi-total');
       const upiSaveEl = document.getElementById('cart-upi-save');
       const codTotalEl = document.getElementById('cart-cod-total');
-      const codSubtextEl = document.getElementById('cart-cod-subtext');
       const codNoticeEl = document.getElementById('cart-cod-threshold-notice');
       const codNoticeText = document.getElementById('cart-cod-notice-text');
       const totalLabelEl = document.getElementById('cart-total-label');
@@ -289,20 +307,17 @@ try {
       const checkoutBtnText = document.getElementById('checkout-btn-text');
 
       if (upiTotalEl) upiTotalEl.innerText = formatINR(upiTotal);
-      if (upiSaveEl) upiSaveEl.innerText = `Save ₹${upiSavings} (10%)`;
       if (codTotalEl) codTotalEl.innerText = formatINR(codPayable);
 
       // Handle COD Locking Visuals
       if (!isCodEligible && totalAmount > 0) {
-        tabCodEl?.classList.add('opacity-60', 'cursor-not-allowed', 'border-dashed');
-        if (codSubtextEl) codSubtextEl.innerText = 'Prepaid Only 🔒';
+        tabCodEl?.classList.add('opacity-60', 'cursor-not-allowed');
         if (codNoticeEl && codNoticeText) {
-          codNoticeText.innerHTML = `<span>🔒 <strong>Low-ticket items are available via UPI/Prepaid only.</strong> Add any Spirulina or wellness product to unlock Cash on Delivery! (कॅश ऑन डिलिव्हरीसाठी इतर सप्लीमेंट्स जोडा).</span>`;
+          codNoticeText.innerHTML = `<span>🔒 <strong>Prepaid only for low-ticket items.</strong> Add supplements to unlock COD.</span>`;
           codNoticeEl.classList.remove('hidden');
         }
       } else {
-        tabCodEl?.classList.remove('opacity-60', 'cursor-not-allowed', 'border-dashed');
-        if (codSubtextEl) codSubtextEl.innerText = hasCoupon ? `Save ₹${codDiscount} (10%)` : 'Pay at Doorstep';
+        tabCodEl?.classList.remove('opacity-60', 'cursor-not-allowed');
         if (codNoticeEl) codNoticeEl.classList.add('hidden');
       }
 
@@ -311,34 +326,63 @@ try {
           subtotalEl.innerText = formatINR(upiTotal);
           subtotalEl.className = 'text-xl sm:text-2xl font-black text-emerald-700 font-sans';
         }
+        if (regularPriceEl) {
+          if (totalAmount > upiTotal) {
+            regularPriceEl.innerText = formatINR(totalAmount);
+            regularPriceEl.classList.remove('hidden');
+          } else {
+            regularPriceEl.classList.add('hidden');
+          }
+        }
         if (totalLabelEl) totalLabelEl.innerText = 'UPI Payable (10% Instant Off)';
+        if (upiSaveEl) {
+          upiSaveEl.innerText = `Save ₹${upiSavings} (10% Instant)`;
+          upiSaveEl.className = 'text-[9.5px] font-bold text-emerald-700 font-sans';
+        }
         if (checkoutBtn) {
-          checkoutBtn.className = 'w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
+          checkoutBtn.className = 'w-full bg-emerald-700 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.12em] py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
         }
         if (checkoutBtnText) checkoutBtnText.innerText = '⚡ Proceed to Pay with UPI';
 
-        tabUpiEl?.classList.remove('bg-white/70', 'border-transparent', 'text-gray-600');
-        tabUpiEl?.classList.add('bg-white', 'border-emerald-500', 'text-emerald-950', 'shadow-xs');
+        tabUpiEl?.classList.remove('bg-transparent', 'border-transparent', 'text-gray-600');
+        tabUpiEl?.classList.add('bg-white', 'border-emerald-500/50', 'text-emerald-950', 'shadow-xs');
         tabCodEl?.classList.remove('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-xs');
-        tabCodEl?.classList.add('bg-white/70', 'border-transparent', 'text-gray-600');
+        tabCodEl?.classList.add('bg-transparent', 'border-transparent', 'text-gray-600');
       } else {
         if (subtotalEl) {
           subtotalEl.innerText = formatINR(codPayable);
           subtotalEl.className = 'text-xl sm:text-2xl font-black text-[#111827] font-sans';
         }
-        if (totalLabelEl) totalLabelEl.innerText = hasCoupon ? `Payable on Delivery (${savedDiscount} 10% Off)` : 'Payable on Delivery (COD)';
+        if (regularPriceEl) {
+          if (hasCoupon && codDiscount > 0) {
+            regularPriceEl.innerText = formatINR(totalAmount);
+            regularPriceEl.classList.remove('hidden');
+          } else {
+            regularPriceEl.classList.add('hidden');
+          }
+        }
+        if (totalLabelEl) totalLabelEl.innerText = hasCoupon ? `Payable on Delivery (${savedDiscount} Applied)` : 'Payable on Delivery (COD)';
+        if (upiSaveEl) {
+          if (hasCoupon && codDiscount > 0) {
+            upiSaveEl.innerText = `Coupon Discount: ₹${codDiscount}`;
+            upiSaveEl.className = 'text-[9.5px] font-bold text-emerald-700 font-sans';
+          } else {
+            upiSaveEl.innerText = 'Standard Doorstep Delivery';
+            upiSaveEl.className = 'text-[9.5px] font-medium text-gray-500 font-sans';
+          }
+        }
         if (checkoutBtn) {
-          checkoutBtn.className = 'w-full bg-[#111827] hover:bg-black text-white font-black text-xs uppercase tracking-[0.12em] py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
+          checkoutBtn.className = 'w-full bg-[#111827] hover:bg-black text-white font-black text-xs uppercase tracking-[0.12em] py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-md active:scale-95 touch-manipulation cursor-pointer';
         }
         if (checkoutBtnText) checkoutBtnText.innerText = '📦 Proceed with Cash on Delivery';
 
-        tabCodEl?.classList.remove('bg-white/70', 'border-transparent', 'text-gray-600');
+        tabCodEl?.classList.remove('bg-transparent', 'border-transparent', 'text-gray-600');
         tabCodEl?.classList.add('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-xs');
-        tabUpiEl?.classList.remove('bg-white', 'border-emerald-500', 'text-emerald-950', 'shadow-xs');
-        tabUpiEl?.classList.add('bg-white/70', 'border-transparent', 'text-gray-600');
+        tabUpiEl?.classList.remove('bg-white', 'border-emerald-500/50', 'text-emerald-950', 'shadow-xs');
+        tabUpiEl?.classList.add('bg-transparent', 'border-transparent', 'text-gray-600');
       }
 
-      // 🚚 Silicon Valley CRO: Guaranteed 100% Unlocked Free Express Delivery (Zero Shipping Anxiety)
+      // 🚚 Free Express Delivery Banner
       if (shippingBar && shippingText) {
         shippingBar.style.width = '100%';
         if (totalAmount === 0) {
@@ -367,34 +411,42 @@ try {
       }
 
       container.innerHTML = items.map(item => `
-        <div class="flex gap-3 p-3 sm:p-4 bg-white rounded-2xl border border-gray-200 shadow-sm relative group">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-[#FAF9F6] rounded-xl p-1.5 flex items-center justify-center shrink-0 border border-gray-100">
-            <img src="${item.image || '/spirulina-bottle.png'}" alt="${item.title}" class="w-full h-full object-contain drop-shadow-sm" />
+        <div class="flex gap-2.5 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl sm:rounded-2xl border border-gray-200/90 shadow-2xs relative group">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-[#FAF9F6] rounded-lg sm:rounded-xl p-1 flex items-center justify-center shrink-0 border border-gray-100">
+            <img src="${item.image || '/spirulina-bottle.png'}" alt="${item.title}" class="w-full h-full object-contain drop-shadow-2xs" />
           </div>
 
           <div class="flex-1 flex flex-col justify-between min-w-0">
-            <div class="flex items-start justify-between gap-1.5">
+            <div class="flex items-start justify-between gap-1">
               <div class="min-w-0 flex-1 pr-1">
-                <h4 class="text-xs sm:text-sm font-bold text-[#111827] font-sans truncate leading-snug" title="${item.title}">${item.title}</h4>
-                <span class="text-[10px] text-[#166534] font-semibold block mt-0.5 truncate">${item.subtitle || '100% Pure Cold-Pressed'}</span>
+                <h4 class="text-xs sm:text-[13px] font-bold text-[#111827] font-sans truncate leading-snug" title="${item.title}">${item.title}</h4>
+                <span class="text-[9.5px] sm:text-[10px] text-[#166534] font-semibold block mt-0.5 truncate">${item.subtitle || '100% Pure Cold-Pressed'}</span>
               </div>
-              <button class="cart-remove-btn shrink-0 w-6 h-6 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-400 text-xs flex items-center justify-center transition-colors cursor-pointer touch-manipulation" data-id="${item.id}" title="Remove item" aria-label="Remove ${item.title}">
+              <button class="cart-remove-btn shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-400 text-xs flex items-center justify-center transition-colors cursor-pointer touch-manipulation" data-id="${item.id}" title="Remove item" aria-label="Remove ${item.title}">
                 ✕
               </button>
             </div>
 
-            <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
-              <div class="flex items-center gap-2 bg-gray-100 rounded-full px-2 py-0.5">
-                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-5 h-5 flex items-center justify-center cursor-pointer touch-manipulation" data-id="${item.id}" data-action="dec" aria-label="Decrease quantity">−</button>
+            <div class="flex items-center justify-between mt-1.5 pt-1.5 border-t border-gray-100">
+              <div class="flex items-center gap-1.5 bg-gray-100 rounded-full px-2 py-0.5">
+                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center cursor-pointer touch-manipulation" data-id="${item.id}" data-action="dec" aria-label="Decrease quantity">−</button>
                 <span class="text-xs font-bold text-[#111827] px-1">${item.quantity}</span>
-                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-5 h-5 flex items-center justify-center cursor-pointer touch-manipulation" data-id="${item.id}" data-action="inc" aria-label="Increase quantity">+</button>
+                <button class="cart-qty-btn text-xs font-bold text-gray-600 hover:text-black w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center cursor-pointer touch-manipulation" data-id="${item.id}" data-action="inc" aria-label="Increase quantity">+</button>
               </div>
 
               <span class="text-xs sm:text-sm font-black text-[#111827] font-sans">${formatINR(item.price * item.quantity)}</span>
             </div>
           </div>
         </div>
-      `).join('');
+      `).join('') + `
+        <div class="mt-2.5 p-3 bg-gradient-to-r from-amber-50/90 to-emerald-50/80 border border-amber-200/80 rounded-xl flex items-start gap-2.5 shadow-2xs">
+          <span class="text-base shrink-0 mt-0.5">🛡️</span>
+          <div class="text-[10px] sm:text-[10.5px] text-emerald-950 font-medium leading-relaxed">
+            <strong class="font-bold text-emerald-900 block mb-0.5">90-Day Vitality Guarantee:</strong>
+            Follow your routine for 90 days to align with natural cellular renewal. If not completely satisfied, receive a 100% full refund. Zero friction.
+          </div>
+        </div>
+      `;
     };
 
     // Add Item to Local Cart
