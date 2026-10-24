@@ -6,7 +6,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 <header id="main-header" class="fixed top-0 w-full z-[100] transition-all duration-300 pt-safe bg-[#022C22]">
   
   {/* 1. ANNOUNCEMENT BAR (High-Trust Clinical Strip) */}
-  <div class="w-full bg-[#022C22] text-white overflow-hidden py-2 border-b border-white/10">
+  <div class="w-full bg-[#022C22] text-white overflow-hidden py-1.5 lg:py-1 border-b border-white/10">
     <div class="flex whitespace-nowrap animate-[marquee_25s_linear_infinite] hover:pause">
       {BRAND_CONFIG.announcementTickers.map((ticker) => (
         <span class="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] px-6 border-r border-white/10 flex items-center gap-2 opacity-95">
@@ -25,7 +25,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
   </div>
 
   {/* 2. THE LUXURY UTILITY HEADER */}
-  <nav id="main-nav" class="bg-[#064E3B] border-b border-[#043d2e] px-4 md:px-8 py-3 lg:py-4 shadow-xl transition-all duration-500 ease-in-out">
+  <nav id="main-nav" class="bg-[#064E3B] border-b border-[#043d2e] px-4 md:px-8 py-2.5 lg:py-2 shadow-xl transition-all duration-500 ease-in-out">
     <div class="max-w-[95rem] mx-auto flex items-center justify-between gap-4 md:gap-8">
       
       {/* Left: Mobile Menu Button & Brand Logo */}
@@ -81,7 +81,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
       {/* Main Search Trigger (Desktop) */}
       <div id="desktop-search-trigger" class="hidden md:block flex-1 max-w-md lg:max-w-lg relative group cursor-pointer" role="button" tabindex="0" aria-label="Open Product Search">
-        <div class="w-full bg-black/20 hover:bg-black/30 border border-white/10 text-white rounded-full px-5 py-2.5 md:py-3 text-xs md:text-sm flex items-center justify-between transition-all pl-12 shadow-inner group-hover:border-emerald-400/40">
+        <div class="w-full bg-black/20 hover:bg-black/30 border border-white/10 text-white rounded-full px-4 py-2 lg:py-1.5 text-xs flex items-center justify-between transition-all pl-12 shadow-inner group-hover:border-emerald-400/40">
           <span class="text-emerald-100/60 font-medium">Search formulations, powders, capsules...</span>
           <kbd class="hidden lg:inline-flex items-center gap-0.5 px-2 py-0.5 bg-white/10 rounded text-[10px] font-mono text-emerald-200/80 border border-white/10">⌘K</kbd>
         </div>
