@@ -130,29 +130,7 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
         {/* Relative Carousel Container with Floating Glassmorphic Arrows */}
     <div class="relative w-full group/carousel">
       
-      {/* ⬅️ Floating Desktop Carousel Navigation Arrow (Prev) */}
-      <button 
-        type="button" 
-        id="hero-prev-btn" 
-        aria-label="Previous slide" 
-        class="hidden xl:flex absolute -left-12 2xl:-left-14 top-1/2 -translate-y-1/2 z-30 w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 hover:border-amber-400/60 backdrop-blur-md text-white/80 hover:text-white items-center justify-center transition-all duration-300 shadow-xl cursor-pointer group/btn active:scale-95"
-      >
-        <svg class="w-4 h-4 transition-transform group-hover/btn:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
 
-      {/* ➡️ Floating Desktop Carousel Navigation Arrow (Next) */}
-      <button 
-        type="button" 
-        id="hero-next-btn" 
-        aria-label="Next slide" 
-        class="hidden xl:flex absolute -right-12 2xl:-right-14 top-1/2 -translate-y-1/2 z-30 w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 hover:border-amber-400/60 backdrop-blur-md text-white/80 hover:text-white items-center justify-center transition-all duration-300 shadow-xl cursor-pointer group/btn active:scale-95"
-      >
-        <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
 
       <div 
         id="hero-slider-track" 
@@ -353,68 +331,55 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           {/* Copy & Offer: On Mobile = Order 2 (BOTTOM), On Desktop = Order 1 (LEFT) */}
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            <span class="hero-reveal-elem hero-reveal-tag inline-flex items-center gap-1.5 text-[9.5px] sm:text-xs font-mono font-bold uppercase tracking-[0.2em] text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30 mb-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Sujata Nutrilive Agrotech • Official Store
-            </span>
+            {/* 1. Trust Rating Hook (Instant 0.2s Authority) */}
+            <div class="hero-reveal-elem hero-reveal-tag inline-flex items-center gap-2 mb-1.5 bg-emerald-950/70 border border-emerald-400/25 px-2.5 py-0.5 rounded-full shadow-sm">
+              <span class="text-amber-400 text-xs">★★★★★</span>
+              <span class="text-[10.5px] sm:text-xs font-bold text-emerald-200 font-sans">4.9/5 by 18,000+ Buyers</span>
+              <span class="text-white/30">•</span>
+              <span class="text-[10.5px] sm:text-xs font-semibold text-emerald-300 font-sans">NABL Lab Tested</span>
+            </div>
 
-            <h1 class="hero-reveal-elem hero-reveal-heading text-xl sm:text-2xl lg:text-[1.8rem] xl:text-[2rem] font-serif font-normal text-white leading-[1.08] tracking-tight mb-1">
+            {/* 2. Bold High-Conviction Benefit Headline */}
+            <h1 class="hero-reveal-elem hero-reveal-heading text-2xl sm:text-3xl lg:text-[2.2rem] font-serif font-normal text-white leading-[1.12] tracking-tight mb-1.5">
               Double Your Daily Energy.<br/>
               <span class="italic text-emerald-300 font-serif">Zero 3 PM Fatigue.</span>
             </h1>
 
-            <p class="hero-reveal-elem hero-reveal-desc text-[11px] sm:text-xs lg:text-[13px] text-emerald-100/80 font-normal leading-relaxed max-w-lg mb-1.5 font-sans">
-              100% Pure, sub-40°C cold-pressed Spirulina. Packed with 290.89 mg/kg natural iron (as Fe), 62.39% plant protein (IS 7219), and active Phycocyanin. Wake up refreshed and energized all day without caffeine crashes.
+            {/* 3. Single Crisp Benefit Sentence (Zero Chemistry Jargon) */}
+            <p class="hero-reveal-elem hero-reveal-desc text-xs sm:text-[13px] text-emerald-100/85 font-normal leading-relaxed max-w-lg mb-2 font-sans">
+              India's purest cold-pressed Spirulina. Packed with natural bio-iron and 62% pure plant protein for sustained all-day stamina — without caffeine crashes or fishy smell.
             </p>
 
-            {/* 3 Clinical Pills */}
-            <div class="hero-reveal-elem hero-reveal-pills grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-md lg:max-w-lg mb-1.5 sm:mb-2 text-center sm:text-left">
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">🟢</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Pure Veg</span>
-              </div>
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">🌿</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">Zero Fishy Odour</span>
-              </div>
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">⚡</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">290.89 mg/kg Fe</span>
-              </div>
+            {/* 4. Three Sleek Scannable Checkmark Benefits */}
+            <div class="hero-reveal-elem hero-reveal-pills flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 mb-2.5 text-xs text-emerald-100/90 font-medium font-sans">
+              <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> 100% Pure Organic Veg</span>
+              <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Zero Fishy Odour</span>
+              <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> 60 Caps (30-Day Routine)</span>
             </div>
 
-            {/* Pricing Bar with Daily Cost Anchor (Silicon Valley / Top D2C Framing) */}
-            <div class="hero-reveal-elem hero-reveal-price flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 px-3.5 py-1.5 sm:py-2 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
-              <div class="flex items-baseline gap-2">
-                <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{spiriPrice.toLocaleString('en-IN')}</span>
-                {spiriCompare > spiriPrice && (
-                  <span class="text-xs sm:text-sm text-gray-400 line-through font-sans">₹{spiriCompare.toLocaleString('en-IN')}</span>
-                  <span class="bg-emerald-400 text-black text-[8.5px] sm:text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded font-sans shadow-sm">
-                    SAVE {spiriDiscount}%
-                  </span>
-                )}
-              </div>
-              <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-emerald-300 font-sans">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Just ₹16/day • 60 Veg Caps (30 Days)</span>
-              </div>
-            </div>
-
-            {/* Single High-Converting Primary CTA on Mobile */}
-            <div class="hero-reveal-elem hero-reveal-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+            {/* 5. Clean Integrated CTA & Price Row (Replaces Heavy Box) */}
+            <div class="hero-reveal-elem hero-reveal-cta flex flex-wrap items-center justify-center lg:justify-start gap-3.5 mb-2.5 w-full sm:w-auto">
               <a 
                 href={`/product/${spiriHandle}`} 
-                class="btn-emerald-sweep bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-5 py-2 sm:py-2.5 rounded-xl shadow-[0_5px_16px_rgba(52,211,153,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                class="btn-emerald-sweep bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 sm:py-3 rounded-xl shadow-[0_6px_20px_rgba(52,211,153,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
                 <span>ORDER PURE SPIRULINA • ₹{spiriPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
               </a>
 
-              
+              <div class="flex items-center gap-2 text-left font-sans">
+                {spiriCompare > spiriPrice && (
+                  <span class="text-xs text-gray-400 line-through">₹{spiriCompare.toLocaleString('en-IN')}</span>
+                )}
+                <span class="bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded shadow-sm">
+                  SAVE {spiriDiscount}%
+                </span>
+                <span class="text-xs font-bold text-emerald-300">Just ₹16/day</span>
+              </div>
             </div>
 
-            {/* 4-Pillar High-Trust Reassurance Strip */}
-            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-0.5 text-[9.5px] sm:text-[10px] lg:text-[10.5px] font-semibold text-emerald-200/90 font-sans">
+            {/* 6. Clean Reassurance Strip */}
+            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-0.5 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
               <span class="flex items-center gap-1"><span class="text-emerald-400">💵</span> Free Cash on Delivery</span>
@@ -464,63 +429,55 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
           {/* Copy & Offer */}
           <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            <h2 class="hero-reveal-elem hero-reveal-heading text-xl sm:text-2xl lg:text-[1.8rem] xl:text-[2rem] font-serif font-normal text-white leading-[1.08] tracking-tight mb-1">
+            {/* 1. Trust Rating Hook */}
+            <div class="hero-reveal-elem hero-reveal-tag inline-flex items-center gap-2 mb-1.5 bg-amber-950/70 border border-amber-400/30 px-2.5 py-0.5 rounded-full shadow-sm">
+              <span class="text-amber-400 text-xs">★★★★★</span>
+              <span class="text-[10.5px] sm:text-xs font-bold text-amber-200 font-sans">4.9/5 Flagship Routine</span>
+              <span class="text-white/30">•</span>
+              <span class="text-[10.5px] sm:text-xs font-semibold text-amber-300 font-sans">24,000+ Delivered</span>
+            </div>
+
+            {/* 2. Headline */}
+            <h2 class="hero-reveal-elem hero-reveal-heading text-2xl sm:text-3xl lg:text-[2.2rem] font-serif font-normal text-white leading-[1.12] tracking-tight mb-1.5">
               All-Day Natural Energy & Radiant Skin.<br/>
               <span class="italic text-amber-300 font-serif">Spirulina + Himalayan Sea Buckthorn.</span>
             </h2>
 
-            <p class="hero-reveal-elem hero-reveal-desc text-[11px] sm:text-xs lg:text-[13px] text-emerald-100/80 font-normal leading-relaxed max-w-lg mb-1.5 font-sans">
-              India's purest cold-pressed Spirulina (natural plant iron & 62.39% plant protein) paired with wild Ladakh Sea Buckthorn (rare Omega 7 & 12x Vitamin C). Fixes 3 PM fatigue, boosts daily stamina, and nourishes skin from within.
+            {/* 3. Benefit Sentence */}
+            <p class="hero-reveal-elem hero-reveal-desc text-xs sm:text-[13px] text-emerald-100/85 font-normal leading-relaxed max-w-lg mb-2 font-sans">
+              India's purest cold-pressed Spirulina (plant iron & protein) paired with wild Ladakh Sea Buckthorn (rare Omega 7 & 12x Vitamin C). Eliminates 3 PM fatigue and restores natural skin glow.
             </p>
 
-            {/* 3 Clinical Pills */}
-            <div class="hero-reveal-elem hero-reveal-pills grid grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-md lg:max-w-lg mb-1.5 sm:mb-2 text-center sm:text-left">
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">🟢</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">100% Pure Veg</span>
-              </div>
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">⚡</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">290.89 mg/kg Fe</span>
-              </div>
-              <div class="flex items-center justify-center sm:justify-start gap-1 bg-white/5 border border-white/10 rounded-lg px-1.5 sm:px-2 py-1">
-                <span class="text-emerald-400 text-[10px] sm:text-xs">🧪</span>
-                <span class="text-[8.5px] sm:text-[11px] font-bold text-emerald-100 font-sans whitespace-nowrap">NABL Lab Tested</span>
-              </div>
+            {/* 4. Three Sleek Scannable Checkmark Benefits */}
+            <div class="hero-reveal-elem hero-reveal-pills flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 mb-2.5 text-xs text-emerald-100/90 font-medium font-sans">
+              <span class="flex items-center gap-1.5"><span class="text-amber-400 font-bold">✓</span> 100% Pure Organic Veg</span>
+              <span class="flex items-center gap-1.5"><span class="text-amber-400 font-bold">✓</span> Rare Omega 7 & Vit C</span>
+              <span class="flex items-center gap-1.5"><span class="text-amber-400 font-bold">✓</span> 120 Caps (60-Day Dual Protocol)</span>
             </div>
 
-            {/* Pricing Bar */}
-            <div class="hero-reveal-elem hero-reveal-price flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 px-3.5 py-1.5 sm:py-2 rounded-xl bg-black/50 border border-white/15 w-full max-w-md shadow-inner">
-              <div class="flex items-baseline gap-2">
-                <span class="text-xl sm:text-2xl font-black text-white font-sans tracking-tight">₹{comboPrice.toLocaleString('en-IN')}</span>
-                {comboCompare > comboPrice && (
-                  <span class="text-xs sm:text-sm text-gray-400 line-through font-sans">₹{comboCompare.toLocaleString('en-IN')}</span>
-                  <span class="bg-amber-400 text-black text-[8.5px] sm:text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded font-sans shadow-sm">
-                    SAVE {comboDiscount}%
-                  </span>
-                )}
-              </div>
-              <div class="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-amber-300 font-sans">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Just ₹18/day • 2 Bottles (120 Caps)</span>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div class="hero-reveal-elem hero-reveal-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto mb-2">
+            {/* 5. Clean Integrated CTA & Price Row */}
+            <div class="hero-reveal-elem hero-reveal-cta flex flex-wrap items-center justify-center lg:justify-start gap-3.5 mb-2.5 w-full sm:w-auto">
               <a 
                 href={`/product/${comboHandle}`} 
-                class="btn-gold-sweep bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-5 py-2 sm:py-2.5 rounded-xl shadow-[0_5px_16px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
+                class="btn-gold-sweep bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 sm:py-3 rounded-xl shadow-[0_6px_20px_rgba(245,158,11,0.35)] transition-all active:scale-95 text-center font-sans flex items-center justify-center gap-2 cursor-pointer touch-manipulation"
               >
                 <span>ORDER COMBO PACK • ₹{comboPrice.toLocaleString('en-IN')}</span>
                 <span class="text-base font-bold">→</span>
               </a>
 
-              
+              <div class="flex items-center gap-2 text-left font-sans">
+                {comboCompare > comboPrice && (
+                  <span class="text-xs text-gray-400 line-through">₹{comboCompare.toLocaleString('en-IN')}</span>
+                )}
+                <span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 text-[9.5px] font-black uppercase px-1.5 py-0.5 rounded shadow-sm">
+                  SAVE {comboDiscount}%
+                </span>
+                <span class="text-xs font-bold text-amber-300">Just ₹18/day</span>
+              </div>
             </div>
 
-            {/* Trust Strip */}
-            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-0.5 text-[9.5px] sm:text-[10px] lg:text-[10.5px] font-semibold text-emerald-200/90 font-sans">
+            {/* 6. Trust Strip */}
+            <div class="hero-reveal-elem hero-reveal-trust flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-0.5 text-[10px] sm:text-[11px] font-semibold text-emerald-200/90 font-sans">
               <span class="flex items-center gap-1"><span class="text-amber-400">⚡</span> Extra 10% UPI Off</span>
               <span class="text-white/25">•</span>
               <span class="flex items-center gap-1"><span class="text-emerald-400">💵</span> Free Cash on Delivery</span>
