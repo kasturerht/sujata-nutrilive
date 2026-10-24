@@ -55,52 +55,67 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
     <div class="w-full max-w-md mx-auto mb-3 sm:mb-5 px-1 sm:px-0 flex justify-center">
       <div 
         id="hero-protocol-tabs" 
-        class="w-full grid grid-cols-3 p-1 rounded-full bg-black/60 border border-white/15 backdrop-blur-xl shadow-xl gap-1"
+        class="w-full grid grid-cols-4 p-1 rounded-full bg-black/60 border border-white/15 backdrop-blur-xl shadow-xl gap-0.5 sm:gap-1"
         role="tablist"
         aria-label="Flagship Protocols"
       >
-        {/* Tab 0: Pure Spirulina (Primary Low-Ticket Anchor) */}
+        {/* Tab 0: Shubh Diwali Festive Offer */}
         <button 
           type="button" 
           role="tab" 
           aria-selected="true" 
           aria-controls="hero-slide-0"
           data-tab-index="0"
-          class="hero-tab-btn active relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap bg-[#064E3B] text-white shadow-md border border-emerald-400/40"
+          class="hero-tab-btn active relative py-1.5 sm:py-2 px-1 sm:px-2 rounded-full text-[8px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-0.5 sm:gap-1 cursor-pointer outline-none whitespace-nowrap bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-md border border-amber-400/50"
         >
-          <span class="text-emerald-400 text-xs sm:text-sm">🌿</span>
-          <span>Spirulina</span>
-          <span class="bg-emerald-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">₹{spiriPrice}</span>
-          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-emerald-400 rounded-full scale-x-0 origin-left"></div>
+          <span class="text-amber-300 text-[11px] sm:text-sm">🪔</span>
+          <span class="truncate"><span class="inline sm:hidden">Diwali</span><span class="hidden sm:inline">Diwali Offer</span></span>
+          <span class="bg-amber-400 text-black text-[6.5px] sm:text-[8px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">HOT</span>
+          <div class="tab-progress-line absolute bottom-0 left-1 right-1 sm:left-2 sm:right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
         </button>
 
-        {/* Tab 1: Synergy Combo Pack */}
+        {/* Tab 1: Pure Spirulina (Primary Low-Ticket Anchor) */}
         <button 
           type="button" 
           role="tab" 
           aria-selected="false" 
           aria-controls="hero-slide-1"
           data-tab-index="1"
-          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
+          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-2 rounded-full text-[8px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-0.5 sm:gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
         >
-          <span class="text-amber-400 text-xs sm:text-sm">⭐</span>
-          <span>Combo Pack</span>
-          <span class="bg-amber-400 text-black text-[7.5px] sm:text-[9px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">-{comboDiscount}%</span>
-          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
+          <span class="text-emerald-400 text-[11px] sm:text-sm">🌿</span>
+          <span class="truncate">Spirulina</span>
+          <span class="bg-emerald-400 text-black text-[6.5px] sm:text-[8px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">₹{spiriPrice}</span>
+          <div class="tab-progress-line absolute bottom-0 left-1 right-1 sm:left-2 sm:right-2 h-[2px] bg-emerald-400 rounded-full scale-x-0 origin-left"></div>
         </button>
 
-        {/* Tab 2: Sea Buckthorn */}
+        {/* Tab 2: Synergy Combo Pack */}
         <button 
           type="button" 
           role="tab" 
           aria-selected="false" 
           aria-controls="hero-slide-2"
           data-tab-index="2"
-          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-3 rounded-full text-[10px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
+          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-2 rounded-full text-[8px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-0.5 sm:gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
         >
-          <span class="text-amber-400 text-xs sm:text-sm">🍊</span>
-          <span class="truncate"><span class="hidden sm:inline">Sea </span>Buckthorn</span>
-          <div class="tab-progress-line absolute bottom-0 left-2 right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
+          <span class="text-amber-400 text-[11px] sm:text-sm">⭐</span>
+          <span class="truncate"><span class="inline sm:hidden">Combo</span><span class="hidden sm:inline">Combo Pack</span></span>
+          <span class="bg-amber-400 text-black text-[6.5px] sm:text-[8px] font-black uppercase px-1 py-0.5 rounded-full shadow-sm leading-none">-{comboDiscount}%</span>
+          <div class="tab-progress-line absolute bottom-0 left-1 right-1 sm:left-2 sm:right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
+        </button>
+
+        {/* Tab 3: Sea Buckthorn */}
+        <button 
+          type="button" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="hero-slide-3"
+          data-tab-index="3"
+          class="hero-tab-btn relative py-1.5 sm:py-2 px-1 sm:px-2 rounded-full text-[8px] sm:text-xs font-bold font-sans transition-all duration-300 flex items-center justify-center gap-0.5 sm:gap-1 cursor-pointer outline-none whitespace-nowrap text-emerald-100/70 hover:text-white hover:bg-white/5 border border-transparent"
+        >
+          <span class="text-amber-400 text-[11px] sm:text-sm">🍊</span>
+          <span class="truncate"><span class="inline sm:hidden">Sea B.</span><span class="hidden sm:inline">Sea Buckthorn</span></span>
+          <div class="tab-progress-line absolute bottom-0 left-1 right-1 sm:left-2 sm:right-2 h-[2px] bg-amber-400 rounded-full scale-x-0 origin-left"></div>
         </button>
       </div>
     </div>
@@ -113,14 +128,76 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
       class="relative w-full flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth no-scrollbar overscroll-y-auto"
       aria-label="Product Showcase Carousel"
     >
-      
       {/* -------------------------------------------------------------
-          SLIDE 0: PURE SPIRULINA PROTOCOL (Energy & Bio-Iron - #1 High-Intent Entry)
+          SLIDE 0: 🪔 SHUBH DIWALI FESTIVE OFFER (True Aspect Ratio Master)
           ------------------------------------------------------------- */}
       <div 
         id="hero-slide-0" 
-        class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
+        class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4 flex items-center justify-center py-2 sm:py-4"
         data-slide-index="0"
+      >
+        <div class="w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
+          <a 
+            href={`/product/${comboHandle}`} 
+            title="Claim Shubh Diwali Festive Offers - Sujata Nutrilive" 
+            class="block relative w-full group overflow-hidden rounded-2xl sm:rounded-3xl border border-amber-500/40 shadow-[0_12px_40px_rgba(245,158,11,0.25)] hover:shadow-[0_18px_50px_rgba(245,158,11,0.4)] transition-all duration-300 transform hover:-translate-y-0.5 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-amber-400 bg-[#240409]"
+          >
+            <picture class="block w-full">
+              {/* 1. Mobile Screen (< 640px): Dedicated Vertical Master (96 KB WebP, 1080x1650, Exact Vertical Aspect Ratio) */}
+              <source 
+                media="(max-width: 639px)" 
+                srcset="/banners/diwali-hero-mobile-750.webp 1x, /banners/diwali-hero-mobile-master.webp 2x" 
+                type="image/webp" 
+              />
+              <source 
+                media="(max-width: 639px)" 
+                srcset="/banners/diwali-hero-mobile-master.jpg" 
+              />
+
+              {/* 2. Tablet Screen (640px - 1023px): Cinematic Safe-Margin 2:1 */}
+              <source 
+                media="(max-width: 1023px)" 
+                srcset="/banners/diwali-hero-cinematic.jpg" 
+              />
+
+              {/* 3. Desktop Screen (>= 1024px): 16:9 Widescreen Master WebP */}
+              <source 
+                media="(min-width: 1024px)" 
+                srcset="/banners/diwali-hero-desktop-master.webp" 
+                type="image/webp" 
+              />
+              <source 
+                media="(min-width: 1024px)" 
+                srcset="/banners/diwali-hero-desktop-master.jpg" 
+              />
+
+              {/* 100% True Ratio Image: object-contain with max-h guarantees zero crop, zero stretch, zero distortion */}
+              <img 
+                src="/banners/diwali-hero-desktop-master.jpg" 
+                alt="Sujata Nutrilive Shubh Diwali Festive Offers - 1-Month, 2-Month & 3-Month Spirulina & Sea Buckthorn Combo Hampers" 
+                class="w-full h-auto max-h-[580px] object-contain block mx-auto transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                width="2752"
+                height="1536"
+              />
+            </picture>
+
+            {/* Subtle ambient golden sheen */}
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+          </a>
+        </div>
+      </div>
+
+      
+      {/* -------------------------------------------------------------
+          SLIDE 1: PURE SPIRULINA PROTOCOL (Energy & Bio-Iron - #1 High-Intent Entry)
+          ------------------------------------------------------------- */}
+      <div 
+        id="hero-slide-1" 
+        class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
+        data-slide-index="1"
       >
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
@@ -232,12 +309,12 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
       </div>
 
       {/* -------------------------------------------------------------
-          SLIDE 1: HEALTHY LIFE COMBO (Synergy Routine Upgrade)
+          SLIDE 2: HEALTHY LIFE COMBO (Synergy Routine Upgrade)
           ------------------------------------------------------------- */}
       <div 
-        id="hero-slide-1" 
+        id="hero-slide-2" 
         class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
-        data-slide-index="1"
+        data-slide-index="2"
       >
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
@@ -343,12 +420,12 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
       </div>
 
       {/* -------------------------------------------------------------
-          SLIDE 2: WILD SEA BUCKTHORN (Cellular Glow & Omega 7)
+          SLIDE 3: WILD SEA BUCKTHORN (Cellular Glow & Omega 7)
           ------------------------------------------------------------- */}
       <div 
-        id="hero-slide-2" 
+        id="hero-slide-3" 
         class="hero-slide-card min-w-full w-full flex-shrink-0 snap-center px-1 sm:px-4"
-        data-slide-index="2"
+        data-slide-index="3"
       >
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-10 items-center">
           
@@ -459,21 +536,27 @@ const sbtHandle = sbtProduct?.handle || 'sujata-sea-buckthorn-capsules';
     <div class="flex items-center justify-center gap-2 mt-3 sm:mt-4">
       <button 
         type="button" 
-        class="hero-dot-indicator w-6 h-1.5 rounded-full bg-emerald-400 transition-all duration-300 cursor-pointer" 
+        class="hero-dot-indicator w-6 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer" 
         data-dot-index="0" 
-        aria-label="Go to slide 1"
+        aria-label="Go to slide 1 (Diwali Offer)"
       ></button>
       <button 
         type="button" 
         class="hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer" 
         data-dot-index="1" 
-        aria-label="Go to slide 2"
+        aria-label="Go to slide 2 (Spirulina)"
       ></button>
       <button 
         type="button" 
         class="hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer" 
         data-dot-index="2" 
-        aria-label="Go to slide 3"
+        aria-label="Go to slide 3 (Combo Pack)"
+      ></button>
+      <button 
+        type="button" 
+        class="hero-dot-indicator w-2 h-1.5 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300 cursor-pointer" 
+        data-dot-index="3" 
+        aria-label="Go to slide 4 (Sea Buckthorn)"
       ></button>
     </div>
 
