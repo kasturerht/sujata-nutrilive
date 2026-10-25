@@ -212,10 +212,14 @@ let images = product?.images?.edges ? product.images.edges.map((e: any) => e.nod
 if (images.length === 0) {
   images = localGallery.length > 0 ? [...localGallery] : [{ url: '/products/sujata-spirulina-powder-pouch.jpg', altText: product?.title || 'Sujata Formulation' }];
 } else if (localGallery.length > 0) {
-  // 🌟 Resilient CRO Merge: Keep Shopify primary image first, and append local infographics!
-  const existingUrls = new Set(images.map((img: any) => img.url));
+  // 🌟 Resilient CRO Merge: Keep Shopify CDN images first, and deduplicate with local gallery by clean basename!
+  const getBaseName = (u: string) => {
+    const raw = (u || '').split('?')[0].split('/').pop() || '';
+    return raw.replace(/_[a-f0-9-]{8,}/gi, '').toLowerCase();
+  };
+  const existingNames = new Set(images.map((img: any) => getBaseName(img.url)));
   for (const localImg of localGallery) {
-    if (!existingUrls.has(localImg.url)) {
+    if (!existingNames.has(getBaseName(localImg.url))) {
       images.push(localImg);
     }
   }

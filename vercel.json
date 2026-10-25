@@ -15,8 +15,8 @@
       "permanent": true
     },
     {
-      "source": "/products/:path*",
-      "destination": "/product/:path*",
+      "source": "/products/:slug([^.]+)",
+      "destination": "/product/:slug",
       "permanent": true
     }
   ],
