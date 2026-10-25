@@ -76,7 +76,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         }
 
         // Send fire-and-forget alert to Telegram
-        const botToken = '8922846279:AAFZXUeM6lZc4t0x1AtKjOwPHAE0IBeugSI';
+        const botToken = (import.meta as any).env?.TELEGRAM_BOT_TOKEN || '8922846279:AAExG-cyXGGUx0G4SGSLIODL8md1cdbiNyI';
         const chatId = '847419012';
         const timeStr = new Date(now + 5.5 * 3600 * 1000).toISOString().replace('T', ' ').substring(0, 19) + ' IST';
         

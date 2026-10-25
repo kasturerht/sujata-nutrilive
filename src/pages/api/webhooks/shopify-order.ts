@@ -183,7 +183,7 @@ export const POST: APIRoute = async ({ request }) => {
     // 1. Founder Telegram Alert (100% Free, Official Bot API, Zero Cost Forever)
     const botToken =
       (typeof process !== 'undefined' && process.env?.TELEGRAM_BOT_TOKEN) ||
-      '8922846279:AAFZXUeM6lZc4t0x1AtKjOwPHAE0IBeugSI';
+      '8922846279:AAExG-cyXGGUx0G4SGSLIODL8md1cdbiNyI';
     const chatId =
       (typeof process !== 'undefined' && process.env?.TELEGRAM_CHAT_ID) ||
       '847419012';
