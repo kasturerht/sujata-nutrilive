@@ -1778,11 +1778,11 @@ const productVideoSchema = videoData ? {
   {/* UNIFIED LUXURY STORE HEADER */}
   <StoreHeader />
 
-  <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-12 selection:bg-[#166534] selection:text-white">
+  <main class="bg-[#FAF9F6] min-h-screen pt-24 md:pt-40 pb-28 md:pb-12 selection:bg-[#166534] selection:text-white">
     <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
 
       {/* Breadcrumb Navigation */}
-      <nav class="flex items-center justify-between mb-8">
+      <nav class="flex items-center justify-between mb-4 md:mb-8">
         <div class="flex items-center gap-3">
           <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
             <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
@@ -1797,7 +1797,7 @@ const productVideoSchema = videoData ? {
         
         {/* 🌟 Left Column: Sensory Gallery & Clinical Assurance */}
         <div class="lg:col-span-6 lg:sticky lg:top-28 space-y-4">
-          <div id="premium-3d-track" class="relative w-full aspect-[4/5] md:aspect-square bg-white rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.03] flex items-center justify-center cursor-none" style="perspective: 1500px;">
+          <div id="premium-3d-track" class="relative w-full aspect-square max-h-[300px] sm:max-h-[360px] md:max-h-none md:aspect-square mx-auto bg-white rounded-2xl md:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.03] flex items-center justify-center cursor-none" style="perspective: 1500px;">
             <div id="ambient-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-emerald-800/10 rounded-full pointer-events-none transition-transform duration-150 ease-out will-change-transform blur-[100px]"></div>
             <div id="image-skeleton" class="absolute inset-0 bg-[#f8faf9] animate-pulse z-10 flex items-center justify-center transition-opacity duration-700">
               <div class="w-8 h-8 border-2 border-[#166534]/20 border-t-[#166534] rounded-full animate-spin"></div>
@@ -1824,16 +1824,16 @@ const productVideoSchema = videoData ? {
           )}
 
           {/* 🌟 Clinical Quality Seals (Directly anchoring the gallery) */}
-          <div class="grid grid-cols-3 gap-2.5 pt-1">
+          <div class="grid grid-cols-3 gap-2 sm:gap-2.5 pt-0.5 sm:pt-1">
             {[
               { icon: '🌿', title: '100% Plant', sub: 'Pure Vegan' },
               { icon: '🔬', title: 'Lab Tested', sub: 'NABL Certified' },
               { icon: '⚡', title: 'Bio-Active', sub: 'Fast Absorption' }
             ].map(item => (
-              <div class="text-center p-3 rounded-2xl bg-white border border-gray-100/90 shadow-2xs hover:border-[#166534]/20 transition-colors">
-                <div class="text-lg mb-1">{item.icon}</div>
-                <div class="text-[11px] font-extrabold text-[#111827] uppercase tracking-wider">{item.title}</div>
-                <div class="text-[10px] text-gray-500 font-medium mt-0.5">{item.sub}</div>
+              <div class="text-center p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-white border border-gray-100/90 shadow-2xs hover:border-[#166534]/20 transition-colors">
+                <div class="text-base sm:text-lg mb-0.5 sm:mb-1">{item.icon}</div>
+                <div class="text-[10px] sm:text-[11px] font-extrabold text-[#111827] uppercase tracking-wider">{item.title}</div>
+                <div class="text-[9px] sm:text-[10px] text-gray-500 font-medium mt-0.5">{item.sub}</div>
               </div>
             ))}
           </div>
@@ -1905,9 +1905,9 @@ const productVideoSchema = videoData ? {
             </div>
 
             {variants.length > 1 && (
-              <div class="mb-6 border-t border-gray-50 pt-5">
-                <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-3 block">Select Size / Duration</span>
-                <div class="flex flex-wrap gap-2.5" id="variant-selector">
+              <div class="mb-5 sm:mb-6 border-t border-gray-50 pt-4 sm:pt-5">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-2.5 sm:mb-3 block">Select Size / Duration</span>
+                <div class="flex flex-col sm:flex-row gap-2 sm:flex-wrap" id="variant-selector">
                   {variants.map((v: any, i: number) => {
                     const vPrice = v.price?.amount || "0";
                     const vCompare = v.compareAtPrice?.amount || "";
@@ -1930,7 +1930,7 @@ const productVideoSchema = videoData ? {
 
                     return (
                       <button 
-                        class={`variant-btn relative px-4 sm:px-5 py-2.5 sm:py-3 min-h-[50px] rounded-xl border-2 text-left transition-all duration-300 touch-manipulation whitespace-nowrap flex flex-col justify-center ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                        class={`variant-btn relative px-3 sm:px-5 py-2 sm:py-3 min-h-[44px] sm:min-h-[50px] rounded-xl border-2 text-left transition-all duration-300 touch-manipulation flex items-center justify-between sm:flex-col sm:justify-center sm:items-start ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
                         data-variant-id={v.id}
                         data-base-price={vPrice}
                         data-base-compare={vCompare}
@@ -1941,14 +1941,14 @@ const productVideoSchema = videoData ? {
                         data-days-supply={daysSupply || ''}
                         data-is-best-value={isBestValue ? 'true' : 'false'}
                       >
-                        <div class="flex items-center gap-1.5">
+                        <div class="flex items-center gap-1.5 flex-wrap">
                           <span class="text-xs font-bold">{v.title}</span>
                           {isBestValue && (
                             <span class="text-[9px] font-black bg-emerald-700 text-white px-1.5 py-0.5 rounded-full uppercase tracking-wider">Best Value</span>
                           )}
                         </div>
                         {perDayCost && (
-                          <span class="text-[10px] font-semibold text-emerald-700 mt-0.5">
+                          <span class="text-[9px] sm:text-[10px] font-semibold text-emerald-700 shrink-0 sm:mt-0.5">
                             ₹{perDayCost}/day • {daysSupply}-Day Supply
                           </span>
                         )}
@@ -1960,7 +1960,7 @@ const productVideoSchema = videoData ? {
             )}
 
             {/* 🌟 Silicon Valley High-Conversion Payment Option Selector: 10% UPI vs COD */}
-            <div class="mb-5 border-t border-gray-100 pt-4">
+            <div class="mb-4 sm:mb-5 border-t border-gray-100 pt-3 sm:pt-4">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">Select Payment Option</span>
                 <span class="text-[10px] text-emerald-800 font-extrabold uppercase tracking-wider bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-1">
@@ -1973,7 +1973,7 @@ const productVideoSchema = videoData ? {
                 <button 
                   type="button" 
                   id="tab-upi"
-                  class="payment-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-[#064E3B] bg-white shadow-sm border-2 border-emerald-500 flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group relative"
+                  class="payment-tab-btn py-2 sm:py-3 px-2 sm:px-3 rounded-xl text-xs font-bold transition-all duration-200 text-[#064E3B] bg-white shadow-sm border-2 border-emerald-500 flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group relative"
                   data-value="upi"
                 >
                   <div class="flex items-center gap-1">
@@ -1991,7 +1991,7 @@ const productVideoSchema = videoData ? {
                 <button 
                   type="button" 
                   id="tab-cod"
-                  class="payment-tab-btn py-3 px-3 rounded-xl text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] border-2 border-transparent flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
+                  class="payment-tab-btn py-2 sm:py-3 px-2 sm:px-3 rounded-xl text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] border-2 border-transparent flex flex-col items-center justify-center gap-0.5 cursor-pointer touch-manipulation group"
                   data-value="cod"
                 >
                   <span class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">📦 Cash on Delivery</span>
@@ -2738,16 +2738,21 @@ const productVideoSchema = videoData ? {
   <!-- 🌟 Mobile Sticky Bottom Dual "Buy Now & Cart" Bar (High Conversion & Safe Area Fitted) -->
   <div 
     id="mobile-sticky-bottom-bar" 
-    class="fixed bottom-0 left-0 right-0 z-[140] bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-3.5 py-2.5 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform translate-y-full md:hidden flex items-center justify-between gap-2.5"
+    class="fixed bottom-0 left-0 right-0 z-[140] bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-3.5 py-2.5 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform translate-y-full md:hidden flex items-center justify-between gap-2.5"
     aria-label="Quick Purchase Bar"
   >
     <!-- Left: Product Snapshot -->
-    <div class="flex items-center gap-2 min-w-0">
+    <div 
+      class="flex items-center gap-2 min-w-0 cursor-pointer active:opacity-80 transition-opacity"
+      onclick="const vs = document.getElementById('variant-selector') || document.getElementById('magnetic-btn-wrapper'); vs?.scrollIntoView({ behavior: 'smooth', block: 'center' });"
+      title="Click to select duration"
+    >
       <div class="w-10 h-10 rounded-xl bg-white/10 p-0.5 flex-shrink-0 flex items-center justify-center border border-white/10">
         <img src={images[0]?.url || "/spirulina-bottle.png"} alt={product.title} class="w-full h-full object-contain" />
       </div>
       <div class="flex flex-col min-w-0">
-        <span class="text-xs font-bold text-white truncate max-w-[90px] sm:max-w-[130px] font-['Playfair_Display']">{product.title}</span>
+        <span class="text-xs font-bold text-white truncate max-w-[95px] sm:max-w-[130px] font-['Playfair_Display']">{product.title}</span>
+        <span id="sticky-variant-title" class="text-[9px] text-emerald-200/90 truncate font-semibold block">{variants[0]?.title && variants[0]?.title !== 'Default Title' ? variants[0]?.title : ''}</span>
         <div class="flex items-center gap-1.5 mt-0.5">
           <span class="text-sm font-black text-emerald-400" id="sticky-display-price">₹{price}</span>
           <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase" id="sticky-benefit-pill">COD OK</span>
@@ -2820,6 +2825,7 @@ const productVideoSchema = videoData ? {
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .pb-safe { padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0.625rem)); }
     @keyframes shimmer { 100% { transform: translateX(100%); } }
     @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
     @keyframes wave { 0%, 100% { height: 4px; } 50% { height: 24px; } }
@@ -2987,6 +2993,7 @@ const productVideoSchema = videoData ? {
           const stickyPillEl = document.getElementById('sticky-benefit-pill');
           if (stickyPillEl && activeIntent.stickyTag) {
             stickyPillEl.textContent = activeIntent.stickyTag;
+            stickyPillEl.setAttribute('data-has-custom-hook', 'true');
             stickyPillEl.classList.remove('bg-emerald-500/20', 'text-emerald-300');
             stickyPillEl.classList.add('bg-amber-400/20', 'text-amber-300');
           }
@@ -3477,6 +3484,26 @@ const productVideoSchema = videoData ? {
           if (btnTextElement) btnTextElement.innerText = "Add to Cart";
           if (stickyBtnText) stickyBtnText.innerText = "Cart";
         }
+
+        // 6. Update Mobile Sticky Bottom Bar Dynamic Meta
+        const stickyVarTitleEl = document.getElementById('sticky-variant-title');
+        if (stickyVarTitleEl) {
+          const vTitle = productState.variantTitle || '';
+          stickyVarTitleEl.innerText = (vTitle && vTitle !== 'Default Title')
+            ? vTitle.split('(')[0].trim()
+            : '';
+        }
+        const stickyBenefitPill = document.getElementById('sticky-benefit-pill');
+        if (stickyBenefitPill && !stickyBenefitPill.getAttribute('data-has-custom-hook')) {
+          stickyBenefitPill.innerText = isUpi ? '10% OFF' : 'COD OK';
+          if (isUpi) {
+            stickyBenefitPill.classList.remove('bg-amber-500/20', 'text-amber-300');
+            stickyBenefitPill.classList.add('bg-emerald-500/20', 'text-emerald-300');
+          } else {
+            stickyBenefitPill.classList.remove('bg-emerald-500/20', 'text-emerald-300');
+            stickyBenefitPill.classList.add('bg-amber-500/20', 'text-amber-300');
+          }
+        }
       }
 
       // Initialize Pricing UI immediately
@@ -3706,29 +3733,38 @@ const productVideoSchema = videoData ? {
       window.addEventListener('popstate', resetPdpBuyButtons);
       window.addEventListener('sujata:buttons-reset', resetPdpBuyButtons);
 
-      // 1.9 Mobile Sticky Bottom Bar Scroll Observer
-      const buyBoxWrapper = document.getElementById('magnetic-btn-wrapper') || atcBtn;
-      if (buyBoxWrapper && stickyBar) {
-        const stickyObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
+      // 1.9 High-Converting Mobile Sticky Bottom Bar Controller (Kapiva / D2C Benchmark)
+      if (stickyBar) {
+        let isStickyShown = false;
+        const updateStickyBarState = () => {
+          // Keep sticky bar hidden on desktop viewports (>= 768px) where right-column sticky box exists
+          if (window.innerWidth >= 768) {
+            if (isStickyShown) {
               stickyBar.classList.remove('translate-y-0');
               stickyBar.classList.add('translate-y-full');
-            } else {
-              if (entry.boundingClientRect.top < 0) {
-                stickyBar.classList.remove('translate-y-full');
-                stickyBar.classList.add('translate-y-0');
-              } else {
-                stickyBar.classList.remove('translate-y-0');
-                stickyBar.classList.add('translate-y-full');
-              }
+              isStickyShown = false;
             }
-          });
-        }, {
-          threshold: 0.1
-        });
+            return;
+          }
 
-        stickyObserver.observe(buyBoxWrapper);
+          // On mobile: Smoothly glide in sticky bar as soon as user scrolls past initial 70px
+          const shouldShow = window.scrollY > 70;
+          if (shouldShow !== isStickyShown) {
+            isStickyShown = shouldShow;
+            if (shouldShow) {
+              stickyBar.classList.remove('translate-y-full');
+              stickyBar.classList.add('translate-y-0');
+            } else {
+              stickyBar.classList.remove('translate-y-0');
+              stickyBar.classList.add('translate-y-full');
+            }
+          }
+        };
+
+        window.addEventListener('scroll', updateStickyBarState, { passive: true });
+        window.addEventListener('resize', updateStickyBarState, { passive: true });
+        // Run immediately to set initial state
+        updateStickyBarState();
       }
 
       // 2. WhatsApp Opt-in Checkbox State Logic (RTO Reduction)
