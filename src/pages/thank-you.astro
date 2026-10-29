@@ -4,9 +4,8 @@ import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
 
-// Symmetrical dynamic variables
+// Symmetrical initial dynamic variables for SSR
 const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
 ---
 
 <StoreLayout title="Order Confirmed | Sujata Nutrilive" noindex={true}>
@@ -32,25 +31,28 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
         Protocol <span class="italic text-[#166534]">Activated.</span>
       </h1>
       
-      <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg mb-10">
+      <p class="text-gray-500 text-sm md:text-base leading-relaxed max-w-lg mb-8">
         Your order is confirmed and registered under <span class="text-[#166534] font-bold">Batch #LIVE-0426</span>. Priority packaging is active. Your delivery will arrive at your doorstep shortly.
       </p>
 
       {/* 3. ENTERPRISE RECEIPT DOSSIER CARD */}
-      <div class="w-full bg-white rounded-3xl p-6 md:p-8 shadow-[0_15px_45px_rgba(0,0,0,0.03)] border border-gray-100/60 mb-10 text-left relative overflow-hidden group">
+      <div class="w-full bg-white rounded-3xl p-6 md:p-8 shadow-[0_15px_45px_rgba(0,0,0,0.03)] border border-gray-100/60 mb-6 text-left relative overflow-hidden group">
         
         {/* Glow corner detail */}
         <div class="absolute -top-12 -right-12 w-24 h-24 bg-emerald-50 rounded-full blur-xl pointer-events-none opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
         
         <h3 class="text-xs font-black uppercase tracking-[0.25em] text-gray-400 border-b border-gray-100 pb-4 mb-5 flex items-center justify-between">
-          <span>Order Specifications</span>
-          <span class="text-[#166534] font-mono lowercase tracking-normal font-bold">registered ⚡</span>
+          <span>Official Order Dossier</span>
+          <span class="text-[#166534] font-mono lowercase tracking-normal font-bold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            verified ⚡
+          </span>
         </h3>
 
         <div class="grid grid-cols-2 gap-y-5 gap-x-4 text-xs">
           <div>
             <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Receipt Number</span>
-            <span class="font-extrabold text-[#111827] font-mono">{orderNumber}</span>
+            <span class="font-extrabold text-[#111827] font-mono tracking-tight text-xs sm:text-sm break-all" id="receipt-number">SUJATA-PROCESSING</span>
           </div>
           <div>
             <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Activation Date</span>
@@ -58,13 +60,11 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
           </div>
           <div>
             <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Payment Channel</span>
-            <span class="font-extrabold text-[#111827]">Secure UPI / Card</span>
+            <span class="font-extrabold text-[#111827]" id="payment-channel">Secure UPI / Online</span>
           </div>
           <div>
-            <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Shipping Speed</span>
-            <span class="font-extrabold text-emerald-700 flex items-center gap-1.5 font-bold">
-              Priority Express 🚚
-            </span>
+            <span class="text-gray-400 font-bold uppercase tracking-wider block mb-1">Order Amount</span>
+            <span class="font-black text-emerald-800 text-sm" id="order-total-amount">₹945</span>
           </div>
         </div>
 
@@ -72,8 +72,18 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
           <span class="text-gray-400 font-bold uppercase tracking-wider">Dispatch Status</span>
           <span class="bg-[#f0fdf4] text-[#166534] border border-emerald-100 px-3 py-1 rounded-full font-bold uppercase tracking-widest text-[9px] flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Dispatches in 24 Hours
+            Dispatches in 24 Hours • Express Delivery
           </span>
+        </div>
+      </div>
+
+      {/* 3.1 DYNAMIC ORDER ITEMS CARD */}
+      <div id="order-items-card" class="w-full bg-white rounded-3xl p-6 md:p-8 shadow-[0_15px_45px_rgba(0,0,0,0.03)] border border-gray-100/60 mb-8 text-left hidden">
+        <h3 class="text-xs font-black uppercase tracking-[0.25em] text-gray-400 border-b border-gray-100 pb-3 mb-4">
+          Purchased Formulations
+        </h3>
+        <div id="order-items-list" class="divide-y divide-gray-100">
+          {/* Injected dynamically by client JS */}
         </div>
       </div>
 
@@ -96,10 +106,11 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
         </div>
 
         <a 
-          href={`https://wa.me/919834783503?text=Hello%20Sujata%20Nutrilive!%20My%20order%20is%20confirmed%20(Receipt%20ID:%20${orderNumber}).%20I%20want%20to%20activate%20my%20free%20doctor%20consultation%20and%20diet%20chart%20protocol.`}
+          id="whatsapp-consult-link"
+          href="https://wa.me/919834783503?text=Hello%20Sujata%20Nutrilive!%20My%20order%20is%20confirmed.%20I%20want%20to%20activate%20my%20free%20doctor%20consultation%20and%20diet%20chart%20protocol."
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-[#25D366] hover:bg-[#20ba5a] text-emerald-950 font-extrabold text-[11px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-[0_10px_25px_rgba(37,211,102,0.15)] hover:shadow-[0_15px_30px_rgba(37,211,102,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group/btn shrink-0 w-full md:w-auto relative z-10"
+          class="bg-[#25D366] hover:bg-[#20ba5a] text-emerald-950 font-extrabold text-[11px] uppercase tracking-widest px-6 py-4 rounded-xl shadow-[0_10px_25px_rgba(37,211,102,0.15)] hover:shadow-[0_15px_30px_rgba(37,211,102,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group/btn shrink-0 w-full md:w-auto relative z-10 touch-manipulation cursor-pointer"
         >
           <svg class="w-4 h-4 fill-current transition-transform duration-300 group-hover/btn:scale-110" viewBox="0 0 24 24">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.446L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.45 5.535 0 10.026-4.488 10.029-10.02.002-2.684-1.038-5.207-2.93-7.101C16.559 1.588 14.054.55 11.4.553 5.865.553 1.376 5.04 1.373 10.573c-.001 1.702.464 3.367 1.348 4.838l-.99 3.613 3.7-.971zm12.39-5.127c-.302-.15-1.786-.88-2.062-.98-.277-.1-.478-.15-.679.15-.201.3-.778.98-.954 1.18-.176.2-.352.225-.654.075-.302-.15-1.276-.47-2.43-1.498-.897-.8-1.502-1.787-1.678-2.087-.176-.3-.019-.462.13-.611.135-.134.302-.35.453-.525.15-.175.2-.3.302-.5.101-.2.05-.375-.025-.525-.075-.15-.679-1.635-.93-2.245-.244-.587-.49-.508-.679-.518-.176-.008-.377-.01-.578-.01-.201 0-.527.075-.803.375-.276.3-1.054 1.03-1.054 2.51 0 1.48 1.08 2.91 1.23 3.11.15.2 2.124 3.245 5.144 4.545.718.31 1.277.495 1.713.635.722.23 1.378.197 1.897.12.579-.085 1.786-.73 2.037-1.43.251-.7.251-1.3.176-1.43-.075-.13-.277-.205-.578-.355z"/>
@@ -110,11 +121,18 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
 
       {/* 5. CTAS: Continue Shopping + Track Order */}
       <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
-        <a href={`/track-order?order=${orderNumber}`} class="w-full sm:w-auto bg-[#166534] hover:bg-[#064E3B] text-white font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group">
+        <a 
+          id="track-order-link"
+          href="/track-order" 
+          class="w-full sm:w-auto bg-[#166534] hover:bg-[#064E3B] text-white font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group touch-manipulation cursor-pointer"
+        >
           <span>Track Live Shipment</span>
           <span class="group-hover:translate-x-1 transition-transform">🚚</span>
         </a>
-        <a href="/" class="w-full sm:w-auto bg-[#111827] text-white hover:bg-gray-800 font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-sm flex items-center justify-center gap-2 group">
+        <a 
+          href="/" 
+          class="w-full sm:w-auto bg-[#111827] text-white hover:bg-gray-800 font-bold text-xs uppercase tracking-[0.2em] px-8 py-4.5 rounded-xl transition-all duration-300 shadow-sm flex items-center justify-center gap-2 group touch-manipulation cursor-pointer"
+        >
           <span>Continue Shopping</span>
           <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
@@ -135,6 +153,138 @@ const orderNumber = `SUJATA-${Math.floor(10000 + Math.random() * 90000)}`;
   </main>
 
   <StoreFooter />
+
+  {/* 🌟 SILICON VALLEY ENTERPRISE CONTROLLER: Meta Pixel Purchase & Real Order Reconstitution */}
+  <script is:inline>
+    (function initThankYouController() {
+      try {
+        // 1. Extract URL Parameters from Payment Gateway Handshake
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlOrderId = urlParams.get('order_id') || urlParams.get('order') || '';
+        var urlPaymentId = urlParams.get('payment_id') || '';
+        var urlValue = urlParams.get('value') || '';
+        var urlMode = urlParams.get('mode') || '';
+
+        // 2. Retrieve Stored Order Snapshot (Generated by CartDrawer before checkout launch)
+        var snapshot = null;
+        try {
+          var raw = sessionStorage.getItem('sujata_pending_order') || localStorage.getItem('sujata_pending_order');
+          if (raw) snapshot = JSON.parse(raw);
+        } catch(e) {}
+
+        // 3. Resolve Real Order Identity & Value
+        var resolvedOrderId = urlOrderId || (snapshot && snapshot.order_id) || urlPaymentId || ('SUJATA-' + Math.floor(10000 + Math.random() * 90000));
+        var resolvedPaymentId = urlPaymentId || (snapshot && snapshot.payment_id) || '';
+        var resolvedValue = Number(urlValue) || (snapshot && Number(snapshot.total)) || 945;
+        var resolvedMode = urlMode || (snapshot && snapshot.payment_mode) || 'upi';
+        var resolvedItems = (snapshot && snapshot.items && snapshot.items.length > 0) 
+          ? snapshot.items 
+          : [{ id: 'sujata-combo', title: 'Sujata Spirulina + Sea Buckthorn Protocol', price: resolvedValue, quantity: 1, image: '/spirulina-bottle.png' }];
+
+        // 4. Update UI Elements Dynamically
+        var receiptEl = document.getElementById('receipt-number');
+        if (receiptEl) receiptEl.textContent = resolvedOrderId;
+
+        var channelEl = document.getElementById('payment-channel');
+        if (channelEl) {
+          if (resolvedMode === 'upi') {
+            channelEl.innerHTML = '<span class="text-emerald-700 font-extrabold flex items-center gap-1"><span>⚡</span> Instant UPI (10% Off Applied)</span>';
+          } else if (resolvedMode === 'cod') {
+            channelEl.innerHTML = '<span class="text-amber-800 font-extrabold flex items-center gap-1"><span>📦</span> Cash on Delivery</span>';
+          } else {
+            channelEl.textContent = 'Secure Prepaid / Card';
+          }
+        }
+
+        var totalEl = document.getElementById('order-total-amount');
+        if (totalEl) totalEl.textContent = '₹' + new Intl.NumberFormat('en-IN').format(Math.round(resolvedValue));
+
+        // Inject Purchased Formulations List
+        var itemsContainer = document.getElementById('order-items-list');
+        if (itemsContainer && resolvedItems.length > 0) {
+          itemsContainer.innerHTML = resolvedItems.map(function(item) {
+            var imgUrl = item.image || '/spirulina-bottle.png';
+            var itemTotal = (Number(item.price) || 0) * (Number(item.quantity) || 1);
+            return '<div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">' +
+              '<div class="flex items-center gap-3 min-w-0">' +
+                '<div class="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 p-1 shrink-0 flex items-center justify-center">' +
+                  '<img src="' + imgUrl + '" alt="' + (item.title || '') + '" class="w-full h-full object-contain" />' +
+                '</div>' +
+                '<div class="min-w-0">' +
+                  '<p class="text-xs font-bold text-gray-900 truncate max-w-[170px] sm:max-w-[280px]">' + (item.title || 'Sujata Formulation') + '</p>' +
+                  '<p class="text-[10px] text-gray-500 font-semibold mt-0.5">Quantity: ' + (item.quantity || 1) + '</p>' +
+                '</div>' +
+              '</div>' +
+              '<span class="text-xs font-black text-gray-900 shrink-0">₹' + new Intl.NumberFormat('en-IN').format(Math.round(itemTotal)) + '</span>' +
+            '</div>';
+          }).join('');
+          var itemsCard = document.getElementById('order-items-card');
+          if (itemsCard) itemsCard.classList.remove('hidden');
+        }
+
+        // Update WhatsApp Consultation Deep-link
+        var waBtn = document.getElementById('whatsapp-consult-link');
+        if (waBtn) {
+          var waText = encodeURIComponent('Hello Sujata Nutrilive! My order is confirmed (Order ID: ' + resolvedOrderId + '). I want to activate my free doctor consultation and diet chart protocol.');
+          waBtn.setAttribute('href', 'https://wa.me/919834783503?text=' + waText);
+        }
+
+        // Update Track Order Link
+        var trackBtn = document.getElementById('track-order-link');
+        if (trackBtn) {
+          trackBtn.setAttribute('href', '/track-order?order=' + encodeURIComponent(resolvedOrderId));
+        }
+
+        // 5. 🛡️ SILICON VALLEY IDEMPOTENCY GUARD (Zero Duplicate Conversions)
+        var trackingKey = 'sujata_purchased_' + resolvedOrderId;
+        var isAlreadyTracked = false;
+        try {
+          isAlreadyTracked = localStorage.getItem(trackingKey) === 'true';
+        } catch(e) {}
+
+        if (isAlreadyTracked) {
+          console.log('🛡️ [Sujata Analytics] Purchase already tracked for Order ID:', resolvedOrderId, '- Skipping duplicate dispatch.');
+        } else {
+          try {
+            localStorage.setItem(trackingKey, 'true');
+          } catch(e) {}
+
+          // 🌟 Official Dual-Channel Purchase Event Dispatch (Meta Pixel + GA4)
+          if (typeof window.dispatchStoreEvent === 'function') {
+            var purchasePayload = {
+              event_id: resolvedOrderId || resolvedPaymentId || ('order_' + Date.now()),
+              order_id: resolvedOrderId,
+              payment_id: resolvedPaymentId,
+              currency: 'INR',
+              value: resolvedValue,
+              total: resolvedValue,
+              price: resolvedValue,
+              payment_mode: resolvedMode,
+              items: resolvedItems.map(function(item) {
+                return {
+                  id: String(item.id || item.variantId || ''),
+                  title: item.title || 'Sujata Formulation',
+                  price: Number(item.price || 0),
+                  quantity: Number(item.quantity || 1)
+                };
+              })
+            };
+
+            window.dispatchStoreEvent('Purchase', purchasePayload);
+            console.log('✅ [Sujata Analytics] Official Purchase event dispatched successfully for Meta Ads & GA4:', purchasePayload);
+          }
+
+          // Clean local cart so drawer is empty on next visit
+          try {
+            localStorage.removeItem('sujata_cart');
+            localStorage.removeItem('sujata_pending_order');
+          } catch(e) {}
+        }
+      } catch(err) {
+        console.error('❌ [Sujata Analytics] Thank-You page controller error:', err);
+      }
+    })();
+  </script>
 
 </StoreLayout>
 

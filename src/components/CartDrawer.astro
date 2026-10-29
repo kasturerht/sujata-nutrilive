@@ -765,6 +765,31 @@ try {
                   const magicData = await magicRes.json();
                   if (magicData.success && magicData.order_id) {
                     clearTimeout(recoveryTimer);
+
+                    // 🌟 Silicon Valley Order Snapshot (Stored for Thank-You attribution & in-app browser recovery)
+                    const totalCartAmount = items.reduce((acc, item) => acc + (Number(item.price || 0) * Number(item.quantity || 1)), 0);
+                    const finalOrderTotal = selectedMode === 'upi' ? Math.round(totalCartAmount * 0.9) : totalCartAmount;
+                    const orderSnapshot = {
+                      order_id: magicData.order_id,
+                      key_id: magicData.key_id,
+                      items: items.map(it => ({
+                        id: it.id,
+                        title: it.title,
+                        price: it.price,
+                        quantity: it.quantity,
+                        image: it.image
+                      })),
+                      total: finalOrderTotal,
+                      raw_total: totalCartAmount,
+                      payment_mode: selectedMode,
+                      coupon_code: discountCodeToSend || '',
+                      created_at: Date.now()
+                    };
+                    try {
+                      sessionStorage.setItem('sujata_pending_order', JSON.stringify(orderSnapshot));
+                      localStorage.setItem('sujata_pending_order', JSON.stringify(orderSnapshot));
+                    } catch(e) {}
+
                     const rzp = new window.Razorpay({
                       key: magicData.key_id || "rzp_live_TV8wwiNECUNJs0",
                       order_id: magicData.order_id,
@@ -777,7 +802,12 @@ try {
                       },
                       handler: function(response) {
                         try { localStorage.removeItem('sujata_cart'); } catch(e) {}
-                        window.location.href = '/thank-you?order_id=' + (response.razorpay_order_id || '') + '&payment_id=' + (response.razorpay_payment_id || '');
+                        const resolvedOrderId = response.razorpay_order_id || magicData.order_id || '';
+                        const resolvedPaymentId = response.razorpay_payment_id || '';
+                        window.location.href = '/thank-you?order_id=' + encodeURIComponent(resolvedOrderId) + 
+                          '&payment_id=' + encodeURIComponent(resolvedPaymentId) + 
+                          '&value=' + encodeURIComponent(finalOrderTotal) + 
+                          '&mode=' + encodeURIComponent(selectedMode);
                       },
                       modal: {
                         ondismiss: function() {

@@ -638,7 +638,8 @@ const unifiedSchemaGraph = {
         window.dataLayer = window.dataLayer || [];
 
         // High-entropy deterministic event_id for CAPI deduplication
-        var eventId = 'sujata_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7);
+        // High-entropy deterministic event_id for CAPI deduplication (respects passed event_id if available)
+        var eventId = data.event_id || ('sujata_' + Date.now() + '_' + Math.random().toString(36).substr(2, 7));
         var fbpVal = localStorage.getItem('sujata_fbp') || '';
         var fbcVal = localStorage.getItem('sujata_fbc') || '';
         var utmsVal = {};
@@ -769,6 +770,28 @@ const unifiedSchemaGraph = {
             event: 'contact',
             event_id: eventId,
             channel: data.channel || 'WhatsApp Support'
+          });
+        } else if (eventName === 'Purchase') {
+          var pModePurchase = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
+          window.dataLayer.push({ ecommerce: null });
+          window.dataLayer.push({
+            event: 'purchase',
+            event_id: eventId,
+            user_data: userData,
+            ecommerce: {
+              transaction_id: String(data.order_id || eventId),
+              value: Number(data.value || data.total || 0),
+              currency: data.currency || 'INR',
+              payment_type: pModePurchase,
+              items: (data.items || []).map(function(item) {
+                return {
+                  item_id: cleanShopifyId(item.id || ''),
+                  item_name: item.title || '',
+                  price: Number(item.price || 0),
+                  quantity: Number(item.quantity || 1)
+                };
+              })
+            }
           });
         } else if (eventName === 'CompleteRegistration') {
           window.dataLayer.push({
