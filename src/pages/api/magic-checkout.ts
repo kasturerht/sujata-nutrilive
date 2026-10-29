@@ -8,7 +8,8 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const items = body.items || [];
-    const couponCode = body.coupon_code || '';
+    let couponCode = body.coupon_code || '';
+    const paymentMode = body.payment_mode || 'upi';
     const note = body.note || null;
     const attributes = body.attributes || {};
 
@@ -18,6 +19,19 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'Content-Type': 'application/json' }
       });
     }
+
+    // 🛡️ Silicon Valley Business Rule 1: Guard UPI10 from COD leakage
+    // If the customer chose COD, never send UPI10 to Razorpay
+    if (paymentMode === 'cod' && (/^upi/i.test(couponCode) || couponCode === 'UPI10')) {
+      couponCode = '';
+    }
+
+    // 🛡️ Silicon Valley Business Rule 2: Dynamic No-COD Detection (e.g. SpiruGlow Soap)
+    const hasNoCodItem = items.some((item: any) => 
+      item.noCod === true || 
+      /soap|spiruglow/i.test(item.title || '') || 
+      /soap|spiruglow/i.test(item.handle || '')
+    );
 
     // Format items for Razorpay Magic Shopify Cart API
     const formattedItems = items.map((item: any) => {
@@ -100,6 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
       order_id: orderData.order_id,
       shopify_checkout_id: shopifyCheckoutId,
       key_id: RAZORPAY_KEY_ID,
+      hide_cod: hasNoCodItem,
       line_items: orderData.line_items || []
     }), {
       status: 200,

@@ -580,7 +580,7 @@ try {
     window.resetAllPurchaseButtons = resetCheckoutBtn;
     window.resetSujataCheckoutBtn = resetCheckoutBtn;
 
-    // Checkout Action Button Handler (Shopify GraphQL Mutation with Self-Healing)
+    // 🚀 Silicon Valley Sub-Second 1-Click Checkout Handler (Direct Magic Execution)
     async function handleCheckout(e) {
       const checkoutBtn = (e && e.target && typeof e.target.closest === 'function') 
         ? (e.target.closest('#checkout-action-btn') || document.getElementById('checkout-action-btn')) 
@@ -598,14 +598,38 @@ try {
       const items = getLocalCart();
       if (items.length === 0) return;
 
+      // 2. 🔒 Silicon Valley Tag-Driven COD Check (Managed directly from Shopify)
+      const drawerEl = document.getElementById('cart-drawer');
+      let noCodList = ["sujata-spiruglow-bath-soap"];
+      try {
+        const raw = drawerEl?.getAttribute('data-no-cod-handles');
+        if (raw) noCodList = JSON.parse(raw);
+      } catch(e) {}
+      const isItemNoCod = (item) => {
+        if (item.noCod === true) return true;
+        if (item.handle && noCodList.includes(item.handle)) return true;
+        if (item.title && /soap|spiruglow/i.test(item.title)) return true;
+        return false;
+      };
+      const hasOnlyNoCodItems = items.length > 0 && items.every(item => isItemNoCod(item));
+      const anyNoCodItem = items.some(item => isItemNoCod(item));
+      const isCodEligible = !hasOnlyNoCodItems;
+
+      let selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+      if (!isCodEligible && selectedMode === 'cod') {
+        selectedMode = 'upi';
+        try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
+      }
+      const savedDiscount = localStorage.getItem('sujata_discount_code');
+      const totalAmount = items.reduce((acc, item) => acc + (Number(item.price || 0) * Number(item.quantity || 1)), 0);
+      const totalCount = items.reduce((acc, item) => acc + Number(item.quantity || 1), 0);
+      const finalOrderTotal = selectedMode === 'upi' ? Math.round(totalAmount * 0.9) : totalAmount;
+      const discountCodeToSend = (selectedMode === 'upi' ? (savedDiscount || 'UPI10') : (savedDiscount !== 'UPI10' ? savedDiscount : undefined));
+
       // 🌟 Dispatch E-Commerce InitiateCheckout Event (Meta Pixel & Google Ads / GA4)
       if (typeof window.dispatchStoreEvent === 'function') {
-        const totalAmount = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-        const totalCount = items.reduce((acc, item) => acc + item.quantity, 0);
-        const selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
-        const finalTotal = selectedMode === 'upi' ? Math.round(totalAmount * 0.9) : totalAmount;
         window.dispatchStoreEvent('InitiateCheckout', {
-          total: finalTotal,
+          total: finalOrderTotal,
           count: totalCount,
           items: items,
           payment_mode: selectedMode
@@ -621,19 +645,11 @@ try {
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <span>Securing Checkout...</span>
+        <span>Securing 1-Click Checkout...</span>
       `;
 
       // 🛡️ Circuit Breaker: Auto-reset button if navigation takes > 8 seconds or user cancels
       const recoveryTimer = setTimeout(resetCheckoutBtn, 8000);
-
-      // Format lines for Shopify Storefront API
-      const lines = items
-        .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
-        .map(i => {
-          const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
-          return { merchandiseId, quantity: Math.max(1, Math.min(10, parseInt(i.quantity) || 1)) };
-        });
 
       // 🌟 Cross-Domain Tracking: Extract Meta & UTM Attribution to forward to Shopify Checkout
       const cartAttributes = [];
@@ -661,6 +677,121 @@ try {
         if (storedEmail) cartAttributes.push({ key: '_lead_email', value: storedEmail });
         if (storedPhone) cartAttributes.push({ key: '_lead_phone', value: storedPhone });
       } catch(e) {}
+
+      // 🚀 FAST PATH: Direct 1-Click Razorpay Magic Checkout (Sub-Second Latency)
+      try {
+        if (typeof window.Razorpay === 'function') {
+          const attrRecord = {};
+          cartAttributes.forEach(a => { attrRecord[a.key] = a.value; });
+
+          const magicPayload = {
+            items: items,
+            coupon_code: discountCodeToSend || undefined,
+            payment_mode: selectedMode,
+            attributes: attrRecord
+          };
+
+          const magicRes = await fetch('/api/magic-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(magicPayload)
+          });
+
+          if (magicRes.ok) {
+            const magicData = await magicRes.json();
+            if (magicData.success && magicData.order_id) {
+              clearTimeout(recoveryTimer);
+
+              // 🌟 Silicon Valley Order Snapshot (Stored for Thank-You attribution & in-app browser recovery)
+              const orderSnapshot = {
+                order_id: magicData.order_id,
+                key_id: magicData.key_id,
+                items: items.map(it => ({
+                  id: it.id,
+                  title: it.title,
+                  price: it.price,
+                  quantity: it.quantity,
+                  image: it.image
+                })),
+                total: finalOrderTotal,
+                raw_total: totalAmount,
+                payment_mode: selectedMode,
+                coupon_code: discountCodeToSend || '',
+                created_at: Date.now()
+              };
+              try {
+                sessionStorage.setItem('sujata_pending_order', JSON.stringify(orderSnapshot));
+                localStorage.setItem('sujata_pending_order', JSON.stringify(orderSnapshot));
+                // 🛡️ Active checkout sentinel for Instagram in-app webview recovery
+                localStorage.setItem('sujata_active_checkout', JSON.stringify({
+                  order_id: magicData.order_id,
+                  shopify_checkout_id: magicData.shopify_checkout_id,
+                  total: finalOrderTotal,
+                  payment_mode: selectedMode,
+                  initiated_at: Date.now()
+                }));
+              } catch(e) {}
+
+              const rzpOptions = {
+                key: magicData.key_id || "rzp_live_TV8wwiNECUNJs0",
+                order_id: magicData.order_id,
+                one_click_checkout: true,
+                name: "Sujata Nutrilive",
+                description: "100% Organic Superfoods",
+                image: "https://www.sujatanutrilive.com/sujata-checkout-logo.png",
+                prefill: {
+                  contact: localStorage.getItem('sujata_user_phone') || undefined,
+                  email: localStorage.getItem('sujata_user_email') || undefined,
+                  coupon_code: discountCodeToSend || undefined,
+                  ...(selectedMode === 'upi' ? { method: 'upi' } : {})
+                },
+                handler: function(response) {
+                  try { 
+                    localStorage.removeItem('sujata_cart'); 
+                    localStorage.removeItem('sujata_active_checkout');
+                  } catch(e) {}
+                  const resolvedOrderId = response.razorpay_order_id || magicData.order_id || '';
+                  const resolvedPaymentId = response.razorpay_payment_id || '';
+                  window.location.href = '/thank-you?order_id=' + encodeURIComponent(resolvedOrderId) + 
+                    '&payment_id=' + encodeURIComponent(resolvedPaymentId) + 
+                    '&value=' + encodeURIComponent(finalOrderTotal) + 
+                    '&mode=' + encodeURIComponent(selectedMode);
+                },
+                modal: {
+                  ondismiss: function() {
+                    try { localStorage.removeItem('sujata_active_checkout'); } catch(e) {}
+                    resetCheckoutBtn();
+                  }
+                }
+              };
+
+              // 🛡️ Phase 4: Dynamic No-COD Display Hiding in Razorpay modal
+              if (magicData.hide_cod || anyNoCodItem) {
+                rzpOptions.config = {
+                  display: {
+                    hide: [{ method: "cod" }]
+                  }
+                };
+              }
+
+              const rzp = new window.Razorpay(rzpOptions);
+              rzp.open();
+              return; // Fast path successful!
+            }
+          }
+        }
+      } catch(magicErr) {
+        console.warn("⚠️ Razorpay Magic Checkout fast path failed, transitioning to Storefront fallback:", magicErr);
+      }
+
+      // 🛡️ FALLBACK PATH: Standard Shopify Storefront API GraphQL cartCreate
+      // Format lines for Shopify Storefront API
+      const lines = items
+        .filter(i => i.id && typeof i.id === 'string' && (i.id.includes('gid://shopify/ProductVariant/') || !isNaN(Number(i.id))))
+        .map(i => {
+          const merchandiseId = i.id.includes('gid://shopify/ProductVariant/') ? i.id : `gid://shopify/ProductVariant/${i.id}`;
+          return { merchandiseId, quantity: Math.max(1, Math.min(10, parseInt(i.quantity) || 1)) };
+        });
 
       if (lines.length > 0) {
         const mutation = `
@@ -698,136 +829,16 @@ try {
 
           const data = await response.json();
           let checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl;
-          const userErrors = data?.data?.cartCreate?.userErrors;
-
-          if (userErrors && userErrors.length > 0) {
-            console.warn("⚠️ Shopify cart userErrors:", userErrors);
-          }
 
           if (checkoutUrl) {
-
-            // 🔒 Silicon Valley Tag-Driven COD Check (Managed directly from Shopify)
-            const drawerEl = document.getElementById('cart-drawer');
-            let noCodList = ["sujata-spiruglow-bath-soap"];
-            try {
-              const raw = drawerEl?.getAttribute('data-no-cod-handles');
-              if (raw) noCodList = JSON.parse(raw);
-            } catch(e) {}
-            const isItemNoCod = (item) => {
-              if (item.noCod === true) return true;
-              if (item.handle && noCodList.includes(item.handle)) return true;
-              if (item.title && /soap|spiruglow/i.test(item.title)) return true;
-              return false;
-            };
-            const hasOnlyNoCodItems = items.length > 0 && items.every(item => isItemNoCod(item));
-            const isCodEligible = !hasOnlyNoCodItems;
-
-            let selectedMode = localStorage.getItem('sujata_selected_payment_mode') || 'upi';
-            if (!isCodEligible && selectedMode === 'cod') {
-              selectedMode = 'upi';
-              try { localStorage.setItem('sujata_selected_payment_mode', 'upi'); } catch(e) {}
+            const discountToApply = discountCodeToSend;
+            if (discountToApply && !checkoutUrl.includes('discount=')) {
+              const sep = checkoutUrl.includes('?') ? '&' : '?';
+              checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(discountToApply)}`;
             }
-            const savedDiscount = localStorage.getItem('sujata_discount_code');
-
-            if (selectedMode === 'upi') {
-              // 🎁 Auto-Apply 10% UPI/Prepaid Discount Code (UPI10 or saved coupon)
-              const discountToApply = savedDiscount || 'UPI10';
-              if (discountToApply && !checkoutUrl.includes('discount=')) {
-                const sep = checkoutUrl.includes('?') ? '&' : '?';
-                checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(discountToApply)}`;
-              }
-            } else {
-              // 📦 Cash on Delivery:
-              // If the customer legitimately earned a welcome/first-time coupon (e.g. PEAK10), HONOR IT!
-              // Never strip it and breach customer trust!
-              if (savedDiscount && !checkoutUrl.includes('discount=')) {
-                const sep = checkoutUrl.includes('?') ? '&' : '?';
-                checkoutUrl = `${checkoutUrl}${sep}discount=${encodeURIComponent(savedDiscount)}`;
-              }
-            }
-
-            // 🚀 1-Click Razorpay Magic Checkout (Kapiva-style Instant Mobile OTP & Auto-Address)
-            try {
-              if (typeof window.Razorpay === 'function') {
-                const discountCodeToSend = (selectedMode === 'upi' ? (savedDiscount || 'UPI10') : savedDiscount) || undefined;
-                const magicPayload = {
-                  items: items,
-                  coupon_code: discountCodeToSend
-                };
-
-                const magicRes = await fetch('/api/magic-checkout', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(magicPayload)
-                });
-
-                if (magicRes.ok) {
-                  const magicData = await magicRes.json();
-                  if (magicData.success && magicData.order_id) {
-                    clearTimeout(recoveryTimer);
-
-                    // 🌟 Silicon Valley Order Snapshot (Stored for Thank-You attribution & in-app browser recovery)
-                    const totalCartAmount = items.reduce((acc, item) => acc + (Number(item.price || 0) * Number(item.quantity || 1)), 0);
-                    const finalOrderTotal = selectedMode === 'upi' ? Math.round(totalCartAmount * 0.9) : totalCartAmount;
-                    const orderSnapshot = {
-                      order_id: magicData.order_id,
-                      key_id: magicData.key_id,
-                      items: items.map(it => ({
-                        id: it.id,
-                        title: it.title,
-                        price: it.price,
-                        quantity: it.quantity,
-                        image: it.image
-                      })),
-                      total: finalOrderTotal,
-                      raw_total: totalCartAmount,
-                      payment_mode: selectedMode,
-                      coupon_code: discountCodeToSend || '',
-                      created_at: Date.now()
-                    };
-                    try {
-                      sessionStorage.setItem('sujata_pending_order', JSON.stringify(orderSnapshot));
-                      localStorage.setItem('sujata_pending_order', JSON.stringify(orderSnapshot));
-                    } catch(e) {}
-
-                    const rzp = new window.Razorpay({
-                      key: magicData.key_id || "rzp_live_TV8wwiNECUNJs0",
-                      order_id: magicData.order_id,
-                      one_click_checkout: true,
-                      name: "Sujata Nutrilive",
-                      description: "Pure Health & Wellness",
-                      prefill: {
-                        contact: localStorage.getItem('sujata_user_phone') || undefined,
-                        coupon_code: discountCodeToSend
-                      },
-                      handler: function(response) {
-                        try { localStorage.removeItem('sujata_cart'); } catch(e) {}
-                        const resolvedOrderId = response.razorpay_order_id || magicData.order_id || '';
-                        const resolvedPaymentId = response.razorpay_payment_id || '';
-                        window.location.href = '/thank-you?order_id=' + encodeURIComponent(resolvedOrderId) + 
-                          '&payment_id=' + encodeURIComponent(resolvedPaymentId) + 
-                          '&value=' + encodeURIComponent(finalOrderTotal) + 
-                          '&mode=' + encodeURIComponent(selectedMode);
-                      },
-                      modal: {
-                        ondismiss: function() {
-                          resetCheckoutBtn();
-                        }
-                      }
-                    });
-                    rzp.open();
-                    return;
-                  }
-                }
-              }
-            } catch(magicErr) {
-              console.warn("⚠️ Razorpay Magic Checkout inline open fallback triggered:", magicErr);
-            }
-
             clearTimeout(recoveryTimer);
             window.location.href = checkoutUrl;
           } else {
-            console.warn("⚠️ Checkout URL missing, redirecting to direct store checkout");
             clearTimeout(recoveryTimer);
             window.location.href = `https://${DOMAIN}/cart`;
           }
@@ -838,15 +849,12 @@ try {
           window.location.href = `https://${DOMAIN}/cart`;
         }
       } else {
-        // Fallback for custom bundle or trial items
-        setTimeout(() => {
-          clearTimeout(recoveryTimer);
-          window.location.href = '/thank-you';
-        }, 600);
+        clearTimeout(recoveryTimer);
+        window.location.href = `https://${DOMAIN}/cart`;
       }
     }
 
-    // 🌟 Silicon Valley 1-Click Fast Checkout: Bypasses cart drawer friction for mobile & high-intent buyers
+        // 🌟 Silicon Valley 1-Click Fast Checkout: Bypasses cart drawer friction for mobile & high-intent buyers
     window.directCheckoutItem = async function(product) {
       if (!product || !product.id) return;
       if (product.paymentMode) {

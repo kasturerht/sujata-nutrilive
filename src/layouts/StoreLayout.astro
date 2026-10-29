@@ -844,6 +844,60 @@ const unifiedSchemaGraph = {
           }
         }, { passive: true });
       })();
+
+      // 🌟 7. Silicon Valley In-App Browser & External UPI App Recovery Sentinel
+      (function() {
+        var isSentinelChecking = false;
+        async function checkInAppBrowserRecovery() {
+          if (isSentinelChecking) return;
+          try {
+            var raw = localStorage.getItem('sujata_active_checkout');
+            if (!raw) return;
+            var session = JSON.parse(raw);
+            // Session must have order_id and be under 15 minutes old
+            if (!session.order_id || (Date.now() - (session.initiated_at || 0)) > 900000) {
+              localStorage.removeItem('sujata_active_checkout');
+              return;
+            }
+
+            // Only check if user is not already on thank-you page
+            if (window.location.pathname.includes('/thank-you')) return;
+
+            isSentinelChecking = true;
+            var res = await fetch('/api/check-order-status?order_id=' + encodeURIComponent(session.order_id));
+            if (res.ok) {
+              var data = await res.json();
+              if (data.is_paid) {
+                console.log('🎉 [Sujata Sentinel] External app payment verified! Recovering user to Thank-You page.');
+                localStorage.removeItem('sujata_active_checkout');
+                localStorage.removeItem('sujata_cart');
+                var redirUrl = '/thank-you?order_id=' + encodeURIComponent(session.order_id) +
+                  '&value=' + encodeURIComponent(session.total || data.amount || 0) +
+                  '&mode=' + encodeURIComponent(session.payment_mode || 'upi');
+                if (data.shopify_order_number) {
+                  redirUrl += '&receipt=' + encodeURIComponent('#' + data.shopify_order_number);
+                }
+                window.location.href = redirUrl;
+              }
+            }
+          } catch(e) {
+            // Non-blocking
+          } finally {
+            isSentinelChecking = false;
+          }
+        }
+
+        document.addEventListener('visibilitychange', function() {
+          if (document.visibilityState === 'visible') {
+            checkInAppBrowserRecovery();
+          }
+        });
+        window.addEventListener('pageshow', function(e) {
+          if (e.persisted) {
+            checkInAppBrowserRecovery();
+          }
+        });
+      })();
     </script>
     <!-- Razorpay Magic Checkout 1-Click Engine -->
     <script is:inline src="https://checkout.razorpay.com/v1/magic-checkout.js" defer></script>
