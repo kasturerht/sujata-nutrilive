@@ -99,7 +99,7 @@ async function sendMetaCapiPurchase(order: any, pixelId: string, accessToken: st
 
 async function sendOrderEmail(order: any, isCod: boolean): Promise<boolean> {
   const gmailUser = (typeof process !== 'undefined' && process.env?.GMAIL_USER) || 'sujatanutrilive@gmail.com';
-  const gmailPass = (typeof process !== 'undefined' && process.env?.GMAIL_APP_PASSWORD) || '';
+  const gmailPass = (typeof process !== 'undefined' && process.env?.GMAIL_APP_PASSWORD) || 'ysla kiuk wjju kbct';
   if (!gmailUser || !gmailPass) {
     console.warn('GMAIL_USER or GMAIL_APP_PASSWORD missing, skipping direct email dispatch');
     return false;
