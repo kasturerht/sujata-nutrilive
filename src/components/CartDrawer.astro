@@ -212,6 +212,7 @@ try {
 
     // Open & Close Drawer
     window.openSujataCart = function() {
+      if (typeof window.ensureRazorpayLoaded === 'function') window.ensureRazorpayLoaded();
       const drawer = document.getElementById('cart-drawer');
       const overlay = document.getElementById('cart-overlay');
       if (drawer && overlay) {
@@ -680,6 +681,10 @@ try {
 
       // 🚀 FAST PATH: Direct 1-Click Razorpay Magic Checkout (Sub-Second Latency)
       try {
+        if (typeof window.ensureRazorpayLoaded === 'function' && typeof window.Razorpay !== 'function') {
+          await window.ensureRazorpayLoaded();
+        }
+
         if (typeof window.Razorpay === 'function') {
           const attrRecord = {};
           cartAttributes.forEach(a => { attrRecord[a.key] = a.value; });

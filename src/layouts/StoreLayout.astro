@@ -900,7 +900,74 @@ const unifiedSchemaGraph = {
       })();
     </script>
     <!-- Razorpay Magic Checkout 1-Click Engine -->
-    <script is:inline src="https://checkout.razorpay.com/v1/magic-checkout.js" defer></script>
+    <!-- ⚡ Silicon Valley JIT Razorpay Magic Checkout Engine (Zero Bloat on Initial Page Load) -->
+    <script is:inline>
+      (function() {
+        var rzpLoading = false;
+        var rzpQueue = [];
+
+        window.ensureRazorpayLoaded = function(callback) {
+          if (typeof window.Razorpay === 'function') {
+            if (typeof callback === 'function') callback();
+            return Promise.resolve();
+          }
+
+          return new Promise(function(resolve) {
+            var cb = function() {
+              if (typeof callback === 'function') {
+                try { callback(); } catch(e) { console.error(e); }
+              }
+              resolve();
+            };
+
+            if (rzpLoading) {
+              rzpQueue.push(cb);
+              return;
+            }
+
+            rzpLoading = true;
+            rzpQueue.push(cb);
+
+            var script = document.createElement('script');
+            script.src = 'https://checkout.razorpay.com/v1/magic-checkout.js';
+            script.async = true;
+            script.onload = function() {
+              rzpLoading = false;
+              while (rzpQueue.length > 0) {
+                var qCb = rzpQueue.shift();
+                if (typeof qCb === 'function') qCb();
+              }
+            };
+            script.onerror = function() {
+              rzpLoading = false;
+              console.warn('⚠️ Razorpay script load failed, Storefront fallback will handle checkout.');
+              while (rzpQueue.length > 0) {
+                var qCb = rzpQueue.shift();
+                if (typeof qCb === 'function') qCb();
+              }
+            };
+            document.head.appendChild(script);
+          });
+        };
+
+        // 🧠 Predictive Preload Triggers (Zero Delay When Needed)
+        // Trigger 1: Idle time preload (after 4.0s, when critical FCP/LCP page load is 100% complete)
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(function() {
+            setTimeout(function() { window.ensureRazorpayLoaded(); }, 4000);
+          }, { timeout: 7000 });
+        } else {
+          setTimeout(function() { window.ensureRazorpayLoaded(); }, 4500);
+        }
+
+        // Trigger 2: Predictive interaction on any purchase touch / hover
+        document.addEventListener('pointerdown', function(e) {
+          if (e.target.closest('#buy-now-btn, #sticky-buynow-btn, #atc-btn, #sticky-atc-btn, .add-to-cart-btn, #checkout-button, #cart-drawer-trigger')) {
+            window.ensureRazorpayLoaded();
+          }
+        }, { passive: true, once: true });
+      })();
+    </script>
   </head>
   <body class="bg-[#FAF9F6] text-[#111827] antialiased selection:bg-[#166534]/20 selection:text-[#166534] flex flex-col min-h-screen min-h-[100dvh] relative overflow-x-hidden font-sans">
     <!-- Google Tag Manager (noscript) -->
