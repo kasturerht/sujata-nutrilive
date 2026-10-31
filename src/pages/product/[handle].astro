@@ -2801,7 +2801,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
   <!-- 🌟 Mobile Sticky Bottom Dual "Buy Now & Cart" Bar (High Conversion & Safe Area Fitted) -->
   <div 
     id="mobile-sticky-bottom-bar" 
-    class="fixed bottom-0 left-0 right-0 z-[140] bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-3.5 py-2.5 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform translate-y-full opacity-0 pointer-events-none md:hidden flex items-center justify-between gap-2.5"
+    class="fixed bottom-0 left-0 right-0 z-[140] bg-[#022c22]/95 backdrop-blur-xl border-t border-emerald-500/20 px-3.5 py-2.5 pb-safe shadow-[0_-10px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu will-change-transform translate-y-full opacity-0 pointer-events-none md:hidden flex items-center justify-between gap-2.5"
     aria-label="Quick Purchase Bar"
   >
     <!-- Left: Product Snapshot -->
@@ -3840,34 +3840,31 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
                 hideStickyBar();
                 return;
               }
-              // If main in-page buy buttons are visible in viewport -> HIDE sticky bar to eliminate double CTA collision
+              // 🌟 Dual-Mode Smart Ghost Sentinel (Silicon Valley Grade CRO):
+              // 1. When in-page main buy buttons are in viewport -> HIDE sticky bar to eliminate double CTA collision (0% Clutter!)
+              // 2. When in-page buy buttons are NOT in viewport (either top of page or scrolled past into reviews/FAQs) -> SHOW sticky bar!
               if (entry.isIntersecting) {
                 hideStickyBar();
               } else {
-                // Only show if user has scrolled PAST the buy buttons (down into content)
-                const bounding = mainBuyWrapper.getBoundingClientRect();
-                if (bounding.top < 0) {
-                  showStickyBar();
-                } else {
-                  hideStickyBar();
-                }
+                showStickyBar();
               }
             });
           }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
+            threshold: 0.05,
+            rootMargin: '0px 0px -20px 0px'
           });
 
           buyObserver.observe(mainBuyWrapper);
         } else {
-          // Resilient fallback for older browsers
+          // Resilient 60fps fallback for older browsers
           window.addEventListener('scroll', () => {
             if (window.innerWidth >= 768) { hideStickyBar(); return; }
             const rect = mainBuyWrapper.getBoundingClientRect();
-            if (rect.bottom < 0) {
-              showStickyBar();
-            } else {
+            const inViewport = (rect.top < window.innerHeight && rect.bottom > 0);
+            if (inViewport) {
               hideStickyBar();
+            } else {
+              showStickyBar();
             }
           }, { passive: true });
         }
