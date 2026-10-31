@@ -1891,19 +1891,13 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
             
             {/* Header Block */}
             <div class="border-b border-gray-50 pb-4 mb-4 sm:pb-6 sm:mb-6">
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <div class="flex items-center gap-1.5 text-amber-500 whitespace-nowrap">
+              {hasVerifiedReviews && (
+                <div class="flex items-center gap-2 mb-2.5">
                   <div class="jdgm-widget jdgm-preview-badge" data-id={rawNumericProductId}>
-                    {hasVerifiedReviews ? (
-                      <Fragment set:html={judgeMeBadgeHtml.replace("style='display:none'", "style='display:inline-flex; align-items:center; gap:6px;'")} />
-                    ) : null}
+                    <Fragment set:html={judgeMeBadgeHtml.replace("style='display:none'", "style='display:inline-flex; align-items:center; gap:6px;'")} />
                   </div>
                 </div>
-                <div class="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/60 whitespace-nowrap shrink-0">
-                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                  <span class="font-bold text-[11px] uppercase tracking-wider" id="stock-status">High Demand: Only 14 Left</span>
-                </div>
-              </div>
+              )}
 
               {/* 🌟 Dynamic Luxury Ad-Hook Pill (Apothecary Luxury Aesthetic) */}
               <div id="dynamic-hook-pill-container" class="hidden mb-2.5 animate-[fadeIn_0.3s_ease-out]">
