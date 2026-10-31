@@ -1759,6 +1759,51 @@ const productVideoSchema = videoData ? {
     }
   }
 } : null;
+function getVariantDetails(title: string, numericPrice: number, productTitleStr: string) {
+  const monthMatch = (title || '').match(/(\d+)\s*[- ]?Months?/i);
+  let daysSupply = 0;
+  let shortLabel = title || '';
+  let perkText = '';
+
+  if (monthMatch) {
+    const months = parseInt(monthMatch[1]);
+    daysSupply = months * 30;
+    shortLabel = `${months} ${months === 1 ? 'Month' : 'Months'}`;
+    if (/free soaps?/i.test(title)) {
+      perkText = '🎁 Includes 2 Free Handcrafted Luxury Soaps';
+    } else if (/free chikki/i.test(title)) {
+      perkText = '🔥 Includes Free Immunity Chikki + Maximum Savings';
+    } else if (months === 1) {
+      perkText = '🌿 30-Day Pure Starter Protocol';
+    } else {
+      perkText = `⚡ Intensive ${daysSupply}-Day Vitality Routine`;
+    }
+  } else {
+    const countMatch = (title || '').match(/(\d+)\s*(Tablets?|Capsules?|Pouch|Bar|ml|g)?/i);
+    const count = countMatch ? parseInt(countMatch[1]) : 0;
+    const isTabletOrCap = /tablet|capsule/i.test(title) || /tablet|capsule/i.test(productTitleStr);
+    const dailyServing = isTabletOrCap ? 2 : 1;
+    daysSupply = (count > 0 && isTabletOrCap) ? Math.round(count / dailyServing) : 0;
+    
+    if (count > 0) {
+      const unit = isTabletOrCap ? (countMatch?.[2] || 'Caps') : (countMatch?.[2] || 'Units');
+      shortLabel = `${count} ${unit}`;
+    } else {
+      shortLabel = (title || '').split('(')[0].trim();
+    }
+
+    if (daysSupply > 0) {
+      perkText = `⚡ Clinical-Grade ${daysSupply}-Day Supply (${count} Count)`;
+    } else {
+      perkText = '🌿 100% Pure Cryo-Nutraceutical Formulation';
+    }
+  }
+
+  const perDayCost = (daysSupply > 0 && numericPrice > 0) ? Math.round(numericPrice / daysSupply) : null;
+  const isBestValue = /120|180|3-month|mega/i.test(title);
+
+  return { shortLabel, perkText, perDayCost, daysSupply, isBestValue };
+}
 ---
 
 <StoreLayout 
@@ -1901,59 +1946,64 @@ const productVideoSchema = videoData ? {
             </div>
 
             {variants.length > 1 && (
-              <div class="mb-5 sm:mb-6 border-t border-gray-50 pt-4 sm:pt-5">
-                <span class="text-xs font-bold tracking-[0.25em] uppercase text-gray-400 mb-2.5 sm:mb-3 block">Select Size / Duration</span>
-                <div class="flex flex-col sm:flex-row gap-2 sm:flex-wrap" id="variant-selector">
+              <div class="mb-3.5 sm:mb-5 border-t border-gray-50 pt-3 sm:pt-4">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-[10px] font-bold tracking-[0.18em] uppercase text-gray-400">Select Protocol / Duration</span>
+                  <span class="text-[8.5px] font-bold text-emerald-800 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/50">Verified Supply</span>
+                </div>
+                
+                {/* 🌟 Tier 1: Apple-Style 3-Segmented Pill Selector (Zero Text Breaking) */}
+                <div class={`grid gap-1 p-1 bg-gray-100/90 rounded-2xl border border-gray-200/80 ${variants.length === 2 ? 'grid-cols-2' : (variants.length >= 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3')}`} id="variant-selector">
                   {variants.map((v: any, i: number) => {
                     const vPrice = v.price?.amount || "0";
                     const vCompare = v.compareAtPrice?.amount || "";
                     const numericPrice = parseFloat(vPrice) || 0;
-                    
-                    // 🌟 Accurately resolve Month-based protocols vs Capsule counts
-                    const monthMatch = (v.title || '').match(/(\d+)\s*[- ]?Months?/i);
-                    let daysSupply = 0;
-                    if (monthMatch) {
-                      daysSupply = parseInt(monthMatch[1]) * 30;
-                    } else {
-                      const countMatch = (v.title || '').match(/(\d+)\s*(Tablets?|Capsules?|Pouch|Bar|ml|g)?/i);
-                      const count = countMatch ? parseInt(countMatch[1]) : 0;
-                      const isTabletOrCap = /tablet|capsule/i.test(v.title || '') || /tablet|capsule/i.test(productTitle || '');
-                      const dailyServing = isTabletOrCap ? 2 : 1;
-                      daysSupply = (count > 0 && isTabletOrCap) ? Math.round(count / dailyServing) : 0;
-                    }
-                    const perDayCost = (daysSupply > 0 && numericPrice > 0) ? Math.round(numericPrice / daysSupply) : null;
-                    const isBestValue = /120|180|3-month|mega/i.test(v.title || '');
+                    const { shortLabel, perkText, perDayCost, daysSupply, isBestValue } = getVariantDetails(v.title || '', numericPrice, product?.title || '');
 
                     return (
                       <button 
-                        class={`variant-btn relative px-3 sm:px-5 py-2 sm:py-3 min-h-[48px] sm:min-h-[50px] rounded-xl border-2 text-left transition-all duration-300 touch-manipulation flex items-center justify-between gap-2 ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                        type="button"
+                        class={`variant-btn relative py-2 px-1.5 sm:px-3 rounded-xl text-center transition-all duration-200 touch-manipulation cursor-pointer flex flex-col items-center justify-center min-h-[42px] border-2 ${i === 0 ? 'border-[#111827] text-[#111827] bg-white shadow-xs font-black selected-variant' : 'border-transparent text-gray-600 hover:text-[#111827] font-bold'}`}
                         data-variant-id={v.id}
                         data-base-price={vPrice}
                         data-base-compare={vCompare}
                         data-price={vPrice}
                         data-compare-price={vCompare}
                         data-title={v.title}
+                        data-short-title={shortLabel}
+                        data-perk={perkText}
                         data-per-day={perDayCost || ''}
                         data-days-supply={daysSupply || ''}
                         data-is-best-value={isBestValue ? 'true' : 'false'}
                       >
                         {isBestValue && (
-                          <span class="absolute -top-2.5 right-3 text-[8px] font-black bg-emerald-700 text-white px-2 py-0.5 rounded-full uppercase tracking-wider shadow-xs border border-white">Best Value</span>
+                          <span class="absolute -top-2.5 right-1 sm:right-2 text-[7px] sm:text-[7.5px] font-black bg-emerald-700 text-white px-1.5 py-0.2 rounded-full uppercase tracking-wider shadow-xs border border-white">Best</span>
                         )}
-                        <div class="flex flex-col min-w-0 pr-1">
-                          <span class="text-xs font-bold text-[#111827] leading-tight">{v.title}</span>
-                        </div>
-                        {perDayCost && (
-                          <div class="text-right shrink-0">
-                            <span class="text-[10px] sm:text-[11px] font-bold text-emerald-700 block whitespace-nowrap">
-                              ₹{perDayCost}/day • {daysSupply}-Day Supply
-                            </span>
-                          </div>
-                        )}
+                        <span class="text-[11px] sm:text-xs tracking-tight leading-tight block truncate w-full">{shortLabel}</span>
                       </button>
                     );
                   })}
                 </div>
+
+                {/* 🌟 Tier 2: Dynamic Perk & Savings Banner (High Contrast Reassurance) */}
+                {(() => {
+                  const firstPrice = parseFloat(variants[0]?.price?.amount || "0") || 0;
+                  const firstMeta = getVariantDetails(variants[0]?.title || '', firstPrice, product?.title || '');
+                  return (
+                    <div id="variant-perk-banner" class="mt-1.5 px-3 py-1.5 rounded-xl bg-emerald-50/90 border border-emerald-200/70 flex items-center justify-between text-xs text-emerald-950 font-medium transition-all duration-200">
+                      <div class="flex items-center gap-1.5 min-w-0">
+                        <span id="variant-perk-text" class="text-[10.5px] sm:text-xs font-bold text-emerald-900 truncate">
+                          {firstMeta.perkText}
+                        </span>
+                      </div>
+                      {firstMeta.perDayCost && (
+                        <span id="variant-perk-rate" class="text-[9.5px] sm:text-[10px] font-black text-[#166534] bg-emerald-100/90 px-2 py-0.5 rounded-md shrink-0">
+                          ₹{firstMeta.perDayCost}/day
+                        </span>
+                      )}
+                    </div>
+                  );
+                })()}
               </div>
             )}
 
@@ -3535,12 +3585,12 @@ const productVideoSchema = videoData ? {
           if (!target) return;
 
           variantBtns.forEach(b => {
-            b.classList.remove('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
-            b.classList.add('border-gray-200', 'text-gray-500');
+            b.classList.remove('border-[#111827]', 'text-[#111827]', 'bg-white', 'shadow-xs', 'font-black', 'selected-variant');
+            b.classList.add('border-transparent', 'text-gray-600', 'font-bold');
           });
 
-          target.classList.remove('border-gray-200', 'text-gray-500');
-          target.classList.add('border-[#111827]', 'text-[#111827]', 'bg-gray-50', 'selected-variant');
+          target.classList.remove('border-transparent', 'text-gray-600', 'font-bold');
+          target.classList.add('border-[#111827]', 'text-[#111827]', 'bg-white', 'shadow-xs', 'font-black', 'selected-variant');
 
           const rawBasePrice = parseFloat(target.getAttribute('data-base-price') || target.getAttribute('data-price')) || productState.basePrice;
           const rawBaseCompare = parseFloat(target.getAttribute('data-base-compare') || target.getAttribute('data-compare-price')) || 0;
@@ -3551,6 +3601,21 @@ const productVideoSchema = videoData ? {
           productState.baseCompare = rawBaseCompare;
           productState.variantId = selectedVariantId;
           productState.variantTitle = selectedTitle;
+
+          // Update Dynamic Tier 2 Perk Banner
+          const perkBannerText = document.getElementById('variant-perk-text');
+          const perkBannerRate = document.getElementById('variant-perk-rate');
+          const perkText = target.getAttribute('data-perk');
+          const perDayRate = target.getAttribute('data-per-day');
+          if (perkBannerText && perkText) perkBannerText.innerText = perkText;
+          if (perkBannerRate) {
+            if (perDayRate) {
+              perkBannerRate.innerText = `₹${perDayRate}/day`;
+              perkBannerRate.classList.remove('hidden');
+            } else {
+              perkBannerRate.classList.add('hidden');
+            }
+          }
 
           // 🌟 Re-dispatch ViewContent for Meta Dynamic Retargeting
           try {
