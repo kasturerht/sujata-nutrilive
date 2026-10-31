@@ -1782,14 +1782,15 @@ const productVideoSchema = videoData ? {
     <div class="max-w-[85rem] mx-auto px-3.5 sm:px-6 lg:px-12 relative z-10">
 
       {/* Breadcrumb Navigation */}
-      <nav class="flex items-center justify-between mb-4 md:mb-8">
-        <div class="flex items-center gap-3">
-          <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
-            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7-7 7 7 7"/></svg>
-            <span>Apothecary</span>
+      <nav class="flex items-center justify-between mb-2.5 sm:mb-4 md:mb-8">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="/" class="text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-1.5 sm:py-2 touch-manipulation flex items-center gap-1.5 group">
+            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-x-1 text-[#166534]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12H5m7-7-7 7 7 7"/></svg>
+            <span class="hidden sm:inline">Apothecary</span>
+            <span class="sm:hidden font-extrabold text-[#166534]">Back to Store</span>
           </a>
-          <span class="w-6 h-[1px] bg-gray-300"></span>
-          <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-[#111827]">{product.title}</span>
+          <span class="hidden sm:inline-block w-6 h-[1px] bg-gray-300"></span>
+          <span class="hidden sm:inline-block text-[10px] font-bold tracking-[0.25em] uppercase text-[#111827] truncate max-w-md">{product.title}</span>
         </div>
       </nav>
 
@@ -1797,7 +1798,7 @@ const productVideoSchema = videoData ? {
         
         {/* 🌟 Left Column: Sensory Gallery & Clinical Assurance */}
         <div class="lg:col-span-6 lg:sticky lg:top-28 space-y-4">
-          <div id="premium-3d-track" class="relative w-full aspect-square max-h-[300px] sm:max-h-[360px] md:max-h-none md:aspect-square mx-auto bg-white rounded-2xl md:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.03] flex items-center justify-center cursor-none" style="perspective: 1500px;">
+          <div id="premium-3d-track" class="relative w-full aspect-square max-h-[250px] sm:max-h-[360px] md:max-h-none md:aspect-square mx-auto bg-white rounded-2xl md:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-black/[0.03] flex items-center justify-center cursor-none" style="perspective: 1500px;">
             <div id="ambient-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-emerald-800/10 rounded-full pointer-events-none transition-transform duration-150 ease-out will-change-transform blur-[100px]"></div>
             <div id="image-skeleton" class="absolute inset-0 bg-[#f8faf9] animate-pulse z-10 flex items-center justify-center transition-opacity duration-700">
               <div class="w-8 h-8 border-2 border-[#166534]/20 border-t-[#166534] rounded-full animate-spin"></div>
@@ -1816,7 +1817,7 @@ const productVideoSchema = videoData ? {
           {images.length > 1 && (
             <div class="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
               {images.map((img: any, i: number) => (
-                <button class={`thumb-btn flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border transition-all duration-300 ${i === 0 ? 'border-[#166534] shadow-md opacity-100' : 'border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30'}`} data-src={img.url}>
+                <button class={`thumb-btn flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden border transition-all duration-300 ${i === 0 ? 'border-[#166534] shadow-md opacity-100' : 'border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30'}`} data-src={img.url}>
                   <img src={img.url} alt="Thumbnail" class="w-full h-full object-cover" />
                 </button>
               ))}
@@ -1824,7 +1825,7 @@ const productVideoSchema = videoData ? {
           )}
 
           {/* 🌟 Clinical Quality Seals (Directly anchoring the gallery) */}
-          <div class="grid grid-cols-3 gap-2 sm:gap-2.5 pt-0.5 sm:pt-1">
+          <div class="hidden sm:grid grid-cols-3 gap-2 sm:gap-2.5 pt-0.5 sm:pt-1">
             {[
               { icon: '🌿', title: '100% Plant', sub: 'Pure Vegan' },
               { icon: '🔬', title: 'Lab Tested', sub: 'NABL Certified' },
@@ -1844,18 +1845,13 @@ const productVideoSchema = videoData ? {
           <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.02)] border border-gray-100">
             
             {/* Header Block */}
-            <div class="border-b border-gray-50 pb-6 mb-6">
+            <div class="border-b border-gray-50 pb-4 mb-4 sm:pb-6 sm:mb-6">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div class="flex items-center gap-1.5 text-amber-500 whitespace-nowrap">
                   <div class="jdgm-widget jdgm-preview-badge" data-id={rawNumericProductId}>
                     {hasVerifiedReviews ? (
                       <Fragment set:html={judgeMeBadgeHtml.replace("style='display:none'", "style='display:inline-flex; align-items:center; gap:6px;'")} />
-                    ) : (
-                      <a href="#reviews-section" class="flex items-center gap-1.5 text-amber-500 hover:text-amber-600 transition-all group" title="Be the first to review this formulation">
-                        <span class="text-xs text-amber-400 group-hover:text-amber-500 transition-colors">★★★★★</span>
-                        <span class="text-xs font-semibold text-gray-500 group-hover:text-emerald-700 transition-colors">Be the first to review</span>
-                      </a>
-                    )}
+                    ) : null}
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200/60 whitespace-nowrap shrink-0">
@@ -2099,6 +2095,21 @@ const productVideoSchema = videoData ? {
                   <svg class="w-3.5 h-3.5 text-emerald-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                   FSSAI Approved & 100% Lab Tested
                 </span>
+              </div>
+
+              {/* Mobile Micro Clinical Seals (Anchoring Purchase Decision) */}
+              <div class="sm:hidden grid grid-cols-3 gap-1.5 pt-1">
+                {[
+                  { icon: '🌿', title: '100% Plant', sub: 'Pure Vegan' },
+                  { icon: '🔬', title: 'Lab Tested', sub: 'NABL Certified' },
+                  { icon: '⚡', title: 'Bio-Active', sub: 'Fast Absorption' }
+                ].map(item => (
+                  <div class="text-center p-1.5 rounded-xl bg-gray-50/80 border border-gray-100 shadow-2xs">
+                    <div class="text-sm mb-0.5">{item.icon}</div>
+                    <div class="text-[9px] font-extrabold text-[#111827] uppercase tracking-wider">{item.title}</div>
+                    <div class="text-[8px] text-gray-500 font-medium">{item.sub}</div>
+                  </div>
+                ))}
               </div>
 
               <div class="flex items-center justify-center gap-2 opacity-75 hover:opacity-100 transition-opacity duration-300">
