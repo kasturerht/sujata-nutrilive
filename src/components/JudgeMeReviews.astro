@@ -57,8 +57,6 @@ const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW
 </section>
 
 <!-- Official Judge.me Global Assets & Dynamic Hydration Engine (Decoupled Canonical Edge CDN) -->
-<link rel="stylesheet" href="https://cdnwidget.judge.me/shopify_v2.css" media="all" />
-
 <style is:global>
   /* 🌟 Official Judge.me Star Icon Font Face (Base64 Embedded WOFF Engine) */
   @font-face {
@@ -236,9 +234,47 @@ const publicToken = import.meta.env.PUBLIC_JUDGEME_TOKEN || "1S3X_MR--dEFToT4LdW
   jdgm.PUBLIC_TOKEN = publicToken;
 </script>
 
-<script 
-  src="https://cdnwidget.judge.me/shopify_v2.js" 
-  data-shop-domain={shopifyDomain}
-  onerror="this.onerror=null; this.src='https://cdn.judge.me/shopify_v2.js';"
-  defer
-></script>
+<script is:inline define:vars={{ shopifyDomain }}>
+  (function() {
+    function loadJudgemeAssets() {
+      if (window._judgemeLoaded) return;
+      window._judgemeLoaded = true;
+
+      // 1. Lazy load Judge.me CSS
+      if (!document.querySelector('link[href*="judge.me/shopify_v2.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnwidget.judge.me/shopify_v2.css';
+        link.media = 'all';
+        document.head.appendChild(link);
+      }
+
+      // 2. Lazy load Judge.me JavaScript Engine
+      if (!document.querySelector('script[src*="judge.me/shopify_v2.js"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://cdnwidget.judge.me/shopify_v2.js';
+        script.setAttribute('data-shop-domain', shopifyDomain);
+        script.async = true;
+        script.onerror = function() {
+          this.onerror = null;
+          this.src = 'https://cdn.judge.me/shopify_v2.js';
+        };
+        document.body.appendChild(script);
+      }
+    }
+
+    // 🌟 Viewport Intersection Observer (Triggers 600px before review section)
+    const reviewTarget = document.getElementById('reviews-section') || document.querySelector('.jdgm-widget');
+    if (reviewTarget && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(function(entries, obs) {
+        if (entries[0].isIntersecting) {
+          loadJudgemeAssets();
+          obs.disconnect();
+        }
+      }, { rootMargin: '600px 0px' });
+      observer.observe(reviewTarget);
+    } else {
+      setTimeout(loadJudgemeAssets, 7000);
+    }
+  })();
+</script>
