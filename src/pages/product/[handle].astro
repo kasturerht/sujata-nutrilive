@@ -2818,7 +2818,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         <span id="sticky-variant-title" class="text-[9px] text-emerald-200/90 truncate font-semibold block">{variants[0]?.title && variants[0]?.title !== 'Default Title' ? variants[0]?.title : ''}</span>
         <div class="flex items-center gap-1.5 mt-0.5">
           <span class="text-sm font-black text-emerald-400" id="sticky-display-price">₹{price}</span>
-          <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase" id="sticky-benefit-pill">COD OK</span>
+          <span class="text-[9px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded uppercase" id="sticky-benefit-pill">COD Available</span>
         </div>
       </div>
     </div>
@@ -3531,7 +3531,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           if (buyNowBtnText) {
             buyNowBtnText.innerHTML = `<span class="text-base animate-pulse">⚡</span><span>Pay via UPI — ₹${formatINRClient(upiPrice)} (Save ₹${formatINRClient(upiSave)})</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
           }
-          if (stickyBuyNowText) stickyBuyNowText.innerText = `UPI ₹${formatINRClient(upiPrice)}`;
+          if (stickyBuyNowText) stickyBuyNowText.innerText = "Buy Now";
           if (btnTextElement) btnTextElement.innerText = "Add to Cart (10% OFF)";
           if (stickyBtnText) stickyBtnText.innerText = "Cart";
         } else {
@@ -3543,7 +3543,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           if (buyNowBtnText) {
             buyNowBtnText.innerHTML = `<span>📦</span><span>Order with Cash on Delivery — ₹${formatINRClient(productState.basePrice)}</span><svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
           }
-          if (stickyBuyNowText) stickyBuyNowText.innerText = `COD ₹${formatINRClient(productState.basePrice)}`;
+          if (stickyBuyNowText) stickyBuyNowText.innerText = "Buy Now";
           if (btnTextElement) btnTextElement.innerText = "Add to Cart";
           if (stickyBtnText) stickyBtnText.innerText = "Cart";
         }
@@ -3558,13 +3558,15 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         }
         const stickyBenefitPill = document.getElementById('sticky-benefit-pill');
         if (stickyBenefitPill && !stickyBenefitPill.getAttribute('data-has-custom-hook')) {
-          stickyBenefitPill.innerText = isUpi ? '10% OFF' : 'COD OK';
-          if (isUpi) {
-            stickyBenefitPill.classList.remove('bg-amber-500/20', 'text-amber-300');
-            stickyBenefitPill.classList.add('bg-emerald-500/20', 'text-emerald-300');
-          } else {
+          const isNoCod = document.getElementById('payment-option-tabs')?.getAttribute('data-no-cod') === 'true';
+          if (isNoCod) {
+            stickyBenefitPill.innerText = 'Online Only';
             stickyBenefitPill.classList.remove('bg-emerald-500/20', 'text-emerald-300');
             stickyBenefitPill.classList.add('bg-amber-500/20', 'text-amber-300');
+          } else {
+            stickyBenefitPill.innerText = 'COD Available';
+            stickyBenefitPill.classList.remove('bg-amber-500/20', 'text-amber-300');
+            stickyBenefitPill.classList.add('bg-emerald-500/20', 'text-emerald-300');
           }
         }
       }
