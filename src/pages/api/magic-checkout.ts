@@ -109,12 +109,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     const orderData = await orderRes.json();
 
+    const isUpiDiscount = paymentMode === 'upi' || (/^upi/i.test(couponCode) || couponCode === 'UPI10');
+    const shouldHideCod = hasNoCodItem || isUpiDiscount;
+
     return new Response(JSON.stringify({
       success: true,
       order_id: orderData.order_id,
       shopify_checkout_id: shopifyCheckoutId,
       key_id: RAZORPAY_KEY_ID,
-      hide_cod: hasNoCodItem,
+      hide_cod: shouldHideCod,
       line_items: orderData.line_items || []
     }), {
       status: 200,

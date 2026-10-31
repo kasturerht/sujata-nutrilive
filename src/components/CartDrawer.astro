@@ -747,8 +747,7 @@ try {
                 prefill: {
                   contact: localStorage.getItem('sujata_user_phone') || undefined,
                   email: localStorage.getItem('sujata_user_email') || undefined,
-                  coupon_code: discountCodeToSend || undefined,
-                  ...(selectedMode === 'upi' ? { method: 'upi' } : {})
+                  coupon_code: discountCodeToSend || undefined
                 },
                 handler: function(response) {
                   try { 
@@ -770,8 +769,11 @@ try {
                 }
               };
 
-              // 🛡️ Phase 4: Dynamic No-COD Display Hiding in Razorpay modal
-              if (magicData.hide_cod || anyNoCodItem) {
+              // 🛡️ Silicon Valley Anti-Leak & Clean Checkout Engine
+              // Strictly hide COD when order receives UPI discount or item has no COD
+              const isUpiDiscountActive = selectedMode === 'upi' || (/^upi/i.test(discountCodeToSend || ''));
+              const shouldBlockCod = magicData.hide_cod || anyNoCodItem || isUpiDiscountActive;
+              if (shouldBlockCod) {
                 rzpOptions.config = {
                   display: {
                     hide: [{ method: "cod" }]
