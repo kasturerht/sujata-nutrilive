@@ -1779,7 +1779,7 @@ const productVideoSchema = videoData ? {
   <StoreHeader />
 
   <main class="bg-[#FAF9F6] min-h-screen pt-24 md:pt-40 pb-28 md:pb-12 selection:bg-[#166534] selection:text-white">
-    <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
+    <div class="max-w-[85rem] mx-auto px-3.5 sm:px-6 lg:px-12 relative z-10">
 
       {/* Breadcrumb Navigation */}
       <nav class="flex items-center justify-between mb-4 md:mb-8">
@@ -1841,7 +1841,7 @@ const productVideoSchema = videoData ? {
 
         {/* 🌟 Right Column: Scientific & Commercial Interface (50% Width) */}
         <div class="lg:col-span-6 space-y-6">
-          <div class="bg-white p-6 sm:p-8 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.02)] border border-gray-100">
+          <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.02)] border border-gray-100">
             
             {/* Header Block */}
             <div class="border-b border-gray-50 pb-6 mb-6">
@@ -1930,7 +1930,7 @@ const productVideoSchema = videoData ? {
 
                     return (
                       <button 
-                        class={`variant-btn relative px-3 sm:px-5 py-2 sm:py-3 min-h-[44px] sm:min-h-[50px] rounded-xl border-2 text-left transition-all duration-300 touch-manipulation flex items-center justify-between sm:flex-col sm:justify-center sm:items-start ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
+                        class={`variant-btn relative px-3 sm:px-5 py-2 sm:py-3 min-h-[48px] sm:min-h-[50px] rounded-xl border-2 text-left transition-all duration-300 touch-manipulation flex items-center justify-between gap-2 ${i === 0 ? 'border-[#111827] text-[#111827] bg-gray-50 selected-variant' : 'border-gray-200 text-gray-500 hover:border-[#111827] hover:text-[#111827]'}`}
                         data-variant-id={v.id}
                         data-base-price={vPrice}
                         data-base-compare={vCompare}
@@ -1941,16 +1941,18 @@ const productVideoSchema = videoData ? {
                         data-days-supply={daysSupply || ''}
                         data-is-best-value={isBestValue ? 'true' : 'false'}
                       >
-                        <div class="flex items-center gap-1.5 flex-wrap">
-                          <span class="text-xs font-bold">{v.title}</span>
-                          {isBestValue && (
-                            <span class="text-[9px] font-black bg-emerald-700 text-white px-1.5 py-0.5 rounded-full uppercase tracking-wider">Best Value</span>
-                          )}
+                        {isBestValue && (
+                          <span class="absolute -top-2.5 right-3 text-[8px] font-black bg-emerald-700 text-white px-2 py-0.5 rounded-full uppercase tracking-wider shadow-xs border border-white">Best Value</span>
+                        )}
+                        <div class="flex flex-col min-w-0 pr-1">
+                          <span class="text-xs font-bold text-[#111827] leading-tight">{v.title}</span>
                         </div>
                         {perDayCost && (
-                          <span class="text-[9px] sm:text-[10px] font-semibold text-emerald-700 shrink-0 sm:mt-0.5">
-                            ₹{perDayCost}/day • {daysSupply}-Day Supply
-                          </span>
+                          <div class="text-right shrink-0">
+                            <span class="text-[10px] sm:text-[11px] font-bold text-emerald-700 block whitespace-nowrap">
+                              ₹{perDayCost}/day • {daysSupply}-Day Supply
+                            </span>
+                          </div>
                         )}
                       </button>
                     );
@@ -1965,24 +1967,24 @@ const productVideoSchema = videoData ? {
                 <span class="text-[10px] font-bold tracking-[0.18em] uppercase text-gray-400">Payment Option</span>
                 <span class="text-[9px] text-emerald-800 font-extrabold uppercase tracking-wider bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-1">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  ⚡ 10% Instant Off on UPI
+                  10% Instant Off on UPI
                 </span>
               </div>
-              <div class="grid grid-cols-2 p-1 bg-gray-100/90 rounded-xl border border-gray-200/80 gap-1.5" id="payment-option-tabs" data-no-cod={isNoCodProduct ? "true" : "false"}>
+              <div class="grid grid-cols-2 p-1.5 bg-gray-100/90 rounded-2xl border border-gray-200/80 gap-1.5 sm:gap-2" id="payment-option-tabs" data-no-cod={isNoCodProduct ? "true" : "false"}>
                 {/* ⚡ UPI / Online Button (Default / Recommended) */}
                 <button 
                   type="button" 
                   id="tab-upi"
-                  class="payment-tab-btn py-2 px-2.5 rounded-lg text-xs font-bold transition-all duration-200 text-[#064E3B] bg-white shadow-xs border border-emerald-500 flex items-center justify-between gap-1 cursor-pointer touch-manipulation group relative"
+                  class="payment-tab-btn p-2 sm:p-2.5 rounded-xl text-xs font-bold transition-all duration-200 text-[#064E3B] bg-white shadow-xs border-2 border-emerald-500 flex flex-col justify-between gap-1 cursor-pointer touch-manipulation group relative text-left"
                   data-value="upi"
                 >
-                  <div class="flex items-center gap-1 truncate">
-                    <span class="text-[11px] text-emerald-900 uppercase tracking-tight font-extrabold">⚡ UPI</span>
-                    <span class="text-[8px] bg-emerald-600 text-white font-black px-1.5 py-0.2 rounded-full uppercase shrink-0">10% OFF</span>
+                  <div class="flex items-center justify-between w-full gap-1">
+                    <span class="text-[11px] sm:text-xs text-emerald-950 uppercase tracking-tight font-black flex items-center gap-1">⚡ UPI</span>
+                    <span class="text-[8px] sm:text-[9px] bg-emerald-600 text-white font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider shrink-0 shadow-2xs">10% OFF</span>
                   </div>
-                  <div class="flex items-baseline gap-1 shrink-0">
-                    <span class="text-xs font-black text-emerald-700" id="upi-price-label">₹{formatINR(Math.round(initialPrice * 0.9))}</span>
-                    <span class="text-[9px] text-gray-400 line-through" id="upi-old-price">₹{formatINR(initialPrice)}</span>
+                  <div class="flex items-baseline gap-1.5 mt-0.5">
+                    <span class="text-xs sm:text-sm font-black text-emerald-700" id="upi-price-label">₹{formatINR(Math.round(initialPrice * 0.9))}</span>
+                    <span class="text-[9px] sm:text-[10px] text-gray-400 line-through font-medium" id="upi-old-price">₹{formatINR(initialPrice)}</span>
                   </div>
                   <span class="hidden" id="upi-save-label">Save ₹{formatINR(initialPrice - Math.round(initialPrice * 0.9))}</span>
                 </button>
@@ -1991,15 +1993,15 @@ const productVideoSchema = videoData ? {
                 <button 
                   type="button" 
                   id="tab-cod"
-                  class="payment-tab-btn py-2 px-2.5 rounded-lg text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] border border-transparent flex items-center justify-between gap-1 cursor-pointer touch-manipulation group"
+                  class="payment-tab-btn p-2 sm:p-2.5 rounded-xl text-xs font-bold transition-all duration-200 text-gray-600 hover:text-[#111827] border-2 border-transparent flex flex-col justify-between gap-1 cursor-pointer touch-manipulation group text-left"
                   data-value="cod"
                 >
-                  <div class="flex items-center gap-1 truncate">
-                    <span class="text-[11px] text-gray-700 uppercase tracking-tight font-semibold">📦 Pay on Delivery</span>
+                  <div class="flex items-center justify-between w-full gap-1">
+                    <span class="text-[11px] sm:text-xs text-gray-700 uppercase tracking-tight font-bold flex items-center gap-1">📦 Cash on Delivery</span>
                   </div>
-                  <div class="flex flex-col items-end shrink-0">
-                    <span class="text-xs font-black text-[#111827]" id="cod-price-label">₹{formatINR(initialPrice)}</span>
-                    <span class="hidden" id="cod-subtext-label">Pay at Door</span>
+                  <div class="flex items-baseline gap-1.5 mt-0.5">
+                    <span class="text-xs sm:text-sm font-black text-[#111827]" id="cod-price-label">₹{formatINR(initialPrice)}</span>
+                    <span class="text-[9px] sm:text-[10px] text-gray-400 font-medium">Standard</span>
                   </div>
                 </button>
               </div>
@@ -2051,13 +2053,13 @@ const productVideoSchema = videoData ? {
                 data-image={primaryImage?.url || '/spirulina-bottle.png'}
                 data-subtitle="Standard Single Shipment"
                 data-purchase-type="onetime"
-                class="w-full h-14 bg-gradient-to-r from-emerald-600 via-emerald-700 to-[#166534] hover:from-emerald-500 hover:to-emerald-600 text-white rounded-xl font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-[0_10px_25px_rgba(22,101,52,0.3)] hover:shadow-[0_15px_35px_rgba(22,101,52,0.4)] active:scale-[0.99] transition-all cursor-pointer relative overflow-hidden group touch-manipulation"
+                class="w-full h-14 bg-gradient-to-r from-emerald-600 via-emerald-700 to-[#166534] hover:from-emerald-500 hover:to-emerald-600 text-white rounded-xl font-black text-xs sm:text-sm uppercase tracking-wide flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(22,101,52,0.3)] hover:shadow-[0_15px_35px_rgba(22,101,52,0.4)] active:scale-[0.99] transition-all cursor-pointer relative overflow-hidden group touch-manipulation"
               >
                 <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 <span id="buy-now-btn-text" class="relative z-10 flex items-center gap-2">
                   <span class="text-base animate-pulse">⚡</span>
                   <span>Buy Now — Cash on Delivery Available</span>
-                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </span>
                 <svg id="buy-now-spinner" class="absolute z-10 w-5 h-5 text-white animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
               </button>
@@ -3379,7 +3381,7 @@ const productVideoSchema = videoData ? {
 
         if (perDay && perDayText && daysSupply && parseFloat(daysSupply) > 0) {
           const effectivePrice = isUpi ? upiPrice : productState.basePrice;
-          const effectivePerDay = (effectivePrice / parseFloat(daysSupply)).toFixed(2);
+          const effectivePerDay = Math.round(effectivePrice / parseFloat(daysSupply));
           perDayText.innerText = `Daily Routine: Just ₹${effectivePerDay} / day (${daysSupply}-Day Supply)`;
           
           if (perDaySavings) {
@@ -3466,9 +3468,9 @@ const productVideoSchema = videoData ? {
 
         // 5. Update Tab Active Visual Styling
         if (isUpi) {
-          tabUpi?.classList.add('bg-white', 'text-[#064E3B]', 'shadow-sm', 'border-emerald-500');
+          tabUpi?.classList.add('bg-white', 'text-[#064E3B]', 'shadow-xs', 'border-emerald-500');
           tabUpi?.classList.remove('text-gray-600', 'border-transparent');
-          tabCod?.classList.remove('bg-white', 'text-[#111827]', 'shadow-sm', 'border-gray-800');
+          tabCod?.classList.remove('bg-white', 'text-[#111827]', 'shadow-xs', 'border-gray-800');
           tabCod?.classList.add('text-gray-600', 'border-transparent');
 
           if (buyNowBtnText) {
@@ -3478,9 +3480,9 @@ const productVideoSchema = videoData ? {
           if (btnTextElement) btnTextElement.innerText = "Add to Cart (10% OFF)";
           if (stickyBtnText) stickyBtnText.innerText = "Cart";
         } else {
-          tabCod?.classList.add('bg-white', 'text-[#111827]', 'shadow-sm', 'border-gray-800');
+          tabCod?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-gray-800');
           tabCod?.classList.remove('text-gray-600', 'border-transparent');
-          tabUpi?.classList.remove('bg-white', 'text-[#064E3B]', 'shadow-sm', 'border-emerald-500');
+          tabUpi?.classList.remove('bg-white', 'text-[#064E3B]', 'shadow-xs', 'border-emerald-500');
           tabUpi?.classList.add('text-gray-600', 'border-transparent');
 
           if (buyNowBtnText) {
