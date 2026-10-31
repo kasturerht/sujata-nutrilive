@@ -3838,31 +3838,7 @@ const productVideoSchema = videoData ? {
             updateCheckboxState(true);
             localStorage.setItem('sujata_whatsapp_optin', 'true');
             
-            // Trigger success feedback on global Live Toast
-            const toast = document.getElementById('live-toast');
-            const toastName = document.getElementById('toast-name');
-            if (toast && toastName) {
-              const oldName = toastName.innerText;
-              const toastTitle = document.getElementById('toast-title');
-              const toastAction = document.getElementById('toast-action');
-              
-              const oldTitleText = toastTitle ? toastTitle.innerText : 'Live Order';
-              const oldActionText = toastAction ? toastAction.innerText : '';
-              
-              if (toastTitle) toastTitle.innerText = "WhatsApp Enabled";
-              toastName.innerText = "Live tracking linked!";
-              if (toastAction) toastAction.innerText = "Updates will be sent on checkout";
-              
-              toast.classList.remove('translate-y-[150%]', 'opacity-0');
-              setTimeout(() => {
-                toast.classList.add('translate-y-[150%]', 'opacity-0');
-                setTimeout(() => {
-                  if (toastTitle) toastTitle.innerText = oldTitleText;
-                  toastName.innerText = oldName;
-                  if (toastAction) toastAction.innerText = oldActionText;
-                }, 800);
-              }, 2500);
-            }
+            
           }
         });
       }
