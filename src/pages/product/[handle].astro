@@ -199,7 +199,7 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
     { url: '/products/sujata-combo-synergy-infographic-hindi.jpg', altText: 'Ayurvedic Synergy Infographic' }
   ],
   'sujata-spirulina-sea-buckthorn-combo-pack': [
-    { url: '/products/sujata-combo-spirulina-sea-buckthorn-transparent.png', altText: 'Sujata Spirulina Capsules + Sea Buckthorn Capsules Vitality Protocol' },
+    { url: '/products/sujata-combo-spirulina-sea-buckthorn-transparent.webp', altText: 'Sujata Spirulina Capsules + Sea Buckthorn Capsules Vitality Protocol' },
     { url: '/products/sujata-spirulina-capsules-bottle.jpg', altText: 'Sujata Spirulina 100% Veg Capsules' },
     { url: '/products/sujata-sea-buckthorn-capsules-bottle.jpg', altText: 'Sujata Sea Buckthorn Capsules' },
     { url: '/products/sujata-combo-synergy-infographic-hindi.jpg', altText: 'Dual Cellular Synergy Infographic' }
@@ -512,19 +512,19 @@ const videoTestimonials = [
   {
     customerName: "Dr. Siddhant M.",
     tag: "Expert Opinion",
-    thumbnail: "/siddharth_testimonial_video.png",
+    thumbnail: "/siddharth_testimonial_video.webp",
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hand-taking-capsules-from-a-bottle-41614-large.mp4"
   },
   {
     customerName: "Aditya V.",
     tag: "Energy Boost",
-    thumbnail: "/sujata_goal_energy.png",
+    thumbnail: "/sujata_goal_energy.webp",
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-healthy-green-smoothie-being-poured-into-a-glass-41618-large.mp4"
   },
   {
     customerName: "Priya S.",
     tag: "Better Immunity",
-    thumbnail: "/sujata_goal_immunity.png",
+    thumbnail: "/sujata_goal_immunity.webp",
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-drinking-water-after-workout-40898-large.mp4"
   }
 ];
@@ -2274,7 +2274,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#047857_0%,transparent_70%)] opacity-10 mix-blend-screen pointer-events-none group-hover:opacity-25 transition-opacity duration-500"></div>
                 
                 {/* Poster Image */}
-                <img src={video.thumbnail} alt={`${video.customerName} Testimonial`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[600ms] ease-out" />
+                <img src={video.thumbnail} alt={`${video.customerName} Testimonial`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[600ms] ease-out" loading="lazy" decoding="async" />
                 
                 {/* Dark Gradient Overlay */}
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent z-10 transition-colors duration-500 group-hover:from-black/90"></div>
