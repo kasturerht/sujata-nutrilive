@@ -950,19 +950,10 @@ const unifiedSchemaGraph = {
           });
         };
 
-        // 🧠 Predictive Preload Triggers (Zero Delay When Needed)
-        // Trigger 1: Idle time preload (after 4.0s, when critical FCP/LCP page load is 100% complete)
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(function() {
-            setTimeout(function() { window.ensureRazorpayLoaded(); }, 4000);
-          }, { timeout: 7000 });
-        } else {
-          setTimeout(function() { window.ensureRazorpayLoaded(); }, 4500);
-        }
-
-        // Trigger 2: Predictive interaction on any purchase touch / hover
+        // 🧠 Pure Interaction-Based JIT Engine (Zero Background Download during Browsing)
+        // Only loads when customer explicitly interacts with a purchase action
         document.addEventListener('pointerdown', function(e) {
-          if (e.target.closest('#buy-now-btn, #sticky-buynow-btn, #atc-btn, #sticky-atc-btn, .add-to-cart-btn, #checkout-button, #cart-drawer-trigger')) {
+          if (e.target.closest('#buy-now-btn, #sticky-buynow-btn, #atc-btn, #sticky-atc-btn, .add-to-cart-btn, #checkout-button, #cart-drawer-trigger, .open-cart-trigger')) {
             window.ensureRazorpayLoaded();
           }
         }, { passive: true, once: true });

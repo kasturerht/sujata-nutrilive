@@ -3845,7 +3845,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
               // 2. When in-page buy buttons are NOT in viewport (either top of page or scrolled past into reviews/FAQs) -> SHOW sticky bar!
               if (entry.isIntersecting) {
                 hideStickyBar();
-                if (typeof window.ensureRazorpayLoaded === 'function') window.ensureRazorpayLoaded();
               } else {
                 showStickyBar();
               }
