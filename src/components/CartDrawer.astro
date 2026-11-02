@@ -769,19 +769,17 @@ try {
                 }
               };
 
-              // 🌟 Institutional-Grade Dynamic Intent-Based Sequencing Engine (October/November 2026 Standards)
-              // Preserves customer intent: COD at #1 when COD is selected; UPI at #1 when UPI is selected.
+              // 🌟 Silicon Valley Pure Intent-Isolated Checkout Engine (October/November 2026 Standards)
+              // Eliminates the 3-click friction & suppresses the "Are you sure? Pay Online vs Continue with COD" popup.
               const isUpiDiscountActive = selectedMode === 'upi' || (/^upi/i.test(discountCodeToSend || ''));
               const shouldBlockCod = Boolean(magicData.hide_cod || anyNoCodItem || isUpiDiscountActive);
 
               let displayConfig = {};
 
               if (selectedMode === 'cod' && !shouldBlockCod) {
-                // Scenario 1: Customer explicitly selected COD in Cart Drawer.
-                // 1. Cash on Delivery is placed at the very top (#1 position).
-                // 2. UPI is cleanly offered below as a secondary payment option.
-                // 3. Cards & Netbanking are offered last.
-                // 4. Cluttered default blocks (CRED cashback, EMI banners) are suppressed.
+                // 📦 STRICT COD ISOLATION:
+                // Zero online payment instruments available -> Razorpay CANNOT trigger "Are you sure? Pay Online" popup!
+                // Result: Direct Address -> Single [ Place Order • ₹Total ] button!
                 displayConfig = {
                   blocks: {
                     cod_primary: {
@@ -789,35 +787,25 @@ try {
                       instruments: [
                         { method: "cod" }
                       ]
-                    },
-                    upi_secondary: {
-                      name: "Pay Online via UPI (Fast & Secure)",
-                      instruments: [
-                        { method: "upi" }
-                      ]
-                    },
-                    other_methods: {
-                      name: "Cards & Netbanking",
-                      instruments: [
-                        { method: "card" },
-                        { method: "netbanking" }
-                      ]
                     }
                   },
                   sequence: [
-                    "block.cod_primary",
-                    "block.upi_secondary",
-                    "block.other_methods"
+                    "block.cod_primary"
                   ],
                   preferences: {
                     show_default_blocks: false
-                  }
+                  },
+                  hide: [
+                    { method: "upi" },
+                    { method: "card" },
+                    { method: "netbanking" },
+                    { method: "wallet" },
+                    { method: "emi" }
+                  ]
                 };
+                rzpOptions.prefill.method = "cod";
               } else {
-                // Scenario 2: Customer selected UPI (or cart items restrict COD).
-                // 1. UPI is placed at the very top (#1 position) with 10% instant discount applied.
-                // 2. COD is placed below if eligible, or strictly hidden if UPI discount / no-COD applies.
-                // 3. Cards & Netbanking placed next.
+                // ⚡ STRICT UPI ISOLATION (10% Instant Off Applied):
                 displayConfig = {
                   blocks: {
                     upi_primary: {
@@ -826,14 +814,6 @@ try {
                         { method: "upi" }
                       ]
                     },
-                    ...(!shouldBlockCod ? {
-                      cod_secondary: {
-                        name: "Cash on Delivery (Full Price)",
-                        instruments: [
-                          { method: "cod" }
-                        ]
-                      }
-                    } : {}),
                     other_methods: {
                       name: "Cards & Netbanking",
                       instruments: [
@@ -844,14 +824,16 @@ try {
                   },
                   sequence: [
                     "block.upi_primary",
-                    ...(!shouldBlockCod ? ["block.cod_secondary"] : []),
                     "block.other_methods"
                   ],
                   preferences: {
                     show_default_blocks: false
                   },
-                  ...(shouldBlockCod ? { hide: [{ method: "cod" }] } : {})
+                  hide: [
+                    { method: "cod" }
+                  ]
                 };
+                rzpOptions.prefill.method = "upi";
               }
 
               rzpOptions.config = {
