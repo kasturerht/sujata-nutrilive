@@ -117,7 +117,9 @@ export const POST: APIRoute = async ({ request }) => {
       order_id: orderData.order_id,
       shopify_checkout_id: shopifyCheckoutId,
       key_id: RAZORPAY_KEY_ID,
+      payment_mode: paymentMode,
       hide_cod: shouldHideCod,
+      has_no_cod_item: hasNoCodItem,
       line_items: orderData.line_items || []
     }), {
       status: 200,

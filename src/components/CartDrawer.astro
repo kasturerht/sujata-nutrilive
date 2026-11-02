@@ -769,17 +769,97 @@ try {
                 }
               };
 
-              // 🛡️ Silicon Valley Anti-Leak & Clean Checkout Engine
-              // Strictly hide COD when order receives UPI discount or item has no COD
+              // 🌟 Institutional-Grade Dynamic Intent-Based Sequencing Engine (October/November 2026 Standards)
+              // Preserves customer intent: COD at #1 when COD is selected; UPI at #1 when UPI is selected.
               const isUpiDiscountActive = selectedMode === 'upi' || (/^upi/i.test(discountCodeToSend || ''));
-              const shouldBlockCod = magicData.hide_cod || anyNoCodItem || isUpiDiscountActive;
-              if (shouldBlockCod) {
-                rzpOptions.config = {
-                  display: {
-                    hide: [{ method: "cod" }]
+              const shouldBlockCod = Boolean(magicData.hide_cod || anyNoCodItem || isUpiDiscountActive);
+
+              let displayConfig = {};
+
+              if (selectedMode === 'cod' && !shouldBlockCod) {
+                // Scenario 1: Customer explicitly selected COD in Cart Drawer.
+                // 1. Cash on Delivery is placed at the very top (#1 position).
+                // 2. UPI is cleanly offered below as a secondary payment option.
+                // 3. Cards & Netbanking are offered last.
+                // 4. Cluttered default blocks (CRED cashback, EMI banners) are suppressed.
+                displayConfig = {
+                  blocks: {
+                    cod_primary: {
+                      name: "Cash on Delivery (घरपोच कॅश द्या)",
+                      instruments: [
+                        { method: "cod" }
+                      ]
+                    },
+                    upi_secondary: {
+                      name: "Pay Online via UPI (Fast & Secure)",
+                      instruments: [
+                        { method: "upi" }
+                      ]
+                    },
+                    other_methods: {
+                      name: "Cards & Netbanking",
+                      instruments: [
+                        { method: "card" },
+                        { method: "netbanking" }
+                      ]
+                    }
+                  },
+                  sequence: [
+                    "block.cod_primary",
+                    "block.upi_secondary",
+                    "block.other_methods"
+                  ],
+                  preferences: {
+                    show_default_blocks: false
                   }
                 };
+              } else {
+                // Scenario 2: Customer selected UPI (or cart items restrict COD).
+                // 1. UPI is placed at the very top (#1 position) with 10% instant discount applied.
+                // 2. COD is placed below if eligible, or strictly hidden if UPI discount / no-COD applies.
+                // 3. Cards & Netbanking placed next.
+                displayConfig = {
+                  blocks: {
+                    upi_primary: {
+                      name: isUpiDiscountActive ? "Pay via UPI (⚡ 10% Instant Off Applied)" : "Pay via UPI (Fast & Secure)",
+                      instruments: [
+                        { method: "upi" }
+                      ]
+                    },
+                    ...(!shouldBlockCod ? {
+                      cod_secondary: {
+                        name: "Cash on Delivery (Full Price)",
+                        instruments: [
+                          { method: "cod" }
+                        ]
+                      }
+                    } : {}),
+                    other_methods: {
+                      name: "Cards & Netbanking",
+                      instruments: [
+                        { method: "card" },
+                        { method: "netbanking" }
+                      ]
+                    }
+                  },
+                  sequence: [
+                    "block.upi_primary",
+                    ...(!shouldBlockCod ? ["block.cod_secondary"] : []),
+                    "block.other_methods"
+                  ],
+                  preferences: {
+                    show_default_blocks: false
+                  },
+                  ...(shouldBlockCod ? { hide: [{ method: "cod" }] } : {})
+                };
               }
+
+              rzpOptions.config = {
+                display: displayConfig
+              };
+              rzpOptions.theme = {
+                color: "#166534"
+              };
 
               const rzp = new window.Razorpay(rzpOptions);
               rzp.open();
