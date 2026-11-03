@@ -1,0 +1,5 @@
+---
+const { handle } = Astro.params;
+const targetHandle = handle === 'sujata-daily-super-immunity-combo' ? 'sujata-spirulina-sea-buckthorn-combo-pack' : (handle || '');
+return Astro.rewrite(`/product/${targetHandle}`);
+---

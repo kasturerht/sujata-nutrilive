@@ -15,8 +15,6 @@ export default defineConfig({
   adapter: vercel(),
   redirects: {
     '/sitemap.xml': '/sitemap-index.xml',
-    '/products/sujata-daily-super-immunity-combo': '/product/sujata-spirulina-sea-buckthorn-combo-pack',
-    '/product/sujata-daily-super-immunity-combo': '/product/sujata-spirulina-sea-buckthorn-combo-pack',
   },
   integrations: [
     tailwind(),

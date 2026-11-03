@@ -11,7 +11,8 @@ import { resolveDynamicProductEntity } from '../../lib/product-entity-resolver';
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
-const { handle } = Astro.params;
+const { handle: rawHandle } = Astro.params;
+const handle = rawHandle === 'sujata-daily-super-immunity-combo' ? 'sujata-spirulina-sea-buckthorn-combo-pack' : rawHandle;
 
 // 🌟 Updated Metafield Keys based on your Shopify Admin
 const productQuery = `
