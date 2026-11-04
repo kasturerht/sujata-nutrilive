@@ -39,5 +39,11 @@
         }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/daily-dispatch",
+      "schedule": "30 4 * * *"
+    }
   ]
 }

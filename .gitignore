@@ -44,3 +44,12 @@ content_vault/
 
 # jetbrains setting folder
 .idea/
+
+
+# WhatsApp raw chats, text dumps and logs
+scripts/whatsapp*/
+scripts/*.txt
+scripts/__pycache__/
+reports/
+*.txt
+*.log

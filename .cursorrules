@@ -24,3 +24,13 @@
 
 # 6. VERBOSITY LIMITS
 - Code snippets: Only output the specific lines that changed, or provide unified diffs. Never output hundreds of lines of unchanged code.
+
+# 7. DAILY ORDERS DISPATCH EXCEL SOP (MANDATORY STANDARD)
+- Whenever the user asks for "dispatch excel", "dispatch chi excel", or provides a "Daily orders dispatch" zip:
+  * NEVER create custom layouts, Marathi headers, or non-standard sheets.
+  * ALWAYS use the official India Post Office 4-sheet BNPL template:
+    Sheets: [ 'ArticleDetails', 'PickupAddress', 'AltAddress', 'Information' ]
+  * Template source: `C:\Users\Admin\.gemini\antigravity\brain\71a2db4c-5724-4f2e-94d9-9aa036757079\.user_uploaded\media_1793598932274_d37b67a2.xlsx`
+  * Exactly 48 columns in 'ArticleDetails' (SERIAL NUMBER, PHYSICAL WEIGHT, NROL, LENGTH 15, BREADTH 15, HEIGHT, PRIORITY FLAG TRUE, DELIVERY INSTRUCTION ND, SENDER SUJATA NUTRILIVE, RECEIVER NAME, ADD1, ADD2, CITY, STATE, PINCODE, MOBILE, COD/CODR, VALUE FOR CODR/COD, OTP BASED DELIVERY TRUE, etc.).
+  * File naming convention: `SUJATA_<DD>_<Month>_final.xlsx` (e.g. `SUJATA_02_November_final.xlsx`).
+  * Always output to: `C:\Users\Admin\Downloads\` AND `F:\RK\Sujata Nutrilive\dispatch_excel\`.

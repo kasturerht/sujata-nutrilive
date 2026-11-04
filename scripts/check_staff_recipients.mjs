@@ -1,0 +1,42 @@
+import fs from 'fs';
+
+const env = {};
+fs.readFileSync('.env', 'utf8').split(/\r?\n/).forEach(line => {
+  const m = line.match(/^([^=]+)=(.*)$/);
+  if (m) env[m[1].trim()] = m[2].trim().replace(/^['"]|['"]$/g, '');
+});
+
+async function checkStaffNotificationEmails() {
+  const domain = env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || 'tvczdq-nu.myshopify.com';
+  const oRes = await fetch(`https://${domain}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      client_id: env.SHOPIFY_CLIENT_ID,
+      client_secret: env.SHOPIFY_CLIENT_SECRET,
+      grant_type: 'client_credentials'
+    })
+  });
+  const oData = await oRes.json();
+  const token = oData.access_token;
+
+  // Let's test staff notification recipients endpoints
+  const endpoints = [
+    '/admin/api/2024-04/notification_subscribers.json',
+    '/admin/api/2024-04/order_notification_subscriptions.json',
+    '/admin/api/2024-04/events.json?filter=Order&limit=10'
+  ];
+
+  for (const ep of endpoints) {
+    const res = await fetch(`https://${domain}${ep}`, {
+      headers: { 'X-Shopify-Access-Token': token }
+    });
+    console.log(`Endpoint ${ep}: Status ${res.status}`);
+    if (res.ok) {
+      const data = await res.json();
+      console.log(`Data for ${ep}:`, JSON.stringify(data, null, 2).slice(0, 1000));
+    }
+  }
+}
+
+checkStaffNotificationEmails();
