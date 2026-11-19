@@ -8,20 +8,25 @@ const lab = BRAND_CONFIG.labReport;
 
 // ── Tiering (source of truth: Shopify metafield custom.home_tier = "core") ──
 // Order always follows the manual sort of the 'frontpage' collection.
-// Fallback while the metafield is unset: first Combo, Spirulina, Sea Buckthorn found.
-const CORE_LIMIT = 3; // layout = 1 anchor card + 2 cards
+// Fallback fills any missing slot: Capsules Combo, Tablets Combo, Spirulina, Sea Buckthorn.
+const CORE_LIMIT = 4; // mobile 2×2, desktop 1×4 — row 1 combos, row 2 singles
+const COMBO_TABLETS = 'sujata-spirulina-sea-buckthorn-combo';       // Spirulina Tablets + Sea Buckthorn
+const COMBO_CAPSULES = 'sujata-spirulina-sea-buckthorn-combo-pack'; // Spirulina Veg Caps + Sea Buckthorn
 const nodes: any[] = products.map((e: any) => e?.node).filter(Boolean);
 const textOf = (p: any) => `${p.title || ''} ${p.handle || ''}`.toLowerCase();
+const isCombo = (p: any) => /combo|bundle/.test(textOf(p));
 const isSpirulinaProduct = (p: any) => textOf(p).includes('spirulina') && !/soap|face|cream|shampoo|hair|oil|glow|shine/.test(textOf(p));
 
 let coreProducts: any[] = nodes.filter((p) => (p.homeTier?.value || '').trim().toLowerCase() === 'core').slice(0, CORE_LIMIT);
-if (coreProducts.length === 0) {
+if (coreProducts.length < CORE_LIMIT) {
   const pickers = [
-    (p: any) => /combo|bundle/.test(textOf(p)),
-    (p: any) => isSpirulinaProduct(p) && !/combo|bundle/.test(textOf(p)),
-    (p: any) => textOf(p).includes('sea buckthorn') && !/combo|bundle/.test(textOf(p)),
+    (p: any) => p.handle === COMBO_CAPSULES,
+    (p: any) => p.handle === COMBO_TABLETS,
+    (p: any) => isSpirulinaProduct(p) && !isCombo(p),
+    (p: any) => textOf(p).includes('sea buckthorn') && !isCombo(p),
   ];
   for (const pick of pickers) {
+    if (coreProducts.length >= CORE_LIMIT) break;
     const found = nodes.find((p) => !coreProducts.includes(p) && pick(p));
     if (found) coreProducts.push(found);
   }
@@ -63,8 +68,8 @@ const productLocalImageMap: Record<string, string> = {
   'sujata-bridal-whitening-cream': '/products/sujata-bridal-whitening-cream-jar.jpg',
   'sujata-spirulina-coconut-hair-oil': '/products/sujata-spirulina-hair-oil-bottle.png',
   'sujata-spirushine-shampoo-conditioner': '/products/sujata-spirushine-shampoo-bottle.jpg',
-  'sujata-spirulina-sea-buckthorn-combo': '/products/sujata-combo-spirulina-sea-buckthorn.jpg',
-  'sujata-spirulina-sea-buckthorn-combo-pack': '/products/sujata-combo-spirulina-sea-buckthorn.jpg',
+  'sujata-spirulina-sea-buckthorn-combo': '/products/sujata-combo-spirulina-tablets-sea-buckthorn.jpg',          // white tablets bottle
+  'sujata-spirulina-sea-buckthorn-combo-pack': '/products/sujata-combo-spirulina-sea-buckthorn-transparent.webp', // black capsules bottle
 };
 
 function getImageUrl(product: any) {
@@ -133,7 +138,14 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
   let defaultTag = "Bestseller";
   let defaultBenefit = "🌿 Pure Daily Nutrition";
 
-  if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
+  // Twin-combo disambiguation: short copy (fits the one-line truncated subtitle at ~185px).
+  if (product.handle === COMBO_TABLETS) {
+    defaultTag = "Tablets Combo";
+    defaultBenefit = "Tablets + Sea Buckthorn Duo";
+  } else if (product.handle === COMBO_CAPSULES) {
+    defaultTag = "Capsules Combo";
+    defaultBenefit = "Veg Caps + Sea Buckthorn Duo";
+  } else if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
     defaultTag = "Value Combo";
     defaultBenefit = "⚡ Daily Protein + Omega-7 Routine";
   } else if (t.includes('powder') && t.includes('spirulina')) {
@@ -201,7 +213,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
 }
 ---
 
-<!-- 🛍️ ZONE 2: Core Trio (99% of revenue) + Explore Rail (rest of catalogue). Single SSR render, zero client fetch. -->
+<!-- 🛍️ ZONE 2: Core 4 (99% of revenue) + Explore Rail (rest of catalogue). Single SSR render, zero client fetch. -->
 <section id="product-ecosystem" class="pt-7 sm:pt-12 pb-14 md:py-20 bg-[#FBF9F5] text-[#111827] relative">
   <div id="bundle-offers" class="absolute -top-24 left-0 w-full pointer-events-none"></div>
   <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-12">
@@ -219,18 +231,18 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
     {coreProducts.length === 0 && (
       <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 text-center">
         <p class="text-sm text-gray-600 mb-4">Live prices are loading slowly right now. Choose a product to see today's price:</p>
-        <div class="flex flex-col sm:flex-row gap-2.5 justify-center">
-          <a href="/product/sujata-spirulina-sea-buckthorn-combo-pack" class="bg-[#166534] hover:bg-[#15803d] text-white font-bold text-sm px-5 py-3 rounded-xl">Spirulina + Sea Buckthorn Combo</a>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-xl mx-auto">
+          <a href="/product/sujata-spirulina-sea-buckthorn-combo-pack" class="bg-[#166534] hover:bg-[#15803d] text-white font-bold text-sm px-5 py-3 rounded-xl">Spirulina Capsules + Sea Buckthorn Combo</a>
+          <a href="/product/sujata-spirulina-sea-buckthorn-combo" class="bg-[#166534] hover:bg-[#15803d] text-white font-bold text-sm px-5 py-3 rounded-xl">Spirulina Tablets + Sea Buckthorn Combo</a>
           <a href="/product/sujata-spirulina-capsules" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-800 font-bold text-sm px-5 py-3 rounded-xl">Spirulina Capsules</a>
           <a href="/product/sujata-sea-buckthorn-capsules" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-800 font-bold text-sm px-5 py-3 rounded-xl">Sea Buckthorn Capsules</a>
         </div>
       </div>
     )}
 
-    {/* 2. CORE TRIO — mobile: anchor full-width + 2-col; desktop: 3-col */}
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-4 lg:gap-6" id="shop-products-grid">
+    {/* 2. CORE 4 — mobile/tablet: 2×2 (row 1 combos, row 2 singles); desktop: 1×4 */}
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-5" id="shop-products-grid">
       {coreProducts.map((product: any, index: number) => {
-        const isAnchor = index === 0;
         const category = getProductCategory(product);
         const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.price?.amount || "799";
         const numPrice = parseFloat(priceAmount) || 799;
@@ -246,11 +258,11 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         const initialCompare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : 0;
 
         return (
-          <div class={`product-card-item bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 md:p-5 border border-gray-200/90 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group ${isAnchor ? 'col-span-2 md:col-span-1' : ''}`} data-category={category} data-tier="core">
+          <div class={`product-card-item bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 md:p-5 border border-gray-200/90 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={category} data-tier="core">
 
             <div>
               {/* Product Visual Container with Floating Badges */}
-              <a href={`/product/${product.handle}`} class={`block relative bg-[#FAF9F6] rounded-xl sm:rounded-2xl p-2 sm:p-3 mb-2 sm:mb-3 overflow-hidden group-hover:bg-emerald-50/30 transition-colors flex items-center justify-center ${isAnchor ? 'aspect-[16/10] md:aspect-square' : 'aspect-square'}`}>
+              <a href={`/product/${product.handle}`} class={`block relative bg-[#FAF9F6] rounded-xl sm:rounded-2xl p-2 sm:p-3 mb-2 sm:mb-3 overflow-hidden group-hover:bg-emerald-50/30 transition-colors flex items-center justify-center aspect-square`}>
                 {/* Top-Left Trust Badge */}
                 <span class="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 z-10 text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider bg-[#064E3B] text-white px-2 py-0.5 rounded-full shadow-sm">
                   {meta.tag}

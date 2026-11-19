@@ -27,7 +27,7 @@ const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczd
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018"; 
 
 // GraphQL Query for Products Catalog (Fetches exact sequence from Shopify 'Home page' Collection)
-// One request, edge-cached. `homeTier` (custom.home_tier = "core") decides the Core Trio;
+// One request, edge-cached. `homeTier` (custom.home_tier = "core") decides the Core 4;
 // everything else renders in the Explore rail. `card`/`thumb` are Shopify-CDN WebP transforms.
 const productFields = `
   fragment HomeProduct on Product {
