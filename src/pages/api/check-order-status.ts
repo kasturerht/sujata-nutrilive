@@ -44,8 +44,15 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     const domain = process.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || 'tvczdq-nu.myshopify.com';
-    const clientId = process.env.SHOPIFY_CLIENT_ID || '450e63998a0ecdfd5417ed474356188b';
-    const clientSecret = process.env.SHOPIFY_CLIENT_SECRET || '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';
+    const clientId = process.env.SHOPIFY_CLIENT_ID || '';
+    const clientSecret = process.env.SHOPIFY_CLIENT_SECRET || '';
+
+    if (!clientId || !clientSecret) {
+      return new Response(JSON.stringify({ success: false, error: 'Shopify Admin API credentials not configured' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
     const token = await getShopifyAdminToken(domain, clientId, clientSecret);
     if (!token) {
