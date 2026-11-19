@@ -1,61 +1,38 @@
 ---
 // src/components/StoreTrustBadges.astro
+// Compact trust strip. Every badge is a checkable fact (licence number, downloadable report).
+import { BRAND_CONFIG } from '../config/brand';
+const lab = BRAND_CONFIG.labReport;
+
+const badges = [
+  { icon: '🇮🇳', title: 'FSSAI Registered', detail: `Lic. ${BRAND_CONFIG.fssaiNumber}`, href: null },
+  { icon: '🧪', title: 'Lab Report Published', detail: `#${lab.number} ↗`, href: lab.pdfUrl },
+  { icon: '🟢', title: '100% Vegetarian', detail: 'Plant-based capsule shells', href: null },
+  { icon: '💵', title: 'Free COD', detail: 'Dispatches in 24h', href: null },
+];
 ---
 
-<!-- 🛡️ SMART COMPACT INDIAN TRUST STRIP (4 Pillars: FSSAI, NABL, 100% Veg, Free COD) -->
-<section id="trust-signals-bar" class="w-full bg-[#FAF9F6] border-b border-gray-200/70 py-2.5 sm:py-3.5 font-sans relative overflow-hidden">
-  
-  <div class="max-w-[94rem] mx-auto px-3 sm:px-6 lg:px-12 relative z-10">
-    
-    {/* 4-Pillar Symmetrical Trust Grid (2x2 on Mobile, 4-in-a-row on Desktop) */}
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-3 lg:gap-4">
-      
-      {/* 1. FSSAI Certified */}
-      <div class="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2.5 rounded-xl bg-white border border-gray-200/80 shadow-xs hover:border-emerald-300 transition-all">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50/80 border border-emerald-100 flex items-center justify-center text-emerald-800 text-xs sm:text-sm shrink-0">
-          🇮🇳
-        </div>
-        <div class="min-w-0">
-          <h4 class="text-[10.5px] sm:text-xs font-bold text-[#111827] uppercase tracking-wide font-sans truncate leading-tight">FSSAI Certified</h4>
-          <p class="text-[9px] sm:text-[10px] text-[#166534] font-medium font-sans truncate leading-tight">Govt Safety Standards</p>
-        </div>
-      </div>
-
-      {/* 2. NABL Lab Tested */}
-      <div class="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2.5 rounded-xl bg-white border border-gray-200/80 shadow-xs hover:border-emerald-300 transition-all">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50/80 border border-emerald-100 flex items-center justify-center text-emerald-800 text-xs sm:text-sm shrink-0">
-          🧪
-        </div>
-        <div class="min-w-0">
-          <h4 class="text-[10.5px] sm:text-xs font-bold text-[#111827] uppercase tracking-wide font-sans truncate leading-tight">NABL Tested</h4>
-          <p class="text-[9px] sm:text-[10px] text-[#166534] font-medium font-sans truncate leading-tight">Verified Pure & Safe</p>
-        </div>
-      </div>
-
-      {/* 3. 100% Vegetarian */}
-      <div class="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2.5 rounded-xl bg-white border border-gray-200/80 shadow-xs hover:border-emerald-300 transition-all">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50/80 border border-emerald-100 flex items-center justify-center text-emerald-800 text-xs sm:text-sm shrink-0">
-          🟢
-        </div>
-        <div class="min-w-0">
-          <h4 class="text-[10.5px] sm:text-xs font-bold text-[#111827] uppercase tracking-wide font-sans truncate leading-tight">100% Vegetarian</h4>
-          <p class="text-[9px] sm:text-[10px] text-[#166534] font-medium font-sans truncate leading-tight">Zero Gelatin Shells</p>
-        </div>
-      </div>
-
-      {/* 4. Free COD Pan-India */}
-      <div class="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2.5 rounded-xl bg-white border border-gray-200/80 shadow-xs hover:border-emerald-300 transition-all">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50/80 border border-emerald-100 flex items-center justify-center text-emerald-800 text-xs sm:text-sm shrink-0">
-          💵
-        </div>
-        <div class="min-w-0">
-          <h4 class="text-[10.5px] sm:text-xs font-bold text-[#111827] uppercase tracking-wide font-sans truncate leading-tight">Free COD</h4>
-          <p class="text-[9px] sm:text-[10px] text-[#166534] font-medium font-sans truncate leading-tight">Dispatches in 24h</p>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
+<section id="trust-signals-bar" aria-label="Trust and quality" class="w-full bg-[#FAF9F6] border-b border-gray-200/70 py-2.5 sm:py-3.5 font-sans">
+  <ul class="max-w-[94rem] mx-auto px-3 sm:px-6 lg:px-12 grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-3 lg:gap-4">
+    {badges.map((b) => {
+      const inner = (
+        <>
+          <span aria-hidden="true" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50/80 border border-emerald-100 flex items-center justify-center text-xs sm:text-sm shrink-0">{b.icon}</span>
+          <span class="min-w-0">
+            <span class="block text-[10.5px] sm:text-xs font-bold text-[#111827] uppercase tracking-wide truncate leading-tight">{b.title}</span>
+            <span class="block text-[9.5px] sm:text-[10.5px] text-[#166534] font-medium font-mono truncate leading-tight">{b.detail}</span>
+          </span>
+        </>
+      );
+      return (
+        <li class="rounded-xl bg-white border border-gray-200/80 shadow-xs hover:border-emerald-300 transition-colors">
+          {b.href ? (
+            <a href={b.href} target="_blank" rel="noopener" class="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2.5">{inner}</a>
+          ) : (
+            <div class="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2.5">{inner}</div>
+          )}
+        </li>
+      );
+    })}
+  </ul>
 </section>

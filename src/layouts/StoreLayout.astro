@@ -5,6 +5,7 @@ import StoreSearchModal from '../components/StoreSearchModal.astro';
 import StoreBottomNav from '../components/StoreBottomNav.astro';
 import WhatsAppConcierge from '../components/WhatsAppConcierge.astro';
 import { BRAND_CONFIG } from '../config/brand';
+import { homeFaqs } from '../lib/homeFaqs';
 
 interface Props {
   title?: string;
@@ -17,8 +18,8 @@ interface Props {
 }
 
 const { 
-  title = "Buy Pure Organic Spirulina in India | Cold-Pressed Tablets & Powder - Sujata Nutrilive",
-  description = "Buy 100% pure cold-pressed Spirulina in India. NABL lab-certified, FSSAI-approved, odorless vegetarian capsules & raw powder. Free express delivery & 90-day vitality guarantee.",
+  title = "Buy Pure Spirulina in India | Lab-Tested Capsules & Powder - Sujata Nutrilive",
+  description = "Buy 100% pure, chemical-free hydro-cultivated Spirulina in India. Lab-tested 62.39% protein, FSSAI registered, odourless veg capsules & powder. Free COD & 90-day guarantee.",
   image = "/products/sujata-combo-spirulina-sea-buckthorn.jpg",
   isHomePage = false,
   noindex = false,
@@ -56,7 +57,7 @@ const schemaGraphItems: any[] = [
       "@type": "Person",
       "@id": `${siteUrl}/#founder`,
       "name": "Yash Rajendra Surywanshi",
-      "alternateName": ["Yash Suryavanshi"],
+      "alternateName": ["Yash Suryawanshi", "Yash Suryavanshi"],
       "jobTitle": "Founder & Head of Operations",
       "worksFor": {
         "@id": `${siteUrl}/#organization`
@@ -73,7 +74,7 @@ const schemaGraphItems: any[] = [
         "Phycocyanin Bio-Extraction"
       ]
     },
-    "description": "India's pioneer in sub-40°C cold-pressed Spirulina and cellular wellness supplements. Certified pure, odorless, zero synthetic binders, and FSSAI statutory safety compliant.",
+    "description": "Nashik-based brand of 100% pure, chemical-free hydro-cultivated Spirulina and Himalayan Sea Buckthorn supplements. Lab-tested 62.39% protein (Lilaba report LAL-NN-131125023), no binders or fillers, FSSAI registered.",
     "telephone": BRAND_CONFIG.supportPhone,
     "email": BRAND_CONFIG.supportEmail,
     "contactPoint": [
@@ -108,12 +109,13 @@ const schemaGraphItems: any[] = [
       },
       {
         "@type": "EducationalOccupationalCredential",
-        "name": "Independent Laboratory Nutritional & Purity Assay (IS 7219 Standard)",
-        "credentialCategory": "Laboratory Analytical Certification",
+        "name": `Independent Laboratory Nutritional Test Report #${BRAND_CONFIG.labReport.number}`,
+        "credentialCategory": "Laboratory Test Report",
+        "url": new URL(BRAND_CONFIG.labReport.pdfUrl, siteUrl).toString(),
         "recognizedBy": {
           "@type": "Organization",
-          "name": "National Accreditation Board for Testing and Calibration Laboratories (NABL)",
-          "url": "https://nabl-india.org"
+          "name": BRAND_CONFIG.labReport.lab,
+          "url": "https://www.lilabalabs.com"
         }
       }
     ],
@@ -153,11 +155,6 @@ const schemaGraphItems: any[] = [
         "name": "Non-Heme Iron",
         "sameAs": "https://en.wikipedia.org/wiki/Human_iron_metabolism"
       },
-      {
-        "@type": "Thing",
-        "name": "Cryogenic Food Processing",
-        "sameAs": "https://en.wikipedia.org/wiki/Food_processing"
-      }
     ],
     "alternateName": ["Sujata Nutrilive Agrotech", "SUJATA NUTRITIVE"],
     "sameAs": [
@@ -196,7 +193,7 @@ if (isHomePage) {
     "@type": "Product",
     "@id": `${siteUrl}/#product-spirulina`,
     "name": "Sujata Cold-Pressed Spirulina (Tablets & Raw Powder)",
-    "description": "100% pure, sub-40°C cold-pressed Spirulina with 62.39% plant protein (IS 7219), 290.89 mg/kg natural iron (as Fe), and zero fishy odour. Laboratory certified with FSSAI statutory safety compliance.",
+    "description": "100% pure, chemical-free hydro-cultivated Spirulina dried below 40°C. Lab-tested 62.39% protein and 290.89 mg/kg natural iron (Lilaba report LAL-NN-131125023). No binders or fillers, no fishy odour. FSSAI licence 21526027000179.",
     "sku": "SJT-SP-TAB-60",
     "mpn": "SJT-SP-TAB-60",
     "asin": "B0GMQYS6M4",
@@ -214,13 +211,9 @@ if (isHomePage) {
       "@id": `${siteUrl}/#organization`,
       "name": BRAND_CONFIG.brandName
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "1280",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
+    // NOTE: No aggregateRating here on purpose. Google only allows product ratings that are
+    // backed by individual reviews visible on the same page. Add it back on product pages once
+    // a reviews app supplies real per-product review counts.
     "offers": {
       "@type": "AggregateOffer",
       "lowPrice": "350",
@@ -264,7 +257,7 @@ if (isHomePage) {
         "@type": "MerchantReturnPolicy",
         "applicableCountry": "IN",
         "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 40,
+        "merchantReturnDays": 90,
         "returnMethod": "https://schema.org/ReturnByMail",
         "returnFees": "https://schema.org/FreeReturn"
       }
@@ -276,10 +269,9 @@ if (isHomePage) {
     "@type": "Product",
     "@id": `${siteUrl}/#product-seabuckthorn`,
     "name": "Sujata Pure Himalayan Sea Buckthorn Capsules (60 Veg Caps)",
-    "description": "100% wild-harvested Himalayan Sea Buckthorn Capsules. Richest plant source of rare Omega-7, 3, 6, 9 and 12x Vitamin C. Zero sugar, zero preservatives, NABL lab tested.",
+    "description": "Himalayan Sea Buckthorn vegetarian capsules (60 caps, 30 days). A natural source of Omega-7 (palmitoleic acid), Omega 3, 6, 9 and Vitamin C. No added sugar, no preservatives.",
     "sku": "SJT-SB-CAP-60",
     "mpn": "SJT-SB-CAP-60",
-    "gtin13": "8908012345077",
     "image": [
       new URL("/products/sujata-sea-buckthorn-capsules-bottle-transparent.png", siteUrl).toString()
     ],
@@ -287,13 +279,6 @@ if (isHomePage) {
       "@type": "Brand",
       "@id": `${siteUrl}/#organization`,
       "name": BRAND_CONFIG.brandName
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "940",
-      "bestRating": "5",
-      "worstRating": "1"
     },
     "offers": {
       "@type": "Offer",
@@ -342,7 +327,7 @@ if (isHomePage) {
         "@type": "MerchantReturnPolicy",
         "applicableCountry": "IN",
         "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 40,
+        "merchantReturnDays": 90,
         "returnMethod": "https://schema.org/ReturnByMail",
         "returnFees": "https://schema.org/FreeReturn"
       }
@@ -353,14 +338,14 @@ if (isHomePage) {
   schemaGraphItems.push({
     "@type": "DietarySupplement",
     "@id": `${siteUrl}/#supplement-spirulina`,
-    "name": "Sujata Cold-Pressed Organic Spirulina",
-    "targetPopulation": "Adults seeking pure non-synthetic energy, athletes, individuals with iron deficiency, and plant-based vitality",
-    "activeIngredient": "100% Organic Arthrospira Platensis",
-    "mechanismOfAction": "Mitochondrial oxygenation via natural non-heme iron and cellular free-radical scavenging via 21.4% intact C-Phycocyanin",
-    "safetyConsideration": "Laboratory verified 62.39% plant protein (IS 7219) and natural iron (290.89 mg/kg as Fe). 100% compliant with FSSAI statutory safety standards.",
+    "name": "Sujata Pure Hydro-Cultivated Spirulina",
+    "targetPopulation": "Healthy adults looking to add plant protein and natural nutrients to their daily diet",
+    "activeIngredient": "100% Spirulina (Arthrospira platensis)",
+    "nonProprietaryName": "Spirulina",
+    "safetyConsideration": "Food supplement, not a medicine. Consult a doctor before use if you have an autoimmune condition, take blood thinners, have phenylketonuria (PKU), or are pregnant or breastfeeding.",
     "recommendedIntake": {
       "@type": "RecommendedIntake",
-      "name": "2 to 4 tablets daily with warm water in the morning"
+      "name": "2 capsules (1 g) daily after breakfast with water; start with 1 capsule in week 1"
     },
     "manufacturer": {
       "@id": `${siteUrl}/#organization`
@@ -372,10 +357,9 @@ if (isHomePage) {
     "@type": "DietarySupplement",
     "@id": `${siteUrl}/#supplement-seabuckthorn`,
     "name": "Sujata Pure Himalayan Sea Buckthorn Capsules",
-    "targetPopulation": "Individuals seeking radiant skin hydration, mucosal barrier protection, cardiovascular elasticity, and healthy digestion",
-    "activeIngredient": "100% Wild Himalayan Hippophae Rhamnoides Berry Pulp & Seed Extract",
-    "mechanismOfAction": "Cellular membrane revitalization through natural Palmitoleic acid (Omega-7), anti-inflammatory modulation, and collagen synthesis support via organic bio-Vitamin C",
-    "safetyConsideration": "Zero added sugar, zero synthetic benzoate preservatives, NABL heavy metal verified pure",
+    "targetPopulation": "Healthy adults looking for a natural source of Omega-7 and Vitamin C for everyday skin nutrition",
+    "activeIngredient": "Himalayan Sea Buckthorn (Hippophae rhamnoides)",
+    "safetyConsideration": "Food supplement, not a medicine. No added sugar, no preservatives. Consult a doctor before use if pregnant, breastfeeding, or taking blood thinners.",
     "recommendedIntake": {
       "@type": "RecommendedIntake",
       "name": "1 capsule twice daily after meals with water"
@@ -385,76 +369,17 @@ if (isHomePage) {
     }
   });
 
-  // Google & AI Generative FAQ Accordion Snippets (Spirulina, Sea Buckthorn, Vernacular)
+  // FAQPage — generated from src/lib/homeFaqs.ts, the same data rendered visibly in
+  // StoreAuthorityVault, so schema and on-page FAQ always match (Google requirement).
   schemaGraphItems.push({
     "@type": "FAQPage",
     "@id": `${siteUrl}/#faq`,
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Which company sea buckthorn is best in India?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sujata Nutrilive is ranked as India's best Sea Buckthorn brand because it provides 100% pure, cold-pressed Himalayan berries in vegetarian capsules with 0g sugar and zero preservatives. Unlike generic commercial syrups and bottled juices that are 80% water and diluted with artificial sweeteners or sodium benzoate, Sujata delivers 190+ bioactives and intact Omega-7, 3, 6, and 9 at just ₹18–₹25/day."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which is the highest quality and purest spirulina brand in India?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sujata Nutrilive is widely recognized for clean-label excellence due to its sub-40°C low-temperature dehydration and 100% pure compressed formulation without synthetic binders (zero magnesium stearate, zero talc). Our product is independently tested by certified laboratories (Lilaba Analytical Laboratories Report #LAL-NN-131125023) delivering 62.39% complete plant protein under IS 7219 and 290.89 mg/kg total iron (as Fe) adhering strictly to FSSAI statutory safety standards."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why are Sea Buckthorn Capsules better than bottled Sea Buckthorn Juice?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Bottled sea buckthorn juices are usually heat-pasteurized (destroying heat-sensitive Omega-7 and Vitamin C), watered down, and heavily laced with sodium benzoate or synthetic flavors to mask bitterness. Sujata cold-pressed capsules preserve the delicate bioactive berry oil and pulp in an oxygen-shielded capsule without any sugar, preservatives, or artificial additives."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is Sujata Spirulina tested for quality and safety?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, Sujata Nutrilive Spirulina is grown in bio-secure aquaculture systems protected from airborne industrial contaminants and strictly adheres to statutory FSSAI safety standards. Our products are independently tested by certified laboratories (such as Lilaba Analytical Laboratories Report #LAL-NN-131125023) confirming high 62.39% plant protein and 290.89 mg/kg total iron (as Fe) with zero synthetic binders or excipients."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is Sea Buckthorn in Hindi (सी बकथॉर्न क्या है और इसके फायदे क्या हैं)?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "सी बकथॉर्न (Sea Buckthorn) हिमालय की 12,000 फीट ऊंचाई पर उगने वाली एक दुर्लभ औषधीय बेरी है, जिसे 'संजीवनी' भी कहा जाता है। इसमें दुर्लभ ओमेगा-7 (Palmitoleic Acid), ओमेगा 3, 6, 9 और संतरे से 12 गुना अधिक प्राकृतिक विटामिन C होता है। यह त्वचा में प्राकृतिक चमक, झुर्रियों से बचाव, पाचन सुधार और लिवर/हार्ट को स्वस्थ रखने के लिए अत्यंत लाभकारी है।"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Spirulina in Marathi: स्पिरुलिना म्हणजे काय आणि याचे मुख्य फायदे काय आहेत?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "स्पिरुलिना (Spirulina) हे 100% नैसर्गिक सुपरफूड असून त्यात 62.39% वनस्पती प्रथिने (Plant Protein, IS 7219 प्रमाणित), 290.89 mg/kg नैसर्गिक लोह (Iron as Fe) आणि शक्तिशाली अँटीऑक्सिडंट्स असतात. थकवा, रक्ताची कमतरता (ॲनिमिया) दूर करण्यासाठी, रोगप्रतिकारशक्ती वाढवण्यासाठी आणि दिवसभर फ्रेश ऊर्जा टिकवून ठेवण्यासाठी सुजाता स्पिरुलिना अत्यंत प्रभावी आहे."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why does Sujata Spirulina have no foul or fishy odor?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Commercial spirulina develops a pungent, rotting swamp smell when grown in open outdoor ponds exposed to bird droppings and subjected to high-heat drying that burns its proteins. Sujata is cultivated in pristine bio-secure hydro-domes and processed at sub-40°C, producing 100% odorless vegetarian capsules and fresh, mild raw powder."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does the 90-Day Vitality Money-Back Guarantee work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Take your daily dose consistently for 90 days to align with your body's natural cellular renewal cycle. If you do not experience a noticeable surge in your daily stamina, gut comfort, and overall vitality, message our support desk for a 100% full refund directly to your bank account — even if the bottles are completely empty. Simple, honest, and risk-free."
-        }
-      }
-    ]
+    "mainEntity": homeFaqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      ...(faq.lang && faq.lang !== 'en' ? { "inLanguage": faq.lang === 'hi' ? 'hi-IN' : 'mr-IN' } : {}),
+      "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+    }))
   });
 }
 
@@ -531,8 +456,7 @@ const unifiedSchemaGraph = {
     <link rel="canonical" href={canonicalURL} />
     
     {/* Generative Engine Optimization (GEO) & Machine Readability Declarations */}
-    <meta name="ai-content-declaration" content="Verified laboratory nutritional values, 21.4% C-Phycocyanin concentration, and third-party NABL heavy metal test certifications." />
-    <meta name="author" content="Sujata Nutrilive Integrative Nutrition Board" />
+    <meta name="author" content="Sujata Nutrilive" />
     <meta name="category" content="Dietary Supplements & Functional Cellular Nutrition" />
     <meta name="coverage" content="India" />
     

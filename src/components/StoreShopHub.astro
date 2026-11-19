@@ -1,6 +1,5 @@
 ---
 // src/components/StoreShopHub.astro
-import StoreBundleBuilder from './StoreBundleBuilder.astro';
 
 const { products = [] } = Astro.props;
 
@@ -93,121 +92,76 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
   const rawCompare = product.variants?.edges?.[0]?.node?.compareAtPrice?.amount;
   const shopifyComparePrice = rawCompare ? Math.round(parseFloat(rawCompare)) : 0;
 
-  // 🌟 PRIORITY 2: Smart Semantic Fallback (Used ONLY if merchant left it blank in Shopify Admin)
+  // 🌟 PRIORITY 2: Neutral fallback copy (used ONLY if the merchant left metafields/tags blank).
+  // Compliance: no disease/treatment claims, no "organic", no invented ratings or prices.
   const t = (product.title || '').toLowerCase();
   let defaultTag = "Bestseller";
-  let defaultBenefit = "⚡ Cellular Vitality & Immunity";
-  let rating = "4.9 (1.8k)";
-  let oldPrice = shopifyComparePrice > currentPrice ? shopifyComparePrice : Math.round(currentPrice * 1.35);
+  let defaultBenefit = "🌿 Pure Daily Nutrition";
 
-  if (shopifyComparePrice > currentPrice) {
-    oldPrice = shopifyComparePrice;
-  } else if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
-    defaultTag = "360° VALUE COMBO";
-    defaultBenefit = "⚡ All-Day Energy, Immunity & Skin Synergy";
-    rating = "4.9 (1.5k)";
-    oldPrice = Math.round(currentPrice * 1.3);
+  if (t.includes('combo') || t.includes('bundle') || t.includes('healthy life')) {
+    defaultTag = "Value Combo";
+    defaultBenefit = "⚡ Daily Protein + Omega-7 Routine";
   } else if (t.includes('powder') && t.includes('spirulina')) {
-    defaultTag = "100% Raw Pure";
-    defaultBenefit = "🌱 Complete Cellular Detox & Protein";
-    rating = "4.9 (2.4k)";
-    oldPrice = 799;
-  } else if (t.includes('tablet')) {
-    defaultTag = "Zero Binder";
-    defaultBenefit = "⚡ Daily Energy, Iron & Stamina";
-    rating = "4.9 (3.1k)";
-    oldPrice = 650;
+    defaultTag = "100% Pure";
+    defaultBenefit = "🌱 62.39% Plant Protein (Lab Tested)";
+  } else if (t.includes('tablet') || (t.includes('capsule') && t.includes('spirulina'))) {
+    defaultTag = "Zero Binders";
+    defaultBenefit = "⚡ Plant Protein & Natural Iron";
   } else if (t.includes('sea buckthorn')) {
-    defaultTag = "Rare Omega 7";
-    defaultBenefit = "🛡️ Heart, Skin & Mucosal Defense";
-    rating = "4.9 (1.2k)";
-    oldPrice = 999;
+    defaultTag = "Omega-7";
+    defaultBenefit = "✨ Omega-7 & Vitamin C for Skin";
   } else if (t.includes('b12')) {
     defaultTag = "Plant Based B12";
-    defaultBenefit = "🧠 Active Nerve & RBC Formation";
-    rating = "4.8 (940)";
-    oldPrice = 1099;
+    defaultBenefit = "🌿 Vegetarian B12 Supplement";
   } else if (t.includes('shilajit')) {
-    defaultTag = "Gold Grade 75%+";
-    defaultBenefit = "💪 Peak Physical Strength & Vitality";
-    rating = "5.0 (1.5k)";
-    oldPrice = 1299;
+    defaultTag = "Himalayan";
+    defaultBenefit = "🏔️ Pure Himalayan Shilajit";
   } else if (t.includes('moringa')) {
-    defaultTag = "Super Detox";
-    defaultBenefit = "🍃 Blood Sugar Balance & Cleansing";
-    rating = "4.8 (820)";
-    oldPrice = 299;
+    defaultTag = "Daily Greens";
+    defaultBenefit = "🍃 Pure Moringa Leaf Powder";
   } else if (t.includes('face wash') || t.includes('facewash')) {
-    defaultTag = "Anti-Acne";
-    defaultBenefit = "✨ Deep Pore Detox & Oil Control";
-    rating = "4.9 (1.9k)";
-    oldPrice = 499;
+    defaultTag = "Spirulina Skincare";
+    defaultBenefit = "✨ Gentle Daily Face Wash";
   } else if (t.includes('face pack') || t.includes('facepack')) {
-    defaultTag = "Instant Glow";
-    defaultBenefit = "🌸 Botanical Tan & Blemish Removal";
-    rating = "4.8 (750)";
-    oldPrice = 399;
+    defaultTag = "Spirulina Skincare";
+    defaultBenefit = "🌸 Botanical Face Pack";
   } else if (t.includes('soap')) {
-    defaultTag = "100% Organic";
-    defaultBenefit = "🧼 Handcrafted Ayurvedic Herbal Bar";
-    rating = "4.9 (1.1k)";
-    oldPrice = 249;
-  } else if (t.includes('korean')) {
-    defaultTag = "K-Beauty Formula";
-    defaultBenefit = "✨ Glass Skin & Dark Spot Corrector";
-    rating = "4.9 (880)";
-    oldPrice = 799;
-  } else if (t.includes('bridal') || t.includes('whitening')) {
-    defaultTag = "Luxury Radiance";
-    defaultBenefit = "👑 Saffron & Sandalwood Bridal Glow";
-    rating = "5.0 (620)";
-    oldPrice = 899;
+    defaultTag = "Handmade";
+    defaultBenefit = "🧼 Handcrafted Herbal Bar";
+  } else if (t.includes('korean') || t.includes('cream')) {
+    defaultTag = "Spirulina Skincare";
+    defaultBenefit = "✨ Daily Moisturising Cream";
   } else if (t.includes('hair oil') || t.includes('oil')) {
-    defaultTag = "Hair Fall Control";
-    defaultBenefit = "💆 Scalp Nourishment & Active Biotin";
-    rating = "4.9 (1.4k)";
-    oldPrice = 399;
+    defaultTag = "Hair Care";
+    defaultBenefit = "💆 Spirulina Coconut Hair Oil";
   } else if (t.includes('shampoo')) {
-    defaultTag = "2-in-1 Therapy";
-    defaultBenefit = "🌿 Anti-Thinning & Keratin Strength";
-    rating = "4.8 (910)";
-    oldPrice = 499;
+    defaultTag = "Hair Care";
+    defaultBenefit = "🌿 2-in-1 Shampoo & Conditioner";
   }
 
-  // Clinical Purity Differentiator (NABL tested & scientifically verified)
-  let purityDifferentiator = "NABL Tested • 100% Zero Binders";
+  // Factual product-format line (no unverified lab claims)
+  let purityDifferentiator = "100% Pure • Zero Binders";
   if (t.includes('powder') && t.includes('spirulina')) {
-    purityDifferentiator = "Sub-40°C Cryo-Milled • 21.4% Phycocyanin";
+    purityDifferentiator = "Dried Below 40°C • Zero Fillers";
   } else if (t.includes('tablet')) {
-    purityDifferentiator = "Sub-40°C Cold Compressed • Zero Binders";
+    purityDifferentiator = "Zero Binders • Zero Talc";
   } else if (t.includes('capsule') && t.includes('spirulina')) {
-    purityDifferentiator = "100% Plant Veggie Caps • 500mg Pure";
-  } else if (t.includes('b12')) {
-    purityDifferentiator = "Active Methylcobalamin • Zero Cyanide";
-  } else if (t.includes('shilajit')) {
-    purityDifferentiator = ">75% Fulvic Acid • Lead < 0.01 ppm";
+    purityDifferentiator = "100% Veg Caps • 500mg Pure";
   } else if (t.includes('sea buckthorn')) {
-    purityDifferentiator = "Wild Himalayan • Rare Omega 7";
-  } else if (t.includes('moringa')) {
-    purityDifferentiator = "Raw Leaves • Zero Artificial Colors";
+    purityDifferentiator = "Himalayan • No Added Sugar";
   } else if (t.includes('combo') || t.includes('bundle')) {
-    purityDifferentiator = "Synergistic Bio-Absorption Protocol";
-  } else if (t.includes('skin') || t.includes('face') || t.includes('cream')) {
-    purityDifferentiator = "Spirulina Botanical • Zero Parabens";
-  } else if (t.includes('hair') || t.includes('shampoo')) {
-    purityDifferentiator = "Ayurvedic Scalp Therapy • Sulphate Free";
+    purityDifferentiator = "Spirulina + Sea Buckthorn";
   }
 
-  const finalOldPrice = oldPrice;
-  const savedPrice = Math.max(0, finalOldPrice - currentPrice);
+  // Strike-through price ONLY when Shopify has a real compare-at price.
+  const oldPrice = shopifyComparePrice > currentPrice ? shopifyComparePrice : 0;
 
   return {
     tag: customBadge || defaultTag,
     benefit: customBenefit || defaultBenefit,
     purityDifferentiator,
-    rating,
-    oldPrice: finalOldPrice,
-    savedPrice
+    oldPrice,
+    savedPrice: oldPrice ? oldPrice - currentPrice : 0
   };
 }
 ---
@@ -222,7 +176,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-4 sm:mb-6">
         <div>
           <span class="text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] block mb-1 font-sans">
-            Doctor-Curated Pure Nutrition
+            Lab-Tested Pure Nutrition
           </span>
           <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight">
             Explore All <span class="italic text-[#166534]">Formulations.</span>
@@ -265,7 +219,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         const hasMultipleVariants = rawVariants.length > 1;
         const firstVariant = rawVariants[0];
         const initialPrice = firstVariant?.price?.amount ? parseFloat(firstVariant.price.amount) : numPrice;
-        const initialCompare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : meta.oldPrice;
+        const initialCompare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : 0;
 
         return (
           <div class={`product-card-item bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 md:p-5 border border-gray-200/90 shadow-xs hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={category}>
@@ -276,12 +230,6 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
                 {/* Top-Left Trust Badge */}
                 <span class="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 z-10 text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider bg-[#064E3B] text-white px-2 py-0.5 rounded-full shadow-xs">
                   {meta.tag}
-                </span>
-
-                {/* Bottom-Left Rating Badge */}
-                <span class="absolute bottom-1.5 left-1.5 sm:bottom-2.5 sm:left-2.5 z-10 text-[8.5px] sm:text-[10px] font-bold bg-black/60 text-white backdrop-blur-xs px-1.5 py-0.5 rounded flex items-center gap-0.5 shadow-xs">
-                  <span class="text-amber-400 text-[9px] sm:text-[10px]">★</span>
-                  <span>{meta.rating.split(' ')[0]}</span>
                 </span>
 
                 <img 

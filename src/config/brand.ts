@@ -12,9 +12,29 @@ export const BRAND_CONFIG = {
   fssaiNumber: "21526027000179",
   address: "Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik, Maharashtra 422008, India",
   googleMapsUrl: "https://share.google/R7aB2MCG9AN5l3RF1",
+  // ✅ VERIFIED FACTS ONLY — single source of truth for every trust claim on the site.
+  // Lab values below are exactly what Lilaba report LAL-NN-131125023 states. Do not add
+  // claims here (heavy metals, phycocyanin, NABL, IS 7219) until a report proving them is on file.
+  labReport: {
+    lab: "Lilaba Analytical Laboratories LLP, Surat",
+    number: "LAL-NN-131125023",
+    batch: "SP/SS/Nov01/2025",
+    issueDate: "17 Nov 2025",
+    sample: "Spirulina Powder",
+    pdfUrl: "/lilaba_lab_report_2025_2027.pdf",
+    proteinPct: "62.39",
+    ironMgPerKg: "290.89",
+    calciumMgPerKg: "1407.91",
+    moisturePct: "4.12",
+    ashPct: "5.79",
+  },
+  reviews: {
+    ratingValue: "4.9",
+    verifiedBuyersLabel: "1,100+",
+  },
   announcementTickers: [
-    "🌿 100% Pure Cryo-Extracted Spirulina",
-    "🧪 Lab Certified 62.39% Pure Plant Protein",
+    "🌿 100% Pure, Chemical-Free Hydro-Cultivated Spirulina",
+    "🧪 Lab Tested: 62.39% Plant Protein",
     "💵 Free Cash on Delivery (COD) Pan-India",
     "⚡ Dispatches in 24 Hours"
   ],

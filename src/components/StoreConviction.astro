@@ -1,378 +1,100 @@
 ---
 // src/components/StoreConviction.astro
-// ⚖️ "Why Sujata?" Purity Moat & Comparison Matrix + 🏭 Living Proof Nashik Facility Video Tour
-// Silicon Valley Clean Editorial Architecture (Oct 2026)
+// "Why Sujata?" comparison. Every Sujata-side claim must be provable (lab report, formulation,
+// licence). The facility video tour moved to StoreAuthorityVault (Founder & Proof section).
+import { BRAND_CONFIG } from '../config/brand';
+const lab = BRAND_CONFIG.labReport;
 
-const tourVideoSchema = {
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  "name": "Inside Sujata Nutrilive Nashik Spirulina Cultivation Facility",
-  "description": "Comprehensive 1-minute facility tour showing closed bio-dome ponds, pure groundwater paddlewheel circulation, hygienic harvesting, and sub-40°C cryo-milling in Nashik, Maharashtra.",
-  "thumbnailUrl": [
-    "https://i.ytimg.com/vi/WbhJp-tZVj4/maxresdefault.jpg",
-    "https://i.ytimg.com/vi/WbhJp-tZVj4/hqdefault.jpg"
-  ],
-  "uploadDate": "2026-10-10",
-  "duration": "PT1M1S",
-  "contentUrl": "https://www.youtube.com/watch?v=WbhJp-tZVj4",
-  "embedUrl": "https://www.youtube-nocookie.com/embed/WbhJp-tZVj4",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Sujata Nutrilive",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.sujatanutrilive.com/favicon.svg"
-    }
-  }
-};
+const rows = [
+  {
+    param: "Lab Transparency",
+    hint: "Can you see the test results yourself?",
+    sujata: `Full lab report published (#${lab.number})`,
+    other: "Test reports rarely shared with buyers",
+  },
+  {
+    param: "Binders & Fillers",
+    hint: "What else is inside the tablet or capsule?",
+    sujata: "0% binders, talc or fillers. 100% spirulina",
+    other: "Often uses binders like PVP K30, talc or magnesium stearate",
+  },
+  {
+    param: "Cultivation",
+    hint: "How and where the algae is grown",
+    sujata: "100% pure, chemical-free hydro-cultivated",
+    other: "Often open ponds exposed to dust and runoff",
+  },
+  {
+    param: "Drying Temperature",
+    hint: "High heat can damage delicate proteins and pigments",
+    sujata: "Dried at low temperature (below 40°C)",
+    other: "Often high-heat spray drying",
+  },
+  {
+    param: "Taste & Odour",
+    hint: "Crucial for sticking to a daily habit",
+    sujata: "No fishy smell. Odourless veg capsules",
+    other: "Pond-like, swampy smell and bitter taste",
+  },
+];
 ---
 
-<!-- 🎯 Google & AI Engine Schema Injection -->
-<script type="application/ld+json" set:html={JSON.stringify(tourVideoSchema)} />
+<section id="why-sujata" aria-labelledby="why-sujata-heading" class="py-16 md:py-24 bg-[#FCFBF7] text-[#111827] font-sans border-t border-gray-200/80">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
 
-<section id="why-sujata" class="py-16 md:py-24 bg-[#FCFBF7] text-[#111827] font-sans border-t border-gray-200/80 relative overflow-hidden">
-  
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-    
-    {/* ==============================================================
-        ZONE 1: CLINICAL PURITY COMPARISON MATRIX
-        ============================================================== */}
-    <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100/70 border border-emerald-300/50 mb-3.5 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
-        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] font-sans">
-          The Purity Standard
-        </span>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight mb-3">
-        Why Sujata? <span class="italic text-[#166534]">The Clinical Difference.</span>
+    <div class="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] mb-3">The Purity Standard</span>
+      <h2 id="why-sujata-heading" class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal tracking-tight leading-tight mb-3">
+        Sujata vs Ordinary <span class="italic text-[#166534]">Market Spirulina</span>
       </h2>
-      <p class="text-xs sm:text-sm md:text-base text-gray-600 font-normal max-w-xl mx-auto leading-relaxed font-sans">
-        Commercial spirulina is often mass spray-dried at extreme heat, killing fragile enzymes. Here is how Sujata's cold-pressed protocol protects your health.
+      <p class="text-xs sm:text-sm md:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+        Five things to check before you buy any spirulina, and how Sujata compares.
       </p>
     </div>
 
-    {/* DESKTOP TABLE VIEW (md and up) */}
-    <div class="hidden md:block overflow-hidden bg-white rounded-3xl border border-gray-200/90 shadow-xl mb-10">
+    {/* Desktop table */}
+    <div class="hidden md:block overflow-hidden bg-white rounded-3xl border border-gray-200/90 shadow-xl">
       <table class="w-full border-collapse text-left">
         <thead>
           <tr class="border-b border-gray-200">
-            <th class="p-5 lg:p-6 text-xs font-bold text-gray-500 uppercase tracking-wider w-[32%] bg-gray-50/70 font-sans">
-              Quality Parameter
-            </th>
-            <th class="p-5 lg:p-6 bg-[#064E3B] text-white text-xs font-black uppercase tracking-wider text-center w-[36%] relative font-sans shadow-md">
-              <span class="text-emerald-300 block text-[10px] tracking-widest uppercase mb-0.5">Gold Standard</span>
-              <span>Sujata Nutrilive Protocol</span>
-            </th>
-            <th class="p-5 lg:p-6 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-wider text-center w-[32%] font-sans">
-              Ordinary Market Spirulina
-            </th>
+            <th scope="col" class="p-5 lg:p-6 text-xs font-bold text-gray-500 uppercase tracking-wider w-[32%] bg-gray-50/70">What to check</th>
+            <th scope="col" class="p-5 lg:p-6 bg-[#064E3B] text-white text-xs font-black uppercase tracking-wider text-center w-[36%]">Sujata Nutrilive</th>
+            <th scope="col" class="p-5 lg:p-6 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-wider text-center w-[32%]">Ordinary Market Spirulina</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100 text-sm font-sans">
-          
-          {/* Row 1: Extraction */}
-          <tr class="hover:bg-gray-50/40 transition-colors">
-            <td class="p-5 lg:p-6 font-bold text-[#111827]">
-              Extraction Temperature
-              <span class="block text-xs font-normal text-gray-500 mt-0.5">Preserves live therapeutic Phycocyanin</span>
-            </td>
-            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-emerald-600 text-base">✓</span>
-                <span>Sub-40°C Cryo-Milling (100% Live Enzymes)</span>
-              </div>
-            </td>
-            <td class="p-5 lg:p-6 text-gray-500 text-center">
-              Industrial Spray Dehydration (Heat denatures delicate phycobiliproteins & enzymes &gt;45°C)
-            </td>
-          </tr>
-
-          {/* Row 2: Taste & Smell */}
-          <tr class="hover:bg-gray-50/40 transition-colors">
-            <td class="p-5 lg:p-6 font-bold text-[#111827]">
-              Taste, Texture & Odour
-              <span class="block text-xs font-normal text-gray-500 mt-0.5">Crucial for daily habit compliance</span>
-            </td>
-            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-emerald-600 text-base">✓</span>
-                <span>Zero Fishy Smell • 100% Odourless Capsules</span>
-              </div>
-            </td>
-            <td class="p-5 lg:p-6 text-gray-500 text-center">
-              Pond-like swampy odour & bitter, gritty taste
-            </td>
-          </tr>
-
-          {/* Row 3: Heavy Metal Safety */}
-          <tr class="hover:bg-gray-50/40 transition-colors">
-            <td class="p-5 lg:p-6 font-bold text-[#111827]">
-              Heavy Metal Testing
-              <span class="block text-xs font-normal text-gray-500 mt-0.5">Lead, Mercury, Cadmium & Arsenic</span>
-            </td>
-            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-emerald-600 text-base">✓</span>
-                <span>NABL & FSSAI Compliant: Heavy Metal Safe</span>
-              </div>
-            </td>
-            <td class="p-5 lg:p-6 text-gray-500 text-center">
-              Rarely tested; open pond contamination risk
-            </td>
-          </tr>
-
-          {/* Row 4: Bio-Absorption */}
-          <tr class="hover:bg-gray-50/40 transition-colors">
-            <td class="p-5 lg:p-6 font-bold text-[#111827]">
-              Human Bio-Absorption
-              <span class="block text-xs font-normal text-gray-500 mt-0.5">Speed of assimilation through intestine</span>
-            </td>
-            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-emerald-600 text-base">✓</span>
-                <span>95%+ Fast Absorption in 30 Mins</span>
-              </div>
-            </td>
-            <td class="p-5 lg:p-6 text-gray-500 text-center">
-              Delayed Disintegration (Synthetic binders like PVPK30 &amp; talc impede rapid dissolution)
-            </td>
-          </tr>
-
-          {/* Row 5: Formulation Origin */}
-          <tr class="hover:bg-gray-50/40 transition-colors">
-            <td class="p-5 lg:p-6 font-bold text-[#111827]">
-              Formulation Standard
-              <span class="block text-xs font-normal text-gray-500 mt-0.5">Quality governance & expertise</span>
-            </td>
-            <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-emerald-600 text-base">✓</span>
-                <span>Doctor-Curated Ayurvedic Rasayana Protocol</span>
-              </div>
-            </td>
-            <td class="p-5 lg:p-6 text-gray-500 text-center">
-              White-label bulk powder repackaged
-            </td>
-          </tr>
-
+        <tbody class="divide-y divide-gray-100 text-sm">
+          {rows.map((r) => (
+            <tr>
+              <th scope="row" class="p-5 lg:p-6 font-bold text-[#111827]">
+                {r.param}
+                <span class="block text-xs font-normal text-gray-500 mt-0.5">{r.hint}</span>
+              </th>
+              <td class="p-5 lg:p-6 bg-emerald-50/40 text-center font-bold text-[#064E3B] border-x border-emerald-600/10">
+                <span class="text-emerald-600 mr-1.5" aria-hidden="true">✓</span>{r.sujata}
+              </td>
+              <td class="p-5 lg:p-6 text-gray-500 text-center">{r.other}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
 
-    {/* MOBILE CARD DECK (Block by Block, 100% Readable) */}
-    <div class="md:hidden space-y-4 mb-8">
-      {[
-        {
-          param: "Extraction Temperature",
-          sujata: "Sub-40°C Cryo-Milling (100% Live Enzymes)",
-          other: "Industrial Spray Dehydration (Thermal denaturation >45°C)"
-        },
-        {
-          param: "Taste & Odour",
-          sujata: "Zero Fishy Smell • 100% Odourless Capsules",
-          other: "Pond-like swampy odour & gritty taste"
-        },
-        {
-          param: "Heavy Metal Testing",
-          sujata: "NABL Tested: FSSAI Heavy Metal Safe",
-          other: "Rarely tested; open pond contamination risk"
-        },
-        {
-          param: "Human Bio-Absorption",
-          sujata: "95%+ Fast Absorption in 30 Mins",
-          other: "Delayed Disintegration (Synthetic excipients impede breakdown)"
-        },
-        {
-          param: "Formulation Standard",
-          sujata: "Doctor-Curated Ayurvedic Rasayana",
-          other: "Generic bulk powder repackaged"
-        }
-      ].map((item, idx) => (
-        <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm font-sans">
-          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">
-            Parameter 0{idx + 1}
-          </span>
-          <h4 class="text-sm font-bold text-[#111827] mb-3">{item.param}</h4>
-          
+    {/* Mobile cards */}
+    <div class="md:hidden space-y-3">
+      {rows.map((r) => (
+        <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
+          <h3 class="text-sm font-bold text-[#111827] mb-2.5">{r.param}</h3>
           <div class="space-y-2">
-            <div class="bg-[#064E3B] text-white p-3 rounded-xl">
-              <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-wider block mb-0.5">
-                ✓ Sujata Gold Standard
-              </span>
-              <p class="text-xs font-semibold leading-snug">{item.sujata}</p>
-            </div>
-            <div class="bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-gray-500">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-0.5">
-                ✕ Ordinary Market Brands
-              </span>
-              <p class="text-xs leading-snug">{item.other}</p>
-            </div>
+            <p class="bg-[#064E3B] text-white p-3 rounded-xl text-xs font-semibold leading-snug">
+              <span class="block text-[10px] font-bold text-emerald-300 uppercase tracking-wider mb-0.5">✓ Sujata</span>{r.sujata}
+            </p>
+            <p class="bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-gray-500 text-xs leading-snug">
+              <span class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5">✕ Ordinary brands</span>{r.other}
+            </p>
           </div>
         </div>
       ))}
     </div>
 
-    {/* ==============================================================
-        ZONE 2: 🏭 THE LIVING PROOF: INSIDE OUR NASHIK CULTIVATION FACILITY
-        ============================================================== */}
-    <div class="mt-14 md:mt-20 pt-12 md:pt-16 border-t border-gray-200/80">
-      
-      <!-- Sub-header -->
-      <div class="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/70 mb-3.5 shadow-sm">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#166534] animate-pulse"></span>
-          <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] font-sans">
-            100% Farm-To-Bottle Transparency
-          </span>
-        </div>
-        <h3 class="text-2xl sm:text-3xl md:text-4xl font-serif font-normal text-[#111827] tracking-tight mb-2.5">
-          Don't Just Take Our Word For It. <span class="italic text-[#166534]">Step Inside Our Nashik Facility.</span>
-        </h3>
-        <p class="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
-          Watch how single-strain Arthrospira platensis is cultivated in closed bio-domes, gently harvested, and cryo-milled below 40°C in Maharashtra.
-        </p>
-      </div>
-
-      <!-- Video Tour Grid (Video on Left, 3 Pillars on Right) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-gray-200/80 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
-        
-        <!-- Video Player Frame (Lite Facade - Zero Lag) -->
-        <div class="lg:col-span-7">
-          <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-gray-900 border border-gray-200/90 shadow-md group cursor-pointer" id="facility-video-card">
-            
-            <!-- Poster Image -->
-            <img 
-              src="https://i.ytimg.com/vi/WbhJp-tZVj4/maxresdefault.jpg" 
-              alt="Inside Sujata Nutrilive Nashik Spirulina Cultivation Facility" 
-              loading="lazy" 
-              decoding="async"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
-            />
-            
-            <!-- Subtle Vignette -->
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-
-            <!-- Top Corner Pill -->
-            <div class="absolute top-3.5 left-3.5 z-10">
-              <span class="bg-black/60 backdrop-blur-md text-white/90 px-3 py-1 rounded-full text-[11px] font-mono font-medium border border-white/20 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
-                Nashik Facility Tour • 1:01 Min
-              </span>
-            </div>
-
-            <!-- Minimalist Center Play Button -->
-            <div class="absolute inset-0 flex items-center justify-center z-10" id="facility-play-button-overlay">
-              <div class="w-15 h-15 sm:w-16 sm:h-16 rounded-full bg-white/95 text-[#166534] flex items-center justify-center shadow-xl backdrop-blur-sm group-hover:scale-115 group-hover:bg-white transition-all duration-300">
-                <svg class="w-7 h-7 fill-current translate-x-0.5" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
-            </div>
-
-            <!-- Dynamic Iframe Container (Injected on Click) -->
-            <div id="facility-video-container" class="absolute inset-0 w-full h-full hidden bg-black"></div>
-          </div>
-        </div>
-
-        <!-- 3 Pillars on Right -->
-        <div class="lg:col-span-5 flex flex-col justify-between gap-6">
-          <div>
-            <h4 class="text-lg font-serif font-bold text-[#111827] mb-4">
-              Cultivated with Bio-Pharmaceutical Rigor:
-            </h4>
-            
-            <div class="space-y-4">
-              <!-- Pillar 1 -->
-              <div class="flex items-start gap-3.5">
-                <div class="w-8 h-8 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center shrink-0 text-sm font-bold border border-emerald-200/60 mt-0.5">
-                  💧
-                </div>
-                <div>
-                  <h5 class="text-sm font-bold text-[#111827]">Closed-Dome Hydroponic Ponds</h5>
-                  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
-                    Grown with filtered deep-bore groundwater, entirely protected from outdoor dust, open-air bird droppings, and toxic agricultural runoff.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Pillar 2 -->
-              <div class="flex items-start gap-3.5">
-                <div class="w-8 h-8 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center shrink-0 text-sm font-bold border border-emerald-200/60 mt-0.5">
-                  ❄️
-                </div>
-                <div>
-                  <h5 class="text-sm font-bold text-[#111827]">Sub-40°C Cryo-Dehydration</h5>
-                  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
-                    Unlike commercial spray-drying at 80°C that kills nutrients, our cold-milled protocol keeps delicate Phycocyanin (20%+) and enzymes alive.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Pillar 3 -->
-              <div class="flex items-start gap-3.5">
-                <div class="w-8 h-8 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center shrink-0 text-sm font-bold border border-emerald-200/60 mt-0.5">
-                  🔬
-                </div>
-                <div>
-                  <h5 class="text-sm font-bold text-[#111827]">Batch ICP-MS Heavy Metal Clearance</h5>
-                  <p class="text-xs text-gray-500 leading-relaxed mt-0.5">
-                    Every harvest is cleared by certified NABL labs. Lead levels are strictly under 0.01 ppm — 100x purer than national government limits.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Micro-Trust Strip -->
-          <div class="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3 text-[11px] text-gray-500 font-medium">
-            <span class="flex items-center gap-1.5 text-gray-700">
-              <svg class="w-3.5 h-3.5 text-[#166534]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              FSSAI Lic. #11521999000284
-            </span>
-            <span class="text-[#166534] font-bold">Maharashtra Agrotech Hub</span>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </div>
-
 </section>
-
-<!-- 🎥 INLINE FACILITY TOUR PLAYER SCRIPT -->
-<script>
-  function initFacilityTourPlayer() {
-    const card = document.getElementById('facility-video-card');
-    const container = document.getElementById('facility-video-container');
-    const playBtn = document.getElementById('facility-play-button-overlay');
-    
-    if (card && container) {
-      card.addEventListener('click', () => {
-        container.innerHTML = `
-          <iframe 
-            src="https://www.youtube-nocookie.com/embed/WbhJp-tZVj4?autoplay=1&rel=0&modestbranding=1&playsinline=1" 
-            title="Inside Sujata Nutrilive Nashik Spirulina Cultivation Facility" 
-            class="w-full h-full border-0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-          </iframe>
-        `;
-        container.classList.remove('hidden');
-        if (playBtn) playBtn.classList.add('hidden');
-      });
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFacilityTourPlayer);
-  } else {
-    initFacilityTourPlayer();
-  }
-  document.addEventListener('astro:page-load', initFacilityTourPlayer);
-</script>

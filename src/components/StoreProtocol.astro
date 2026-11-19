@@ -1,109 +1,68 @@
 ---
 // src/components/StoreProtocol.astro
+// Honest "how to take it" guide. No disease/cure claims, no guaranteed outcomes.
+const steps = [
+  {
+    days: "Day 1 – 7",
+    title: "Start gently.",
+    body: "Take 1 capsule after breakfast with a glass of water. Starting low lets your stomach get used to the extra plant protein and fibre, so most people have no bloating or discomfort.",
+    tag: "1 capsule daily",
+  },
+  {
+    days: "Day 8 – 21",
+    title: "Move to the full serving.",
+    body: "Increase to 2 capsules (1 g) after breakfast. Same time every day works best. Many customers tell us their energy feels steadier through the afternoon once the routine is regular.",
+    tag: "2 capsules daily",
+  },
+  {
+    days: "Day 22 – 30",
+    title: "Make it a habit.",
+    body: "By now it is part of your morning. Pair it with Sea Buckthorn after meals if you also want Omega-7 and Vitamin C for your skin. Individual results vary with diet, sleep and activity.",
+    tag: "Daily routine",
+  },
+];
 ---
 
-<!-- ⏳ Block 8: The 30-Day Transformation Protocol (Zero Scroll-Jacking • Mobile Fluid) -->
-<section id="protocol-timeline" class="py-16 md:py-24 bg-[#F9F9F6] text-[#111827] font-sans border-t border-gray-200/80 relative overflow-hidden">
-  
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-    
-    {/* Section Header */}
+<section id="protocol-timeline" aria-labelledby="protocol-heading" class="py-16 md:py-24 bg-[#F9F9F6] text-[#111827] font-sans border-t border-gray-200/80">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
+
     <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100/70 border border-emerald-300/50 mb-3.5 shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-emerald-700 animate-pulse"></span>
-        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] font-sans">
-          The 30-Day Protocol
-        </span>
-      </div>
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight mb-3">
-        Your 30-Day <span class="italic text-[#166534]">Biological Rebirth.</span>
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] mb-3">Your First 30 Days</span>
+      <h2 id="protocol-heading" class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal tracking-tight leading-tight mb-3">
+        How to Take Spirulina: <span class="italic text-[#166534]">A Simple 30-Day Routine</span>
       </h2>
-      <p class="text-xs sm:text-sm md:text-base text-gray-600 font-normal leading-relaxed font-sans">
-        True cellular renewal is not an overnight chemical spike. It is a compounding biological transformation. Here is what happens when you stay consistent.
+      <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+        Spirulina is a daily food supplement, not a quick fix. Consistency matters more than dose.
       </p>
     </div>
 
-    {/* The 3 Compounding Milestones (Mobile Vertical Connected Flow / Desktop 3-Col Step Grid) */}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
-      
-      {/* Milestone 1: Day 1 - 7 */}
-      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-4">
-            <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full font-sans">
-              Day 1 – 7
-            </span>
-            <span class="text-3xl font-serif font-bold text-gray-200 group-hover:text-emerald-300 transition-colors">01</span>
+    <ol class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+      {steps.map((s, i) => (
+        <li class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full">{s.days}</span>
+              <span class="text-3xl font-serif font-bold text-gray-200" aria-hidden="true">0{i + 1}</span>
+            </div>
+            <h3 class="text-xl font-bold font-serif mb-2 leading-snug">{s.title}</h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">{s.body}</p>
           </div>
-          <h3 class="text-xl font-bold font-serif text-[#111827] mb-2 leading-snug">
-            The Awakening.
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed mb-6">
-            Highly bio-available organic iron and B-vitamins flood your bloodstream. The very first measurable shift? Your 3 PM afternoon energy slump completely disappears.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-emerald-800 font-sans">
-          <span>⚡ Cellular Oxygenation Boost</span>
-        </div>
-      </div>
+          <p class="pt-4 border-t border-gray-100 text-xs font-bold text-emerald-800">{s.tag}</p>
+        </li>
+      ))}
+    </ol>
 
-      {/* Milestone 2: Day 8 - 21 */}
-      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-4">
-            <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full font-sans">
-              Day 8 – 21
-            </span>
-            <span class="text-3xl font-serif font-bold text-gray-200 group-hover:text-emerald-300 transition-colors">02</span>
-          </div>
-          <h3 class="text-xl font-bold font-serif text-[#111827] mb-2 leading-snug">
-            The Gut Cleanse.
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed mb-6">
-            Natural Chlorophyll-a neutralizes chronic stomach acidity and morning bloating. Bowel motility normalizes as healthy gut microbiome flora begins multiplying.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-emerald-800 font-sans">
-          <span>🌿 Alkaline Digestive Balance</span>
-        </div>
-      </div>
-
-      {/* Milestone 3: Day 22 - 30 */}
-      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative group">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-4">
-            <span class="text-xs font-black uppercase tracking-[0.2em] text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full font-sans">
-              Day 22 – 30
-            </span>
-            <span class="text-3xl font-serif font-bold text-gray-200 group-hover:text-emerald-300 transition-colors">03</span>
-          </div>
-          <h3 class="text-xl font-bold font-serif text-[#111827] mb-2 leading-snug">
-            The Deep Baseline.
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed mb-6">
-            Phycocyanin and Superoxide Dismutase (SOD) establish an antioxidant shield. Natural keratin strengthens hair roots and skin develops a healthy, clean glow.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-bold text-emerald-800 font-sans">
-          <span>✨ Radiant Skin & Immune Baseline</span>
-        </div>
-      </div>
-
-    </div>
-
-    {/* Risk Reversal Callout */}
     <div class="max-w-xl mx-auto text-center">
-      <a 
-        href="#product-ecosystem" 
-        class="inline-flex items-center gap-2 bg-[#111827] hover:bg-[#166534] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-md touch-manipulation cursor-pointer font-sans"
+      <a
+        href="#product-ecosystem"
+        class="inline-flex items-center gap-2 bg-[#111827] hover:bg-[#166534] text-white px-8 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors shadow-md touch-manipulation"
       >
-        <span>Begin Your 30-Day Protocol →</span>
+        Start Your 30-Day Routine →
       </a>
-      <p class="text-[11px] text-gray-500 font-medium font-sans mt-2.5">
-        Backed by our 90-Day Vitality Money-Back Guarantee (Full Cellular Renewal Protocol). Zero friction.
+      <p class="text-[11px] text-gray-500 font-medium mt-2.5">
+        Backed by our 90-Day Vitality Guarantee. Full refund even on empty bottles.
       </p>
     </div>
 
   </div>
-
 </section>

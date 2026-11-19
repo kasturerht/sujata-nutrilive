@@ -1,5 +1,6 @@
 ---
 // src/components/StoreSocialProof.astro
+import { BRAND_CONFIG } from '../config/brand';
 // 🏛️ Silicon Valley "Clean Editorial Split" Architecture (Oct 2026)
 // MasterClass & Apple Health Aesthetic: Zero clutter on thumbnails, clean editorial white card below
 
@@ -20,70 +21,26 @@ interface VideoStory {
   productHandle: string;
 }
 
+// ✅ Only genuine CUSTOMER stories for Spirulina / Sea Buckthorn. No disease or cure claims.
+// Removed (Nov 2026 compliance cleanup): sciatica "relief" story (disease claim), Korean cream
+// acne story (treatment claim + off-focus product). The founder video moved to StoreAuthorityVault.
+// ⚠️ Keep each highlight/quote faithful to what the customer actually says in the video.
 const videoStories: VideoStory[] = [
   {
-    id: "sciatica-relief",
-    videoId: "RrlZeX3CyRk",
-    category: "Joint & Sciatica",
-    filterKey: "sciatica",
-    duration: "1:15",
-    rating: 5,
-    highlight: "15-Year Chronic Sciatica Completely Relieved",
-    quote: "After trying multiple injections and pain tablets with no relief, the Sujata Spirulina + Sea Buckthorn protocol completely stopped the nerve pinching and lower back stiffness.",
-    patientName: "Verified Patient Review",
-    location: "Age 58 • Maharashtra",
-    posterUrl: "https://i.ytimg.com/vi/RrlZeX3CyRk/hqdefault.jpg",
-    productTitle: "Spirulina + Sea Buckthorn Combo",
-    productPrice: "₹1,299",
-    productHandle: "/product/sujata-spirulina-sea-buckthorn-combo-pack"
-  },
-  {
-    id: "glass-skin-acne",
-    videoId: "M51vkSh7JLE",
-    category: "Skin & Glow",
-    filterKey: "skin",
-    duration: "0:15",
-    rating: 5,
-    highlight: "Acne & Dark Spots Cleared in 45 Days",
-    quote: "Stubborn hormonal breakouts and dark marks refused to fade with chemical creams. The Spirulina Korean Cream repaired my skin barrier and gave a real natural glow.",
-    patientName: "Pooja S. (Verified Buyer)",
-    location: "Age 26 • Pune",
-    posterUrl: "https://i.ytimg.com/vi/M51vkSh7JLE/hqdefault.jpg",
-    productTitle: "Spirulina Korean Glow Cream",
-    productPrice: "₹599",
-    productHandle: "/product/sujata-spirulina-korean-cream"
-  },
-  {
-    id: "daily-energy-vitality",
+    id: "daily-energy",
     videoId: "gMis3c4ivKo",
-    category: "Energy & Gut",
+    category: "Energy",
     filterKey: "energy",
     duration: "1:20",
     rating: 5,
-    highlight: "Zero Afternoon Fatigue & Acid Reflux Gone",
-    quote: "I used to wake up sluggish with constant acid reflux and bloating. Within 3 weeks on pure cold-pressed spirulina, digestion smoothed out and energy stays steady till late night.",
+    highlight: "Steady Energy Through the Day in 3 Weeks",
+    quote: "I used to wake up sluggish. Within 3 weeks on Sujata spirulina, my energy stays steady till late night.",
     patientName: "Sandeep P. (Verified Buyer)",
     location: "Age 42 • Nashik",
     posterUrl: "https://i.ytimg.com/vi/gMis3c4ivKo/hqdefault.jpg",
     productTitle: "100% Pure Spirulina Capsules",
-    productPrice: "₹699",
+    productPrice: "",
     productHandle: "/product/sujata-spirulina-capsules"
-  },
-  {
-    id: "doctor-authority",
-    videoId: "ugm6QqndEzQ",
-    category: "Doctor Backed",
-    filterKey: "doctors",
-    duration: "1:36",
-    rating: 5,
-    highlight: "Farm-Fresh Pure Algae Trusted by 100+ Doctors",
-    quote: "Grown in our own bio-secure closed ponds in Nashik without synthetic binders. Certified under FSSAI and ICP-MS lab tests with heavy metals below 0.01 ppm.",
-    patientName: "Yash Suryavanshi (Founder)",
-    location: "Nashik Cultivation Facility",
-    posterUrl: "https://i.ytimg.com/vi/ugm6QqndEzQ/hqdefault.jpg",
-    productTitle: "Spirulina Cold-Pressed Tablets",
-    productPrice: "₹699",
-    productHandle: "/product/sujata-spirulina-tablets"
   }
 ];
 
@@ -126,34 +83,25 @@ const socialProofSchema = {
             <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           ))}
         </div>
-        <span class="text-sm font-bold text-[#111827] font-sans">4.9/5.0</span>
+        <span class="text-sm font-bold text-[#111827] font-sans">{BRAND_CONFIG.reviews.ratingValue}/5</span>
         <div class="w-1 h-1 bg-gray-300 rounded-full"></div>
-        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest font-sans">50,000+ Verified Buyers</span>
+        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest font-sans">{BRAND_CONFIG.reviews.verifiedBuyersLabel} Verified Buyers</span>
       </div>
 
       <h2 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal text-[#111827] tracking-tight mb-4">
-        Real People. <span class="italic text-[#166534]">Real Transformations.</span>
+        Spirulina Reviews from <span class="italic text-[#166534]">Real Customers.</span>
       </h2>
-      
-      <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-sans">
-        Watch authentic, unscripted recovery journeys and clinical results shared directly by verified patients and daily users.
-      </p>
 
-      <!-- Category Filter Pills -->
-      <div class="flex flex-wrap items-center justify-center gap-2.5 mt-8" id="video-filter-group">
-        <button data-filter="all" class="video-filter-btn px-6 py-2.5 rounded-full bg-[#111827] text-white text-xs font-bold shadow-sm transition-all touch-manipulation">All Stories</button>
-        <button data-filter="sciatica" class="video-filter-btn px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:border-gray-400 shadow-sm transition-all touch-manipulation">🦵 Joint & Sciatica</button>
-        <button data-filter="skin" class="video-filter-btn px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:border-gray-400 shadow-sm transition-all touch-manipulation">✨ Glass Skin & Acne</button>
-        <button data-filter="energy" class="video-filter-btn px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:border-gray-400 shadow-sm transition-all touch-manipulation">⚡ Energy & Digestion</button>
-        <button data-filter="doctors" class="video-filter-btn px-6 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold hover:border-gray-400 shadow-sm transition-all touch-manipulation">🩺 Doctor Backed</button>
-      </div>
+      <p class="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-sans">
+        Unscripted video reviews from verified Sujata buyers about their daily routine. Individual experiences vary.
+      </p>
 
     </div>
 
     <!-- ==========================================
         ZONE 2: 4 CLEAN EDITORIAL CARDS (No Khichadi)
         ========================================== -->
-    <div id="video-stories-track" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pb-8 scroll-smooth">
+    <div id="video-stories-track" class={`grid grid-cols-1 gap-6 lg:gap-8 pb-8 mx-auto ${videoStories.length === 1 ? 'max-w-sm' : videoStories.length === 2 ? 'sm:grid-cols-2 max-w-3xl' : 'sm:grid-cols-2 lg:grid-cols-4'}`}>
       
       {videoStories.map((story) => (
         <div 
@@ -224,7 +172,7 @@ const socialProofSchema = {
               <span class="font-bold text-[#166534] group-hover:underline flex items-center gap-1">
                 {story.productTitle}
               </span>
-              <span class="font-mono text-gray-500">{story.productPrice} ➔</span>
+              <span class="font-mono text-gray-500">{story.productPrice || 'Shop'} ➔</span>
             </div>
 
           </div>
@@ -240,12 +188,10 @@ const socialProofSchema = {
     <div class="mt-8 pt-8 border-t border-gray-200/80 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500">
       <div class="flex items-center gap-2">
         <svg class="w-4 h-4 text-[#166534]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-        <span class="font-medium text-gray-700">100% Verified Customer & Patient Stories (Zero Scripted Actors)</span>
+        <span class="font-medium text-gray-700">Real verified buyers. No paid actors.</span>
       </div>
-      <div class="flex items-center gap-4 text-gray-600">
-        <span>FSSAI Lic. #11521999000284</span>
-        <span>•</span>
-        <span>Nashik Bio-Dome Facility</span>
+      <div class="flex flex-wrap items-center gap-4 text-gray-600">
+        <span>FSSAI Lic. #{BRAND_CONFIG.fssaiNumber}</span>
         <span>•</span>
         <a href="#product-ecosystem" class="text-[#166534] hover:underline font-bold">Explore Full Catalog ➔</a>
       </div>
