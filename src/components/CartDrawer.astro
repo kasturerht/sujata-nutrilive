@@ -174,7 +174,6 @@ try {
     const drawerEl = document.getElementById('cart-drawer');
     const DOMAIN = drawerEl?.getAttribute('data-domain') || "tvczdq-nu.myshopify.com";
     const TOKEN = drawerEl?.getAttribute('data-token') || "7e0a0176aede63ce4c6b199e18684018";
-    const SHIPPING_THRESHOLD = 1500;
 
     // Local Cart Data Management (Strict Sanitization & Anti-Corruption)
     function getLocalCart() {
@@ -1121,7 +1120,9 @@ try {
 
     // 🚀 Silicon Valley Standard: Back-Forward Cache (bfcache) & Page Lifecycle Recovery
     // When a user hits the browser Back button from Shopify checkout, instant restoration happens!
+    // `persisted` only: on a normal load `pageshow` also fires, and init() below already renders.
     window.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return;
       resetCheckoutBtn();
       window.renderSujataCart();
     });
@@ -1136,11 +1137,6 @@ try {
 
     window.addEventListener('focus', () => {
       resetCheckoutBtn();
-    });
-
-    window.addEventListener('popstate', () => {
-      resetCheckoutBtn();
-      window.renderSujataCart();
     });
 
     // Cross-tab Synchronization
@@ -1158,7 +1154,7 @@ try {
       }
     });
 
-    // Initialize on page load & Astro View Transitions
+    // Initialize on page load
     function init() {
       resetCheckoutBtn();
       window.renderSujataCart();
@@ -1169,8 +1165,6 @@ try {
     } else {
       init();
     }
-    document.addEventListener('astro:page-load', init);
-    document.addEventListener('astro:after-swap', init);
 
   })();
 </script>

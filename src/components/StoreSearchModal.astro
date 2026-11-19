@@ -247,15 +247,25 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       link.addEventListener('click', closeModal);
     });
 
-    // 2. Recent Searches Storage Engine
+    // 2. Recent Searches Storage Engine (corrupt/foreign values must never break the modal)
+    function readRecents() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem('sujata_recent_searches') || '[]');
+        return Array.isArray(parsed) ? parsed.filter((t) => typeof t === 'string').slice(0, 5) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    const escapeHtml = (str) => String(str).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
     function loadRecentSearches() {
-      const recents = JSON.parse(localStorage.getItem('sujata_recent_searches') || '[]');
+      const recents = readRecents();
       if (recents.length > 0 && recentsContainer && recentsList) {
         recentsContainer.classList.remove('hidden');
         recentsList.innerHTML = recents.map(term => `
-          <button type="button" class="recent-tag-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-gray-300 hover:text-white transition-all flex items-center gap-1.5 touch-manipulation" data-term="${term}">
+          <button type="button" class="recent-tag-btn px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-gray-300 hover:text-white transition-all flex items-center gap-1.5 touch-manipulation" data-term="${escapeHtml(term)}">
             <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            ${term}
+            ${escapeHtml(term)}
           </button>
         `).join('');
 
@@ -275,7 +285,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 
     function saveRecentSearch(term) {
       if (!term || term.trim().length < 2) return;
-      let recents = JSON.parse(localStorage.getItem('sujata_recent_searches') || '[]');
+      let recents = readRecents();
       recents = [term, ...recents.filter(t => t.toLowerCase() !== term.toLowerCase())].slice(0, 5);
       localStorage.setItem('sujata_recent_searches', JSON.stringify(recents));
     }
@@ -533,5 +543,4 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
   } else {
     initPredictiveSearch();
   }
-  document.addEventListener('astro:page-load', initPredictiveSearch);
 </script>

@@ -121,8 +121,14 @@ import { Image } from 'astro:assets';
 
     if (!overlay || !card) return;
 
-    let popupShown = false;
-    const hasSeenPopup = localStorage.getItem('sujata_exit_popup_shown'); 
+    let hasSeenPopup = false;
+    try { hasSeenPopup = localStorage.getItem('sujata_exit_popup_shown') === 'true'; } catch (e) {}
+    // Already seen: attach nothing (no timers, no scroll/mouse listeners for the page lifetime).
+    if (hasSeenPopup) return;
+
+    let popupShown = false; // ever shown this page view
+    let popupOpen = false;  // currently visible
+    const triggerCleanups: Array<() => void> = [];
 
     // Never interrupt an active purchase flow (cart drawer open).
     const isCartOpen = () => {
@@ -131,7 +137,7 @@ import { Image } from 'astro:assets';
     };
 
     const showPopup = () => {
-      if (popupShown || hasSeenPopup || isCartOpen()) return;
+      if (popupShown || isCartOpen()) return;
 
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('opacity-100', 'pointer-events-auto');
@@ -141,10 +147,15 @@ import { Image } from 'astro:assets';
       
       document.body.style.overflow = 'hidden';
       popupShown = true;
-      localStorage.setItem('sujata_exit_popup_shown', 'true');
+      popupOpen = true;
+      try { localStorage.setItem('sujata_exit_popup_shown', 'true'); } catch (e) {}
+      // One-shot: detach every trigger (exit-intent, scroll, fallback timer) once shown.
+      triggerCleanups.splice(0).forEach((fn) => fn());
     };
 
     const hidePopup = () => {
+      if (!popupOpen) return; // never touch body overflow (e.g. cart drawer lock) unless we own it
+      popupOpen = false;
       overlay.classList.remove('opacity-100', 'pointer-events-auto');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       
@@ -163,12 +174,17 @@ import { Image } from 'astro:assets';
       const handleMouseOut = (e: MouseEvent) => {
         if (!e.relatedTarget && e.clientY <= 0) showPopup();
       };
-      setTimeout(() => {
+      const armTimer = window.setTimeout(() => {
         document.addEventListener('mouseout', handleMouseOut);
       }, 5000);
 
       // 2. Desktop fallback: 45s of time on page
-      setTimeout(showPopup, 45000);
+      const fallbackTimer = window.setTimeout(showPopup, 45000);
+      triggerCleanups.push(() => {
+        clearTimeout(armTimer);
+        clearTimeout(fallbackTimer);
+        document.removeEventListener('mouseout', handleMouseOut);
+      });
     } else {
       // 3. Mobile: only after real engagement (20s+ on page, read 400px+, then scrolled back to top)
       let maxScrollY = 0;
@@ -185,6 +201,7 @@ import { Image } from 'astro:assets';
         }
       };
       window.addEventListener('scroll', handleScroll, { passive: true });
+      triggerCleanups.push(() => window.removeEventListener('scroll', handleScroll));
     }
 
     // Close Events
@@ -196,7 +213,7 @@ import { Image } from 'astro:assets';
 
     // Keyboard Dismiss
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && popupShown) {
+      if (e.key === 'Escape' && popupOpen) {
         hidePopup();
       }
     });
@@ -254,7 +271,8 @@ import { Image } from 'astro:assets';
       try {
         localStorage.setItem('sujata_discount_code', code);
       } catch(e) {}
-      navigator.clipboard.writeText(code);
+      // Clipboard API is missing in insecure contexts and some in-app webviews, and can reject on permission.
+      try { navigator.clipboard?.writeText(code)?.catch(() => {}); } catch (e) {}
       
       copyBtn.innerHTML = `<span class="text-sm font-bold text-[#166534] uppercase tracking-widest">✔ COPIED!</span>`;
       
@@ -269,5 +287,4 @@ import { Image } from 'astro:assets';
   } else {
     initExitPopup();
   }
-  document.addEventListener('astro:page-load', initExitPopup);
 </script>

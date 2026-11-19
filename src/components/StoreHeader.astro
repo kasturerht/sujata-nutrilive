@@ -436,7 +436,6 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
     const menuDrawer = document.getElementById('mobile-nav-drawer');
     const closeMenuBtn = document.getElementById('close-mobile-menu');
     const mobileSearchBtn = document.getElementById('mobile-search-btn');
-    const mobileSearchInput = document.getElementById('mobile-search-input');
     const navLinks = document.querySelectorAll('.mobile-nav-link');
 
     const openMenu = () => {
@@ -535,5 +534,4 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
   } else {
     initHeaderSystem();
   }
-  document.addEventListener('astro:page-load', initHeaderSystem);
 </script>

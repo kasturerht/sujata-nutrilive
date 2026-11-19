@@ -248,7 +248,6 @@ const conversionData = [
   } else {
     updateDeliveryEstimates();
   }
-  document.addEventListener('astro:page-load', updateDeliveryEstimates);
   window.addEventListener('storage', updateDeliveryEstimates);
   window.addEventListener('pincode-updated', updateDeliveryEstimates);
 </script>

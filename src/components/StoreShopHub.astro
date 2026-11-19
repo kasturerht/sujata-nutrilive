@@ -605,13 +605,10 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
     });
 
     // 🚀 Silicon Valley Standard: Back-Forward Cache (bfcache) & Tab Lifecycle Listeners
-    window.addEventListener('pageshow', (e) => { resetHubBuyButtons(); });
+    window.addEventListener('pageshow', (e) => { if (e.persisted) resetHubBuyButtons(); });
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') resetHubBuyButtons(); });
     window.addEventListener('focus', resetHubBuyButtons);
-    window.addEventListener('popstate', resetHubBuyButtons);
     window.addEventListener('sujata:buttons-reset', resetHubBuyButtons);
-    document.addEventListener('astro:page-load', resetHubBuyButtons);
-    document.addEventListener('astro:after-swap', resetHubBuyButtons);
 
     // 3. Quick-Add to Cart
     document.querySelectorAll('.hub-add-cart-btn').forEach(btn => {
@@ -675,7 +672,6 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
     initAllShopHub();
   }
 
-  document.addEventListener('astro:page-load', initAllShopHub);
 
   window.addEventListener('pincode-updated', () => {
     updateDeliveryEstimators();

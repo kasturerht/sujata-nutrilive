@@ -2094,7 +2094,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
                         data-is-best-value={isBestValue ? 'true' : 'false'}
                       >
                         {isBestValue && (
-                          <span class="absolute -top-2.5 right-1 sm:right-2 text-[7px] sm:text-[7.5px] font-black bg-emerald-700 text-white px-1.5 py-0.2 rounded-full uppercase tracking-wider shadow-xs border border-white">Best</span>
+                          <span class="absolute -top-2.5 right-1 sm:right-2 text-[7px] sm:text-[7.5px] font-black bg-emerald-700 text-white px-1.5 py-px rounded-full uppercase tracking-wider shadow-xs border border-white">Best</span>
                         )}
                         <span class="text-[11px] sm:text-xs tracking-tight leading-tight block truncate w-full">{shortLabel}</span>
                       </button>
@@ -2937,7 +2937,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         <img src={images[0]?.url || "/spirulina-bottle.png"} alt={product.title} class="w-full h-full object-contain" />
       </div>
       <div class="flex flex-col min-w-0">
-        <span class="text-xs font-bold text-white truncate max-w-[70px] xs:max-w-[95px] sm:max-w-[130px] font-['Playfair_Display'] leading-tight">{product.title}</span>
+        <span class="text-xs font-bold text-white truncate max-w-[70px] min-[380px]:max-w-[95px] sm:max-w-[130px] font-['Playfair_Display'] leading-tight">{product.title}</span>
         <span id="sticky-variant-title" class="text-[9px] text-emerald-200/90 truncate font-semibold block leading-tight">{variants[0]?.title && variants[0]?.title !== 'Default Title' ? variants[0]?.title : ''}</span>
         <!-- Preserved DOM IDs for Dynamic Intent Engine Compatibility -->
         <span class="hidden" id="sticky-benefit-pill">COD Available</span>
@@ -3028,7 +3028,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
   </style>
 
   <script is:inline>
-    // All code is wrapped in an init function to handle Astro's ViewTransitions and page loads
+    // All code is wrapped in an idempotent init function (runs once on DOMContentLoaded)
     function initProductPage() {
       // 🌟 Idempotency Guard: Prevent duplicate event listener attachments
       const buyBox = document.getElementById('magnetic-btn-wrapper');
@@ -3039,7 +3039,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       try {
         if (typeof window.dispatchStoreEvent === 'function') {
           var activeVar = document.querySelector('.variant-btn.selected-variant') || document.querySelector('.variant-btn');
-          var mainBtn = document.getElementById('add-to-cart-btn') || document.getElementById('magnetic-atc-btn');
+          var mainBtn = document.getElementById('add-to-cart-btn');
           var vId = activeVar ? activeVar.getAttribute('data-variant-id') : (mainBtn ? mainBtn.getAttribute('data-variant-id') : '');
           var vPrice = activeVar ? parseFloat(activeVar.getAttribute('data-price')) : (mainBtn ? parseFloat(mainBtn.getAttribute('data-price')) : 0);
           var pTitle = document.querySelector('h1') ? document.querySelector('h1').innerText.trim() : 'Sujata Formulation';
@@ -3215,19 +3215,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         const scrollBar = document.getElementById('scroll-progress');
         if(scrollBar) scrollBar.style.width = scrolled + '%';
       }, { passive: true });
-
-      // Urgency Timer
-      const timerElement = document.getElementById('countdown-timer');
-      if(timerElement) {
-        let time = 2 * 3600 + 14 * 60;
-        setInterval(() => {
-          time--;
-          const h = Math.floor(time / 3600).toString().padStart(2, '0');
-          const m = Math.floor((time % 3600) / 60).toString().padStart(2, '0');
-          const s = (time % 60).toString().padStart(2, '0');
-          timerElement.innerText = `${h}:${m}:${s}`;
-        }, 1000);
-      }
 
       // 3D Hover & Glare (Performance optimized with requestAnimationFrame throttling)
       const track = document.getElementById('premium-3d-track');
@@ -3514,8 +3501,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       const stickyCodSpinner = document.getElementById('sticky-cod-spinner');
       const stickyBuyNowBtn = document.getElementById('sticky-buynow-btn');
       const stickyUpiPrice = document.getElementById('sticky-upi-price');
-      const stickyAtcBtn = document.getElementById('sticky-atc-btn');
-      const stickyBtnText = document.getElementById('sticky-btn-text');
       const buyNowBtn = document.getElementById('buy-now-btn');
       const buyNowBtnText = document.getElementById('buy-now-btn-text');
       const stickyBuyNowText = document.getElementById('sticky-buynow-text');
@@ -3618,7 +3603,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         const isEligibleForCod = !isNoCodTag;
         const pdpCodNotice = document.getElementById('pdp-cod-threshold-notice');
         const pdpCodNoticeText = document.getElementById('pdp-cod-notice-text');
-        const codSubtextLabel = document.getElementById('cod-subtext-label');
 
         if (!isEligibleForCod) {
           if (productState.paymentMode === 'cod') {
@@ -3628,7 +3612,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           tabCod?.classList.add('opacity-60', 'cursor-not-allowed', 'border-dashed');
           stickyCodBtn?.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
           if (stickyCodPrice) stickyCodPrice.innerText = 'Prepaid Only';
-          if (codSubtextLabel) codSubtextLabel.innerText = 'Prepaid Only 🔒';
           if (pdpCodNotice) {
             if (pdpCodNoticeText) {
               pdpCodNoticeText.innerHTML = `<span>🔒 Available exclusively via secure UPI / Prepaid payment (10% instant discount applied).</span>`;
@@ -3638,7 +3621,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         } else {
           tabCod?.classList.remove('opacity-60', 'cursor-not-allowed', 'border-dashed');
           stickyCodBtn?.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
-          if (codSubtextLabel) codSubtextLabel.innerText = 'Regular • Pay at Door';
           if (pdpCodNotice) pdpCodNotice.classList.add('hidden');
         }
 
@@ -3654,7 +3636,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
 
         // 4. Update ATC & Buy Now Buttons Payload Attributes
         const atcSubtitle = isUpi ? '⚡ 10% Instant UPI / Prepaid Discount' : '📦 Standard Cash on Delivery';
-        [atcBtn, stickyAtcBtn, buyNowBtn, stickyCodBtn, stickyBuyNowBtn].forEach(btn => {
+        [atcBtn, buyNowBtn, stickyCodBtn, stickyBuyNowBtn].forEach(btn => {
           if (!btn) return;
           btn.setAttribute('data-variant-id', productState.variantId);
           btn.setAttribute('data-price', productState.basePrice);
@@ -3692,7 +3674,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           }
           if (stickyBuyNowText) stickyBuyNowText.innerText = "Buy Now";
           if (btnTextElement) btnTextElement.innerText = "Add to Cart (10% OFF)";
-          if (stickyBtnText) stickyBtnText.innerText = "Cart";
         } else {
           tabCod?.classList.add('bg-white', 'text-[#111827]', 'shadow-xs', 'border-gray-800');
           tabCod?.classList.remove('text-gray-600', 'border-transparent');
@@ -3704,7 +3685,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           }
           if (stickyBuyNowText) stickyBuyNowText.innerText = "Buy Now";
           if (btnTextElement) btnTextElement.innerText = "Add to Cart";
-          if (stickyBtnText) stickyBtnText.innerText = "Cart";
         }
 
         // 6. Update Mobile Sticky Bottom Bar Dynamic Meta
@@ -3972,12 +3952,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         handlePdpBuyNow(stickyBuyNowBtn);
       });
 
-      stickyAtcBtn?.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handlePdpAddToCart(stickyAtcBtn);
-      });
-
       buyNowBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -3985,10 +3959,9 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       });
 
       // 🚀 Silicon Valley Standard: BFCache & Tab Lifecycle Listeners for PDP
-      window.addEventListener('pageshow', () => { resetPdpBuyButtons(); });
+      window.addEventListener('pageshow', (e) => { if (e.persisted) resetPdpBuyButtons(); });
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') resetPdpBuyButtons(); });
       window.addEventListener('focus', resetPdpBuyButtons);
-      window.addEventListener('popstate', resetPdpBuyButtons);
       window.addEventListener('sujata:buttons-reset', resetPdpBuyButtons);
 
       // 1.9 High-Converting Mobile Sticky Bottom Bar Controller (IntersectionObserver State Machine)
@@ -4054,44 +4027,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         }, { passive: true });
       }
 
-      // 2. WhatsApp Opt-in Checkbox State Logic (RTO Reduction)
-      const waToggle = document.getElementById('whatsapp-toggle-container');
-      const waCheckbox = document.getElementById('whatsapp-checkbox');
-      
-      if (waToggle && waCheckbox) {
-        const checkboxIcon = waCheckbox.querySelector('svg');
-        const isOptedIn = localStorage.getItem('sujata_whatsapp_optin') === 'true';
-        
-        const updateCheckboxState = (active) => {
-          if (active) {
-            waCheckbox.classList.remove('bg-white');
-            waCheckbox.classList.add('bg-[#166534]');
-            checkboxIcon?.classList.remove('scale-0');
-            checkboxIcon?.classList.add('scale-100');
-          } else {
-            waCheckbox.classList.remove('bg-[#166534]');
-            waCheckbox.classList.add('bg-white');
-            checkboxIcon?.classList.remove('scale-100');
-            checkboxIcon?.classList.add('scale-0');
-          }
-        };
-
-        if (isOptedIn) updateCheckboxState(true);
-        
-        waToggle.addEventListener('click', () => {
-          const active = waCheckbox.classList.contains('bg-[#166534]');
-          if (active) {
-            updateCheckboxState(false);
-            localStorage.setItem('sujata_whatsapp_optin', 'false');
-          } else {
-            updateCheckboxState(true);
-            localStorage.setItem('sujata_whatsapp_optin', 'true');
-            
-            
-          }
-        });
-      }
-
       // 3. Lite YouTube Player Facade (Instant Play on Click, 0ms initial render block)
       document.querySelectorAll('.youtube-lite-player').forEach(player => {
         player.addEventListener('click', function() {
@@ -4111,8 +4046,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       initProductPage();
     }
     
-    // Fallback for Astro ViewTransitions
-    document.addEventListener('astro:page-load', initProductPage);
   </script>
 
 </StoreLayout>

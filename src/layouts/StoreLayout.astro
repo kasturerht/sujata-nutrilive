@@ -437,6 +437,44 @@ const unifiedSchemaGraph = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- 🛡️ Storage Guard — MUST be the first script. Instagram/Facebook/WhatsApp webviews, Safari Private
+         Mode and blocked-cookie browsers throw SecurityError on storage access or QuotaExceededError on
+         write. Unusable storage is swapped for an in-memory polyfill, and runtime write failures are
+         swallowed, so the 80+ storage call sites site-wide (cart, checkout, attribution) never crash. -->
+    <script is:inline>
+      (function () {
+        function memoryStorage() {
+          var d = {};
+          return {
+            getItem: function (k) { k = String(k); return Object.prototype.hasOwnProperty.call(d, k) ? d[k] : null; },
+            setItem: function (k, v) { d[String(k)] = String(v); },
+            removeItem: function (k) { delete d[String(k)]; },
+            clear: function () { d = {}; },
+            key: function (i) { var ks = Object.keys(d); return i < ks.length ? ks[i] : null; },
+            get length() { return Object.keys(d).length; }
+          };
+        }
+        ['localStorage', 'sessionStorage'].forEach(function (name) {
+          try {
+            var s = window[name], t = '__sj_probe__';
+            s.setItem(t, t); s.removeItem(t);
+          } catch (e) {
+            try { Object.defineProperty(window, name, { value: memoryStorage(), configurable: true }); } catch (e2) {}
+          }
+        });
+        try {
+          var P = window.Storage && window.Storage.prototype;
+          if (P && !P.__sjSafe) {
+            var nativeSet = P.setItem;
+            P.setItem = function (k, v) {
+              try { return nativeSet.call(this, k, v); }
+              catch (e) { if (window.console) console.warn('[storage] write skipped:', k, e && e.name); }
+            };
+            P.__sjSafe = true;
+          }
+        } catch (e) {}
+      })();
+    </script>
     <!-- 🛡️ Internal Staff Exclusion & Google Consent Mode v2 -->
     <script is:inline>
       (function() {
@@ -693,7 +731,7 @@ const unifiedSchemaGraph = {
             }
           });
         } else if (eventName === 'InitiateCheckout') {
-          var pModeGA = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
+          var pModeGA = data.payment_mode || localStorage.getItem('sujata_selected_payment_mode') || 'upi';
           var totalNumItems = (data.items || []).reduce(function(sum, it) { return sum + Number(it.quantity || 1); }, 0) || (data.items || []).length || 1;
           window.dataLayer.push({ ecommerce: null });
           window.dataLayer.push({
@@ -736,7 +774,7 @@ const unifiedSchemaGraph = {
             channel: data.channel || 'WhatsApp Support'
           });
         } else if (eventName === 'Purchase') {
-          var pModePurchase = data.payment_mode || (typeof localStorage !== 'undefined' ? localStorage.getItem('sujata_selected_payment_mode') : '') || 'upi';
+          var pModePurchase = data.payment_mode || localStorage.getItem('sujata_selected_payment_mode') || 'upi';
           window.dataLayer.push({ ecommerce: null });
           window.dataLayer.push({
             event: 'purchase',
@@ -788,7 +826,7 @@ const unifiedSchemaGraph = {
       (function() {
         var tracked50 = false;
         var tracked90 = false;
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function onScrollDepth() {
           var h = document.documentElement, 
               b = document.body,
               st = 'scrollTop',
@@ -806,6 +844,7 @@ const unifiedSchemaGraph = {
               window.dispatchStoreEvent('ScrollDepth', { depth: '90%' });
             }
           }
+          if (tracked50 && tracked90) window.removeEventListener('scroll', onScrollDepth);
         }, { passive: true });
       })();
 
