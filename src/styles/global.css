@@ -1,10 +1,7 @@
-/* 1. External Fonts ALWAYS go first */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
-/* 2. Tailwind v3 Core (The right way) */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Imported by StoreLayout.astro.
+   - Fonts load non-blocking from StoreLayout <head> (no render-blocking @import here).
+   - Tailwind base/components/utilities are injected by @astrojs/tailwind (applyBaseStyles);
+     re-declaring @tailwind here would duplicate the whole utility CSS. */
 
 /* Base resets & Font Application */
 html {

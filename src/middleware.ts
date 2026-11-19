@@ -98,8 +98,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // Cache static and marketing/product pages on Vercel Edge CDN
   if (context.request.method === 'GET' && response.status === 200) {
-    if (!pathname.startsWith('/api/') && !pathname.startsWith('/cart') && !pathname.startsWith('/checkout')) {
-      response.headers.set('Cache-Control', 'public, max-age=120, s-maxage=86400, stale-while-revalidate=604800');
+    // Respect a Cache-Control the page set itself (e.g. 'private, no-store' on a Shopify outage).
+    if (!response.headers.has('Cache-Control') && !pathname.startsWith('/api/') && !pathname.startsWith('/cart') && !pathname.startsWith('/checkout')) {
+      response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400');
     }
   }
 

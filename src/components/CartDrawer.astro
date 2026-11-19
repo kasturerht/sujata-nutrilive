@@ -37,15 +37,15 @@ try {
 <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-opacity duration-300 ease-out"></div>
 
 {/* The Premium Drawer (Responsive width across Mobile, Tablet, Laptop, Desktop) */}
-<div id="cart-drawer" data-domain={shopifyDomain} data-token={storefrontToken} data-no-cod-handles={JSON.stringify(noCodHandles)} class="fixed top-0 right-0 w-full sm:w-[440px] md:w-[460px] lg:w-[475px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
+<div id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title" data-domain={shopifyDomain} data-token={storefrontToken} data-no-cod-handles={JSON.stringify(noCodHandles)} class="fixed top-0 right-0 w-full sm:w-[440px] md:w-[460px] lg:w-[475px] h-[100dvh] h-screen bg-[#FAF9F6] z-[9999] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl flex flex-col border-l border-gray-200">
   
   {/* 1. Drawer Header (Compact & Crisp) */}
   <div class="px-4 sm:px-5 py-3 sm:py-3.5 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
     <div class="flex items-center gap-2">
-      <h2 class="text-base sm:text-lg font-serif font-semibold text-[#111827]">Your Daily Routine</h2>
+      <p role="heading" aria-level="2" id="cart-drawer-title" class="text-base sm:text-lg font-serif font-semibold text-[#111827]">Your Daily Routine</p>
       <span class="bg-[#166534] text-white text-[10.5px] font-bold font-sans px-2 py-0.5 rounded-full" id="cart-count-badge">0</span>
     </div>
-    <button id="close-cart-btn" aria-label="Close cart" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black transition-colors touch-manipulation cursor-pointer">
+    <button id="close-cart-btn" aria-label="Close cart" class="w-11 h-11 -mr-1.5 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black transition-colors touch-manipulation cursor-pointer">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
   </div>
@@ -77,7 +77,7 @@ try {
       <button 
         type="button" 
         id="cart-tab-upi"
-        class="py-1.5 px-2 rounded-lg text-xs font-bold transition-all text-emerald-950 bg-white border border-emerald-500/50 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation group"
+        class="py-1.5 px-2 rounded-lg text-xs font-bold transition-all text-emerald-950 bg-white border border-emerald-500/50 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer touch-manipulation group"
         data-mode="upi"
       >
         <span class="text-xs">⚡</span>
@@ -346,8 +346,8 @@ try {
         if (checkoutBtnText) checkoutBtnText.innerText = '⚡ Proceed to Pay with UPI';
 
         tabUpiEl?.classList.remove('bg-transparent', 'border-transparent', 'text-gray-600');
-        tabUpiEl?.classList.add('bg-white', 'border-emerald-500/50', 'text-emerald-950', 'shadow-xs');
-        tabCodEl?.classList.remove('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-xs');
+        tabUpiEl?.classList.add('bg-white', 'border-emerald-500/50', 'text-emerald-950', 'shadow-sm');
+        tabCodEl?.classList.remove('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-sm');
         tabCodEl?.classList.add('bg-transparent', 'border-transparent', 'text-gray-600');
       } else {
         if (subtotalEl) {
@@ -378,8 +378,8 @@ try {
         if (checkoutBtnText) checkoutBtnText.innerText = '📦 Proceed with Cash on Delivery';
 
         tabCodEl?.classList.remove('bg-transparent', 'border-transparent', 'text-gray-600');
-        tabCodEl?.classList.add('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-xs');
-        tabUpiEl?.classList.remove('bg-white', 'border-emerald-500/50', 'text-emerald-950', 'shadow-xs');
+        tabCodEl?.classList.add('bg-white', 'border-gray-800', 'text-[#111827]', 'shadow-sm');
+        tabUpiEl?.classList.remove('bg-white', 'border-emerald-500/50', 'text-emerald-950', 'shadow-sm');
         tabUpiEl?.classList.add('bg-transparent', 'border-transparent', 'text-gray-600');
       }
 
@@ -401,7 +401,7 @@ try {
             <div class="w-16 h-16 rounded-full bg-emerald-50 text-[#166534] flex items-center justify-center text-2xl mx-auto mb-4 border border-emerald-100">
               🌿
             </div>
-            <h3 class="text-base font-bold text-[#111827] mb-1">Your Routine is Empty</h3>
+            <p class="text-base font-bold text-[#111827] mb-1">Your Routine is Empty</p>
             <p class="text-xs text-gray-500 max-w-[240px] mx-auto mb-6">Select a starter kit or daily formulation to begin your wellness protocol.</p>
             <button onclick="window.closeSujataCart()" class="bg-[#111827] hover:bg-[#166534] text-white px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer">
               Explore Products →
@@ -414,13 +414,13 @@ try {
       container.innerHTML = items.map(item => `
         <div class="flex gap-2.5 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl sm:rounded-2xl border border-gray-200/90 shadow-2xs relative group">
           <div class="w-14 h-14 sm:w-16 sm:h-16 bg-[#FAF9F6] rounded-lg sm:rounded-xl p-1 flex items-center justify-center shrink-0 border border-gray-100">
-            <img src="${item.image || '/spirulina-bottle.png'}" alt="${item.title}" class="w-full h-full object-contain drop-shadow-2xs" />
+            <img src="${item.image || '/spirulina-bottle.png'}" alt="${item.title}" class="w-full h-full object-contain drop-shadow-sm" />
           </div>
 
           <div class="flex-1 flex flex-col justify-between min-w-0">
             <div class="flex items-start justify-between gap-1">
               <div class="min-w-0 flex-1 pr-1">
-                <h4 class="text-xs sm:text-[13px] font-bold text-[#111827] font-sans truncate leading-snug" title="${item.title}">${item.title}</h4>
+                <p class="text-xs sm:text-[13px] font-bold text-[#111827] font-sans truncate leading-snug" title="${item.title}">${item.title}</p>
                 <span class="text-[9.5px] sm:text-[10px] text-[#166534] font-semibold block mt-0.5 truncate">${item.subtitle || '100% Pure Cold-Pressed'}</span>
               </div>
               <button class="cart-remove-btn shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-400 text-xs flex items-center justify-center transition-colors cursor-pointer touch-manipulation" data-id="${item.id}" title="Remove item" aria-label="Remove ${item.title}">

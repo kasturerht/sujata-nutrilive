@@ -3,8 +3,37 @@
 
 const { products = [] } = Astro.props;
 
-// Allow all products exactly in the sequence set in Shopify Admin
-const filteredProducts = products;
+import { BRAND_CONFIG } from '../config/brand';
+const lab = BRAND_CONFIG.labReport;
+
+// ── Tiering (source of truth: Shopify metafield custom.home_tier = "core") ──
+// Order always follows the manual sort of the 'frontpage' collection.
+// Fallback while the metafield is unset: first Combo, Spirulina, Sea Buckthorn found.
+const CORE_LIMIT = 3; // layout = 1 anchor card + 2 cards
+const nodes: any[] = products.map((e: any) => e?.node).filter(Boolean);
+const textOf = (p: any) => `${p.title || ''} ${p.handle || ''}`.toLowerCase();
+const isSpirulinaProduct = (p: any) => textOf(p).includes('spirulina') && !/soap|face|cream|shampoo|hair|oil|glow|shine/.test(textOf(p));
+
+let coreProducts: any[] = nodes.filter((p) => (p.homeTier?.value || '').trim().toLowerCase() === 'core').slice(0, CORE_LIMIT);
+if (coreProducts.length === 0) {
+  const pickers = [
+    (p: any) => /combo|bundle/.test(textOf(p)),
+    (p: any) => isSpirulinaProduct(p) && !/combo|bundle/.test(textOf(p)),
+    (p: any) => textOf(p).includes('sea buckthorn') && !/combo|bundle/.test(textOf(p)),
+  ];
+  for (const pick of pickers) {
+    const found = nodes.find((p) => !coreProducts.includes(p) && pick(p));
+    if (found) coreProducts.push(found);
+  }
+  for (const p of nodes) {
+    if (coreProducts.length >= CORE_LIMIT) break;
+    if (!coreProducts.includes(p)) coreProducts.push(p);
+  }
+}
+// Explore rail: everything else, sold-out items pushed to the end (stable sort keeps Shopify order).
+const exploreProducts = nodes
+  .filter((p) => !coreProducts.includes(p))
+  .sort((a, b) => Number(b.availableForSale !== false) - Number(a.availableForSale !== false));
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com"; 
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
@@ -66,6 +95,12 @@ function getImageUrl(product: any) {
 }
 
 function getProductCategory(product: any) {
+  // Prefer Shopify's native productType; fall back to keyword match.
+  const pt = (product.productType || '').toLowerCase();
+  if (/combo|bundle/.test(pt)) return 'combos';
+  if (/hair/.test(pt)) return 'haircare';
+  if (/skin|face|beauty|soap|body/.test(pt)) return 'skincare';
+  if (/nutri|supplement|superfood|food|health/.test(pt)) return 'nutrition';
   const t = (product.title + ' ' + (product.tags || []).join(' ') + ' ' + product.handle).toLowerCase();
   if (t.includes('combo') || t.includes('bundle')) return 'combos';
   if (t.includes('shampoo') || t.includes('hair oil') || t.includes('hair')) return 'haircare';
@@ -166,55 +201,44 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
 }
 ---
 
-<!-- 🛍️ ZONE 2: The Unified Shop Engine (Featured Kit + Segmented Catalog) -->
+<!-- 🛍️ ZONE 2: Core Trio (99% of revenue) + Explore Rail (rest of catalogue). Single SSR render, zero client fetch. -->
 <section id="product-ecosystem" class="pt-7 sm:pt-12 pb-14 md:py-20 bg-[#FBF9F5] text-[#111827] relative">
   <div id="bundle-offers" class="absolute -top-24 left-0 w-full pointer-events-none"></div>
   <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-12">
-    {/* 1. CATALOG HEADER & FILTER PILLS */}
+    {/* 1. HEADER */}
     <div class="mb-4 sm:mb-8">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-6 mb-4 sm:mb-6">
-        <div>
-          <span class="text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] block mb-1 font-sans">
-            Lab-Tested Pure Nutrition
-          </span>
-          <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight">
-            Explore All <span class="italic text-[#166534]">Formulations.</span>
-          </h2>
-        </div>
-
-        {/* Filter Pills - Horizontal Scroll on Mobile with no-scrollbar */}
-        <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto sm:flex-wrap no-scrollbar py-1" id="shop-catalog-filters">
-          <button class="shop-filter-btn active px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-sans transition-all bg-[#111827] text-white cursor-pointer whitespace-nowrap shrink-0" data-filter="all">
-            All Products ({filteredProducts.length})
-          </button>
-          <button class="shop-filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer whitespace-nowrap shrink-0" data-filter="nutrition">
-            🌿 Nutrition & Superfoods
-          </button>
-          <button class="shop-filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer whitespace-nowrap shrink-0" data-filter="skincare">
-            🌸 Skin & Face Care
-          </button>
-          <button class="shop-filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer whitespace-nowrap shrink-0" data-filter="haircare">
-            💆 Hair Care
-          </button>
-          <button class="shop-filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold font-sans transition-all bg-white border border-gray-200 text-gray-700 hover:border-gray-400 cursor-pointer whitespace-nowrap shrink-0" data-filter="combos">
-            📦 Value Combos
-          </button>
-        </div>
-      </div>
-
+      <span class="text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] block mb-1 font-sans">
+        Lab-Tested Pure Nutrition
+      </span>
+      <h2 class="text-2xl sm:text-4xl md:text-5xl font-serif font-normal text-[#111827] tracking-tight leading-tight">
+        Our <span class="italic text-[#166534]">Bestsellers.</span>
+      </h2>
     </div>
 
-    {/* 3. PRODUCT SALES GRID (2-Column Mobile, 4-Column Desktop) */}
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-6" id="shop-products-grid">
-      {filteredProducts.map((edge: any, index: number) => {
-        const product = edge.node;
+    {/* 2a. DEGRADED STATE — Shopify unreachable: static links to core PDPs (no prices shown) */}
+    {coreProducts.length === 0 && (
+      <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 text-center">
+        <p class="text-sm text-gray-600 mb-4">Live prices are loading slowly right now. Choose a product to see today's price:</p>
+        <div class="flex flex-col sm:flex-row gap-2.5 justify-center">
+          <a href="/product/sujata-spirulina-sea-buckthorn-combo-pack" class="bg-[#166534] hover:bg-[#15803d] text-white font-bold text-sm px-5 py-3 rounded-xl">Spirulina + Sea Buckthorn Combo</a>
+          <a href="/product/sujata-spirulina-capsules" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-800 font-bold text-sm px-5 py-3 rounded-xl">Spirulina Capsules</a>
+          <a href="/product/sujata-sea-buckthorn-capsules" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-800 font-bold text-sm px-5 py-3 rounded-xl">Sea Buckthorn Capsules</a>
+        </div>
+      </div>
+    )}
+
+    {/* 2. CORE TRIO — mobile: anchor full-width + 2-col; desktop: 3-col */}
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-4 lg:gap-6" id="shop-products-grid">
+      {coreProducts.map((product: any, index: number) => {
+        const isAnchor = index === 0;
         const category = getProductCategory(product);
         const priceAmount = product.priceRange?.minVariantPrice?.amount || product.variants?.edges[0]?.node?.price?.amount || "799";
         const numPrice = parseFloat(priceAmount) || 799;
         const meta = getProductBadgeAndBenefit(product, numPrice);
         const productImg = getImageUrl(product);
-        
+        const cardImg = product.card?.url || productImg;
+        const showLabChip = isSpirulinaProduct(product);
+
         const rawVariants = product.variants?.edges?.map((e: any) => e.node) || [];
         const hasMultipleVariants = rawVariants.length > 1;
         const firstVariant = rawVariants[0];
@@ -222,22 +246,32 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         const initialCompare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : 0;
 
         return (
-          <div class={`product-card-item bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 md:p-5 border border-gray-200/90 shadow-xs hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group`} data-category={category}>
-            
+          <div class={`product-card-item bg-white rounded-2xl sm:rounded-3xl p-2.5 sm:p-4 md:p-5 border border-gray-200/90 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all flex flex-col justify-between group ${isAnchor ? 'col-span-2 md:col-span-1' : ''}`} data-category={category} data-tier="core">
+
             <div>
               {/* Product Visual Container with Floating Badges */}
-              <a href={`/product/${product.handle}`} class="block relative aspect-square bg-[#FAF9F6] rounded-xl sm:rounded-2xl p-2 sm:p-3 mb-2 sm:mb-3 overflow-hidden group-hover:bg-emerald-50/30 transition-colors flex items-center justify-center">
+              <a href={`/product/${product.handle}`} class={`block relative bg-[#FAF9F6] rounded-xl sm:rounded-2xl p-2 sm:p-3 mb-2 sm:mb-3 overflow-hidden group-hover:bg-emerald-50/30 transition-colors flex items-center justify-center ${isAnchor ? 'aspect-[16/10] md:aspect-square' : 'aspect-square'}`}>
                 {/* Top-Left Trust Badge */}
-                <span class="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 z-10 text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider bg-[#064E3B] text-white px-2 py-0.5 rounded-full shadow-xs">
+                <span class="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 z-10 text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider bg-[#064E3B] text-white px-2 py-0.5 rounded-full shadow-sm">
                   {meta.tag}
                 </span>
 
-                <img 
-                  src={productImg} 
-                  alt={product.title} 
+                <img
+                  src={cardImg}
+                  alt={product.title}
+                  width="640"
+                  height="640"
                   class="w-full h-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
+                  decoding="async"
                 />
+
+                {/* Proof at point of decision (verified Lilaba report figure only) */}
+                {showLabChip && (
+                  <span class="absolute bottom-1.5 left-1.5 right-1.5 sm:bottom-2.5 sm:left-2.5 sm:right-auto z-10 text-[8px] sm:text-[9.5px] font-bold text-[#064E3B] bg-white/95 border border-emerald-200 px-2 py-0.5 rounded-full shadow-sm truncate text-center">
+                    🔬 Lab-tested · {lab.proteinPct}% protein
+                  </span>
+                )}
               </a>
 
               {/* Title with Fixed 2-Line Min-Height for Consistent Symmetry */}
@@ -254,7 +288,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
 
               {/* In-Card Multi-Variant Pill Selector or Purity Differentiator (Symmetric min-h-[26px]) */}
               {hasMultipleVariants ? (
-                <div class="product-variant-pills flex items-center gap-1 mb-2.5 overflow-x-auto no-scrollbar py-0.5 min-h-[26px]">
+                <div class="product-variant-pills flex items-center gap-1 mb-1.5 overflow-x-auto no-scrollbar min-h-[44px]">
                   {rawVariants.slice(0, 3).map((v: any, vIdx: number) => {
                     const vPrice = parseFloat(v.price?.amount || "0");
                     const vCompare = v.compareAtPrice?.amount ? parseFloat(v.compareAtPrice.amount) : 0;
@@ -267,19 +301,22 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
                     return (
                       <button 
                         type="button" 
-                        class={`variant-pill-btn text-[8.5px] sm:text-[9.5px] font-bold px-2 py-0.5 rounded-lg border transition-all cursor-pointer whitespace-nowrap ${vIdx === 0 ? 'bg-[#166534] text-white border-[#166534] active-pill shadow-xs' : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-gray-400'}`}
+                        class="variant-pill-btn group/pill h-11 min-w-[44px] flex items-center justify-center shrink-0 cursor-pointer touch-manipulation"
+                        aria-pressed={vIdx === 0 ? 'true' : 'false'}
                         data-variant-id={v.id}
                         data-price={vPrice}
                         data-compare-price={vCompare}
                         data-title={v.title}
                       >
-                        {shortTitle}
+                        <span class={`pill-face text-[8.5px] sm:text-[9.5px] font-bold px-2 py-1 rounded-lg border transition-all whitespace-nowrap ${vIdx === 0 ? 'bg-[#166534] text-white border-[#166534] active-pill shadow-sm' : 'bg-gray-50 text-gray-700 border-gray-200 group-hover/pill:border-gray-400'}`}>
+                          {shortTitle}
+                        </span>
                       </button>
                     );
                   })}
                 </div>
               ) : (
-                <div class="min-h-[26px] flex items-center gap-1.5 mb-2.5 text-[8.5px] sm:text-[9.5px] font-mono text-[#166534] bg-emerald-50/70 border border-emerald-100/80 rounded-lg px-2 py-0.5">
+                <div class="min-h-[44px] flex items-center gap-1.5 mb-1.5 text-[8.5px] sm:text-[9.5px] font-mono text-[#166534] bg-emerald-50/70 border border-emerald-100/80 rounded-lg px-2 py-0.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
                   <span class="truncate font-semibold">{meta.purityDifferentiator}</span>
                 </div>
@@ -319,7 +356,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
               <div class="grid grid-cols-12 gap-1.5">
                 <button 
                   type="button"
-                  class="hub-direct-buy-btn col-span-8 bg-[#166534] hover:bg-[#15803d] active:scale-[0.98] text-white py-2 sm:py-2.5 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-1 cursor-pointer touch-manipulation group/buy"
+                  class="hub-direct-buy-btn col-span-8 min-h-[44px] bg-[#166534] hover:bg-[#15803d] active:scale-[0.98] text-white py-2 sm:py-2.5 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-1 cursor-pointer touch-manipulation group/buy"
                   data-variant-id={firstVariant?.id || ('prod_' + index)}
                   data-title={product.title}
                   data-price={initialPrice.toString()}
@@ -335,7 +372,7 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
 
                 <button 
                   type="button"
-                  class="hub-add-cart-btn col-span-4 bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-800 border border-gray-200 py-2 sm:py-2.5 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-0.5 cursor-pointer touch-manipulation"
+                  class="hub-add-cart-btn col-span-4 min-h-[44px] bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-800 border border-gray-200 py-2 sm:py-2.5 rounded-xl font-bold text-[10px] sm:text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-0.5 cursor-pointer touch-manipulation"
                   data-variant-id={firstVariant?.id || ('prod_' + index)}
                   data-title={product.title}
                   data-price={initialPrice.toString()}
@@ -355,50 +392,85 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
       })}
     </div>
 
+    {/* 3. EXPLORE RAIL — rest of catalogue. One row on every breakpoint (scroll-snap), pure CSS. */}
+    {exploreProducts.length > 0 && (
+      <div class="mt-8 sm:mt-12" id="explore-formulations" data-tier="explore">
+        <div class="flex items-end justify-between gap-3 mb-3 sm:mb-4">
+          <div>
+            <span class="text-[9.5px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#166534] block mb-1 font-sans">
+              Also from the Sujata Spirulina Lab
+            </span>
+            <h3 class="text-lg sm:text-2xl md:text-3xl font-serif font-normal text-[#111827] tracking-tight leading-tight">
+              More Formulations
+            </h3>
+          </div>
+          <span class="text-[10px] sm:text-xs font-semibold text-gray-500 font-sans whitespace-nowrap">{exploreProducts.length} more · <span class="md:hidden">Swipe</span><span class="hidden md:inline">Scroll</span> →</span>
+        </div>
+
+        <div class="flex gap-2.5 sm:gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-2.5 sm:scroll-px-6 md:scroll-px-0 no-scrollbar -mx-2.5 px-2.5 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pb-1" role="list">
+          {exploreProducts.map((product: any) => {
+            const firstVariant = product.variants?.edges?.[0]?.node;
+            const price = parseFloat(firstVariant?.price?.amount || product.priceRange?.minVariantPrice?.amount || "0");
+            const compare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : 0;
+            const meta = getProductBadgeAndBenefit(product, price);
+            const productImg = getImageUrl(product);
+            const thumbImg = product.thumb?.url || productImg;
+            const available = product.availableForSale !== false && firstVariant?.availableForSale !== false;
+
+            return (
+              <div role="listitem" class="product-card-item snap-start shrink-0 w-[42%] sm:w-[30%] md:w-[23%] lg:w-[18.5%] bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-md hover:border-[#166534]/40 transition-all p-2 sm:p-3 flex flex-col group" data-category={getProductCategory(product)} data-tier="explore">
+                <a href={`/product/${product.handle}`} class="block relative aspect-square bg-[#FAF9F6] rounded-xl overflow-hidden mb-2 p-2 flex items-center justify-center">
+                  {!available && (
+                    <span class="absolute top-1.5 left-1.5 z-10 text-[8px] font-bold uppercase tracking-wider bg-gray-700 text-white px-2 py-0.5 rounded-full">Sold out</span>
+                  )}
+                  <img
+                    src={thumbImg}
+                    alt={product.title}
+                    width="360"
+                    height="360"
+                    class={`w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ${available ? '' : 'opacity-60 grayscale'}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+                <a href={`/product/${product.handle}`} class="block">
+                  <h4 class="text-[11px] sm:text-sm font-bold font-sans text-[#111827] group-hover:text-[#166534] transition-colors leading-tight line-clamp-2 min-h-[2.5em]">
+                    {product.title}
+                  </h4>
+                </a>
+                <div class="mt-auto pt-1.5 flex items-center justify-between gap-1">
+                  <div class="flex items-baseline gap-1 min-w-0">
+                    <span class="text-xs sm:text-sm font-black text-[#111827] font-sans">{formatPrice(price)}</span>
+                    {compare > price && (
+                      <span class="text-[9px] sm:text-[10px] text-gray-400 line-through font-sans">₹{Math.round(compare)}</span>
+                    )}
+                  </div>
+                  {available && firstVariant?.id && (
+                    <button
+                      type="button"
+                      class="hub-add-cart-btn shrink-0 min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-gray-100 hover:bg-gray-200 active:scale-[0.98] text-gray-800 border border-gray-200 px-3 py-1 rounded-lg font-bold text-[9.5px] sm:text-[10.5px] uppercase tracking-wider transition-all cursor-pointer touch-manipulation"
+                      data-variant-id={firstVariant.id}
+                      data-title={product.title}
+                      data-price={price.toString()}
+                      data-image={productImg}
+                      data-subtitle={meta.benefit}
+                      title="Add to cart"
+                    >
+                      + Add
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
   </div>
 </section>
 
 <script is:inline>
-  function initShopHubFilters() {
-    const filterBtns = document.querySelectorAll('.shop-filter-btn');
-    const productCards = document.querySelectorAll('.product-card-item');
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-filter');
-
-        filterBtns.forEach(b => {
-          b.classList.remove('active', 'bg-[#111827]', 'text-white');
-          b.classList.add('bg-white', 'text-gray-700');
-        });
-
-        btn.classList.add('active', 'bg-[#111827]', 'text-white');
-        btn.classList.remove('bg-white', 'text-gray-700');
-
-        productCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // 🌟 Auto-activate "Value Combos" filter when navigating to #bundle-offers
-    function checkHashFilter() {
-      if (window.location.hash === '#bundle-offers') {
-        const comboBtn = document.querySelector('.shop-filter-btn[data-filter="combos"]');
-        if (comboBtn) {
-          comboBtn.click();
-        }
-      }
-    }
-    checkHashFilter();
-    window.addEventListener('hashchange', checkHashFilter);
-  }
-
   function initShopHubInteractions() {
     // 1. Variant Pill Switching
     document.querySelectorAll('.product-card-item').forEach(card => {
@@ -415,12 +487,16 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
           e.stopPropagation();
 
           pills.forEach(p => {
-            p.classList.remove('bg-[#166534]', 'text-white', 'border-[#166534]', 'active-pill');
-            p.classList.add('bg-gray-50', 'text-gray-700', 'border-gray-200');
+            p.setAttribute('aria-pressed', 'false');
+            const face = p.querySelector('.pill-face');
+            face?.classList.remove('bg-[#166534]', 'text-white', 'border-[#166534]', 'active-pill', 'shadow-sm');
+            face?.classList.add('bg-gray-50', 'text-gray-700', 'border-gray-200');
           });
 
-          pill.classList.remove('bg-gray-50', 'text-gray-700', 'border-gray-200');
-          pill.classList.add('bg-[#166534]', 'text-white', 'border-[#166534]', 'active-pill');
+          pill.setAttribute('aria-pressed', 'true');
+          const activeFace = pill.querySelector('.pill-face');
+          activeFace?.classList.remove('bg-gray-50', 'text-gray-700', 'border-gray-200');
+          activeFace?.classList.add('bg-[#166534]', 'text-white', 'border-[#166534]', 'active-pill', 'shadow-sm');
 
           const variantId = pill.getAttribute('data-variant-id');
           const price = parseFloat(pill.getAttribute('data-price') || '0');
@@ -589,7 +665,6 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
   }
 
   function initAllShopHub() {
-    initShopHubFilters();
     initShopHubInteractions();
     updateDeliveryEstimators();
   }

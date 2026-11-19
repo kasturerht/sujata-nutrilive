@@ -27,119 +27,56 @@ const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczd
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018"; 
 
 // GraphQL Query for Products Catalog (Fetches exact sequence from Shopify 'Home page' Collection)
+// One request, edge-cached. `homeTier` (custom.home_tier = "core") decides the Core Trio;
+// everything else renders in the Explore rail. `card`/`thumb` are Shopify-CDN WebP transforms.
+const productFields = `
+  fragment HomeProduct on Product {
+    id
+    handle
+    title
+    description
+    tags
+    productType
+    availableForSale
+    subtitle: metafield(namespace: "custom", key: "subtitle") { value }
+    keyBenefit: metafield(namespace: "custom", key: "key_benefit") { value }
+    badgeTag: metafield(namespace: "custom", key: "badge") { value }
+    badgeTagAlt: metafield(namespace: "custom", key: "badge_tag") { value }
+    homeTier: metafield(namespace: "custom", key: "home_tier") { value }
+    priceRange { minVariantPrice { amount currencyCode } }
+    variants(first: 10) {
+      edges {
+        node {
+          id
+          title
+          availableForSale
+          price { amount currencyCode }
+          compareAtPrice { amount currencyCode }
+          selectedOptions { name value }
+        }
+      }
+    }
+    featuredImage { url altText }
+    card: featuredImage { url(transform: { maxWidth: 640, preferredContentType: WEBP }) }
+    thumb: featuredImage { url(transform: { maxWidth: 360, preferredContentType: WEBP }) }
+    images(first: 2) { edges { node { url altText } } }
+  }
+`;
+
 const query = `
+  ${productFields}
   {
     collection(handle: "frontpage") {
       id
       title
-      products(first: 50) {
-        edges {
-          node {
-            id
-            handle
-            title
-            description
-            tags
-            availableForSale
-            subtitle: metafield(namespace: "custom", key: "subtitle") { value }
-            keyBenefit: metafield(namespace: "custom", key: "key_benefit") { value }
-            badgeTag: metafield(namespace: "custom", key: "badge") { value }
-            badgeTagAlt: metafield(namespace: "custom", key: "badge_tag") { value }
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            variants(first: 10) {
-              edges {
-                node {
-                  id
-                  title
-                  availableForSale
-                  price {
-                    amount
-                    currencyCode
-                  }
-                  compareAtPrice {
-                    amount
-                    currencyCode
-                  }
-                  selectedOptions {
-                    name
-                    value
-                  }
-                }
-              }
-            }
-            images(first: 2) {
-              edges {
-                node {
-                  url
-                  altText
-                }
-              }
-            }
-          }
-        }
-      }
+      products(first: 50) { edges { node { ...HomeProduct } } }
     }
-    products(first: 50) {
-      edges {
-        node {
-          id
-          handle
-          title
-          description
-          tags
-          availableForSale
-          subtitle: metafield(namespace: "custom", key: "subtitle") { value }
-          keyBenefit: metafield(namespace: "custom", key: "key_benefit") { value }
-          badgeTag: metafield(namespace: "custom", key: "badge") { value }
-          badgeTagAlt: metafield(namespace: "custom", key: "badge_tag") { value }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          variants(first: 10) {
-            edges {
-              node {
-                id
-                title
-                availableForSale
-                price {
-                  amount
-                  currencyCode
-                }
-                compareAtPrice {
-                  amount
-                  currencyCode
-                }
-                selectedOptions {
-                  name
-                  value
-                }
-              }
-            }
-          }
-          images(first: 2) {
-            edges {
-              node {
-                url
-                altText
-              }
-            }
-          }
-        }
-      }
-    }
+    products(first: 50) { edges { node { ...HomeProduct } } }
   }
 `;
 
-// Server-side Fetch with safe handling
-let products = [];
+// Server-side Fetch with outage protection (3.5s timeout, HTTP + GraphQL error checks)
+let products: any[] = [];
 try {
   if (shopifyDomain && storefrontToken) {
     const response = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
@@ -149,9 +86,13 @@ try {
         'X-Shopify-Storefront-Access-Token': storefrontToken,
       },
       body: JSON.stringify({ query }),
+      signal: AbortSignal.timeout(3500),
     });
 
+    if (!response.ok) throw new Error(`Shopify HTTP ${response.status}`);
     const json = await response.json();
+    if (json.errors?.length) throw new Error(`Shopify GraphQL: ${json.errors.map((e: any) => e.message).join('; ')}`);
+
     // Prioritize exact manual sort sequence from 'Home page' (frontpage) collection
     const collectionEdges = json.data?.collection?.products?.edges || [];
     const fallbackEdges = json.data?.products?.edges || [];
@@ -161,6 +102,13 @@ try {
   }
 } catch (error) {
   console.error("❌ Failed to fetch products from Shopify:", error);
+}
+
+// Degraded state: render the page (hero, proof, FAQ still useful) but never let the CDN cache it.
+// middleware.ts respects a Cache-Control already set by the page.
+const catalogUnavailable = products.length === 0;
+if (catalogUnavailable) {
+  Astro.response.headers.set('Cache-Control', 'private, no-store');
 }
 ---
 

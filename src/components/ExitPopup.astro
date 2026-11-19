@@ -11,7 +11,7 @@ import { Image } from 'astro:assets';
     
     {/* Close Button */}
     <button id="close-exit-popup" aria-label="Close popup" class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-black transition-colors touch-manipulation">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
  
     {/* LEFT SIDE: Visual Hook (Image & Glowing Background) */}
@@ -41,9 +41,9 @@ import { Image } from 'astro:assets';
         Wait! Don't leave your peak behind.
       </span>
       
-      <h2 class="text-2xl sm:text-3xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-3">
+      <p role="heading" aria-level="2" class="text-2xl sm:text-3xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-3">
         Unsure what to buy? Get a <span class="text-[#166534] italic">Free Consultation + 10% Off</span>.
-      </h2>
+      </p>
       
       <p class="text-gray-500 text-xs sm:text-sm mb-6 leading-relaxed max-w-sm">
         Enter your email below to instantly receive your personalized routine recommendation report and a VIP 10% discount code.
@@ -78,7 +78,7 @@ import { Image } from 'astro:assets';
         <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
         </div>
-        <h3 class="text-xl font-bold text-[#111827] mb-2">You're In!</h3>
+        <p role="heading" aria-level="3" class="text-xl font-bold text-[#111827] mb-2">You're In!</p>
         <p class="text-sm text-gray-500 mb-6">Use this exact code at checkout:</p>
         
         <div class="border-2 border-dashed border-[#166534] bg-[#f0fdf4] px-8 py-4 rounded-xl cursor-pointer hover:bg-emerald-100 transition-colors group" id="copy-code-btn">
@@ -124,8 +124,14 @@ import { Image } from 'astro:assets';
     let popupShown = false;
     const hasSeenPopup = localStorage.getItem('sujata_exit_popup_shown'); 
 
+    // Never interrupt an active purchase flow (cart drawer open).
+    const isCartOpen = () => {
+      const drawer = document.getElementById('cart-drawer');
+      return !!drawer && !drawer.classList.contains('translate-x-full');
+    };
+
     const showPopup = () => {
-      if (popupShown || hasSeenPopup) return; 
+      if (popupShown || hasSeenPopup || isCartOpen()) return;
 
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('opacity-100', 'pointer-events-auto');
@@ -148,37 +154,38 @@ import { Image } from 'astro:assets';
       document.body.style.overflow = '';
     };
 
-    // 1. Desktop Trigger: Mouse Leave
-    const handleMouseOut = (e: MouseEvent) => {
-      if (e.clientY < 0 || e.relatedTarget == null) {
-        showPopup();
-      }
-    };
-    setTimeout(() => {
-      document.addEventListener('mouseout', handleMouseOut);
-    }, 2000);
+    // Mobile/touch: no timed or full-screen auto-popup (Google intrusive-interstitial guidance).
+    const isMobile = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+    const pageStart = Date.now();
 
-    // 2. Mobile Trigger: Rapid Scroll Up after reading down
-    let maxScrollY = 0;
-    let lastScrollY = window.scrollY;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > maxScrollY) {
-        maxScrollY = currentScrollY;
-      }
-      
-      // If user scrolled down at least 400px and then scrolls up rapidly by 150px
-      if (maxScrollY > 400 && (maxScrollY - currentScrollY > 150) && currentScrollY < 300) {
-        showPopup();
-      }
-      lastScrollY = currentScrollY;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    if (!isMobile) {
+      // 1. Desktop: genuine exit intent (cursor leaves through the top of the window)
+      const handleMouseOut = (e: MouseEvent) => {
+        if (!e.relatedTarget && e.clientY <= 0) showPopup();
+      };
+      setTimeout(() => {
+        document.addEventListener('mouseout', handleMouseOut);
+      }, 5000);
 
-    // 3. Fallback Trigger: Inactivity / Time on page (30s)
-    const timerTrigger = setTimeout(() => {
-      showPopup();
-    }, 30000);
+      // 2. Desktop fallback: 45s of time on page
+      setTimeout(showPopup, 45000);
+    } else {
+      // 3. Mobile: only after real engagement (20s+ on page, read 400px+, then scrolled back to top)
+      let maxScrollY = 0;
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > maxScrollY) maxScrollY = currentScrollY;
+        if (
+          Date.now() - pageStart > 20000 &&
+          maxScrollY > 400 &&
+          maxScrollY - currentScrollY > 150 &&
+          currentScrollY < 300
+        ) {
+          showPopup();
+        }
+      };
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
 
     // Close Events
     closeBtn?.addEventListener('click', hidePopup);
@@ -197,8 +204,7 @@ import { Image } from 'astro:assets';
     // Form Submission with Shopify Customer Sync & Meta Lead Event
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      clearTimeout(timerTrigger);
-      
+
       const emailInput = document.getElementById('promo-email') as HTMLInputElement | null;
       const email = emailInput ? emailInput.value.trim() : '';
       const btnText = unlockBtn?.querySelector('.btn-text') as HTMLElement | null;

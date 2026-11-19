@@ -6,6 +6,7 @@ import StoreBottomNav from '../components/StoreBottomNav.astro';
 import WhatsAppConcierge from '../components/WhatsAppConcierge.astro';
 import { BRAND_CONFIG } from '../config/brand';
 import { homeFaqs } from '../lib/homeFaqs';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -56,7 +57,7 @@ const schemaGraphItems: any[] = [
     "founder": {
       "@type": "Person",
       "@id": `${siteUrl}/#founder`,
-      "name": "Yash Rajendra Surywanshi",
+      "name": "Yash Rajendra Suryawanshi",
       "alternateName": ["Yash Suryawanshi", "Yash Suryavanshi"],
       "jobTitle": "Founder & Head of Operations",
       "worksFor": {
@@ -157,6 +158,7 @@ const schemaGraphItems: any[] = [
       },
     ],
     "alternateName": ["Sujata Nutrilive Agrotech", "SUJATA NUTRITIVE"],
+    "brand": { "@id": `${siteUrl}/#brand` },
     "sameAs": [
       "https://www.wikidata.org/wiki/Q141656957",
       "https://www.amazon.in/dp/B0GMQYS6M4",
@@ -178,11 +180,15 @@ const schemaGraphItems: any[] = [
     "publisher": {
       "@id": `${siteUrl}/#organization`
     },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": `${siteUrl}/#product-ecosystem?search={search_term_string}`,
-      "query-input": "required name=search_term_string"
-    }
+    "inLanguage": "en-IN"
+  },
+
+  // 3. Brand Entity (distinct from the Organization that owns it)
+  {
+    "@type": "Brand",
+    "@id": `${siteUrl}/#brand`,
+    "name": BRAND_CONFIG.brandName,
+    "logo": { "@id": `${siteUrl}/#logo` }
   }
 ];
 
@@ -204,11 +210,11 @@ if (isHomePage) {
     ],
     "image": [
       new URL("/products/sujata-combo-spirulina-sea-buckthorn.jpg", siteUrl).toString(),
-      new URL("/products/sujata-spirulina-transparent.png", siteUrl).toString()
+      new URL("/products/sujata-spirulina-capsules-bottle-transparent.png", siteUrl).toString()
     ],
     "brand": {
       "@type": "Brand",
-      "@id": `${siteUrl}/#organization`,
+      "@id": `${siteUrl}/#brand`,
       "name": BRAND_CONFIG.brandName
     },
     // NOTE: No aggregateRating here on purpose. Google only allows product ratings that are
@@ -277,7 +283,7 @@ if (isHomePage) {
     ],
     "brand": {
       "@type": "Brand",
-      "@id": `${siteUrl}/#organization`,
+      "@id": `${siteUrl}/#brand`,
       "name": BRAND_CONFIG.brandName
     },
     "offers": {
@@ -344,8 +350,11 @@ if (isHomePage) {
     "nonProprietaryName": "Spirulina",
     "safetyConsideration": "Food supplement, not a medicine. Consult a doctor before use if you have an autoimmune condition, take blood thinners, have phenylketonuria (PKU), or are pregnant or breastfeeding.",
     "recommendedIntake": {
-      "@type": "RecommendedIntake",
-      "name": "2 capsules (1 g) daily after breakfast with water; start with 1 capsule in week 1"
+      "@type": "RecommendedDoseSchedule",
+      "doseValue": 2,
+      "doseUnit": "capsule (500 mg)",
+      "frequency": "once daily, after breakfast",
+      "description": "2 capsules (1 g) daily after breakfast with water; start with 1 capsule in week 1"
     },
     "manufacturer": {
       "@id": `${siteUrl}/#organization`
@@ -361,8 +370,11 @@ if (isHomePage) {
     "activeIngredient": "Himalayan Sea Buckthorn (Hippophae rhamnoides)",
     "safetyConsideration": "Food supplement, not a medicine. No added sugar, no preservatives. Consult a doctor before use if pregnant, breastfeeding, or taking blood thinners.",
     "recommendedIntake": {
-      "@type": "RecommendedIntake",
-      "name": "1 capsule twice daily after meals with water"
+      "@type": "RecommendedDoseSchedule",
+      "doseValue": 1,
+      "doseUnit": "capsule",
+      "frequency": "twice daily, after meals",
+      "description": "1 capsule twice daily after meals with water"
     },
     "manufacturer": {
       "@id": `${siteUrl}/#organization`
@@ -388,6 +400,34 @@ if (extraSchema && Array.isArray(extraSchema) && extraSchema.length > 0) {
   schemaGraphItems.push(...extraSchema);
 }
 
+// 5. WebPage node — ties this URL to WebSite, Organization & Brand, and declares what it is `about`.
+// Skipped when the page already ships its own WebPage-family node (policy pages, contact, science).
+const WEBPAGE_TYPES = ['WebPage', 'AboutPage', 'ContactPage', 'CollectionPage', 'ItemPage', 'MedicalWebPage', 'ProfilePage', 'CheckoutPage', 'SearchResultsPage'];
+const typesOf = (n: any): string[] => (Array.isArray(n?.['@type']) ? n['@type'] : [n?.['@type']]);
+const hasOwnWebPage = schemaGraphItems.some((n: any) => typesOf(n).some((t) => WEBPAGE_TYPES.includes(t)));
+if (!hasOwnWebPage) {
+  const productRefs = schemaGraphItems
+    .filter((n: any) => n?.['@id'] && typesOf(n).includes('Product'))
+    .map((n: any) => ({ "@id": n['@id'] }));
+  schemaGraphItems.push({
+    "@type": "WebPage",
+    "@id": `${canonicalURL}#webpage`,
+    "url": canonicalURL,
+    "name": title,
+    "description": description,
+    "inLanguage": "en-IN",
+    "isPartOf": [
+      { "@id": `${siteUrl}/#website` },
+      { "@id": `${siteUrl}/#organization` },
+      { "@id": `${siteUrl}/#brand` }
+    ],
+    "publisher": { "@id": `${siteUrl}/#organization` },
+    "primaryImageOfPage": { "@type": "ImageObject", "url": ogImageURL },
+    ...(productRefs.length ? { "about": productRefs, ...(productRefs.length === 1 ? { "mainEntity": productRefs[0] } : {}) } : { "about": { "@id": `${siteUrl}/#brand` } }),
+    ...(isHomePage ? { "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["#hero-heading", "#aeo-definition"] } } : {})
+  });
+}
+
 const unifiedSchemaGraph = {
   "@context": "https://schema.org",
   "@graph": schemaGraphItems
@@ -395,6 +435,8 @@ const unifiedSchemaGraph = {
 ---
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- 🛡️ Internal Staff Exclusion & Google Consent Mode v2 -->
     <script is:inline>
       (function() {
@@ -449,8 +491,6 @@ const unifiedSchemaGraph = {
     </script>
     <!-- End Google Tag Manager -->
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
@@ -876,11 +916,17 @@ const unifiedSchemaGraph = {
 
         // 🧠 Pure Interaction-Based JIT Engine (Zero Background Download during Browsing)
         // Only loads when customer explicitly interacts with a purchase action
-        document.addEventListener('pointerdown', function(e) {
-          if (e.target.closest('#buy-now-btn, #sticky-buynow-btn, #atc-btn, #sticky-atc-btn, .add-to-cart-btn, #checkout-button, #cart-drawer-trigger, .open-cart-trigger')) {
-            window.ensureRazorpayLoaded();
-          }
-        }, { passive: true, once: true });
+        // Intent preload: desktop hover (pointerover) + mobile first touch (touchstart/pointerdown).
+        // Not `once` — the listener must survive taps on non-purchase elements; it detaches after the first hit.
+        var RZP_INTENT = '.hub-direct-buy-btn, .hub-add-cart-btn, #buy-now-btn, #sticky-buynow-btn, #atc-btn, #sticky-atc-btn, .add-to-cart-btn, #checkout-button, #cart-drawer-trigger, .open-cart-trigger';
+        var rzpIntentEvents = ['pointerover', 'touchstart', 'pointerdown', 'focusin'];
+        function onRzpIntent(e) {
+          var t = e.target;
+          if (!t || typeof t.closest !== 'function' || !t.closest(RZP_INTENT)) return;
+          rzpIntentEvents.forEach(function(ev) { document.removeEventListener(ev, onRzpIntent, true); });
+          window.ensureRazorpayLoaded();
+        }
+        rzpIntentEvents.forEach(function(ev) { document.addEventListener(ev, onRzpIntent, { passive: true, capture: true }); });
       })();
     </script>
   </head>

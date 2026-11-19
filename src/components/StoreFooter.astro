@@ -31,9 +31,9 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
           <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
           Join The Inner Circle
         </span>
-        <h3 class="text-3xl md:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-white tracking-tight mb-4 leading-tight">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-white tracking-tight mb-4 leading-tight">
           Unlock <span class="text-emerald-400 italic">10% Off</span> <br class="hidden md:block"/> Your First Routine.
-        </h3>
+        </h2>
         <p class="text-gray-400 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">
           Get exclusive access to flash sales, early product drops, and expert nutritional protocols. No spam, ever.
         </p>
@@ -41,19 +41,21 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
       <div class="w-full lg:w-1/2 relative z-10">
         {/* Sleek Apple-style Input Form */}
-        <form id="footer-newsletter-form" class="relative flex items-center w-full max-w-lg mx-auto lg:ml-auto lg:mr-0 bg-black/40 border border-white/10 rounded-full p-1.5 focus-within:border-emerald-500/50 focus-within:bg-black/60 transition-all duration-500 shadow-inner">
-          <div class="pl-5 pr-2 flex items-center text-gray-500">
+        <form id="footer-newsletter-form" class="relative flex items-center w-full max-w-lg mx-auto lg:ml-auto lg:mr-0 bg-black/40 border border-white/10 rounded-full p-1 sm:p-1.5 min-w-0 focus-within:border-emerald-500/50 focus-within:bg-black/60 transition-all duration-500 shadow-inner">
+          <div class="hidden sm:flex pl-5 pr-2 items-center text-gray-500" aria-hidden="true">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
           </div>
           <input 
             type="email" 
             name="email"
             id="footer-email-input"
-            placeholder="Enter your email address..." 
-            class="w-full bg-transparent border-none text-white text-base focus:outline-none focus:ring-0 placeholder-gray-500 px-3"
+            placeholder="Your email address"
+            aria-label="Email address"
+            autocomplete="email"
+            class="flex-1 min-w-0 w-full h-11 bg-transparent border-none text-white text-base focus:outline-none focus:ring-0 placeholder-gray-500 pl-4 pr-2 sm:px-3"
             required
           />
-          <button type="submit" id="footer-submit-btn" class="shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-full transition-colors duration-300 shadow-[0_0_20px_rgba(5,150,105,0.3)] touch-manipulation cursor-pointer">
+          <button type="submit" id="footer-submit-btn" class="shrink-0 min-h-[44px] bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider sm:tracking-widest px-4 sm:px-6 py-3 sm:py-3.5 rounded-full transition-colors duration-300 shadow-[0_0_20px_rgba(5,150,105,0.3)] touch-manipulation cursor-pointer">
             Subscribe
           </button>
         </form>
@@ -99,7 +101,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
       {/* Column 2: Pure Formulations Directory (Neural Mesh Internal Linking for Googlebot) */}
       <div class="lg:col-span-4 flex flex-col">
-        <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Formulations</h4>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Formulations</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5">
           <ul class="flex flex-col gap-2.5">
             <li><a href="/product/sujata-spirulina-tablets" class="text-gray-400 text-xs hover:text-emerald-400 hover:translate-x-0.5 transition-all inline-block">Spirulina Tablets (500mg)</a></li>
@@ -126,7 +128,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
       {/* Column 3: Quick Links (Span 2) */}
       <div class="lg:col-span-2 flex flex-col">
-        <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Explore</h4>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Explore</h3>
         <ul class="flex flex-col gap-3">
           <li><a href="/track-order" class="text-white font-bold text-xs hover:text-emerald-400 hover:translate-x-1 transition-all inline-block">Track Your Order 🚚</a></li>
           <li><a href="/quiz" class="text-emerald-400 font-bold text-xs hover:text-white hover:translate-x-1 transition-all inline-block">1-Min Routine Quiz <span class="ml-1 bg-emerald-500/20 text-emerald-300 text-[9px] px-1 py-0.5 rounded uppercase font-black">Quiz</span></a></li>
@@ -141,7 +143,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
       {/* Column 4: Legal & Compliance - MANDATORY FOR ADS (Span 2) */}
       <div class="lg:col-span-2 flex flex-col">
-        <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Policies</h4>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Policies</h3>
         <ul class="flex flex-col gap-3">
           <li><a href="/privacy-policy" class="text-gray-400 text-xs hover:text-white hover:translate-x-1 transition-all inline-block">Privacy Policy</a></li>
           <li><a href="/terms-of-service" class="text-gray-400 text-xs hover:text-white hover:translate-x-1 transition-all inline-block">Terms of Service</a></li>
@@ -152,7 +154,7 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
 
       {/* Column 5: Socials (Span 1) */}
       <div class="lg:col-span-1 flex flex-col">
-        <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Connect</h4>
+        <h3 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Connect</h3>
         <div class="flex items-center gap-3">
           <a href={BRAND_CONFIG.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#E1306C] hover:text-white hover:border-[#E1306C] transition-all transform hover:-translate-y-1 shadow-lg touch-manipulation">
             {/* Instagram Icon */}
