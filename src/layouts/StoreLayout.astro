@@ -34,6 +34,9 @@ const ogImageURL = new URL(image, siteUrl).toString();
 
 const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID || "1314112957191765";
 const googleTagId = import.meta.env.PUBLIC_GA4_ID || import.meta.env.PUBLIC_GTAG_ID || "G-5WZ8DNW2PD";
+// When GA4_API_SECRET is set, GA4 purchases are sent server-side from the Shopify orders/create webhook
+// (exact order value), and the browser skips its own GA4 purchase hit to avoid double counting.
+const serverPurchaseTracking = Boolean(import.meta.env.GA4_API_SECRET || (typeof process !== 'undefined' && process.env?.GA4_API_SECRET));
 const fbDomainVerification = import.meta.env.PUBLIC_FACEBOOK_DOMAIN_VERIFICATION || "4u1oycwawhemmpli8xnp0mencq1puj";
 
 // =========================================================================
@@ -192,193 +195,32 @@ const schemaGraphItems: any[] = [
   }
 ];
 
-// 3. Homepage-Specific Rich Snippets (Product Aggregate Rating + DietarySupplement + Google FAQ Accordion)
+// 3. Homepage-Specific Structured Data
+// Google Product snippets / Merchant listings are only valid on a page about ONE product. The homepage
+// lists the catalogue, so it ships an ItemList that points to each product page (where the full Product +
+// Offer + MerchantReturnPolicy markup lives) instead of standalone Product/DietarySupplement nodes.
+// DietarySupplement is a schema.org subtype of Product, so it triggered "offers/review/aggregateRating
+// missing" errors when used here.
 if (isHomePage) {
-  // Flagship Spirulina Product Showcase for Google SERP Gold Star Ratings
+  const homepageCatalog: Array<[string, string]> = [
+    ['sujata-spirulina-sea-buckthorn-combo-pack', 'Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack'],
+    ['sujata-spirulina-capsules', 'Sujata Premium Spirulina Capsules'],
+    ['sujata-spirulina-tablets', 'Sujata Spirulina Tablets'],
+    ['sujata-spirulina-powder', 'Sujata Pure Organic Spirulina Powder'],
+    ['sujata-sea-buckthorn-capsules', 'Sujata Himalayan Sea Buckthorn Capsules'],
+  ];
   schemaGraphItems.push({
-    "@type": "Product",
-    "@id": `${siteUrl}/#product-spirulina`,
-    "name": "Sujata Cold-Pressed Spirulina (Tablets & Raw Powder)",
-    "description": "100% pure, chemical-free hydro-cultivated Spirulina dried below 40°C. Lab-tested 62.39% protein and 290.89 mg/kg natural iron (Lilaba report LAL-NN-131125023). No binders or fillers, no fishy odour. FSSAI licence 21526027000179.",
-    "sku": "SJT-SP-TAB-60",
-    "mpn": "SJT-SP-TAB-60",
-    "asin": "B0GMQYS6M4",
-    "sameAs": [
-      "https://www.amazon.in/dp/B0GMQYS6M4",
-      "https://www.amazon.in/dp/B0DNSXGGTN",
-      "https://www.amazon.in/dp/B0DP2FWN4J"
-    ],
-    "image": [
-      new URL("/products/sujata-combo-spirulina-sea-buckthorn.jpg", siteUrl).toString(),
-      new URL("/products/sujata-spirulina-capsules-bottle-transparent.png", siteUrl).toString()
-    ],
-    "brand": {
-      "@type": "Brand",
-      "@id": `${siteUrl}/#brand`,
-      "name": BRAND_CONFIG.brandName
-    },
-    // NOTE: No aggregateRating here on purpose. Google only allows product ratings that are
-    // backed by individual reviews visible on the same page. Add it back on product pages once
-    // a reviews app supplies real per-product review counts.
-    "offers": {
-      "@type": "AggregateOffer",
-      "lowPrice": "350",
-      "highPrice": "1100",
-      "priceCurrency": "INR",
-      "offerCount": "4",
-      "validFrom": "2024-01-01",
-      "priceValidUntil": "2027-12-31",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@id": `${siteUrl}/#organization`
-      },
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": "INR"
-        },
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "IN"
-        },
-        "deliveryTime": {
-          "@type": "ShippingDeliveryTime",
-          "handlingTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 0,
-            "maxValue": 1,
-            "unitCode": "d"
-          },
-          "transitTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 2,
-            "maxValue": 5,
-            "unitCode": "d"
-          }
-        }
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "applicableCountry": "IN",
-        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 90,
-        "returnMethod": "https://schema.org/ReturnByMail",
-        "returnFees": "https://schema.org/FreeReturn"
-      }
-    }
-  });
-
-  // Flagship Sea Buckthorn Product Showcase
-  schemaGraphItems.push({
-    "@type": "Product",
-    "@id": `${siteUrl}/#product-seabuckthorn`,
-    "name": "Sujata Pure Himalayan Sea Buckthorn Capsules (60 Veg Caps)",
-    "description": "Himalayan Sea Buckthorn vegetarian capsules (60 caps, 30 days). A natural source of Omega-7 (palmitoleic acid), Omega 3, 6, 9 and Vitamin C. No added sugar, no preservatives.",
-    "sku": "SJT-SB-CAP-60",
-    "mpn": "SJT-SB-CAP-60",
-    "image": [
-      new URL("/products/sujata-sea-buckthorn-capsules-bottle-transparent.png", siteUrl).toString()
-    ],
-    "brand": {
-      "@type": "Brand",
-      "@id": `${siteUrl}/#brand`,
-      "name": BRAND_CONFIG.brandName
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "649",
-      "priceCurrency": "INR",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "price": "649",
-        "priceCurrency": "INR",
-        "valueAddedTaxIncluded": true
-      },
-      "validFrom": "2024-01-01",
-      "priceValidUntil": "2027-12-31",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@id": `${siteUrl}/#organization`
-      },
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": "INR"
-        },
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "IN"
-        },
-        "deliveryTime": {
-          "@type": "ShippingDeliveryTime",
-          "handlingTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 0,
-            "maxValue": 1,
-            "unitCode": "d"
-          },
-          "transitTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 2,
-            "maxValue": 5,
-            "unitCode": "d"
-          }
-        }
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "applicableCountry": "IN",
-        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 90,
-        "returnMethod": "https://schema.org/ReturnByMail",
-        "returnFees": "https://schema.org/FreeReturn"
-      }
-    }
-  });
-
-  // Biomedical & Dietary Supplement Entity for LLMs & Knowledge Graph (Spirulina)
-  schemaGraphItems.push({
-    "@type": "DietarySupplement",
-    "@id": `${siteUrl}/#supplement-spirulina`,
-    "name": "Sujata Pure Hydro-Cultivated Spirulina",
-    "targetPopulation": "Healthy adults looking to add plant protein and natural nutrients to their daily diet",
-    "activeIngredient": "100% Spirulina (Arthrospira platensis)",
-    "nonProprietaryName": "Spirulina",
-    "safetyConsideration": "Food supplement, not a medicine. Consult a doctor before use if you have an autoimmune condition, take blood thinners, have phenylketonuria (PKU), or are pregnant or breastfeeding.",
-    "recommendedIntake": {
-      "@type": "RecommendedDoseSchedule",
-      "doseValue": 2,
-      "doseUnit": "capsule (500 mg)",
-      "frequency": "once daily, after breakfast",
-      "description": "2 capsules (1 g) daily after breakfast with water; start with 1 capsule in week 1"
-    },
-    "manufacturer": {
-      "@id": `${siteUrl}/#organization`
-    }
-  });
-
-  // Biomedical & Dietary Supplement Entity for LLMs & Knowledge Graph (Sea Buckthorn)
-  schemaGraphItems.push({
-    "@type": "DietarySupplement",
-    "@id": `${siteUrl}/#supplement-seabuckthorn`,
-    "name": "Sujata Pure Himalayan Sea Buckthorn Capsules",
-    "targetPopulation": "Healthy adults looking for a natural source of Omega-7 and Vitamin C for everyday skin nutrition",
-    "activeIngredient": "Himalayan Sea Buckthorn (Hippophae rhamnoides)",
-    "safetyConsideration": "Food supplement, not a medicine. No added sugar, no preservatives. Consult a doctor before use if pregnant, breastfeeding, or taking blood thinners.",
-    "recommendedIntake": {
-      "@type": "RecommendedDoseSchedule",
-      "doseValue": 1,
-      "doseUnit": "capsule",
-      "frequency": "twice daily, after meals",
-      "description": "1 capsule twice daily after meals with water"
-    },
-    "manufacturer": {
-      "@id": `${siteUrl}/#organization`
-    }
+    "@type": "ItemList",
+    "@id": `${siteUrl}/#bestsellers`,
+    "name": "Sujata Nutrilive Bestsellers",
+    "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    "numberOfItems": homepageCatalog.length,
+    "itemListElement": homepageCatalog.map(([handle, name], idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": name,
+      "url": `${siteUrl}/product/${handle}`
+    }))
   });
 
   // FAQPage — generated from src/lib/homeFaqs.ts, the same data rendered visibly in
@@ -587,45 +429,181 @@ const unifiedSchemaGraph = {
     <script type="application/ld+json" set:html={JSON.stringify(unifiedSchemaGraph)} />
 
     {/* 🌟 2026 Resilient Ad Tracking Hub (Meta Pixel & Google Tag) */}
-    <script is:inline define:vars={{ metaPixelId, googleTagId }}>
-      // 1. First-Party Cookie Engine & UTM Attribution Capture
+    <script is:inline define:vars={{ metaPixelId, googleTagId, serverPurchaseTracking }}>
+      // 1. First-Party Attribution Engine (first touch + last non-direct touch)
+      // Every landing is classified (UTMs > click IDs > referrer > direct), so organic, WhatsApp, AI and
+      // social visits are attributed even without UTMs. Stored in localStorage AND a first-party cookie
+      // (in-app webviews often wipe localStorage). Read at checkout via window.sujataGetAttribution().
       (function() {
+        var LS_FT = 'sujata_attr_ft', LS_LT = 'sujata_attr_lt', COOKIE = 'sj_attr';
+        var MAX_AGE_DAYS = 90, DIRECT_GRACE_DAYS = 30;
+        var OWN_HOSTS = /(^|\.)(sujatanutrilive\.com|myshopify\.com|razorpay\.com|rzp\.io|gokwik\.co|shopify\.com|localhost)$/i;
+
+        function readCookie(name) {
+          var parts = document.cookie ? document.cookie.split(/;\s*/) : [];
+          for (var i = 0; i < parts.length; i++) {
+            var eq = parts[i].indexOf('=');
+            if (eq > 0 && parts[i].slice(0, eq) === name) return parts[i].slice(eq + 1);
+          }
+          return '';
+        }
+        function writeCookie(name, value, days) {
+          try { document.cookie = name + '=' + value + ';path=/;max-age=' + (days * 86400) + ';SameSite=Lax' + (location.protocol === 'https:' ? ';Secure' : ''); } catch (e) {}
+        }
+        function clip(v, n) { return v == null ? '' : String(v).slice(0, n || 200); }
+        function readJson(key) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+        function fresh(t, days) { return !!(t && t.at && (Date.now() - Date.parse(t.at)) < days * 86400000); }
+
+        function classifyReferrer(host) {
+          host = String(host || '').toLowerCase().replace(/^www\./, '');
+          var rules = [
+            [/(^|\.)gemini\.google\.com$/, 'gemini', 'ai'],
+            [/(^|\.)google\./, 'google', 'organic'], [/(^|\.)bing\.com$/, 'bing', 'organic'],
+            [/(^|\.)yahoo\./, 'yahoo', 'organic'], [/(^|\.)duckduckgo\.com$/, 'duckduckgo', 'organic'],
+            [/(^|\.)yandex\./, 'yandex', 'organic'], [/(^|\.)ecosia\.org$/, 'ecosia', 'organic'],
+            [/(^|\.)(chatgpt\.com|chat\.openai\.com)$/, 'chatgpt', 'ai'], [/(^|\.)perplexity\.ai$/, 'perplexity', 'ai'],
+            [/(^|\.)copilot\.microsoft\.com$/, 'copilot', 'ai'], [/(^|\.)claude\.ai$/, 'claude', 'ai'],
+            [/(^|\.)instagram\.com$/, 'instagram', 'social'], [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, 'facebook', 'social'],
+            [/(^|\.)(wa\.me|whatsapp\.com|wl\.co)$/, 'whatsapp', 'social'],
+            [/(^|\.)(youtube\.com|youtu\.be)$/, 'youtube', 'social'], [/(^|\.)(t\.co|twitter\.com|x\.com)$/, 'x', 'social'],
+            [/(^|\.)linkedin\.com$/, 'linkedin', 'social'], [/(^|\.)pinterest\./, 'pinterest', 'social'],
+            [/(^|\.)amazon\./, 'amazon', 'referral']
+          ];
+          for (var i = 0; i < rules.length; i++) if (rules[i][0].test(host)) return { source: rules[i][1], medium: rules[i][2] };
+          return { source: host, medium: 'referral' };
+        }
+
+        function currentTouch(params) {
+          var refHost = '';
+          try { refHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+          var internalRef = !!refHost && OWN_HOSTS.test(refHost);
+          var t = {
+            source: '', medium: '', campaign: clip(params.get('utm_campaign')), content: clip(params.get('utm_content')),
+            term: clip(params.get('utm_term')), id: clip(params.get('utm_id'), 100),
+            gclid: clip(params.get('gclid') || params.get('gbraid') || params.get('wbraid'), 150),
+            fbclid: clip(params.get('fbclid'), 250),
+            landing: clip(location.pathname + location.search, 250),
+            referrer: internalRef ? '' : clip(document.referrer, 250),
+            at: new Date().toISOString()
+          };
+          var utmSource = clip(params.get('utm_source'), 100).toLowerCase();
+          var utmMedium = clip(params.get('utm_medium'), 100).toLowerCase();
+          if (utmSource || utmMedium) {
+            t.source = utmSource || '(not set)'; t.medium = utmMedium || '(not set)';
+          } else if (t.gclid) {
+            t.source = 'google'; t.medium = 'cpc';
+          } else if (t.fbclid) {
+            t.source = classifyReferrer(refHost).source === 'instagram' ? 'instagram' : 'facebook'; t.medium = 'social';
+          } else if (refHost && !internalRef) {
+            var c = classifyReferrer(refHost); t.source = c.source; t.medium = c.medium;
+          } else if (!refHost) {
+            t.source = '(direct)'; t.medium = '(none)';
+          } else {
+            return null; // internal navigation / payment-gateway return: not a new touch
+          }
+          return t;
+        }
+
+        function persist(ft, lt) {
+          try { localStorage.setItem(LS_FT, JSON.stringify(ft)); localStorage.setItem(LS_LT, JSON.stringify(lt)); } catch (e) {}
+          // Compact cookie mirror for webviews whose storage does not survive the session.
+          var compact = [ft.source, ft.medium, ft.campaign, ft.at, ft.landing, lt.source, lt.medium, lt.campaign, lt.content, lt.at, lt.landing]
+            .map(function (v) { return encodeURIComponent(clip(v, 120)); }).join('|');
+          writeCookie(COOKIE, compact, MAX_AGE_DAYS);
+          // Legacy key read by dispatchStoreEvent and older code: mirrors the LAST non-direct touch.
+          var legacy = {};
+          if (lt.source && lt.source !== '(direct)') {
+            legacy.utm_source = lt.source; legacy.utm_medium = lt.medium;
+            if (lt.campaign) legacy.utm_campaign = lt.campaign;
+            if (lt.content) legacy.utm_content = lt.content;
+            if (lt.term) legacy.utm_term = lt.term;
+          }
+          try { localStorage.setItem('sujata_utms', JSON.stringify(legacy)); } catch (e) {}
+        }
+
+        function restoreFromCookie() {
+          var raw = readCookie(COOKIE); if (!raw) return null;
+          var p = raw.split('|').map(function (v) { try { return decodeURIComponent(v); } catch (e) { return v; } });
+          return {
+            ft: { source: p[0], medium: p[1], campaign: p[2], at: p[3], landing: p[4] },
+            lt: { source: p[5], medium: p[6], campaign: p[7], content: p[8], at: p[9], landing: p[10] }
+          };
+        }
+
         try {
-          var urlParams = new URLSearchParams(window.location.search);
-          var fbclid = urlParams.get('fbclid');
-          
-          // Capture & Persist _fbc (Meta Click ID)
+          var params = new URLSearchParams(location.search);
+
+          // Meta click ID (_fbc) & browser ID (_fbp)
+          var fbclid = params.get('fbclid');
           if (fbclid) {
             var fbcVal = 'fb.1.' + Date.now() + '.' + fbclid;
-            document.cookie = '_fbc=' + fbcVal + ';path=/;max-age=' + (90 * 86400) + ';SameSite=Lax';
+            writeCookie('_fbc', fbcVal, MAX_AGE_DAYS);
             localStorage.setItem('sujata_fbc', fbcVal);
           }
-          
-          // Ensure _fbp (Meta Browser ID) exists
-          var existingFbp = (document.cookie.match(/(^|;\s*)_fbp=([^;]+)/) || [])[2] || localStorage.getItem('sujata_fbp');
+          var existingFbp = readCookie('_fbp') || localStorage.getItem('sujata_fbp');
           if (!existingFbp) {
             existingFbp = 'fb.1.' + Date.now() + '.' + Math.floor(Math.random() * 1000000000);
-            document.cookie = '_fbp=' + existingFbp + ';path=/;max-age=' + (90 * 86400) + ';SameSite=Lax';
-            localStorage.setItem('sujata_fbp', existingFbp);
-          } else {
-            localStorage.setItem('sujata_fbp', existingFbp);
+            writeCookie('_fbp', existingFbp, MAX_AGE_DAYS);
           }
+          localStorage.setItem('sujata_fbp', existingFbp);
 
-          // Capture UTM campaign attribution
-          var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-          var utmData = {};
-          var hasUtm = false;
-          utmKeys.forEach(function(key) {
-            var val = urlParams.get(key);
-            if (val) {
-              utmData[key] = val;
-              hasUtm = true;
+          var ft = readJson(LS_FT), lt = readJson(LS_LT);
+          if (!ft || !lt) { var restored = restoreFromCookie(); if (restored) { ft = ft || restored.ft; lt = lt || restored.lt; } }
+          if (ft && !fresh(ft, MAX_AGE_DAYS)) ft = null;
+          if (lt && !fresh(lt, MAX_AGE_DAYS)) lt = null;
+
+          var hasCampaignParams = /[?&](utm_[a-z]+|gclid|gbraid|wbraid|fbclid)=/i.test(location.search);
+          var isNewSession = !sessionStorage.getItem('sujata_attr_sess');
+          if (isNewSession || hasCampaignParams) {
+            var touch = currentTouch(params);
+            if (touch) {
+              if (!ft) ft = touch;
+              var isDirect = touch.source === '(direct)';
+              // Last NON-direct touch: a direct revisit does not erase a campaign/organic touch < 30 days old.
+              if (!isDirect || !lt || lt.source === '(direct)' || !fresh(lt, DIRECT_GRACE_DAYS)) lt = touch;
             }
-          });
-          if (hasUtm) {
-            localStorage.setItem('sujata_utms', JSON.stringify(utmData));
+            sessionStorage.setItem('sujata_attr_sess', '1');
           }
-        } catch(e) {}
+          if (ft && lt) persist(ft, lt);
+        } catch (e) {}
+
+        function gaClientId() {
+          var m = readCookie('_ga').match(/^GA\d\.\d\.(.+)$/);
+          return m ? m[1] : '';
+        }
+        function gaSessionId() {
+          var v = readCookie('_ga_' + String(googleTagId || '').replace(/^G-/, ''));
+          if (!v) return '';
+          var gs2 = v.match(/^GS2\.\d\.s(\d+)/); if (gs2) return gs2[1];
+          var gs1 = v.match(/^GS1\.\d\.(\d+)\./); return gs1 ? gs1[1] : '';
+        }
+
+        // Flat attribute map written into Shopify order attributes (Magic Checkout + Storefront cart).
+        window.sujataGetAttribution = function () {
+          var ft = readJson(LS_FT) || {}, lt = readJson(LS_LT) || {};
+          if (!lt.source) { var r = restoreFromCookie(); if (r) { ft = ft.source ? ft : r.ft; lt = r.lt; } }
+          var out = {};
+          function put(k, v, n) { v = clip(v, n || 200); if (v) out[k] = v; }
+          put('utm_source', lt.source); put('utm_medium', lt.medium); put('utm_campaign', lt.campaign);
+          put('utm_content', lt.content); put('utm_term', lt.term); put('utm_id', lt.id);
+          put('_landing_page', lt.landing, 250); put('_referrer', lt.referrer, 250); put('_touch_at', lt.at);
+          put('_ft_source', ft.source); put('_ft_medium', ft.medium); put('_ft_campaign', ft.campaign);
+          put('_ft_landing_page', ft.landing, 250); put('_ft_at', ft.at);
+          put('_gclid', lt.gclid || ft.gclid, 150);
+          put('_fbp', readCookie('_fbp') || localStorage.getItem('sujata_fbp'), 120);
+          put('_fbc', readCookie('_fbc') || localStorage.getItem('sujata_fbc'), 300);
+          put('_ga_cid', gaClientId(), 60); put('_ga_sid', gaSessionId(), 30);
+          out._attr_v = '2';
+          return out;
+        };
+
+        // Human-readable summary for the Shopify order note (visible to the team in Shopify admin).
+        window.sujataAttributionNote = function () {
+          var a = window.sujataGetAttribution();
+          var last = (a.utm_source || '(direct)') + ' / ' + (a.utm_medium || '(none)') + (a.utm_campaign ? ' | campaign: ' + a.utm_campaign : '');
+          var first = a._ft_source ? (a._ft_source + ' / ' + (a._ft_medium || '(none)') + (a._ft_campaign ? ' | campaign: ' + a._ft_campaign : '')) : last;
+          return 'Source (last touch): ' + last + '\nFirst touch: ' + first + (a._landing_page ? '\nLanding page: ' + a._landing_page : '');
+        };
       })();
 
       // 🌟 2. Unified Enterprise E-Commerce DataLayer Dispatcher (GA4 & Meta GTM Standard)
@@ -682,7 +660,8 @@ const unifiedSchemaGraph = {
         });
 
         // 1. Dual-Compatibility: Push custom event for GTM custom event triggers
-        window.dataLayer.push({
+        // (Purchase is pushed once, with its ecommerce payload, in the Purchase branch below.)
+        if (eventName !== 'Purchase') window.dataLayer.push({
           event: eventName,
           event_id: eventId,
           user_data: userData,
@@ -774,16 +753,24 @@ const unifiedSchemaGraph = {
             channel: data.channel || 'WhatsApp Support'
           });
         } else if (eventName === 'Purchase') {
-          var pModePurchase = data.payment_mode || localStorage.getItem('sujata_selected_payment_mode') || 'upi';
+          // Single event: fires the GTM Meta Pixel Purchase tag once (eventID = order ID for CAPI dedup).
+          // It intentionally does NOT match the GTM "GA4 - purchase" trigger (exact 'purchase'): GA4
+          // purchases are sent by window.sujataTrackPurchase (gtag) or server-side by the order webhook.
+          var pModePurchase = data.payment_mode || localStorage.getItem('sujata_selected_payment_mode') || '';
+          var purchaseValue = Number(data.value || data.total || 0);
           window.dataLayer.push({ ecommerce: null });
           window.dataLayer.push({
-            event: 'purchase',
+            event: 'Purchase',
             event_id: eventId,
             user_data: userData,
+            order_total: purchaseValue,
+            clean_id: cleanId,
+            event_data: enrichedData,
             ecommerce: {
               transaction_id: String(data.order_id || eventId),
-              value: Number(data.value || data.total || 0),
+              value: purchaseValue,
               currency: data.currency || 'INR',
+              coupon: data.coupon || undefined,
               payment_type: pModePurchase,
               items: (data.items || []).map(function(item) {
                 return {
@@ -802,6 +789,119 @@ const unifiedSchemaGraph = {
             method: data.content_name || 'Routine Quiz'
           });
         }
+      };
+
+      // 🌟 3. Unified, idempotent purchase tracker (called from the Razorpay success handler AND /thank-you).
+      //  - One idempotency key per transaction, so the handler + thank-you page never double-count.
+      //  - Meta Pixel: GTM "Meta Pixel - Purchase" tag via a single dataLayer 'Purchase' event (eventID = order ID).
+      //  - GA4: when GA4_API_SECRET is configured, the Shopify orders/create webhook sends the purchase
+      //    server-side with the exact Shopify total (source of truth) and the browser does NOT send one.
+      //    Without the secret, the browser sends it directly via gtag (send_to the GA4 ID), not via GTM.
+      //  - If GTM never loads (blocked / in-app webview / slow network), Pixel + gtag are loaded directly.
+      window.sujataTrackPurchase = function (order) {
+        return new Promise(function (resolve) {
+          try {
+            if (!order || !order.transaction_id) return resolve(false);
+            var txId = String(order.transaction_id);
+            var key = 'sujata_purchased_' + txId;
+            try {
+              if (localStorage.getItem(key) === 'true') return resolve(false);
+              localStorage.setItem(key, 'true');
+            } catch (e) {}
+            if (window.__SUJATA_STAFF__) return resolve(false);
+
+            var value = Math.round(Number(order.value || 0) * 100) / 100;
+            var currency = order.currency || 'INR';
+            var rawItems = order.items || [];
+            function cleanId(raw) {
+              var s = String(raw || '');
+              var m = s.match(/(?:ProductVariant|Product)\/(\d+)/);
+              return m ? m[1] : s;
+            }
+            var gaItems = rawItems.map(function (it, idx) {
+              return {
+                item_id: cleanId(it.id || it.variantId),
+                item_name: it.title || 'Sujata Formulation',
+                item_brand: 'Sujata Nutrilive',
+                price: Number(it.price || 0),
+                quantity: Number(it.quantity || 1),
+                index: idx
+              };
+            });
+
+            // (a) GTM / Meta Pixel path
+            if (typeof window.dispatchStoreEvent === 'function') {
+              window.dispatchStoreEvent('Purchase', {
+                event_id: txId,
+                order_id: txId,
+                payment_id: order.payment_id || '',
+                value: value,
+                total: value,
+                currency: currency,
+                coupon: order.coupon || '',
+                payment_mode: order.payment_mode || '',
+                items: rawItems
+              });
+            }
+
+            var settled = false;
+            function finish() { if (!settled) { settled = true; resolve(true); } }
+            var gaParams = {
+              send_to: googleTagId,
+              transaction_id: txId,
+              value: value,
+              currency: currency,
+              payment_type: order.payment_mode || undefined,
+              coupon: order.coupon || undefined,
+              items: gaItems
+            };
+
+            // (b) GA4 direct path (only when the server is not the GA4 purchase source)
+            if (!serverPurchaseTracking && typeof window.gtag === 'function') {
+              window.gtag('event', 'purchase', Object.assign({}, gaParams, { event_callback: finish, event_timeout: 1500 }));
+              setTimeout(finish, 1600);
+            } else {
+              setTimeout(finish, 500);
+            }
+
+            // (c) Resilience: GTM did not load -> fire Pixel + gtag directly.
+            setTimeout(function () {
+              var gtmAlive = !!(window.google_tag_manager && window.google_tag_manager['GTM-5BCC6JL8']);
+              if (gtmAlive) return;
+              try {
+                if (!serverPurchaseTracking) {
+                  var g = document.createElement('script');
+                  g.async = true;
+                  g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleTagId);
+                  document.head.appendChild(g);
+                  window.dataLayer = window.dataLayer || [];
+                  if (typeof window.gtag !== 'function') window.gtag = function () { window.dataLayer.push(arguments); };
+                  window.gtag('js', new Date());
+                  window.gtag('config', googleTagId, { send_page_view: false });
+                  window.gtag('event', 'purchase', gaParams); // same transaction_id -> GA4 de-duplicates
+                }
+                if (typeof window.fbq !== 'function') {
+                  (function (f, b, e, v, n, t, s) {
+                    if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+                    if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+                    t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+                  })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+                  window.fbq('init', metaPixelId);
+                }
+                window.fbq('track', 'Purchase', {
+                  value: value,
+                  currency: currency,
+                  content_type: 'product',
+                  content_ids: gaItems.map(function (i) { return i.item_id; }),
+                  contents: gaItems.map(function (i) { return { id: i.item_id, quantity: i.quantity, item_price: i.price }; }),
+                  num_items: gaItems.reduce(function (n, i) { return n + i.quantity; }, 0)
+                }, { eventID: txId });
+              } catch (e) {}
+            }, 3500);
+          } catch (err) {
+            resolve(false);
+          }
+        });
       };
 
       // 🌟 5. Global Delegated Click Listener for WhatsApp & Phone Support

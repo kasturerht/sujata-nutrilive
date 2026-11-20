@@ -4,14 +4,32 @@ export const prerender = false;
 
 const RAZORPAY_KEY_ID = "rzp_live_TV8wwiNECUNJs0";
 
+const MAX_ATTRIBUTES = 40;
+function sanitizeAttributes(input: unknown): Record<string, string> {
+  const out: Record<string, string> = {};
+  if (!input || typeof input !== 'object' || Array.isArray(input)) return out;
+  for (const [rawKey, rawVal] of Object.entries(input as Record<string, unknown>)) {
+    if (Object.keys(out).length >= MAX_ATTRIBUTES) break;
+    const key = String(rawKey).trim().slice(0, 64);
+    if (!/^[A-Za-z0-9_\-]+$/.test(key)) continue;
+    if (rawVal === null || rawVal === undefined || typeof rawVal === 'object') continue;
+    const val = String(rawVal).trim().slice(0, 300);
+    if (val) out[key] = val;
+  }
+  return out;
+}
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const items = body.items || [];
     let couponCode = body.coupon_code || '';
     const paymentMode = body.payment_mode || 'upi';
-    const note = body.note || null;
-    const attributes = body.attributes || {};
+    // Attribution travels as Shopify cart attributes (Razorpay copies them onto the Shopify order, verified on
+    // orders #1039-#1042) plus a human-readable note. Sanitised: string keys/values, bounded size.
+    const note = typeof body.note === 'string' && body.note.trim() ? body.note.trim().slice(0, 1000) : null;
+    const attributes = sanitizeAttributes(body.attributes);
+    attributes._checkout_path = 'magic';
 
     if (!items || items.length === 0) {
       return new Response(JSON.stringify({ success: false, error: 'Cart is empty' }), {
@@ -120,6 +138,8 @@ export const POST: APIRoute = async ({ request }) => {
       payment_mode: paymentMode,
       hide_cod: shouldHideCod,
       has_no_cod_item: hasNoCodItem,
+      // Razorpay amounts are in paise; used for an accurate client-side purchase value.
+      order_amount: typeof orderData.amount === 'number' && orderData.amount > 0 ? orderData.amount / 100 : null,
       line_items: orderData.line_items || []
     }), {
       status: 200,

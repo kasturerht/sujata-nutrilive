@@ -173,9 +173,14 @@ const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'l
         } catch(e) {}
 
         // 3. Resolve Real Order Identity & Value
-        var resolvedOrderId = urlOrderId || (snapshot && snapshot.order_id) || urlPaymentId || ('SUJATA-' + Math.floor(10000 + Math.random() * 90000));
+        // A purchase is only tracked for a REAL order reference (URL from the payment handler, or the
+        // checkout snapshot). Previously a random 'SUJATA-xxxxx' ID and a ₹945 default meant any direct or
+        // repeat visit to /thank-you recorded a fake purchase.
+        var realOrderId = urlOrderId || (snapshot && snapshot.order_id) || '';
+        var resolvedOrderId = realOrderId || urlPaymentId || 'SUJATA-PROCESSING';
         var resolvedPaymentId = urlPaymentId || (snapshot && snapshot.payment_id) || '';
-        var resolvedValue = Number(urlValue) || (snapshot && Number(snapshot.total)) || 945;
+        var knownValue = Number(urlValue) || (snapshot && Number(snapshot.total)) || 0;
+        var resolvedValue = knownValue || 945; // display only
         var resolvedMode = urlMode || (snapshot && snapshot.payment_mode) || 'upi';
         var resolvedItems = (snapshot && snapshot.items && snapshot.items.length > 0) 
           ? snapshot.items 
@@ -235,46 +240,25 @@ const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'l
           trackBtn.setAttribute('href', '/track-order?order=' + encodeURIComponent(resolvedOrderId));
         }
 
-        // 5. 🛡️ SILICON VALLEY IDEMPOTENCY GUARD (Zero Duplicate Conversions)
-        var trackingKey = 'sujata_purchased_' + resolvedOrderId;
-        var isAlreadyTracked = false;
-        try {
-          isAlreadyTracked = localStorage.getItem(trackingKey) === 'true';
-        } catch(e) {}
+        // 5. Purchase tracking via the shared idempotent tracker (StoreLayout). If the Razorpay handler already
+        //    tracked this order before redirecting, the shared key makes this a no-op.
+        var hasRealItems = !!(snapshot && snapshot.items && snapshot.items.length > 0 && snapshot.order_id === realOrderId);
+        if (realOrderId && knownValue > 0 && typeof window.sujataTrackPurchase === 'function') {
+          window.sujataTrackPurchase({
+            transaction_id: realOrderId,
+            payment_id: resolvedPaymentId,
+            value: knownValue,
+            currency: 'INR',
+            coupon: (snapshot && snapshot.coupon_code) || '',
+            payment_mode: resolvedMode,
+            items: hasRealItems ? snapshot.items : []
+          });
+        } else if (!realOrderId) {
+          console.warn('[Sujata Analytics] /thank-you opened without an order reference: no purchase tracked.');
+        }
 
-        if (isAlreadyTracked) {
-          console.log('🛡️ [Sujata Analytics] Purchase already tracked for Order ID:', resolvedOrderId, '- Skipping duplicate dispatch.');
-        } else {
-          try {
-            localStorage.setItem(trackingKey, 'true');
-          } catch(e) {}
-
-          // 🌟 Official Dual-Channel Purchase Event Dispatch (Meta Pixel + GA4)
-          if (typeof window.dispatchStoreEvent === 'function') {
-            var purchasePayload = {
-              event_id: resolvedOrderId || resolvedPaymentId || ('order_' + Date.now()),
-              order_id: resolvedOrderId,
-              payment_id: resolvedPaymentId,
-              currency: 'INR',
-              value: resolvedValue,
-              total: resolvedValue,
-              price: resolvedValue,
-              payment_mode: resolvedMode,
-              items: resolvedItems.map(function(item) {
-                return {
-                  id: String(item.id || item.variantId || ''),
-                  title: item.title || 'Sujata Formulation',
-                  price: Number(item.price || 0),
-                  quantity: Number(item.quantity || 1)
-                };
-              })
-            };
-
-            window.dispatchStoreEvent('Purchase', purchasePayload);
-            console.log('✅ [Sujata Analytics] Official Purchase event dispatched successfully for Meta Ads & GA4:', purchasePayload);
-          }
-
-          // Clean local cart so drawer is empty on next visit
+        // Clean local cart so drawer is empty on next visit
+        if (realOrderId) {
           try {
             localStorage.removeItem('sujata_cart');
             localStorage.removeItem('sujata_pending_order');

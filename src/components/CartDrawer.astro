@@ -652,19 +652,37 @@ try {
       const recoveryTimer = setTimeout(resetCheckoutBtn, 8000);
 
       // 🌟 Cross-Domain Tracking: Extract Meta & UTM Attribution to forward to Shopify Checkout
+      // First-touch + last-touch attribution (StoreLayout engine) is bound to the checkout session here and
+      // written into Shopify order attributes + note by both the Magic Checkout and Storefront paths.
       const cartAttributes = [];
+      let attributionNote = '';
       try {
+        if (typeof window.sujataGetAttribution === 'function') {
+          const attribution = window.sujataGetAttribution() || {};
+          Object.keys(attribution).forEach(k => {
+            if (attribution[k]) cartAttributes.push({ key: k, value: String(attribution[k]) });
+          });
+          if (typeof window.sujataAttributionNote === 'function') attributionNote = window.sujataAttributionNote();
+        }
+      } catch(e) {}
+      const hasAttr = (k) => cartAttributes.some(a => a.key === k);
+      try {
+        if (!hasAttr('_fbp')) {
         const fbp = (document.cookie.match(/(^|;\s*)_fbp=([^;]+)/) || [])[2] || localStorage.getItem('sujata_fbp');
         const fbc = (document.cookie.match(/(^|;\s*)_fbc=([^;]+)/) || [])[2] || localStorage.getItem('sujata_fbc');
         if (fbp) cartAttributes.push({ key: '_fbp', value: fbp });
         if (fbc) cartAttributes.push({ key: '_fbc', value: fbc });
+        }
 
-        const rawUtms = localStorage.getItem('sujata_utms');
-        if (rawUtms) {
-          const parsedUtms = JSON.parse(rawUtms);
-          Object.keys(parsedUtms).forEach(k => {
-            if (parsedUtms[k]) cartAttributes.push({ key: k, value: String(parsedUtms[k]) });
-          });
+        // Legacy fallback (only if the attribution engine did not run)
+        if (!hasAttr('utm_source')) {
+          const rawUtms = localStorage.getItem('sujata_utms');
+          if (rawUtms) {
+            const parsedUtms = JSON.parse(rawUtms);
+            Object.keys(parsedUtms).forEach(k => {
+              if (parsedUtms[k] && !hasAttr(k)) cartAttributes.push({ key: k, value: String(parsedUtms[k]) });
+            });
+          }
         }
 
         const activeHook = sessionStorage.getItem('sujata_active_hook') || localStorage.getItem('sujata_active_hook');
@@ -692,7 +710,8 @@ try {
             items: items,
             coupon_code: discountCodeToSend || undefined,
             payment_mode: selectedMode,
-            attributes: attrRecord
+            attributes: attrRecord,
+            note: attributionNote || undefined
           };
 
           const magicRes = await fetch('/api/magic-checkout', {
@@ -749,16 +768,38 @@ try {
                   coupon_code: discountCodeToSend || undefined
                 },
                 handler: function(response) {
-                  try { 
-                    localStorage.removeItem('sujata_cart'); 
+                  try {
+                    localStorage.removeItem('sujata_cart');
                     localStorage.removeItem('sujata_active_checkout');
                   } catch(e) {}
                   const resolvedOrderId = response.razorpay_order_id || magicData.order_id || '';
                   const resolvedPaymentId = response.razorpay_payment_id || '';
-                  window.location.href = '/thank-you?order_id=' + encodeURIComponent(resolvedOrderId) + 
-                    '&payment_id=' + encodeURIComponent(resolvedPaymentId) + 
-                    '&value=' + encodeURIComponent(finalOrderTotal) + 
-                    '&mode=' + encodeURIComponent(selectedMode);
+                  const purchaseValue = Number(magicData.order_amount) > 0 ? Number(magicData.order_amount) : finalOrderTotal;
+                  const goToThankYou = () => {
+                    window.location.href = '/thank-you?order_id=' + encodeURIComponent(resolvedOrderId) +
+                      '&payment_id=' + encodeURIComponent(resolvedPaymentId) +
+                      '&value=' + encodeURIComponent(purchaseValue) +
+                      '&mode=' + encodeURIComponent(selectedMode);
+                  };
+                  // Track the purchase HERE (GTM is already loaded on this page), before navigating away:
+                  // in-app webviews often lose the redirect, which is why GA4 saw only part of the orders.
+                  // /thank-you re-uses the same idempotency key, so the order is counted exactly once.
+                  if (typeof window.sujataTrackPurchase === 'function') {
+                    let navigated = false;
+                    const go = () => { if (!navigated) { navigated = true; goToThankYou(); } };
+                    setTimeout(go, 1800);
+                    window.sujataTrackPurchase({
+                      transaction_id: resolvedOrderId,
+                      payment_id: resolvedPaymentId,
+                      value: purchaseValue,
+                      currency: 'INR',
+                      coupon: discountCodeToSend || '',
+                      payment_mode: selectedMode,
+                      items: orderSnapshot.items
+                    }).then(go, go);
+                  } else {
+                    goToThankYou();
+                  }
                 },
                 modal: {
                   ondismiss: function() {
@@ -900,6 +941,7 @@ try {
           if (cartAttributes.length > 0) {
             cartInput.attributes = cartAttributes;
           }
+          if (attributionNote) cartInput.note = attributionNote;
 
           const response = await fetch(`https://${DOMAIN}/api/2024-01/graphql.json`, {
             method: 'POST',

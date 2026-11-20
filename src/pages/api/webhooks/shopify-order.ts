@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import type { APIRoute } from 'astro';
 import process from 'node:process';
 import crypto from 'node:crypto';
+import { describeOrderSource, purchaseTransactionId, sendGa4Purchase, verifyShopifyWebhook } from '../../../lib/server-analytics';
 
 export const prerender = false;
 
@@ -41,7 +42,7 @@ async function sendMetaCapiPurchase(order: any, pixelId: string, accessToken: st
     const fbp = notes['_fbp'] || notes['fbp'] || undefined;
     const fbc = notes['_fbc'] || notes['fbc'] || undefined;
 
-    const eventId = `order_${order.id || order.order_number}`;
+    const eventId = purchaseTransactionId(order) || `order_${order.id || order.order_number}`;
     const value = parseFloat(order.total_price || '0');
     const currency = order.currency || 'INR';
 
@@ -419,11 +420,8 @@ function formatCorporateOrderMessage(order: any): string {
   const fullAddress = street ? `${street}, ${city}` : city;
 
   // 4. Source / Attribution
-  const utms: Record<string, string> = {};
-  (order.note_attributes || []).forEach((attr: any) => {
-    if (attr && attr.name && attr.value) utms[attr.name] = attr.value;
-  });
-  const campaign = utms['utm_campaign'] || utms['utm_source'] || 'Website Direct';
+  // Escaped: campaign names often contain "_" which breaks Telegram Markdown and drops the alert.
+  const sourceLine = describeOrderSource(order).replace(/[_*`\[]/g, '\\$&');
 
   return `🌿 *SUJATA NUTRILIVE — NEW ORDER*
 ━━━━━━━━━━━━━━━━━━━━━━━━
@@ -435,7 +433,7 @@ function formatCorporateOrderMessage(order: any): string {
 
 📍 *Address:* ${fullAddress}
 
-🌐 *Source:* Website Direct (${campaign})
+🌐 *Source:* ${sourceLine}
 ━━━━━━━━━━━━━━━━━━━━━━━━`;
 }
 
@@ -453,13 +451,19 @@ export const GET: APIRoute = async () => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const rawBody = await request.text();
     let order: any = null;
     try {
-      order = await request.json();
+      order = JSON.parse(rawBody);
     } catch {
-      const text = await request.text();
-      order = JSON.parse(text);
+      order = null;
     }
+
+    // Shopify signs webhooks with the app secret. Revenue-affecting dispatch (GA4 / CAPI) only runs for a
+    // verified payload (or when no secret is configured), so a forged POST cannot inject fake purchases.
+    const hmacStatus = verifyShopifyWebhook(rawBody, request.headers.get('x-shopify-hmac-sha256'));
+    const trustedPayload = hmacStatus !== false;
+    if (!trustedPayload) console.warn('Shopify webhook HMAC verification failed: analytics dispatch skipped.');
 
     if (!order) {
       return new Response(JSON.stringify({ error: 'Invalid or empty order payload' }), { status: 400 });
@@ -517,8 +521,19 @@ export const POST: APIRoute = async ({ request }) => {
       'EAAZAmug8oChABSqxHeW0lbtHCwkwMaQQsx5UqcYgYxLfn3qep4z4avHUZC26Nlv2OYU0Qqw0OkfIg4TcZBWVJJGCntlwH8kQiKzmLid0eyCQZC70ZBK56ZCt3mMoolHewqj2R07NVZAQV6ifdZBlyZBSoGVzZAqKHt7vaof15TcZBzmGzpYpmyHFM7ykDPOfoAhfQZDZD';
 
     let capiResult = null;
-    if (enableWebhookCapi && metaPixelId && metaAccessToken) {
+    if (trustedPayload && enableWebhookCapi && metaPixelId && metaAccessToken) {
       capiResult = await sendMetaCapiPurchase(order, metaPixelId, metaAccessToken);
+    }
+
+    // 2b. Server-side GA4 purchase (Measurement Protocol) with the exact Shopify order value.
+    let ga4Result: any = null;
+    if (trustedPayload) {
+      try {
+        ga4Result = await sendGa4Purchase(order);
+      } catch (e: any) {
+        ga4Result = { sent: false, reason: e?.message || 'GA4 MP error' };
+        console.error('GA4 Measurement Protocol error:', e);
+      }
     }
 
     // 3. Direct Automated Email Dispatch to sujatanutrilive@gmail.com
@@ -536,7 +551,9 @@ export const POST: APIRoute = async ({ request }) => {
         telegramDelivered: telegramSuccess,
         emailDelivered: emailDelivered,
         metaCapiDelivered: capiResult?.events_received === 1,
-        metaCapiResponse: capiResult
+        metaCapiResponse: capiResult,
+        hmacVerified: hmacStatus,
+        ga4Purchase: ga4Result
       }),
       {
         status: 200,

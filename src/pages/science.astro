@@ -391,6 +391,7 @@ const scienceSchemas = [
     "name": "Botanical Phytochemical Biomarkers & Bio-Enzyme Specification",
     "description": "Validated spectrophotometric and enzymatic kinetic assays for heat-sensitive chromoproteins (C-Phycocyanin, Chlorophyll-a) and antioxidant enzymes (Superoxide Dismutase) in sub-40°C cryo-preserved Arthrospira platensis biomass.",
     "isAccessibleForFree": true,
+    "creator": { "@id": "https://www.sujatanutrilive.com/#organization" },
     "variableMeasured": botanicalBiomarkers.map(b => `${b.biomarker}: ${b.result} (${b.method}) - ${b.status}`)
   },
   {
@@ -399,6 +400,7 @@ const scienceSchemas = [
     "name": "Commercial Certificate of Analysis: Batch #SP/SS/Nov01/2025",
     "description": "Commercial batch release certificate for Batch #SP/SS/Nov01/2025 contract manufactured by Spiru Swastha India Pvt Ltd conforming to Master Specification SPEC-SN-2026-REV03.",
     "isAccessibleForFree": true,
+    "creator": { "@type": "Organization", "name": "Spiru Swastha India Pvt Ltd" },
     "variableMeasured": currentBatchCoA.parameters.map(p => `${p.test}: ${p.observed} (Spec: ${p.spec}) - ${p.status}`)
   },
   {

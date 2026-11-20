@@ -89,3 +89,22 @@ export async function getJudgeMeSsrData(
     return { badgeHtml: '', widgetHtml: '', hasVerifiedReviews: false };
   }
 }
+
+/**
+ * Extracts the real rating summary from the Judge.me preview badge markup
+ * (`data-average-rating='4.50' data-number-of-reviews='12'`).
+ * Returns null when there are no published reviews, so callers can omit
+ * `aggregateRating` instead of inventing one (Google review-snippet policy).
+ */
+export function parseJudgeMeRating(
+  badgeHtml: string | undefined | null
+): { ratingValue: string; reviewCount: number } | null {
+  if (!badgeHtml) return null;
+  const avg = badgeHtml.match(/data-average-rating=['"]([\d.]+)['"]/);
+  const count = badgeHtml.match(/data-number-of-reviews=['"](\d+)['"]/);
+  if (!avg || !count) return null;
+  const reviewCount = parseInt(count[1], 10);
+  const rating = parseFloat(avg[1]);
+  if (!reviewCount || !(rating > 0)) return null;
+  return { ratingValue: rating.toFixed(1), reviewCount };
+}
