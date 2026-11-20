@@ -3,7 +3,9 @@
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
 import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
 
 const pageTitle = "Spirulina Tablets vs Capsules vs Powder: The Honest Indian Buyer's Guide (2026)";
 const pageDescription = "Spirulina tablets vs capsules vs powder: Which is best for the Indian body? Discover the 5-minute kitchen water test for talc, NABL lab comparisons, and price per day.";
@@ -20,7 +22,7 @@ const structuredSchemas = [
     "inLanguage": "en-IN",
     "mainEntityOfPage": pageUrl,
     "datePublished": "2026-11-18T09:00:00+05:30",
-    "dateModified": "2026-11-18T15:00:00+05:30",
+    "dateModified": "2026-11-20T10:00:00+05:30",
     "author": {
       "@type": "Organization",
       "name": "Sujata Nutrilive Clinical Research Cell",
@@ -305,6 +307,15 @@ const structuredSchemas = [
         </div>
       </article>
 
+      <!-- Choose your format: direct comparison cards with 1-click order -->
+      <section id="choose-your-format" aria-labelledby="choose-format-heading" class="rounded-2xl border border-emerald-900/50 bg-[#0A1A12] p-5 sm:p-8 shadow-xl">
+        <h2 id="choose-format-heading" class="text-xl sm:text-2xl font-serif font-bold text-white mb-1">Choose your format and order</h2>
+        <p class="text-sm text-gray-300 mb-2">Same NABL-tested spirulina (62.39% protein, 290.89 mg/kg iron) in all three. Pick by how you will take it; prices are live from our store.</p>
+        <LearnBuyCard handle="sujata-spirulina-tablets" variantIndex={1} placement="tvc-format-tablets" badge="Best value · most people" heading="Spirulina Tablets (500mg, no binders)" pitch="Lowest cost per day. Swallow 2 tablets after breakfast; easy to scale up on heavy days." />
+        <LearnBuyCard handle="sujata-spirulina-capsules" placement="tvc-format-capsules" badge="Zero taste · sensitive stomach" heading="Spirulina Veg Capsules (500mg)" pitch="Plant (HPMC/pullulan) shell hides the algae taste and smell completely. Best if tablets make you gag." />
+        <LearnBuyCard handle="sujata-spirulina-powder" placement="tvc-format-powder" badge="Smoothies · shakes · chaas" heading="Spirulina Powder (100g)" pitch="For people who blend daily. Mix 1 scoop (3g) into a smoothie or protein shake, not plain water." />
+      </section>
+
       <!-- ========================================================================= -->
       <!-- SECTION 2: THE PHYSICAL & CHEMICAL REALITY MATRIX -->
       <!-- ========================================================================= -->
@@ -472,7 +483,7 @@ const structuredSchemas = [
                 For over 57% of Indian women suffering from low hemoglobin and chronic fatigue, allopathic iron tablets (ferrous sulfate) represent a daily ordeal—causing severe nausea, abdominal cramps, and stone-hard black stools.
               </p>
               <p>
-                Pure cold-compressed spirulina tablets deliver <strong>290.89 mg/kg of bio-available non-heme organic iron</strong> (Lilaba NABL Report #LAL-NN-131125023) chelated naturally to plant biliproteins. This form absorbs smoothly in the duodenum without irritating the bowel mucosa, restoring hemoglobin naturally without constipation.
+                Pure <a href="/product/sujata-spirulina-tablets" class="text-emerald-300 underline underline-offset-2 hover:text-amber-300">cold-compressed spirulina tablets</a> deliver <strong>290.89 mg/kg of bio-available non-heme organic iron</strong> (Lilaba NABL Report #LAL-NN-131125023) chelated naturally to plant biliproteins. This form absorbs smoothly in the duodenum without irritating the bowel mucosa, restoring hemoglobin naturally without constipation.
               </p>
               <p>
                 Moreover, tablets allow <strong>flexible micro-dosing</strong>: take 2 tablets (1,000 mg) on normal desk-work days, or scale to 4 tablets during intensive travel, physical workouts, or seasonal recovery.
@@ -489,7 +500,7 @@ const structuredSchemas = [
                 Over 75% of cheap pharmaceutical capsules sold in Indian medical stores are made of <strong>Bovine or Porcine Gelatin</strong>—an animal slaughterhouse byproduct manufactured by boiling cattle and pig bones, skin, and hooves.
               </div>
               <p>
-                Always verify that your capsules are certified <strong>100% Vegetarian HPMC (Hydroxypropyl Methylcellulose) or Pullulan Plant Capsules</strong>. Sujata Nutrilive capsules use plant cellulose derived from pine tree bark and fermented tapioca, certified 100% free of animal DNA, preservatives, and phthalates.
+                Always verify that your capsules are certified <strong>100% Vegetarian HPMC (Hydroxypropyl Methylcellulose) or Pullulan Plant Capsules</strong>. <a href="/product/sujata-spirulina-capsules" class="text-emerald-300 underline underline-offset-2 hover:text-amber-300">Sujata Nutrilive spirulina capsules</a> use plant cellulose derived from pine tree bark and fermented tapioca, certified 100% free of animal DNA, preservatives, and phthalates.
               </p>
               <p>
                 Capsules are mandatory for individuals with a sensitive gag reflex, pregnant women experiencing first-trimester morning sickness, or patients suffering from chronic GERD / acid reflux who cannot tolerate raw herbal tastes.
@@ -505,7 +516,7 @@ const structuredSchemas = [
                 Raw powder represents the purest physical form of spirulina, but it has the highest consumer drop-off rate in India. Spirulina powder is hydrophobic—it resists dissolving in plain water, clumping into unpalatable dark green spheres that float on top. Drinking it plain also stains your teeth and tongue a vivid dark blue-green for hours due to its concentrated natural phycocyanin pigment.
               </p>
               <p>
-                <em>The Golden Rule:</em> Only purchase powder if you own an electric blender and regularly blend it into fruit smoothies, protein shakes, or homemade spiced mint buttermilk (chaas).
+                <em>The Golden Rule:</em> Only purchase powder if you own an electric blender and regularly blend it into fruit smoothies, protein shakes, or homemade spiced mint buttermilk (chaas). If that is you, <a href="/product/sujata-spirulina-powder" class="text-emerald-300 underline underline-offset-2 hover:text-amber-300">our 100g organic spirulina powder</a> is the cheapest way in.
               </p>
             </div>
           </div>
@@ -513,49 +524,10 @@ const structuredSchemas = [
         </div>
       </article>
 
-      <!-- ========================================================================= -->
-      <!-- TASTEFUL MID-ARTICLE PRODUCT SHOWCASE (CLEAN D2C CONVERSION BANNER) -->
-      <!-- ========================================================================= -->
-      <section class="relative bg-gradient-to-r from-emerald-950 via-[#064E3B] to-emerald-900 border-2 border-emerald-400/40 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-          <img 
-            src="/products/sujata-spirulina-tablets-main-3d.jpg" 
-            alt="Sujata 100% Vegan Spirulina Cold-Compressed Tablets" 
-            class="h-32 sm:h-36 w-auto object-contain drop-shadow-2xl" 
-          />
-          <div>
-            <div class="inline-block bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full mb-1">
-              Direct From Nashik Farm • 0% Binders
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-white font-serif">Sujata 100% Vegan Cold-Compressed Tablets</h3>
-            <p class="text-xs sm:text-sm text-emerald-100/90 mt-1 max-w-md">
-              62.39% bio-protein (IS 7219) • 290 mg/kg plant iron • Dissolves in 12–15 mins in warm water • Just ₹9.16 per day on 120-tablet value pack.
-            </p>
-            <div class="flex items-baseline gap-2 mt-2 justify-center sm:justify-start">
-              <span class="text-2xl font-black text-white font-sans">₹350</span>
-              <span class="text-xs text-gray-300 line-through">₹400 (60 Tabs)</span>
-              <span class="text-xs text-amber-300 font-bold ml-2">₹550 for 120 Tabs (Save ₹149)</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="shrink-0 flex flex-col gap-2 w-full sm:w-auto">
-          <a 
-            href="/product/sujata-spirulina-tablets" 
-            class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs uppercase px-6 py-3 rounded-xl shadow-xl transition-all cursor-pointer font-sans text-center tracking-wide"
-          >
-            Order Vegan Tablets (COD) →
-          </a>
-          <a 
-            href="https://wa.me/919834783503?text=Hi%2C%20I%20want%20to%20order%20Sujata%20Spirulina%20Tablets%20on%20COD" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/50 text-[#25D366] font-bold text-xs py-2 px-4 rounded-xl text-center flex items-center justify-center gap-1.5 transition-all"
-          >
-            <span>💬</span> WhatsApp Order
-          </a>
-        </div>
-      </section>
+      <p class="text-sm text-gray-400 text-center">
+        Decided? <a href="#choose-your-format" class="text-emerald-300 underline underline-offset-2">Compare the three formats with live prices</a>, or read
+        <a href="/learn/best-spirulina-brand-in-india" class="text-emerald-300 underline underline-offset-2">how Sujata compares with other Indian spirulina brands</a>.
+      </p>
 
       <!-- ========================================================================= -->
       <!-- SECTION 4: MASTER BRAND BENCHMARKING (OBJECTIVE AUDIT) -->
@@ -675,49 +647,12 @@ const structuredSchemas = [
         </div>
       </article>
 
-      <!-- ========================================================================= -->
-      <!-- SECTION 6: THE SYNERGISTIC IMMUNITY COMBO (FLAGSHIP CONVERSION BANNER) -->
-      <!-- ========================================================================= -->
-      <section class="bg-gradient-to-r from-[#031d16] via-[#0A2E23] to-[#031d16] border-2 border-emerald-400/50 rounded-2xl p-6 sm:p-8 shadow-2xl">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="max-w-xl">
-            <span class="inline-block bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 border border-amber-400/30">
-              ⚡ Doctor &amp; Practitioner Recommended
-            </span>
-            <h3 class="text-xl sm:text-2xl font-serif font-black text-white mb-2">
-              Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)
-            </h3>
-            <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed mb-4">
-              When sub-40°C cold-compressed Spirulina Tablets (complete bio-protein, organic iron, phycocyanin) are paired with wild Himalayan Sea Buckthorn Capsules (rare Omega-7, 3, 6, 9 and natural Vitamin C), bio-absorption increases by up to 300%. Protects cell membranes, boosts hemoglobin, and restores all-day clean energy.
-            </p>
-            <div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-emerald-300">
-              <span>✓ Free Express Courier</span>
-              <span>•</span>
-              <span>✓ Cash on Delivery (COD)</span>
-              <span>•</span>
-              <span>✓ 90-Day Vitality Guarantee</span>
-            </div>
-          </div>
-
-          <div class="shrink-0 text-center flex flex-col items-center">
-            <div class="text-xs text-emerald-300 line-through">MRP: ₹1,399</div>
-            <div class="text-3xl font-black text-amber-400 mb-3">₹950</div>
-            <a 
-              href="/product/sujata-spirulina-sea-buckthorn-combo" 
-              class="inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-black font-black py-3 px-6 rounded-xl text-sm shadow-xl transition-transform active:scale-95"
-            >
-              Order Synergy Combo (₹950) →
-            </a>
-            <a 
-              href="https://wa.me/919834783503?text=Hi%2C%20I%20want%20to%20order%20Daily%20Super%20Immunity%20Combo%20on%20COD" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="text-xs text-emerald-300 hover:text-white mt-2 flex items-center gap-1 font-medium"
-            >
-              <span>💬</span> Order via WhatsApp
-            </a>
-          </div>
-        </div>
+      <!-- Spirulina + Sea Buckthorn combos (live prices) -->
+      <section aria-labelledby="combo-heading" class="rounded-2xl border border-amber-500/30 bg-[#0A1A12] p-5 sm:p-8 shadow-xl">
+        <h2 id="combo-heading" class="text-xl sm:text-2xl font-serif font-bold text-white mb-1">Pair it with Himalayan Sea Buckthorn</h2>
+        <p class="text-sm text-gray-300">Spirulina covers protein and iron; <a href="/product/sujata-sea-buckthorn-capsules" class="text-emerald-300 underline underline-offset-2">sea buckthorn capsules</a> add Omega-7 and vitamin C for skin. Both combos cost less than buying the two separately.</p>
+        <LearnBuyCard handle="sujata-spirulina-sea-buckthorn-combo-pack" placement="tvc-combo-capsules" badge="Bestseller · capsule combo" heading="Spirulina Capsules + Sea Buckthorn Combo" />
+        <LearnBuyCard handle="sujata-spirulina-sea-buckthorn-combo" placement="tvc-combo-tablets" compact={true} heading="Spirulina Tablets + Sea Buckthorn Combo" />
       </section>
 
       <!-- ========================================================================= -->
@@ -798,5 +733,6 @@ const structuredSchemas = [
     </div>
   </main>
 
+  <LearnRelatedGuides current="spirulina-tablets-vs-capsules-vs-powder" />
   <StoreFooter />
 </StoreLayout>

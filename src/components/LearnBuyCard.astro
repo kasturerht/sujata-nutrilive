@@ -1,0 +1,182 @@
+---
+// src/components/LearnBuyCard.astro
+// Inline "buy the verified formulation" card for learn articles and buyer guides.
+// Live Shopify variant IDs + prices (src/lib/catalog.ts). Buttons plug into the global cart:
+//  - "Add to cart": .add-to-cart-btn -> CartDrawer delegation -> addItemToLocalCart (opens drawer)
+//  - "Buy now": window.directCheckoutItem -> Razorpay Magic 1-click checkout (Storefront fallback)
+import { getCatalogProducts, formatINR, type CatalogHandle } from '../lib/catalog';
+
+interface Props {
+  handle: CatalogHandle;
+  lang?: 'en' | 'mr' | 'hi';
+  badge?: string;
+  heading?: string;
+  pitch?: string;
+  points?: string[];
+  variantIndex?: number;
+  compact?: boolean;
+  placement?: string; // analytics label, e.g. "marathi-article-top"
+}
+
+const { handle, lang = 'en', badge, heading, pitch, points = [], variantIndex = 0, compact = false, placement = 'learn' } = Astro.props;
+const product = (await getCatalogProducts([handle]))[handle];
+const variants = product.variants.filter((x) => x.available);
+const list = variants.length ? variants : product.variants;
+const selected = list[Math.min(variantIndex, list.length - 1)];
+const off = selected.compareAt && selected.compareAt > selected.price ? Math.round((1 - selected.price / selected.compareAt) * 100) : 0;
+const upiPrice = Math.round(selected.price * 0.9);
+
+const T = {
+  en: { add: 'Add to cart', buy: 'Buy now — 1-click', details: 'Full details', upi: 'with UPI (10% off)', cod: 'Cash on Delivery available · Free shipping above ₹999', pack: 'Pack', save: 'off' },
+  mr: { add: 'कार्टमध्ये टाका', buy: 'आत्ता ऑर्डर करा', details: 'पूर्ण माहिती', upi: 'UPI ने (10% सूट)', cod: 'कॅश ऑन डिलिव्हरी उपलब्ध · ₹९९९ वरील ऑर्डरवर मोफत डिलिव्हरी', pack: 'पॅक', save: 'सूट' },
+  hi: { add: 'कार्ट में डालें', buy: 'अभी ऑर्डर करें', details: 'पूरी जानकारी', upi: 'UPI से (10% छूट)', cod: 'कैश ऑन डिलीवरी उपलब्ध · ₹999 से ऊपर फ्री डिलीवरी', pack: 'पैक', save: 'छूट' }
+}[lang];
+
+const cardId = `buy-${handle}-${placement}`.replace(/[^a-z0-9-]/gi, '-');
+const displayTitle = heading || product.title;
+---
+
+<aside
+  id={cardId}
+  class:list={[
+    'learn-buy-card not-prose my-8 rounded-3xl border border-emerald-900/10 bg-white shadow-[0_12px_40px_rgba(6,78,59,0.08)] overflow-hidden',
+    compact ? 'p-4 sm:p-5' : 'p-5 sm:p-7'
+  ]}
+  data-placement={placement}
+  aria-label={displayTitle}
+>
+  <div class:list={['flex gap-4 sm:gap-6', compact ? 'items-center' : 'flex-col sm:flex-row sm:items-center']}>
+    <a href={product.url} class:list={['shrink-0 rounded-2xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden', compact ? 'w-20 h-20' : 'w-full sm:w-40 h-44 sm:h-40']}>
+      <img src={product.image} alt={product.title} loading="lazy" decoding="async" width="320" height="320" class="w-full h-full object-contain p-2" />
+    </a>
+
+    <div class="flex-1 min-w-0">
+      {badge && (
+        <span class="inline-block mb-2 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-800 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1">{badge}</span>
+      )}
+      <h3 class:list={['font-["Playfair_Display"] font-bold text-[#111827] leading-snug', compact ? 'text-base' : 'text-lg sm:text-xl']}>
+        <a href={product.url} class="hover:text-emerald-800 transition-colors">{displayTitle}</a>
+      </h3>
+      {pitch && <p class="mt-1.5 text-sm text-gray-600 leading-relaxed">{pitch}</p>}
+      {points.length > 0 && !compact && (
+        <ul class="mt-3 grid gap-1.5 text-[13px] text-gray-700">
+          {points.map((p) => (
+            <li class="flex gap-2"><span class="text-emerald-700 font-bold" aria-hidden="true">✓</span><span>{p}</span></li>
+          ))}
+        </ul>
+      )}
+
+      <div class="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <span class="learn-buy-price text-2xl font-black text-[#064E3B]">{formatINR(selected.price)}</span>
+        {selected.compareAt && selected.compareAt > selected.price && (
+          <span class="learn-buy-compare text-sm text-gray-400 line-through">{formatINR(selected.compareAt)}</span>
+        )}
+        {off > 0 && <span class="learn-buy-off text-xs font-bold text-amber-700">{off}% {T.save}</span>}
+        <span class="w-full text-xs text-emerald-800 font-semibold">
+          <span class="learn-buy-upi">{formatINR(upiPrice)}</span> {T.upi}
+        </span>
+      </div>
+
+      {list.length > 1 && (
+        <label class="mt-3 block">
+          <span class="sr-only">{T.pack}</span>
+          <select class="learn-buy-variant w-full sm:w-auto text-sm border border-gray-200 rounded-xl px-3 py-2 bg-[#FAF9F6] focus:outline-none focus:ring-2 focus:ring-emerald-600">
+            {list.map((vr, i) => (
+              <option
+                value={vr.id}
+                selected={vr.id === selected.id}
+                data-price={vr.price}
+                data-compare={vr.compareAt ?? ''}
+                data-title={`${product.title} - ${vr.title}`}
+              >{vr.title} — {formatINR(vr.price)}</option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <button
+          type="button"
+          class="learn-direct-buy inline-flex items-center justify-center gap-2 rounded-xl bg-[#166534] hover:bg-[#064E3B] text-white text-sm font-bold px-4 py-3 transition-colors touch-manipulation"
+          data-variant-id={selected.id}
+          data-title={`${product.title} - ${selected.title}`}
+          data-price={selected.price}
+          data-image={product.image}
+          data-handle={product.handle}
+        >⚡ {T.buy}</button>
+        <button
+          type="button"
+          class="add-to-cart-btn inline-flex items-center justify-center rounded-xl border border-[#166534] text-[#166534] hover:bg-emerald-50 text-sm font-bold px-4 py-3 transition-colors touch-manipulation"
+          data-variant-id={selected.id}
+          data-title={`${product.title} - ${selected.title}`}
+          data-price={selected.price}
+          data-image={product.image}
+        >{T.add}</button>
+      </div>
+      <div class="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-500">
+        <span>{T.cod}</span>
+        <a href={product.url} class="font-semibold text-emerald-800 underline underline-offset-2">{T.details} →</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // Bundled once per page by Astro, however many cards render.
+  const inr = (n: number) => '₹' + new Intl.NumberFormat('en-IN').format(Math.round(n));
+
+  document.addEventListener('change', (e) => {
+    const select = (e.target as HTMLElement)?.closest?.('.learn-buy-variant') as HTMLSelectElement | null;
+    if (!select) return;
+    const card = select.closest('.learn-buy-card');
+    const opt = select.selectedOptions[0];
+    if (!card || !opt) return;
+    const price = Number(opt.dataset.price || 0);
+    const compare = Number(opt.dataset.compare || 0);
+    card.querySelectorAll<HTMLElement>('.learn-direct-buy, .add-to-cart-btn').forEach((btn) => {
+      btn.dataset.variantId = opt.value;
+      btn.dataset.price = String(price);
+      btn.dataset.title = opt.dataset.title || btn.dataset.title || '';
+    });
+    const priceEl = card.querySelector('.learn-buy-price');
+    const compareEl = card.querySelector<HTMLElement>('.learn-buy-compare');
+    const offEl = card.querySelector<HTMLElement>('.learn-buy-off');
+    const upiEl = card.querySelector('.learn-buy-upi');
+    if (priceEl) priceEl.textContent = inr(price);
+    if (upiEl) upiEl.textContent = inr(price * 0.9);
+    if (compareEl) { compareEl.textContent = compare > price ? inr(compare) : ''; }
+    if (offEl) {
+      const pct = compare > price ? Math.round((1 - price / compare) * 100) : 0;
+      offEl.style.display = pct ? '' : 'none';
+      offEl.textContent = offEl.textContent ? offEl.textContent.replace(/^\d+%/, pct + '%') : '';
+    }
+  });
+
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement)?.closest?.('.learn-direct-buy') as HTMLButtonElement | null;
+    if (!btn) return;
+    e.preventDefault();
+    const w = window as any;
+    const product = {
+      id: btn.dataset.variantId,
+      title: btn.dataset.title,
+      price: Number(btn.dataset.price || 0),
+      image: btn.dataset.image,
+      handle: btn.dataset.handle,
+      quantity: 1
+    };
+    if (typeof w.directCheckoutItem !== 'function') {
+      // Cart script not ready: fall back to the product page rather than a dead click.
+      window.location.href = '/product/' + (btn.dataset.handle || '');
+      return;
+    }
+    const label = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '…';
+    try {
+      await w.directCheckoutItem(product);
+    } finally {
+      setTimeout(() => { btn.disabled = false; btn.innerHTML = label; }, 1500);
+    }
+  });
+</script>

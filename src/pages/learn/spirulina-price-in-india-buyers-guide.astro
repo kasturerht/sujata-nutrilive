@@ -1,0 +1,242 @@
+---
+// src/pages/learn/spirulina-price-in-india-buyers-guide.astro
+// Commercial-intent guide for "spirulina price", "spirulina tablets price", "spirulina in marathi price".
+// Every price, cost-per-day and cost-per-gram figure is computed from the live Shopify catalog.
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import { getCatalogProducts, formatINR } from '../../lib/catalog';
+
+const pageUrl = 'https://www.sujatanutrilive.com/learn/spirulina-price-in-india-buyers-guide';
+const pageTitle = 'Spirulina Price in India (2026): Cost Per Day & Per Gram';
+const pageDescription = 'What does spirulina cost in India? Live prices for tablets, capsules and powder, worked out per day and per gram, plus how to spot under-dosed or impure spirulina before you buy.';
+
+const catalog = await getCatalogProducts(['sujata-spirulina-tablets', 'sujata-spirulina-capsules', 'sujata-spirulina-powder']);
+
+// Spirulina content per unit and the label's daily serving, used for fair per-day / per-gram maths.
+const FORMATS = [
+  { handle: 'sujata-spirulina-tablets', format: 'Tablets', unitGrams: 0.5, perDay: 2, unitWord: 'tablets', serving: '2 tablets (1 g)' },
+  { handle: 'sujata-spirulina-capsules', format: 'Veg capsules', unitGrams: 0.5, perDay: 2, unitWord: 'capsules', serving: '2 capsules (1 g)' },
+  { handle: 'sujata-spirulina-powder', format: 'Powder', unitGrams: 1, perDay: 3, unitWord: 'g', serving: '1 scoop (3 g)' }
+] as const;
+
+type Row = { format: string; handle: string; url: string; pack: string; price: number; mrp: number | null; grams: number; days: number; perDay: number; perGram: number; upiPerDay: number; serving: string };
+const rows: Row[] = [];
+for (const f of FORMATS) {
+  const p = catalog[f.handle];
+  for (const variant of p.variants) {
+    const units = parseInt((variant.title.match(/(\d+)/) || ['', '0'])[1], 10);
+    if (!units) continue;
+    const grams = units * f.unitGrams;
+    const days = Math.floor(units / f.perDay);
+    const dailyGrams = f.unitGrams * f.perDay;
+    rows.push({
+      format: f.format, handle: f.handle, url: p.url, pack: variant.title, price: variant.price, mrp: variant.compareAt,
+      grams, days, perDay: (variant.price / grams) * dailyGrams, perGram: variant.price / grams,
+      upiPerDay: (variant.price * 0.9 / grams) * dailyGrams, serving: f.serving
+    });
+  }
+}
+const money = (n: number) => '₹' + n.toFixed(2);
+const cheapestDaily = rows.reduce((a, b) => (b.perDay < a.perDay ? b : a));
+const cheapestGram = rows.reduce((a, b) => (b.perGram < a.perGram ? b : a));
+const priceMin = Math.min(...rows.map((r) => r.price));
+const priceMax = Math.max(...rows.map((r) => r.price));
+const tablets60 = rows.find((r) => r.handle === 'sujata-spirulina-tablets' && r.grams === 30);
+const capsules60 = rows.find((r) => r.handle === 'sujata-spirulina-capsules' && r.grams === 30);
+const powder = rows.find((r) => r.handle === 'sujata-spirulina-powder');
+
+const lab = BRAND_CONFIG.labReport;
+
+const faqs = [
+  {
+    question: 'What is the price of spirulina in India?',
+    answer: `Sujata spirulina costs ${formatINR(priceMin)} to ${formatINR(priceMax)} depending on format and pack size. At the label serving that is about ${money(cheapestDaily.perDay)} to ${money(Math.max(...rows.map((r) => r.perDay)))} per day, before the 10% UPI discount. Cash on delivery is available, and shipping is free on orders above ₹999.`
+  },
+  {
+    question: 'What is the cheapest way to take spirulina every day?',
+    answer: `Per daily serving, the cheapest option is ${cheapestDaily.format.toLowerCase()} (${cheapestDaily.pack}) at ${money(cheapestDaily.perDay)} per day. Per gram of spirulina, ${cheapestGram.format.toLowerCase()} is cheapest at ${money(cheapestGram.perGram)} per gram, but its serving is larger (3 g) and it needs a blender or shaker.`
+  },
+  {
+    question: 'How much do spirulina tablets cost and how long do they last?',
+    answer: tablets60 ? `A bottle of 60 Sujata spirulina tablets (500 mg each) costs ${formatINR(tablets60.price)} and lasts 30 days at 2 tablets a day. The 120-tablet bottle lasts 60 days and brings the daily cost down further.` : 'Spirulina tablets are sold in 60 and 120 tablet bottles; at 2 tablets a day a 60-tablet bottle lasts 30 days.'
+  },
+  {
+    question: 'Is very cheap spirulina safe?',
+    answer: 'Not always. Spirulina absorbs whatever is in the water it grows in, so the main risks are heavy metals and microcystin contamination. Before buying on price alone, ask for a recent third-party lab report showing protein content and heavy-metal results, and check the FSSAI licence number on the pack.'
+  },
+  {
+    question: 'Why do spirulina prices vary so much between brands?',
+    answer: 'Three things drive most of the difference: how much actual spirulina is in each tablet or capsule (binders and fillers are cheaper than algae), how it was grown and dried (low-temperature drying preserves more phycocyanin), and whether the brand pays for independent lab testing. Comparing price per gram of spirulina, not price per bottle, removes most of the confusion.'
+  }
+];
+
+const structuredSchemas = [
+  {
+    '@type': 'Article',
+    '@id': `${pageUrl}#article`,
+    headline: pageTitle,
+    description: pageDescription,
+    image: 'https://www.sujatanutrilive.com/products/sujata-spirulina-tablets-bottle.jpg',
+    inLanguage: 'en-IN',
+    datePublished: '2026-11-20T09:00:00+05:30',
+    dateModified: '2026-11-20T09:00:00+05:30',
+    author: { '@id': 'https://www.sujatanutrilive.com/#organization' },
+    publisher: { '@id': 'https://www.sujatanutrilive.com/#organization' },
+    mainEntityOfPage: pageUrl,
+    about: [{ '@type': 'Thing', name: 'Spirulina (dietary supplement)', sameAs: 'https://en.wikipedia.org/wiki/Spirulina_(dietary_supplement)' }]
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } }))
+  },
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.sujatanutrilive.com' },
+      { '@type': 'ListItem', position: 2, name: 'Buyer Guides', item: 'https://www.sujatanutrilive.com/learn/best-spirulina-brand-in-india' },
+      { '@type': 'ListItem', position: 3, name: 'Spirulina Price in India', item: pageUrl }
+    ]
+  }
+];
+---
+
+<StoreLayout title={pageTitle} description={pageDescription} image="/products/sujata-spirulina-tablets-bottle.jpg" extraSchema={structuredSchemas}>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022A21] to-[#011A14] text-white border-b border-emerald-900/60">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-5 font-medium" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-amber-400">Home</a><span class="text-emerald-700">/</span>
+        <a href="/learn/best-spirulina-brand-in-india" class="hover:text-amber-400">Buyer Guides</a><span class="text-emerald-700">/</span>
+        <span class="text-emerald-100">Spirulina price</span>
+      </nav>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight">
+        Spirulina price in India: <span class="text-amber-400 italic">what you should pay, per day and per gram</span>
+      </h1>
+      <p class="mt-4 text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl">
+        Bottle prices hide the real cost. This guide works out what spirulina costs per day at the label serving and per gram of actual algae, using live prices, so you can compare any brand fairly.
+      </p>
+
+      <div class="mt-6 rounded-2xl border-2 border-emerald-500/50 bg-[#02231A]/95 p-5">
+        <p class="text-[10px] font-black uppercase tracking-wider text-amber-300 mb-2">Quick answer</p>
+        <p class="text-sm sm:text-base text-gray-100 leading-relaxed">
+          Sujata spirulina costs <strong class="text-white">{formatINR(priceMin)} to {formatINR(priceMax)}</strong> per pack. At the label serving that works out to
+          <strong class="text-emerald-300">{money(cheapestDaily.perDay)} per day</strong> for the cheapest option ({cheapestDaily.format.toLowerCase()}, {cheapestDaily.pack}),
+          and <strong class="text-emerald-300">{money(cheapestGram.perGram)} per gram</strong> of spirulina for {cheapestGram.format.toLowerCase()}. Paying by UPI takes another 10% off.
+        </p>
+      </div>
+      <p class="mt-4 text-xs text-emerald-200/70">Prices checked live against our store · Updated 20 November 2026 · Lab data: {lab.lab}, report #{lab.number}</p>
+    </div>
+  </header>
+
+  <main class="bg-[#FAF9F6] text-[#1F2937] py-12 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto space-y-12">
+
+      <section aria-labelledby="price-table-heading">
+        <h2 id="price-table-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">Every pack, priced per day and per gram</h2>
+        <p class="mt-2 text-sm text-gray-600">Per-day cost uses each product's label serving. Per-gram cost is the price divided by the grams of spirulina in the pack.</p>
+        <div class="mt-5 overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+          <table class="w-full min-w-[640px] text-left text-sm">
+            <thead class="bg-[#064E3B] text-white text-xs uppercase tracking-wider">
+              <tr>
+                <th scope="col" class="px-4 py-3">Format & pack</th>
+                <th scope="col" class="px-4 py-3 text-right">Price</th>
+                <th scope="col" class="px-4 py-3 text-right">Lasts</th>
+                <th scope="col" class="px-4 py-3 text-right">Per day</th>
+                <th scope="col" class="px-4 py-3 text-right">Per day (UPI)</th>
+                <th scope="col" class="px-4 py-3 text-right">Per gram</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {rows.map((r) => (
+                <tr class:list={[r === cheapestDaily && 'bg-emerald-50/70']}>
+                  <td class="px-4 py-3">
+                    <a href={r.url} class="font-semibold text-[#111827] hover:text-emerald-800 underline-offset-2 hover:underline">{r.format}</a>
+                    <span class="block text-xs text-gray-500">{r.pack} · {r.grams} g spirulina</span>
+                  </td>
+                  <td class="px-4 py-3 text-right font-bold">{formatINR(r.price)}{r.mrp && r.mrp > r.price && <span class="block text-xs font-normal text-gray-400 line-through">{formatINR(r.mrp)}</span>}</td>
+                  <td class="px-4 py-3 text-right">{r.days} days</td>
+                  <td class="px-4 py-3 text-right font-semibold text-[#064E3B]">{money(r.perDay)}</td>
+                  <td class="px-4 py-3 text-right text-emerald-800">{money(r.upiPerDay)}</td>
+                  <td class="px-4 py-3 text-right">{money(r.perGram)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-xs text-gray-500">Highlighted row: lowest cost per day. Cash on delivery is available on every pack; shipping is free on orders above ₹999.</p>
+      </section>
+
+      <section aria-labelledby="compare-heading" class="space-y-4">
+        <h2 id="compare-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">How to compare spirulina prices between brands</h2>
+        <p class="leading-relaxed">A cheaper bottle is not cheaper spirulina. Run any product through these three checks before you compare prices.</p>
+        <ol class="list-decimal pl-5 space-y-3 leading-relaxed">
+          <li><strong>Work out the price per gram of spirulina.</strong> Multiply the tablet or capsule weight by the count, then divide the price by that number. A "500 mg tablet" with binders and fillers contains less than 500 mg of algae, so check the ingredient list for anything other than spirulina.</li>
+          <li><strong>Ask for the protein figure from a lab report.</strong> Good spirulina is typically 55–70% protein. Ours tests at <strong>62.39%</strong> (IS 7219) in {lab.lab} report #{lab.number}, which you can <a href="/science" class="text-emerald-800 underline underline-offset-2">read in full on our science page</a>. A brand that will not show a recent report is asking you to trust the price alone.</li>
+          <li><strong>Check heavy-metal results and the FSSAI licence.</strong> Spirulina concentrates what is in its water. Look for lead, arsenic and mercury results on the report, and an FSSAI number on the pack (ours: #{BRAND_CONFIG.fssaiNumber}).</li>
+        </ol>
+        <p class="leading-relaxed">If you are still choosing a format, our <a href="/learn/spirulina-tablets-vs-capsules-vs-powder" class="text-emerald-800 underline underline-offset-2">tablets vs capsules vs powder guide</a> explains which suits which routine, and the <a href="/learn/best-spirulina-brand-in-india" class="text-emerald-800 underline underline-offset-2">best spirulina brand guide</a> covers purity checks in more depth.</p>
+      </section>
+
+      <section aria-labelledby="value-heading">
+        <h2 id="value-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">Which pack is the best value for you?</h2>
+        <p class="mt-2 leading-relaxed">The right pack depends on how you will take it, not just the lowest number in the table.</p>
+
+        <h3 class="mt-6 font-serif text-xl font-bold text-[#111827]">Lowest daily cost: tablets</h3>
+        <p class="mt-1 text-sm leading-relaxed text-gray-700">
+          {tablets60 ? `The 60-tablet bottle (${formatINR(tablets60.price)}) is the cheapest way to try spirulina for a month.` : ''} The 120-tablet bottle halves the reorders and lowers the daily cost further. Tablets suit most people who are fine swallowing a pill.
+        </p>
+        <LearnBuyCard handle="sujata-spirulina-tablets" variantIndex={1} placement="price-guide-tablets" badge="Lowest cost per day" heading="Sujata Spirulina Tablets (500mg, no binders)" points={['Choose 60 or 120 tablets', '2 tablets a day after breakfast', 'Zero chemical binders or talc']} />
+
+        <h3 class="mt-8 font-serif text-xl font-bold text-[#111827]">No taste or smell: veg capsules</h3>
+        <p class="mt-1 text-sm leading-relaxed text-gray-700">
+          {capsules60 ? `Capsules cost more per day (${money(capsules60.perDay)} on the 60-pack) because of the plant shell, but they hide the algae taste completely.` : 'Capsules cost a little more because of the plant shell, but hide the taste completely.'} Larger packs bring the daily cost close to tablets.
+        </p>
+        <LearnBuyCard handle="sujata-spirulina-capsules" variantIndex={1} placement="price-guide-capsules" badge="Zero taste" heading="Sujata Spirulina Veg Capsules (500mg)" points={['60, 120 or 180 capsules', 'Plant shell, no gelatin', 'Best for sensitive stomachs']} />
+
+        <h3 class="mt-8 font-serif text-xl font-bold text-[#111827]">Lowest cost per gram: powder</h3>
+        <p class="mt-1 text-sm leading-relaxed text-gray-700">
+          {powder ? `At ${money(powder.perGram)} per gram, powder gives you the most spirulina for the money.` : 'Powder gives you the most spirulina for the money.'} The catch: it clumps in plain water, so it is only good value if you blend it into smoothies, shakes or chaas.
+        </p>
+        <LearnBuyCard handle="sujata-spirulina-powder" placement="price-guide-powder" badge="Most spirulina per rupee" heading="Sujata Organic Spirulina Powder (100g)" compact={true} />
+      </section>
+
+      <section aria-labelledby="included-heading" class="rounded-2xl border border-gray-200 bg-white p-6">
+        <h2 id="included-heading" class="font-serif text-2xl font-bold text-[#111827]">What is included in the price</h2>
+        <ul class="mt-3 space-y-2 text-sm leading-relaxed">
+          <li><strong>Free shipping</strong> on orders above ₹999 (see our <a href="/shipping-policy" class="text-emerald-800 underline underline-offset-2">shipping policy</a>).</li>
+          <li><strong>Cash on delivery</strong> on all spirulina products, or <strong>10% off</strong> when you pay by UPI.</li>
+          <li><strong>Lab-tested batch:</strong> 62.39% protein and 290.89 mg/kg natural iron in report #{lab.number}.</li>
+          <li><strong>Grown and packed in India</strong> under FSSAI licence #{BRAND_CONFIG.fssaiNumber}.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="faq-heading">
+        <h2 id="faq-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">Spirulina price: common questions</h2>
+        <div class="mt-5 divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white">
+          {faqs.map((f) => (
+            <details class="group p-5">
+              <summary class="cursor-pointer list-none font-semibold text-[#111827] flex justify-between gap-4">
+                <span>{f.question}</span><span class="text-emerald-700 group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-gray-700">{f.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <p class="text-xs text-gray-500 leading-relaxed">
+        Spirulina is a food supplement, not a medicine. Consult a doctor before use if you are pregnant or breastfeeding, have an autoimmune condition, phenylketonuria (PKU), or take blood thinners.
+      </p>
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="spirulina-price-in-india-buyers-guide" />
+  <StoreFooter />
+</StoreLayout>

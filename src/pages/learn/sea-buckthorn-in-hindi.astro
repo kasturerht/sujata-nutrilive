@@ -3,7 +3,9 @@
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
 import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
 
 const pageTitle = "सी बकथॉर्न क्या है? फायदे, उपयोग, खुराक और नुकसान (2026)";
 const pageDescription = "Sea Buckthorn in Hindi: सी बकथॉर्न क्या है? जानिए इसके फायदे, दुर्लभ ओमेगा-7, सही खुराक, उपयोग का तरीका और कैप्सूल बनाम जूस की सच्चाई।";
@@ -52,7 +54,7 @@ const articleAndFaqSchema = [
     "inLanguage": "hi-IN",
     "mainEntityOfPage": pageUrl,
     "datePublished": "2026-01-20T09:00:00+05:30",
-    "dateModified": "2026-10-18T17:00:00+05:30",
+    "dateModified": "2026-11-20T10:00:00+05:30",
     "author": {
       "@type": "Organization",
       "name": "Sujata Nutrilive Clinical Research Team",
@@ -227,6 +229,17 @@ const articleAndFaqSchema = [
         </div>
       </article>
 
+      <!-- Direct buy: first screen after the definition -->
+      <LearnBuyCard
+        handle="sujata-sea-buckthorn-capsules"
+        lang="hi"
+        placement="hindi-after-definition"
+        badge="हिमालयन सी बकथॉर्न • 60 वेज कैप्सूल्स"
+        heading="सुजाता हिमालयन सी बकथॉर्न कैप्सूल्स"
+        pitch="ओमेगा 3, 6, 7 और 9 व प्राकृतिक विटामिन C का शुद्ध स्रोत। जूस की तरह चीनी या प्रिज़र्वेटिव नहीं; रोज़ 1 कैप्सूल, दिन में दो बार खाने के बाद।"
+        points={["0% चीनी, 0% प्रिज़र्वेटिव", "30 दिन का पूरा कोर्स (60 कैप्सूल्स)", "कैश ऑन डिलीवरी या UPI पर 10% छूट"]}
+      />
+
       <!-- Section 2: सी बकथॉर्न के १० प्रमुख वैज्ञानिक फायदे -->
       <article class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
         <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
@@ -326,47 +339,16 @@ const articleAndFaqSchema = [
         </div>
       </article>
 
-      <!-- Conversion Banner (Sujata Sea Buckthorn Capsules) -->
-      <section class="relative bg-gradient-to-r from-amber-950 via-[#1c1204] to-emerald-950 border-2 border-amber-400/40 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-4 text-center sm:text-left">
-          <img 
-            src="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png" 
-            alt="Sujata Sea Buckthorn Capsules 60 Veg Caps" 
-            class="h-28 sm:h-36 w-auto object-contain drop-shadow-2xl" 
-          />
-          <div>
-            <div class="inline-block bg-amber-400 text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full mb-1">
-              100% शुद्ध हिमालयन ओमेगा-7
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-white font-serif">सुजाता शुद्ध सी बकथॉर्न कैप्सूल्स</h3>
-            <p class="text-xs sm:text-sm text-amber-100/90 mt-1">
-              ६० शाकाहारी कैप्सूल्स • रोजाना केवल ₹२१ • ०% चीनी और ०% प्रिजर्वेटिव्स
-            </p>
-            <div class="flex items-baseline gap-2 mt-2">
-              <span class="text-2xl font-black text-white font-sans">₹६४९</span>
-              <span class="text-xs text-gray-400 line-through">₹८९९</span>
-              <span class="text-xs text-emerald-400 font-bold">फ्री कैश ऑन डिलीवरी</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col gap-2 w-full sm:w-auto shrink-0">
-          <a 
-            href="/product/sujata-sea-buckthorn-capsules" 
-            class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-sm uppercase px-6 py-3.5 rounded-xl shadow-lg text-center transition-all cursor-pointer font-sans"
-          >
-            सी बकथॉर्न ऑर्डर करें →
-          </a>
-          <a 
-            href="https://wa.me/919834783503?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%B8%E0%A5%81%E0%A4%9C%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B8%E0%A5%80%20%E0%A4%AC%E0%A4%95%E0%A4%A5%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%A8%20%E0%A4%95%E0%A5%88%E0%A4%AA%E0%A5%8D%E0%A4%B8%E0%A5%82%E0%A4%B2%E0%A5%8D%E0%A4%B8%20%E0%A4%95%E0%A4%BE%20%E0%A4%95%E0%A5%88%E0%A4%B6%20%E0%A4%81%E0%A4%A8%20%E0%A4%A1%E0%A4%BF%E0%A4%B2%E0%A5%80%E0%A4%B5%E0%A4%B0%E0%A5%80%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A4%BE%20%E0%A4%B9%E0%A5%88%E0%A5%A4" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/50 text-[#25D366] font-bold text-xs py-2 px-4 rounded-xl text-center flex items-center justify-center gap-1.5 transition-all"
-          >
-            <span>💬</span> WhatsApp पर ऑर्डर करें
-          </a>
-          <span class="text-[10px] text-center text-amber-200">UPI पेमेंट पर 10% तुरंत छूट</span>
-        </div>
-      </section>
+      <!-- Direct buy: bestselling combo -->
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="hi"
+        placement="hindi-mid-combo"
+        badge="सबसे ज़्यादा बिकने वाला कॉम्बो"
+        heading="सी बकथॉर्न + स्पिरुलिना कैप्सूल्स कॉम्बो पैक"
+        pitch="त्वचा के लिए सी बकथॉर्न का ओमेगा-7 और ऊर्जा के लिए स्पिरुलिना का 62.39% प्रोटीन, एक साथ। 2 और 3 महीने के पैक पर ज़्यादा बचत।"
+        points={["1, 2 या 3 महीने का पैक चुनें", "2 महीने के पैक के साथ 2 फ्री साबुन", "कैश ऑन डिलीवरी उपलब्ध"]}
+      />
 
       <!-- Section 3: जूस बनाम कैप्सूल: कौन सा बेहतर है? -->
       <article class="bg-[#0A1A12] border border-amber-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
@@ -460,6 +442,7 @@ const articleAndFaqSchema = [
         <!-- Educational Verdict Box -->
         <div class="mt-6 p-4 bg-black/30 border border-emerald-500/30 rounded-xl text-xs sm:text-sm text-gray-300">
           <strong class="text-emerald-400">निष्कर्ष (Expert Verdict):</strong> यदि आप अपनी त्वचा की झुर्रियों, पेट की एसिडिटी, सूखी आंखों और दिल के स्वास्थ्य के लिए 100% सक्रिय ओमेगा-7 का वास्तविक लाभ चाहते हैं और हानिकारक केमिकल प्रिजर्वेटिव्स से बचना चाहते हैं, तो <strong>100% शुद्ध कोल्ड-प्रेस्ड वेज कैप्सूल्स</strong> ही भारत में सबसे सुरक्षित, वैज्ञानिक और परिणामकारक विकल्प हैं।
+          <span class="block mt-2">देखें: <a href="/product/sujata-sea-buckthorn-capsules" class="text-emerald-300 underline underline-offset-2">सुजाता हिमालयन सी बकथॉर्न कैप्सूल्स की कीमत और जानकारी</a>, या ब्रांड चुनने से पहले पढ़ें <a href="/learn/which-company-sea-buckthorn-is-best" class="text-emerald-300 underline underline-offset-2">कौन सी कंपनी का सी बकथॉर्न सबसे अच्छा है</a>।</span>
         </div>
       </article>
 
@@ -685,40 +668,18 @@ const articleAndFaqSchema = [
         </div>
       </article>
 
-      <!-- Ultimate Combo Banner -->
-      <section class="bg-gradient-to-br from-[#064E3B] to-[#1a0f03] border-2 border-amber-400/50 rounded-3xl p-6 sm:p-10 shadow-2xl text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div>
-          <span class="bg-amber-400 text-black text-xs font-black uppercase px-3 py-1 rounded-full font-sans">
-            सुपर सेवर कॉम्बो पैक
-          </span>
-          <h3 class="text-2xl sm:text-3xl font-serif font-black text-white mt-3">
-            स्पिरुलिना + हिमालयन सी बकथॉर्न
-          </h3>
-          <p class="text-emerald-100 text-sm mt-2 max-w-lg font-sans">
-            अखंड ऊर्जा + तेजस्वी त्वचा! स्पिरुलिना का ६२.३९% प्रोटीन और सी बकथॉर्न का दुर्लभ ओमेगा-७ एक साथ पाएं। पूरे २ महीने का सम्पूर्ण कायाकल्प सिर्फ <strong>₹१८/दिन</strong> के किफायती खर्च में।
-          </p>
-        </div>
-        <div class="shrink-0 flex flex-col items-center gap-2.5 w-full sm:w-auto">
-          <div class="text-2xl font-black text-white font-sans">मात्र ₹१,१०० <span class="text-xs text-gray-400 line-through">₹१,५९८</span></div>
-          <a 
-            href="/product/sujata-spirulina-sea-buckthorn-combo-pack" 
-            class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm uppercase px-8 py-3.5 rounded-xl shadow-xl transition-all cursor-pointer font-sans w-full text-center"
-          >
-            कॉम्बो पैक अभी ऑर्डर करें →
-          </a>
-          <a 
-            href="https://wa.me/919834783503?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%B8%E0%A5%81%E0%A4%9C%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B8%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%B0%E0%A5%81%E0%A4%B2%E0%A4%BF%E0%A4%A8%E0%A4%BE%20%2B%20%E0%A4%B8%E0%A5%80%20%E0%A4%AC%E0%A4%95%E0%A4%A5%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%A8%20%E0%A4%95%E0%A5%89%E0%A4%AE%E0%A5%8D%E0%A4%AC%E0%A5%8B%20%E0%A4%AA%E0%A5%88%E0%A4%95%20%E0%A4%95%E0%A4%BE%20%E0%A4%95%E0%A5%88%E0%A4%B6%20%E0%A4%81%E0%A4%A8%20%E0%A4%A1%E0%A4%BF%E0%A4%B2%E0%A5%80%E0%A4%B5%E0%A4%B0%E0%A5%80%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A4%BE%20%E0%A4%B9%E0%A5%88%E0%A5%A4" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/50 text-[#25D366] font-bold text-xs py-2 px-4 rounded-xl text-center flex items-center justify-center gap-1.5 transition-all w-full"
-          >
-            <span>💬</span> WhatsApp पर ऑर्डर करें
-          </a>
-        </div>
-      </section>
+      <!-- Direct buy: closing reminder -->
+      <LearnBuyCard
+        handle="sujata-sea-buckthorn-capsules"
+        lang="hi"
+        placement="hindi-bottom"
+        compact={true}
+        heading="सुजाता हिमालयन सी बकथॉर्न कैप्सूल्स (60 वेज कैप्सूल्स)"
+      />
 
     </div>
   </main>
 
+  <LearnRelatedGuides current="sea-buckthorn-in-hindi" />
   <StoreFooter />
 </StoreLayout>

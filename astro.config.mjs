@@ -58,6 +58,7 @@ export default defineConfig({
         `${siteUrl}/learn/which-company-sea-buckthorn-is-best`,
         `${siteUrl}/learn/spirulina-tablets-vs-capsules-vs-powder`,
         `${siteUrl}/learn/spirulina-side-effects-in-marathi`,
+        `${siteUrl}/learn/spirulina-price-in-india-buyers-guide`,
         // 🌟 All 16 Active Shopify Products for Google Shopping & GSC Indexing
         `${siteUrl}/product/sujata-spirulina-powder`,
         `${siteUrl}/product/sujata-spirulina-tablets`,

@@ -3,7 +3,9 @@
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
 import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
 
 const pageTitle = "Spirulina in Marathi: स्पिरुलिना म्हणजे काय, फायदे व किंमत";
 const pageDescription = "Spirulina in Marathi: स्पिरुलिना म्हणजे काय? जाणून घ्या त्याचे आरोग्यदायी फायदे, मराठी नाव, खाण्याची योग्य पद्धत आणि 100% शुद्ध सुजाता स्पिरुलिना.";
@@ -50,7 +52,7 @@ const articleAndFaqSchema = [
     "inLanguage": "mr-IN",
     "mainEntityOfPage": pageUrl,
     "datePublished": "2026-01-15T09:00:00+05:30",
-    "dateModified": "2026-10-18T16:00:00+05:30",
+    "dateModified": "2026-11-20T10:00:00+05:30",
     "author": {
       "@type": "Organization",
       "name": "Sujata Nutrilive Clinical Research Team",
@@ -231,6 +233,17 @@ const articleAndFaqSchema = [
         </div>
       </article>
 
+      <!-- Direct buy: first screen after the definition -->
+      <LearnBuyCard
+        handle="sujata-spirulina-capsules"
+        lang="mr"
+        placement="marathi-after-definition"
+        badge="लॅब-टेस्टेड • वास नसलेल्या कॅप्सूल्स"
+        heading="सुजाता शुद्ध स्पिरुलिना कॅप्सूल्स (500mg)"
+        pitch="वर सांगितलेले ६२.३९% प्रथिने व २९०.८९ mg/kg लोह असलेले NABL-प्रमाणित स्पिरुलिना, थेट घरपोच. दररोज २ कॅप्सूल्स नाश्त्यानंतर."
+        points={["FSSAI नोंदणीकृत #21526027000179", "शून्य केमिकल बाईंडर, मासळीसारखा वास नाही", "कॅश ऑन डिलिव्हरी किंवा UPI वर १०% सूट"]}
+      />
+
       <!-- Section 2: स्पिरुलिनाचे शरीरासाठी १० प्रमुख फायदे -->
       <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
         <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
@@ -330,51 +343,16 @@ const articleAndFaqSchema = [
         </div>
       </article>
 
-      <!-- Conversion Banner (Sujata Spirulina Capsules) -->
-      <section class="relative bg-gradient-to-r from-emerald-950 via-[#064E3B] to-emerald-900 border-2 border-emerald-400/40 rounded-2xl p-6 sm:p-8 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-4 text-center sm:text-left">
-          <img 
-            src="/products/sujata-spirulina-capsules-bottle-transparent.png" 
-            alt="Sujata Spirulina Capsules 60 Veg Caps" 
-            class="h-28 sm:h-36 w-auto object-contain drop-shadow-2xl" 
-          />
-          <div>
-            <div class="inline-block bg-amber-400 text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full mb-1">
-              महाराष्ट्रातील नंबर १ पसंती
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-white font-serif">सुजाता कोल्ड-प्रेस्ड स्पिरुलिना कॅप्सूल्स</h3>
-            <p class="text-xs sm:text-sm text-emerald-100/90 mt-1">
-              ६० शाकाहारी कॅप्सूल्स • दररोज फक्त ₹१५ ते ₹१७ चा खर्च • वास न येणाऱ्या शुद्ध कॅप्सूल्स
-            </p>
-            <div class="flex items-baseline gap-2 mt-2">
-              <span class="text-2xl font-black text-white font-sans">₹४९९</span>
-              <span class="text-xs text-gray-400 line-through">₹७९९</span>
-              <span class="text-xs text-amber-300 font-bold">मोफत कॅश ऑन डिलिव्हरी</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col gap-2 w-full sm:w-auto shrink-0">
-          <a 
-            href="/product/sujata-spirulina-capsules" 
-            class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold text-sm uppercase px-6 py-3.5 rounded-xl shadow-lg text-center transition-all cursor-pointer font-sans"
-          >
-            आत्ताच खरेदी करा (Order Now) →
-          </a>
-          <a 
-            href="https://wa.me/919834783503?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%2C%20%E0%A4%AE%E0%A4%B2%E0%A4%BE%20%E0%A4%B8%E0%A5%81%E0%A4%9C%E0%A4%BE%E0%A4%A4%E0%A4%BE%20%E0%A4%B8%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%B0%E0%A5%81%E0%A4%B2%E0%A4%BF%E0%A4%A8%E0%A4%BE%20%E0%A4%95%E0%A5%85%E0%A4%AA%E0%A5%8D%E0%A4%B8%E0%A5%82%E0%A4%B2%E0%A5%8D%E0%A4%B8%E0%A4%9A%E0%A5%80%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%BE%E0%A4%AF%E0%A4%9A%E0%A5%80%20%E0%A4%86%E0%A4%B9%E0%A5%87." 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/50 text-[#25D366] font-bold text-xs py-2.5 px-4 rounded-xl text-center flex items-center justify-center gap-1.5 transition-all"
-          >
-            <span>💬</span> WhatsApp वर १-क्लिक ऑर्डर
-          </a>
-          <div class="flex items-center justify-between text-[10px] text-emerald-200 px-1">
-            <span>UPI वर १०% सवलत (₹४४९)</span>
-            <span>•</span>
-            <span class="text-amber-300">९०-दिवस गॅरंटी*</span>
-          </div>
-        </div>
-      </section>
+      <!-- Direct buy: powder (smoothies, juice, face packs) -->
+      <LearnBuyCard
+        handle="sujata-spirulina-powder"
+        lang="mr"
+        placement="marathi-mid-powder"
+        badge="स्मूदी • ज्यूस • फेसपॅक"
+        heading="सुजाता ऑरगॅनिक स्पिरुलिना पावडर (100g)"
+        pitch="ज्यांना गोळ्या गिळायला आवडत नाहीत त्यांच्यासाठी: एक चमचा (3g) पावडर ज्यूस, ताक किंवा स्मूदीमध्ये मिसळा. दररोजचा खर्च सुमारे ₹१०."
+        compact={false}
+      />
 
       <!-- Section 3: पावडर, टॅब्लेट की कॅप्सूल? काय निवडावे? -->
       <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
@@ -755,40 +733,20 @@ const articleAndFaqSchema = [
         </div>
       </article>
 
-      <!-- Ultimate Combo Banner -->
-      <section class="bg-gradient-to-br from-[#064E3B] to-[#011F18] border-2 border-amber-400/50 rounded-3xl p-6 sm:p-10 shadow-2xl text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div>
-          <span class="bg-amber-400 text-black text-xs font-black uppercase px-3 py-1 rounded-full font-sans">
-            सुपर सेव्हर कॉम्बो पॅक
-          </span>
-          <h3 class="text-2xl sm:text-3xl font-serif font-black text-white mt-3">
-            स्पिरुलिना + हिमालयन सी बकथॉर्न
-          </h3>
-          <p class="text-emerald-100 text-sm mt-2 max-w-lg font-sans">
-            अखंड ऊर्जा + तेजस्वी त्वचा! स्पिरुलिनाचे ६२.३९% प्रथिने (IS 7219) आणि सी बकथॉर्नचा दुर्मिळ ओमेगा-७ एकत्र मिळवा. २ महिन्यांचा संपूर्ण डोस फक्त <strong>₹१८/दिवस</strong> खर्चात.
-          </p>
-        </div>
-        <div class="shrink-0 flex flex-col items-center gap-2.5 w-full sm:w-auto">
-          <div class="text-2xl font-black text-white font-sans">फक्त ₹१,१०० <span class="text-xs text-gray-400 line-through">₹१,५९८</span></div>
-          <a 
-            href="/product/sujata-spirulina-sea-buckthorn-combo-pack" 
-            class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm uppercase px-8 py-3.5 rounded-xl shadow-xl transition-all cursor-pointer font-sans w-full text-center"
-          >
-            कॉम्बो पॅक ऑर्डर करा →
-          </a>
-          <a 
-            href="https://wa.me/919834783503?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%2C%20%E0%A4%AE%E0%A4%B2%E0%A4%BE%20%E0%A4%B8%E0%A5%8D%E0%A4%AA%E0%A4%BF%E0%A4%B0%E0%A5%81%E0%A4%B2%E0%A4%BF%E0%A4%A8%E0%A4%BE%20%2B%20%E0%A4%B8%E0%A5%80%20%E0%A4%AC%E0%A4%95%E0%A4%A5%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%A8%20%E0%A4%95%E0%A5%89%E0%A4%AE%E0%A5%8D%E0%A4%AC%E0%A5%8B%E0%A4%9A%E0%A5%80%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%BE%E0%A4%AF%E0%A4%9A%E0%A5%80%20%E0%A4%86%E0%A4%B9%E0%A5%87." 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="bg-[#25D366]/20 hover:bg-[#25D366]/30 border border-[#25D366]/50 text-[#25D366] font-bold text-xs py-2 px-4 rounded-xl text-center flex items-center justify-center gap-1.5 transition-all w-full"
-          >
-            <span>💬</span> WhatsApp वर ऑर्डर करा
-          </a>
-        </div>
-      </section>
+      <!-- Direct buy: combo (best value) -->
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="mr"
+        placement="marathi-bottom-combo"
+        badge="सुपर सेव्हर कॉम्बो पॅक"
+        heading="स्पिरुलिना कॅप्सूल्स + हिमालयन सी बकथॉर्न कॉम्बो"
+        pitch="अखंड ऊर्जा + तेजस्वी त्वचा: स्पिरुलिनाचे ६२.३९% प्रथिने आणि सी बकथॉर्नचा ओमेगा-७ एकत्र. २ व ३ महिन्यांच्या पॅकवर जास्त बचत."
+        points={["१, २ किंवा ३ महिन्यांचा पॅक निवडा", "२ महिन्यांच्या पॅकसोबत २ मोफत साबण", "कॅश ऑन डिलिव्हरी उपलब्ध"]}
+      />
 
     </div>
   </main>
 
+  <LearnRelatedGuides current="spirulina-in-marathi" />
   <StoreFooter />
 </StoreLayout>
