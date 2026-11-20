@@ -18,7 +18,7 @@ interface Props {
 
 const { products = [] } = Astro.props;
 const lab = BRAND_CONFIG.labReport;
-const reviews = BRAND_CONFIG.reviews;
+const trust = BRAND_CONFIG.trust;
 
 function findProduct(handles: string[]) {
   if (!products || !products.length) return null;
@@ -90,10 +90,10 @@ const slideLabels = ['Flagship routine', 'Lab-tested proof', 'Daily value', 'Rea
           <div class="lg:col-span-7 flex flex-col items-start text-left">
             {/* Rating line — real numbers only */}
             <p class="inline-flex items-center gap-2 mb-2.5 bg-emerald-950/70 border border-emerald-400/25 px-3 py-1 rounded-full text-[11px] sm:text-xs">
-              <span class="text-amber-400 tracking-tight" aria-hidden="true">★★★★★</span>
-              <span class="font-bold text-emerald-100">{reviews.ratingValue}/5</span>
+              <span class="text-emerald-300 font-bold" aria-hidden="true">✓</span>
+              <span class="font-bold text-emerald-100">{trust.ordersLabel} orders since {trust.ordersSince}</span>
               <span class="text-white/30" aria-hidden="true">•</span>
-              <span class="font-semibold text-emerald-200">{reviews.verifiedBuyersLabel} Verified Buyers</span>
+              <span class="font-semibold text-emerald-200">FSSAI licensed · NABL lab-tested</span>
             </p>
 
             {/* The ONLY H1 on the homepage */}
@@ -319,14 +319,14 @@ const slideLabels = ['Flagship routine', 'Lab-tested proof', 'Daily value', 'Rea
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-center content-center h-full">
           <div class="lg:col-span-7 flex flex-col items-start text-left">
             <p class="inline-flex items-center gap-2 mb-3 bg-emerald-950/70 border border-emerald-400/25 px-3 py-1 rounded-full text-[11px] sm:text-xs">
-              <span class="text-amber-400 tracking-tight" aria-hidden="true">★★★★★</span>
-              <span class="font-bold text-emerald-100">{reviews.ratingValue}/5</span>
+              <span class="text-emerald-300 font-bold" aria-hidden="true">✓</span>
+              <span class="font-bold text-emerald-100">{trust.ordersLabel} orders since {trust.ordersSince}</span>
               <span class="text-white/30" aria-hidden="true">•</span>
-              <span class="font-semibold text-emerald-200">{reviews.verifiedBuyersLabel} Verified Buyers</span>
+              <span class="font-semibold text-emerald-200">FSSAI licensed · NABL lab-tested</span>
             </p>
             <h2 class="text-[1.65rem] leading-[1.12] sm:text-4xl lg:text-[2.75rem] font-serif font-normal tracking-tight text-white mb-3">
-              Trusted by {reviews.verifiedBuyersLabel}
-              <span class="block italic text-emerald-300">Indian Families</span>
+              Chosen in {trust.ordersLabel} Orders
+              <span class="block italic text-emerald-300">Across India</span>
             </h2>
             {/* TODO(founder): replace with Yash Suryawanshi's own approved quote, in quotation marks.
                 Until then this is a factual line only — never put invented words in a real person's mouth. */}

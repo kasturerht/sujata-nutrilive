@@ -13,6 +13,18 @@ export default defineConfig({
   // while still allowing individual pages to opt-in to prerendering.
   output: 'server',
   adapter: vercel(),
+  server: {
+    port: 4321,
+    host: true,
+  },
+  vite: {
+    server: {
+      strictPort: true,
+      watch: {
+        ignored: ['**/node_modules/**', '**/.git/**', '**/.astro/**', '**/dist/**', '**/*.xlsx', '**/*.pdf'],
+      },
+    },
+  },
   redirects: {
     '/sitemap.xml': '/sitemap-index.xml',
   },
@@ -59,6 +71,7 @@ export default defineConfig({
         `${siteUrl}/learn/spirulina-tablets-vs-capsules-vs-powder`,
         `${siteUrl}/learn/spirulina-side-effects-in-marathi`,
         `${siteUrl}/learn/spirulina-price-in-india-buyers-guide`,
+        `${siteUrl}/learn/sea-buckthorn-capsules-buyers-guide`,
         // 🌟 All 16 Active Shopify Products for Google Shopping & GSC Indexing
         `${siteUrl}/product/sujata-spirulina-powder`,
         `${siteUrl}/product/sujata-spirulina-tablets`,

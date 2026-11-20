@@ -11,7 +11,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 let powderProduct = {
   variantId: "gid://shopify/ProductVariant/52738357854340",
   title: "Sujata Pure Organic Spirulina Powder (100g)",
-  price: 599,
+  price: 350,
   image: "/products/sujata-spirulina-powder-pouch.jpg"
 };
 
@@ -394,7 +394,7 @@ const quizSchemas = [
                   <div class="flex flex-col">
                     <span class="text-sm font-black text-[#111827]" id="result-product-title">Raw Spirulina Powder (100g)</span>
                     <span class="text-xs text-gray-500 font-light">Sub-40°C Cold-Pressed • 30-Day Protocol</span>
-                    <span class="text-base font-black text-emerald-800 mt-1" id="result-product-price">₹600</span>
+                    <span class="text-base font-black text-emerald-800 mt-1" id="result-product-price">₹{powderProduct.price}</span>
                   </div>
                 </div>
 
@@ -476,7 +476,7 @@ const quizSchemas = [
         goalTitle: 'Sustained Cellular Energy',
         format: 'powder',
         formatTitle: 'Raw Spirulina Powder (100g)',
-        price: 599,
+        price: 350,
         image: '/products/sujata-spirulina-powder-pouch.jpg',
         variantId: 'gid://shopify/ProductVariant/52738357854340',
         lifestyle: 'desk',
@@ -504,7 +504,7 @@ const quizSchemas = [
         btn.addEventListener('click', () => {
           quizAnswers.format = btn.getAttribute('data-format') || 'powder';
           quizAnswers.formatTitle = btn.getAttribute('data-format-title') || 'Raw Spirulina Powder (100g)';
-          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 599;
+          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 350;
           quizAnswers.image = btn.getAttribute('data-image') || '/products/sujata-spirulina-powder-pouch.jpg';
           quizAnswers.variantId = btn.getAttribute('data-variant-id') || (quizAnswers.format === 'capsules' ? 'gid://shopify/ProductVariant/52738357985412' : 'gid://shopify/ProductVariant/52738357854340');
 
@@ -581,7 +581,7 @@ const quizSchemas = [
             window.dispatchStoreEvent('CompleteRegistration', {
               content_name: `Quiz: ${quizAnswers.goalTitle || 'Vitality Protocol'}`,
               recommended: quizAnswers.formatTitle || 'Sujata Spirulina',
-              value: quizAnswers.price || 599
+              value: quizAnswers.price || 350
             });
           }
         } catch(e) {}

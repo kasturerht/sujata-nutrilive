@@ -50,6 +50,8 @@ content_vault/
 scripts/whatsapp*/
 scripts/*.txt
 scripts/__pycache__/
+scripts/*/__pycache__/
+__pycache__/
 reports/
 *.txt
 *.log

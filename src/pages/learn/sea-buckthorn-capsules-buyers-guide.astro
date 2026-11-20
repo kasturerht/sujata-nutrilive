@@ -1,0 +1,215 @@
+---
+// src/pages/learn/sea-buckthorn-capsules-buyers-guide.astro
+// Commercial-intent guide for "sea buckthorn capsules benefits / uses / price / best".
+// GSC (Aug–Nov 2026): "sea buckthorn capsules benefits" 111 impr. + Hindi variants ~150 impr., position 7–10,
+// zero clicks, previously landing on a generic Hindi article. Copy follows FSSAI claim rules: describes what
+// the product contains and how to choose/use it; no disease or treatment claims.
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import { getCatalogProducts, formatINR } from '../../lib/catalog';
+
+const pageUrl = 'https://www.sujatanutrilive.com/learn/sea-buckthorn-capsules-buyers-guide';
+const pageTitle = 'Sea Buckthorn Capsules: Uses, Dosage, Price & How to Choose';
+const pageDescription = 'What is inside sea buckthorn capsules, how to take them, what they cost per day in India, and a 6-point checklist for choosing a pure, correctly dosed product.';
+
+const live = await getCatalogProducts(['sujata-sea-buckthorn-capsules', 'sujata-spirulina-sea-buckthorn-combo-pack']);
+const sb = live['sujata-sea-buckthorn-capsules'];
+const sbVariant = sb.variants[0];
+const sbPrice = sbVariant.price;
+const capsules = parseInt((sbVariant.title.match(/(\d+)/) || ['', '60'])[1], 10);
+const days = Math.floor(capsules / 2);
+const perDay = sbPrice / days;
+const money = (n: number) => '₹' + n.toFixed(2);
+
+const faqs = [
+  {
+    question: 'What are sea buckthorn capsules used for?',
+    answer: 'People take sea buckthorn capsules as a convenient way to get the fatty acids found in sea buckthorn fruit and seed oil, including the uncommon Omega-7 (palmitoleic acid), along with Omega 3, 6 and 9 and natural plant antioxidants. They are a food supplement, not a medicine, and are not meant to treat or cure any condition.'
+  },
+  {
+    question: 'How many sea buckthorn capsules should I take a day?',
+    answer: 'Follow the label of the product you buy. For Sujata sea buckthorn capsules (500 mg fruit and seed extract each), the label serving is 1 capsule twice a day after meals with water. Taking them with food helps the body absorb fat-soluble nutrients.'
+  },
+  {
+    question: 'What is the price of sea buckthorn capsules in India?',
+    answer: `Sujata Himalayan sea buckthorn capsules cost ${formatINR(sbPrice)} for ${capsules} capsules, which lasts ${days} days at 2 capsules a day: about ${money(perDay)} per day. Shipping is free and cash on delivery is available; UPI payment takes 10% off.`
+  },
+  {
+    question: 'Are sea buckthorn capsules better than sea buckthorn juice?',
+    answer: 'They suit different people. Juice gives the fruit\'s vitamin C but is often sweetened, needs refrigeration once opened, and the serving size varies. Capsules give a fixed, measured dose with no sugar and travel easily. If you want a consistent daily routine without added sugar, capsules are simpler.'
+  },
+  {
+    question: 'Who should not take sea buckthorn capsules?',
+    answer: 'Speak to your doctor first if you are pregnant or breastfeeding, take blood-thinning or blood-pressure medicine, have a bleeding disorder, or have surgery scheduled. Sea buckthorn may slow blood clotting, so it is usually stopped about two weeks before surgery.'
+  },
+  {
+    question: 'Can I take sea buckthorn capsules with spirulina?',
+    answer: 'Yes. Many customers take both: spirulina for plant protein and iron, sea buckthorn for its fatty acids. Take sea buckthorn after meals and spirulina after breakfast. Our combo pack contains both at a lower price than buying them separately.'
+  }
+];
+
+const structuredSchemas = [
+  {
+    '@type': 'Article',
+    '@id': `${pageUrl}#article`,
+    headline: pageTitle,
+    description: pageDescription,
+    image: 'https://www.sujatanutrilive.com/products/sujata-sea-buckthorn-capsules-bottle-transparent.png',
+    inLanguage: 'en-IN',
+    datePublished: '2026-11-20T12:00:00+05:30',
+    dateModified: '2026-11-20T12:00:00+05:30',
+    author: { '@id': 'https://www.sujatanutrilive.com/#organization' },
+    publisher: { '@id': 'https://www.sujatanutrilive.com/#organization' },
+    mainEntityOfPage: pageUrl,
+    about: [{ '@type': 'Thing', name: 'Sea buckthorn (Hippophae rhamnoides)', sameAs: 'https://en.wikipedia.org/wiki/Hippophae_rhamnoides' }]
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } }))
+  },
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.sujatanutrilive.com' },
+      { '@type': 'ListItem', position: 2, name: 'Buyer Guides', item: 'https://www.sujatanutrilive.com/learn/which-company-sea-buckthorn-is-best' },
+      { '@type': 'ListItem', position: 3, name: 'Sea Buckthorn Capsules', item: pageUrl }
+    ]
+  }
+];
+
+const formats = [
+  { format: 'Capsules (extract)', serving: '1 capsule, twice a day', sugar: 'None', storage: 'Room temperature', note: 'Fixed dose, easy to travel with' },
+  { format: 'Juice', serving: '15–30 ml a day (varies by brand)', sugar: 'Often added', storage: 'Refrigerate after opening', note: 'Highest vitamin C; taste is very sour' },
+  { format: 'Seed / fruit oil (liquid)', serving: 'A few ml a day', sugar: 'None', storage: 'Cool, dark place', note: 'Strong taste; dose is harder to measure' },
+  { format: 'Powder', serving: 'Varies by brand', sugar: 'Check label', storage: 'Airtight, dry', note: 'Mix into water or smoothies' }
+];
+---
+
+<StoreLayout title={pageTitle} description={pageDescription} image="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png" extraSchema={structuredSchemas}>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022A21] to-[#011A14] text-white border-b border-emerald-900/60">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-5 font-medium" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-amber-400">Home</a><span class="text-emerald-700">/</span>
+        <a href="/learn/which-company-sea-buckthorn-is-best" class="hover:text-amber-400">Buyer Guides</a><span class="text-emerald-700">/</span>
+        <span class="text-emerald-100">Sea buckthorn capsules</span>
+      </nav>
+      <h1 class="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight">
+        Sea buckthorn capsules: <span class="text-amber-400 italic">what is inside, how to take them, and what to pay</span>
+      </h1>
+      <p class="mt-4 text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl">
+        A plain-English guide for buyers: what a sea buckthorn capsule actually contains, how it compares with juice and oil, the right daily serving, and a checklist for spotting a well-made product.
+      </p>
+      <div class="mt-6 rounded-2xl border-2 border-emerald-500/50 bg-[#02231A]/95 p-5">
+        <p class="text-[10px] font-black uppercase tracking-wider text-amber-300 mb-2">Quick answer</p>
+        <p class="text-sm sm:text-base text-gray-100 leading-relaxed">
+          Sea buckthorn capsules hold an extract of the Himalayan sea buckthorn berry and seed (<em>Hippophae rhamnoides</em>), a source of Omega-7 plus Omega 3, 6 and 9.
+          The usual serving is <strong class="text-white">1 capsule twice a day after meals</strong>. Sujata's {capsules}-capsule bottle costs <strong class="text-emerald-300">{formatINR(sbPrice)}</strong>,
+          about <strong class="text-emerald-300">{money(perDay)} a day</strong>.
+        </p>
+      </div>
+      <p class="mt-4 text-xs text-emerald-200/70">Updated 20 November 2026 · Price checked live against our store · FSSAI licence #{BRAND_CONFIG.fssaiNumber}</p>
+    </div>
+  </header>
+
+  <main class="bg-[#FAF9F6] text-[#1F2937] py-12 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto space-y-12">
+
+      <section aria-labelledby="inside-heading" class="space-y-4">
+        <h2 id="inside-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">What is inside a sea buckthorn capsule?</h2>
+        <p class="leading-relaxed">Sea buckthorn is a thorny shrub that grows wild in the cold, high-altitude valleys of Ladakh, Himachal Pradesh and Uttarakhand. Its small orange berries and their seeds are pressed or extracted, and that extract goes into the capsule. What makes it unusual:</p>
+        <ul class="space-y-2.5 leading-relaxed">
+          <li><strong>Omega-7 (palmitoleic acid).</strong> Sea buckthorn fruit oil is one of the few plant sources with a meaningful amount of this fatty acid; most plant oils contain almost none.</li>
+          <li><strong>Omega 3, 6 and 9.</strong> The seed oil adds alpha-linolenic acid (Omega-3), linoleic acid (Omega-6) and oleic acid (Omega-9).</li>
+          <li><strong>Natural antioxidants.</strong> The berries contain carotenoids, vitamin E and flavonoids. They are also rich in vitamin C, though an oil-based extract keeps less of it than the fresh juice.</li>
+        </ul>
+        <p class="leading-relaxed">Each Sujata capsule contains <strong>500 mg of sea buckthorn fruit and seed extract</strong> in a vegetarian shell. It is a food supplement: it adds these nutrients to your diet and is not intended to diagnose, treat or cure any condition.</p>
+      </section>
+
+      <LearnBuyCard
+        handle="sujata-sea-buckthorn-capsules"
+        placement="sb-capsule-guide-top"
+        badge="Himalayan sea buckthorn · 60 veg caps"
+        heading="Sujata Himalayan Sea Buckthorn Capsules"
+        pitch="500 mg fruit and seed extract per capsule, vegetarian shell, no added sugar. One capsule twice a day after meals."
+        points={[`${capsules} capsules = ${days}-day supply`, 'Free shipping and cash on delivery', '10% off with UPI']}
+      />
+
+      <section aria-labelledby="formats-heading">
+        <h2 id="formats-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">Capsules vs juice vs oil vs powder</h2>
+        <p class="mt-2 text-sm text-gray-600">All four come from the same berry. The practical differences are dose control, sugar and convenience.</p>
+        <div class="mt-5 overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+          <table class="w-full min-w-[620px] text-left text-sm">
+            <thead class="bg-[#064E3B] text-white text-xs uppercase tracking-wider">
+              <tr><th scope="col" class="px-4 py-3">Format</th><th scope="col" class="px-4 py-3">Typical serving</th><th scope="col" class="px-4 py-3">Added sugar</th><th scope="col" class="px-4 py-3">Storage</th><th scope="col" class="px-4 py-3">Good to know</th></tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {formats.map((f, i) => (
+                <tr class:list={[i === 0 && 'bg-emerald-50/70']}>
+                  <td class="px-4 py-3 font-semibold">{f.format}</td><td class="px-4 py-3">{f.serving}</td><td class="px-4 py-3">{f.sugar}</td><td class="px-4 py-3">{f.storage}</td><td class="px-4 py-3 text-gray-600">{f.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm leading-relaxed">Prefer reading in Hindi? Our <a href="/learn/sea-buckthorn-in-hindi" class="text-emerald-800 underline underline-offset-2">सी बकथॉर्न गाइड (हिंदी)</a> covers the same comparison.</p>
+      </section>
+
+      <section aria-labelledby="checklist-heading" class="space-y-4">
+        <h2 id="checklist-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">How to choose sea buckthorn capsules: a 6-point checklist</h2>
+        <p class="leading-relaxed">Many brands sell sea buckthorn capsules in India. Use these checks on any of them, including ours.</p>
+        <ol class="list-decimal pl-5 space-y-3 leading-relaxed">
+          <li><strong>Extract amount per capsule.</strong> The label should state the milligrams of sea buckthorn per capsule (ours: 500 mg). Vague wording like "proprietary blend" hides the dose.</li>
+          <li><strong>Fruit and seed, not just one.</strong> Fruit oil carries most of the Omega-7; seed oil carries most of the Omega 3 and 6. A fruit-and-seed extract gives you both.</li>
+          <li><strong>Vegetarian shell.</strong> Many capsules use gelatin. If you are vegetarian, look for HPMC or pullulan on the label.</li>
+          <li><strong>No added sugar or fillers you do not need.</strong> Read the full ingredient list, not just the front label.</li>
+          <li><strong>FSSAI licence number on the pack.</strong> Every legally sold supplement in India must show one (ours: #{BRAND_CONFIG.fssaiNumber}).</li>
+          <li><strong>Price per day, not per bottle.</strong> Divide the price by the number of days the bottle lasts at the label serving. Ours works out to {money(perDay)} a day.</li>
+        </ol>
+        <p class="leading-relaxed">For a brand-by-brand look at sea buckthorn in India, read <a href="/learn/which-company-sea-buckthorn-is-best" class="text-emerald-800 underline underline-offset-2">which company's sea buckthorn is best</a>.</p>
+      </section>
+
+      <section aria-labelledby="how-heading" class="rounded-2xl border border-gray-200 bg-white p-6">
+        <h2 id="how-heading" class="font-serif text-2xl font-bold text-[#111827]">How to take them</h2>
+        <ul class="mt-3 space-y-2 text-sm leading-relaxed">
+          <li><strong>Serving:</strong> 1 capsule twice a day, after breakfast and after dinner, with water.</li>
+          <li><strong>With food:</strong> the fatty acids are absorbed better with a meal.</li>
+          <li><strong>Consistency:</strong> take it daily; most people judge any supplement after 4 to 8 weeks.</li>
+          <li><strong>Check with your doctor first</strong> if you are pregnant or breastfeeding, take blood thinners or blood-pressure medicine, or have surgery coming up.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="pair-heading">
+        <h2 id="pair-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">Taking it with spirulina</h2>
+        <p class="mt-2 leading-relaxed">Our most-ordered pack pairs sea buckthorn with <a href="/product/sujata-spirulina-capsules" class="text-emerald-800 underline underline-offset-2">spirulina capsules</a>: spirulina adds plant protein and iron, sea buckthorn adds its fatty acids. The combo costs less than buying both bottles separately.</p>
+        <LearnBuyCard handle="sujata-spirulina-sea-buckthorn-combo-pack" placement="sb-capsule-guide-combo" badge="Most ordered" heading="Spirulina Capsules + Sea Buckthorn Combo" compact={true} />
+      </section>
+
+      <section aria-labelledby="faq-heading">
+        <h2 id="faq-heading" class="font-serif text-2xl sm:text-3xl font-bold text-[#111827]">Sea buckthorn capsules: common questions</h2>
+        <div class="mt-5 divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white">
+          {faqs.map((f) => (
+            <details class="group p-5">
+              <summary class="cursor-pointer list-none font-semibold text-[#111827] flex justify-between gap-4">
+                <span>{f.question}</span><span class="text-emerald-700 group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed text-gray-700">{f.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <p class="text-xs text-gray-500 leading-relaxed">Sea buckthorn capsules are a food supplement, not a medicine, and are not intended to diagnose, treat, cure or prevent any disease. Do not exceed the stated serving.</p>
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="sea-buckthorn-capsules-buyers-guide" />
+  <StoreFooter />
+</StoreLayout>

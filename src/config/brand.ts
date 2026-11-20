@@ -28,9 +28,12 @@ export const BRAND_CONFIG = {
     moisturePct: "4.12",
     ashPct: "5.79",
   },
-  reviews: {
-    ratingValue: "4.9",
-    verifiedBuyersLabel: "1,100+",
+  // Verifiable trust figures ONLY. No star rating is claimed anywhere: the store has 1 published review
+  // (Judge.me, 2026-11-20), so "4.9/5" and "1,100+ verified buyers" had no source. ordersLabel is backed by
+  // the order database (1,396 orders recorded 2026-03-01 to 2026-11-20). Update both together.
+  trust: {
+    ordersLabel: "1,300+",
+    ordersSince: "March 2026",
   },
   announcementTickers: [
     "🌿 100% Pure, Chemical-Free Hydro-Cultivated Spirulina",

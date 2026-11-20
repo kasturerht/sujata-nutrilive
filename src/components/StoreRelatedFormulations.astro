@@ -2,6 +2,9 @@
 // src/components/StoreRelatedFormulations.astro
 // 🧬 NEURAL MESH INTERNAL LINKING ENGINE (Silicon Valley 2026 Spec)
 // Bridges PageRank & Crawl Priority across all 16 Formulations
+// Prices are LIVE from Shopify (src/lib/catalog.ts). No ratings are shown: the store has almost no
+// published reviews yet, and invented star counts mislead buyers (Consumer Protection Act / CCPA).
+import { getCatalogProducts, formatINR, type CatalogHandle } from '../lib/catalog';
 
 interface Props {
   currentHandle: string;
@@ -13,11 +16,8 @@ interface CatalogItem {
   handle: string;
   title: string;
   subtitle: string;
-  price: string;
-  comparePrice?: string;
   image: string;
   badge: string;
-  rating: string;
   category: 'nutrition' | 'skincare' | 'haircare' | 'combos';
 }
 
@@ -26,176 +26,128 @@ const ALL_CATALOG: CatalogItem[] = [
     handle: 'sujata-spirulina-tablets',
     title: 'Sujata Spirulina Tablets (500mg)',
     subtitle: 'Cold-Compressed • Zero Chemical Binders',
-    price: '₹499',
-    comparePrice: '₹799',
     image: '/products/sujata-spirulina-tablets-bottle.jpg',
     badge: 'Flagship Superfood',
-    rating: '4.9 ★ (1,840)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-spirulina-powder',
     title: 'Sujata Pure Spirulina Powder (100g)',
     subtitle: 'Cryo-Milled • 21.4% Phycocyanin',
-    price: '₹499',
-    comparePrice: '₹799',
     image: '/products/sujata-spirulina-powder-pouch.jpg',
     badge: 'Cryo-Milled Pure',
-    rating: '4.9 ★ (1,420)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-spirulina-capsules',
     title: 'Sujata Spirulina Veggie Capsules',
     subtitle: '500mg Plant Shell • Instant Absorption',
-    price: '₹499',
-    comparePrice: '₹799',
     image: '/products/sujata-spirulina-capsules-bottle.jpg',
     badge: '100% Veggie Shell',
-    rating: '4.9 ★ (1,150)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-pure-himalayan-shilajit',
     title: 'Pure Himalayan Shilajit Resin (Gold Grade)',
     subtitle: '>75% Fulvic Acid • NABL Certified Purity',
-    price: '₹999',
-    comparePrice: '₹1,299',
     image: '/products/sujata-himalayan-shilajit-bottle.jpg',
     badge: 'Gold Grade >75%',
-    rating: '5.0 ★ (1,580)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-sea-buckthorn-capsules',
     title: 'Wild Himalayan Sea Buckthorn Capsules',
     subtitle: 'Rare Omega 7 & 12x Natural Vitamin C',
-    price: '₹699',
-    comparePrice: '₹999',
     image: '/products/sujata-sea-buckthorn-capsules-bottle.jpg',
     badge: 'Rare Omega 7',
-    rating: '4.9 ★ (1,230)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-plant-based-vitamin-b12',
     title: 'Plant-Based Vitamin B12 (Active Co-Enzyme)',
     subtitle: 'Methylcobalamin • 0% Synthetic Cyanide',
-    price: '₹799',
-    comparePrice: '₹1,099',
     image: '/products/sujata-plant-based-b12-bottle.png',
     badge: 'Active Co-Enzyme',
-    rating: '4.8 ★ (940)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-moringa-powder',
     title: 'Raw Moringa Leaf Detox Powder (100g)',
     subtitle: 'Shade-Dried Organic Moringa • Natural Detox',
-    price: '₹249',
-    comparePrice: '₹299',
     image: '/products/sujata-moringa-powder-pouch.jpg',
     badge: 'Super Detox Leaf',
-    rating: '4.8 ★ (820)',
     category: 'nutrition'
   },
   {
     handle: 'sujata-spirulina-facewash',
     title: 'Spirulina Botanical Detox Face Wash',
     subtitle: 'Anti-Acne • Deep Pore Cleansing & Zinc',
-    price: '₹349',
-    comparePrice: '₹499',
     image: '/products/sujata-spirulina-facewash-bottle.jpg',
     badge: 'Anti-Acne Detox',
-    rating: '4.9 ★ (1,910)',
     category: 'skincare'
   },
   {
     handle: 'sujata-spiruglow-bath-soap',
     title: 'SpiruGlow Ayurvedic Herbal Bath Bar',
     subtitle: 'Handcrafted Cold-Pressed Coconut & Spirulina',
-    price: '₹149',
-    comparePrice: '₹249',
     image: '/products/sujata-spiruglow-bath-soap-box.jpg',
     badge: 'Handcrafted Herbal',
-    rating: '4.9 ★ (1,120)',
     category: 'skincare'
   },
   {
     handle: 'sujata-spirulina-korean-cream',
     title: 'Spirulina Korean Glass Skin Night Cream',
     subtitle: 'K-Beauty Radiance Peptide Infusion',
-    price: '₹599',
-    comparePrice: '₹799',
     image: '/products/sujata-spirulina-korean-cream-jar.jpg',
     badge: 'K-Beauty Glass Skin',
-    rating: '4.9 ★ (880)',
     category: 'skincare'
   },
   {
     handle: 'sujata-bridal-whitening-cream',
     title: 'Bridal Whitening & Radiance Day Cream',
     subtitle: 'Pure Sandalwood & Saffron Botanical Glow',
-    price: '₹699',
-    comparePrice: '₹899',
     image: '/products/sujata-bridal-whitening-cream-jar.jpg',
     badge: 'Luxury Bridal Glow',
-    rating: '5.0 ★ (620)',
     category: 'skincare'
   },
   {
     handle: 'sujata-spirulina-facepack-powder',
     title: 'Spirulina Tan-Removal Face Pack Powder',
     subtitle: 'Instant Botanical Radiance & Blemish Detox',
-    price: '₹299',
-    comparePrice: '₹399',
     image: '/products/sujata-spirulina-facepack-pouch.jpg',
     badge: 'Instant Glow Pack',
-    rating: '4.8 ★ (750)',
     category: 'skincare'
   },
   {
     handle: 'sujata-spirulina-coconut-hair-oil',
     title: 'Spirulina & Biotin Cold-Pressed Hair Oil',
     subtitle: 'Active Scalp Therapy • Hair Fall Defense',
-    price: '₹299',
-    comparePrice: '₹399',
     image: '/products/sujata-spirulina-hair-oil-bottle.png',
     badge: 'Scalp Root Defense',
-    rating: '4.9 ★ (1,450)',
     category: 'haircare'
   },
   {
     handle: 'sujata-spirushine-shampoo-conditioner',
     title: 'SpiruShine 2-in-1 Shampoo & Conditioner',
     subtitle: 'Keratin & Spirulina Anti-Thinning Wash',
-    price: '₹399',
-    comparePrice: '₹499',
     image: '/products/sujata-spirushine-shampoo-bottle.jpg',
     badge: '2-in-1 Therapy',
-    rating: '4.8 ★ (910)',
     category: 'haircare'
   },
   {
     handle: 'sujata-spirulina-sea-buckthorn-combo-pack',
     title: 'Spirulina Veg Capsules + Sea Buckthorn Combo Pack',
     subtitle: '100% Veg Capsules Dual Cellular Rejuvenation',
-    price: '₹1,050',
-    comparePrice: '₹1,598',
     image: '/products/sujata-combo-spirulina-sea-buckthorn.jpg',
     badge: '100% Veg Capsules Duo',
-    rating: '5.0 ★ (2,100)',
     category: 'combos'
   },
   {
     handle: 'sujata-spirulina-sea-buckthorn-combo',
     title: 'Daily Super Immunity Combo (Tablets + Capsules)',
     subtitle: 'Pure Tablets (0% Binders) + Wild Himalayan Berry Oil',
-    price: '₹950',
-    comparePrice: '₹1,399',
     image: '/products/sujata-combo-spirulina-tablets-sea-buckthorn.jpg',
     badge: 'Tablets + Capsules Duo',
-    rating: '4.9 ★ (980)',
     category: 'combos'
   }
 ];
@@ -213,6 +165,12 @@ if (recommendations.length < 4) {
 }
 
 const displayItems = recommendations.slice(0, 4);
+const live = await getCatalogProducts(displayItems.map((i) => i.handle as CatalogHandle));
+const priceOf = (handle: string) => {
+  const variants = live[handle]?.variants || [];
+  const v = variants.find((x) => x.available) || variants[0];
+  return v ? { price: formatINR(v.price), compare: v.compareAt && v.compareAt > v.price ? formatINR(v.compareAt) : null, from: variants.length > 1 } : null;
+};
 ---
 
 <section class="py-12 sm:py-16 bg-[#FBF9F5] border-t border-gray-200/80 text-[#111827]">
@@ -262,12 +220,14 @@ const displayItems = recommendations.slice(0, 4);
 
           <div class="pt-2 border-t border-gray-100 flex items-center justify-between gap-1">
             <div class="flex items-baseline gap-1">
-              <span class="text-sm sm:text-base font-black text-[#111827]">
-                {item.price}
-              </span>
-              {item.comparePrice && (
+              {priceOf(item.handle) && (
+                <span class="text-sm sm:text-base font-black text-[#111827]">
+                  {priceOf(item.handle)!.from && <span class="text-[10px] font-semibold text-gray-500">from </span>}{priceOf(item.handle)!.price}
+                </span>
+              )}
+              {priceOf(item.handle)?.compare && (
                 <span class="text-[10px] text-gray-400 line-through">
-                  {item.comparePrice}
+                  {priceOf(item.handle)!.compare}
                 </span>
               )}
             </div>

@@ -1,0 +1,248 @@
+[
+ {
+  "handle": "sujata-spirulina-powder",
+  "description": "100% Pure, Sub-40°C Cold-Pressed Organic Spirulina Powder cultivated in closed bio-secure hydro-domes for maximum nutrient density and bioavailability. ⚡ Key Health Benefits Daily Cellular Vitality & Sustained Energy: High plant protein (65-70%) and organic non-heme iron to combat afternoon fatigue and enhance daily oxygenation. Superior Natural Immunity: Packed with high-potency Phycocyanin, Beta-Carotene, and Superoxide Dismutase (SOD) to protect cells from oxidative stress. Gut & Digestive Detox: Naturally rich in chlorophyll to detoxify heavy metals, reduce bloating, and alkalize your gut pH. Fast Bioavailability (95%+ Absorption): Ultra-fine, non-gritty texture that dissolves seamlessly in warm water, smoothies, and fresh juices. 🌿 Pure Ingredients 100% Pure Certified Organic Spirulina (Arthrospira platensis) Powder. Zero binders, zero preservatives, zero artificial additives, zero heavy metals. 📋 Suggested Usage & Dosage Mix 1 level scoop (approx. 3g) daily into warm water, fruit smoothies, lemon water, or sprinkle over fresh salads. Best consumed in the morning or early afternoon on an empty stomach. 🏆 Quality Standards & Certifications FSSAI Approved (#10723998000433), GMP Certified Facility, Non-GMO, 100% Vegan & Cruelty-Free, NABL Third-Party Lab Tested for heavy metal safety.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Ph\",\"name\":\"Phycocyanin (20%+)\",\"desc\":\"Master blue antioxidant bio-pigment. Neutralizes free radicals and activates cellular defense pathways.\",\"color\":\"text-blue-400\",\"border\":\"border-blue-500/30\"},{\"symbol\":\"Fe\",\"name\":\"Bioavailable Iron\",\"desc\":\"Easily absorbable plant iron. Directly supports hemoglobin synthesis and boosts oxygen flow to tissues.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"},{\"symbol\":\"Ch\",\"name\":\"Active Chlorophyll\",\"desc\":\"The natural detoxifier. Assists liver detoxification, flushes heavy metals, and alkalizes gut pH.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"EAA\",\"name\":\"18 Amino Acid Matrix\",\"desc\":\"65-70% complete bio-protein. Repairs muscle tissue, rebuilds connective fibers, and sustains energy.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Hour 01\",\"title\":\"Metabolic Activation\",\"desc\":\"Rapidly absorbed micro-nutrients flood the bloodstream. Brain fog lifts with steady, non-jittery energy.\"},{\"time\":\"Day 07\",\"title\":\"Digestive & Gut Detox\",\"desc\":\"Natural chlorophyll balances microbiome ecology. Bloating subsides and daily digestion smooths out.\"},{\"time\":\"Day 30\",\"title\":\"Cellular Fortification\",\"desc\":\"Red blood cell oxygenation peaks. Stamina remains steady throughout the day, and immune shield strengthens.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-tablets",
+  "description": "High-potency 500mg pure Spirulina tablets compressed without synthetic binders, chemical fillers, or artificial glazes. ⚡ Key Health Benefits Convenient On-The-Go Cellular Nutrition: Get all essential vitamins, iron, and active Phycocyanin without any mess or measuring. Boosts Strength, Stamina & Daily Alertness: Delivers bioavailable iron and amino acids to reduce chronic tiredness and keep you energized all day. Immune Defense & Red Blood Cell Support: Rich in Vitamin B12, B6, and Vitamin A to support optimal hemoglobin levels and cellular repair. 100% Zero-Binder Formulation: Only pure microalgae compressed under sub-40°C mechanical pressure. 🌿 Pure Ingredients Pure Grade-A Organic Spirulina Powder (500mg per tablet). 100% Vegan, Zero Talc, Zero Magnesium Stearate, Zero Binders. 📋 Suggested Usage & Dosage Take 1 to 2 tablets twice daily with water, preferably in the morning after breakfast and in the afternoon. 🏆 Quality Standards & Certifications FSSAI Approved (#10723998000433), GMP Certified, ISO 9001:2015, 100% Vegan, NABL Batch Tested.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"GLA\",\"name\":\"Gamma-Linolenic Acid\",\"desc\":\"Rare anti-inflammatory fatty acid. Regulates hormonal equilibrium and eases joint stiffness.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"SOD\",\"name\":\"Superoxide Dismutase\",\"desc\":\"Master antioxidant enzyme preserved under cold press. Protects mitochondria from oxidative wear.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"Fe\",\"name\":\"Zero-Binder Bio-Iron\",\"desc\":\"High-absorption non-heme iron to combat chronic fatigue and elevate daily hemoglobin.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"},{\"symbol\":\"EAA\",\"name\":\"Pure Microalgae Protein\",\"desc\":\"100% pure compressed spirulina without talc or chemical binders. Delivers all essential amino acids.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Clean Enteric Absorption\",\"desc\":\"Tablets dissolve gently without reflux or grassy aftertaste, providing sustained physical stamina.\"},{\"time\":\"Week 02\",\"title\":\"Anti-Fatigue Repair\",\"desc\":\"Enzymes and micro-minerals alleviate post-work fatigue and support joint flexibility.\"},{\"time\":\"Day 30+\",\"title\":\"Total Body Defense\",\"desc\":\"Full red blood cell renewal cycle completes. Hemoglobin saturates, hair roots fortify, and immunity peaks.\"}]"
+  },
+  "faqs": {
+   "value": "[{\"question\":\"सुजाता स्पिरुलिना गोळ्या बाजारातील इतर गोळ्यांपेक्षा कशा वेगळ्या आहेत? (Zero Chemical Binders)\",\"answer\":\"बाजारातील बहुतेक गोळ्या बनवताना ३०% ते ४०% केमिकल बाईंडर्स (जसे की PVP, टाल्क, मॅग्नेशियम स्टिअर्रेट किंवा खडूची पावडर) वापरली जाते, ज्यामुळे पोट फुगणे किंवा अपचनाचा त्रास होतो. सुजाता स्पिरुलिना टॅब्लेट्स Sub-40°C कोल्ड कॉम्प्रेस मेकॅनिकल तंत्रज्ञानाने १००% शुद्ध मायक्रोअल्गी दाबून बनवल्या जातात. यात शून्य केमिकल बाईंडर्स आणि शून्य आर्टिफिशिअल कोटिंग असते. त्यामुळे ही कोमट पाण्यात सहज विरघळते आणि गॅस किंवा दुर्गंधीचा त्रास होत नाही.\",\"tag\":\"Zero-Binder Technology\"},{\"question\":\"सुजाता स्पिरुलिना गोळ्या पाण्यात विरघळतात का? (Zero-Binder Water Dissolution Test)\",\"answer\":\"होय, अगदी सहज. एक सुजाता स्पिरुलिना गोळी एका काचेच्या पेल्यात कोमट पाण्यात टाकल्यास १२ ते १५ मिनिटांत ती नैसर्गिकरित्या विरघळते आणि पाणी गडद हिरवे होते. हीच १००% शुद्धतेची आणि शून्य केमिकल बाईंडर असण्याची खरी खूण आहे.\",\"tag\":\"Water Dissolution Test\"},{\"question\":\"स्पिरुलिना गोळ्या घेण्याची योग्य वेळ आणि पद्धत कोणती? (Dosage & Timing)\",\"answer\":\"दररोज सकाळी नाश्त्यानंतर २० ते ३० मिनिटांनी २ गोळ्या एका ग्लास कोमट पाण्यासोबत किंवा लिंबू पाण्यासोबत घ्याव्यात. लिंबामधील नैसर्गिक व्हिटॅमिन सी मुळे स्पिरुलिनामधील नॉन-हीम प्लांट आयर्नचे शोषण ३००% वेगाने होते.\",\"tag\":\"Dosage Protocol\"},{\"question\":\"सुजाता स्पिरुलिना गोळ्यांची किंमत किती आहे? (Price & Value Packs)\",\"answer\":\"सुजाता १००% व्हेगन स्पिरुलिना गोळ्या (५००mg) ६० गोळ्यांच्या पॅकसाठी ₹३५० (MRP ₹४००, ₹११.६६/दिवस) आणि १२० गोळ्यांच्या व्हॅल्यू पॅकसाठी ₹५५० (MRP ₹६९९, ₹९.१६/दिवस) उपलब्ध आहेत. १२० गोळ्यांच्या पॅकवर थेट ₹१५० रोख बचत होते. सर्व ऑर्डर्सवर फ्री डिलिव्हरी आणि कॅश ऑन डिलिव्हरी (COD) उपलब्ध आहे.\",\"tag\":\"Transparent Pricing\"},{\"question\":\"महिलांसाठी ॲनिमिया, केस गळणे आणि थकव्यासाठी हे फायदेशीर आहे का?\",\"answer\":\"होय, अत्यंत गुणकारी आहे. सुजाता स्पिरुलिनामध्ये २९१ mg/kg बायो-अवेलेबल नैसर्गिक प्लांट आयर्न आणि १८ आवश्यक अमिनो ॲसिड्स असतात. हे लाल रक्तपेशींमधील हिमोग्लोबिन वाढवून केस गळणे आणि दिवसभराचा थकवा मुळापासून दूर करते, आणि ॲलोपॅथिक आयर्नच्या गोळ्यांप्रमाणे बद्धकोष्ठता (Constipation) होत नाही.\",\"tag\":\"Women's Health & Iron\"},{\"question\":\"थायरॉईड, बीपी किंवा मधुमेहाचे रुग्ण स्पिरुलिना घेऊ शकतात का?\",\"answer\":\"होय, नक्कीच. शुद्ध स्पिरुलिना हे नैसर्गिक संपूर्ण अन्न (Whole Food) असून त्यात कोणतीही साखर, स्टिम्युलंट्स किंवा हार्मोन्स नसतात. फक्त आपल्या सकाळच्या नेहमीच्या औषधांनंतर १ तासाचे अंतर ठेवून स्पिरुलिनाचे सेवन करावे.\",\"tag\":\"Safety & Medication Gap\"},{\"question\":\"सुजाता स्पिरुलिना गोळ्यांची लॅब चाचणी आणि शुद्धतेचे निकष काय आहेत?\",\"answer\":\"सुजाताची प्रत्येक बॅच FSSAI परवानाधारक (#10723998000433) असून NABL मान्यताप्राप्त प्रयोगशाळेत IS 7219 मानकांनुसार तपासली जाते. यात ६२.३% संपूर्ण प्रोटिन, सुरक्षित हेवी मेटल प्रमाण (Lead < 0.5 ppm, Arsenic < 0.1 ppm) आणि ०.००% केमिकल बाईंडर्स प्रमाणित आहेत.\",\"tag\":\"NABL Lab Verification\"}]"
+  },
+  "comparison_table": {
+   "value": "{\"title\":\"सुजाता १००% कोल्ड-कॉम्प्रेस्ड गोळ्या विरुद्ध इतर ब्रँड्स आणि केमिकल गोळ्या\",\"subtitle\":\"वैज्ञानिक तुलना: शून्य केमिकल बाईंडर्स विरुद्ध ३०-४०% टाल्क आणि केमिकल गोळ्या\",\"rows\":[{\"feature\":\"केमिकल बाईंडर्स व टाल्क (Binders & Excipients)\",\"sujata\":\"०% बाईंडर्स (१००% शुद्ध मायक्रोअल्गी)\",\"generic\":\"३०% ते ४०% PVP, टाल्क, मॅग्नेशियम स्टिअर्रेट\",\"competitors\":\"१००% सिंथेटिक केमिकल कोटिंग व फिलर्स\"},{\"feature\":\"सुकवण्याचे तापमान (Dehydration Temperature)\",\"sujata\":\"Sub-40°C क्रायो-ड्रायिंग (प्रोटिन व एन्झाइम्स जिवंत)\",\"generic\":\"१६०°C–२००°C हाय-हीट (जळलेला वास येतो)\",\"competitors\":\"केमिकल सॉल्व्हेंट प्रोसेस\"},{\"feature\":\"पाण्यात विरघळणे (Dissolution & Digestion)\",\"sujata\":\"कोमट पाण्यात १२-१५ मिनिटांत नैसर्गिक विरघळते\",\"generic\":\"केमिकल कोटिंगमुळे विरघळायला २-३ तास लागतात\",\"competitors\":\"बद्धकोष्ठता (Constipation) व काळी शौच होते\"},{\"feature\":\"NABL लॅब हेवी मेटल चाचणी (Heavy Metals)\",\"sujata\":\"NABL प्रमाणित (Lead < 0.01 ppm, Hg Undetected)\",\"generic\":\"सहसा बॅच-वाइज चाचणी नसते\",\"competitors\":\"केमिकल आयर्न टॉक्सिसिटीचा धोका\"},{\"feature\":\"पाण्याचा स्रोत व शेती (Cultivation & Ecology)\",\"sujata\":\"नाशिकच्या बंद बायो-डोम तळ्यांमधील शुद्ध भूजल\",\"generic\":\"उघडी औद्योगिक तळी (कचऱ्याचा धोका)\",\"competitors\":\"पेट्रोकेमिकल सिंथेसिस\"},{\"feature\":\"दैनंदिन खर्च व गॅरंटी (Cost & Guarantee)\",\"sujata\":\"फक्त ₹९.१६/दिवस + ४० दिवसांची परतावा गॅरंटी\",\"generic\":\"₹१८–₹३०/दिवस (कोणतीही गॅरंटी नाही)\",\"competitors\":\"₹१५–₹३५/दिवस (पचनाचा त्रास होतो)\"}]}"
+  },
+  "subtitle": {
+   "value": "100% Pure Cold-Compressed Microalgae (Zero Chemical Binders or Talc)"
+  },
+  "key_benefit": {
+   "value": "Zero Chemical Binders • 62.3% Bio-Protein • Fast Lukewarm Water Dissolution"
+  },
+  "how_to_use": {
+   "value": "Take 2 tablets daily in the morning with lukewarm water or lemon water 20-30 minutes after breakfast. Vitamin C in lemon water boosts plant iron absorption by up to 300%."
+  }
+ },
+ {
+  "handle": "sujata-spirulina-capsules",
+  "description": "Premium Black Edition 500mg Spirulina Capsules encased in plant-cellulose HPMC vegetarian shells for gentle digestion and maximum nutrient preservation. ⚡ Key Health Benefits Zero Odor & Maximum Bio-Absorption: Ideal for individuals sensitive to the natural smell of raw spirulina while preserving 100% active phytonutrients. Promotes Mental Clarity & Neural Sharpness: Rich in gamma-linolenic acid (GLA) and B-complex vitamins to support focus, concentration, and calm energy. Cellular Anti-Aging: High ORAC antioxidant value fights free radical damage caused by urban pollution and stress. Vegetarian Plant Capsule Shells: 100% free from bovine gelatin, starch, or synthetic dyes. 🌿 Pure Ingredients Each vegetarian capsule contains 500mg Pure Cold-Processed Spirulina Extract Powder. Vegetable cellulose capsule shell. 📋 Suggested Usage & Dosage Take 1 capsule twice daily with a glass of water after breakfast and lunch. 🏆 Quality Standards & Certifications FSSAI Approved, 100% Vegan, GMP Certified, Non-GMO, Heavy-Metal Free.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"GLA\",\"name\":\"Gamma-Linolenic Acid\",\"desc\":\"Essential lipid compound for nerve calmness, cellular elasticity, and hormonal balance.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"Ph\",\"name\":\"Phycocyanin Bio-Shield\",\"desc\":\"Shields cells against urban pollution and oxidative stress with potent free-radical scavenging.\",\"color\":\"text-blue-400\",\"border\":\"border-blue-500/30\"},{\"symbol\":\"B-Cx\",\"name\":\"B-Complex Vitamins\",\"desc\":\"Fuels cellular ATP energy production and enhances mental focus without caffeine.\",\"color\":\"text-purple-400\",\"border\":\"border-purple-500/30\"},{\"symbol\":\"Veg\",\"name\":\"Plant Cellulose Shell\",\"desc\":\"100% vegetarian HPMC shell ensuring zero odor, gentle digestion, and rapid absorption.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Odorless Micro-Nutrition\",\"desc\":\"Gentle plant capsules deliver essential nutrients directly to the digestive tract with zero odor.\"},{\"time\":\"Week 02\",\"title\":\"Neural Clarity & Focus\",\"desc\":\"B-complex and antioxidants optimize cognitive processing speed and reduce afternoon burnout.\"},{\"time\":\"Day 30+\",\"title\":\"Deep Immune Shield\",\"desc\":\"Builds a resilient cellular defense barrier against seasonal infections and daily physical stress.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-sea-buckthorn-capsules",
+  "description": "Rare Himalayan Superfruit Sea Buckthorn Extract — Nature's most comprehensive plant source of all four essential fatty acids: Omega 3, 6, 7, and 9. ⚡ Key Health Benefits Cardiovascular & Heart Wellness: Rich in Omega-3 and Omega-9 to support healthy arterial elasticity, cholesterol balance, and blood circulation. Rare Omega-7 Mucosal & Skin Rejuvenation: Palmitoleic acid (Omega-7) restores deep skin hydration, reduces dryness, and stimulates collagen production. Potent Natural Vitamin C & UV Defense: Contains 12x more Vitamin C than oranges, defending skin cells against UV photoaging and environmental damage. Accelerates Tissue Repair & Cellular Recovery: Synergistic bioactive flavonoids support faster wound healing and internal gut lining repair. 🌿 Pure Ingredients Pure Sea Buckthorn (Hippophae rhamnoides) Fruit & Seed Extract (500mg), Vegetarian Capsule Shell. 📋 Suggested Usage & Dosage Take 1 capsule twice daily after meals with lukewarm water. 🏆 Quality Standards & Certifications FSSAI Approved, 100% Vegan, ISO 9001:2015, GMP Certified Facility.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Ω-7\",\"name\":\"Rare Palmitoleic Acid (Omega 7)\",\"desc\":\"Miracle lipid that rejuvenates mucosal membranes, hydrates dry eyes/skin, and stimulates collagen.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"Ω-369\",\"name\":\"Omegas 3, 6 & 9 Spectrum\",\"desc\":\"Promotes cardiovascular arterial flexibility, healthy lipid balance, and smooth circulation.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"},{\"symbol\":\"Vit C\",\"name\":\"Active Super-Vitamin C\",\"desc\":\"12x more potent than citrus fruits. Guards skin from UV photo-aging and boosts natural immunity.\",\"color\":\"text-yellow-400\",\"border\":\"border-yellow-500/30\"},{\"symbol\":\"Fla\",\"name\":\"Bioactive Flavonoids\",\"desc\":\"Accelerates internal mucosal tissue repair and supports gut lining integrity.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Deep Mucosal Hydration\",\"desc\":\"Relieves internal dryness in eyes, throat, and skin; restores gut lining comfort and cellular hydration.\"},{\"time\":\"Week 02\",\"title\":\"Cardiovascular & Dermal Glow\",\"desc\":\"Omega fatty acids enhance micro-circulation, bringing a natural healthy radiance to the face.\"},{\"time\":\"Day 30+\",\"title\":\"Comprehensive Cellular Defense\",\"desc\":\"Boosts skin elasticity, promotes cardiovascular wellness, and strengthens systemic defense.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-plant-based-vitamin-b12",
+  "description": "100% Natural, Plant-Sourced Vitamin B12 Formula engineered specifically for vegans and vegetarians seeking natural cellular energy and metabolism support without synthetic cyanocobalamin. ⚡ Key Health Benefits Supports Red Blood Cell (RBC) Maintenance: Supports healthy red blood cell maintenance, natural energy levels, and combats daily tiredness. Cognitive Function & Nervous System Wellness: Promotes nervous system wellness, mental focus, and cognitive clarity. Natural Energy Metabolism: Converts dietary carbohydrates and proteins into cellular ATP energy at the mitochondrial level. 100% Clean Plant Extraction: Formulated using fermented botanical culture and Spirulina biomass for superior intestinal absorption. 🌿 Pure Ingredients Plant-Derived B-Complex & Vitamin B12, Organic Spirulina & Moringa Botanical Blend. 100% Vegan Capsule Shell. 📋 Suggested Usage & Dosage Take 1 capsule daily after breakfast with water, or as directed by your healthcare practitioner. 🏆 Quality Standards & Certifications FSSAI Approved, 100% Vegan Certified, Lab Tested, Zero Additives, GMP Certified.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"MeB12\",\"name\":\"Plant Methylcobalamin\",\"desc\":\"100% natural, active co-enzyme B12 form for direct neurological absorption without liver conversion.\",\"color\":\"text-purple-400\",\"border\":\"border-purple-500/30\"},{\"symbol\":\"RBC\",\"name\":\"Erythropoietic Co-Factors\",\"desc\":\"Essential for healthy red blood cell synthesis, preventing megaloblastic fatigue and anemia.\",\"color\":\"text-red-400\",\"border\":\"border-red-500/30\"},{\"symbol\":\"My\",\"name\":\"Myelin Sheath Repair\",\"desc\":\"Rebuilds nerve protective sheaths, eliminating tingling sensations and enhancing memory speed.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"Spi\",\"name\":\"Botanical Ferment Base\",\"desc\":\"Spirulina-fermented plant matrix providing 3x superior bio-absorption for vegans and vegetarians.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Neural Awakening\",\"desc\":\"Active Methylcobalamin crosses the blood-brain barrier; morning lethargy and brain fog lift.\"},{\"time\":\"Week 02\",\"title\":\"Hemoglobin & Energy Surge\",\"desc\":\"Elevates cellular oxygen-carrying capacity, providing lasting stamina through active hours.\"},{\"time\":\"Day 30+\",\"title\":\"Nervous System Fortification\",\"desc\":\"Nerve myelin sheaths strengthen, eliminating tingling in limbs and restoring peak mental sharpness.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-pure-himalayan-shilajit",
+  "description": "Pure Himalayan Gold-Grade Shilajit Extract enriched with 75%+ active Fulvic Acid and 84+ ionic trace minerals. ⚡ Key Health Benefits Peak Physical Strength & Stamina Booster: Elevates cellular ATP reserves, accelerates post-workout recovery, and combats chronic exhaustion. Elevates Daily Vitality & Stamina: Clinically recognized in Ayurveda as a premier Rasayana to restore cellular vigor, natural endurance, and active longevity. 75%+ Natural Fulvic Acid: Enhances deep cellular nutrient absorption and micro-mineral permeability across cell membranes. Purified by Traditional Shodhana Protocol: Free from heavy metals, impurities, and chemical solvents. 🌿 Pure Ingredients Purified Himalayan Shilajit (Asphaltum punjabianum) Resin Extract (Standardized to >75% Fulvic Acid). Vegetarian Capsule Shell. 📋 Suggested Usage & Dosage Take 1 capsule twice daily with warm milk or lukewarm water after meals. 🏆 Quality Standards & Certifications FSSAI Approved, Heavy Metal Tested (NABL Lab Certified), 100% Ayurvedic Formulation, GMP Certified.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"FA\",\"name\":\"75%+ Fulvic Acid Matrix\",\"desc\":\"Ultra-purified bio-carrier that transports minerals directly into mitochondrial cell membranes.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"Min\",\"name\":\"84+ Ionic Trace Minerals\",\"desc\":\"Replenishes vital micronutrients, electrolytes, zinc, and magnesium in ionic colloidal form.\",\"color\":\"text-yellow-400\",\"border\":\"border-yellow-500/30\"},{\"symbol\":\"ATP\",\"name\":\"Mitochondrial Energy Catalyst\",\"desc\":\"Supercharges cellular ATP production, increasing endurance and post-exercise recovery.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"},{\"symbol\":\"Ras\",\"name\":\"Purified Shodhana Extract\",\"desc\":\"Traditional Ayurvedic Rasayana that enhances vitality, vigor, and physical power naturally.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Mitochondrial Ignition\",\"desc\":\"Cellular ATP levels surge, combating physical fatigue and boosting daily stamina.\"},{\"time\":\"Week 02\",\"title\":\"Strength & Recovery\",\"desc\":\"Muscle endurance increases, post-workout soreness decreases, and stress resilience peaks.\"},{\"time\":\"Day 30+\",\"title\":\"Peak Vitality & Vigor\",\"desc\":\"Optimizes vitality, endurance, and deep physiological resilience for sustained peak performance.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-moringa-powder",
+  "description": "100% Pure Shade-Dried Moringa Oleifera Leaf Powder — The Miracle Tree superfood loaded with 90+ nutrients, 46 antioxidants, and all 9 essential amino acids. ⚡ Key Health Benefits Natural Cleanser & Daily Detoxifier: High levels of Quercetin and Chlorogenic Acid support hepatic liver detoxification and gut cleansing. Stabilizes Blood Sugar & Metabolism: Rich in bioactive Isothiocyanates shown to assist healthy glucose regulation and metabolic balance. Essential Amino Acid Profile: Provides plant protein (6.7g per serving) with complete Branched-Chain Amino Acids (Leucine, Isoleucine, Valine). Supports Eye Health & Retinal Protection: High natural Vitamin A (Carotene 6.78mg) and non-heme iron to protect vision and reduce fatigue. 🌿 Pure Ingredients 100% Pure Organic Moringa Oleifera Leaf Powder. Zero chemical additives, zero preservatives. 📋 Suggested Usage & Dosage Consume 1 teaspoon (2g to 5g) daily with warm water, milk, green tea, or blend into green smoothies. 🏆 Quality Standards & Certifications FSSAI Approved (#10723998000433), FDA Compliant, GMP Certified, 100% Vegan, ISO Certified.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Que\",\"name\":\"Quercetin & Chlorogenic Acid\",\"desc\":\"Bioactive polyphenols shown to support balanced blood sugar metabolism and liver detox.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"Vit A\",\"name\":\"Natural Beta-Carotene\",\"desc\":\"4x higher than carrots. Protects eye vision, combats retinal fatigue, and clears complexion.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"},{\"symbol\":\"BCAA\",\"name\":\"All 9 Essential Amino Acids\",\"desc\":\"Complete botanical protein source supporting muscle maintenance and daily metabolic tone.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"Ca-Fe\",\"name\":\"Bio-Calcium & Plant Iron\",\"desc\":\"Natural mineral density strengthens bone structure and combats chronic nutritional gaps.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Digestive Reset\",\"desc\":\"Soluble dietary fibers and chlorophyll detoxify the digestive tract and relieve sluggishness.\"},{\"time\":\"Week 02\",\"title\":\"Metabolic Equilibrium\",\"desc\":\"Stabilizes post-meal glucose spikes and reduces midday sugar cravings.\"},{\"time\":\"Day 30+\",\"title\":\"Nutritional Vitality\",\"desc\":\"90+ vitamins and minerals saturate cellular reserves for full-body lightness and stamina.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-facewash",
+  "description": "Natural Anti-Acne Deep Pore Cleansing & Exfoliating Face Wash infused with pure botanical Spirulina extract for 24x7 radiant, oil-free freshness. 🌸 Key Skincare Benefits Deep Pore Cleansing & Gentle Exfoliation: Clears trapped dirt, dead skin cells, and urban micro-pollutants without stripping the skin's natural lipid barrier. Anti-Acne & Excess Oil Control: Regulates sebum secretion, prevents bacterial breakout triggers, and calms redness and active pimples. 24x7 Cellular Radiance: Spirulina antioxidants and amino acids nourish dermal layers for a fresh, luminous, lit-from-within glow. Skin pH Balanced: Suitable for all skin types, including sensitive, combination, and acne-prone skin. 🌿 Pure Ingredients Spirulina Extract, Aloe Vera Leaf Juice, Green Tea Extract, Botanical Glycerin, Mild Coconut-Derived Cleansing Agents. 100% Paraben-Free, Sulphate-Free, Chemical-Free. 📋 How to Use (3 Steps) Rinse face with lukewarm water and pump a small amount onto your palm. Gently massage over face and neck in circular motions for 45-60 seconds, avoiding direct eye contact. Rinse thoroughly with clean water and pat dry. Use twice daily (morning & night). 🏆 Quality Standards & Certifications Dermatologically Tested, 100% Cruelty-Free, Paraben-Free, Toxin-Free, Made in India.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Spi\",\"name\":\"Spirulina Bio-Extract\",\"desc\":\"Infuses antioxidants and amino acids directly into epidermal layers, detoxifying clogged pores.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"Alo\",\"name\":\"Organic Aloe Vera Juice\",\"desc\":\"Deeply hydrates skin tissues, reduces redness, and soothes active acne inflammation.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"GT\",\"name\":\"Green Tea Polyphenols\",\"desc\":\"Regulates excess sebum production and shields facial skin from urban pollutant damage.\",\"color\":\"text-green-400\",\"border\":\"border-green-500/30\"},{\"symbol\":\"pH\",\"name\":\"pH 5.5 Balanced Cleanser\",\"desc\":\"100% sulphate-free and paraben-free formula that cleanses without stripping skin barrier lipids.\",\"color\":\"text-blue-400\",\"border\":\"border-blue-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Day 01\",\"title\":\"Instant Oil Balance\",\"desc\":\"Cleanses deep impurities and excess sebum without causing skin tightness or dryness.\"},{\"time\":\"Day 07\",\"title\":\"Acne Breakout Relief\",\"desc\":\"Reduces acne redness, calms active eruptions, and clears congested sebaceous pores.\"},{\"time\":\"Day 21+\",\"title\":\"24x7 Fresh Radiance\",\"desc\":\"Pores remain clear and refined, providing an oil-free, luminous glow all day long.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-facepack-powder",
+  "description": "Natural Botanical Detox & Radiance Face Pack enriched with pure Spirulina, Sandalwood, Multani Mitti, and Organic Aloe extracts. 🌸 Key Skincare Benefits Instant Tan & Blemish Removal: Draws out micro-toxins and deeply unclogs clogged sebaceous pores for a visibly brighter complexion. Fights Stubborn Acne & Pimples: Calms inflammation, soothes active eruptions, and minimizes enlarged pores. Restores Radiance to Tired, Stressed Skin: High phytonutrient concentration replenishes essential trace minerals directly to the dermal matrix. 100% Pure Herbal Blend: Zero preservatives, artificial perfumes, or synthetic bleaching agents. 🌿 Pure Ingredients Pure Spirulina Powder, Multani Mitti (Fuller's Earth), Sandalwood Powder, Aloe Vera Powder, Neem Leaf Extract. 📋 How to Use Mix 1-2 spoons of Face Pack Powder with rose water, clean water, or plain curd/yogurt to form a smooth paste. Apply evenly across cleansed face and neck, avoiding the eye area. Allow to rest for 10-15 minutes until semi-dry. Rinse gently with cold water. Use 2-3 times weekly for optimal results. 🏆 Quality Standards & Certifications 100% Herbal & Natural, No Chemical Additives, Handcrafted Formulation, Dermatologically Safe.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Spi\",\"name\":\"Pure Spirulina Powder\",\"desc\":\"High micro-nutrient density feeds epidermal cells to revive tired, sun-damaged skin.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"MM\",\"name\":\"Multani Mitti (Fuller's Earth)\",\"desc\":\"Draws out deep micro-toxins, absorbs excess oil, and tightens enlarged pores.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"San\",\"name\":\"Sandalwood (Chandan)\",\"desc\":\"Traditional cooling botanical that fades blemishes, sun tan, and surface pigmentation.\",\"color\":\"text-yellow-400\",\"border\":\"border-yellow-500/30\"},{\"symbol\":\"Nm\",\"name\":\"Neem Leaf Extract\",\"desc\":\"Natural antibacterial agent that kills acne-causing bacteria and prevents future breakouts.\",\"color\":\"text-green-400\",\"border\":\"border-green-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Day 01\",\"title\":\"Instant Tan & Glow\",\"desc\":\"Unclogs pores in 15 minutes, leaving facial skin noticeably brighter and refreshed.\"},{\"time\":\"Week 02\",\"title\":\"Blemish & Spot Fading\",\"desc\":\"Regular application lightens stubborn sun tan, dark spots, and post-pimple marks.\"},{\"time\":\"Day 30+\",\"title\":\"Velvet Smooth Skin\",\"desc\":\"Restores even skin tone and refined texture with a natural healthy bridal radiance.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spiruglow-bath-soap",
+  "description": "100% Handcrafted Herbal & Organic Bathing Bar enriched with active Spirulina, Cold-Pressed Coconut Oil, Turmeric, Sandalwood, and Multani Mitti. 🌸 Key Skincare Benefits Rich Nourishing Herbal Cleanse: Gently purifies skin without causing dryness, irritation, or moisture loss. Infused with Powerful Ayurvedic Botanicals: Combines Turmeric, Sandalwood, Neem, and Orange Peel to clarify tone and soothe body acne. Deep Skin Hydration: Pure coconut oil base and natural glycerin maintain soft, supple, and healthy skin throughout the day. 100% Chemical & Fragrance Free: Free from parabens, synthetic fragrances, sulfates, animal fats, and artificial foaming agents. 🌿 Pure Ingredients Spirulina Powder, Turmeric Powder, Multani Mitti, Sandalwood Powder, Aloe Vera Leaf Powder, Orange Peel Powder, Neem Powder, Pure Coconut Oil, Plant Glycerin. 📋 How to Use Lather gently between wet hands or loofah and apply all over body during bath or shower. Rinse thoroughly with water. 🏆 Quality Standards & Certifications Handmade in India, 100% Organic Ingredients, Paraben Free, Fragrance Free, Chemical Free.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Spi\",\"name\":\"Active Spirulina Extract\",\"desc\":\"Delivers trace vitamins and antioxidants to skin cells during daily bathing.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"Tur\",\"name\":\"Ayurvedic Turmeric (Haldi)\",\"desc\":\"Purifies skin micro-flora, soothes body acne, and enhances natural skin tone.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"San\",\"name\":\"Sandalwood & Neem\",\"desc\":\"Calms heat rashes, backne, and skin irritation with gentle botanical action.\",\"color\":\"text-yellow-400\",\"border\":\"border-yellow-500/30\"},{\"symbol\":\"VCO\",\"name\":\"Cold-Pressed Coconut Oil\",\"desc\":\"Pure coconut oil base rich in natural glycerin ensures deep, long-lasting moisturization.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Day 01\",\"title\":\"Nourishing Herbal Cleanse\",\"desc\":\"Produces a rich, creamy lather that hydrates the skin without harsh chemical drying.\"},{\"time\":\"Week 02\",\"title\":\"Body Blemish Relief\",\"desc\":\"Soothes backne, heat rash, and rough patches across arms, back, and shoulders.\"},{\"time\":\"Day 30+\",\"title\":\"Soft, Healthy Skin\",\"desc\":\"Maintains optimal dermal barrier moisture and gives a natural silky texture all day.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-korean-cream",
+  "description": "Natural K-Beauty Inspired Spirulina Skin Rejuvenation Cream crafted to deliver radiant glass skin, even complexion, and advanced spot correction. 🌸 Key Skincare Benefits Targeted Tan & Pigmentation Removal: Fades stubborn sun tan, hyperpigmentation patches, and hormonal dark spots with regular application. Diminishes Pimple Marks & Blemishes: Accelerated cellular repair reduces post-inflammatory marks and balances skin texture. Promotes an Even, Luminous Skin Tone: Botanical micro-nutrients penetrate deep into the epidermis to revive dull, fatigued skin. Lightweight, Non-Greasy Absorption: Velvet texture that absorbs rapidly without clogging pores or leaving oily residue. 🌿 Pure Ingredients Spirulina Bio-Extract, Niacinamide, Hyaluronic Acid Complex, Aloe Vera Leaf Juice, Licorice Root Extract, Jojoba Oil. 📋 How to Use Apply a pea-sized amount over cleansed face and neck every morning and night. Massage gently in upward circular motions until fully absorbed. 🏆 Quality Standards & Certifications Dermatologist Approved, 100% Naturally Prepared, Cruelty-Free, Non-Comedogenic.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Nia\",\"name\":\"Niacinamide (Vitamin B3)\",\"desc\":\"Clinically proven to minimize enlarged pores, even skin tone, and fade hyperpigmentation.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"HA\",\"name\":\"Hyaluronic Acid Complex\",\"desc\":\"Binds 1000x its weight in water to deliver dewy, plump K-beauty glass skin hydration.\",\"color\":\"text-blue-400\",\"border\":\"border-blue-500/30\"},{\"symbol\":\"Spi\",\"name\":\"Spirulina Bio-Actives\",\"desc\":\"Accelerates epidermal cellular turnover to lighten sun tan and post-acne dark spots.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"Lic\",\"name\":\"Licorice Root Extract\",\"desc\":\"Gentle plant brightener that inhibits excess melanin production for a spotless glow.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Glass Skin Hydration\",\"desc\":\"Non-greasy cream absorbs rapidly, giving a plump, dewy, lit-from-within glow.\"},{\"time\":\"Week 02\",\"title\":\"Tan & Dark Spot Fading\",\"desc\":\"Sun tan patches and stubborn acne marks visibly reduce in darkness and size.\"},{\"time\":\"Day 30+\",\"title\":\"Luminous, Spotless Skin\",\"desc\":\"Uniform complexion with visibly refined pores and resilient moisture barrier.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-bridal-whitening-cream",
+  "description": "Luxury Bridal Radiance & Intense Skin Brightening Cream formulated with precious herbal extracts and spirulina bio-actives for wedding-ready luminous glow. 🌸 Key Skincare Benefits Instant Luminous Bridal Radiance: Transforms dull, fatigued skin into a visibly glowing, velvet-soft complexion within days. Deep Intracellular Nourishment: Restores dermal hydration and locks in essential moisture for a plump, smooth texture. Fades Uneven Discoloration & Blemishes: Helps reduce stubborn pigmentation, dark circles, and sun damage patches. Precious Herbal Heritage Formulation: 100% free from harsh bleaches, steroids, or synthetic hydroquinone. 🌿 Pure Ingredients Spirulina Bio-Compound, Saffron (Kesar) Extract, Sandalwood Essential Oil, Sweet Almond Oil, Rose Water, Vitamin E. 📋 How to Use Take a small amount on fingertips and apply evenly on face, neck, and decolletage twice daily after cleansing. 🏆 Quality Standards & Certifications 100% Organic Herbal Blend, No Harsh Bleach, No Steroids, GMP Certified.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Kes\",\"name\":\"Kashmiri Saffron (Kesar)\",\"desc\":\"Precious royal herb that improves dermal blood circulation for luminous bridal glow.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"San\",\"name\":\"Pure Sandalwood Extract\",\"desc\":\"Soothes skin redness, cools inflammation, and smooths uneven skin roughness.\",\"color\":\"text-yellow-400\",\"border\":\"border-yellow-500/30\"},{\"symbol\":\"Spi\",\"name\":\"Spirulina Bio-Complex\",\"desc\":\"Delivers essential amino acids to reverse dullness and photo-fatigued dermal texture.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"Alm\",\"name\":\"Sweet Almond & Vitamin E\",\"desc\":\"Deeply seals in hydration to create a soft, velvet bridal radiance without chemicals.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Day 03\",\"title\":\"Instant Glow & Softness\",\"desc\":\"Dull, tired complexion immediately regains moisture and visible softness.\"},{\"time\":\"Week 02\",\"title\":\"Tone & Pigmentation Clarity\",\"desc\":\"Fades uneven patches, dark circles, and sun tan with gentle botanical nourishment.\"},{\"time\":\"Day 30+\",\"title\":\"Wedding-Ready Luminous Radiance\",\"desc\":\"Achieves velvet-smooth, glowing, and camera-ready skin without bleach or steroids.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-coconut-hair-oil",
+  "description": "Non-Sticky Ayurvedic Hair Growth & Anti-Dandruff Oil powered by pure Spirulina microalgae extract, cold-pressed Virgin Coconut Oil, Biotin, and Vitamin E. 💆 Key Hair Care Benefits Stops Hair Fall & Reduces Thinning: Stimulates dormant hair follicles with micro-proteins and essential minerals to promote thicker hair density. Deep Scalp Nourishment & Anti-Dandruff: Soothes itchy, flaky scalp conditions and balances natural follicular sebum. Tames Frizz & Heals Dry, Damaged Ends: Infuses intense moisture into hair shafts to eliminate frizz, split ends, and heat styling damage. Lightweight & Non-Greasy: Easily absorbs into the scalp with a refreshing, calming natural aroma. 🌿 Pure Ingredients Pure Spirulina Extract, Cold-Pressed Virgin Coconut Oil, Biotin, Vitamin E, Rosemary Essential Oil, Almond Oil. 📋 How to Use Apply 5-10 ml oil directly onto scalp and hair roots. Massage gently with fingertips for 5-10 minutes. Leave on for at least 1 hour or overnight before washing with Sujata SpiruShine Shampoo. 🏆 Quality Standards & Certifications 100% Herbal & Natural, No Mineral Oil, No Silicones, No Synthetic Fragrance, GMP Certified.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Bio\",\"name\":\"Active Biotin & Spirulina\",\"desc\":\"Feeds hair roots with sulfur-rich proteins and micronutrients to stop excessive shedding.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"VCO\",\"name\":\"Virgin Cold-Pressed Coconut\",\"desc\":\"Deep-penetrating medium-chain fatty acids prevent hair protein loss and strengthen shafts.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"Ros\",\"name\":\"Rosemary Essential Oil\",\"desc\":\"Stimulates follicular blood micro-circulation to activate dormant hair roots for growth.\",\"color\":\"text-green-400\",\"border\":\"border-green-500/30\"},{\"symbol\":\"Vit E\",\"name\":\"Pure Vitamin E & Almond Oil\",\"desc\":\"Seals hair cuticles, eliminates split ends, and leaves strands shiny, silky, and frizz-free.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Scalp Relief & Frizz Control\",\"desc\":\"Soothes dry, itchy scalp and eliminates flyaways with lightweight non-sticky moisture.\"},{\"time\":\"Week 03\",\"title\":\"Hair Fall Reduction (70%+)\",\"desc\":\"Strengthens root anchoring in the scalp, dramatically reducing hair fall in shower and comb.\"},{\"time\":\"Day 60+\",\"title\":\"Noticeable Density & Bounce\",\"desc\":\"New baby hair growth begins along hairline; hair feels visibly thicker, glossier, and fuller.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirushine-shampoo-conditioner",
+  "description": "2-in-1 Anti-Hair Thinning Shampoo with Built-in Deep Conditioner powered by organic Spirulina superfood extracts for softer, stronger, and shinier hair. 💆 Key Hair Care Benefits 100% Hair Fall & Thinning Control: Reinforces hair keratin structure from root to tip, preventing breakage and premature shedding. 2-in-1 Dual Action Formula: Cleanses scalp impurities thoroughly while providing deep conditioning moisture in a single easy step. Silky Smoothness & Natural Bounce: Transforms coarse, unmanageable strands into glossy, detangled, salon-soft locks. Clean & Cruelty-Free Therapy: Zero harsh sulphates, parabens, or heavy silicones that weigh down hair. 🌿 Pure Ingredients Spirulina Bio-Extract, Plant Keratin, Hydrolyzed Wheat Protein, Aloe Vera Juice, Pro-Vitamin B5 (Panthenol), Mild Coconut Glucoside Cleansers. 📋 How to Use (3 Steps) Take a coin-sized amount onto wet palms. Apply to wet hair and gently massage scalp and lengths to create a luxurious rich lather. Rinse thoroughly with clean water. No extra conditioner required. 🏆 Quality Standards & Certifications Sulphate Free, Paraben Free, Cruelty Free, Safe for Color-Treated Hair, GMP Certified.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Ker\",\"name\":\"Plant Keratin Matrix\",\"desc\":\"Rebuilds damaged hair fiber proteins, preventing strand breakage and split ends.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"},{\"symbol\":\"Spi\",\"name\":\"Spirulina Bio-Extract\",\"desc\":\"Delivers essential trace minerals directly to the scalp to fight hair thinning.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"B5\",\"name\":\"Pro-Vitamin B5 (Panthenol)\",\"desc\":\"Built-in deep conditioner coats strands for instant detangling and silky bounce.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"Sul-0\",\"name\":\"Sulphate-Free Coconut Foam\",\"desc\":\"Ultra-mild natural surfactant cleanses scalp sebum without stripping moisture.\",\"color\":\"text-blue-400\",\"border\":\"border-blue-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Wash 01\",\"title\":\"Silky Detangled Cleanse\",\"desc\":\"Cleanses scalp thoroughly while built-in conditioner makes hair instantly soft and detangled.\"},{\"time\":\"Week 02\",\"title\":\"Anti-Breakage Defense\",\"desc\":\"Keratin reinforces weak hair shafts, reducing breakage during combing and styling.\"},{\"time\":\"Day 30+\",\"title\":\"Salon-Grade Bounce & Gloss\",\"desc\":\"Restores hair fullness, natural shine, and long-lasting freshness without chemical buildup.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-sea-buckthorn-combo",
+  "description": "The Ultimate Ayurvedic Superfood Synergy — Combines 100% pure Spirulina Tablets (Complete Protein & Iron) with Himalayan Sea Buckthorn Capsules (Omega 3, 6, 7 & 9). ⚡ Key Health Benefits 360° Comprehensive Cellular Wellness: Spirulina provides complete micro-nutrition (Protein, Iron, B-Vitamins) while Sea Buckthorn provides essential Omegas and cellular protection. Boosts Vitality, Stamina & Natural Immunity: Supercharges daily physical endurance and strengthens your body's innate defense shield. Cardiovascular, Skin & Gut Support: Promotes radiant skin elasticity, healthy heart rhythm, and smooth digestion. Huge Value Savings: Save over ₹300 compared to purchasing individual bottles. 🌿 Pure Ingredients Bottle 1: 100% Pure Spirulina Tablets (500mg, No Binders).Bottle 2: 100% Himalayan Sea Buckthorn Capsules (Omega 3, 6, 7 & 9, 500mg). 📋 Suggested Usage & Dosage Take 1 Spirulina Tablet and 1 Sea Buckthorn Capsule together daily in the morning with breakfast and water. 🏆 Quality Standards & Certifications FSSAI Approved, 100% Vegan, ISO Certified, GMP Certified Facility, NABL Tested.",
+  "active_compounds": {
+   "value": "[{\"symbol\":\"Spi\",\"name\":\"Pure Spirulina (Tablets)\",\"desc\":\"Delivers 65% complete vegan protein, organic iron, and all-day physical stamina.\",\"color\":\"text-emerald-400\",\"border\":\"border-emerald-500/30\"},{\"symbol\":\"SBT\",\"name\":\"Himalayan Sea Buckthorn\",\"desc\":\"Provides rare Omega 7, 3, 6, 9 and natural Vitamin C for skin glow and heart health.\",\"color\":\"text-orange-400\",\"border\":\"border-orange-500/30\"},{\"symbol\":\"Ph-Fla\",\"name\":\"Dual Bio-Shield\",\"desc\":\"Synergy of Phycocyanin and Flavonoids creates a 360° antioxidant defense against aging.\",\"color\":\"text-cyan-400\",\"border\":\"border-cyan-500/30\"},{\"symbol\":\"Syn\",\"name\":\"360° Ayurvedic Synergy\",\"desc\":\"Comprehensive superfood combination that addresses energy, immunity, skin, and vitality.\",\"color\":\"text-amber-400\",\"border\":\"border-amber-500/30\"}]"
+  },
+  "efficacy_timeline": {
+   "value": "[{\"time\":\"Week 01\",\"title\":\"Synergistic Energy Surge\",\"desc\":\"Bio-iron and omega fatty acids combine to boost daily stamina and mental sharpness.\"},{\"time\":\"Week 02\",\"title\":\"Immunity & Radiant Skin\",\"desc\":\"Omega 7 hydrates dermal layers from within while antioxidants fortify immune defense.\"},{\"time\":\"Day 30+\",\"title\":\"360° Complete Wellness\",\"desc\":\"Optimal cardiovascular wellness, radiant skin elasticity, and sustained high energy.\"}]"
+  },
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ },
+ {
+  "handle": "sujata-spirulina-sea-buckthorn-combo-pack",
+  "description": "🪔 Shubh Diwali Festive Offer: 100% Pure Spirulina Veg Capsules + Wild Himalayan Sea Buckthorn Veg Capsules Combo. Experience complete 360° cellular rejuvenation in easy-to-swallow vegetarian capsules. Powered by pure bio-protein, non-heme iron, rare Omega 7, 3, 6, 9 and 12x Vitamin C for sustained all-day energy, radiant skin glow, and robust immune defense — with zero bitter taste and zero binder chemicals. 🪔 Diwali Special Festive Protocol: 1-Month Pack: 1x Spirulina Veg Capsules (60 Caps) + 1x Sea Buckthorn Capsules (60 Caps) — ₹1,050 (MRP: ₹1,598) 2-Month Pack: 2x Spirulina (120 Caps) + 2x Sea Buckthorn (120 Caps) + 2 FREE Handmade Spirulina Soaps — ₹1,700 (MRP: ₹3,196) 3-Month Mega Pack (Best Value): 3x Spirulina (180 Caps) + 3x Sea Buckthorn (180 Caps) + FREE Spirulina Chikki — ₹2,400 (MRP: ₹4,794) ⚡ Extra 10% Instant Discount on Prepaid / UPI Payments! Key Health Benefits: All-Day Clean Energy: 65% Bio-Protein & Organic Iron without caffeine crashes. Skin Hydration & Glow: Rare Omega-7 deeply nourishes skin cells and mucosal tissues. Immunity Fortress: High-potency natural Vitamin C & Phycocyanin antioxidants. Pure Plant Capsules: 100% HPMC plant capsules, zero gelatin, gentle on digestion.",
+  "active_compounds": null,
+  "efficacy_timeline": null,
+  "faqs": null,
+  "comparison_table": null,
+  "subtitle": null,
+  "key_benefit": null,
+  "how_to_use": null
+ }
+]

@@ -973,7 +973,10 @@ const unifiedSchemaGraph = {
               if (data.is_paid) {
                 console.log('🎉 [Sujata Sentinel] External app payment verified! Recovering user to Thank-You page.');
                 localStorage.removeItem('sujata_active_checkout');
-                localStorage.removeItem('sujata_cart');
+                try {
+                  var paidSnap = JSON.parse(localStorage.getItem('sujata_pending_order') || 'null');
+                  if (paidSnap && paidSnap.order_id === session.order_id && typeof window.removePurchasedFromSujataCart === 'function') window.removePurchasedFromSujataCart(paidSnap.items || []);
+                } catch (e) {}
                 var redirUrl = '/thank-you?order_id=' + encodeURIComponent(session.order_id) +
                   '&value=' + encodeURIComponent(session.total || data.amount || 0) +
                   '&mode=' + encodeURIComponent(session.payment_mode || 'upi');

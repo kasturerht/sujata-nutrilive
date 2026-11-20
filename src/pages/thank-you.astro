@@ -260,7 +260,7 @@ const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'l
         // Clean local cart so drawer is empty on next visit
         if (realOrderId) {
           try {
-            localStorage.removeItem('sujata_cart');
+            if (hasRealItems && typeof window.removePurchasedFromSujataCart === 'function') window.removePurchasedFromSujataCart(snapshot.items);
             localStorage.removeItem('sujata_pending_order');
           } catch(e) {}
         }

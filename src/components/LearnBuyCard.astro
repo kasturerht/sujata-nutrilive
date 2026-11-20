@@ -27,9 +27,9 @@ const off = selected.compareAt && selected.compareAt > selected.price ? Math.rou
 const upiPrice = Math.round(selected.price * 0.9);
 
 const T = {
-  en: { add: 'Add to cart', buy: 'Buy now — 1-click', details: 'Full details', upi: 'with UPI (10% off)', cod: 'Cash on Delivery available · Free shipping above ₹999', pack: 'Pack', save: 'off' },
-  mr: { add: 'कार्टमध्ये टाका', buy: 'आत्ता ऑर्डर करा', details: 'पूर्ण माहिती', upi: 'UPI ने (10% सूट)', cod: 'कॅश ऑन डिलिव्हरी उपलब्ध · ₹९९९ वरील ऑर्डरवर मोफत डिलिव्हरी', pack: 'पॅक', save: 'सूट' },
-  hi: { add: 'कार्ट में डालें', buy: 'अभी ऑर्डर करें', details: 'पूरी जानकारी', upi: 'UPI से (10% छूट)', cod: 'कैश ऑन डिलीवरी उपलब्ध · ₹999 से ऊपर फ्री डिलीवरी', pack: 'पैक', save: 'छूट' }
+  en: { add: 'Add to cart', buy: 'Buy now — 1-click', details: 'Full details', upi: 'with UPI (10% off)', cod: 'Cash on Delivery available · Free shipping on every order', pack: 'Pack', save: 'off' },
+  mr: { add: 'कार्टमध्ये टाका', buy: 'आत्ता ऑर्डर करा', details: 'पूर्ण माहिती', upi: 'UPI ने (10% सूट)', cod: 'कॅश ऑन डिलिव्हरी उपलब्ध · प्रत्येक ऑर्डरवर मोफत डिलिव्हरी', pack: 'पॅक', save: 'सूट' },
+  hi: { add: 'कार्ट में डालें', buy: 'अभी ऑर्डर करें', details: 'पूरी जानकारी', upi: 'UPI से (10% छूट)', cod: 'कैश ऑन डिलीवरी उपलब्ध · हर ऑर्डर पर फ्री डिलीवरी', pack: 'पैक', save: 'छूट' }
 }[lang];
 
 const cardId = `buy-${handle}-${placement}`.replace(/[^a-z0-9-]/gi, '-');

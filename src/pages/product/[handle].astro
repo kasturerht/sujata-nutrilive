@@ -7,8 +7,16 @@ import StoreRelatedFormulations from '../../components/StoreRelatedFormulations.
 import { BRAND_CONFIG, getWhatsAppLink } from '../../config/brand';
 import { getJudgeMeSsrData, parseJudgeMeRating } from '../../lib/judgeme-ssr';
 import { resolveDynamicProductEntity } from '../../lib/product-entity-resolver';
+import { getCatalogProducts, formatINR as formatCatalogINR } from '../../lib/catalog';
+import { scrubClaims, hasClaim } from '../../lib/claims-guard';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
+
+// Live prices for copy that quotes a price (titles, FAQs, comparison rows), so marketing text can never
+// drift from what checkout charges. Sea buckthorn: 60 capsules at 2 a day = 30 days.
+const liveCopyCatalog = await getCatalogProducts(['sujata-sea-buckthorn-capsules']);
+const seaBuckthornPrice = liveCopyCatalog['sujata-sea-buckthorn-capsules'].variants[0].price;
+const seaBuckthornPerDay = `₹${Math.round(seaBuckthornPrice / 30)}/day`;
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
 const { handle: rawHandle } = Astro.params;
@@ -236,7 +244,8 @@ function formatINR(val: string | number) {
 
 const initialVariant = variants[0];
 const initialPrice = initialVariant?.price ? parseFloat(initialVariant.price.amount) : (product.priceRange ? parseFloat(product.priceRange.minVariantPrice.amount) : 0);
-const initialComparePrice = initialVariant?.compareAtPrice ? parseFloat(initialVariant.compareAtPrice.amount) : (initialPrice > 0 ? Math.round(initialPrice * 1.3) : 0);
+// Compare-at (MRP) only when Shopify has one: never invent a strikethrough price (Consumer Protection Act, misleading discounts).
+const initialComparePrice = initialVariant?.compareAtPrice ? parseFloat(initialVariant.compareAtPrice.amount) : 0;
 const hasInitialDiscount = initialComparePrice > initialPrice;
 const initialDiscountPct = hasInitialDiscount ? Math.round(((initialComparePrice - initialPrice) / initialComparePrice) * 100) : 0;
 
@@ -254,7 +263,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   'sujata-spirulina-powder': {
     ingredients: [
       { symbol: "Ph", name: "Phycocyanin (20%+)", desc: "Master blue antioxidant bio-pigment. Neutralizes free radicals and activates cellular defense pathways.", color: "text-blue-400", border: "border-blue-500/30" },
-      { symbol: "Fe", name: "Natural Plant Iron (Fe)", desc: "Easily absorbable plant iron. Directly supports hemoglobin synthesis and boosts oxygen flow to tissues.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Fe", name: "Natural Plant Iron (Fe)", desc: "Natural plant iron. Iron contributes to normal haemoglobin formation and normal oxygen transport in the body.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "Ch", name: "Active Chlorophyll", desc: "The natural detoxifier. Assists liver detoxification, flushes heavy metals, and alkalizes gut pH.", color: "text-emerald-400", border: "border-emerald-500/30" },
       { symbol: "EAA", name: "18 Amino Acid Matrix", desc: "62.39% complete plant protein (IS 7219). Repairs muscle tissue, rebuilds connective fibers, and sustains energy.", color: "text-amber-400", border: "border-amber-500/30" }
     ],
@@ -268,13 +277,13 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
     ingredients: [
       { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Rare anti-inflammatory fatty acid. Regulates hormonal equilibrium and eases joint stiffness.", color: "text-amber-400", border: "border-amber-500/30" },
       { symbol: "SOD", name: "Superoxide Dismutase", desc: "Master antioxidant enzyme preserved under cold press. Protects mitochondria from oxidative wear.", color: "text-cyan-400", border: "border-cyan-500/30" },
-      { symbol: "Fe", name: "Natural Plant Iron (Fe)", desc: "Pure non-heme algal iron to combat chronic fatigue and elevate daily hemoglobin.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Fe", name: "Natural Plant Iron (Fe)", desc: "Non-heme algal iron. Iron contributes to normal haemoglobin formation and to the reduction of tiredness.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "EAA", name: "Pure Microalgae Protein", desc: "100% pure compressed spirulina without talc or chemical binders. Delivers all essential amino acids.", color: "text-emerald-400", border: "border-emerald-500/30" }
     ],
     timeline: [
       { time: "Week 01", title: "Clean Enteric Absorption", desc: "Tablets dissolve gently without reflux or grassy aftertaste, providing sustained physical stamina." },
       { time: "Week 02", title: "Anti-Fatigue Repair", desc: "Enzymes and micro-minerals alleviate post-work fatigue and support joint flexibility." },
-      { time: "Day 30+", title: "Total Body Defense", desc: "Full red blood cell renewal cycle completes. Hemoglobin saturates, hair roots fortify, and immunity peaks." }
+      { time: "Day 30+", title: "A Settled Daily Habit", desc: "A full month of consistent daily nutrition. Most people judge how they feel after 4 to 8 weeks of regular use; results vary between individuals." }
     ]
   },
   'sujata-spirulina-capsules': {
@@ -292,28 +301,28 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   },
   'sujata-sea-buckthorn-capsules': {
     ingredients: [
-      { symbol: "Ω-7", name: "Rare Palmitoleic Acid (Omega 7)", desc: "Miracle lipid that rejuvenates mucosal membranes, hydrates dry eyes/skin, and stimulates collagen.", color: "text-amber-400", border: "border-amber-500/30" },
-      { symbol: "Ω-369", name: "Omegas 3, 6 & 9 Spectrum", desc: "Promotes cardiovascular arterial flexibility, healthy lipid balance, and smooth circulation.", color: "text-orange-400", border: "border-orange-500/30" },
-      { symbol: "Vit C", name: "Active Super-Vitamin C", desc: "12x more potent than citrus fruits. Guards skin from UV photo-aging and boosts natural immunity.", color: "text-yellow-400", border: "border-yellow-500/30" },
-      { symbol: "Fla", name: "Bioactive Flavonoids", desc: "Accelerates internal mucosal tissue repair and supports gut lining integrity.", color: "text-emerald-400", border: "border-emerald-500/30" }
+      { symbol: "Ω-7", name: "Rare Palmitoleic Acid (Omega 7)", desc: "A rare fatty acid found in sea buckthorn fruit oil; few other plants contain it in meaningful amounts.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "Ω-369", name: "Omegas 3, 6 & 9 Spectrum", desc: "Sea buckthorn seed and fruit oil naturally contain all three, alongside Omega-7.", color: "text-orange-400", border: "border-orange-500/30" },
+      { symbol: "Vit C", name: "Natural Fruit Antioxidants", desc: "Sea buckthorn berries are naturally rich in vitamin C, carotenoids and vitamin E; the amount in an extract varies by batch.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "Fla", name: "Bioactive Flavonoids", desc: "Plant flavonoids such as isorhamnetin and quercetin occur naturally in sea buckthorn fruit.", color: "text-emerald-400", border: "border-emerald-500/30" }
     ],
     timeline: [
-      { time: "Week 01", title: "Deep Mucosal Hydration", desc: "Relieves internal dryness in eyes, throat, and skin; restores gut lining comfort and cellular hydration." },
-      { time: "Week 02", title: "Cardiovascular & Dermal Glow", desc: "Omega fatty acids enhance micro-circulation, bringing a natural healthy radiance to the face." },
-      { time: "Day 30+", title: "Comprehensive Cellular Defense", desc: "Boosts skin elasticity, promotes cardiovascular wellness, and strengthens systemic defense." }
+      { time: "Week 01", title: "Start the Routine", desc: "One capsule twice a day after meals, with water." },
+      { time: "Week 02", title: "Build Consistency", desc: "Take it daily with food; fat-soluble nutrients are absorbed better alongside a meal." },
+      { time: "Day 30+", title: "Review How You Feel", desc: "Most people judge a supplement after 4 to 8 weeks of regular use; results vary between individuals." }
     ]
   },
   'sujata-plant-based-vitamin-b12': {
     ingredients: [
-      { symbol: "MeB12", name: "Plant Methylcobalamin", desc: "100% natural, active co-enzyme B12 form for direct neurological absorption without liver conversion.", color: "text-purple-400", border: "border-purple-500/30" },
-      { symbol: "RBC", name: "Erythropoietic Co-Factors", desc: "Essential for healthy red blood cell synthesis, preventing megaloblastic fatigue and anemia.", color: "text-red-400", border: "border-red-500/30" },
-      { symbol: "My", name: "Myelin Sheath Repair", desc: "Rebuilds nerve protective sheaths, eliminating tingling sensations and enhancing memory speed.", color: "text-cyan-400", border: "border-cyan-500/30" },
-      { symbol: "Spi", name: "Botanical Ferment Base", desc: "Spirulina-fermented plant matrix providing 3x superior bio-absorption for vegans and vegetarians.", color: "text-emerald-400", border: "border-emerald-500/30" }
+      { symbol: "MeB12", name: "Plant Methylcobalamin", desc: "Methylcobalamin, an active form of vitamin B12.", color: "text-purple-400", border: "border-purple-500/30" },
+      { symbol: "RBC", name: "Erythropoietic Co-Factors", desc: "Vitamin B12 contributes to normal red blood cell formation and to the reduction of tiredness.", color: "text-red-400", border: "border-red-500/30" },
+      { symbol: "My", name: "Nervous System Function", desc: "Vitamin B12 contributes to normal functioning of the nervous system and normal psychological function.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Spi", name: "Botanical Ferment Base", desc: "A plant-based capsule suitable for vegetarians and vegans, who often get little B12 from diet.", color: "text-emerald-400", border: "border-emerald-500/30" }
     ],
     timeline: [
-      { time: "Week 01", title: "Neural Awakening", desc: "Active Methylcobalamin crosses the blood-brain barrier; morning lethargy and brain fog lift." },
-      { time: "Week 02", title: "Hemoglobin & Energy Surge", desc: "Elevates cellular oxygen-carrying capacity, providing lasting stamina through active hours." },
-      { time: "Day 30+", title: "Nervous System Fortification", desc: "Nerve myelin sheaths strengthen, eliminating tingling in limbs and restoring peak mental sharpness." }
+      { time: "Week 01", title: "Daily B12 Routine", desc: "One capsule a day with breakfast. Vitamin B12 contributes to normal energy-yielding metabolism." },
+      { time: "Week 02", title: "Red Blood Cell Support", desc: "Vitamin B12 contributes to normal red blood cell formation and to the reduction of tiredness." },
+      { time: "Day 30+", title: "Consistent Intake", desc: "Vitamin B12 contributes to normal nervous system function. Speak to a doctor about any persistent symptoms." }
     ]
   },
   'sujata-pure-himalayan-shilajit': {
@@ -383,7 +392,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   },
   'sujata-spirulina-korean-cream': {
     ingredients: [
-      { symbol: "Nia", name: "Niacinamide (Vitamin B3)", desc: "Clinically proven to minimize enlarged pores, even skin tone, and fade hyperpigmentation.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Nia", name: "Niacinamide (Vitamin B3)", desc: "Widely used in skincare to help refine the look of pores, even skin tone, and reduce the look of hyperpigmentation.", color: "text-cyan-400", border: "border-cyan-500/30" },
       { symbol: "HA", name: "Hyaluronic Acid Complex", desc: "Binds 1000x its weight in water to deliver dewy, plump K-beauty glass skin hydration.", color: "text-blue-400", border: "border-blue-500/30" },
       { symbol: "Spi", name: "Spirulina Bio-Actives", desc: "Accelerates epidermal cellular turnover to lighten sun tan and post-acne dark spots.", color: "text-emerald-400", border: "border-emerald-500/30" },
       { symbol: "Lic", name: "Licorice Root Extract", desc: "Gentle plant brightener that inhibits excess melanin production for a spotless glow.", color: "text-amber-400", border: "border-amber-500/30" }
@@ -503,32 +512,22 @@ try {
   console.warn("Could not parse product.timeline metafield JSON:", e);
 }
 
-const labReportUrl = product?.labReport?.value || "/sujata_lab_certificate.pdf";
-const customSubtitle = product?.subtitle?.value || "";
-const customKeyBenefit = product?.keyBenefit?.value || "";
-const customBadge = product?.badgeTag?.value || product?.badgeTagAlt?.value || "";
-const customHowToUse = product?.howToUse?.value || "";
+// Claims guard (src/lib/claims-guard.ts): Shopify metafield copy is filtered sentence by sentence, so a
+// disease/cure/weight-loss claim typed into Shopify never renders. Items whose NAME is a claim are dropped.
+ingredientsData = ingredientsData
+  .filter((it: any) => !hasClaim(it?.name))
+  .map((it: any) => ({ ...it, desc: scrubClaims(it?.desc) }));
+timelineData = timelineData
+  .map((st: any) => ({ ...st, title: hasClaim(st?.title) ? (st?.time || 'Routine') : st?.title, desc: scrubClaims(st?.desc) }))
+  .filter((st: any) => st.desc);
 
-const videoTestimonials = [
-  {
-    customerName: "Dr. Siddhant M.",
-    tag: "Expert Opinion",
-    thumbnail: "/siddharth_testimonial_video.webp",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hand-taking-capsules-from-a-bottle-41614-large.mp4"
-  },
-  {
-    customerName: "Aditya V.",
-    tag: "Energy Boost",
-    thumbnail: "/sujata_goal_energy.webp",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-healthy-green-smoothie-being-poured-into-a-glass-41618-large.mp4"
-  },
-  {
-    customerName: "Priya S.",
-    tag: "Better Immunity",
-    thumbnail: "/sujata_goal_immunity.webp",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-drinking-water-after-workout-40898-large.mp4"
-  }
-];
+const labReportUrl = product?.labReport?.value || "/sujata_lab_certificate.pdf";
+const customSubtitle = scrubClaims(product?.subtitle?.value || "");
+const customKeyBenefit = scrubClaims(product?.keyBenefit?.value || "");
+const customBadge = product?.badgeTag?.value || product?.badgeTagAlt?.value || "";
+const customHowToUse = scrubClaims(product?.howToUse?.value || "", { allowConditions: true });
+
+// (videoTestimonials removed: stock footage presented as customer videos)
 
 const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
@@ -556,6 +555,7 @@ rawCleanDescription = rawCleanDescription
   .replace(/Rebuilds the protective myelin sheath around nerves/gi, 'Supports nervous system and cognitive function')
   .replace(/\bcures?\b/gi, 'supports')
   .replace(/\btreats?\b/gi, 'supports');
+rawCleanDescription = scrubClaims(rawCleanDescription) || `Buy authentic ${productTitle} online from Sujata Nutrilive. Lab tested, FSSAI licensed, free delivery across India.`;
 
 const structuredImages = (images || []).map((img: any) => {
   const u = img?.url || '/products/sujata-spirulina-powder-pouch.jpg';
@@ -1165,7 +1165,7 @@ const productSeoConfigMap: Record<string, {
   };
 }> = {
   'sujata-sea-buckthorn-capsules': {
-    seoTitle: 'Sea Buckthorn Capsules (60 Veg Caps) — Pure Himalayan Omega 7, 3, 6, 9 | ₹18/day • Sujata Nutrilive',
+    seoTitle: `Sea Buckthorn Capsules (60 Veg Caps) — Pure Himalayan Omega 7, 3, 6, 9 | ${seaBuckthornPerDay} • Sujata Nutrilive`,
     metaDescription: 'Buy 100% wild-crafted Himalayan Sea Buckthorn Capsules in India. Nature\'s richest plant source of rare Omega-7 for glowing skin, mucosal hydration & immunity. Free COD.',
     badgeHeading: '🏔️ 100% Pure Himalayan Sea Buckthorn (Rare Plant Omega-7)',
     faqs: [
@@ -1186,7 +1186,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "What is the price of Sujata Sea Buckthorn Capsules in India?",
-        answer: "Sujata Sea Buckthorn Capsules are priced at just ₹699 for a full 60-capsule bottle (working out to just ₹18 per day). It includes 100% Free Express Delivery across India via BlueDart/Delhivery, Free Cash on Delivery (COD), and an instant 10% discount on UPI payments.",
+        answer: `Sujata Sea Buckthorn Capsules are priced at ${formatCatalogINR(seaBuckthornPrice)} for a full 60-capsule bottle (about ${seaBuckthornPerDay.replace("/day", " per day")}).` + " Delivery is free on every order across India, cash on delivery is available, and UPI payments get an instant 10% discount.",
         tag: "Commercial & Delivery Assurance"
       },
       {
@@ -1214,7 +1214,7 @@ const productSeoConfigMap: Record<string, {
         { feature: "Source & Sourcing Height", sujata: "Wild-Crafted Ladakh Himalayas (12,000+ ft)", generic: "Commercial Farm Cultivation", competitors: "Unknown third-party brokers" },
         { feature: "Omega-7 Bioactive Retention", sujata: "Sub-40°C Cold Press (190+ Actives Intact)", generic: "Heat Pasteurized (Severe lipid loss)", competitors: "High heat spray dried" },
         { feature: "Heavy Metal Testing", sujata: "FSSAI & NABL Lab Certified (Safe Limits)", generic: "Rarely tested per batch", competitors: "Self-certified only" },
-        { feature: "Daily Cost & Guarantee", sujata: "Just ₹18/day + 90-Day Vitality Guarantee", generic: "₹25–₹35/day (Spills & oxidizes)", competitors: "₹30+/day with strict return rules" }
+        { feature: "Daily Cost & Guarantee", sujata: `About ${seaBuckthornPerDay} + 90-Day Vitality Guarantee`, generic: "₹25–₹35/day (Spills & oxidizes)", competitors: "₹30+/day with strict return rules" }
       ]
     }
   },
@@ -1225,7 +1225,7 @@ const productSeoConfigMap: Record<string, {
     faqs: [
       {
         question: "What is Spirulina and what are its primary health benefits?",
-        answer: "Spirulina (Arthrospira platensis) is an ancient blue-green microalgae recognized by the WHO as the most nutrient-dense superfood on the planet. Sujata Cold-Pressed Spirulina delivers 62.39% complete plant protein (IS 7219), 290.89 mg/kg natural iron (as Fe), and active Phycocyanin to eliminate chronic 3 PM fatigue, boost hemoglobin, and rebuild natural cellular immunity.",
+        answer: "Spirulina (Arthrospira platensis) is an ancient blue-green microalgae recognized by the WHO as the most nutrient-dense superfood on the planet. Sujata Cold-Pressed Spirulina delivers 62.39% complete plant protein (IS 7219), 290.89 mg/kg natural iron (as Fe), and active Phycocyanin to support daily energy: iron contributes to normal haemoglobin formation and to the reduction of tiredness.",
         tag: "WHO Nutrient Powerhouse"
       },
       {
@@ -1245,7 +1245,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "Where to buy authentic cold-pressed Spirulina in India?",
-        answer: "You can buy 100% authentic, lab-certified Sujata Cold-Pressed Spirulina directly from our official website (www.sujatanutrilive.com) with Free All-India Express Delivery via BlueDart/Delhivery, Free COD, and a 90-Day Vitality Money-Back Guarantee.",
+        answer: "You can buy 100% authentic, lab-certified Sujata Cold-Pressed Spirulina directly from our official website (www.sujatanutrilive.com) with free delivery across India, cash on delivery, and a 90-Day Vitality Money-Back Guarantee.",
         tag: "Direct Purchase Channel"
       },
       {
@@ -1613,6 +1613,12 @@ try {
   console.warn("Could not parse product.faqs metafield JSON:", e);
 }
 
+// FAQ answers may mention conditions in safety advice ("consult your doctor if you have diabetes"), so
+// only efficacy claims are removed there.
+resolvedFaqs = resolvedFaqs
+  .map((f: any) => ({ ...f, answer: scrubClaims(f?.answer, { allowConditions: true }) }))
+  .filter((f: any) => f.question && f.answer);
+
 let comparisonData = seoConfig?.comparisonTable || null;
 try {
   if (product?.comparisonTable?.value && product.comparisonTable.value.trim().length > 2) {
@@ -1623,6 +1629,15 @@ try {
   }
 } catch (e) {
   console.warn("Could not parse product.comparisonTable metafield JSON:", e);
+}
+
+if (comparisonData && Array.isArray(comparisonData.rows)) {
+  comparisonData = {
+    ...comparisonData,
+    rows: comparisonData.rows
+      .map((r: any) => ({ ...r, sujata: scrubClaims(r?.sujata), generic: scrubClaims(r?.generic), competitors: scrubClaims(r?.competitors) }))
+      .filter((r: any) => r.feature && r.sujata)
+  };
 }
 
 const rawNumericProductId = product?.id ? product.id.replace('gid://shopify/Product/', '').split('?')[0] : '';
@@ -1687,29 +1702,29 @@ const seaBuckthornVideoDef: ProductVideoDefinition = {
 
 const moringaVideoDef: ProductVideoDefinition = {
   videoId: 'qRtGC6BnHh8',
-  title: 'सिर्फ 1 चम्मच से पेट की चर्बी कम? Moringa Powder for Weight Loss | Sujata Nutrilive',
-  description: 'क्या सिर्फ १ चम्मच हरा पाउडर बिना किसी सख्त डाइटिंग के पेट की चर्बी और जिद्दी वजन कम कर सकता है? जानिए मोरिंगा (सहजन के पत्तों का पाउडर) का प्राचीन और वैज्ञानिक रहस्य!',
+  title: 'Moringa Leaf Powder: Nutrition & How to Use It | Sujata Nutrilive',
+  description: 'मोरिंगा (सहजन) के पत्तों का पाउडर क्या है, इसमें कौन से पोषक तत्व होते हैं और इसे रोज़ के खाने में कैसे शामिल करें। नाशिक के खेत से छाया में सुखाया गया शुद्ध मोरिंगा।',
   uploadDate: '2026-08-20T01:45:00Z',
   duration: 'PT1M2S',
   clips: [
-    { name: 'चमत्कारी हरा पाउडर: पेट की चर्बी और जिद्दी वजन कम करने का रहस्य', start: 0, end: 6 },
+    { name: 'मोरिंगा पाउडर क्या है?', start: 0, end: 6 },
     { name: 'ऋग्वेद में वर्णित सबसे शक्तिशाली पेड़: मोरिंगा (सहजन)', start: 6, end: 14 },
-    { name: 'पालक से २५ गुना अधिक आयरन व दूध से ४ गुना कैल्शियम', start: 14, end: 21 },
-    { name: 'भूख नियंत्रण व तेज मेटाबॉलिज्म (सोते हुए फैट बर्निंग)', start: 21, end: 34 },
+    { name: 'मोरिंगा के पत्तों में पोषक तत्व', start: 14, end: 21 },
+    { name: 'रोज़ के खाने में कैसे लें', start: 21, end: 34 },
     { name: 'टॅब्लेट्स ऐवजी १००% शुद्ध मोरिंगा पावडर का सर्वोत्तम?', start: 34, end: 44 },
     { name: 'सुजाता न्यूट्रीलाईव्ह: नाशिक शेतातून १००% केमिकल-फ्री मोरिंगा', start: 44, end: 62 }
   ],
-  badgeText: 'Ancient Vedic Supertree • Dual Action Fat Loss',
-  headline: 'Scientific Fat Loss: Moringa for Weight Loss & Metabolism',
-  subheadline: 'Discover how 100% farm-fresh, shade-dried Moringa leaf powder curbs stubborn appetite, accelerates resting metabolic rate, and provides abundant bioavailable non-heme iron and 90+ vital nutrients.',
+  badgeText: 'Shade-Dried Moringa Leaf • Nashik Farm',
+  headline: 'Moringa Leaf Powder: What It Is and How to Use It',
+  subheadline: 'Farm-fresh, shade-dried moringa leaf powder from Nashik: a simple way to add leafy-green nutrition to your daily food. Mix one teaspoon into dal, smoothies or chaas.',
   speechAuthor: 'Clinical Nutrition Overview • Sujata Nutrilive',
-  speechQuote: 'ऋग्वेद में मोरिंगा को प्रकृति का सबसे शक्तिशाली और चमत्कारी वृक्ष कहा गया है। इसके पत्तों में भरपूर प्राकृतिक आयरन, प्रचुर कैल्शियम और प्राकृतिक विटामिन सी पाया जाता है। क्लोरोजेनिक एसिड और घुलनशील फाइबर मेटाबॉलिज्म तेज करके जिद्दी चर्बी घटाने में मदद करते हैं।',
+  speechQuote: 'ऋग्वेद में मोरिंगा को प्रकृति का सबसे शक्तिशाली और चमत्कारी वृक्ष कहा गया है। इसके पत्तों में भरपूर प्राकृतिक आयरन, प्रचुर कैल्शियम और प्राकृतिक विटामिन सी पाया जाता है।',
   posterImage: '/moringa_video_cover.jpg',
   endSecond: null,
   assurances: [
     '100% Farm Fresh Harvest (Nashik, MH)',
     'Bioavailable Plant Iron & 90+ Nutrients',
-    'Zero Fillers • Dual Fat Loss Action'
+    'Zero Fillers • 100% Moringa Leaf'
   ]
 };
 
@@ -2213,136 +2228,9 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
     </div>
   </main>
 
-  {/* 🌟 Section 1: Testimonials Section (The Social Proof Layer) */}
-  <section id="testimonials-section" class="w-full relative bg-[#FAF9F6] py-24 md:py-32 overflow-hidden z-20 border-t border-black/[0.03]">
-    <div class="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-[#f0fdf4] to-transparent opacity-50 pointer-events-none"></div>
-
-    <div class="max-w-[85rem] mx-auto px-6 lg:px-12 relative z-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-3 mb-4">
-            <span class="w-8 h-[1px] bg-[#166534]/30"></span>
-            <span class="text-[#166534] font-mono text-[9px] tracking-[0.3em] uppercase font-bold">Verified Efficacy</span>
-          </div>
-          <h2 class="text-3xl md:text-[3.5rem] font-['Playfair_Display'] font-black text-[#111827] leading-[1.05] tracking-tight">
-            Join the top 1% <br/> <span class="italic text-gray-400 font-light">high performers.</span>
-          </h2>
-        </div>
-        <div class="md:text-right flex flex-col md:items-end">
-          <div class="flex items-center gap-2 mb-2">
-            {[1,2,3,4,5].map(() => (<svg class="w-5 h-5 text-[#166534] drop-shadow-sm" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>))}
-            <span class="text-2xl font-black text-[#111827] ml-2">4.9</span>
-          </div>
-          <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Based on <span class="text-[#166534] odometer-number" data-target="12450">0</span>+ protocols</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-        {/* Left Side: Testimonials text blocks */}
-        <div class="lg:col-span-5 flex flex-col gap-6 justify-between">
-          <div class="space-y-6">
-            {/* Aditya V. Customer review */}
-            <div class="bg-white p-8 rounded-[2rem] border border-black/[0.04] shadow-[0_15px_30px_rgba(0,0,0,0.02)] relative overflow-hidden group hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] transition-all duration-500">
-              <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50/40 rounded-bl-[100%] z-0"></div>
-              
-              <div class="flex items-center gap-3 mb-4 relative z-10">
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                  <img src="https://ui-avatars.com/api/?name=Aditya+V&background=f0fdf4&color=166534&font-size=0.4" alt="Aditya V." class="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <h4 class="text-xs font-black text-[#111827]">Aditya V.</h4>
-                  <div class="flex items-center gap-1.5 mt-0.5">
-                    <span class="bg-[#f0fdf4] text-emerald-800 text-[11px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                      <svg class="w-2.5 h-2.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Verified Buyer
-                    </span>
-                  </div>
-                </div>
-              </div>
-              
-              <p class="text-[#111827] text-lg md:text-xl font-['Playfair_Display'] font-black leading-relaxed relative z-10 mb-2">
-                "Energy levels up by 20% in 2 weeks"
-              </p>
-              <p class="text-gray-500 text-xs font-light leading-relaxed relative z-10">
-                This formulation has completely eliminated my afternoon slumps. My focus and physical stamina have seen a massive, measurable uplift. Non-negotiable in my daily health protocol.
-              </p>
-            </div>
-
-            {/* Dr. Siddhant Endorsement */}
-            <div class="bg-white p-8 rounded-[2rem] border border-black/[0.04] shadow-[0_15px_30px_rgba(0,0,0,0.02)] relative overflow-hidden group hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] transition-all duration-500">
-              <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50/40 rounded-bl-[100%] z-0"></div>
-              
-              <div class="flex items-center gap-3 mb-4 relative z-10">
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                  <img src="https://ui-avatars.com/api/?name=Dr.+Siddhant+M&background=022c22&color=fff&font-size=0.4" alt="Dr. Siddhant M." class="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <h4 class="text-xs font-black text-[#111827]">Dr. Siddhant M.</h4>
-                  <p class="text-xs uppercase tracking-widest text-[#166534] font-bold">Clinical Nutritionist</p>
-                </div>
-              </div>
-
-              <p class="text-[#111827] text-sm font-light leading-relaxed relative z-10">
-                "The bioavailability of this specific cold-pressed extract is unlike standard commercial spirulina. We see measurable spikes in cellular ATP within hours of consumption. It is a non-negotiable in my daily optimization stack."
-              </p>
-            </div>
-          </div>
-          
-          <div class="flex items-center justify-between px-4 py-2 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 text-xs font-black uppercase tracking-[0.2em] text-gray-400">
-            <span>Forbes</span><span>GQ</span><span>Vogue</span><span>Men's Health</span>
-          </div>
-        </div>
-
-        {/* Right Side: Dynamic Multi-Video Layout (Grid on Desktop, Swipe Carousel on Mobile) */}
-        <div class="lg:col-span-7 flex flex-col justify-center">
-          <div class="flex overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 scrollbar-hide pb-4 md:pb-0">
-            {videoTestimonials.map((video) => (
-              <div 
-                class="video-testimonial-card snap-start shrink-0 w-[80%] sm:w-[48%] md:w-auto relative aspect-[3/4] rounded-3xl overflow-hidden shadow-lg border border-white bg-[#022c22] group cursor-pointer transition-all duration-300 hover:shadow-2xl"
-                data-video-url={video.videoUrl}
-              >
-                {/* Ambient Glow */}
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#047857_0%,transparent_70%)] opacity-10 mix-blend-screen pointer-events-none group-hover:opacity-25 transition-opacity duration-500"></div>
-                
-                {/* Poster Image */}
-                <img src={video.thumbnail} alt={`${video.customerName} Testimonial`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[600ms] ease-out" loading="lazy" decoding="async" />
-                
-                {/* Dark Gradient Overlay */}
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent z-10 transition-colors duration-500 group-hover:from-black/90"></div>
-                
-                {/* Play Button Overlay */}
-                <div class="absolute inset-0 flex items-center justify-center z-20">
-                  <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-lg transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:bg-white/30">
-                    <svg class="w-5 h-5 text-white translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Verified Tag / Health Tag */}
-                <div class="absolute top-4 left-4 z-20 flex flex-col gap-1.5">
-                  <span class="bg-black/35 backdrop-blur-md border border-white/20 text-white text-[11px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full flex items-center gap-1 w-fit">
-                    <svg class="w-2.5 h-2.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    Verified
-                  </span>
-                  <span class="bg-[#166534] text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider w-fit">
-                    {video.tag}
-                  </span>
-                </div>
-
-                {/* Bottom Customer Info */}
-                <div class="absolute bottom-4 left-4 right-4 z-20">
-                  <h4 class="text-white text-sm font-black tracking-wide leading-none">{video.customerName}</h4>
-                  <p class="text-xs text-gray-300 font-medium uppercase tracking-widest mt-1">Verified Buyer</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {/* Testimonials: removed in Phase 3. The previous block showed stock-footage videos (mixkit.co) labelled
+       "Verified Buyer", an unverifiable "Clinical Nutritionist" endorsement and press logos (Forbes, GQ, Vogue,
+       Men's Health) with no coverage behind them. Real reviews render through <JudgeMeReviews /> below. */}
 
   {/* 🎬 Section: Verified Clinical Video Proof & National Recognition */}
   {videoData && (
@@ -3444,10 +3332,10 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         const isUpi = productState.paymentMode === 'upi';
         const upiPrice = Math.round(productState.basePrice * 0.9);
         const upiSave = productState.basePrice - upiPrice;
-        const currentPrice = isUpi ? upiPrice : productState.basePrice;
-        const currentCompare = productState.baseCompare > productState.basePrice 
-          ? productState.baseCompare 
-          : (productState.basePrice > 0 ? Math.round(productState.basePrice * 1.3) : 0);
+        // Headline price is ALWAYS the regular Shopify price (matches Product schema + Merchant feed, and the
+        // server-rendered value, so nothing flickers). The UPI price is shown as a labelled offer.
+        const currentPrice = productState.basePrice;
+        const currentCompare = productState.baseCompare > productState.basePrice ? productState.baseCompare : 0;
 
         // 1. Update Main and Sticky Display Prices
         if (priceDisplay) priceDisplay.innerText = `₹${formatINRClient(currentPrice)}`;
@@ -3466,14 +3354,14 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         const perDaySavings = document.getElementById('pdp-per-day-savings');
 
         if (perDay && perDayText && daysSupply && parseFloat(daysSupply) > 0) {
-          const effectivePrice = isUpi ? upiPrice : productState.basePrice;
+          const effectivePrice = productState.basePrice;
           const effectivePerDay = Math.round(effectivePrice / parseFloat(daysSupply));
           perDayText.innerText = `Daily Routine: Just ₹${effectivePerDay} / day (${daysSupply}-Day Supply)`;
           
           if (perDaySavings) {
             if (isBestVal) {
-              const diffSavings = productState.baseCompare > productState.basePrice ? (productState.baseCompare - productState.basePrice) : 150;
-              perDaySavings.innerText = `🔥 Best Value • Save ₹${diffSavings}`;
+              const diffSavings = productState.baseCompare > productState.basePrice ? (productState.baseCompare - productState.basePrice) : 0;
+              perDaySavings.innerText = diffSavings > 0 ? `🔥 Best Value • Save ₹${diffSavings}` : '🔥 Best Value';
               perDaySavings.classList.remove('hidden');
             } else {
               perDaySavings.classList.add('hidden');
@@ -3492,7 +3380,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           }
           if (badgeElement) {
             if (isUpi) {
-              badgeElement.innerText = `⚡ 10% UPI OFF (Save ₹${formatINRClient(upiSave)})`;
+              badgeElement.innerText = `⚡ ₹${formatINRClient(upiPrice)} with UPI (save ₹${formatINRClient(upiSave)})`;
             } else {
               const totalPct = Math.round(((currentCompare - productState.basePrice) / currentCompare) * 100);
               badgeElement.innerText = `Save ${totalPct}% off MRP`;

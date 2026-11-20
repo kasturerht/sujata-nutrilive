@@ -4,8 +4,21 @@ import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
 import { BRAND_CONFIG } from '../config/brand';
+import { getCatalogProducts, formatINR } from '../lib/catalog';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
+
+// Every price and every data-price on this page comes from the live catalog: the cart and checkout read
+// data-price, so a hardcoded value here showed one price and charged another.
+const sciCatalog = await getCatalogProducts([
+  'sujata-spirulina-tablets', 'sujata-spirulina-powder', 'sujata-spirulina-capsules',
+  'sujata-plant-based-vitamin-b12', 'sujata-pure-himalayan-shilajit', 'sujata-spirulina-sea-buckthorn-combo-pack'
+]);
+const VP: Record<string, { price: number; compareAt: number | null }> = {};
+for (const prod of Object.values(sciCatalog)) for (const vr of prod.variants) VP[vr.id.split('/').pop() as string] = { price: vr.price, compareAt: vr.compareAt };
+const vPrice = (id: string) => VP[id]?.price ?? 0;
+const vCompare = (id: string) => (VP[id]?.compareAt && VP[id]!.compareAt! > vPrice(id) ? VP[id]!.compareAt! : null);
+const vSave = (id: string) => (vCompare(id) ? vCompare(id)! - vPrice(id) : 0);
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
 // Scientific Advisory Board Data
@@ -66,7 +79,7 @@ const activeCompounds = [
     border: "border-emerald-500/30",
     bg: "bg-emerald-500/10",
     role: "Deep Gut & Blood Alkalizer",
-    desc: "Structurally identical to human hemoglobin with magnesium at its core. Acts as a potent internal deodorizer and gut microbiome cleanser, binding to heavy toxins and flushing them safely from the liver."
+    desc: "The green pigment of plants and algae. Its ring structure resembles haem, but with magnesium at the centre instead of iron."
   },
   {
     symbol: "SOD",
@@ -128,7 +141,7 @@ const labParameters = [
     limit: "Nutritional Benchmark", 
     result: "290.89 mg/kg (29.09 mg/100g)", 
     status: "HIGH POTENCY", 
-    verdict: "Supports Hemoglobin & Natural Cellular Energy",
+    verdict: "Iron Contributes to Normal Haemoglobin Formation",
     pass: true 
   },
   { 
@@ -568,7 +581,7 @@ const scienceSchemas = [
             ISO/IEC 17025 Certified
           </span>
           <a href={BRAND_CONFIG.googleMapsUrl || "https://share.google/R7aB2MCG9AN5l3RF1"} target="_blank" rel="noopener noreferrer" class="text-[10px] font-mono text-amber-300 hover:text-white transition-colors flex items-center gap-1">
-            <span>Nashik Facility (5.0 ★)</span>
+            <span>Nashik Facility</span>
             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
         </div>
@@ -1041,8 +1054,8 @@ const scienceSchemas = [
               <div>
                 <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
                   <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white font-sans">₹350</span>
-                    <span class="text-xs text-gray-400 line-through">₹499</span>
+                    <span class="text-2xl font-black text-white font-sans">{formatINR(vPrice('52738357887108'))}</span>
+                    {vCompare('52738357887108') && <span class="text-xs text-gray-400 line-through">{formatINR(vCompare('52738357887108')!)}</span>}
                   </div>
                   <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 30%</span>
                 </div>
@@ -1053,7 +1066,7 @@ const scienceSchemas = [
                     class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357887108"
                     data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
-                    data-price="350"
+                    data-price={String(vPrice('52738357887108'))}
                     data-image="/products/sujata-spirulina-tablets-bottle.jpg"
                     data-subtitle="21.4% Intact C-Phycocyanin • Zero Binders"
                   >
@@ -1064,7 +1077,7 @@ const scienceSchemas = [
                     class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357887108"
                     data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
-                    data-price="350"
+                    data-price={String(vPrice('52738357887108'))}
                     data-image="/products/sujata-spirulina-tablets-bottle.jpg"
                     data-subtitle="21.4% Intact C-Phycocyanin • Zero Binders"
                   >
@@ -1125,8 +1138,8 @@ const scienceSchemas = [
               <div>
                 <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
                   <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white font-sans">₹350</span>
-                    <span class="text-xs text-gray-400 line-through">₹499</span>
+                    <span class="text-2xl font-black text-white font-sans">{formatINR(vPrice('52738357854340'))}</span>
+                    {vCompare('52738357854340') && <span class="text-xs text-gray-400 line-through">{formatINR(vCompare('52738357854340')!)}</span>}
                   </div>
                   <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 30%</span>
                 </div>
@@ -1137,7 +1150,7 @@ const scienceSchemas = [
                     class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357854340"
                     data-title="Sujata Pure Organic Spirulina Powder (100g)"
-                    data-price="350"
+                    data-price={String(vPrice('52738357854340'))}
                     data-image="/products/sujata-spirulina-powder-pouch.jpg"
                     data-subtitle="Sub-40°C Cryo-Milled • 62.39% Protein"
                   >
@@ -1148,7 +1161,7 @@ const scienceSchemas = [
                     class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357854340"
                     data-title="Sujata Pure Organic Spirulina Powder (100g)"
-                    data-price="350"
+                    data-price={String(vPrice('52738357854340'))}
                     data-image="/products/sujata-spirulina-powder-pouch.jpg"
                     data-subtitle="Sub-40°C Cryo-Milled • 62.39% Protein"
                   >
@@ -1209,8 +1222,8 @@ const scienceSchemas = [
               <div>
                 <div class="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
                   <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-black text-white font-sans">₹699</span>
-                    <span class="text-xs text-gray-400 line-through">₹999</span>
+                    <span class="text-2xl font-black text-white font-sans">{formatINR(vPrice('52738358050948'))}</span>
+                    {vCompare('52738358050948') && <span class="text-xs text-gray-400 line-through">{formatINR(vCompare('52738358050948')!)}</span>}
                   </div>
                   <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 30%</span>
                 </div>
@@ -1221,7 +1234,7 @@ const scienceSchemas = [
                     class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738358050948"
                     data-title="Sujata Plant-Based Vitamin B12 Capsules (90 Vegan Capsules)"
-                    data-price="699"
+                    data-price={String(vPrice('52738358050948'))}
                     data-image="/products/sujata-plant-based-b12-bottle.png"
                     data-subtitle="Active Methylcobalamin • Zero Cyanide"
                   >
@@ -1232,7 +1245,7 @@ const scienceSchemas = [
                     class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738358050948"
                     data-title="Sujata Plant-Based Vitamin B12 Capsules (90 Vegan Capsules)"
-                    data-price="699"
+                    data-price={String(vPrice('52738358050948'))}
                     data-image="/products/sujata-plant-based-b12-bottle.png"
                     data-subtitle="Active Methylcobalamin • Zero Cyanide"
                   >
@@ -1608,7 +1621,7 @@ const scienceSchemas = [
                   <div class="space-y-1 text-[11px] text-gray-300 font-mono">
                     <div class="flex items-center gap-1.5">
                       <span class="text-amber-400">●</span>
-                      <span>Assay: 15,000mg Potency / 60 Caps</span>
+                      <span>60 Veg Capsules · 30 Days</span>
                     </div>
                     <div class="flex items-center gap-1.5">
                       <span class="text-emerald-400">●</span>
@@ -1622,8 +1635,8 @@ const scienceSchemas = [
             <div class="pt-4 border-t border-white/10">
               <div class="flex items-baseline justify-between mb-4">
                 <div class="flex items-baseline gap-2">
-                  <span class="text-2xl font-black text-white font-sans">₹899</span>
-                  <span class="text-xs text-gray-400 line-through">₹1,499</span>
+                  <span class="text-2xl font-black text-white font-sans">{formatINR(vPrice('52738358083716'))}</span>
+                  {vCompare('52738358083716') && <span class="text-xs text-gray-400 line-through">{formatINR(vCompare('52738358083716')!)}</span>}
                 </div>
                 <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE 40%</span>
               </div>
@@ -1633,8 +1646,8 @@ const scienceSchemas = [
                   type="button"
                   class="science-direct-buy-btn w-full bg-amber-400 hover:bg-amber-300 text-black py-3.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                   data-id="gid://shopify/ProductVariant/52738358083716"
-                  data-title="Sujata Pure Himalayan Shilajit Capsules (15,000mg - 60 Capsules)"
-                  data-price="899"
+                  data-title="Sujata Pure Himalayan Shilajit Capsules (60 Veg Capsules)"
+                  data-price={String(vPrice('52738358083716'))}
                   data-image="/products/sujata-himalayan-shilajit-bottle.png"
                   data-subtitle=">75% Fulvic Acid • ICP-MS Tested Clean"
                 >
@@ -1644,8 +1657,8 @@ const scienceSchemas = [
                   type="button"
                   class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                   data-id="gid://shopify/ProductVariant/52738358083716"
-                  data-title="Sujata Pure Himalayan Shilajit Capsules (15,000mg - 60 Capsules)"
-                  data-price="899"
+                  data-title="Sujata Pure Himalayan Shilajit Capsules (60 Veg Capsules)"
+                  data-price={String(vPrice('52738358083716'))}
                   data-image="/products/sujata-himalayan-shilajit-bottle.png"
                   data-subtitle=">75% Fulvic Acid • ICP-MS Tested Clean"
                 >
@@ -1705,9 +1718,9 @@ const scienceSchemas = [
                   type="button" 
                   class="science-combo-pill active-combo-pill text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer whitespace-nowrap bg-emerald-500 text-black border-emerald-400 shadow-sm"
                   data-variant-id="gid://shopify/ProductVariant/52759081779332"
-                  data-price="1100"
-                  data-old-price="1430"
-                  data-save="330"
+                  data-price={String(vPrice('52759081779332'))}
+                  data-old-price={String(vCompare('52759081779332') ?? vPrice('52759081779332'))}
+                  data-save={String(vSave('52759081779332'))}
                   data-title="1-Month Plan"
                 >
                   1-Month Plan
@@ -1716,9 +1729,9 @@ const scienceSchemas = [
                   type="button" 
                   class="science-combo-pill text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer whitespace-nowrap bg-white/10 text-gray-300 border-white/10 hover:border-white/30"
                   data-variant-id="gid://shopify/ProductVariant/52759081812100"
-                  data-price="1900"
-                  data-old-price="2470"
-                  data-save="570"
+                  data-price={String(vPrice('52759081812100'))}
+                  data-old-price={String(vCompare('52759081812100') ?? vPrice('52759081812100'))}
+                  data-save={String(vSave('52759081812100'))}
                   data-title="2-Month Plan"
                 >
                   2-Month Plan
@@ -1727,9 +1740,9 @@ const scienceSchemas = [
                   type="button" 
                   class="science-combo-pill text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer whitespace-nowrap bg-white/10 text-gray-300 border-white/10 hover:border-white/30"
                   data-variant-id="gid://shopify/ProductVariant/52759081844868"
-                  data-price="2700"
-                  data-old-price="3510"
-                  data-save="810"
+                  data-price={String(vPrice('52759081844868'))}
+                  data-old-price={String(vCompare('52759081844868') ?? vPrice('52759081844868'))}
+                  data-save={String(vSave('52759081844868'))}
                   data-title="3-Month Plan"
                 >
                   3-Month Plan
@@ -1740,10 +1753,10 @@ const scienceSchemas = [
             <div class="pt-4 border-t border-white/10">
               <div class="flex items-baseline justify-between mb-4">
                 <div class="flex items-baseline gap-2">
-                  <span id="science-combo-price" class="text-2xl font-black text-white font-sans">₹1,100</span>
-                  <span id="science-combo-old-price" class="text-xs text-gray-400 line-through">₹1,430</span>
+                  <span id="science-combo-price" class="text-2xl font-black text-white font-sans">{formatINR(vPrice('52759081779332'))}</span>
+                  <span id="science-combo-old-price" class="text-xs text-gray-400 line-through">{formatINR(vCompare('52759081779332') ?? vPrice('52759081779332'))}</span>
                 </div>
-                <span id="science-combo-save-badge" class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE ₹330</span>
+                <span id="science-combo-save-badge" class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">SAVE {formatINR(vSave('52759081779332'))}</span>
               </div>
 
               <div class="grid grid-cols-2 gap-3 mb-2">
@@ -1753,7 +1766,7 @@ const scienceSchemas = [
                   class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                   data-id="gid://shopify/ProductVariant/52759081779332"
                   data-title="Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack"
-                  data-price="1100"
+                  data-price={String(vPrice('52759081779332'))}
                   data-image="/products/sujata-combo-spirulina-sea-buckthorn-transparent.webp"
                   data-subtitle="1-Month Plan • All-Day Energy, Immunity & Skin Synergy"
                 >
@@ -1765,7 +1778,7 @@ const scienceSchemas = [
                   class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                   data-id="gid://shopify/ProductVariant/52759081779332"
                   data-title="Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack"
-                  data-price="1100"
+                  data-price={String(vPrice('52759081779332'))}
                   data-image="/products/sujata-combo-spirulina-sea-buckthorn-transparent.webp"
                   data-subtitle="1-Month Plan • All-Day Energy, Immunity & Skin Synergy"
                 >
@@ -1924,13 +1937,13 @@ const scienceSchemas = [
               class="science-format-btn active-format border-2 border-[#166534] bg-emerald-50/50 p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer"
               data-id="gid://shopify/ProductVariant/52738357854340"
               data-title="Sujata Pure Organic Spirulina Powder (100g)"
-              data-price="350"
+              data-price={String(vPrice('52738357854340'))}
               data-image="/products/sujata-spirulina-powder-pouch.jpg"
               data-subtitle="Sub-40°C Cold Extract"
             >
               <span class="text-xs font-black text-[#111827]">Powder</span>
               <span class="text-[10px] text-gray-500 mt-0.5">100g Pouch</span>
-              <span class="text-sm font-black text-emerald-800 mt-2">₹350</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">{formatINR(vPrice('52738357854340'))}</span>
             </button>
 
             <button 
@@ -1938,13 +1951,13 @@ const scienceSchemas = [
               class="science-format-btn border-2 border-gray-200 bg-white p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer hover:border-gray-300"
               data-id="gid://shopify/ProductVariant/52738357887108"
               data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
-              data-price="350"
+              data-price={String(vPrice('52738357887108'))}
               data-image="/products/sujata-spirulina-tablets-bottle.jpg"
               data-subtitle="500mg • Zero Binders"
             >
               <span class="text-xs font-black text-[#111827]">Tablets</span>
               <span class="text-[10px] text-gray-500 mt-0.5">60 Tabs (500mg)</span>
-              <span class="text-sm font-black text-emerald-800 mt-2">₹350</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">{formatINR(vPrice('52738357887108'))}</span>
             </button>
 
             <button 
@@ -1952,13 +1965,13 @@ const scienceSchemas = [
               class="science-format-btn border-2 border-gray-200 bg-white p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer hover:border-gray-300"
               data-id="gid://shopify/ProductVariant/52738357985412"
               data-title="Sujata Premium Spirulina Capsules (60 Capsules - 500mg)"
-              data-price="499"
+              data-price={String(vPrice('52738357985412'))}
               data-image="/products/sujata-spirulina-capsules-bottle-transparent.png"
               data-subtitle="100% Veggie Caps"
             >
               <span class="text-xs font-black text-[#111827]">Capsules</span>
               <span class="text-[10px] text-gray-500 mt-0.5">60 Veggie Caps</span>
-              <span class="text-sm font-black text-emerald-800 mt-2">₹499</span>
+              <span class="text-sm font-black text-emerald-800 mt-2">{formatINR(vPrice('52738357985412'))}</span>
             </button>
 
           </div>
@@ -1984,7 +1997,7 @@ const scienceSchemas = [
               <span class="btn-spinner hidden w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
               <span class="btn-text flex items-center gap-1.5">
                 <span>⚡ Buy Now — Cash on Delivery OK • </span>
-                <span class="science-cta-dynamic-price">₹350</span>
+                <span class="science-cta-dynamic-price">{formatINR(vPrice('52738357854340'))}</span>
               </span>
             </button>
 
@@ -2194,8 +2207,8 @@ const scienceSchemas = [
 
           const variantId = pill.getAttribute('data-variant-id');
           const price = parseFloat(pill.getAttribute('data-price') || '1100');
-          const oldPrice = pill.getAttribute('data-old-price') || '1430';
-          const save = pill.getAttribute('data-save') || '330';
+          const oldPrice = Number(pill.getAttribute('data-old-price') || 0).toLocaleString('en-IN');
+          const save = Number(pill.getAttribute('data-save') || 0).toLocaleString('en-IN');
           const title = pill.getAttribute('data-title') || '1-Month Plan';
 
           if (comboBuyBtn) {

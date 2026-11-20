@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "npx rimraf .astro && astro dev",
+    "dev": "node scripts/free-dev-ports.mjs && npx rimraf .astro && astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
