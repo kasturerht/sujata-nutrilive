@@ -4,6 +4,8 @@
 // Live Shopify variant IDs + prices (src/lib/catalog.ts). Buttons plug into the global cart:
 //  - "Add to cart": .add-to-cart-btn -> CartDrawer delegation -> addItemToLocalCart (opens drawer)
 //  - "Buy now": window.directCheckoutItem -> Razorpay Magic 1-click checkout (Storefront fallback)
+//  - "Buy on Amazon →": Amazon Attribution-tagged outbound link for the Brand Referral Bonus
+//    flywheel. Shoppers who prefer Prime get routed to the matching ASIN with proper tracking.
 import { getCatalogProducts, formatINR, type CatalogHandle } from '../lib/catalog';
 
 interface Props {
@@ -27,13 +29,34 @@ const off = selected.compareAt && selected.compareAt > selected.price ? Math.rou
 const upiPrice = Math.round(selected.price * 0.9);
 
 const T = {
-  en: { add: 'Add to cart', buy: 'Buy now — 1-click', details: 'Full details', upi: 'with UPI (10% off)', cod: 'Cash on Delivery available · Free shipping on every order', pack: 'Pack', save: 'off' },
-  mr: { add: 'कार्टमध्ये टाका', buy: 'आत्ता ऑर्डर करा', details: 'पूर्ण माहिती', upi: 'UPI ने (10% सूट)', cod: 'कॅश ऑन डिलिव्हरी उपलब्ध · प्रत्येक ऑर्डरवर मोफत डिलिव्हरी', pack: 'पॅक', save: 'सूट' },
-  hi: { add: 'कार्ट में डालें', buy: 'अभी ऑर्डर करें', details: 'पूरी जानकारी', upi: 'UPI से (10% छूट)', cod: 'कैश ऑन डिलीवरी उपलब्ध · हर ऑर्डर पर फ्री डिलीवरी', pack: 'पैक', save: 'छूट' }
+  en: { add: 'Add to cart', buy: 'Buy now — 1-click', details: 'Full details', upi: 'with UPI (10% off)', cod: 'Cash on Delivery available · Free shipping on every order', pack: 'Pack', save: 'off', amazon: 'Prefer Amazon Prime? Buy on Amazon →' },
+  mr: { add: 'कार्टमध्ये टाका', buy: 'आत्ता ऑर्डर करा', details: 'पूर्ण माहिती', upi: 'UPI ने (10% सूट)', cod: 'कॅश ऑन डिलिव्हरी उपलब्ध · प्रत्येक ऑर्डरवर मोफत डिलिव्हरी', pack: 'पॅक', save: 'सूट', amazon: 'Amazon Prime वापरायचा आहे का? Amazon वर खरेदी करा →' },
+  hi: { add: 'कार्ट में डालें', buy: 'अभी ऑर्डर करें', details: 'पूरी जानकारी', upi: 'UPI से (10% छूट)', cod: 'कैश ऑन डिलीवरी उपलब्ध · हर ऑर्डर पर फ्री डिलीवरी', pack: 'पैक', save: 'छूट', amazon: 'Amazon Prime से लेना है? Amazon पर खरीदें →' }
 }[lang];
 
 const cardId = `buy-${handle}-${placement}`.replace(/[^a-z0-9-]/gi, '-');
 const displayTitle = heading || product.title;
+
+// Amazon Attribution map — Shopify handle → matching ASIN on Amazon.in.
+// The tag is a single environment variable so the growth team can swap it to
+// their real Amazon Attribution campaign tag (from the Advertising Console)
+// without touching source. Default falls back to the Associates tag, which is
+// still tracked for the Brand Referral Bonus flywheel.
+const AMAZON_ASIN_BY_HANDLE: Partial<Record<CatalogHandle, string>> = {
+  'sujata-spirulina-powder': 'B0DP2FWN4J',
+  'sujata-spirulina-tablets': 'B0HMJD7SJ9',
+  'sujata-spirulina-capsules': 'B0GMQYS6M4',
+  'sujata-sea-buckthorn-capsules': 'B0HMJDX1X9',
+  'sujata-spirulina-sea-buckthorn-combo-pack': 'B0HMJFDKG9',
+  'sujata-plant-based-vitamin-b12': 'B0HMJFWPXR',
+  'sujata-moringa-powder': 'B0HMJMYRS5'
+};
+const amazonAsin = AMAZON_ASIN_BY_HANDLE[handle];
+const amazonTag = import.meta.env.PUBLIC_AMAZON_ATTRIBUTION_TAG || 'sujatanutrilive-21';
+const amazonCtaRef = `sujata_learn_${placement}`.replace(/[^a-z0-9_-]/gi, '-');
+const amazonUrl = amazonAsin
+  ? `https://www.amazon.in/dp/${amazonAsin}?tag=${encodeURIComponent(amazonTag)}&ref_=${encodeURIComponent(amazonCtaRef)}`
+  : null;
 ---
 
 <aside
@@ -113,6 +136,19 @@ const displayTitle = heading || product.title;
           data-image={product.image}
         >{T.add}</button>
       </div>
+      {amazonUrl && (
+        <a
+          href={amazonUrl}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          data-placement={placement}
+          data-asin={amazonAsin}
+          class="learn-buy-amazon mt-2.5 inline-flex items-center justify-center gap-1.5 w-full rounded-xl border border-amber-500/40 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-semibold px-4 py-2.5 transition-colors touch-manipulation"
+        >
+          <span aria-hidden="true">🛒</span>
+          <span>{T.amazon}</span>
+        </a>
+      )}
       <div class="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-500">
         <span>{T.cod}</span>
         <a href={product.url} class="font-semibold text-emerald-800 underline underline-offset-2">{T.details} →</a>
@@ -151,6 +187,23 @@ const displayTitle = heading || product.title;
       offEl.textContent = offEl.textContent ? offEl.textContent.replace(/^\d+%/, pct + '%') : '';
     }
   });
+
+  // Amazon outbound CTA: fires a dataLayer event so Brand Referral Bonus clicks
+  // are measurable alongside on-site Razorpay conversions. The outbound link
+  // continues to its target — never preventDefault — so the attributed sale
+  // remains on Amazon's side of the funnel.
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement)?.closest?.('.learn-buy-amazon') as HTMLAnchorElement | null;
+    if (!link) return;
+    const w = window as any;
+    if (typeof w.dispatchStoreEvent === 'function') {
+      w.dispatchStoreEvent('AmazonOutboundClick', {
+        placement: link.dataset.placement || 'learn',
+        asin: link.dataset.asin || '',
+        channel: 'Amazon.in'
+      });
+    }
+  }, { passive: true });
 
   document.addEventListener('click', async (e) => {
     const btn = (e.target as HTMLElement)?.closest?.('.learn-direct-buy') as HTMLButtonElement | null;
