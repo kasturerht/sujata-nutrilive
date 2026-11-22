@@ -1,5 +1,8 @@
 ---
 // src/pages/refund-policy.astro
+// FSSAI-compliant refund policy: satisfaction-based 90-day return, no outcome
+// promises ("if you don't feel X we refund Y" was banned under FSS Reg 4(5)
+// and Maharashtra FDA Nov-2026 order).
 import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
@@ -30,13 +33,13 @@ const refundPolicySchemas = [
   {
     "@type": "WebPage",
     "@id": `${pageUrl}/#webpage`,
-    "name": "90-Day Vitality Guarantee & Refund Policy | Sujata Nutrilive",
-    "description": "Official 90-Day Vitality Guarantee: Complete a 90-day cellular rejuvenation routine with 100% full money-back promise, even on empty bottles. Zero-risk trial with transparent terms.",
+    "name": "90-Day Satisfaction Return Policy | Sujata Nutrilive",
+    "description": "Sujata Nutrilive 90-Day Satisfaction Return Policy. Transparent terms for returns on directly-purchased dietary supplements. Food supplements are not medicines.",
     "url": pageUrl,
     "mainEntity": {
       "@type": "MerchantReturnPolicy",
       "@id": `${siteUrl}/#merchant-return-policy`,
-      "name": "Sujata 90-Day Vitality Guarantee",
+      "name": "Sujata 90-Day Satisfaction Return Policy",
       "applicableCountry": "IN",
       "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
       "merchantReturnDays": 90,
@@ -59,7 +62,7 @@ const refundPolicySchemas = [
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Refund Policy & 90-Day Guarantee",
+        "name": "Refund Policy & 90-Day Return",
         "item": pageUrl
       }
     ]
@@ -67,9 +70,9 @@ const refundPolicySchemas = [
 ];
 ---
 
-<StoreLayout 
-  title="90-Day Guarantee & Refund Policy | Sujata Nutrilive"
-  description="Sujata Nutrilive 90-Day Vitality Guarantee: 100% money-back refund even on empty bottles. Zero-risk trial with full cellular rejuvenation cycle."
+<StoreLayout
+  title="90-Day Satisfaction Return Policy | Sujata Nutrilive"
+  description="Sujata Nutrilive 90-Day Satisfaction Return Policy. Transparent return terms for directly-purchased dietary supplements."
   extraSchema={refundPolicySchemas}
 >
 
@@ -77,9 +80,9 @@ const refundPolicySchemas = [
   <StoreHeader />
 
   <main class="bg-[#FAF9F6] min-h-screen pt-32 md:pt-40 pb-20 selection:bg-[#166534] selection:text-white">
-    
+
     <div class="max-w-4xl mx-auto px-6 lg:px-8">
-      
+
       {/* Breadcrumb Navigation */}
       <nav class="flex items-center gap-3 mb-8">
         <a href="/" class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-400 hover:text-[#166534] transition-colors py-2 touch-manipulation flex items-center gap-1.5 group">
@@ -102,44 +105,44 @@ const refundPolicySchemas = [
       <div class="mb-12">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-900/10 mb-4 shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">90-Day Cellular Protocol • Zero-Risk Guarantee</span>
+          <span class="text-emerald-900 text-[10px] font-black uppercase tracking-[0.25em]">90-Day Satisfaction Return • Transparent Terms</span>
         </div>
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.12] mb-3">
-          90-Day Vitality Guarantee.
+          90-Day Satisfaction Return Policy.
         </h1>
         <p class="text-xs font-mono text-gray-400 uppercase tracking-widest">
-          90-Day Cellular Renewal Protocol • 100% Full Money-Back Promise
+          Transparent, Satisfaction-Based Returns • Food Supplements, Not Medicines
         </p>
       </div>
 
-      {/* Golden Guarantee Banner */}
+      {/* Satisfaction Policy Banner */}
       <div class="bg-gradient-to-br from-[#064E3B] to-[#022219] rounded-3xl p-6 sm:p-8 text-white border border-emerald-500/30 shadow-xl mb-12 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-400/10 rounded-full blur-[60px] pointer-events-none"></div>
         <div class="relative z-10">
           <span class="text-[10px] font-mono text-amber-400 uppercase tracking-widest block mb-1">The Sujata Promise</span>
           <h2 class="text-xl sm:text-2xl font-['Playfair_Display'] font-bold text-white mb-2">
-            The 90-Day Empty-Bottle Vitality Guarantee.
+            Transparent 90-Day Satisfaction Return.
           </h2>
           <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light">
-            In human biology and Ayurveda, deep tissue repair and cellular turnover (erythropoiesis and mucosal regeneration) take approximately 90 days. If you follow the Sujata daily protocol consistently for 90 days and do not experience a noticeable surge in your daily energy, stamina, digestion, or general wellness, you can request a 100% refund. We will refund every single rupee back to your bank account — <strong>even if all your bottles are completely empty</strong>. No interrogations.
+            Sujata Nutrilive products are dietary supplements, not medicines, and we make no guarantee of any specific health outcome. Individual experience varies with diet, lifestyle and consistency. If, after following the daily routine consistently for up to 90 days, you are not satisfied with the product, contact our support team within 7 calendar days and we will process a refund in line with the terms below.
           </p>
         </div>
       </div>
 
       {/* Structured Legal Content */}
-        {/* Master Clause: 90-Day Vitality Guarantee Supersedes Standard Terms */}
+        {/* Master Clause: Scope of the 90-Day Satisfaction Return */}
         <div class="bg-emerald-950 text-white p-6 sm:p-8 rounded-2xl border-2 border-emerald-500/50">
           <span class="text-amber-400 text-[10px] font-bold uppercase tracking-widest block mb-1">Official Governing Policy Directive</span>
           <h3 class="text-base sm:text-lg font-bold font-serif mb-2 text-white">
-            Precedence of 90-Day Vitality Guarantee Over Standard Merchandise Terms
+            Scope of the 90-Day Satisfaction Return
           </h3>
           <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-light mb-3">
-            For all dietary supplement products purchased directly from Sujata Nutrilive (including Spirulina Capsules, Sea Buckthorn Capsules, and Pure Powder), our <strong>90-Day Vitality Guarantee takes absolute precedence</strong> over generic ecommerce return conditions.
+            For dietary supplement products purchased directly from Sujata Nutrilive (including Spirulina Capsules, Sea Buckthorn Capsules and Pure Powder), customers may request a satisfaction-based return within the 90-day window described below.
           </p>
           <ul class="list-disc pl-5 space-y-1.5 text-xs text-emerald-200">
-            <li>You are entitled to open, consume, and complete a full 90-day protocol (e.g. 3-bottle routine).</li>
-            <li>If you do not experience noticeable improvements in energy, digestion, or cellular vitality, you receive a 100% full refund with zero deductions.</li>
-            <li>You are protected even on completely consumed empty bottles under our transparent terms below.</li>
+            <li>You may open and use the product during the 90-day return window; standard "unopened packaging" rules do not apply for satisfaction returns of direct-purchase dietary supplements.</li>
+            <li>No outcome guarantee is made. Supplements are food, not medicine, and individual experience varies.</li>
+            <li>Refunds are processed on satisfaction grounds alone, provided the conditions in Section 1 are met.</li>
             <li>Standard "unopened packaging" conditions apply strictly to transit-damaged units seeking immediate replacement or excess unopened bottles in custom orders.</li>
           </ul>
         </div>
@@ -148,16 +151,16 @@ const refundPolicySchemas = [
           {/* Section 1 */}
             <div>
               <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-                1. Eligibility &amp; Transparent Terms (4 Key Conditions)
+                1. Eligibility &amp; Transparent Terms
               </h2>
               <p class="mb-3">
-                To qualify for the 90-Day Vitality Money-Back Guarantee, customers simply need to fulfill these 4 fair and transparent biological conditions:
+                To qualify for a 90-day satisfaction return, please meet these four fair and transparent conditions:
               </p>
               <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                <li><strong>1. Consistent 90-Day Daily Protocol:</strong> The product must be consumed daily for a full 90 consecutive days (morning routine after breakfast with water) to allow cellular regeneration.</li>
-                <li><strong>2. Adequate Cellular Hydration:</strong> Consume at least 2.5 to 3 liters of clean water daily to enable proper absorption of phycocyanin, iron, and active bio-compounds.</li>
-                <li><strong>3. Authentic Direct Purchase:</strong> The order must be placed directly through the official Sujata Nutrilive website (<code>sujatanutrilive.com</code>) or verified WhatsApp concierge with a valid Order ID/Invoice.</li>
-                <li><strong>4. 7-Day Claim Window &amp; Empty Bottles:</strong> The claim must be initiated within 7 calendar days after completing the 90-day protocol. Keep the empty bottles as physical confirmation of protocol completion.</li>
+                <li><strong>1. Consistent daily use:</strong> The product should have been taken daily for a reasonable portion of the 90-day window (morning routine after breakfast with water is recommended).</li>
+                <li><strong>2. Adequate hydration:</strong> Daily intake of at least 2.5 to 3 litres of water is recommended alongside any plant-based food supplement.</li>
+                <li><strong>3. Authentic direct purchase:</strong> The order must have been placed directly through the official Sujata Nutrilive website (<code>sujatanutrilive.com</code>) or verified WhatsApp concierge, with a valid Order ID or Invoice.</li>
+                <li><strong>4. 7-day claim window:</strong> Please initiate the claim within 7 calendar days of the end of your 90-day use period. Keep the product packaging as proof of purchase.</li>
               </ul>
             </div>
 
@@ -176,7 +179,7 @@ const refundPolicySchemas = [
               <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
                 3. Refund Processing Timelines &amp; Methods
               </h2>
-              <p class="mb-3">Once approved by our support team, refunds are initiated instantly:</p>
+              <p class="mb-3">Once approved by our support team, refunds are initiated promptly:</p>
               <ul class="list-disc pl-5 space-y-1.5 text-gray-700">
                 <li><strong>Prepaid UPI (Google Pay, PhonePe, Paytm):</strong> Credited directly back to your linked bank account within <strong>24 to 48 hours</strong>.</li>
                 <li><strong>Debit / Credit Cards &amp; NetBanking:</strong> Credited within <strong>3 to 5 business days</strong> depending on your issuing bank's settlement cycle.</li>
@@ -187,7 +190,7 @@ const refundPolicySchemas = [
             {/* Section 4: 2-Step Refund Process */}
             <div class="bg-gray-50 rounded-2xl p-5 border border-gray-200">
               <h2 class="text-base font-bold text-[#111827] font-['Playfair_Display'] mb-3">
-                4. How to Request a Refund (2 Simple Steps)
+                4. How to Request a Return (2 Simple Steps)
               </h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-700">
                 <div class="bg-white p-4 rounded-xl border border-gray-200">
@@ -199,6 +202,16 @@ const refundPolicySchemas = [
                   <span>Send an email with your Order ID to <a href="mailto:support@sujatanutrilive.com" class="text-emerald-700 font-bold underline">support@sujatanutrilive.com</a>.</span>
                 </div>
               </div>
+            </div>
+
+            {/* Section 5: Disclaimer */}
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-[#111827] font-['Playfair_Display'] mb-3">
+                5. Statutory Disclaimer
+              </h2>
+              <p>
+                Sujata Nutrilive products are dietary supplements and pure nutritional foods, not medicines. They are not intended to diagnose, treat, cure, or prevent any disease. FSSAI Reg. No. #21526027000179. Consult your physician before starting any dietary supplement, especially if you have a pre-existing medical condition, are pregnant or lactating, or are on prescribed medication. Individual results vary.
+              </p>
             </div>
         </div>
 

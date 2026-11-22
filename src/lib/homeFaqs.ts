@@ -48,7 +48,7 @@ export const homeFaqs: HomeFaq[] = [
     lang: 'mr'
   },
   {
-    question: "How does the 90-Day Vitality Guarantee work?",
-    answer: "Take your daily serving consistently for 90 days. If you do not feel a noticeable difference in your daily energy and overall wellbeing, message our support team for a 100% refund to your bank account, even if the bottles are empty. Full terms are on our Refund Policy page."
+    question: "How does your 90-Day Satisfaction Return Policy work?",
+    answer: "Sujata products are dietary supplements, not medicines, and we make no guarantee of any specific health outcome. If, after using the product consistently for up to 90 days, you are not satisfied, contact our support team within 7 calendar days to process a return in line with our Refund Policy. Individual experience varies with diet, lifestyle and consistency."
   }
 ];

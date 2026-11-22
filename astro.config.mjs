@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
+import viteComplianceGuard from './plugins/vite-compliance-guard.mjs';
 
 const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.sujatanutrilive.com';
 
@@ -18,6 +19,9 @@ export default defineConfig({
     host: true,
   },
   vite: {
+    // Build-time regulatory guardrail. Fails `astro build` on any FSSAI / Maharashtra
+    // FDA prohibited claim in src/pages, src/components, src/layouts or src/lib.
+    plugins: [viteComplianceGuard()],
     server: {
       strictPort: true,
       watch: {
