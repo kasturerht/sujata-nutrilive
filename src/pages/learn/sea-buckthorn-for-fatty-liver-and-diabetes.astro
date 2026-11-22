@@ -1,5 +1,9 @@
 ---
 // src/pages/learn/sea-buckthorn-for-fatty-liver-and-diabetes.astro
+// FSSAI-compliant rewrite (Advertising & Claims 2018 + Nutraceutical 2022 + Maharashtra FDA Nov-2026).
+// The original disease-targeting draft (NAFLD, Type 2 Diabetes, HbA1c, ALT/AST, metformin/statin counselling,
+// "Hepatologist-Reviewed", PPAR-α mechanism) has been fully replaced with a nutrient-function framing:
+// Himalayan Omega-7 for daily metabolic wellness and cellular nourishment.
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
 import StoreFooter from '../../components/StoreFooter.astro';
@@ -7,50 +11,51 @@ import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
 import { BRAND_CONFIG } from '../../config/brand';
 import LearnBuyCard from '../../components/LearnBuyCard.astro';
 
-const pageTitle = "Sea Buckthorn for Fatty Liver (NAFLD) & Diabetes: HbA1c Protocol (2026)";
-const pageDescription = "Sea buckthorn for fatty liver & diabetes: 1,300 mg/day reduces ALT, AST liver enzymes and improves insulin sensitivity. Omega-7 + 190 phytonutrients — meta-analysis PMID 32639477.";
+const pageTitle = "Himalayan Sea Buckthorn Omega-7: Daily Metabolic Wellness & Cellular Nourishment (2026)";
+const pageDescription = "Himalayan sea buckthorn as a daily food supplement: rare Omega-7, 190+ phytonutrients and 12× orange Vitamin C from wild Leh-Ladakh berries. Not intended to treat or cure any disease.";
 const pageUrl = "https://www.sujatanutrilive.com/learn/sea-buckthorn-for-fatty-liver-and-diabetes";
 
 const faqs = [
   {
-    question: "How does sea buckthorn help in fatty liver (NAFLD)?",
-    answer: "Sea buckthorn addresses NAFLD (Non-Alcoholic Fatty Liver Disease) through 3 mechanisms: (1) Palmitoleic acid (Omega-7) activates PPAR-α, the liver's master fat-burning switch, reducing hepatic triglyceride accumulation; (2) Flavonoids (isorhamnetin, quercetin) inhibit lipogenesis — the enzymatic creation of new fat in liver cells; (3) 12x-orange Vitamin C + superoxide dismutase (SOD) activity reduce ALT/AST liver-enzyme elevations driven by oxidative stress. Clinical review PMID 32639477 and animal studies show 20-30% reduction in liver fat at 1,500-2,000 mg/day over 12 weeks."
+    question: "What makes Himalayan sea buckthorn a unique whole-food supplement?",
+    answer: "Sea buckthorn (Hippophae rhamnoides) is one of the few widely-edible plants that is naturally rich in Omega-7 (palmitoleic acid), alongside Omega-3, 6 and 9, flavonoids (isorhamnetin, quercetin) and natural Vitamin C. Sujata uses wild-harvested Leh-Ladakh berries cold-pressed below 40 °C to keep these nutrients intact. It is a food supplement that adds whole-berry phytonutrients to a daily diet; it is not a medicine and does not replace diet, exercise or medical care."
   },
   {
-    question: "Can sea buckthorn lower HbA1c and blood sugar in diabetes?",
-    answer: "Yes, as an adjunct. Sujata Himalayan Sea Buckthorn is 0 g added sugar and the Omega-7 improves insulin sensitivity by reducing inflammation in adipose tissue — the root cause of insulin resistance in type-2 diabetes. A 2019 systematic review of 11 trials found sea buckthorn reduced fasting glucose by 7-12 mg/dL and HbA1c by 0.3-0.5% over 12-16 weeks at 1-2 g/day. This is additive to metformin/SGLT-2 inhibitors — do not replace medication. Protocol: 2 caps (1,300 mg) daily split morning/evening, with gynaecologist/physician clearance."
+    question: "What is a sensible daily serving of Sujata Himalayan Sea Buckthorn?",
+    answer: "A typical adult serving is 1-2 capsules (650-1,300 mg) per day with food. Take 1 after breakfast and, optionally, 1 after dinner with warm water. The fats in a normal meal help the body absorb the fat-soluble carotenoids. Do not exceed 2 capsules per day without consulting your physician, and do not take it as a replacement for any prescribed medicine."
   },
   {
-    question: "What is the correct sea buckthorn dosage for fatty liver and diabetes?",
-    answer: "Evidence-based dose: 1,300-1,950 mg/day (2-3 capsules of Sujata Himalayan Sea Buckthorn) split as 1 cap after breakfast and 1-2 caps after dinner. Take with food (meal fats boost Omega-7 absorption 2x). Full liver-enzyme (ALT/AST) and HbA1c improvement visible on blood work at the 12-week mark — do not re-test earlier than day 90. Pair with: 500-calorie daily deficit, 10,000 steps, zero added sugar, and your prescribed metformin/statin."
+    question: "What nutrients does sea buckthorn add to a daily diet?",
+    answer: "Each Sujata Himalayan Sea Buckthorn capsule delivers 650 mg of cold-pressed whole-berry extract. This provides naturally occurring Omega-7 (palmitoleic acid), Omega-3, 6 and 9 fatty acids, Vitamin C, Vitamin E, beta-carotene, flavonoids and 190+ plant phytonutrients. These are everyday nutrients — Vitamin C, for example, contributes to normal collagen formation and normal immune function. Spirulina and sea buckthorn can be combined as part of a balanced plant-forward routine."
   },
   {
-    question: "Sea buckthorn vs milk thistle (silymarin) for liver — which is better?",
-    answer: "Both work on different pathways and are best combined: (1) Milk thistle's silymarin directly protects hepatocyte cell membranes from toxin damage — strong for drug-induced or alcoholic liver damage; (2) Sea buckthorn's Omega-7 attacks the lipid accumulation itself — strong for NAFLD driven by refined-carb/sugar diet. For Indian NAFLD patients (90% of cases are sugar/refined-carb driven, not alcohol), sea buckthorn is the primary pick. Sujata's cold-pressed whole-berry extract also provides 190+ phytonutrients that silymarin alone lacks."
+    question: "Can I take sea buckthorn alongside other food supplements?",
+    answer: "Yes, as part of a balanced routine. Many Sujata customers combine Sea Buckthorn with Spirulina through the 2-month combo pack. Both are food supplements. If you are already on prescribed medication for any health condition, speak with your physician first — supplements can interact with medicines, so your doctor should know your full list before you add or stop anything."
   },
   {
-    question: "Is sea buckthorn safe with metformin, statins or BP tablets?",
-    answer: "Yes, with monitoring. Sea buckthorn + metformin is synergistic for insulin sensitivity — monitor fasting glucose and reduce metformin dose only on your physician's recommendation. Sea buckthorn + atorvastatin/rosuvastatin: compatible; both reduce lipids through different pathways. Sea buckthorn + BP tablets (amlodipine, telmisartan): sea buckthorn may lower BP 3-5 mmHg additionally — monitor at home and inform your cardiologist. Blood thinners (warfarin, ecosprin): discuss with doctor as sea buckthorn has mild antiplatelet action. Stop 2 weeks before any surgery."
+    question: "Is sea buckthorn a substitute for prescribed medicine?",
+    answer: "No. Sujata Himalayan Sea Buckthorn is a food supplement, not a medicine. It is not intended to diagnose, treat, cure or prevent any disease, including metabolic or liver conditions. If your doctor has prescribed medicine for any condition, continue that medicine and consult your doctor before adding any supplement to your routine."
   },
   {
-    question: "How quickly can sea buckthorn reduce ALT and AST liver enzymes?",
-    answer: "Realistic timeline at 1,300 mg/day: Week 1-2 — no visible change, body adapting. Week 3-6 — oxidative stress reducing, but ALT/AST on blood work still fluctuating. Week 8-12 — measurable 15-30% reduction in ALT and AST if paired with dietary sugar restriction. Ultrasound fatty-liver grade (Grade 1 vs 2 vs 3) typically improves by one grade in 6 months. Do not skip the diet — supplements alone cannot overcome a 2,500+ kcal/day refined-carb diet."
+    question: "Does Sujata Himalayan Sea Buckthorn contain added sugar?",
+    answer: "No. Sujata Himalayan Sea Buckthorn capsules contain 0 g added sugar, 0 g preservative, 0 g artificial flavour and 0 g colour. The capsule shell is 100 % vegetarian. The only ingredient is cold-pressed wild Himalayan sea-buckthorn whole-berry extract. Check the ingredient panel on the product page for the full composition."
   },
   {
-    question: "Can sea buckthorn be taken during pregnancy with gestational diabetes?",
-    answer: "Nutritionally beneficial but requires gynaecologist clearance. Sea buckthorn is 0 g added sugar and provides Omega-7, Vitamin C, folate and natural beta-carotene — all helpful in pregnancy. For gestational diabetes, the appetite-dampening and insulin-sensitising effects are theoretically useful, but human trial data in pregnancy is limited. Standard advice: 1 capsule (650 mg) daily after breakfast only, with your OB-GYN's written approval. Stop immediately if your doctor advises."
+    question: "Who should avoid sea buckthorn or speak to a doctor first?",
+    answer: "Speak to your doctor before using Sujata Himalayan Sea Buckthorn if you are pregnant or lactating, are on blood thinners (anticoagulants / antiplatelets), are scheduled for surgery within the next 2 weeks, have very low blood pressure, or have any known allergy to Hippophae rhamnoides. Stop the supplement 2 weeks before any planned surgery, as is standard with all plant-oil supplements."
   },
   {
-    question: "What is the price of a 3-month sea buckthorn fatty-liver course?",
-    answer: "Sujata Himalayan Sea Buckthorn 60 veg caps = ₹649 for 1 month at the fatty-liver/diabetes protocol dose (roughly ₹21/day — less than one chai). For the 90-day course, the Spirulina + Sea Buckthorn 2-month combo at ₹1,100 is the best-value option (₹18/day) — the spirulina adds C-phycocyanin which independently improves insulin sensitivity. Free Cash on Delivery pan-India, 90-day cellular turnover money-back guarantee (T&Cs apply)."
+    question: "What is the price of a 3-month daily supply?",
+    answer: "Sujata Himalayan Sea Buckthorn Capsules (60 count × 650 mg) are ₹649 for a 1-month supply at the 2-capsule daily serving — about ₹21 per day. For 90 days, the Spirulina + Himalayan Sea Buckthorn 2-month combo pack is ₹1,100 (roughly ₹18 per day) and ships with 2 free SpiruGlow soaps. Free Cash on Delivery pan-India via WhatsApp (+91 98347 83503). Refund policy: see /refund-policy."
   }
 ];
 
+// Pure Article schema — no MedicalWebPage, no MedicalCondition, no mechanismOfAction.
 const articleSchema = [
   {
-    "@type": ["MedicalWebPage", "Article"],
+    "@type": "Article",
     "@id": `${pageUrl}/#article`,
-    "headline": "Sea Buckthorn for Fatty Liver (NAFLD) & Diabetes: 90-Day HbA1c Protocol",
+    "headline": "Himalayan Sea Buckthorn Omega-7: Daily Metabolic Wellness & Cellular Nourishment",
     "description": pageDescription,
     "image": "https://www.sujatanutrilive.com/products/sujata-sea-buckthorn-capsules-bottle-transparent.png",
     "inLanguage": "en-IN",
@@ -59,7 +64,7 @@ const articleSchema = [
     "dateModified": new Date().toISOString(),
     "author": {
       "@type": "Organization",
-      "name": "Sujata Nutrilive Clinical Research Team",
+      "name": "Sujata Nutrilive Nutrition Research Team",
       "url": "https://www.sujatanutrilive.com"
     },
     "publisher": {
@@ -67,34 +72,12 @@ const articleSchema = [
       "name": BRAND_CONFIG.brandName,
       "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
     },
-    "medicalAudience": [
-      { "@type": "MedicalAudience", "audienceType": "Patient" }
-    ],
-    "about": [
-      { "@type": "MedicalCondition", "name": "Non-Alcoholic Fatty Liver Disease (NAFLD)", "sameAs": "https://en.wikipedia.org/wiki/Non-alcoholic_fatty_liver_disease" },
-      { "@type": "MedicalCondition", "name": "Type 2 Diabetes Mellitus", "sameAs": "https://en.wikipedia.org/wiki/Type_2_diabetes" },
-      { "@type": "DietarySupplement", "name": "Sea Buckthorn (Hippophae rhamnoides)", "activeIngredient": "Palmitoleic acid (Omega-7), Isorhamnetin, Quercetin, Vitamin C", "mechanismOfAction": "PPAR-α activation, hepatic lipogenesis inhibition, insulin-sensitivity enhancement", "sameAs": "https://en.wikipedia.org/wiki/Hippophae" }
-    ],
-    "citation": [
-      {
-        "@type": "ScholarlyArticle",
-        "name": "Sea buckthorn and lipid metabolism: meta-analysis of human trials",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/32639477/",
-        "sameAs": "https://doi.org/10.1186/s12944-020-01270-2"
-      },
-      {
-        "@type": "ScholarlyArticle",
-        "name": "Hippophae rhamnoides in NAFLD: hepatoprotective mechanisms",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/28672761/",
-        "sameAs": "https://doi.org/10.3390/nu9070707"
-      },
-      {
-        "@type": "ScholarlyArticle",
-        "name": "Palmitoleic Acid (Omega-7) as a lipokine regulating insulin sensitivity",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/18805087/",
-        "sameAs": "https://doi.org/10.1016/j.cell.2008.07.048"
-      }
-    ]
+    "about": {
+      "@type": "DietarySupplement",
+      "name": "Sea Buckthorn (Hippophae rhamnoides)",
+      "activeIngredient": "Palmitoleic acid (Omega-7), Omega-3, Omega-6, Omega-9, Vitamin C, Vitamin E, Beta-carotene, Flavonoids",
+      "sameAs": "https://en.wikipedia.org/wiki/Hippophae"
+    }
   },
   {
     "@type": "FAQPage",
@@ -111,7 +94,7 @@ const articleSchema = [
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
       { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
-      { "@type": "ListItem", "position": 3, "name": "Sea Buckthorn for Fatty Liver & Diabetes", "item": pageUrl }
+      { "@type": "ListItem", "position": 3, "name": "Himalayan Sea Buckthorn Omega-7", "item": pageUrl }
     ]
   }
 ];
@@ -132,31 +115,31 @@ const articleSchema = [
         <span>/</span>
         <a href="/science" class="hover:text-amber-400 transition-colors">Science</a>
         <span>/</span>
-        <span class="text-white">Fatty Liver & Diabetes</span>
+        <span class="text-white">Himalayan Sea Buckthorn Omega-7</span>
       </nav>
 
       <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>NAFLD • HbA1c • ALT/AST — 90-Day Protocol</span>
+        <span>Wild Leh-Ladakh Berries • Cold-Pressed <40 °C • 190+ Phytonutrients</span>
       </div>
 
       <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
-        Sea Buckthorn for Fatty Liver & Diabetes: <br class="hidden sm:block"/>
-        <span class="text-amber-400 italic font-serif">90-Day HbA1c Protocol & Clinical Evidence (2026)</span>
+        Himalayan Sea Buckthorn Omega-7: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">Daily Metabolic Wellness & Cellular Nourishment (2026)</span>
       </h1>
 
       <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
-        India's silent epidemic: 25% of urban adults have NAFLD and 11% have diabetes. Sea buckthorn's rare Omega-7 attacks both conditions via a single lipokine mechanism — clinically documented since the 2008 Cell paper (PMID 18805087).
+        A whole-food supplement from the wild Himalayan berry: rare Omega-7, natural Vitamin C, flavonoids and 190+ phytonutrients. A food, not a medicine — intended to support a nutrient-dense daily diet.
       </p>
 
       <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
         <div class="flex items-center gap-2 mb-2">
           <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">Direct Answer</span>
-          <span class="text-xs text-emerald-300 font-semibold">Hepatologist-Reviewed</span>
+          <span class="text-xs text-emerald-300 font-semibold">Nutrient-Function Framing</span>
         </div>
         <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
-          <strong class="text-amber-300 font-bold">Does sea buckthorn help fatty liver and diabetes?</strong>
-          Yes. Sujata Himalayan Sea Buckthorn delivers <strong class="text-emerald-300">palmitoleic acid (Omega-7)</strong>, classified as a <em>lipokine</em> since 2008 — it signals the liver's PPAR-α pathway to burn stored fat and improves insulin sensitivity by reducing adipose inflammation. Protocol: <strong class="text-emerald-300">1,300-1,950 mg/day</strong> for 12 weeks. Expected: ALT/AST down 15-30%, HbA1c down 0.3-0.5%. Never replace metformin/statins — add on top.
+          <strong class="text-amber-300 font-bold">Why is Himalayan sea buckthorn a unique daily food supplement?</strong>
+          Sujata Himalayan Sea Buckthorn delivers <strong class="text-emerald-300">rare Omega-7 (palmitoleic acid)</strong>, <strong class="text-emerald-300">Omega-3, 6 and 9</strong>, natural <strong class="text-emerald-300">Vitamin C</strong> and <strong class="text-emerald-300">190+ phytonutrients</strong> from wild Leh-Ladakh berries — nutrients that support a balanced, plant-forward diet. Typical adult serving: 1-2 capsules (650-1,300 mg) with food. This is a food supplement; it is not intended to diagnose, treat, cure or prevent any disease.
         </p>
       </div>
     </div>
@@ -165,26 +148,26 @@ const articleSchema = [
   <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
     <div class="max-w-4xl mx-auto space-y-12">
 
-      <!-- 1. Why Omega-7 -->
+      <!-- 1. Why Omega-7 as a dietary nutrient -->
       <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
         <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-amber-400">1.</span> Omega-7 as a Lipokine: The Mechanism
+          <span class="text-amber-400">1.</span> Omega-7: A Rare Plant-Food Nutrient
         </h2>
         <p class="text-sm text-gray-300 leading-relaxed mb-4">
-          In 2008, <em>Cell</em> journal classified palmitoleic acid (Omega-7) as a <strong class="text-amber-300">lipokine</strong> — a fat-derived hormone that signals the liver to burn triglycerides and signals muscles to improve glucose uptake. This dual action is exactly what NAFLD + diabetes patients need, and no other common edible plant provides it.
+          Most Indian plates deliver Omega-6 easily (vegetable oils) and some Omega-3 (flaxseed, walnut). Omega-7 — palmitoleic acid — is far less common in everyday foods and is found in meaningful amounts in only a handful of plant sources. Sea buckthorn is one of them. Sujata harvests from wild Leh-Ladakh berries and cold-presses below 40 °C to keep these delicate fatty acids intact.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div class="bg-black/30 border border-emerald-500/20 rounded-xl p-4">
-            <h3 class="font-bold text-emerald-400 text-base mb-2">① PPAR-α Activation</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Omega-7 activates PPAR-α in hepatocytes — the master fat-burning switch. Stored liver fat gets mobilised.</p>
+            <h3 class="font-bold text-emerald-400 text-base mb-2">① Omega-7 Fatty Acid</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Palmitoleic acid is the signature nutrient of the sea-buckthorn berry — rarely present in the typical Indian diet.</p>
           </div>
           <div class="bg-black/30 border border-amber-500/20 rounded-xl p-4">
-            <h3 class="font-bold text-amber-400 text-base mb-2">② Insulin Sensitivity</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Palmitoleic acid reduces adipose tissue inflammation (the root cause of insulin resistance). Fasting glucose drops 7-12 mg/dL.</p>
+            <h3 class="font-bold text-amber-400 text-base mb-2">② Natural Vitamin C (12× orange)</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Vitamin C contributes to normal collagen formation, normal immune function and normal protection of cells from oxidative stress.</p>
           </div>
           <div class="bg-black/30 border border-purple-500/20 rounded-xl p-4">
-            <h3 class="font-bold text-purple-400 text-base mb-2">③ Antioxidant Shield</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">12x-orange Vitamin C + flavonoids neutralise oxidative stress driving ALT/AST elevation.</p>
+            <h3 class="font-bold text-purple-400 text-base mb-2">③ 190+ Phytonutrients</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Flavonoids (isorhamnetin, quercetin), carotenoids and polyphenols from the whole berry — not from an isolated oil extract.</p>
           </div>
         </div>
       </article>
@@ -192,75 +175,75 @@ const articleSchema = [
       <LearnBuyCard
         handle="sujata-sea-buckthorn-capsules"
         lang="en"
-        placement="liver-top"
-        badge="NAFLD Protocol • 1,300-1,950 mg/day"
+        placement="omega7-top"
+        badge="Daily Serving • 1-2 Capsules"
         heading="Sujata Himalayan Sea Buckthorn Capsules (650mg × 60)"
-        pitch="Wild Leh-Ladakh berries, cold-pressed whole-berry extract (not just oil). 0 g added sugar, safe with metformin and statins. 1 bottle = 1 month at the 2-capsule NAFLD protocol."
-        points={["Omega-7 lipokine mechanism (PMID 18805087)", "0 g added sugar, safe with diabetes medication", "Free COD + 90-day guarantee"]}
+        pitch="One month of the 1-2 capsule daily serving. Wild Leh-Ladakh berries, cold-pressed below 40 °C to protect Omega-7. A food supplement, not a medicine."
+        points={["Cold-pressed <40 °C — Omega-7 preserved", "190+ phytonutrients from whole-berry extract", "FSSAI Reg. #21526027000179"]}
       />
 
-      <!-- 2. Protocol table -->
+      <!-- 2. Everyday metabolic-wellness routine -->
       <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
         <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-amber-400">2.</span> 90-Day Fatty-Liver & Diabetes Protocol
+          <span class="text-amber-400">2.</span> An Everyday Metabolic-Wellness Routine
         </h2>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs sm:text-sm border-collapse">
-            <thead>
-              <tr class="border-b border-emerald-800 text-emerald-300">
-                <th class="py-3 px-3">Condition / Severity</th>
-                <th class="py-3 px-3 text-amber-400 font-bold">Daily Dose</th>
-                <th class="py-3 px-3">Blood Work Re-Test</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-emerald-950/60">
-              <tr><td class="py-3 px-3 text-white">NAFLD Grade 1 (mild)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,300 mg (2 caps)</td><td class="py-3 px-3 text-gray-300">ALT/AST at day 90</td></tr>
-              <tr><td class="py-3 px-3 text-white">NAFLD Grade 2-3</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,950 mg (3 caps)</td><td class="py-3 px-3 text-gray-300">ALT/AST at day 60 + 90</td></tr>
-              <tr><td class="py-3 px-3 text-white">Pre-diabetes (HbA1c 5.7-6.4)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,300 mg (2 caps)</td><td class="py-3 px-3 text-gray-300">HbA1c at day 90</td></tr>
-              <tr><td class="py-3 px-3 text-white">Type 2 Diabetes (adjunct)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,300-1,950 mg</td><td class="py-3 px-3 text-gray-300">HbA1c + fasting at day 90</td></tr>
-              <tr><td class="py-3 px-3 text-white">NAFLD + Diabetes (both)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,950 mg (3 caps)</td><td class="py-3 px-3 text-gray-300">Full panel at day 90</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="mt-4 text-xs text-amber-300/90 bg-amber-950/20 border border-amber-500/30 rounded-xl p-3">
-          ⚠️ Not a replacement for metformin, statins or physician-prescribed medication. Always inform your doctor before adding to your regimen.
+        <p class="text-sm text-gray-300 leading-relaxed mb-5">
+          Metabolic wellness is built on everyday habits: balanced meals, physical activity, sleep and hydration. A whole-food supplement like sea buckthorn can be part of that routine, alongside — never replacing — those habits and any medical care from your physician.
         </p>
-      </article>
-
-      <!-- 3. Lifestyle multiplier -->
-      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
-        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-amber-400">3.</span> The Lifestyle Multiplier (Supplement Alone Won't Fix It)
-        </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
-            <h3 class="font-bold text-emerald-400 text-base mb-2">🍚 Carb restriction</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Replace white rice + refined wheat with brown rice, millets, dal. NAFLD is 90% driven by refined carbs in India.</p>
+            <h3 class="font-bold text-emerald-400 text-base mb-2">🍚 Balanced plate</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Half the plate vegetables, one quarter protein (dal, paneer, egg), one quarter complex carb (brown rice, millet, roti). Fibre moderates post-meal blood-sugar swings — standard national dietary advice.</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
             <h3 class="font-bold text-amber-400 text-base mb-2">🚶 10,000 steps / day</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Non-exercise activity mobilises liver fat within 6-8 weeks. Even 30 min brisk walking triggers fatty-acid oxidation.</p>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">A daily brisk walk is one of the simplest everyday habits for an active lifestyle. Pair with 30 minutes of moderate movement for best general wellbeing.</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
             <h3 class="font-bold text-purple-400 text-base mb-2">💧 Zero sugary drinks</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Fructose from colas, packaged juices goes straight to liver fat. Replace with jeera-water, nimbu-paani (no sugar).</p>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Replace colas and packaged juices with jeera-water, plain buttermilk or nimbu-paani (no sugar). This is common nutritional advice for anyone building better daily habits.</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
-            <h3 class="font-bold text-emerald-400 text-base mb-2">😴 7-8 hr sleep</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Sleep deprivation raises cortisol which inhibits insulin. 5-6 hr sleep = +20% HbA1c risk in prediabetic patients.</p>
+            <h3 class="font-bold text-emerald-400 text-base mb-2">😴 7-8 hours of sleep</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Sleep is a foundation of metabolic wellbeing. Keep a consistent bedtime and avoid screens 30 minutes before sleep for the cleanest everyday rhythm.</p>
           </div>
         </div>
+        <p class="mt-4 text-xs text-amber-300/90 bg-amber-950/20 border border-amber-500/30 rounded-xl p-3">
+          ⚠️ Sujata Himalayan Sea Buckthorn is a food supplement, not a replacement for any physician-prescribed medication. Always speak with your doctor before adding a supplement to a medical routine.
+        </p>
       </article>
 
       <LearnBuyCard
         handle="sujata-spirulina-sea-buckthorn-combo-pack"
         lang="en"
-        placement="liver-combo"
-        badge="Metabolic Reset Combo"
+        placement="omega7-combo"
+        badge="Daily Nutrition Combo"
         heading="Spirulina + Himalayan Sea Buckthorn Combo"
-        pitch="Spirulina's C-phycocyanin independently improves insulin sensitivity (PMID 32805562). Combined with sea buckthorn's Omega-7, this is the strongest natural metabolic-reset stack for Indian NAFLD + diabetes patients."
-        points={["Dual-pathway attack on insulin resistance", "1, 2 or 3-month pack — 3-month gives full protocol", "Free COD + 90-day guarantee"]}
+        pitch="Pair spirulina's plant protein with sea buckthorn's Omega-7 in a single everyday routine. Two whole-food supplements — not medicines — chosen by customers looking for plant-forward daily nutrition."
+        points={["Plant protein + Omega-7 pairing", "1, 2 or 3-month pack", "Free COD pan-India via WhatsApp"]}
       />
+
+      <!-- 3. Reading list -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> Nutrition Reading List
+        </h2>
+        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+          Publicly indexed nutrition articles on sea buckthorn as a food. Provided for general reading only — not a medical claim and not a recommendation for any health condition.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/28672761/" target="_blank" rel="noopener noreferrer" class="bg-black/40 border border-white/10 rounded-xl p-4 hover:border-emerald-400/40 transition-colors">
+            <div class="text-emerald-400 font-bold text-[11px] uppercase">Nutrients</div>
+            <h3 class="font-bold text-white text-xs mt-1 mb-1.5">Hippophae rhamnoides phytochemistry</h3>
+            <p class="text-gray-400 text-[11px] leading-relaxed">PMID 28672761 — overview of bioactive nutrients.</p>
+          </a>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/15309440/" target="_blank" rel="noopener noreferrer" class="bg-black/40 border border-white/10 rounded-xl p-4 hover:border-emerald-400/40 transition-colors">
+            <div class="text-amber-400 font-bold text-[11px] uppercase">J Nutr Biochem</div>
+            <h3 class="font-bold text-white text-xs mt-1 mb-1.5">Palmitoleic acid in epithelial tissue</h3>
+            <p class="text-gray-400 text-[11px] leading-relaxed">PMID 15309440 — Omega-7 as a dietary fatty acid.</p>
+          </a>
+        </div>
+      </article>
 
       <!-- 4. FAQ -->
       <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
@@ -282,30 +265,6 @@ const articleSchema = [
           ))}
         </div>
       </section>
-
-      <!-- 5. Scientific citations -->
-      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
-        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
-          <span class="text-amber-400">5.</span> Peer-Reviewed Evidence
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-          <a href="https://pubmed.ncbi.nlm.nih.gov/18805087/" target="_blank" rel="noopener noreferrer" class="bg-black/40 border border-amber-500/30 rounded-xl p-4 hover:border-amber-400/40 transition-colors">
-            <div class="text-amber-300 font-bold text-[11px] uppercase">Cell · Landmark Paper</div>
-            <h3 class="font-bold text-white text-xs mt-1 mb-1.5">Palmitoleic Lipokine</h3>
-            <p class="text-gray-400 text-[11px] leading-relaxed">PMID 18805087 — Cao/Spiegelman classified Omega-7 as insulin-sensitising lipokine.</p>
-          </a>
-          <a href="https://pubmed.ncbi.nlm.nih.gov/32639477/" target="_blank" rel="noopener noreferrer" class="bg-black/40 border border-white/10 rounded-xl p-4 hover:border-emerald-400/40 transition-colors">
-            <div class="text-emerald-400 font-bold text-[11px] uppercase">Lipids Health Dis · Meta</div>
-            <h3 class="font-bold text-white text-xs mt-1 mb-1.5">Sea Buckthorn Lipid Meta</h3>
-            <p class="text-gray-400 text-[11px] leading-relaxed">PMID 32639477 — Pooled human trials confirm triglyceride and glucose reduction.</p>
-          </a>
-          <a href="https://pubmed.ncbi.nlm.nih.gov/28672761/" target="_blank" rel="noopener noreferrer" class="bg-black/40 border border-white/10 rounded-xl p-4 hover:border-emerald-400/40 transition-colors">
-            <div class="text-amber-400 font-bold text-[11px] uppercase">Nutrients</div>
-            <h3 class="font-bold text-white text-xs mt-1 mb-1.5">NAFLD Hepatoprotection</h3>
-            <p class="text-gray-400 text-[11px] leading-relaxed">PMID 28672761 — Hippophae reduces hepatic steatosis in model systems.</p>
-          </a>
-        </div>
-      </article>
 
     </div>
   </main>

@@ -26,15 +26,15 @@ const faqs = [
   },
   {
     question: "What is the best time of day to take spirulina?",
-    answer: "Morning between 7-9 AM is best for energy, immunity and weight loss. The B-vitamins and iron give you a natural energy lift that lasts the entire day. If you take a second dose, keep it before 3 PM — spirulina's tyrosine content can mildly stimulate the nervous system and may cause sleep disturbance if taken after sunset. Never take it just before bedtime."
+    answer: "Morning between 7-9 AM is a popular time for daily nutrition supplements. The B-vitamins contribute to normal energy-yielding metabolism. If you take a second serving, keep it before 3 PM — spirulina's tyrosine content can mildly stimulate the nervous system and may affect sleep if taken after sunset. Avoid taking it just before bedtime."
   },
   {
     question: "How many spirulina tablets should I take per day?",
-    answer: "Standard adult maintenance dose: 2 capsules (1,000 mg) daily. For anemia or iron deficiency: 4 capsules (2,000 mg), split morning and afternoon. For weight loss or fitness: 4-6 capsules (2,000-3,000 mg), taken before meals. For heavy training athletes: up to 10 capsules (5,000 mg). The WHO safe upper limit for adults is 10 grams/day — do not exceed. Children 6-12 years: 500 mg (1 capsule) daily, after breakfast only."
+    answer: "Standard adult daily serving: 2 capsules (1,000 mg). Active adults may take up to 4 capsules (2,000 mg), split morning and afternoon. Heavy-training athletes may take up to 10 capsules (5,000 mg) with physician guidance. The WHO safe upper intake for healthy adults is 10 g per day — do not exceed. Children 6-12 years: 500 mg (1 capsule) daily, after breakfast only, with parental consent. Pregnant/lactating women and anyone on prescribed medicine should consult a physician before use."
   },
   {
     question: "How long should I take spirulina to see results?",
-    answer: "Realistic timeline for Sujata Spirulina: Week 1-2 — mild energy boost and darker urine (detox); Week 3-4 — reduced afternoon fatigue, hemoglobin starts rising; Week 5-8 — visible skin glow, reduced hair fall, 1-2 kg weight loss if calorie-controlled; Week 9-12 — full blood work improvement (Hb, ferritin, cholesterol). Blood is replaced every 90 days, so the full cellular benefit requires at least one 90-day cycle. Do not expect results in 1 week — spirulina is not a stimulant, it is a nutrient."
+    answer: "A sensible personal review window for any daily food supplement is 90 days of consistent use. Spirulina is a whole-food supplement, not a stimulant, so changes build gradually alongside the rest of your diet and lifestyle. There are no promised outcomes and individual experience varies. For a medically tracked parameter, your treating physician is the right person to set expectations and review your blood work."
   },
   {
     question: "Can I take spirulina with other supplements or medications?",
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     question: "What are the 5 most common mistakes when taking spirulina?",
-    answer: "(1) Taking it with milk or dairy — kills iron absorption. (2) Taking it on empty stomach first thing — causes nausea. (3) Expecting results in 1 week — this is biology, not a stimulant. (4) Not drinking 2.5-3 litres of water — spirulina is a detox, needs fluid to flush toxins. (5) Taking it after sunset — the tyrosine may disturb sleep. Fix all 5, and spirulina works like a miracle in 90 days."
+    answer: "(1) Taking it with milk or dairy — reduces non-heme iron absorption. (2) Taking it on empty stomach first thing — can cause nausea in sensitive people. (3) Expecting rapid results — spirulina is a food supplement, not a stimulant, and changes build gradually. (4) Not drinking 2.5-3 litres of water — basic daily-hydration guidance. (5) Taking it after sunset — the tyrosine content may affect sleep. Fix all 5, and spirulina fits cleanly into a steady 90-day daily routine."
   }
 ];
 
@@ -59,7 +59,7 @@ const articleSchema = [
     "dateModified": new Date().toISOString(),
     "author": {
       "@type": "Organization",
-      "name": "Sujata Nutrilive Clinical Research Team",
+      "name": "Sujata Nutrilive Nutrition Research Team",
       "url": "https://www.sujatanutrilive.com"
     },
     "publisher": {
@@ -89,8 +89,8 @@ const articleSchema = [
       { "@type": "HowToStep", "name": "Step 2 — Breakfast first", "text": "Eat a light breakfast (idli, poha, upma, or oats + fruit). Taking spirulina on a completely empty stomach can cause mild nausea in sensitive people." },
       { "@type": "HowToStep", "name": "Step 3 — Take the capsules", "text": "30 minutes after breakfast, swallow 2 capsules (1,000 mg) with the prepared warm water. The capsule shell dissolves in 5 minutes." },
       { "@type": "HowToStep", "name": "Step 4 — Hydrate through the day", "text": "Drink 2.5 to 3 litres of water. Spirulina is a natural detox and needs fluid volume to flush toxins and iron oxide out through urine." },
-      { "@type": "HowToStep", "name": "Step 5 — Second dose (optional)", "text": "For anemia or weight loss, take a second 1,000 mg dose after lunch (before 3 PM). Never take spirulina after sunset, as tyrosine can disturb sleep." },
-      { "@type": "HowToStep", "name": "Step 6 — Review at day 30 and day 90", "text": "Energy and skin changes appear by week 3-4. Hemoglobin and cholesterol improvement show at the 90-day blood test. Full cellular turnover takes 90 days." }
+      { "@type": "HowToStep", "name": "Step 5 — Second serving (optional)", "text": "Active adults may add a second 1,000 mg serving after lunch (before 3 PM). Avoid spirulina after sunset, as tyrosine can affect sleep." },
+      { "@type": "HowToStep", "name": "Step 6 — Personal review at day 30 and day 90", "text": "A food supplement works gradually alongside diet and lifestyle. Review how you feel at day 30 and day 90. For any medically tracked parameter, your physician is the right person to review." }
     ]
   },
   {
@@ -143,7 +143,7 @@ const articleSchema = [
       </h1>
 
       <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
-        2 capsules (1,000 mg), 30 minutes after breakfast, with 250 ml of warm water. Never with milk. Never hot water. This 6-step protocol maximises absorption of spirulina's 62.39% plant protein and 290.89 mg/kg iron.
+        2 capsules (1,000 mg), 30 minutes after breakfast, with 250 ml of warm water. Never with milk. Never hot water. A 6-step daily routine to help your body absorb spirulina's 62.39% plant protein and 290.89 mg/kg natural iron.
       </p>
 
       <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
@@ -153,7 +153,7 @@ const articleSchema = [
         </div>
         <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
           <strong class="text-amber-300 font-bold">How to take spirulina (short answer):</strong>
-          Take <strong class="text-emerald-300">2 capsules (1,000 mg)</strong> of Sujata Spirulina <strong class="text-emerald-300">30 minutes after breakfast</strong> with <strong class="text-amber-300">250 ml of warm water</strong> (not hot, not milk). For anemia or weight loss, add a second 1,000 mg dose after lunch (before 3 PM). Drink 2.5-3 litres of water daily. Avoid taking it after sunset. First visible results: week 3-4. Full cellular benefit: 90 days.
+          Take <strong class="text-emerald-300">2 capsules (1,000 mg)</strong> of Sujata Spirulina <strong class="text-emerald-300">30 minutes after breakfast</strong> with <strong class="text-amber-300">250 ml of warm water</strong> (not hot, not milk). Active adults may add a second 1,000 mg serving after lunch (before 3 PM). Drink 2.5-3 litres of water daily. Avoid taking it after sunset. Review your routine at day 30 and day 90. Spirulina is a food supplement — not a medicine.
         </p>
       </div>
     </div>
@@ -186,11 +186,11 @@ const articleSchema = [
           </li>
           <li class="flex gap-3">
             <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">5</span>
-            <div><strong class="text-white">Optional second dose</strong> of 1,000 mg after lunch (before 3 PM) for anemia, hair fall or weight loss. Not after sunset.</div>
+            <div><strong class="text-white">Optional second serving</strong> of 1,000 mg after lunch (before 3 PM) for active adults. Not after sunset.</div>
           </li>
           <li class="flex gap-3">
             <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">6</span>
-            <div><strong class="text-white">Review at day 30 and day 90.</strong> Energy improves week 3-4. Hemoglobin and cholesterol show at the 90-day blood test.</div>
+            <div><strong class="text-white">Review at day 30 and day 90.</strong> Nutrition changes are gradual. Any medically tracked parameter should be reviewed by your physician.</div>
           </li>
         </ol>
       </article>
@@ -202,7 +202,7 @@ const articleSchema = [
         badge="Correct Dose • 1 Month Pack"
         heading="Sujata Spirulina Capsules (500mg × 60)"
         pitch="Exactly 1 month of the 1,000 mg daily protocol. 62.39% lab-verified plant protein, dissolves in 5 minutes, odourless veg capsule."
-        points={["Lilaba NABL Lab Report #LAL-NN-131125023", "₹499 — ₹15 per day of the full protocol", "180-capsule 3-month pack for anemia / weight loss"]}
+        points={["Lilaba NABL Lab Report #LAL-NN-131125023", "₹499 — about ₹15 per day of the daily routine", "180-capsule 3-month pack available for the 90-day routine"]}
       />
 
       <!-- 2. Dosage Chart -->
@@ -223,8 +223,8 @@ const articleSchema = [
             <tbody class="divide-y divide-emerald-950/60">
               <tr><td class="py-3 px-3 text-white">Children (6-12 yrs)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1</td><td class="py-3 px-3 text-emerald-200 font-bold">500 mg</td><td class="py-3 px-3 text-gray-300">After breakfast</td></tr>
               <tr><td class="py-3 px-3 text-white">Teen / Adult maintenance</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">2</td><td class="py-3 px-3 text-emerald-200 font-bold">1,000 mg</td><td class="py-3 px-3 text-gray-300">After breakfast</td></tr>
-              <tr><td class="py-3 px-3 text-white">Anemia / low energy</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">4</td><td class="py-3 px-3 text-emerald-200 font-bold">2,000 mg</td><td class="py-3 px-3 text-gray-300">2 breakfast + 2 lunch</td></tr>
-              <tr><td class="py-3 px-3 text-white">Weight loss / fitness</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">4-6</td><td class="py-3 px-3 text-emerald-200 font-bold">2,000-3,000 mg</td><td class="py-3 px-3 text-gray-300">Before meals</td></tr>
+              <tr><td class="py-3 px-3 text-white">Active adult (higher intake)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">4</td><td class="py-3 px-3 text-emerald-200 font-bold">2,000 mg</td><td class="py-3 px-3 text-gray-300">2 breakfast + 2 lunch</td></tr>
+              <tr><td class="py-3 px-3 text-white">High-protein fitness routine</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">4-6</td><td class="py-3 px-3 text-emerald-200 font-bold">2,000-3,000 mg</td><td class="py-3 px-3 text-gray-300">Before meals</td></tr>
               <tr><td class="py-3 px-3 text-white">Heavy training athlete</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">6-10</td><td class="py-3 px-3 text-emerald-200 font-bold">3,000-5,000 mg</td><td class="py-3 px-3 text-gray-300">Pre + post workout</td></tr>
               <tr><td class="py-3 px-3 text-white">WHO safe upper limit</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">—</td><td class="py-3 px-3 text-amber-300 font-bold">10,000 mg</td><td class="py-3 px-3 text-gray-300">Never exceed</td></tr>
             </tbody>
@@ -251,8 +251,8 @@ const articleSchema = [
             <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Mild chlorophyll can cause nausea. Eat a light breakfast first, then take spirulina 30 minutes later.</p>
           </div>
           <div class="bg-black/30 border border-red-500/20 rounded-xl p-4">
-            <h3 class="font-bold text-red-400 text-base mb-2">④ Expecting 1-week miracles</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Spirulina is a nutrient, not a stimulant. Visible results take 3-4 weeks. Full cellular benefit = 90 days.</p>
+            <h3 class="font-bold text-red-400 text-base mb-2">④ Expecting 1-week changes</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Spirulina is a food supplement, not a stimulant. Nutrition builds gradually. A sensible personal review window is 90 days.</p>
           </div>
           <div class="bg-black/30 border border-red-500/20 rounded-xl p-4 sm:col-span-2">
             <h3 class="font-bold text-red-400 text-base mb-2">⑤ Not drinking enough water</h3>

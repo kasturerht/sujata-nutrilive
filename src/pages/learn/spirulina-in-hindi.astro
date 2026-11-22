@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     question: "स्पिरुलिना खाने के मुख्य फायदे क्या हैं? (Spirulina ke Fayde)",
-    answer: "1. 290.89 mg/kg प्राकृतिक आयरन से हीमोग्लोबिन व एनीमिया में सुधार। 2. दोपहर की थकान और सुस्ती दूर कर दिनभर स्थिर ऊर्जा। 3. C-फाइकोसायनिन से रोग-प्रतिरोधक क्षमता बढ़ती है। 4. त्वचा पर प्राकृतिक निखार, मुंहासों में कमी और बालों का झड़ना कम। 5. 62.39% शाकाहारी प्लांट प्रोटीन सभी 9 आवश्यक अमीनो एसिड के साथ। 6. LDL कोलेस्ट्रॉल और ब्लड प्रेशर संतुलित करने में सहायक। 7. ब्लड शुगर व HbA1c स्थिर रखने में मदद।"
+    answer: "सुजाता स्पिरुलिना एक पौधों पर आधारित होल-फूड सप्लीमेंट है जिसमें प्राकृतिक पोषक तत्व मौजूद हैं: 1. 290.89 mg/kg प्राकृतिक प्लांट आयरन (आयरन सामान्य रक्त-कोशिका निर्माण में योगदान करता है)। 2. 62.39% शाकाहारी संपूर्ण प्लांट प्रोटीन, सभी 9 आवश्यक अमीनो एसिड के साथ। 3. 1,407.91 mg/kg प्राकृतिक कैल्शियम। 4. B-विटामिन जो सामान्य ऊर्जा-यिल्डिंग मेटाबॉलिज़्म में योगदान देते हैं। 5. प्राकृतिक क्लोरोफिल और कैरोटीनॉइड्स। यह एक खाद्य सप्लीमेंट है, किसी रोग का इलाज नहीं — संतुलित आहार और डॉक्टर की सलाह का विकल्प नहीं है।"
   },
   {
     question: "स्पिरुलिना कैसे और कब लें? सही खुराक क्या है?",
@@ -37,8 +37,8 @@ const faqs = [
     answer: "1. फिनाइलकीटोन्यूरिया (PKU) के दुर्लभ आनुवंशिक रोगी - स्पिरुलिना में फिनाइलऐलेनिन अमीनो एसिड होता है। 2. गंभीर ऑटोइम्यून रोगी (Lupus, MS) जो इम्युनोसप्रेसेंट दवा ले रहे हैं, बिना डॉक्टर सलाह के न लें। 3. गंभीर किडनी रोगी जिन्हें प्रोटीन/पोटैशियम पर पाबंदी है। 4. सर्जरी से 2 हफ्ते पहले बंद कर दें। गर्भवती व स्तनपान कराने वाली माताएं डॉक्टर से परामर्श के बाद ही लें।"
   },
   {
-    question: "क्या शुगर, थायरॉइड या हाई बीपी के मरीज स्पिरुलिना ले सकते हैं?",
-    answer: "हां, तीनों के लिए सुरक्षित माना जाता है। सुजाता स्पिरुलिना 0% चीनी, 0% फिलर है। क्लिनिकल अध्ययनों में C-फाइकोसायनिन इंसुलिन संवेदनशीलता में सुधार और धमनियों का लचीलापन बनाए रखने में मददगार पाया गया है। नियमित दवाओं और स्पिरुलिना के बीच 1 घंटे का अंतर रखें और अपने डॉक्टर को सूचित करें।"
+    question: "यदि मैं दवाइयां ले रहा/रही हूं तो क्या मुझे स्पिरुलिना से पहले डॉक्टर से बात करनी चाहिए?",
+    answer: "हां, अवश्य। सुजाता स्पिरुलिना एक खाद्य सप्लीमेंट है, दवा नहीं। यदि आप किसी भी दीर्घकालिक दवा पर हैं, तो स्पिरुलिना शुरू करने से पहले अपने उपचार कर रहे डॉक्टर से परामर्श करें। स्पिरुलिना 0% चीनी और 0% फिलर है। किसी भी निर्धारित दवा और स्पिरुलिना के बीच कम से कम 1 घंटे का अंतर रखें और अपनी दवाओं की पूरी सूची अपने डॉक्टर के साथ साझा करें।"
   },
   {
     question: "सुजाता स्पिरुलिना की कीमत कितनी है और कैसे ऑर्डर करें?",
@@ -48,7 +48,7 @@ const faqs = [
 
 const articleAndFaqSchema = [
   {
-    "@type": ["Article", "MedicalWebPage"],
+    "@type": "Article",
     "@id": `${pageUrl}/#article`,
     "headline": "Spirulina in Hindi: स्पिरुलिना क्या है? फायदे, खुराक और कीमत (2026)",
     "description": pageDescription,
@@ -59,7 +59,7 @@ const articleAndFaqSchema = [
     "dateModified": new Date().toISOString(),
     "author": {
       "@type": "Organization",
-      "name": "Sujata Nutrilive Clinical Research Team",
+      "name": "Sujata Nutrilive Nutrition Research Team",
       "url": "https://www.sujatanutrilive.com"
     },
     "publisher": {
@@ -235,8 +235,8 @@ const articleAndFaqSchema = [
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
-            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🩸 1. हीमोग्लोबिन और एनीमिया में सुधार</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">290.89 mg/kg प्राकृतिक आयरन (Non-Heme Iron) शरीर में धीरे-धीरे अवशोषित होता है, जिससे कब्ज़ नहीं होती और हीमोग्लोबिन का स्तर स्थायी रूप से बढ़ता है।</p>
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🩸 1. प्राकृतिक प्लांट आयरन</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">290.89 mg/kg प्राकृतिक नॉन-हीम आयरन, विटामिन C और बीटा-कैरोटीन के सह-कारकों के साथ। आयरन सामान्य रक्त-कोशिका निर्माण और ऑक्सीजन परिवहन में योगदान करता है।</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
             <h3 class="font-bold text-amber-400 text-base mb-1.5">⚡ 2. दिन भर ताज़गी भरी ऊर्जा</h3>
@@ -255,8 +255,8 @@ const articleAndFaqSchema = [
             <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">62.39% शुद्ध प्लांट प्रोटीन (Lilaba Lab-verified) में शरीर के लिए ज़रूरी सभी 9 अमीनो एसिड शामिल हैं।</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
-            <h3 class="font-bold text-amber-400 text-base mb-1.5">❤️ 6. कोलेस्ट्रॉल और ब्लड प्रेशर नियंत्रण</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">LDL (खराब कोलेस्ट्रॉल) और ट्राइग्लिसराइड्स कम कर HDL बढ़ाने में सहायक, धमनियों का लचीलापन बनाए रखता है।</p>
+            <h3 class="font-bold text-amber-400 text-base mb-1.5">❤️ 6. हृदय-स्वस्थ आहार का हिस्सा</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">0 g संतृप्त वसा और 0 g अतिरिक्त चीनी — एक संतुलित, हृदय-स्वस्थ प्लांट-फॉरवर्ड आहार में आसानी से फिट होता है।</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
             <h3 class="font-bold text-emerald-400 text-base mb-1.5">👁️ 7. आंखों की रोशनी और सूखापन</h3>
@@ -267,8 +267,8 @@ const articleAndFaqSchema = [
             <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">0% वसा, 62.39% प्रोटीन - भोजन से पहले गुनगुने पानी के साथ लेने पर भूख नियंत्रित होती है।</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
-            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🩺 9. ब्लड शुगर और डायबिटीज सपोर्ट</h3>
-            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">C-फाइकोसायनिन अग्न्याशय (Pancreas) की कोशिकाओं को ऑक्सीडेटिव तनाव से बचाकर इंसुलिन संवेदनशीलता सुधारता है।</p>
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🥗 9. 0 g चीनी, 0 g फिलर</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">शुद्ध स्पिरुलिना के अलावा कुछ नहीं — कोई चीनी, रंग, संरक्षक या कृत्रिम स्वाद नहीं। लो-GI आहार योजना में सहजता से शामिल।</p>
           </div>
           <div class="bg-black/30 border border-white/5 rounded-xl p-4">
             <h3 class="font-bold text-amber-400 text-base mb-1.5">⏳ 10. कोशिकीय सुरक्षा और युवा त्वचा</h3>
@@ -344,7 +344,7 @@ const articleAndFaqSchema = [
             </thead>
             <tbody class="divide-y divide-emerald-950/60">
               <tr><td class="py-3 px-3 text-white">सामान्य वयस्क</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,000-2,000 mg</td><td class="py-3 px-3 text-gray-300">नाश्ते के बाद</td></tr>
-              <tr><td class="py-3 px-3 text-white">एनीमिया / थकान</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,500-3,000 mg</td><td class="py-3 px-3 text-gray-300">सुबह + दोपहर</td></tr>
+              <tr><td class="py-3 px-3 text-white">सक्रिय वयस्क</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,500-3,000 mg</td><td class="py-3 px-3 text-gray-300">सुबह + दोपहर</td></tr>
               <tr><td class="py-3 px-3 text-white">फिटनेस / प्रोटीन</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">3,000-5,000 mg</td><td class="py-3 px-3 text-gray-300">वर्कआउट से पहले</td></tr>
               <tr><td class="py-3 px-3 text-white">त्वचा / बाल</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,000 mg</td><td class="py-3 px-3 text-gray-300">नाश्ते के बाद, लगातार 90 दिन</td></tr>
             </tbody>
