@@ -856,6 +856,7 @@ const primaryIdentifiers = resolveVariantIdentifiers(variants[0], 0);
 // 🌟 Silicon Valley Dynamic Multi-Variant Offer Graph (Google Merchant Center 2026 Compliant)
 const offerShippingDetails = {
   "@type": "OfferShippingDetails",
+  "name": "Free Express Delivery",
   "shippingRate": {
     "@type": "MonetaryAmount",
     "value": "0",
@@ -882,13 +883,19 @@ const offerShippingDetails = {
   }
 };
 
+// 90-Day Satisfaction Return (matches sitewide policy post Tier-2 remediation).
+// No outcome guarantee — satisfaction basis only. Full-refund type.
 const offerReturnPolicy = {
   "@type": "MerchantReturnPolicy",
+  "@id": `${siteUrl}/#merchant-return-policy`,
+  "name": "Sujata 90-Day Satisfaction Return Policy",
   "applicableCountry": "IN",
   "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-  "merchantReturnDays": 40,
+  "merchantReturnDays": 90,
   "returnMethod": "https://schema.org/ReturnByMail",
-  "returnFees": "https://schema.org/FreeReturn"
+  "returnFees": "https://schema.org/FreeReturn",
+  "refundType": "https://schema.org/FullRefund",
+  "customerRemorseReturnFees": "https://schema.org/FreeReturn"
 };
 
 const variantOfferList = variants.length > 0 

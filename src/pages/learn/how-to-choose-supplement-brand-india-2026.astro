@@ -1,0 +1,276 @@
+---
+// src/pages/learn/how-to-choose-supplement-brand-india-2026.astro
+// Competitor-alternative traffic capture. Targets buyers searching "[brand]
+// alternative", "better than [brand]", "which supplement brand is best in
+// India 2026". Uses only factual, verifiable criteria. No disparagement, no
+// trademark attack, no outcome promises.
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+import { getCatalogProducts, formatINR } from '../../lib/catalog';
+
+const catalog = await getCatalogProducts(['sujata-spirulina-capsules', 'sujata-sea-buckthorn-capsules']);
+const spCapsPrice = formatINR(Math.min(...catalog['sujata-spirulina-capsules'].variants.map((v) => v.price)));
+const sbCapsPrice = formatINR(Math.min(...catalog['sujata-sea-buckthorn-capsules'].variants.map((v) => v.price)));
+
+const pageTitle = "How to Choose a Supplement Brand in India (2026 Buyer's Checklist)";
+const pageDescription = "A pragmatic 2026 buyer's checklist for Indian supplement brands. FSSAI verification, public batch COA, cultivation transparency, binder audit, per-day price. Works for spirulina, sea buckthorn, shilajit, B12 and plant proteins. Food supplements, not medicines.";
+const pageUrl = "https://www.sujatanutrilive.com/learn/how-to-choose-supplement-brand-india-2026";
+
+const faqs = [
+  {
+    question: "What is the fastest way to filter out a weak supplement brand in India?",
+    answer: "Ask for one document: the batch-specific lab report. A credible brand will send you a dated, NABL-accredited Certificate of Analysis for the exact lot you are about to purchase, within the hour. Most market brands either do not have one, or send a generic marketing certificate from several years ago. Sujata Nutrilive publishes Lilaba lab report #LAL-NN-131125023 for its spirulina upfront on the Science page."
+  },
+  {
+    question: "Which supplement brand has the strongest documentation transparency in India in 2026?",
+    answer: "On the specific test of 'does the brand publish a public, dated, batch-specific NABL-accredited Certificate of Analysis before you pay', Sujata Nutrilive is one of the few in the direct-to-consumer Indian supplement segment that does so for spirulina and sea buckthorn. Many commodity brands sell on marketplaces with label-only percentage claims and no corresponding public COA. Ask every brand on your shortlist for their batch report."
+  },
+  {
+    question: "Is a brand with more Amazon reviews automatically better than a lab-verified smaller brand?",
+    answer: "No. Review count is a marketing/distribution signal, not a purity signal. Many commodity brands generate high review volume through heavy marketplace advertising while still using open-pond, undocumented spirulina or diluted sea buckthorn oil. The purity-and-transparency signal to trust is a brand's ability to produce a batch Certificate of Analysis on request from an NABL/ILAC-accredited lab. Combine review signal with lab signal before you buy."
+  },
+  {
+    question: "What does FSSAI manufacturer vs trader licence mean, and why should I care?",
+    answer: "An FSSAI 'manufacturer' licence means the brand controls the production facility — you can trace a problem back to a specific factory. An FSSAI 'trader' or 'marketer' licence means the brand only repackages or imports product; the actual manufacturer may be a third party and traceability is weaker. Check the FSSAI number on the pack against the public FSS database. Sujata Nutrilive operates under FSSAI manufacturer licence #21526027000179."
+  },
+  {
+    question: "Which Indian supplements commonly have label-only percentage claims?",
+    answer: "Plant protein isolates, spirulina/moringa powders, Himalayan shilajit (where 'fulvic acid %' is routinely claimed without batch COA) and 'premium' sea buckthorn oils are the categories where label-only claims are most common. For each, ask the brand for a dated batch COA before paying. If the number is real, the paperwork exists. If not, you will get an evasive reply or a generic marketing PDF."
+  },
+  {
+    question: "Why is cultivation origin a legitimate filter and not just marketing?",
+    answer: "Because the raw material determines the final product. Closed hydro-dome spirulina (from a sealed, filtered-water facility) carries a very different contamination risk profile than open-raceway spirulina. Wild Leh-Ladakh sea buckthorn has a measurably different phytonutrient density than lower-altitude plantation stock. Pure Himalayan shilajit's trace-mineral profile depends on the exact altitude of extraction. A brand that will not state its cultivation/harvest origin is asking you to buy on trust alone."
+  },
+  {
+    question: "How do I compare per-day cost fairly across brands?",
+    answer: `Convert every bottle to a cost-per-day at the recommended daily serving on the label. Sujata Spirulina Capsules are ${spCapsPrice}/60 caps at 2/day = about ₹15/day. Sujata Himalayan Sea Buckthorn is ${sbCapsPrice}/60 caps at 2/day = about ₹21/day. Juice formats often look cheaper per bottle but the daily dose is a full 30-50 ml, which pushes the daily cost higher. Always normalise to per-day.`
+  },
+  {
+    question: "What return policy should I expect from an honest Indian supplement brand?",
+    answer: "A satisfaction-based 90-day return is the honest market norm. A brand that promises a specific health outcome ('you will lose X kg', 'your hemoglobin will rise by Y g/dL') is making a medical claim that supplements cannot legally make under FSSAI's Advertising and Claims Regulations 2018 and the Maharashtra FDA's Nov 2026 enforcement order. Sujata Nutrilive offers a 90-Day Satisfaction Return (see /refund-policy for the full terms) and makes no health-outcome guarantee."
+  }
+];
+
+const articleSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}/#article`,
+    "headline": "How to Choose a Supplement Brand in India (2026 Buyer's Checklist)",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-combo-spirulina-sea-buckthorn.jpg",
+    "inLanguage": "en-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-11-22T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Nutrition Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
+    }
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "How to Choose a Supplement Brand in India 2026", "item": pageUrl }
+    ]
+  }
+];
+
+const criteria = [
+  { emoji: '📄', title: 'Public batch COA', detail: 'Dated. Batch-specific. NABL/ILAC-accredited lab. Published on the brand\'s own site or sent on request within the hour.' },
+  { emoji: '🏭', title: 'FSSAI manufacturer licence', detail: 'The number on the pack should resolve to a MANUFACTURER category on the FSS public database — not a trader-only licence.' },
+  { emoji: '🌱', title: 'Cultivation origin declared', detail: 'Farm address, altitude, open-pond vs closed-dome / wild vs plantation. If the brand will not say, assume commodity.' },
+  { emoji: '🌡️', title: 'Processing temperature disclosed', detail: 'Cold-dried spirulina (sub-40 °C) vs spray-dried (160-180 °C). Cold-pressed sea buckthorn (sub-40 °C) vs heat-extracted.' },
+  { emoji: '🧪', title: 'Heavy-metal panel with numbers', detail: 'Lead, Arsenic, Mercury — real ppm values, not a tick mark. India\'s FSS limits are the floor, not the target.' },
+  { emoji: '💊', title: 'Capsule or tablet composition', detail: '100% vegetarian cellulose shell. Zero talc, zero chemical binder, zero magnesium stearate on tablets.' },
+  { emoji: '💰', title: 'Fair per-day price', detail: 'Convert every bottle to per-day cost at the label serving. For lab-verified plant supplements in 2026 India, ₹10-₹25/day is the sensible range.' },
+  { emoji: '🧾', title: 'Satisfaction-based return', detail: 'A 90-day satisfaction return is honest. "Money-back if you don\'t feel vitality improve" is a medical outcome promise, which supplements cannot legally make.' },
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-combo-spirulina-sea-buckthorn.jpg"
+  extraSchema={articleSchema}
+>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">Home</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">Science</a>
+        <span>/</span>
+        <span class="text-white">Supplement Brand Checklist 2026</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>8-Point Checklist • Any Supplement Category • 2026 Edition</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        How to Choose a Supplement Brand in India (2026): <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">The 8-Point Buyer's Checklist</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        A pragmatic, category-agnostic checklist for every Indian supplement buyer in 2026. Works for spirulina, sea buckthorn, plant B12, shilajit, moringa and plant proteins. Food supplements are not medicines; this guide filters for food-safety transparency, not health outcomes.
+      </p>
+
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">Direct Answer</span>
+          <span class="text-xs text-emerald-300 font-semibold">Buyer-Decision Framing</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">What is the single best filter when choosing an Indian supplement brand in 2026?</strong>
+          <strong class="text-emerald-300">A public, dated, batch-specific Certificate of Analysis from an NABL/ILAC-accredited lab.</strong> If the brand cannot show you the paperwork for the exact bottle you are about to pay for, every other marketing signal (review count, price, packaging) is unverified. Sujata Nutrilive publishes Lilaba lab report #LAL-NN-131125023 on the Science page.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. The 8-point checklist -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> The 8-Point Buyer's Checklist
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          {criteria.map((c, idx) => (
+            <div class={`bg-black/30 border rounded-xl p-4 ${idx % 2 === 0 ? 'border-emerald-500/20' : 'border-amber-500/20'}`}>
+              <h3 class={`font-bold text-base mb-2 flex items-center gap-2 ${idx % 2 === 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                <span class="text-xl">{c.emoji}</span>
+                <span>{c.title}</span>
+              </h3>
+              <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">{c.detail}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-capsules"
+        lang="en"
+        placement="brand-checklist-top"
+        badge="Passes 8/8 Checklist Items"
+        heading="Sujata Spirulina Capsules (500mg × 60)"
+        pitch={`${spCapsPrice} per bottle · about ₹15/day. Public Lilaba NABL lab report #LAL-NN-131125023. FSSAI manufacturer #21526027000179. Closed hydro-dome Nashik. Cold-air dehydration under 40 °C.`}
+        points={["Public batch Certificate of Analysis", "0 g sugar, 0 g lactose, 0 g binder", "Free Express Delivery + Cash on Delivery"]}
+      />
+
+      <!-- 2. Comparative shopper: what to ask the other brand -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> Shopping for a Specific Brand Alternative? Ask These Three Questions
+        </h2>
+        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+          If you are comparing Sujata Nutrilive to any other Indian supplement brand before you pay, send that brand the three questions below. Their reply tells you everything you need. Sujata's answers appear underneath each question.
+        </p>
+        <div class="space-y-5">
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5">
+            <h3 class="font-bold text-amber-400 text-sm sm:text-base mb-2">① "Please send me the batch-specific Certificate of Analysis for the bottle I will receive."</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">A credible brand replies within the hour with a dated NABL/ILAC-accredited lab report that matches the batch code on the bottle. Sujata's current published COA: Lilaba report #LAL-NN-131125023, dated 17 Nov 2025, for spirulina powder from batch SP/SS/Nov01/2025.</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5">
+            <h3 class="font-bold text-amber-400 text-sm sm:text-base mb-2">② "What is the FSSAI manufacturer licence number and where is the factory located?"</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">You should receive a specific licence number (manufacturer category, not trader) and a verifiable factory address. Sujata operates under FSSAI #21526027000179, with production in Nashik, Maharashtra.</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5">
+            <h3 class="font-bold text-amber-400 text-sm sm:text-base mb-2">③ "At what temperature is the raw material dried / extracted, and what is the cultivation source?"</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">You should receive a specific temperature (spray-dried commodity is typically 160-180 °C; premium is sub-40 °C cold-air) and a specific cultivation method (closed hydro-dome vs open-pond, wild vs plantation). Sujata's spirulina is closed hydro-dome cultivated in Nashik and cold-air dehydrated below 40 °C. Sea buckthorn is wild-harvested in Leh-Ladakh and cold-pressed below 40 °C.</p>
+          </div>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-sea-buckthorn-capsules"
+        lang="en"
+        placement="brand-checklist-sb"
+        badge="7/7 Sea-Buckthorn Purity Checklist"
+        heading="Sujata Himalayan Sea Buckthorn Capsules (650mg × 60)"
+        pitch={`${sbCapsPrice} per bottle. Wild Leh-Ladakh berries. Cold-pressed <40 °C. Whole-berry extract (not just seed oil). 0 g added sugar, 0 g preservative.`}
+        points={["Wild-harvested Himalayan berries", "190+ phytonutrients, Vitamin C (12× orange)", "Free Express Delivery + COD"]}
+      />
+
+      <!-- 3. Price benchmark -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> Fair Per-Day Price Ranges in India (2026)
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">Category</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Fair Per-Day Range</th>
+                <th class="py-3 px-3">Sujata Per-Day</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr><td class="py-3 px-3 text-white">Spirulina (capsules/tablets, 1 g/day)</td><td class="py-3 px-3 text-gray-300">₹10-₹30/day</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">~₹15/day</td></tr>
+              <tr><td class="py-3 px-3 text-white">Sea buckthorn (whole-berry capsules)</td><td class="py-3 px-3 text-gray-300">₹18-₹40/day</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">~₹21/day</td></tr>
+              <tr><td class="py-3 px-3 text-white">Plant-based B12 (methylcobalamin)</td><td class="py-3 px-3 text-gray-300">₹8-₹18/day</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">Sujata plant B12 available</td></tr>
+              <tr><td class="py-3 px-3 text-white">Himalayan shilajit (purified)</td><td class="py-3 px-3 text-gray-300">₹20-₹60/day</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">Sujata Pure Shilajit available</td></tr>
+              <tr><td class="py-3 px-3 text-white">Moringa powder (3 g/day)</td><td class="py-3 px-3 text-gray-300">₹5-₹15/day</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">Sujata Moringa Powder available</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-emerald-200/80 bg-emerald-950/30 border border-emerald-500/20 rounded-xl p-3">
+          Per-day prices are indicative November 2026. Always normalise to the per-day cost at the label serving before comparing across brands.
+        </p>
+      </article>
+
+      <!-- 4. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">4.</span> Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="how-to-choose-supplement-brand-india-2026" />
+  <StoreFooter />
+</StoreLayout>

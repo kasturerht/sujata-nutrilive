@@ -1,0 +1,327 @@
+---
+// src/pages/learn/best-spirulina-brands-india-2026-comparison.astro
+// Commercial-intent, buyer-decision asset — head-to-head comparison of spirulina
+// brands available in India in 2026, ranked by VERIFIABLE purity criteria only
+// (public batch COA, NABL lab testing, cultivation method, heavy-metal data).
+// Sujata placed #1 on factual grounds — Lilaba Lab report #LAL-NN-131125023.
+// Compliance: no disease claims, no outcome guarantees, no "clinically proven".
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+import { getCatalogProducts, formatINR } from '../../lib/catalog';
+
+const catalog = await getCatalogProducts(['sujata-spirulina-capsules', 'sujata-spirulina-tablets', 'sujata-spirulina-powder']);
+const capsulesPrice = formatINR(Math.min(...catalog['sujata-spirulina-capsules'].variants.map((v) => v.price)));
+const tabletsPrice = formatINR(Math.min(...catalog['sujata-spirulina-tablets'].variants.map((v) => v.price)));
+const powderPrice = formatINR(Math.min(...catalog['sujata-spirulina-powder'].variants.map((v) => v.price)));
+
+const pageTitle = "Best Spirulina Brands in India (2026): Head-to-Head Purity & Lab-Test Comparison";
+const pageDescription = "Side-by-side 2026 comparison of leading spirulina brands sold in India, scored on seven verifiable purity criteria (public batch COA, NABL lab testing, cultivation method, heavy-metal data, per-day cost). Not medical advice.";
+const pageUrl = "https://www.sujatanutrilive.com/learn/best-spirulina-brands-india-2026-comparison";
+
+const faqs = [
+  {
+    question: "Which spirulina brand in India has a publicly published NABL lab report?",
+    answer: "Sujata Nutrilive publishes the Lilaba Analytical Laboratories report #LAL-NN-131125023 (dated 17 Nov 2025) for its spirulina powder, showing 62.39% plant protein, 290.89 mg/kg natural iron and 1,407.91 mg/kg natural calcium. Many market brands make label-only percentage claims without a corresponding public batch Certificate of Analysis. If a brand will not share a dated, lab-issued COA for the batch you intend to buy, that is a red flag."
+  },
+  {
+    question: "How can I tell if a spirulina brand is authentic in 2026?",
+    answer: "Ask for four documents before ordering: (1) a valid FSSAI licence number with the correct manufacturer category; (2) a dated, batch-specific NABL (or ILAC-accredited) lab report covering protein %, heavy metals and microbial panel; (3) a cultivation-origin statement (farm address, closed hydro-dome vs open-pond); (4) a dehydration-temperature declaration. Sujata Nutrilive publishes all four upfront. Market commodities usually publish only #1."
+  },
+  {
+    question: "What price should a 1-month spirulina supply cost in India?",
+    answer: `A fair price range in 2026 India is roughly ₹12 to ₹30 per day for a 1,000 mg daily serving of a lab-verified food-grade spirulina. Sujata Spirulina Capsules (500 mg × 60) are priced at ${capsulesPrice} per bottle (about ₹15/day at the 2-capsule serving). Powder (100 g) works out to about ₹10/day at a 3 g daily serving. Anything substantially cheaper per gram usually comes from open-pond, undocumented sources.`
+  },
+  {
+    question: "Why does commercial spirulina smell like pond water or fish?",
+    answer: "Spray-drying at 160-180 °C oxidises spirulina's polyunsaturated fatty acids and denatures its phycobiliproteins, producing a characteristic pond/fish odour. Sujata Nutrilive uses cold-air dehydration below 40 °C in its manufacturing partner's facility, which preserves the clean, neutral smell of the fresh microalgae. If a sample smells aggressively fishy or earthy-sour, it has likely been heat-abused in drying."
+  },
+  {
+    question: "Open-pond spirulina vs closed hydro-dome spirulina — what is the difference for Indian buyers?",
+    answer: "Open raceway ponds are exposed to atmospheric dust, bird droppings, insects and ambient wild cyanobacteria strains that can produce microcystins (natural toxins). Closed hydro-domes use filtered artesian water and sealed covers, which lowers the risk of microbial, heavy-metal and microcystin contamination. For Indian climates with high urban pollution, closed cultivation is the more defensible choice on a food-safety basis."
+  },
+  {
+    question: "Is Sujata Nutrilive vegetarian and alcohol-free?",
+    answer: "Yes. Sujata Spirulina Veg Capsules use a 100% plant-cellulose capsule shell with zero gelatin, zero animal glaze, zero talc and zero chemical binder. The spirulina itself is a microalgae — strictly plant-based. The product contains 0 g added sugar and 0 g preservative. Full ingredient list and lab panel are on the Science page."
+  },
+  {
+    question: "Which Sujata spirulina format should I buy first — capsules, tablets, or powder?",
+    answer: `Capsules (${capsulesPrice}, 60 × 500 mg) are the easiest starting format — odourless, portable, dissolve in five minutes. Tablets (${tabletsPrice}, 60 × 500 mg) use hydraulic compression with zero chemical binder and work for buyers who prefer a tablet. Powder (${powderPrice}, 100 g) is the most flexible and lowest cost per gram — ideal for smoothies, buttermilk or external face packs. All three use the same lab-verified raw spirulina.`
+  },
+  {
+    question: "Does Sujata ship with Free Express Delivery and Cash on Delivery?",
+    answer: "Yes. Every direct-website order ships with Free Express Delivery pan-India (0-1 day handling, 2-4 days transit) and supports Cash on Delivery. WhatsApp 1-click ordering via +91 98347 83503 is also available. See the Refund Policy page for the 90-Day Satisfaction Return terms."
+  }
+];
+
+const articleSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}/#article`,
+    "headline": "Best Spirulina Brands in India (2026): Head-to-Head Purity & Lab-Test Comparison",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-spirulina-capsules-bottle-transparent.png",
+    "inLanguage": "en-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-11-22T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Nutrition Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
+    },
+    "about": {
+      "@type": "DietarySupplement",
+      "name": "Spirulina (Arthrospira platensis)",
+      "sameAs": "https://en.wikipedia.org/wiki/Spirulina_(dietary_supplement)"
+    }
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "Best Spirulina Brands Comparison 2026", "item": pageUrl }
+    ]
+  }
+];
+
+// Factual seven-criteria matrix. Ranks each brand on PUBLICLY VERIFIABLE evidence
+// only — no opinion, no outcome claims. "Public batch COA" = did the brand
+// publish a dated, batch-specific lab report before you pay? "Open vs closed" =
+// is the cultivation method named on the brand's own web page or label?
+const criteria = [
+  { label: '1. Public batch Certificate of Analysis (dated, batch-specific)', sujata: '✓ Lilaba report #LAL-NN-131125023, 17 Nov 2025', most: '✗ Label-only % claim, no batch COA' },
+  { label: '2. NABL/ILAC-accredited lab for the public COA', sujata: '✓ Lilaba Analytical Laboratories LLP, Surat', most: '✗ Not stated on product page' },
+  { label: '3. Cultivation method declared (open pond vs closed dome)', sujata: '✓ Closed hydro-dome, Nashik, Maharashtra', most: '✗ Usually undeclared' },
+  { label: '4. Dehydration temperature disclosed', sujata: '✓ Sub-40 °C cold-air (cryo-thermal)', most: '✗ Usually undeclared (often 160-180 °C spray)' },
+  { label: '5. Heavy-metal panel in the public COA', sujata: '✓ Pb < 0.5 ppm, As < 0.1 ppm, Hg < 0.01 ppm', most: '✗ Not shown or only summary line' },
+  { label: '6. Capsule/tablet composition (binders, gelatin, talc)', sujata: '✓ Veg shell, 0 g chemical binder, 0 g talc', most: '△ Mixed — some brands disclose, many do not' },
+  { label: '7. Price per day at the 1,000 mg serving', sujata: `✓ About ₹15/day (${capsulesPrice} per bottle)`, most: '△ Varies ₹10-₹45/day depending on grade' }
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-spirulina-capsules-bottle-transparent.png"
+  extraSchema={articleSchema}
+>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">Home</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">Science</a>
+        <span>/</span>
+        <span class="text-white">Best Spirulina Brands 2026</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Head-to-Head Matrix • 7 Verifiable Criteria • 2026 Edition</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Best Spirulina Brands in India (2026): <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">Head-to-Head Purity & Lab-Test Comparison</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        Seven verifiable criteria. Only public, lab-issued evidence counts. Sujata Nutrilive is placed first on factual grounds — Lilaba NABL report #LAL-NN-131125023, closed hydro-dome cultivation and sub-40 °C cold-air dehydration.
+      </p>
+
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">Direct Answer</span>
+          <span class="text-xs text-emerald-300 font-semibold">Buyer-Decision Framing</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">Which spirulina brand in India is best in 2026?</strong>
+          On seven verifiable purity criteria, <strong class="text-emerald-300">Sujata Nutrilive ranks #1</strong> because its Lilaba NABL lab report #LAL-NN-131125023 publishes exact batch data (62.39% plant protein, 290.89 mg/kg iron, heavy-metal panel) before you pay. Sujata is closed hydro-dome cultivated in Nashik, cold-air dehydrated under 40 °C, FSSAI Reg. #21526027000179. Food supplement, not a medicine.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-white/10 text-xs text-gray-300">
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Public NABL Lab Report</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-amber-400 font-bold">✓</span> Closed Hydro-Dome</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Sub-40 °C Dehydration</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> FSSAI #21526027000179</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. The 7-criteria matrix -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> The 7-Criteria Purity Matrix
+        </h2>
+        <p class="text-sm text-gray-300 leading-relaxed mb-5">
+          We score each criterion on publicly verifiable evidence only — a brand either publishes the document and the number, or it does not. "Most market brands" here means commodity-grade spirulina sold on e-commerce marketplaces at label-only claims; higher-standard brands do exist, which is what this matrix helps you find.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3 w-[45%]">Verifiable Criterion</th>
+                <th class="py-3 px-3 text-emerald-400 font-bold">Sujata Nutrilive</th>
+                <th class="py-3 px-3 text-gray-400 font-bold">Most Market Brands</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              {criteria.map((c) => (
+                <tr>
+                  <td class="py-3 px-3 text-white">{c.label}</td>
+                  <td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">{c.sujata}</td>
+                  <td class="py-3 px-3 text-gray-400">{c.most}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-emerald-200/80 bg-emerald-950/30 border border-emerald-500/20 rounded-xl p-3">
+          This matrix compares food-safety and transparency, not health outcomes. All products discussed are food supplements, not medicines.
+        </p>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-capsules"
+        lang="en"
+        placement="brand-comparison-top"
+        badge="Rank #1 on 7 Purity Criteria"
+        heading="Sujata Spirulina Capsules (500mg × 60)"
+        pitch={`${capsulesPrice} per bottle · about ₹15/day. Lilaba NABL Lab Report #LAL-NN-131125023 ships with every order as a verifiable purity receipt.`}
+        points={["62.39% plant protein (NABL-verified)", "0 g sugar, 0 g lactose, 0 g binder", "Free Express Delivery + Cash on Delivery"]}
+      />
+
+      <!-- 2. Why the public COA matters -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> Why a Public Batch Lab Report Is the Buyer's First Filter
+        </h2>
+        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+          Many brands use the same base commodity (often sourced from open-pond farms in a handful of global producers) and compete only on packaging. A public, dated, batch-specific Certificate of Analysis is the single easiest way to filter out label-only marketing. If the brand will not send you the COA for the exact batch you plan to buy, you have no way to verify the protein %, heavy-metal safety or microbial safety of your bottle.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-black/30 border border-emerald-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-2">① Dated & batch-specific</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">A generic "lab tested" badge is marketing. A dated report tied to a batch number is evidence.</p>
+          </div>
+          <div class="bg-black/30 border border-amber-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-2">② NABL-accredited lab</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">NABL or ILAC accreditation is the accepted Indian standard for food-safety labs. Sujata uses Lilaba Analytical Laboratories LLP, Surat.</p>
+          </div>
+          <div class="bg-black/30 border border-purple-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-purple-400 text-base mb-2">③ Complete panel</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Protein % alone is not enough. A credible report includes heavy metals (Pb, As, Hg), microbial counts and moisture.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Price-benchmark -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> Fair Price Benchmark (2026, India)
+        </h2>
+        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+          Prices are from the direct brand sites and Amazon India listings as of November 2026. All three Sujata formats use the same lab-verified raw spirulina, so pick the format that fits your routine.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">Format</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Pack</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Price (MRP)</th>
+                <th class="py-3 px-3">Per-Day Cost</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr><td class="py-3 px-3 text-white">Veg Capsules</td><td class="py-3 px-3 text-gray-300">60 × 500 mg</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">{capsulesPrice}</td><td class="py-3 px-3 text-gray-300">~₹15/day</td></tr>
+              <tr><td class="py-3 px-3 text-white">Tablets (binder-free)</td><td class="py-3 px-3 text-gray-300">60 × 500 mg</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">{tabletsPrice}</td><td class="py-3 px-3 text-gray-300">~₹15/day</td></tr>
+              <tr><td class="py-3 px-3 text-white">Organic Powder</td><td class="py-3 px-3 text-gray-300">100 g</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">{powderPrice}</td><td class="py-3 px-3 text-gray-300">~₹10/day</td></tr>
+              <tr><td class="py-3 px-3 text-white">Spirulina + Sea Buckthorn Combo</td><td class="py-3 px-3 text-gray-300">2-month pack</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">₹1,100</td><td class="py-3 px-3 text-gray-300">~₹18/day</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="en"
+        placement="brand-comparison-combo"
+        badge="Daily Nutrition Combo"
+        heading="Spirulina + Himalayan Sea Buckthorn Combo"
+        pitch="Pair lab-verified spirulina with Himalayan Sea Buckthorn's rare Omega-7 in a single everyday routine. Both are food supplements with public, batch-specific lab reports."
+        points={["1, 2 or 3-month pack", "2-month pack ships with 2 free SpiruGlow soaps", "Free Express Delivery + Cash on Delivery"]}
+      />
+
+      <!-- 4. 60-second buyer checklist -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">4.</span> The 60-Second Buyer Checklist
+        </h2>
+        <ol class="text-gray-300 space-y-3 leading-relaxed text-sm list-decimal pl-5">
+          <li><strong class="text-white">Public COA.</strong> Ask for the batch-specific lab report before paying. Dated. NABL-accredited.</li>
+          <li><strong class="text-white">FSSAI number.</strong> The number on the pack should match the FSSAI Food Safety database for a manufacturer licence (not a trader licence).</li>
+          <li><strong class="text-white">Cultivation declared.</strong> Open pond or closed dome? Which country? Which farm?</li>
+          <li><strong class="text-white">Dehydration declared.</strong> Sub-40 °C cold-air vs 160-180 °C spray-drying. Ask.</li>
+          <li><strong class="text-white">Heavy-metal panel in the COA.</strong> Lead, Arsenic, Mercury — with numbers, not a tick mark.</li>
+          <li><strong class="text-white">Binder-free label.</strong> For tablets, confirm 0 g chemical binder, 0 g talc. For capsules, confirm veg shell.</li>
+          <li><strong class="text-white">Return policy.</strong> A satisfaction-based 90-day return is the market norm (no health-outcome promise).</li>
+        </ol>
+      </article>
+
+      <!-- 5. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">5.</span> Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="best-spirulina-brands-india-2026-comparison" />
+  <StoreFooter />
+</StoreLayout>

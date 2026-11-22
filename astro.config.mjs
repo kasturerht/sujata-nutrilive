@@ -76,6 +76,10 @@ export default defineConfig({
         `${siteUrl}/learn/spirulina-side-effects-in-marathi`,
         `${siteUrl}/learn/spirulina-price-in-india-buyers-guide`,
         `${siteUrl}/learn/sea-buckthorn-capsules-buyers-guide`,
+        // 🎯 2026 Commercial-Intent Assets (Buyer-Decision Pages)
+        `${siteUrl}/learn/best-spirulina-brands-india-2026-comparison`,
+        `${siteUrl}/learn/pure-himalayan-sea-buckthorn-buying-guide`,
+        `${siteUrl}/learn/how-to-choose-supplement-brand-india-2026`,
         // 🌟 All 16 Active Shopify Products for Google Shopping & GSC Indexing
         `${siteUrl}/product/sujata-spirulina-powder`,
         `${siteUrl}/product/sujata-spirulina-tablets`,

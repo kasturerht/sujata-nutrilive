@@ -1,0 +1,253 @@
+---
+// src/pages/learn/pure-himalayan-sea-buckthorn-buying-guide.astro
+// Commercial-intent buying guide: how to identify PURE wild Himalayan Omega-7
+// sea buckthorn vs diluted oils / juices / undeclared commodity sources.
+// Nutrient-function framing throughout. Compliance guard passes.
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+import { getCatalogProducts, formatINR } from '../../lib/catalog';
+
+const catalog = await getCatalogProducts(['sujata-sea-buckthorn-capsules']);
+const sbPrice = formatINR(Math.min(...catalog['sujata-sea-buckthorn-capsules'].variants.map((v) => v.price)));
+const perDay = `₹${Math.round(Math.min(...catalog['sujata-sea-buckthorn-capsules'].variants.map((v) => v.price)) / 30)}/day`;
+
+const pageTitle = "Pure Himalayan Sea Buckthorn Buying Guide (2026): How to Identify Real Wild-Harvested Omega-7";
+const pageDescription = "A 2026 buyer's checklist for pure Himalayan sea buckthorn. Cold-press temperature, whole-berry vs seed-oil-only, batch COA, Omega-7 content — what the label does and does not tell you. Food supplement, not a medicine.";
+const pageUrl = "https://www.sujatanutrilive.com/learn/pure-himalayan-sea-buckthorn-buying-guide";
+
+const faqs = [
+  {
+    question: "What makes a sea buckthorn product 'pure wild Himalayan'?",
+    answer: "Three things, in order: (1) the berries are wild-harvested from naturally growing Hippophae rhamnoides plants at 3,000-5,000 m in the Himalayan belt (Leh-Ladakh, Himachal, Uttarakhand), not from commercial plantations in other regions; (2) the extract is cold-pressed below 40 °C to preserve the fragile Omega-7 fatty acid and Vitamin C; (3) the brand publishes a dated batch Certificate of Analysis showing the source and composition. Sujata Nutrilive sources from wild Leh-Ladakh berries and cold-presses below 40 °C."
+  },
+  {
+    question: "How can I tell whole-berry extract from oil-only or diluted products?",
+    answer: "Read the ingredient panel carefully. 'Sea buckthorn fruit and seed extract' indicates whole-berry extraction — you get Omega-7, Omega-3/6/9, Vitamin C, flavonoids and the 190+ phytonutrients of the whole fruit. 'Sea buckthorn seed oil' alone is thinner — mostly fatty acids, far less Vitamin C and flavonoid content. 'Sea buckthorn juice' is typically 500 ml of mostly-water with sweeteners or preservatives. Sujata capsules deliver 650 mg of whole-berry extract per piece, no added sugar, no preservative."
+  },
+  {
+    question: "Capsules vs oil vs juice — which format is most practical for daily use?",
+    answer: "Capsules give you a consistent 650 mg serving, no oxidation exposure (fatty acids lose freshness quickly on contact with air/light), no taste issues, and 0 g added sugar. Bulk oil can lose freshness after opening. Commercial juices typically contain 70%+ water plus sweeteners. For a 90-day daily routine, cold-pressed whole-berry extract in a 100% vegetarian capsule is the most consistent format."
+  },
+  {
+    question: "What is the right daily serving of sea buckthorn capsules?",
+    answer: `A typical adult serving is 1-2 Sujata Himalayan Sea Buckthorn capsules (650-1,300 mg) with food. Take 1 after breakfast and, optionally, 1 after dinner with warm water. The fats in a normal meal help the body absorb the fat-soluble carotenoids. One 60-capsule bottle at ${sbPrice} covers approximately one month at the 2-capsule daily serving (${perDay}). This is a food supplement; it is not a medicine and is not intended to diagnose, treat, cure or prevent any disease.`
+  },
+  {
+    question: "Why is wild-harvested Himalayan sea buckthorn preferred over plantation-grown?",
+    answer: "Wild berries from 3,000-5,000 m altitudes develop a denser phytonutrient profile because they survive strong UV, temperature swings and short growing seasons. Plantation-grown sea buckthorn at lower altitudes typically shows a diluted phytonutrient density. Regional provenance also matters because Leh-Ladakh's dry, cold climate produces a different flavonoid profile than, for example, European or Chinese cultivated varieties."
+  },
+  {
+    question: "Does sea buckthorn contain added sugar, preservatives or alcohol?",
+    answer: "A pure, high-quality sea buckthorn capsule has none of these. Sujata Himalayan Sea Buckthorn contains 0 g added sugar, 0 g preservative, 0 g artificial colour, 0 g artificial flavour. The capsule shell is 100% plant cellulose. The only ingredient is cold-pressed wild Himalayan sea-buckthorn whole-berry extract. Check the ingredient panel of any brand you buy; sweeteners and preservatives are commonly added to juice and syrup formats."
+  },
+  {
+    question: "What is a fair price for sea buckthorn capsules in India in 2026?",
+    answer: `In 2026, cold-pressed whole-berry sea buckthorn capsules in India generally cost ₹600 to ₹2,000 per 60-capsule bottle, depending on milligrams per capsule, cultivation source, cold-press temperature and brand positioning. Sujata Himalayan Sea Buckthorn (60 × 650 mg) is ${sbPrice} per bottle, about ${perDay} at the 2-capsule daily serving. Prices substantially below the range usually indicate diluted or non-Himalayan sourcing.`
+  },
+  {
+    question: "Is sea buckthorn safe with my prescription medicines?",
+    answer: "Sea buckthorn is a food supplement, not a medicine. However, it has a mild antiplatelet activity, so if you take blood thinners (warfarin, aspirin/ecosprin, clopidogrel) or if you are scheduled for any surgery in the next 2 weeks, speak with your physician before adding it. Also consult your doctor if you are pregnant or lactating. For routine daily nutrition in healthy adults, a 1-2 capsule serving with food is the standard."
+  }
+];
+
+const articleSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}/#article`,
+    "headline": "Pure Himalayan Sea Buckthorn Buying Guide (2026): How to Identify Real Wild-Harvested Omega-7",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-sea-buckthorn-capsules-bottle-transparent.png",
+    "inLanguage": "en-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-11-22T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Nutrition Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
+    },
+    "about": {
+      "@type": "DietarySupplement",
+      "name": "Sea Buckthorn (Hippophae rhamnoides)",
+      "activeIngredient": "Palmitoleic acid (Omega-7), Omega-3, Omega-6, Omega-9, Vitamin C, Vitamin E, Beta-carotene, Flavonoids, 190+ phytonutrients",
+      "sameAs": "https://en.wikipedia.org/wiki/Hippophae"
+    }
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "Pure Himalayan Sea Buckthorn Buying Guide", "item": pageUrl }
+    ]
+  }
+];
+
+// The 7-point purity checklist. Each item is a factual, verifiable criterion —
+// no outcome claim, no disease framing.
+const checklist = [
+  { title: '① Provenance: wild Himalayan vs commercial plantation', detail: 'Ask the brand for the specific altitude and region of harvest. Sujata sources wild berries from 3,000-5,000 m in Leh-Ladakh, the pristine high-altitude Himalayan belt.' },
+  { title: '② Extract type: whole-berry vs seed-oil-only', detail: 'Whole-berry extract gives you Omega-7 alongside Vitamin C, flavonoids and 190+ phytonutrients. Seed oil alone is mostly fatty acids with far less Vitamin C.' },
+  { title: '③ Cold-press temperature: <40 °C vs heat-extracted', detail: 'Omega-7 (palmitoleic acid) and Vitamin C are both heat-sensitive. A credible brand will state its cold-press temperature on the pack or the product page.' },
+  { title: '④ Public batch Certificate of Analysis', detail: 'Dated, batch-specific, from a NABL/ILAC-accredited lab. Covers fatty-acid profile and heavy-metal panel. Sujata publishes the batch COA on the Science page.' },
+  { title: '⑤ Capsule shell and additives', detail: '100% vegetarian cellulose shell, zero gelatin, zero talc, zero binder. Zero added sugar, preservative, colour or flavour on the ingredient panel.' },
+  { title: '⑥ FSSAI manufacturer licence', detail: 'Verify the FSSAI licence number on the pack against the public FSS database. Sujata Reg. #21526027000179 (manufacturer category).' },
+  { title: '⑦ Satisfaction-based return', detail: 'A satisfaction-based 90-day return is the honest market norm. No brand should promise a specific health outcome (that would be a medical claim).' }
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png"
+  extraSchema={articleSchema}
+>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">Home</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">Science</a>
+        <span>/</span>
+        <span class="text-white">Sea Buckthorn Buying Guide</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Wild Leh-Ladakh • Cold-Pressed <40 °C • 7-Point Checklist</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Pure Himalayan Sea Buckthorn Buying Guide (2026): <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">How to Identify Real Wild-Harvested Omega-7</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        Omega-7 is one of the rarer plant fatty acids in the Indian diet. Sea buckthorn is one of the few widely-edible plant sources. Here is the seven-point checklist to separate pure wild-harvested whole-berry extract from diluted oils, sweetened juices and undocumented commodity imports.
+      </p>
+
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">Direct Answer</span>
+          <span class="text-xs text-emerald-300 font-semibold">Buyer-Decision Framing</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">How do I identify a genuinely pure Himalayan sea buckthorn product?</strong>
+          Use the seven-point checklist below — wild Himalayan provenance, whole-berry extract, cold-press under 40 °C, dated batch COA, veg capsule shell, FSSAI manufacturer licence and a satisfaction-based return. Sujata Himalayan Sea Buckthorn Capsules ({sbPrice}, 60 × 650 mg) tick all seven boxes and ship with Lilaba-issued lab evidence. Food supplement, not a medicine.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. 7-Point Checklist -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> The 7-Point Purity Checklist
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          {checklist.map((c, idx) => (
+            <div class={`bg-black/30 border rounded-xl p-4 ${idx % 2 === 0 ? 'border-emerald-500/20' : 'border-amber-500/20'}`}>
+              <h3 class={`font-bold text-base mb-2 ${idx % 2 === 0 ? 'text-emerald-400' : 'text-amber-400'}`}>{c.title}</h3>
+              <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">{c.detail}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-sea-buckthorn-capsules"
+        lang="en"
+        placement="buying-guide-top"
+        badge={`7/7 Checklist • ${sbPrice} per bottle`}
+        heading="Sujata Himalayan Sea Buckthorn Capsules (650mg × 60)"
+        pitch={`Wild Leh-Ladakh berries, cold-pressed below 40 °C to preserve Omega-7. One month at the 2-capsule daily serving (${perDay}).`}
+        points={["Cold-pressed <40 °C — whole-berry extract", "190+ phytonutrients, Vitamin C (12× orange)", "Free Express Delivery + Cash on Delivery"]}
+      />
+
+      <!-- 2. Format comparison -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> Format Comparison: Capsules vs Oil vs Juice
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">Attribute</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Whole-Berry Capsules (Sujata)</th>
+                <th class="py-3 px-3 text-gray-400 font-bold">Bulk Seed Oil</th>
+                <th class="py-3 px-3 text-gray-400 font-bold">Commercial Juice</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr><td class="py-3 px-3 text-white">Serving consistency</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">Fixed 650 mg per piece</td><td class="py-3 px-3 text-gray-400">Variable (spoon measure)</td><td class="py-3 px-3 text-gray-400">Variable (cup measure)</td></tr>
+              <tr><td class="py-3 px-3 text-white">Oxidation protection</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">Capsule shields from air/light</td><td class="py-3 px-3 text-gray-400">Exposed on each opening</td><td class="py-3 px-3 text-gray-400">Pasteurised, shelf-stable</td></tr>
+              <tr><td class="py-3 px-3 text-white">Added sugar / preservative</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">0 g</td><td class="py-3 px-3 text-gray-400">Varies</td><td class="py-3 px-3 text-gray-400">Commonly present</td></tr>
+              <tr><td class="py-3 px-3 text-white">Whole-berry phytonutrients</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">Fruit + seed (190+ compounds)</td><td class="py-3 px-3 text-gray-400">Seed fraction only</td><td class="py-3 px-3 text-gray-400">Diluted with water</td></tr>
+              <tr><td class="py-3 px-3 text-white">Typical per-day cost (2026)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">~{perDay}</td><td class="py-3 px-3 text-gray-400">₹25-₹40/day</td><td class="py-3 px-3 text-gray-400">₹30-₹50/day</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="en"
+        placement="buying-guide-combo"
+        badge="Daily Nutrition Combo"
+        heading="Spirulina + Himalayan Sea Buckthorn Combo"
+        pitch="Pair sea buckthorn's rare Omega-7 with spirulina's 62.39% plant protein. Both food supplements, both with publicly published Lilaba batch lab reports."
+        points={["1, 2 or 3-month pack", "2-month pack ships with 2 free SpiruGlow soaps", "Free Express Delivery + COD"]}
+      />
+
+      <!-- 3. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="pure-himalayan-sea-buckthorn-buying-guide" />
+  <StoreFooter />
+</StoreLayout>
