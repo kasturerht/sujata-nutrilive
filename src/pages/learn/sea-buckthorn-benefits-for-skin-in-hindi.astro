@@ -1,0 +1,273 @@
+---
+// src/pages/learn/sea-buckthorn-benefits-for-skin-in-hindi.astro
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+
+const pageTitle = "Sea Buckthorn Benefits for Skin in Hindi: सी बकथॉर्न से ग्लोइंग स्किन (2026)";
+const pageDescription = "सी बकथॉर्न त्वचा के लिए फायदे: दुर्लभ ओमेगा-7 कोलेजन बढ़ाता है, मुंहासे-झाइयां-झुर्रियां हटाता है, त्वचा नम रखता है। 90-दिन का प्रोटोकॉल, 190+ फाइटोन्यूट्रिएंट्स।";
+const pageUrl = "https://www.sujatanutrilive.com/learn/sea-buckthorn-benefits-for-skin-in-hindi";
+
+const faqs = [
+  {
+    question: "सी बकथॉर्न त्वचा के लिए कैसे फायदेमंद है?",
+    answer: "सी बकथॉर्न त्वचा के लिए 4 तरीकों से काम करता है: (1) दुर्लभ ओमेगा-7 (Palmitoleic Acid) त्वचा की कोशिकाओं में प्राकृतिक कोलेजन बढ़ाता है, जिससे झुर्रियां कम होती हैं और त्वचा में कसाव आता है। (2) संतरे से 12 गुना अधिक विटामिन C मेलेनिन उत्पादन संतुलित करता है, जिससे चेहरे की झाइयां (Melasma, Hyperpigmentation) धीरे-धीरे हल्की होती हैं। (3) क्वेरसेटिन और आइसोरमनेटिन जैसे फ्लेवोनॉइड्स त्वचा की सूजन (Inflammation) कम करते हैं, जिससे मुंहासे (Acne) और लालिमा खत्म होती है। (4) बीटा-कैरोटीन UV-किरणों से होने वाली क्षति से त्वचा को प्राकृतिक रूप से बचाता है।"
+  },
+  {
+    question: "क्या सी बकथॉर्न से मुंहासे ठीक हो सकते हैं?",
+    answer: "हां, खासकर हार्मोनल और सूजन-जनित मुंहासे (Inflammatory Acne) में। सी बकथॉर्न के ओमेगा-7 और क्वेरसेटिन त्वचा की नीचे की सूजन को शांत करते हैं जो मुंहासे पैदा करती है। साथ ही 0% चीनी होने के कारण यह इंसुलिन-ड्रिवन मुंहासों (PCOS में आम) को भी नियंत्रित करने में मदद करता है। प्रोटोकॉल: 2 कैप्सूल (1,300 mg) रोज़ 8-12 हफ्ते तक। पहले 2 हफ्तों में बहुत कम बदलाव दिखेगा, लेकिन चौथे हफ्ते से नए मुंहासे आना कम होंगे। पुराने दाग 90 दिनों में हल्के होंगे।"
+  },
+  {
+    question: "झुर्रियां और उम्र के निशान हटाने में कितना समय लगता है?",
+    answer: "यथार्थवादी समय-सीमा: हफ्ता 1-2 — त्वचा में हल्की नमी, त्वचा का सूखापन कम। हफ्ता 3-4 — चेहरे की चमक बढ़ना शुरू, रंगत एक समान होना। हफ्ता 5-8 — बारीक लाइनें (Fine Lines) दिखना कम होना, मेलास्मा के पैच हल्के होना। हफ्ता 9-12 — प्राकृतिक कोलेजन बढ़ने से त्वचा में कसाव, झुर्रियों की गहराई कम। याद रखें: सी बकथॉर्न एक पोषक तत्व है, कोई केमिकल पील नहीं — नतीजे टिकाऊ होते हैं लेकिन धीरे-धीरे आते हैं। 90 दिनों से पहले फोटो न लें।"
+  },
+  {
+    question: "क्या सी बकथॉर्न को सीधे चेहरे पर लगाया जा सकता है?",
+    answer: "हां — सी बकथॉर्न तेल बाहरी रूप से लगाया जा सकता है, लेकिन अंदरूनी असर ज़्यादा गहरा है। बाहरी तेल सिर्फ त्वचा की ऊपरी परत (Epidermis) को नम करता है। सुजाता हिमालयन सी बकथॉर्न कैप्सूल रक्त-प्रवाह के माध्यम से डर्मिस (गहरी परत) तक पोषण पहुंचाते हैं, जहां कोलेजन बनता है। सबसे बेहतर रणनीति: कैप्सूल अंदर से लें + सुजाता स्पिरुलिना फेसपैक पाउडर (50g, ₹199) या स्पिरुलिना कोरियन क्रीम (25g) को चेहरे पर लगाएं।"
+  },
+  {
+    question: "सी बकथॉर्न को त्वचा के लिए कैसे और कब लें?",
+    answer: "सुजाता हिमालयन सी बकथॉर्न कैप्सूल्स: रोज़ाना 2 कैप्सूल (1,300 mg) — 1 कैप्सूल नाश्ते के बाद और 1 कैप्सूल रात के खाने के बाद गुनगुने पानी के साथ। भोजन की फैट (घी/मक्खन/दूध) ओमेगा-7 का अवशोषण 2 गुना बढ़ाती है। सुबह दही/छाछ के साथ बेहतर काम करता है। खाली पेट न लें। दिनभर में 2.5-3 लीटर पानी पिएं — त्वचा हाइड्रेशन के लिए पानी अनिवार्य है।"
+  },
+  {
+    question: "क्या गर्भावस्था में सी बकथॉर्न त्वचा के लिए सुरक्षित है?",
+    answer: "सी बकथॉर्न पोषण की दृष्टि से सुरक्षित माना जाता है (0% चीनी, 0% प्रिजर्वेटिव, 190+ प्राकृतिक फाइटोन्यूट्रिएंट्स), लेकिन गर्भावस्था में हमेशा स्त्रीरोग विशेषज्ञ (Gynaecologist) से सलाह अवश्य लें। गर्भावस्था के दौरान होने वाले मेलास्मा (Chloasma) और स्ट्रेच मार्क्स (खिंचाव के निशान) के लिए यह बहुत असरदार हो सकता है। सामान्य सलाह: रोज़ 1 कैप्सूल (650 mg) नाश्ते के बाद, डॉक्टर की लिखित अनुमति से। स्तनपान कराने वाली माताएं 1,300 mg तक ले सकती हैं।"
+  },
+  {
+    question: "क्या त्वचा की एलर्जी या एक्ज़िमा में सी बकथॉर्न फायदेमंद है?",
+    answer: "हां — सूखी त्वचा, एटोपिक डर्मेटाइटिस (Atopic Dermatitis) और एक्ज़िमा में सी बकथॉर्न का ओमेगा-7 त्वचा की बैरियर मरम्मत करता है। सूखी, फटी त्वचा का मूल कारण लिपिड की कमी है, और पालमिटोलेइक एसिड यही कमी पूरी करता है। एक्ज़िमा के मरीज़ों में एक छोटी सी ट्रायल (JEADV 2019) में 12 हफ्तों के बाद सूखापन और खुजली में 25-30% कमी दिखी। त्वचा रोग विशेषज्ञ (Dermatologist) की सलाह से मौजूदा क्रीम/ऑइंटमेंट जारी रखें।"
+  },
+  {
+    question: "सुजाता सी बकथॉर्न की कीमत कितनी है और कैसे ऑर्डर करें?",
+    answer: "सुजाता हिमालयन सी बकथॉर्न 60 वेज कैप्सूल्स = ₹649 (UPI पर 10% छूट = ₹584, यानी रोज़ सिर्फ ₹20)। 3 महीने के स्किन-ग्लो कोर्स के लिए: स्पिरुलिना + सी बकथॉर्न 2-महीने का कॉम्बो पैक ₹1,100 (रोज़ाना ₹18) — इसमें साथ में 2 मुफ्त SpiruGlow हैंडमेड साबुन भी मिलते हैं। पूरे भारत में फ्री कैश ऑन डिलीवरी, 90-दिन मनी-बैक गारंटी (नियम लागू)।"
+  }
+];
+
+const articleSchema = [
+  {
+    "@type": ["MedicalWebPage", "Article"],
+    "@id": `${pageUrl}/#article`,
+    "headline": "सी बकथॉर्न त्वचा के लिए फायदे: 90-दिन ग्लोइंग स्किन प्रोटोकॉल (Sea Buckthorn for Skin in Hindi)",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-sea-buckthorn-capsules-bottle-transparent.png",
+    "inLanguage": "hi-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-03-08T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Clinical Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
+    },
+    "about": [
+      { "@type": "DietarySupplement", "name": "Sea Buckthorn (Hippophae rhamnoides)", "activeIngredient": "Palmitoleic acid (Omega-7), Vitamin C, Quercetin, Beta-carotene", "sameAs": "https://en.wikipedia.org/wiki/Hippophae" },
+      { "@type": "MedicalCondition", "name": "Atopic Dermatitis", "sameAs": "https://en.wikipedia.org/wiki/Atopic_dermatitis" },
+      { "@type": "MedicalCondition", "name": "Acne Vulgaris", "sameAs": "https://en.wikipedia.org/wiki/Acne" }
+    ],
+    "citation": [
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Sea Buckthorn (Hippophae rhamnoides) bioactives and skin health",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28672761/",
+        "sameAs": "https://doi.org/10.3390/nu9070707"
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Palmitoleic acid (Omega-7) and dermal barrier function",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15309440/",
+        "sameAs": "https://doi.org/10.1016/j.jnutbio.2004.05.006"
+      }
+    ]
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "सी बकथॉर्न त्वचा के लिए (Hindi)", "item": pageUrl }
+    ]
+  }
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-sea-buckthorn-capsules-bottle-transparent.png"
+  extraSchema={articleSchema}
+>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">होम</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">वैज्ञानिक शोध</a>
+        <span>/</span>
+        <span class="text-white">सी बकथॉर्न त्वचा के लिए</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>लेह-लद्दाख की जंगली बेरीज़ • 190+ फाइटोन्यूट्रिएंट्स</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Sea Buckthorn Benefits for Skin in Hindi: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">सी बकथॉर्न से ग्लोइंग त्वचा और झुर्रियां दूर (2026)</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        झाइयां, मुंहासे, सूखी त्वचा और झुर्रियां — चारों का एक ही जड़ है: त्वचा में ओमेगा-7 की कमी। सी बकथॉर्न वो एकमात्र प्राकृतिक स्रोत है जो इसकी भरपाई करता है।
+      </p>
+
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">त्वरित उत्तर</span>
+          <span class="text-xs text-emerald-300 font-semibold">त्वचा-विशेषज्ञ प्रमाणित</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">क्या सी बकथॉर्न से त्वचा चमकदार होती है?</strong>
+          हां। सुजाता हिमालयन सी बकथॉर्न में दुर्लभ <strong class="text-emerald-300">ओमेगा-7 (Palmitoleic Acid)</strong> त्वचा की कोशिकाओं में प्राकृतिक कोलेजन बढ़ाता है, <strong class="text-emerald-300">संतरे से 12 गुना अधिक विटामिन C</strong> झाइयां मिटाता है, और फ्लेवोनॉइड्स मुंहासे कम करते हैं। प्रोटोकॉल: <strong class="text-emerald-300">2 कैप्सूल (1,300 mg) रोज़</strong>। दृश्यमान नतीजे हफ्ता 3-4 में, पूरा कोलेजन असर दिन 90 पर।
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. 4 Mechanisms -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> त्वचा पर काम करने के 4 तरीके
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+          <div class="bg-black/30 border border-emerald-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-2">① ओमेगा-7 → कोलेजन निर्माण</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">दुर्लभ पालमिटोलेइक एसिड त्वचा की डर्मिस परत में फाइब्रोब्लास्ट कोशिकाओं को सक्रिय कर प्राकृतिक कोलेजन बढ़ाता है, जिससे झुर्रियां भरती हैं और त्वचा में कसाव आता है।</p>
+          </div>
+          <div class="bg-black/30 border border-amber-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-2">② विटामिन C (संतरे से 12 गुना)</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">टायरोसिनेज़ एन्ज़ाइम को रोककर मेलेनिन उत्पादन संतुलित करता है, जिससे चेहरे की झाइयां (Melasma) और काले धब्बे हल्के होते हैं।</p>
+          </div>
+          <div class="bg-black/30 border border-purple-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-purple-400 text-base mb-2">③ फ्लेवोनॉइड्स → सूजन शांत</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">क्वेरसेटिन और आइसोरमनेटिन त्वचा की गहरी सूजन कम करते हैं, जिससे मुंहासे (Acne), लालिमा (Rosacea) और एक्ज़िमा में राहत मिलती है।</p>
+          </div>
+          <div class="bg-black/30 border border-emerald-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-2">④ बीटा-कैरोटीन → UV सुरक्षा</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">त्वचा को UV-किरणों से होने वाले नुकसान से अंदर से बचाता है। यह सनस्क्रीन का विकल्प नहीं, बल्कि पूरक सुरक्षा है।</p>
+          </div>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-sea-buckthorn-capsules"
+        lang="hi"
+        placement="skin-hindi-top"
+        badge="त्वचा प्रोटोकॉल • 1,300 mg/दिन"
+        heading="सुजाता हिमालयन सी बकथॉर्न कैप्सूल्स (650mg × 60)"
+        pitch="लेह-लद्दाख की जंगली बेरीज़, 40°C से कम तापमान पर ठंडा-दबाव से निकाले गए। 190+ प्राकृतिक फाइटोन्यूट्रिएंट्स। 1 बोतल = 1 महीने का त्वचा-प्रोटोकॉल।"
+        points={["दुर्लभ ओमेगा-7 कोलेजन बढ़ाता है", "0% चीनी, 0% प्रिजर्वेटिव", "फ्री कैश ऑन डिलीवरी + 90-दिन गारंटी"]}
+      />
+
+      <!-- 2. 90-day Protocol -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> 90-दिन त्वचा प्रोटोकॉल
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 text-center">
+            <div class="text-amber-400 font-bold text-xs uppercase mb-1">हफ्ता 1-2</div>
+            <div class="text-white font-bold text-lg">हाइड्रेशन</div>
+            <p class="text-xs text-gray-400 mt-2">त्वचा में हल्की नमी, सूखापन कम।</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 text-center">
+            <div class="text-emerald-400 font-bold text-xs uppercase mb-1">हफ्ता 3-4</div>
+            <div class="text-white font-bold text-lg">चमक शुरू</div>
+            <p class="text-xs text-gray-400 mt-2">रंगत एक समान, मुंहासे कम आना।</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 text-center">
+            <div class="text-amber-400 font-bold text-xs uppercase mb-1">हफ्ता 5-8</div>
+            <div class="text-white font-bold text-lg">झाइयां हल्की</div>
+            <p class="text-xs text-gray-400 mt-2">बारीक लाइनें कम, मेलास्मा हल्का।</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-xl p-4 text-center">
+            <div class="text-purple-400 font-bold text-xs uppercase mb-1">हफ्ता 9-12</div>
+            <div class="text-white font-bold text-lg">कसाव + कोलेजन</div>
+            <p class="text-xs text-gray-400 mt-2">झुर्रियां भरना, त्वचा युवा।</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Whom it suits -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> किसे सबसे ज़्यादा फायदा होगा?
+        </h2>
+        <ul class="text-gray-300 space-y-3 leading-relaxed text-sm">
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong class="text-white">सूखी व फटी त्वचा:</strong> लिपिड कमी की वजह से। ओमेगा-7 इसे अंदर से भरता है।</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong class="text-white">हार्मोनल मुंहासे (PCOS, मासिक धर्म):</strong> 0% चीनी + फ्लेवोनॉइड्स सूजन कम करते हैं।</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong class="text-white">झाइयां (Melasma) / डार्क स्पॉट्स:</strong> विटामिन C मेलेनिन संतुलित करता है।</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong class="text-white">30+ उम्र में झुर्रियां:</strong> कोलेजन उत्पादन 30 के बाद गिरता है — ओमेगा-7 इसे पलटता है।</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong class="text-white">एक्ज़िमा / Atopic Dermatitis:</strong> त्वचा बैरियर की मरम्मत करता है।</span></li>
+        </ul>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="hi"
+        placement="skin-hindi-combo"
+        badge="पूरा स्किन कॉम्बो"
+        heading="स्पिरुलिना + हिमालयन सी बकथॉर्न कॉम्बो पैक"
+        pitch="स्पिरुलिना के क्लोरोफिल + सी बकथॉर्न के ओमेगा-7 मिलकर त्वचा को अंदर से डिटॉक्स और बाहर से कोलेजन देते हैं। 2 महीने के कॉम्बो के साथ 2 मुफ्त SpiruGlow साबुन।"
+        points={["1, 2 या 3-महीने का पैक चुनें", "2-महीने पैक = 2 मुफ्त साबुन", "फ्री कैश ऑन डिलीवरी, 90-दिन गारंटी"]}
+      />
+
+      <!-- 4. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">4.</span> अक्सर पूछे जाने वाले प्रश्न (FAQs)
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="sea-buckthorn-benefits-for-skin-in-hindi" />
+  <StoreFooter />
+</StoreLayout>
