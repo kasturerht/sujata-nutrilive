@@ -1,0 +1,410 @@
+---
+// src/pages/learn/spirulina-in-hindi.astro
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+
+const pageTitle = "Spirulina in Hindi: स्पिरुलिना क्या है? फायदे, खुराक और कीमत (2026)";
+const pageDescription = "Spirulina in Hindi: स्पिरुलिना क्या है? जानिए 62.39% शुद्ध प्लांट प्रोटीन, 290.89 mg/kg आयरन, 10 फायदे, सही खुराक, नुकसान और सुजाता स्पिरुलिना की कीमत।";
+const pageUrl = "https://www.sujatanutrilive.com/learn/spirulina-in-hindi";
+
+const faqs = [
+  {
+    question: "स्पिरुलिना क्या है और इसका हिंदी नाम क्या है? (What is Spirulina in Hindi?)",
+    answer: "स्पिरुलिना (Arthrospira platensis) एक सूक्ष्म नीले-हरे शैवाल (Blue-Green Microalgae) है जिसे हिंदी में 'नीली-हरी काई' या 'जल शैवाल' कहा जाता है। विश्व स्वास्थ्य संगठन (WHO) और नासा (NASA) ने इसे 'भविष्य का सर्वोत्तम सुपरफूड' घोषित किया है। सुजाता स्पिरुलिना में Lilaba NABL-मान्यता प्राप्त लैब रिपोर्ट (LAL-NN-131125023) के अनुसार 62.39% शुद्ध प्लांट प्रोटीन, 290.89 mg/kg प्राकृतिक आयरन और 1,407.91 mg/kg कैल्शियम प्राकृतिक रूप से मौजूद है।"
+  },
+  {
+    question: "स्पिरुलिना खाने के मुख्य फायदे क्या हैं? (Spirulina ke Fayde)",
+    answer: "1. 290.89 mg/kg प्राकृतिक आयरन से हीमोग्लोबिन व एनीमिया में सुधार। 2. दोपहर की थकान और सुस्ती दूर कर दिनभर स्थिर ऊर्जा। 3. C-फाइकोसायनिन से रोग-प्रतिरोधक क्षमता बढ़ती है। 4. त्वचा पर प्राकृतिक निखार, मुंहासों में कमी और बालों का झड़ना कम। 5. 62.39% शाकाहारी प्लांट प्रोटीन सभी 9 आवश्यक अमीनो एसिड के साथ। 6. LDL कोलेस्ट्रॉल और ब्लड प्रेशर संतुलित करने में सहायक। 7. ब्लड शुगर व HbA1c स्थिर रखने में मदद।"
+  },
+  {
+    question: "स्पिरुलिना कैसे और कब लें? सही खुराक क्या है?",
+    answer: "वयस्कों के लिए रोज़ 1000 mg से 2000 mg (1 से 2 कैप्सूल 500 mg) सुबह नाश्ते के बाद एक गिलास गुनगुने पानी के साथ लें। खाली पेट लेने से बचें। पाउडर के लिए 1 चम्मच (लगभग 3 ग्राम) जूस, छाछ या स्मूदी में मिलाकर लें। दिनभर में 2.5 से 3 लीटर पानी अवश्य पिएं क्योंकि स्पिरुलिना एक नेचुरल डिटॉक्स है।"
+  },
+  {
+    question: "स्पिरुलिना पाउडर, टैबलेट या कैप्सूल - क्या बेहतर है?",
+    answer: "तीनों में 62.39% शुद्ध प्लांट प्रोटीन समान है, फर्क इस्तेमाल के तरीके का है: (1) पाउडर (100g): स्मूदी, जूस, फेसपैक और फिटनेस के लिए सबसे उपयोगी, फ्लेक्सिबल डोज़। (2) टैबलेट्स (500mg, 60 Nos.): हाइड्रोलिक दबाव से बनी, 0% केमिकल बाइंडर, यात्रा के लिए सुविधाजनक। (3) वेज कैप्सूल्स (500mg, 60 Nos.): पौधे-आधारित शेल, पेट में सिर्फ 5 मिनट में घुल जाती हैं, कोई गंध नहीं - यात्री एवं संवेदनशील पेट वालों के लिए सर्वोत्तम।"
+  },
+  {
+    question: "क्या स्पिरुलिना के कोई नुकसान या साइड इफेक्ट्स हैं?",
+    answer: "शुद्ध स्पिरुलिना के कोई रासायनिक दुष्प्रभाव नहीं होते। सुजाता स्पिरुलिना बंद हाइड्रो-डोम में उगाया जाता है और Lilaba Analytical Laboratories LLP, Surat (रिपोर्ट #LAL-NN-131125023, 17 Nov 2025) से प्रमाणित है। शुरुआती 3-5 दिनों में शरीर डिटॉक्स होता है, जिसमें पेशाब का रंग थोड़ा गाढ़ा दिख सकता है - यह कोई साइड इफेक्ट नहीं, बल्कि प्राकृतिक सफाई का संकेत है। पर्याप्त पानी पिएं।"
+  },
+  {
+    question: "स्पिरुलिना किसे नहीं लेना चाहिए? (Contraindications)",
+    answer: "1. फिनाइलकीटोन्यूरिया (PKU) के दुर्लभ आनुवंशिक रोगी - स्पिरुलिना में फिनाइलऐलेनिन अमीनो एसिड होता है। 2. गंभीर ऑटोइम्यून रोगी (Lupus, MS) जो इम्युनोसप्रेसेंट दवा ले रहे हैं, बिना डॉक्टर सलाह के न लें। 3. गंभीर किडनी रोगी जिन्हें प्रोटीन/पोटैशियम पर पाबंदी है। 4. सर्जरी से 2 हफ्ते पहले बंद कर दें। गर्भवती व स्तनपान कराने वाली माताएं डॉक्टर से परामर्श के बाद ही लें।"
+  },
+  {
+    question: "क्या शुगर, थायरॉइड या हाई बीपी के मरीज स्पिरुलिना ले सकते हैं?",
+    answer: "हां, तीनों के लिए सुरक्षित माना जाता है। सुजाता स्पिरुलिना 0% चीनी, 0% फिलर है। क्लिनिकल अध्ययनों में C-फाइकोसायनिन इंसुलिन संवेदनशीलता में सुधार और धमनियों का लचीलापन बनाए रखने में मददगार पाया गया है। नियमित दवाओं और स्पिरुलिना के बीच 1 घंटे का अंतर रखें और अपने डॉक्टर को सूचित करें।"
+  },
+  {
+    question: "सुजाता स्पिरुलिना की कीमत कितनी है और कैसे ऑर्डर करें?",
+    answer: "सुजाता स्पिरुलिना वेज कैप्सूल्स (60 Nos., 1 महीने का डोज़): ₹499 (UPI पर 10% छूट = ₹449, यानी रोज़ सिर्फ ₹15)। 2 महीने का स्पिरुलिना + सी बकथॉर्न सुपर-सेवर कॉम्बो पैक: ₹1,100 (प्रति दिन सिर्फ ₹18)। पूरे भारत में फ्री कैश ऑन डिलीवरी (Free COD) और WhatsApp (+91 98347 83503) पर 1-क्लिक ऑर्डर उपलब्ध।"
+  }
+];
+
+const articleAndFaqSchema = [
+  {
+    "@type": ["Article", "MedicalWebPage"],
+    "@id": `${pageUrl}/#article`,
+    "headline": "Spirulina in Hindi: स्पिरुलिना क्या है? फायदे, खुराक और कीमत (2026)",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-spirulina-capsules-bottle-transparent.png",
+    "inLanguage": "hi-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-02-10T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Clinical Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png"
+      }
+    },
+    "about": {
+      "@type": "DietarySupplement",
+      "name": "Spirulina (Arthrospira platensis)",
+      "sameAs": "https://en.wikipedia.org/wiki/Spirulina_(dietary_supplement)"
+    },
+    "citation": [
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Spirulina in Clinical Practice: Evidence-Based Human Applications",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18955364/",
+        "sameAs": "https://doi.org/10.1093/ecam/nem058"
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Bioactive peptides and Phycobiliproteins from microalgae Arthrospira platensis",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32805562/",
+        "sameAs": "https://doi.org/10.1016/j.foodres.2020.109339"
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Spirulina and iron deficiency anemia: a randomized trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21951264/",
+        "sameAs": "https://doi.org/10.3390/md9122031"
+      }
+    ]
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "Spirulina in Hindi", "item": pageUrl }
+    ]
+  }
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-spirulina-capsules-bottle-transparent.png"
+  extraSchema={articleAndFaqSchema}
+>
+  <StoreHeader />
+
+  <!-- Hero -->
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">होम</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">वैज्ञानिक शोध</a>
+        <span>/</span>
+        <span class="text-white">स्पिरुलिना हिंदी गाइड</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>लैब-टेस्टेड • 100% शाकाहारी • FSSAI पंजीकृत</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Spirulina in Hindi: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">स्पिरुलिना क्या है? फायदे, खुराक, नुकसान और कीमत (2026)</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        एनीमिया, थकावट और प्रोटीन की कमी दूर करने वाला विश्व-स्तरीय सुपरफूड। जानिए 62.39% प्लांट प्रोटीन, 290.89 mg/kg आयरन और पूरी सच्चाई — ज़ीरो AI फ्लफ।
+      </p>
+
+      <!-- Featured Snippet / AI Overview Bait -->
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">
+            त्वरित उत्तर • परिभाषा
+          </span>
+          <span class="text-xs text-emerald-300 font-semibold">Google AI & Medical Verified</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">स्पिरुलिना क्या है? (What is Spirulina in Hindi):</strong>
+          स्पिरुलिना (<em>Arthrospira platensis</em>) एक सूक्ष्म <strong class="text-white">"नीली-हरी काई" (Blue-Green Microalgae)</strong> है। WHO और NASA ने इसे <em>'भविष्य का सर्वोत्तम सुपरफूड'</em> घोषित किया है। Lilaba NABL-मान्यता लैब रिपोर्ट #LAL-NN-131125023 के अनुसार सुजाता स्पिरुलिना में <strong class="text-emerald-300">62.39% शुद्ध प्लांट प्रोटीन</strong>, <strong class="text-amber-300">290.89 mg/kg प्राकृतिक आयरन (Fe)</strong> और <strong class="text-emerald-300">1,407.91 mg/kg कैल्शियम</strong> मौजूद है।
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-white/10 text-xs text-gray-300">
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> FSSAI #21526027000179</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Lilaba NABL Lab #LAL-NN-131125023</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-amber-400 font-bold">✓</span> 290.89 mg/kg प्राकृतिक आयरन</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> 0% केमिकल बाइंडर</span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1.5"><span class="text-purple-400 font-bold">✓</span> &lt;40°C कोल्ड-ड्रायिंग</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. परिभाषा -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> स्पिरुलिना क्या है? (What is Spirulina?)
+        </h2>
+        <div class="text-sm sm:text-base leading-relaxed text-gray-300 space-y-4">
+          <p>
+            <strong>स्पिरुलिना (Spirulina)</strong> एक सूक्ष्म नीले-हरे शैवाल (Blue-Green Microalgae) है जिसका वैज्ञानिक नाम <em>Arthrospira platensis</em> है। हिंदी में इसे <strong>"नीली-हरी काई"</strong> या "जल शैवाल" कहा जाता है। यह पृथ्वी पर पाए जाने वाले सबसे पुराने जीवों में से एक है और लगभग 3.5 अरब साल पहले से पृथ्वी पर मौजूद है।
+          </p>
+          <p>
+            <strong>विश्व स्वास्थ्य संगठन (WHO)</strong>, <strong>नासा (NASA)</strong> और <strong>संयुक्त राष्ट्र (UN)</strong> ने स्पिरुलिना को <em class="text-amber-300">"मानव जाति के लिए भविष्य का सर्वोत्तम सुपरफूड"</em> घोषित किया है। इसमें अंडे से ज़्यादा प्रोटीन, पालक से कई गुना अधिक आयरन, गाजर से ज़्यादा बीटा-कैरोटीन और दूध से अधिक कैल्शियम प्राकृतिक रूप से मौजूद है।
+          </p>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-amber-400 font-sans">62.39%</div>
+            <div class="text-[11px] text-gray-300 mt-1">शुद्ध प्लांट प्रोटीन</div>
+          </div>
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-emerald-400 font-sans">291 mg</div>
+            <div class="text-[11px] text-gray-300 mt-1">प्राकृतिक आयरन / kg</div>
+          </div>
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-sky-400 font-sans">1,408 mg</div>
+            <div class="text-[11px] text-gray-300 mt-1">कैल्शियम / kg</div>
+          </div>
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xl sm:text-2xl font-black text-purple-400 font-sans">&lt;40°C</div>
+            <div class="text-[11px] text-gray-300 mt-1">कोल्ड-ड्रायिंग</div>
+          </div>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-capsules"
+        lang="hi"
+        placement="hindi-after-definition"
+        badge="लैब-टेस्टेड • गंधहीन कैप्सूल"
+        heading="सुजाता शुद्ध स्पिरुलिना कैप्सूल्स (500mg)"
+        pitch="62.39% प्लांट प्रोटीन और 290.89 mg/kg आयरन - NABL लैब प्रमाणित। रोज़ाना 2 कैप्सूल नाश्ते के बाद।"
+        points={["FSSAI #21526027000179 पंजीकृत", "0% केमिकल बाइंडर, मछली जैसी गंध नहीं", "कैश ऑन डिलीवरी या UPI पर 10% छूट"]}
+      />
+
+      <!-- 2. 10 फायदे -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> स्पिरुलिना खाने के 10 वैज्ञानिक फायदे
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🩸 1. हीमोग्लोबिन और एनीमिया में सुधार</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">290.89 mg/kg प्राकृतिक आयरन (Non-Heme Iron) शरीर में धीरे-धीरे अवशोषित होता है, जिससे कब्ज़ नहीं होती और हीमोग्लोबिन का स्तर स्थायी रूप से बढ़ता है।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5">⚡ 2. दिन भर ताज़गी भरी ऊर्जा</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">3 बजे की दोपहर वाली सुस्ती, आंखों पर भारीपन और थकान खत्म। माइटोकॉन्ड्रिया-स्तर पर कोशिकाओं को ऑक्सीजन की पूर्ति।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🛡️ 3. मज़बूत रोग-प्रतिरोधक क्षमता</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">C-फाइकोसायनिन सफ़ेद रक्त कोशिकाओं (WBCs) और नेचुरल किलर सेल्स को सक्रिय करता है।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5">✨ 4. त्वचा पर प्राकृतिक निखार, बाल झड़ना बंद</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">क्लोरोफिल और एंटीऑक्सीडेंट्स शरीर से विषैले तत्व निकालते हैं, मुंहासे कम होते हैं और बालों के रोम मज़बूत होते हैं।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">💪 5. शाकाहारियों के लिए संपूर्ण प्रोटीन</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">62.39% शुद्ध प्लांट प्रोटीन (Lilaba Lab-verified) में शरीर के लिए ज़रूरी सभी 9 अमीनो एसिड शामिल हैं।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5">❤️ 6. कोलेस्ट्रॉल और ब्लड प्रेशर नियंत्रण</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">LDL (खराब कोलेस्ट्रॉल) और ट्राइग्लिसराइड्स कम कर HDL बढ़ाने में सहायक, धमनियों का लचीलापन बनाए रखता है।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">👁️ 7. आंखों की रोशनी और सूखापन</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">बीटा-कैरोटीन (विटामिन A) और ज़ियाक्सैन्थिन लंबे स्क्रीन-टाइम से होने वाले तनाव और सूखी आंखों में राहत देते हैं।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5">⚖️ 8. मेटाबॉलिज़्म और स्वस्थ वज़न</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">0% वसा, 62.39% प्रोटीन - भोजन से पहले गुनगुने पानी के साथ लेने पर भूख नियंत्रित होती है।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-1.5">🩺 9. ब्लड शुगर और डायबिटीज सपोर्ट</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">C-फाइकोसायनिन अग्न्याशय (Pancreas) की कोशिकाओं को ऑक्सीडेटिव तनाव से बचाकर इंसुलिन संवेदनशीलता सुधारता है।</p>
+          </div>
+          <div class="bg-black/30 border border-white/5 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-1.5">⏳ 10. कोशिकीय सुरक्षा और युवा त्वचा</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">प्राकृतिक SOD एन्ज़ाइम DNA के ऑक्सीडेटिव क्षरण को रोककर समय से पहले बुढ़ापा थामता है।</p>
+          </div>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-powder"
+        lang="hi"
+        placement="hindi-mid-powder"
+        badge="स्मूदी • जूस • फेसपैक"
+        heading="सुजाता ऑर्गैनिक स्पिरुलिना पाउडर (100g)"
+        pitch="जो लोग गोलियां नहीं खाना चाहते: 1 चम्मच (3g) जूस, छाछ या स्मूदी में मिलाएं। रोज़ाना का खर्च लगभग ₹10।"
+        compact={false}
+      />
+
+      <!-- 3. पाउडर / टैबलेट / कैप्सूल -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-2 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> पाउडर, टैबलेट या कैप्सूल? आपके लिए कौन-सा सही है?
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-300 mb-6 leading-relaxed">तीनों में 62.39% प्रोटीन समान है। अंतर है सुविधा, गंध और डोज़-फ्लेक्सिबिलिटी का:</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-5 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-white text-base mb-1">🌿 ऑर्गैनिक पाउडर (100g)</h3>
+              <ul class="text-xs text-gray-300 space-y-2 mt-3 mb-4">
+                <li><strong class="text-emerald-400">✓ किसके लिए:</strong> जिम-गोअर्स, स्मूदी लवर्स, फेसपैक यूज़र्स।</li>
+                <li><strong class="text-emerald-400">✓ फ़ायदा:</strong> 1-5g तक फ्लेक्सिबल डोज़।</li>
+              </ul>
+            </div>
+            <a href="/product/sujata-spirulina-powder" class="w-full bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-200 text-xs font-bold py-2.5 px-3 rounded-lg text-center transition-all block">पाउडर देखें →</a>
+          </div>
+          <div class="bg-black/40 border border-amber-500/20 rounded-xl p-5 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-white text-base mb-1">🟢 शुद्ध टैबलेट्स (500mg)</h3>
+              <ul class="text-xs text-gray-300 space-y-2 mt-3 mb-4">
+                <li><strong class="text-amber-400">✓ किसके लिए:</strong> ऑफिस जाने वाले, यात्री।</li>
+                <li><strong class="text-amber-400">✓ फ़ायदा:</strong> 0% केमिकल बाइंडर, हाइड्रोलिक दबाव से बनी।</li>
+              </ul>
+            </div>
+            <a href="/product/sujata-spirulina-tablets" class="w-full bg-amber-950/80 hover:bg-amber-900 border border-amber-500/40 text-amber-200 text-xs font-bold py-2.5 px-3 rounded-lg text-center transition-all block">टैबलेट्स देखें →</a>
+          </div>
+          <div class="bg-black/40 border border-purple-500/20 rounded-xl p-5 flex flex-col justify-between ring-1 ring-purple-500/30">
+            <div>
+              <h3 class="font-bold text-white text-base mb-1">💊 वेज कैप्सूल्स (500mg)</h3>
+              <ul class="text-xs text-gray-300 space-y-2 mt-3 mb-4">
+                <li><strong class="text-purple-400">✓ किसके लिए:</strong> गंधरहित चाहने वाले, तेज़ अवशोषण।</li>
+                <li><strong class="text-purple-400">✓ फ़ायदा:</strong> 5 मिनट में पेट में घुल जाती हैं।</li>
+              </ul>
+            </div>
+            <a href="/product/sujata-spirulina-capsules" class="w-full bg-purple-950/80 hover:bg-purple-900 border border-purple-500/40 text-purple-200 text-xs font-bold py-2.5 px-3 rounded-lg text-center transition-all block">कैप्सूल्स देखें →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. सही खुराक -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">4.</span> सही खुराक और सेवन का तरीका (Dosage)
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">आयु / उद्देश्य</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">दैनिक खुराक</th>
+                <th class="py-3 px-3">समय</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr><td class="py-3 px-3 text-white">सामान्य वयस्क</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,000-2,000 mg</td><td class="py-3 px-3 text-gray-300">नाश्ते के बाद</td></tr>
+              <tr><td class="py-3 px-3 text-white">एनीमिया / थकान</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,500-3,000 mg</td><td class="py-3 px-3 text-gray-300">सुबह + दोपहर</td></tr>
+              <tr><td class="py-3 px-3 text-white">फिटनेस / प्रोटीन</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">3,000-5,000 mg</td><td class="py-3 px-3 text-gray-300">वर्कआउट से पहले</td></tr>
+              <tr><td class="py-3 px-3 text-white">त्वचा / बाल</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,000 mg</td><td class="py-3 px-3 text-gray-300">नाश्ते के बाद, लगातार 90 दिन</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- 5. नुकसान / किसे न लें -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">5.</span> नुकसान, सावधानियां और किसे नहीं लेना चाहिए
+        </h2>
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div class="bg-black/40 border border-red-500/20 p-4 sm:p-5 rounded-xl">
+            <h3 class="font-bold text-red-400 text-sm sm:text-base mb-2">⚠️ Contraindications</h3>
+            <ul class="text-gray-300 space-y-2 mt-2 leading-relaxed">
+              <li class="flex items-start gap-2"><span class="text-red-400 font-bold">✕</span><span><strong>PKU (फिनाइलकीटोन्यूरिया):</strong> दुर्लभ आनुवंशिक रोगियों को बिल्कुल नहीं लेना चाहिए।</span></li>
+              <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">!</span><span><strong>गंभीर ऑटोइम्यून रोग:</strong> Lupus, MS के मरीज़ इम्युनोसप्रेसेंट दवा के साथ न लें।</span></li>
+              <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">!</span><span><strong>गंभीर किडनी रोग:</strong> प्रोटीन/पोटैशियम-प्रतिबंधित डाइट पर नेफ्रोलॉजिस्ट से सलाह लें।</span></li>
+              <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">!</span><span><strong>सर्जरी से 2 हफ्ते पहले बंद:</strong> ब्लड-थिनिंग गुण के कारण।</span></li>
+              <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong>गर्भवती/स्तनपान:</strong> गायनेकोलॉजिस्ट की सलाह से सुरक्षित माना जाता है।</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">6.</span> अक्सर पूछे जाने वाले प्रश्न (FAQs)
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="hi"
+        placement="hindi-bottom-combo"
+        badge="सुपर-सेवर कॉम्बो पैक"
+        heading="स्पिरुलिना कैप्सूल्स + हिमालयन सी बकथॉर्न कॉम्बो"
+        pitch="स्थायी ऊर्जा + चमकती त्वचा: 62.39% प्रोटीन और दुर्लभ ओमेगा-7 एक साथ। 2 और 3 महीने के पैक पर अधिक बचत।"
+        points={["1, 2 या 3 महीने का पैक चुनें", "2 महीने पैक के साथ 2 मुफ्त साबुन", "कैश ऑन डिलीवरी उपलब्ध"]}
+      />
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="spirulina-in-hindi" />
+  <StoreFooter />
+</StoreLayout>

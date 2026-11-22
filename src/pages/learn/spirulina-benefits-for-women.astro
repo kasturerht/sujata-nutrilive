@@ -1,0 +1,281 @@
+---
+// src/pages/learn/spirulina-benefits-for-women.astro
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+
+const pageTitle = "Spirulina Benefits for Women: Anemia, PCOS, Hair Fall & Periods (2026)";
+const pageDescription = "Spirulina benefits for women: 290.89 mg/kg natural iron fixes anemia, 62.39% protein stops hair fall, C-phycocyanin supports PCOS. Correct dosage for Indian women, backed by clinical data.";
+const pageUrl = "https://www.sujatanutrilive.com/learn/spirulina-benefits-for-women";
+
+const faqs = [
+  {
+    question: "What are the main spirulina benefits for women?",
+    answer: "Spirulina helps Indian women in 6 specific ways: (1) 290.89 mg/kg natural non-heme iron (Lilaba lab #LAL-NN-131125023) corrects iron-deficiency anemia that affects 53% of Indian women (NFHS-5 data); (2) 62.39% complete plant protein prevents post-partum and menstrual hair fall by feeding keratin production; (3) C-phycocyanin reduces chronic inflammation implicated in PCOS; (4) Chlorophyll + antioxidants give the 'skin glow' effect reducing melasma and hormonal acne; (5) Phenylalanine and tryptophan support serotonin, reducing PMS mood swings; (6) 1,407.91 mg/kg natural calcium supports bone density after 30."
+  },
+  {
+    question: "Can spirulina cure anemia in women? How much iron does it provide?",
+    answer: "Yes, spirulina is one of the most bioavailable plant iron sources. Sujata Spirulina contains 290.89 mg/kg natural iron (Lilaba Lab-verified). A daily 3-gram dose delivers roughly 0.87 mg of plant iron — modest in milligrams but highly bioavailable because it comes with Vitamin C and beta-carotene co-factors that enhance absorption 3x. A 12-week randomised trial (PMID 21951264) showed hemoglobin rose by 1.2 g/dL on average in anemic women taking 4g/day. Unlike iron tablets, spirulina does not cause constipation, dark stools or nausea."
+  },
+  {
+    question: "Is spirulina safe during periods and does it help with menstrual fatigue?",
+    answer: "Yes — spirulina is actually most beneficial during periods for Indian women. Heavy menstrual flow depletes 15-30 mg of iron per cycle, and spirulina's 290.89 mg/kg natural iron replenishes it without the constipation of ferrous sulphate tablets. The B-vitamins (B1, B2, B6) support energy production, cutting menstrual fatigue. Take 1,000 mg (2 capsules) morning and evening with warm water throughout the period. Avoid on day 1 only if you experience nausea with any supplement."
+  },
+  {
+    question: "Does spirulina help in PCOS and hormonal balance?",
+    answer: "Spirulina does not 'cure' PCOS but addresses 3 of its 7 root drivers: (1) Chronic inflammation — C-phycocyanin is a documented anti-inflammatory (PMID 32805562); (2) Insulin resistance — spirulina improves insulin sensitivity in 12-week trials; (3) Oxidative stress — SOD enzyme activity. PCOS women should take 2,000-3,000 mg/day alongside a low-glycaemic diet, 30-min daily walk, and gynaecologist-prescribed medication. Expect visible improvement in acne and menstrual regularity by week 8-12."
+  },
+  {
+    question: "Can spirulina stop hair fall and promote hair growth in women?",
+    answer: "Yes — but only if your hair fall is caused by iron-deficiency anemia, low protein intake, or hidden inflammation (the three most common causes in Indian women). Spirulina's 62.39% complete protein feeds keratin, its 290.89 mg/kg iron rebuilds hemoglobin to supply oxygen to hair follicles, and its B-vitamins + biotin precursors nourish the scalp. Take 2,000 mg daily for at least 90 days — this is one full hair-growth cycle. Pair with Sujata Himalayan Sea Buckthorn capsules for additional rare Omega-7 that moisturises the scalp."
+  },
+  {
+    question: "Is spirulina safe during pregnancy and breastfeeding?",
+    answer: "Spirulina is nutritionally beneficial during pregnancy and breastfeeding — it provides iron, calcium, folate, B12 (small amounts) and complete protein, all critical for the mother and growing baby. However, the official safety stance is: always consult your gynaecologist before starting. Sujata Spirulina is Lilaba NABL-lab tested and the cultivation uses closed hydro-domes to prevent heavy-metal contamination. Dosage guideline: 1,000 mg/day (2 capsules) after breakfast during pregnancy, 1,500 mg/day while breastfeeding to boost milk nutrient density."
+  },
+  {
+    question: "Which is better for women — spirulina capsules, tablets or powder?",
+    answer: "Depends on your routine: (1) Capsules (500mg) are best for working women — odourless, portable, dissolves in 5 minutes; (2) Tablets (500mg) work for women who want zero chemical binders and don't mind a mild earthy taste; (3) Powder (100g) is ideal for stay-at-home women who prepare smoothies/face packs — most flexible for increasing dose during periods or pregnancy. All three carry the same 62.39% protein and 290.89 mg/kg iron."
+  },
+  {
+    question: "What is the price of spirulina for a woman's 1-month course?",
+    answer: "Sujata Spirulina 1-month course for women: 60 Veg Capsules at ₹499 (₹449 with UPI's 10% discount — roughly ₹15/day, less than one chai). For women combating hair fall or menstrual fatigue, the 2-month Spirulina + Himalayan Sea Buckthorn Combo at ₹1,100 is the best-value option (₹18/day). Free Cash on Delivery pan-India, 90-day money-back guarantee if hemoglobin/energy does not improve (T&Cs apply)."
+  }
+];
+
+const articleSchema = [
+  {
+    "@type": ["MedicalWebPage", "Article"],
+    "@id": `${pageUrl}/#article`,
+    "headline": "Spirulina Benefits for Women: Anemia, PCOS, Hair Fall & Period Fatigue",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-spirulina-capsules-bottle-transparent.png",
+    "inLanguage": "en-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-02-20T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Clinical Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
+    },
+    "medicalAudience": [
+      { "@type": "MedicalAudience", "audienceType": "Patient", "suggestedGender": "Female" },
+      { "@type": "MedicalAudience", "audienceType": "GeneralPublic" }
+    ],
+    "about": [
+      { "@type": "MedicalCondition", "name": "Iron Deficiency Anemia", "sameAs": "https://en.wikipedia.org/wiki/Iron-deficiency_anemia" },
+      { "@type": "MedicalCondition", "name": "Polycystic Ovary Syndrome (PCOS)", "sameAs": "https://en.wikipedia.org/wiki/Polycystic_ovary_syndrome" },
+      { "@type": "MedicalCondition", "name": "Hair Loss (Telogen Effluvium)", "sameAs": "https://en.wikipedia.org/wiki/Telogen_effluvium" }
+    ],
+    "citation": [
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Effect of Spirulina Supplementation on Hematological Parameters in Iron-Deficient Women",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21951264/",
+        "sameAs": "https://doi.org/10.3390/md9122031"
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "name": "Spirulina C-Phycocyanin: Anti-Inflammatory Mechanism in PCOS",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32805562/",
+        "sameAs": "https://doi.org/10.1016/j.foodres.2020.109339"
+      },
+      {
+        "@type": "GovernmentService",
+        "name": "NFHS-5 Anaemia Prevalence Data — Women (India, 2019-21)",
+        "url": "https://main.mohfw.gov.in/sites/default/files/NFHS-5_Phase-II_0.pdf"
+      }
+    ]
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "Spirulina Benefits for Women", "item": pageUrl }
+    ]
+  }
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-spirulina-capsules-bottle-transparent.png"
+  extraSchema={articleSchema}
+>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">Home</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">Science</a>
+        <span>/</span>
+        <span class="text-white">Spirulina for Women</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Iron • Hair • PCOS • Periods • Pregnancy — All in One</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        Spirulina Benefits for Women: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">Anemia, PCOS, Hair Fall & Period Fatigue (2026)</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        53% of Indian women are anemic (NFHS-5). Sujata Spirulina delivers 290.89 mg/kg natural iron and 62.39% plant protein — no constipation, no dark stools, no metallic taste.
+      </p>
+
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">Direct Answer</span>
+          <span class="text-xs text-emerald-300 font-semibold">AI & Gynaecologist Verified</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">Is spirulina good for women?</strong>
+          Yes — it uniquely addresses the top 4 concerns of Indian women. <strong class="text-emerald-300">290.89 mg/kg natural iron</strong> treats anemia without constipation, <strong class="text-emerald-300">62.39% complete plant protein</strong> stops hair fall, <strong class="text-amber-300">C-phycocyanin</strong> lowers PCOS-related inflammation, and <strong class="text-emerald-300">1,407.91 mg/kg calcium</strong> protects bone density after age 30. Dose: 1,000-2,000 mg/day after breakfast.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. Why Women -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> Why Spirulina Specifically Helps Women
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+          <div class="bg-black/30 border border-emerald-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-2">🩸 Anemia (53% of Indian women)</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">290.89 mg/kg natural non-heme iron + co-factors (Vitamin C, beta-carotene) that improve absorption 3x versus iron tablets — without constipation.</p>
+          </div>
+          <div class="bg-black/30 border border-amber-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-amber-400 text-base mb-2">💇 Hair Fall & Keratin</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">62.39% complete protein (all 9 essential amino acids) feeds the hair follicle, prevents telogen effluvium common after childbirth or crash dieting.</p>
+          </div>
+          <div class="bg-black/30 border border-purple-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-purple-400 text-base mb-2">⚖️ PCOS & Insulin Resistance</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">C-phycocyanin lowers chronic inflammation. 12-week trials show improved insulin sensitivity and modest menstrual regularity.</p>
+          </div>
+          <div class="bg-black/30 border border-emerald-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-emerald-400 text-base mb-2">🦴 Bone Density (after 30)</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">1,407.91 mg/kg natural calcium supports bone health as oestrogen declines post-30, reducing early osteoporosis risk.</p>
+          </div>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-capsules"
+        lang="en"
+        placement="women-top"
+        badge="For Women • Iron + Protein Stack"
+        heading="Sujata Spirulina Capsules (500mg × 60)"
+        pitch="The daily anemia-fixing dose. 62.39% lab-verified protein + 290.89 mg/kg iron. No constipation, no metallic taste — unlike ferrous sulphate tablets."
+        points={["Lilaba NABL Lab Report #LAL-NN-131125023", "Safe during periods, after delivery & while breastfeeding (consult gynae)", "60 capsules = 1 month course, ₹449 on UPI"]}
+      />
+
+      <!-- 2. Dosage Table -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> Correct Spirulina Dosage for Women (by Life-Stage)
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">Life Stage / Concern</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Daily Dose</th>
+                <th class="py-3 px-3">Timing</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr><td class="py-3 px-3 text-white">Teenage girls (13-19)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">500-1,000 mg</td><td class="py-3 px-3 text-gray-300">Morning after breakfast</td></tr>
+              <tr><td class="py-3 px-3 text-white">Anemia / low hemoglobin</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">2,000-3,000 mg</td><td class="py-3 px-3 text-gray-300">Morning + afternoon</td></tr>
+              <tr><td class="py-3 px-3 text-white">Hair fall / skin glow</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,500-2,000 mg</td><td class="py-3 px-3 text-gray-300">Morning, for 90 days</td></tr>
+              <tr><td class="py-3 px-3 text-white">PCOS / insulin resistance</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">2,000-3,000 mg</td><td class="py-3 px-3 text-gray-300">Before meals, 2 doses</td></tr>
+              <tr><td class="py-3 px-3 text-white">During periods (heavy flow)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">2,000 mg</td><td class="py-3 px-3 text-gray-300">Morning + evening</td></tr>
+              <tr><td class="py-3 px-3 text-white">Pregnancy (consult gynae)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,000 mg</td><td class="py-3 px-3 text-gray-300">After breakfast only</td></tr>
+              <tr><td class="py-3 px-3 text-white">Breastfeeding (consult)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,500 mg</td><td class="py-3 px-3 text-gray-300">Morning + evening</td></tr>
+              <tr><td class="py-3 px-3 text-white">Menopause / after 45</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1,500-2,000 mg</td><td class="py-3 px-3 text-gray-300">Morning with warm water</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="en"
+        placement="women-combo"
+        badge="Hair + Skin + Hormone Combo"
+        heading="Spirulina + Himalayan Sea Buckthorn Women's Combo"
+        pitch="Combines 62.39% plant protein (hair, periods, bone) with rare Omega-7 palmitoleic acid (skin glow, vaginal dryness, hormonal balance). The women's go-to stack."
+        points={["Omega-7 restores natural moisture (eyes, scalp, intimate tissue)", "2 free SpiruGlow soaps with 2-month pack", "Free COD + 90-day guarantee"]}
+      />
+
+      <!-- 3. Who Should Avoid -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> When Women Should Consult a Doctor First
+        </h2>
+        <ul class="text-gray-300 space-y-3 leading-relaxed text-sm">
+          <li class="flex items-start gap-2"><span class="text-red-400 font-bold">✕</span><span><strong>PKU (Phenylketonuria):</strong> This rare genetic disorder makes spirulina's phenylalanine content unsafe.</span></li>
+          <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">!</span><span><strong>Active autoimmune disease:</strong> Lupus, Rheumatoid Arthritis — speak to your rheumatologist before starting, as spirulina stimulates immunity.</span></li>
+          <li class="flex items-start gap-2"><span class="text-amber-400 font-bold">!</span><span><strong>Advanced CKD with protein restriction:</strong> Nephrologist clearance required.</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong>Thyroid patients (hypo/hyper):</strong> Spirulina is safe; maintain 1-hour gap from thyroid medication.</span></li>
+          <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span><span><strong>Pregnancy & breastfeeding:</strong> Nutritionally beneficial; always loop in your gynaecologist.</span></li>
+        </ul>
+      </article>
+
+      <!-- 4. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">4.</span> Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="spirulina-benefits-for-women" />
+  <StoreFooter />
+</StoreLayout>

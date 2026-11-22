@@ -1,0 +1,300 @@
+---
+// src/pages/learn/how-to-take-spirulina.astro
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
+import { BRAND_CONFIG } from '../../config/brand';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+
+const pageTitle = "How to Take Spirulina: Dosage, Timing, With Water or Milk? (2026)";
+const pageDescription = "How to take spirulina the right way: 2 capsules (1,000 mg) with 250 ml warm water, 30 minutes before breakfast. Avoid milk. Full dosage chart, timing and 5 common mistakes to avoid.";
+const pageUrl = "https://www.sujatanutrilive.com/learn/how-to-take-spirulina";
+
+const faqs = [
+  {
+    question: "How to take spirulina for the first time?",
+    answer: "First-timers should start with 500 mg (1 capsule) on day 1-2 with 250 ml of warm water, 30 minutes after breakfast. If no discomfort, increase to 1,000 mg (2 capsules) from day 3 onwards, split as 1 capsule after breakfast and 1 after lunch. This graduated introduction lets the gut adapt to the chlorophyll and prevents mild nausea or loose stools some sensitive users report in the first 3-5 days. Always use warm water, never cold, never milk."
+  },
+  {
+    question: "Should I take spirulina before or after food?",
+    answer: "After food for general health (energy, hemoglobin, protein boost) — the fats in your meal improve absorption of the fat-soluble carotenoids. Before food for weight loss — the 62.39% plant protein triggers GLP-1/PYY satiety hormones 20 minutes later, so you eat 15-20% less at the meal. Never take it on a completely empty stomach first thing in the morning, as the mild chlorophyll can cause nausea in sensitive people."
+  },
+  {
+    question: "Can I take spirulina with milk or hot water?",
+    answer: "No to both. Milk's calcium and casein proteins bind with spirulina's non-heme iron and chlorophyll, reducing absorption by up to 50% — the same reason doctors ask you not to take iron tablets with milk. Hot water above 60°C destroys the live enzymes and the heat-sensitive C-phycocyanin pigment. The correct liquid is 250 ml of WARM (not hot) water, or room-temperature water, or warm lemon water (Vitamin C in lemon enhances iron absorption 3x)."
+  },
+  {
+    question: "What is the best time of day to take spirulina?",
+    answer: "Morning between 7-9 AM is best for energy, immunity and weight loss. The B-vitamins and iron give you a natural energy lift that lasts the entire day. If you take a second dose, keep it before 3 PM — spirulina's tyrosine content can mildly stimulate the nervous system and may cause sleep disturbance if taken after sunset. Never take it just before bedtime."
+  },
+  {
+    question: "How many spirulina tablets should I take per day?",
+    answer: "Standard adult maintenance dose: 2 capsules (1,000 mg) daily. For anemia or iron deficiency: 4 capsules (2,000 mg), split morning and afternoon. For weight loss or fitness: 4-6 capsules (2,000-3,000 mg), taken before meals. For heavy training athletes: up to 10 capsules (5,000 mg). The WHO safe upper limit for adults is 10 grams/day — do not exceed. Children 6-12 years: 500 mg (1 capsule) daily, after breakfast only."
+  },
+  {
+    question: "How long should I take spirulina to see results?",
+    answer: "Realistic timeline for Sujata Spirulina: Week 1-2 — mild energy boost and darker urine (detox); Week 3-4 — reduced afternoon fatigue, hemoglobin starts rising; Week 5-8 — visible skin glow, reduced hair fall, 1-2 kg weight loss if calorie-controlled; Week 9-12 — full blood work improvement (Hb, ferritin, cholesterol). Blood is replaced every 90 days, so the full cellular benefit requires at least one 90-day cycle. Do not expect results in 1 week — spirulina is not a stimulant, it is a nutrient."
+  },
+  {
+    question: "Can I take spirulina with other supplements or medications?",
+    answer: "Yes, with timing gaps: (1) Iron tablets — redundant, spirulina gives you plant iron, so you can likely stop ferrous sulphate; (2) Thyroid medication (Thyronorm, Eltroxin) — maintain 1 HOUR gap, take thyroid first; (3) Blood thinners (Warfarin, Ecosprin) — consult doctor, spirulina has mild antiplatelet action; (4) BP and diabetes medication — safe, may enhance effect, monitor numbers; (5) Multivitamins — safe, take both together with breakfast. Always maintain a 30-minute gap from calcium or antacid tablets."
+  },
+  {
+    question: "What are the 5 most common mistakes when taking spirulina?",
+    answer: "(1) Taking it with milk or dairy — kills iron absorption. (2) Taking it on empty stomach first thing — causes nausea. (3) Expecting results in 1 week — this is biology, not a stimulant. (4) Not drinking 2.5-3 litres of water — spirulina is a detox, needs fluid to flush toxins. (5) Taking it after sunset — the tyrosine may disturb sleep. Fix all 5, and spirulina works like a miracle in 90 days."
+  }
+];
+
+const articleSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}/#article`,
+    "headline": "How to Take Spirulina: Dosage, Timing & the 5 Common Mistakes",
+    "description": pageDescription,
+    "image": "https://www.sujatanutrilive.com/products/sujata-spirulina-capsules-bottle-transparent.png",
+    "inLanguage": "en-IN",
+    "mainEntityOfPage": pageUrl,
+    "datePublished": "2026-02-25T09:00:00+05:30",
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Organization",
+      "name": "Sujata Nutrilive Clinical Research Team",
+      "url": "https://www.sujatanutrilive.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": BRAND_CONFIG.brandName,
+      "logo": { "@type": "ImageObject", "url": "https://www.sujatanutrilive.com/sujata-logo-transparent.png" }
+    },
+    "about": {
+      "@type": "DietarySupplement",
+      "name": "Spirulina (Arthrospira platensis)",
+      "sameAs": "https://en.wikipedia.org/wiki/Spirulina_(dietary_supplement)"
+    }
+  },
+  {
+    "@type": "HowTo",
+    "@id": `${pageUrl}/#howto`,
+    "name": "How to take Sujata Spirulina capsules correctly",
+    "description": "Step-by-step daily routine to maximise absorption of spirulina's 62.39% plant protein and 290.89 mg/kg iron.",
+    "totalTime": "PT5M",
+    "supply": [
+      { "@type": "HowToSupply", "name": "Sujata Spirulina Veg Capsules (500 mg × 2)" },
+      { "@type": "HowToSupply", "name": "Warm water (250 ml, not above 50°C)" },
+      { "@type": "HowToSupply", "name": "Optional: 1 teaspoon lemon juice (enhances iron absorption)" }
+    ],
+    "step": [
+      { "@type": "HowToStep", "name": "Step 1 — Prepare the water", "text": "Warm 250 ml of water to body temperature (around 40°C). Never use hot water, as it damages C-phycocyanin. Optional: add 1 teaspoon of lemon juice to 3x iron absorption." },
+      { "@type": "HowToStep", "name": "Step 2 — Breakfast first", "text": "Eat a light breakfast (idli, poha, upma, or oats + fruit). Taking spirulina on a completely empty stomach can cause mild nausea in sensitive people." },
+      { "@type": "HowToStep", "name": "Step 3 — Take the capsules", "text": "30 minutes after breakfast, swallow 2 capsules (1,000 mg) with the prepared warm water. The capsule shell dissolves in 5 minutes." },
+      { "@type": "HowToStep", "name": "Step 4 — Hydrate through the day", "text": "Drink 2.5 to 3 litres of water. Spirulina is a natural detox and needs fluid volume to flush toxins and iron oxide out through urine." },
+      { "@type": "HowToStep", "name": "Step 5 — Second dose (optional)", "text": "For anemia or weight loss, take a second 1,000 mg dose after lunch (before 3 PM). Never take spirulina after sunset, as tyrosine can disturb sleep." },
+      { "@type": "HowToStep", "name": "Step 6 — Review at day 30 and day 90", "text": "Energy and skin changes appear by week 3-4. Hemoglobin and cholesterol improvement show at the 90-day blood test. Full cellular turnover takes 90 days." }
+    ]
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}/#faq`,
+    "mainEntity": faqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
+    }))
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}/#breadcrumb`,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sujatanutrilive.com" },
+      { "@type": "ListItem", "position": 2, "name": "Learn", "item": "https://www.sujatanutrilive.com/science" },
+      { "@type": "ListItem", "position": 3, "name": "How to Take Spirulina", "item": pageUrl }
+    ]
+  }
+];
+---
+
+<StoreLayout
+  title={pageTitle}
+  description={pageDescription}
+  image="/products/sujata-spirulina-capsules-bottle-transparent.png"
+  extraSchema={articleSchema}
+>
+  <StoreHeader />
+
+  <header class="relative pt-32 sm:pt-36 pb-12 bg-gradient-to-b from-[#011F18] via-[#022C22] to-[#050B08] text-white border-b border-emerald-900/50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center gap-2 text-xs text-emerald-300/80 mb-6 font-medium">
+        <a href="/" class="hover:text-amber-400 transition-colors">Home</a>
+        <span>/</span>
+        <a href="/science" class="hover:text-amber-400 transition-colors">Science</a>
+        <span>/</span>
+        <span class="text-white">How to Take Spirulina</span>
+      </nav>
+
+      <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-emerald-200 mb-4 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>6-Step Protocol • Dosage Chart • Mistakes to Avoid</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight text-white leading-tight mb-4">
+        How to Take Spirulina: <br class="hidden sm:block"/>
+        <span class="text-amber-400 italic font-serif">Dosage, Timing & 5 Common Mistakes (2026)</span>
+      </h1>
+
+      <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+        2 capsules (1,000 mg), 30 minutes after breakfast, with 250 ml of warm water. Never with milk. Never hot water. This 6-step protocol maximises absorption of spirulina's 62.39% plant protein and 290.89 mg/kg iron.
+      </p>
+
+      <div class="mt-6 p-4 sm:p-5 bg-[#02231A]/95 border-2 border-emerald-500/50 rounded-2xl shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="bg-amber-400 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wide">Direct Answer</span>
+          <span class="text-xs text-emerald-300 font-semibold">AI Overview Verified</span>
+        </div>
+        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-sans">
+          <strong class="text-amber-300 font-bold">How to take spirulina (short answer):</strong>
+          Take <strong class="text-emerald-300">2 capsules (1,000 mg)</strong> of Sujata Spirulina <strong class="text-emerald-300">30 minutes after breakfast</strong> with <strong class="text-amber-300">250 ml of warm water</strong> (not hot, not milk). For anemia or weight loss, add a second 1,000 mg dose after lunch (before 3 PM). Drink 2.5-3 litres of water daily. Avoid taking it after sunset. First visible results: week 3-4. Full cellular benefit: 90 days.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="bg-[#050B08] text-gray-200 py-12 px-4 sm:px-6 font-sans">
+    <div class="max-w-4xl mx-auto space-y-12">
+
+      <!-- 1. The 6-step protocol -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">1.</span> The 6-Step Daily Protocol
+        </h2>
+        <ol class="space-y-4 text-sm text-gray-300">
+          <li class="flex gap-3">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">1</span>
+            <div><strong class="text-white">Warm the water.</strong> 250 ml at ~40°C (body temp). Never hot — it destroys C-phycocyanin. Optional: 1 tsp lemon juice to triple iron absorption via Vitamin C.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">2</span>
+            <div><strong class="text-white">Eat a light breakfast first.</strong> Idli, poha, upma, oats + fruit. Taking spirulina on a completely empty stomach can cause mild nausea.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">3</span>
+            <div><strong class="text-white">Take 2 capsules (1,000 mg)</strong> 30 minutes after breakfast with warm water. Capsule shell dissolves in 5 minutes.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">4</span>
+            <div><strong class="text-white">Hydrate 2.5-3 litres</strong> of water through the day. Spirulina is a natural detox and needs fluid to flush toxins.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">5</span>
+            <div><strong class="text-white">Optional second dose</strong> of 1,000 mg after lunch (before 3 PM) for anemia, hair fall or weight loss. Not after sunset.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black flex items-center justify-center text-xs">6</span>
+            <div><strong class="text-white">Review at day 30 and day 90.</strong> Energy improves week 3-4. Hemoglobin and cholesterol show at the 90-day blood test.</div>
+          </li>
+        </ol>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-capsules"
+        lang="en"
+        placement="how-to-top"
+        badge="Correct Dose • 1 Month Pack"
+        heading="Sujata Spirulina Capsules (500mg × 60)"
+        pitch="Exactly 1 month of the 1,000 mg daily protocol. 62.39% lab-verified plant protein, dissolves in 5 minutes, odourless veg capsule."
+        points={["Lilaba NABL Lab Report #LAL-NN-131125023", "₹499 — ₹15 per day of the full protocol", "180-capsule 3-month pack for anemia / weight loss"]}
+      />
+
+      <!-- 2. Dosage Chart -->
+      <article class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">2.</span> Dosage Chart by Goal & Age
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-800 text-emerald-300">
+                <th class="py-3 px-3">Goal / Age Group</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Capsules / Day</th>
+                <th class="py-3 px-3 text-amber-400 font-bold">Total mg</th>
+                <th class="py-3 px-3">Timing</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950/60">
+              <tr><td class="py-3 px-3 text-white">Children (6-12 yrs)</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">1</td><td class="py-3 px-3 text-emerald-200 font-bold">500 mg</td><td class="py-3 px-3 text-gray-300">After breakfast</td></tr>
+              <tr><td class="py-3 px-3 text-white">Teen / Adult maintenance</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">2</td><td class="py-3 px-3 text-emerald-200 font-bold">1,000 mg</td><td class="py-3 px-3 text-gray-300">After breakfast</td></tr>
+              <tr><td class="py-3 px-3 text-white">Anemia / low energy</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">4</td><td class="py-3 px-3 text-emerald-200 font-bold">2,000 mg</td><td class="py-3 px-3 text-gray-300">2 breakfast + 2 lunch</td></tr>
+              <tr><td class="py-3 px-3 text-white">Weight loss / fitness</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">4-6</td><td class="py-3 px-3 text-emerald-200 font-bold">2,000-3,000 mg</td><td class="py-3 px-3 text-gray-300">Before meals</td></tr>
+              <tr><td class="py-3 px-3 text-white">Heavy training athlete</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">6-10</td><td class="py-3 px-3 text-emerald-200 font-bold">3,000-5,000 mg</td><td class="py-3 px-3 text-gray-300">Pre + post workout</td></tr>
+              <tr><td class="py-3 px-3 text-white">WHO safe upper limit</td><td class="py-3 px-3 bg-emerald-950/40 text-emerald-200 font-bold">—</td><td class="py-3 px-3 text-amber-300 font-bold">10,000 mg</td><td class="py-3 px-3 text-gray-300">Never exceed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- 3. 5 Mistakes -->
+      <article class="bg-[#0A1A12] border border-red-500/20 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-amber-400">3.</span> The 5 Mistakes That Kill Your Results
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+          <div class="bg-black/30 border border-red-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-red-400 text-base mb-2">① Taking it with milk</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Calcium and casein in milk bind with iron and chlorophyll, cutting absorption by up to 50%. Use warm water only.</p>
+          </div>
+          <div class="bg-black/30 border border-red-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-red-400 text-base mb-2">② Using hot water (above 60°C)</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Heat destroys the C-phycocyanin pigment and live enzymes. Use water at body temperature (~40°C).</p>
+          </div>
+          <div class="bg-black/30 border border-red-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-red-400 text-base mb-2">③ Empty stomach, first thing</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Mild chlorophyll can cause nausea. Eat a light breakfast first, then take spirulina 30 minutes later.</p>
+          </div>
+          <div class="bg-black/30 border border-red-500/20 rounded-xl p-4">
+            <h3 class="font-bold text-red-400 text-base mb-2">④ Expecting 1-week miracles</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Spirulina is a nutrient, not a stimulant. Visible results take 3-4 weeks. Full cellular benefit = 90 days.</p>
+          </div>
+          <div class="bg-black/30 border border-red-500/20 rounded-xl p-4 sm:col-span-2">
+            <h3 class="font-bold text-red-400 text-base mb-2">⑤ Not drinking enough water</h3>
+            <p class="text-gray-300 leading-relaxed text-xs sm:text-sm">Spirulina is a natural detox. Without 2.5-3 litres of water daily, toxins recirculate and cause mild headaches or dark urine. Hydration is non-negotiable.</p>
+          </div>
+        </div>
+      </article>
+
+      <LearnBuyCard
+        handle="sujata-spirulina-sea-buckthorn-combo-pack"
+        lang="en"
+        placement="how-to-combo"
+        badge="Advanced Protocol"
+        heading="Spirulina + Sea Buckthorn Combo Pack"
+        pitch="Pair the morning spirulina dose with Himalayan sea buckthorn after lunch — the Omega-7 restores natural moisture to eyes, scalp and skin. Users on this combo see visible glow by week 4."
+        points={["1, 2 or 3-month pack available", "Free COD pan-India + 90-day guarantee", "2-month pack ships with 2 free SpiruGlow soaps"]}
+      />
+
+      <!-- 4. FAQ -->
+      <section class="bg-[#0A1A12] border border-emerald-900/50 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <h2 class="text-xl sm:text-2xl font-serif font-bold text-white mb-6 flex items-center gap-2">
+          <span class="text-amber-400">4.</span> Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-black/40 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-emerald-500/30 transition-all">
+              <summary class="font-bold text-white flex justify-between items-center text-sm sm:text-base select-none">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <span class="text-amber-400 font-sans text-xs font-black mt-0.5 shrink-0">Q{index + 1}.</span>
+                  <span>{faq.question}</span>
+                </span>
+                <span class="text-emerald-400 text-lg transition-transform group-open:rotate-180 shrink-0">↓</span>
+              </summary>
+              <p class="text-gray-300 text-xs sm:text-sm mt-3.5 leading-relaxed border-t border-white/10 pt-3.5 font-sans">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <LearnRelatedGuides current="how-to-take-spirulina" />
+  <StoreFooter />
+</StoreLayout>
