@@ -291,7 +291,7 @@ Sujata Nutrilive Spirulina Veg Capsules 120 Count (500mg × 120) — 100% Odour-
 
 **Bullet 2 — Best-Value Daily Cost in the Capsule Line**
 ```
-📦 LOWEST PER-DAY COST IN THE SUJATA CAPSULE LINE — Approximately ₹X per day of the daily routine. Preferred by returning customers who have already completed a 30-day starter pack and want to continue the routine at a lower price-per-capsule.
+📦 LOWEST PER-DAY COST IN THE SUJATA CAPSULE LINE — Approximately ₹X per day of the daily routine. Preferred by returning customers who have already completed a 30-day starter pack and want to continue the routine at a better per-day rate.
 ```
 
 **Bullet 3 — Lab-Verified Nutrient Density**
@@ -519,7 +519,7 @@ Bytes: **218**.
 
 #### Title (≤200 chars)
 ```
-Sujata Nutrilive Natural Moringa Leaf Powder 100g — Shadow-Dried Moringa Oleifera (Drumstick Leaf), High Natural Calcium, Natural Plant Iron, Zero Additive, FSSAI #21526027000179
+Sujata Nutrilive Natural Moringa Leaf Powder 100g — Shadow-Dried Moringa Oleifera (Drumstick Leaf), High Calcium, Plant Iron, Zero Additive, FSSAI #21526027000179
 ```
 
 #### 5 Rufus-Engineered Bullet Points
