@@ -276,7 +276,7 @@ Bytes: **198**.
 
 ---
 
-### B0HMJDWYQ5 — Sujata Spirulina Veg Capsules 120 count (500 mg × 120)
+### B0HMJFFVCW — Sujata Spirulina Veg Capsules 120 count (500 mg × 120)
 
 #### Title (≤200 chars)
 ```
@@ -331,7 +331,7 @@ Bytes: **206**.
 
 ---
 
-### B0HMJHZ82V — Sujata Spirulina Veg Capsules 180 count (500 mg × 180)
+### B0HMJRHQZL — Sujata Spirulina Veg Capsules 180 count (500 mg × 180)
 
 #### Title (≤200 chars)
 ```
@@ -389,7 +389,7 @@ Bytes: **212**.
 
 ## Section 4 — Himalayan Sea Buckthorn
 
-### B0HMJDX1X9 — Sujata Himalayan Sea Buckthorn Capsules 60 count (650 mg × 60)
+### B0HMJHWLV3 — Sujata Himalayan Sea Buckthorn Capsules 60 count (650 mg × 60)
 
 #### Title (≤200 chars)
 ```
@@ -454,17 +454,17 @@ Bytes: **214**.
 
 ## Section 5 — Natural Plant-Based Vitamin B12
 
-### B0HMJFWPXR — Sujata Natural Plant-Based Vitamin B12 Tablets 60 count
+### B0HMJDWMSB — Sujata Natural Plant-Based Vitamin B12 Capsules 90 count (3-Month Supply)
 
 #### Title (≤200 chars)
 ```
-Sujata Nutrilive Natural Plant-Based Vitamin B12 Tablets 60 Count — Methylcobalamin from Plant Fermentation, 100% Vegan, Zero Synthetic Cyanocobalamin, Supports Normal Energy Metabolism, FSSAI #21526027000179
+Sujata Nutrilive Natural Plant-Based Vitamin B12 Capsules 90 Count — 3-Month Supply, Methylcobalamin from Plant Fermentation, 100% Vegan, Zero Synthetic Cyanocobalamin, FSSAI #21526027000179
 ```
 
 #### 5 Rufus-Engineered Bullet Points
 **Bullet 1 — Natural Methylcobalamin, Not Synthetic Cyanocobalamin**
 ```
-🧪 NATURAL PLANT-FERMENTATION METHYLCOBALAMIN — 100% VEGAN — Most Vitamin B12 tablets on Amazon India use synthetic cyanocobalamin (a cyanide-stabilised B12 derivative that the body has to convert). Sujata uses the biologically active methylcobalamin form sourced from plant fermentation — the body-ready B12 that normally appears in food.
+🧪 NATURAL PLANT-FERMENTATION METHYLCOBALAMIN — 100% VEGAN — Most Vitamin B12 capsules on Amazon India use synthetic cyanocobalamin (a cyanide-stabilised B12 derivative the body has to convert). Sujata uses the biologically active methylcobalamin form sourced from plant fermentation — the body-ready B12 that normally appears in food.
 ```
 
 **Bullet 2 — Supports Normal Energy Metabolism + RBC Formation**
@@ -474,12 +474,12 @@ Sujata Nutrilive Natural Plant-Based Vitamin B12 Tablets 60 Count — Methylcoba
 
 **Bullet 3 — 100% Vegan Formulation**
 ```
-🌿 100% VEGAN — ZERO ANIMAL INGREDIENT — Tablet core is plant-fermentation methylcobalamin + plant-cellulose base. Zero gelatin, zero milk solids, zero animal glaze. Suitable for vegans, Jains, and strictly plant-based diets. Zero added sugar, zero artificial colour.
+🌿 100% VEGAN — ZERO ANIMAL INGREDIENT — Capsule core is plant-fermentation methylcobalamin + plant-cellulose base. 100% hypromellose veg shell, zero gelatin, zero milk solids, zero animal glaze. Suitable for vegans, Jains, and strictly plant-based diets. Zero added sugar, zero artificial colour.
 ```
 
-**Bullet 4 — 60-Day Supply at 1/Day Serving**
+**Bullet 4 — 90-Count 3-Month Value Supply at 1/Day Serving**
 ```
-📦 60 TABLETS — 2-MONTH SUPPLY AT 1/DAY — One tablet daily after breakfast with warm water. 60-count bottle lasts 2 months. Preferred by vegetarians and vegans who need a reliable daily B12 top-up without the synthetic cyanocobalamin form.
+📦 90 CAPSULES — 3-MONTH SUPPLY AT 1/DAY — One capsule daily after breakfast with warm water. 90-count bottle lasts a full quarter, lowest per-day cost in the Sujata B12 line. Preferred by vegetarians and vegans who want a once-per-quarter reorder cadence.
 ```
 
 **Bullet 5 — FSSAI Manufacturer Licence + Daily Nutrition Framing**
@@ -489,9 +489,9 @@ Sujata Nutrilive Natural Plant-Based Vitamin B12 Tablets 60 Count — Methylcoba
 
 #### Backend Search Terms (≤249 bytes)
 ```
-vitamin b12 tablets 60 count vegan methylcobalamin natural plant based fermentation cobalamin energy metabolism red blood cell formation nervous system vegetarian jain zero synthetic cyanocobalamin fssai nashik
+vitamin b12 capsules 90 count 3 month supply vegan methylcobalamin natural plant based fermentation cobalamin energy metabolism red blood cell nervous system vegetarian jain zero synthetic cyanocobalamin fssai
 ```
-Bytes: **210**.
+Bytes: **218**.
 
 #### 4 Q&A Seeds
 **Q1.** Methylcobalamin or cyanocobalamin — which is in this tablet?
@@ -519,7 +519,7 @@ Bytes: **210**.
 
 #### Title (≤200 chars)
 ```
-Sujata Nutrilive Natural Moringa Leaf Powder 100g — Shadow-Dried Moringa Oleifera (Drumstick Leaf), High Natural Calcium, Natural Plant Iron, Zero Chemical Additive, FSSAI #21526027000179, India-Origin
+Sujata Nutrilive Natural Moringa Leaf Powder 100g — Shadow-Dried Moringa Oleifera (Drumstick Leaf), High Natural Calcium, Natural Plant Iron, Zero Additive, FSSAI #21526027000179
 ```
 
 #### 5 Rufus-Engineered Bullet Points
@@ -636,7 +636,7 @@ Bytes: **213**.
 
 ---
 
-### B0HMJFBF8X — SpiruGlow Handmade Bath Soap 5-Pack (100 g × 5)
+### B0HMKR4W22 — SpiruGlow Handmade Bath Soap 5-Pack (100 g × 5)
 
 #### Title (≤200 chars)
 ```
@@ -692,7 +692,7 @@ Bytes: **212**.
 
 ---
 
-### B0HMJFFVCW — SpiruGlow Handmade Bath Soap 10-Pack (100 g × 10)
+### B0HMKD5F7N — SpiruGlow Handmade Bath Soap 10-Pack (100 g × 10)
 
 #### Title (≤200 chars)
 ```
@@ -750,17 +750,17 @@ Bytes: **212**.
 
 ## Section 8 — High-Value Combo Packs
 
-### B0HMJFDKG9 — Super Immunity Combo: Spirulina + Himalayan Sea Buckthorn
+### B0HMJNJ2LP — Super Immunity Combo: Spirulina Tablets 90 + Himalayan Sea Buckthorn 60
 
 #### Title (≤200 chars)
 ```
-Sujata Nutrilive Super Immunity Combo — Spirulina Veg Capsules 60 + Himalayan Sea Buckthorn 60 — 100% Odour-Free Daily Plant Nutrition, NABL Lab-Verified, Rare Omega-7 + 62.39% Plant Protein, FSSAI #21526027000179
+Sujata Nutrilive Super Immunity Combo — Spirulina Tablets 90 + Himalayan Sea Buckthorn 60 — NABL Lab-Verified, 62.39% Plant Protein + Rare Omega-7, FSSAI #21526027000179
 ```
 
 #### 5 Rufus-Engineered Bullet Points
 **Bullet 1 — Two Lab-Verified Supplements in One Combo**
 ```
-💊 TWO SUPPLEMENTS, ONE PRICE — Sujata Spirulina Veg Capsules (60 × 500 mg) + Sujata Himalayan Sea Buckthorn Capsules (60 × 650 mg) — bundled at a combo price lower than buying each bottle separately. Both are 100% odour-free, 100% taste-free, 100% vegetarian capsule format.
+💊 TWO SUPPLEMENTS, ONE PRICE — Sujata Spirulina Tablets (90 × 500 mg) + Sujata Himalayan Sea Buckthorn Capsules (60 × 650 mg) — bundled at a combo price lower than buying each bottle separately. Hydraulic-pressed spirulina tablets are 100% odour-free with zero chemical binder; sea buckthorn is a 100% plant-cellulose veg capsule.
 ```
 
 **Bullet 2 — Plant Protein + Rare Omega-7 Pairing**
@@ -768,14 +768,14 @@ Sujata Nutrilive Super Immunity Combo — Spirulina Veg Capsules 60 + Himalayan 
 🌿 62.39% PLANT PROTEIN + RARE OMEGA-7 — Spirulina delivers 62.39% NABL-verified plant protein + 290.89 mg/kg natural iron + 1,407.91 mg/kg calcium. Sea Buckthorn delivers rare Omega-7 (palmitoleic acid) + Omega-3/6/9 + 12× orange Vitamin C from wild Leh-Ladakh berries. Vitamin C contributes to normal immune-system function. Protein contributes to maintenance of normal muscle mass.
 ```
 
-**Bullet 3 — 30-Day Daily Routine**
+**Bullet 3 — 30-Day Daily Routine with Extra Spirulina**
 ```
-📅 30-DAY DAILY ROUTINE — 2 Spirulina Capsules after breakfast + 2 Sea Buckthorn Capsules after dinner (or alongside your morning serving, with food). 60 + 60 capsules = 30 days at the standard daily servings. Perfect first-month combo for anyone new to Sujata.
+📅 30-DAY DAILY ROUTINE — 2 Spirulina Tablets after breakfast (45-day supply from the 90-count bottle) + 2 Sea Buckthorn Capsules after dinner (30-day supply from the 60-count bottle). The extra Spirulina covers your tapered maintenance days while you place your next order. Perfect first-month combo for anyone new to Sujata.
 ```
 
 **Bullet 4 — Both Supplements Lab-Verified**
 ```
-🧪 LILABA NABL LAB REPORT #LAL-NN-131125023 — covers the spirulina batch; sea buckthorn is independently cold-pressed below 40 °C from wild-harvested Leh-Ladakh berries. Both food supplements. Zero added sugar, zero preservative, 100% plant-cellulose veg shells.
+🧪 LILABA NABL LAB REPORT #LAL-NN-131125023 — covers the spirulina batch; sea buckthorn is independently cold-pressed below 40 °C from wild-harvested Leh-Ladakh berries. Both food supplements. Zero added sugar, zero preservative, hydraulic-pressed binder-free spirulina tablets, 100% plant-cellulose sea-buckthorn veg shells.
 ```
 
 **Bullet 5 — Common Everyday Pairing**
@@ -785,9 +785,9 @@ Sujata Nutrilive Super Immunity Combo — Spirulina Veg Capsules 60 + Himalayan 
 
 #### Backend Search Terms (≤249 bytes)
 ```
-spirulina sea buckthorn combo pack 30 day routine veg capsules 60 count odour free taste free nabl lab tested plant protein omega 7 iron calcium vitamin c immunity energy vegan fssai nashik himalayan
+spirulina tablets sea buckthorn combo pack 30 day routine 90 tablets 60 capsules odour free zero binder nabl lab tested plant protein omega 7 iron calcium vitamin c immunity energy vegan fssai nashik
 ```
-Bytes: **206**.
+Bytes: **200**.
 
 #### 4 Q&A Seeds
 **Q1.** What is inside the Super Immunity Combo?
@@ -809,44 +809,44 @@ Bytes: **206**.
 
 ---
 
-### B0HMJHG48N — Mega Synergy Combo: Spirulina + Sea Buckthorn + Plant B12
+### B0HMKBCF92 — Mega Synergy Combo: Spirulina Tablets 120 + Himalayan Sea Buckthorn 60
 
 #### Title (≤200 chars)
 ```
-Sujata Nutrilive Mega Synergy Combo — Spirulina + Himalayan Sea Buckthorn + Plant B12 Tablets — Complete Vegan Nutrition Trio, NABL Lab-Verified, Odour-Free Daily Routine, FSSAI #21526027000179
+Sujata Nutrilive Mega Synergy Combo — Spirulina Tablets 120 + Himalayan Sea Buckthorn 60 — 2-Month Routine, NABL Lab-Verified, 62.39% Protein + Rare Omega-7, FSSAI #21526027000179
 ```
 
 #### 5 Rufus-Engineered Bullet Points
-**Bullet 1 — Complete Vegan Nutrition Trio**
+**Bullet 1 — Two Lab-Verified Supplements, 2-Month Pack**
 ```
-💊 THREE SUPPLEMENTS, ONE COMBO PRICE — Sujata Spirulina Veg Capsules + Sujata Himalayan Sea Buckthorn Capsules + Sujata Plant-Based Methylcobalamin B12 Tablets. The complete vegan daily routine: plant protein + iron + calcium + Omega-7 + Vitamin C + vegan B12.
-```
-
-**Bullet 2 — Plant B12 (Methylcobalamin, Not Synthetic Cyanocobalamin)**
-```
-🧪 NATURAL METHYLCOBALAMIN FROM PLANT FERMENTATION — The biologically active B12 form that normally appears in food. Most cheap B12 tablets use synthetic cyanocobalamin (the body has to convert). Sujata's Plant B12 is methylcobalamin, ready to use.
+💊 TWO SUPPLEMENTS, 2-MONTH ROUTINE — Sujata Spirulina Tablets (120 × 500 mg) + Sujata Himalayan Sea Buckthorn Capsules (60 × 650 mg). Mega Synergy upgrades the Super Immunity combo with a larger 120-tablet spirulina base, so you reorder every 60 days instead of every 30. Combo price is lower than buying each bottle separately.
 ```
 
-**Bullet 3 — All Three NABL / Lab-Verified**
+**Bullet 2 — 62.39% Plant Protein + Rare Omega-7**
 ```
-🏭 LAB-VERIFIED SUPPLY CHAIN — Spirulina batch covered by Lilaba NABL report #LAL-NN-131125023 (62.39% protein, 290.89 mg/kg iron). Sea Buckthorn cold-pressed below 40 °C from wild Leh-Ladakh berries. Plant B12 tested per batch. FSSAI Manufacturer #21526027000179 on all three.
-```
-
-**Bullet 4 — Vegan, Vegetarian, Jain-Friendly**
-```
-🌿 100% VEGETARIAN — Spirulina and Sea Buckthorn in 100% plant-cellulose veg capsules. Plant B12 tablets with plant-fermentation methylcobalamin. Zero gelatin, zero dairy, zero animal ingredient anywhere in the combo.
+🌿 62.39% PLANT PROTEIN + RARE OMEGA-7 — Spirulina delivers 62.39% NABL-verified plant protein + 290.89 mg/kg natural iron + 1,407.91 mg/kg calcium. Sea Buckthorn delivers rare Omega-7 (palmitoleic acid) + Omega-3/6/9 + 12× orange Vitamin C from wild Leh-Ladakh berries. Vitamin C contributes to normal immune-system function. Protein contributes to maintenance of normal muscle mass.
 ```
 
-**Bullet 5 — Daily Nutrition for Vegetarians Switching to Plant-Forward Diets**
+**Bullet 3 — Both Supplements Lab-Verified**
 ```
-⚡ FOR VEGETARIAN AND VEGAN DAILY ROUTINES — B12 contributes to normal energy-yielding metabolism and normal red-blood-cell formation. Protein contributes to maintenance of normal muscle mass. Vitamin C contributes to normal immune-system function. Food supplements — not intended to diagnose, treat, cure or prevent any disease.
+🧪 LILABA NABL LAB REPORT #LAL-NN-131125023 — covers the spirulina batch; sea buckthorn is independently cold-pressed below 40 °C from wild Leh-Ladakh berries. Hydraulic-pressed binder-free spirulina tablets. 100% plant-cellulose sea-buckthorn veg capsule shells. Zero added sugar, zero preservative.
+```
+
+**Bullet 4 — 100% Vegetarian, Jain-Friendly**
+```
+🌱 100% VEGETARIAN COMBO — Both products in this pack are 100% plant-derived. Zero gelatin, zero dairy, zero animal ingredient. Suitable for vegans, Jains and strictly plant-based diets.
+```
+
+**Bullet 5 — Daily Nutrition Framing**
+```
+⚡ EVERYDAY NUTRITION ROUTINE — Protein contributes to maintenance of normal muscle mass. Iron contributes to normal red-blood-cell formation and normal oxygen transport. Vitamin C contributes to normal immune-system function and normal collagen formation. FSSAI Manufacturer #21526027000179. Food supplements — not intended to diagnose, treat, cure or prevent any disease.
 ```
 
 #### Backend Search Terms (≤249 bytes)
 ```
-spirulina sea buckthorn vitamin b12 combo pack vegan trio veg capsules tablets odour free nabl lab tested plant protein omega 7 methylcobalamin iron calcium vitamin c immunity energy fssai nashik
+spirulina tablets sea buckthorn combo pack 2 month 120 tablets 60 capsules mega synergy odour free zero binder nabl lab tested plant protein omega 7 iron calcium vitamin c immunity vegan jain fssai nashik
 ```
-Bytes: **198**.
+Bytes: **205**.
 
 #### 4 Q&A Seeds
 **Q1.** What is in the Mega Synergy combo?
@@ -868,7 +868,7 @@ Bytes: **198**.
 
 ---
 
-### B0HMJGDG4X — Healthy Life Month 1 Pack
+### B0HMJNHVNH — Healthy Life Month 1 Pack
 
 #### Title (≤200 chars)
 ```
@@ -923,7 +923,7 @@ Bytes: **203**.
 
 ---
 
-### B0HMJGY4Z5 — Healthy Life Month 2 Pack
+### B0HMJRLX2C — Healthy Life Month 2 Pack
 
 #### Title (≤200 chars)
 ```
@@ -978,7 +978,7 @@ Bytes: **206**.
 
 ---
 
-### B0HMKBCF92 — Healthy Life Month 3 Pack
+### B0HMJD6LYN — Healthy Life Month 3 Pack
 
 #### Title (≤200 chars)
 ```

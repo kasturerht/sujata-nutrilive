@@ -43,12 +43,15 @@ const displayTitle = heading || product.title;
 // without touching source. Default falls back to the Associates tag, which is
 // still tracked for the Brand Referral Bonus flywheel.
 const AMAZON_ASIN_BY_HANDLE: Partial<Record<CatalogHandle, string>> = {
+  // Authoritative ASIN map (source: scripts/amazon-sales-traffic-engine.mjs,
+  // founder-confirmed 2026-11-22). The three combo-shop handle maps to the
+  // Super Immunity combo (B0HMJNJ2LP) — the budget-tier entry SKU.
   'sujata-spirulina-powder': 'B0DP2FWN4J',
   'sujata-spirulina-tablets': 'B0HMJD7SJ9',
   'sujata-spirulina-capsules': 'B0GMQYS6M4',
-  'sujata-sea-buckthorn-capsules': 'B0HMJDX1X9',
-  'sujata-spirulina-sea-buckthorn-combo-pack': 'B0HMJFDKG9',
-  'sujata-plant-based-vitamin-b12': 'B0HMJFWPXR',
+  'sujata-sea-buckthorn-capsules': 'B0HMJHWLV3',
+  'sujata-spirulina-sea-buckthorn-combo-pack': 'B0HMJNJ2LP',
+  'sujata-plant-based-vitamin-b12': 'B0HMJDWMSB',
   'sujata-moringa-powder': 'B0HMJMYRS5'
 };
 const amazonAsin = AMAZON_ASIN_BY_HANDLE[handle];
