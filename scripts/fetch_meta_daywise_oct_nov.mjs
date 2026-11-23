@@ -20,7 +20,7 @@ const campaignMap = {
 };
 
 async function fetchDaywise() {
-  const timeRange = JSON.stringify({ since: '2026-10-01', until: '2026-11-20' });
+  const timeRange = JSON.stringify({ since: '2026-10-01', until: '2026-11-21' });
   const fields = 'campaign_id,campaign_name,spend,impressions,reach,clicks,actions';
   const url = `https://graph.facebook.com/v21.0/${adAccountId}/insights?fields=${fields}&level=campaign&time_increment=1&time_range=${encodeURIComponent(timeRange)}&limit=1000&access_token=${token}`;
   

@@ -153,6 +153,7 @@ export const GET: APIRoute = async () => {
     for (const vEdge of variantEdges) {
       const variant = vEdge.node;
       if (!variant) continue;
+      if (variant.sku === 'SJT-SP-TAB-60' || /60\s*tablets/i.test(variant.title || '')) continue;
 
       const rawPrice = variant.price?.amount || p.priceRange?.minVariantPrice?.amount || '499.00';
       const formattedPrice = `${parseFloat(rawPrice).toFixed(2)} INR`;

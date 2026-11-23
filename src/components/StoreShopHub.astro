@@ -255,9 +255,11 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
         const cardImg = product.card?.url || productImg;
         const showLabChip = isSpirulinaProduct(product);
 
-        const rawVariants = product.variants?.edges?.map((e: any) => e.node) || [];
+        const allRawVariants = product.variants?.edges?.map((e: any) => e.node) || [];
+        // Filter out deactivated 60 Tablets variant
+        const rawVariants = allRawVariants.filter((v: any) => v.sku !== 'SJT-SP-TAB-60' && !/60\s*tablets/i.test(v.title || ''));
         const hasMultipleVariants = rawVariants.length > 1;
-        const firstVariant = rawVariants[0];
+        const firstVariant = rawVariants[0] || allRawVariants[0];
         const initialPrice = firstVariant?.price?.amount ? parseFloat(firstVariant.price.amount) : numPrice;
         const initialCompare = firstVariant?.compareAtPrice?.amount ? parseFloat(firstVariant.compareAtPrice.amount) : 0;
 

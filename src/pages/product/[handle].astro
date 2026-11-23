@@ -239,7 +239,9 @@ if (images.length === 0) {
   }
 }
 const primaryImage = images[0];
-const variants = product?.variants?.edges ? product.variants.edges.map((e: any) => e.node) : [];
+const rawVariants = product?.variants?.edges ? product.variants.edges.map((e: any) => e.node) : [];
+// Temporarily hide Spirulina 60 Tablets variant
+const variants = rawVariants.filter((v: any) => v.sku !== 'SJT-SP-TAB-60' && !/60\s*tablets/i.test(v.title || ''));
 
 function formatINR(val: string | number) {
   const num = typeof val === 'string' ? parseFloat(val) : val;

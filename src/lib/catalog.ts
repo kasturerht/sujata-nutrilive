@@ -33,7 +33,7 @@ const FALLBACK: Record<string, CatalogProduct> = {
   'sujata-spirulina-tablets': {
     handle: 'sujata-spirulina-tablets', title: 'Sujata 100% Vegan Spirulina Tablets (500mg, No Binders)', shortTitle: 'Spirulina Tablets',
     image: '/products/sujata-spirulina-tablets-bottle.jpg', url: '/product/sujata-spirulina-tablets',
-    variants: [v('52738357887108', '60 Tablets (500mg)', 350, 400), v('52738357952644', '120 Tablets (500mg)', 550, 699)]
+    variants: [v('52738357952644', '120 Tablets (500mg)', 550, 699)]
   },
   'sujata-spirulina-capsules': {
     handle: 'sujata-spirulina-capsules', title: 'Sujata Premium Spirulina Capsules (500mg)', shortTitle: 'Spirulina Capsules',
