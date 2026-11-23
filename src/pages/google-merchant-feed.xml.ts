@@ -130,6 +130,7 @@ export const GET: APIRoute = async () => {
   for (const edge of products) {
     const p = edge.node;
     if (!p || !p.handle) continue;
+    if (p.handle === 'sujata-spirulina-powder' || p.handle === 'spirulin-powder') continue;
 
     const variantEdges = p.variants?.edges || [];
     if (variantEdges.length === 0) continue;

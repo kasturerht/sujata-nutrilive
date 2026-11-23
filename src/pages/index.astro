@@ -96,7 +96,10 @@ try {
     // Prioritize exact manual sort sequence from 'Home page' (frontpage) collection
     const collectionEdges = json.data?.collection?.products?.edges || [];
     const fallbackEdges = json.data?.products?.edges || [];
-    products = collectionEdges.length > 0 ? collectionEdges : fallbackEdges;
+    const allEdges = collectionEdges.length > 0 ? collectionEdges : fallbackEdges;
+    // Temporarily hide Spirulina Powder listing from store
+    const HIDDEN_HANDLES = new Set(['sujata-spirulina-powder', 'spirulin-powder']);
+    products = allEdges.filter((e: any) => !HIDDEN_HANDLES.has((e?.node?.handle || '').toLowerCase()));
   } else {
     console.warn("⚠️ Shopify credentials missing! Please configure PUBLIC_SHOPIFY_STOREFRONT_DOMAIN and PUBLIC_SHOPIFY_STOREFRONT_TOKEN.");
   }

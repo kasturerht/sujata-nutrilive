@@ -408,7 +408,9 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
         });
 
         const data = await res.json();
-        const products = data?.data?.products?.edges || [];
+        const allProducts = data?.data?.products?.edges || [];
+        const hiddenHandles = new Set(['sujata-spirulina-powder', 'spirulin-powder']);
+        const products = allProducts.filter(p => !hiddenHandles.has((p?.node?.handle || '').toLowerCase()));
 
         if (products.length === 0) {
           showEmpty();

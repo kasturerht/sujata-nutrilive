@@ -8,11 +8,11 @@ import { BRAND_CONFIG } from '../config/brand';
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
-let powderProduct = {
-  variantId: "gid://shopify/ProductVariant/52738357854340",
-  title: "Sujata Pure Organic Spirulina Powder (100g)",
-  price: 350,
-  image: "/products/sujata-spirulina-powder-pouch.jpg"
+let tabletsProduct = {
+  variantId: "gid://shopify/ProductVariant/52738357952644",
+  title: "Sujata 100% Vegan Spirulina Tablets (120 Tabs)",
+  price: 550,
+  image: "/products/sujata-spirulina-tablets-bottle.jpg"
 };
 
 let capsulesProduct = {
@@ -30,10 +30,10 @@ try {
       body: JSON.stringify({
         query: `
           {
-            powder: product(handle: "sujata-spirulina-powder") {
+            tablets: product(handle: "sujata-spirulina-tablets") {
               title
               featuredImage { url }
-              variants(first: 1) { edges { node { id price { amount } } } }
+              variants(first: 2) { edges { node { id price { amount } } } }
             }
             capsules: product(handle: "sujata-spirulina-capsules") {
               title
@@ -45,11 +45,11 @@ try {
       })
     });
     const data = await res.json();
-    if (data.data?.powder?.variants?.edges?.[0]?.node) {
-      const v = data.data.powder.variants.edges[0].node;
-      powderProduct.variantId = v.id;
-      powderProduct.price = Math.round(parseFloat(v.price.amount));
-      if (data.data.powder.featuredImage?.url) powderProduct.image = data.data.powder.featuredImage.url;
+    if (data.data?.tablets?.variants?.edges?.[0]?.node) {
+      const v = data.data.tablets.variants.edges[data.data.tablets.variants.edges.length > 1 ? 1 : 0].node;
+      tabletsProduct.variantId = v.id;
+      tabletsProduct.price = Math.round(parseFloat(v.price.amount));
+      if (data.data.tablets.featuredImage?.url) tabletsProduct.image = data.data.tablets.featuredImage.url;
     }
     if (data.data?.capsules?.variants?.edges?.[0]?.node) {
       const v = data.data.capsules.variants.edges[0].node;
@@ -226,25 +226,25 @@ const quizSchemas = [
             <button 
               type="button" 
               class="quiz-format-btn p-6 rounded-3xl border-2 border-gray-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/30 transition-all text-left flex flex-col justify-between cursor-pointer group" 
-              data-format="powder" 
-              data-format-title={powderProduct.title} 
-              data-price={powderProduct.price} 
-              data-image={powderProduct.image}
-              data-variant-id={powderProduct.variantId}
+              data-format="tablets" 
+              data-format-title={tabletsProduct.title} 
+              data-price={tabletsProduct.price} 
+              data-image={tabletsProduct.image}
+              data-variant-id={tabletsProduct.variantId}
             >
               <div>
                 <div class="w-full aspect-video rounded-2xl overflow-hidden mb-4 bg-emerald-50/50 border border-emerald-100 flex items-center justify-center p-3">
-                  <img src={powderProduct.image} alt={powderProduct.title} class="h-full object-contain group-hover:scale-110 transition-transform" />
+                  <img src={tabletsProduct.image} alt={tabletsProduct.title} class="h-full object-contain group-hover:scale-110 transition-transform" />
                 </div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-800 block mb-1">Smoothie & Water Blend</span>
-                <h3 class="text-base font-bold text-[#111827] mb-1">{powderProduct.title}</h3>
+                <span class="text-[10px] font-black uppercase tracking-widest text-emerald-800 block mb-1">Cold-Pressed 500mg</span>
+                <h3 class="text-base font-bold text-[#111827] mb-1">{tabletsProduct.title}</h3>
                 <p class="text-xs text-gray-500 font-light leading-relaxed">
-                  Sub-40°C low-temperature milled raw powder. Perfect for morning lemon water, smoothies, or green bowls. High bio-available cellular absorption.
+                  100% pure cold-compressed spirulina tablets. Zero chemical binders, zero fillers. Easy to swallow with water.
                 </p>
               </div>
               <div class="mt-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
-                <span class="text-emerald-900">₹{powderProduct.price} / 30-Day Routine</span>
-                <span class="text-emerald-600 group-hover:translate-x-1 transition-transform">Select Powder →</span>
+                <span class="text-emerald-900">₹{tabletsProduct.price} / Routine</span>
+                <span class="text-emerald-600 group-hover:translate-x-1 transition-transform">Select Tablets →</span>
               </div>
             </button>
 
@@ -474,13 +474,13 @@ const quizSchemas = [
       let quizAnswers = {
         goal: 'energy',
         goalTitle: 'Sustained Cellular Energy',
-        format: 'powder',
-        formatTitle: 'Raw Spirulina Powder (100g)',
-        price: 350,
-        image: '/products/sujata-spirulina-powder-pouch.jpg',
-        variantId: 'gid://shopify/ProductVariant/52738357854340',
+        format: 'capsules',
+        formatTitle: 'Sujata Premium Spirulina Capsules (60 Caps)',
+        price: 499,
+        image: '/products/sujata-spirulina-capsules-bottle.jpg',
+        variantId: 'gid://shopify/ProductVariant/52738357985412',
         lifestyle: 'desk',
-        dosage: 'Take 2 capsules (1g maintenance) or 1 scoop (3g raw powder) in the morning with lukewarm water before breakfast'
+        dosage: 'Take 2 capsules in the morning with lukewarm water before breakfast'
       };
 
       // Step 1 Click Handlers
@@ -502,11 +502,11 @@ const quizSchemas = [
       const formatBtns = document.querySelectorAll('.quiz-format-btn');
       formatBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          quizAnswers.format = btn.getAttribute('data-format') || 'powder';
-          quizAnswers.formatTitle = btn.getAttribute('data-format-title') || 'Raw Spirulina Powder (100g)';
-          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 350;
-          quizAnswers.image = btn.getAttribute('data-image') || '/products/sujata-spirulina-powder-pouch.jpg';
-          quizAnswers.variantId = btn.getAttribute('data-variant-id') || (quizAnswers.format === 'capsules' ? 'gid://shopify/ProductVariant/52738357985412' : 'gid://shopify/ProductVariant/52738357854340');
+          quizAnswers.format = btn.getAttribute('data-format') || 'capsules';
+          quizAnswers.formatTitle = btn.getAttribute('data-format-title') || 'Sujata Premium Spirulina Capsules (60 Caps)';
+          quizAnswers.price = parseFloat(btn.getAttribute('data-price')) || 499;
+          quizAnswers.image = btn.getAttribute('data-image') || '/products/sujata-spirulina-capsules-bottle.jpg';
+          quizAnswers.variantId = btn.getAttribute('data-variant-id') || (quizAnswers.format === 'tablets' ? 'gid://shopify/ProductVariant/52738357952644' : 'gid://shopify/ProductVariant/52738357985412');
 
           step2Pane.classList.add('hidden');
           step3Pane.classList.remove('hidden');

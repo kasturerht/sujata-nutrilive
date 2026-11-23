@@ -12,7 +12,11 @@ const lab = BRAND_CONFIG.labReport;
 const CORE_LIMIT = 4; // mobile 2×2, desktop 1×4 — row 1 combos, row 2 singles
 const COMBO_TABLETS = 'sujata-spirulina-sea-buckthorn-combo';       // Spirulina Tablets + Sea Buckthorn
 const COMBO_CAPSULES = 'sujata-spirulina-sea-buckthorn-combo-pack'; // Spirulina Veg Caps + Sea Buckthorn
-const nodes: any[] = products.map((e: any) => e?.node).filter(Boolean);
+const HIDDEN_HANDLES = new Set(['sujata-spirulina-powder', 'spirulin-powder']);
+const nodes: any[] = products
+  .map((e: any) => e?.node)
+  .filter(Boolean)
+  .filter((p: any) => !HIDDEN_HANDLES.has((p.handle || '').toLowerCase()));
 const textOf = (p: any) => `${p.title || ''} ${p.handle || ''}`.toLowerCase();
 const isCombo = (p: any) => /combo|bundle/.test(textOf(p));
 const isSpirulinaProduct = (p: any) => textOf(p).includes('spirulina') && !/soap|face|cream|shampoo|hair|oil|glow|shine/.test(textOf(p));
