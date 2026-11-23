@@ -48,7 +48,7 @@ const SHOPIFY_TOKEN = process.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || '7e0a0176ae
 // 2. Comprehensive SKU Mapping Matrix (Shopify -> Amazon)
 const SKU_MAPPING = {
   // Shopify SKU -> Amazon SKU & Product Type
-  'SJT-SP-PWD-100G': { amazonSku: 'L5-UK79-BHXE', productType: 'NUTRITIONAL_SUPPLEMENT', customPrice: 350, customMrp: 499 },
+  'SJT-SP-PWD-100G': { amazonSku: 'L5-UK79-BHXE', productType: 'NUTRITIONAL_SUPPLEMENT', customPrice: 350, customMrp: 499, paused: true },
   'SJT-SP-TAB-60':   { amazonSku: '8X-HQKV-14T7', productType: 'HERBAL_SUPPLEMENT', customPrice: 350, customMrp: 400 },
   'SJT-SP-TAB-120':  { amazonSku: 'SJT-SP-TAB-120', productType: 'HERBAL_SUPPLEMENT', customPrice: 550, customMrp: 699 },
   'SJT-SP-CAP-60':   { amazonSku: 'AB01', productType: 'NUTRITIONAL_SUPPLEMENT', customPrice: 499, customMrp: 550 },
@@ -164,7 +164,7 @@ async function syncInventoryAndPrices() {
 
     const mapping = SKU_MAPPING[item.sku];
     const amazonSku = mapping.amazonSku;
-    const stockQty = item.available ? 50 : 0; // Default active inventory buffer
+    const stockQty = (item.available && !mapping.paused) ? 50 : 0; // Paused items forced to 0 stock
 
     let price = mapping.customPrice ?? item.price;
     let mrp = mapping.customMrp ?? item.mrp;
