@@ -800,16 +800,22 @@ const unifiedSchemaGraph = {
       //    server-side with the exact Shopify total (source of truth) and the browser does NOT send one.
       //    Without the secret, the browser sends it directly via gtag (send_to the GA4 ID), not via GTM.
       //  - If GTM never loads (blocked / in-app webview / slow network), Pixel + gtag are loaded directly.
-      window.sujataTrackPurchase = function (order) {
+      window.sujataTrackPurchase = function (order, opts) {
+        opts = opts || {};
         return new Promise(function (resolve) {
           try {
             if (!order || !order.transaction_id) return resolve(false);
             var txId = String(order.transaction_id);
-            var key = 'sujata_purchased_' + txId;
-            try {
-              if (localStorage.getItem(key) === 'true') return resolve(false);
-              localStorage.setItem(key, 'true');
-            } catch (e) {}
+            // Two idempotency keys. Meta: set by the first caller. GA4: set only when gtag reports the hit sent.
+            // GA4 is sent from /thank-you (opts.skipGa4 on the Razorpay handler): a gtag hit queued just before
+            // the handler's redirect is dropped, verified 2026-11-25 when COD test order #1043 never reached GA4.
+            var metaKey = 'sujata_purchased_' + txId;
+            var gaKey = 'sujata_ga4_purchase_' + txId;
+            var metaDone = false, gaDone = false;
+            try { metaDone = localStorage.getItem(metaKey) === 'true'; gaDone = localStorage.getItem(gaKey) === 'true'; } catch (e) {}
+            var sendGa4 = !opts.skipGa4 && !gaDone;
+            if (metaDone && !sendGa4) return resolve(false);
+            if (!metaDone) { try { localStorage.setItem(metaKey, 'true'); } catch (e) {} }
             if (window.__SUJATA_STAFF__) return resolve(false);
 
             var value = Math.round(Number(order.value || 0) * 100) / 100;
@@ -831,8 +837,8 @@ const unifiedSchemaGraph = {
               };
             });
 
-            // (a) GTM / Meta Pixel path
-            if (typeof window.dispatchStoreEvent === 'function') {
+            // (a) GTM / Meta Pixel path (once per order)
+            if (!metaDone && typeof window.dispatchStoreEvent === 'function') {
               window.dispatchStoreEvent('Purchase', {
                 event_id: txId,
                 order_id: txId,
@@ -859,11 +865,14 @@ const unifiedSchemaGraph = {
             };
 
             // (b) GA4 direct path (only when the server is not the GA4 purchase source)
-            if (!serverPurchaseTracking && typeof window.gtag === 'function') {
-              window.gtag('event', 'purchase', Object.assign({}, gaParams, { event_callback: finish, event_timeout: 1500 }));
-              setTimeout(finish, 1600);
+            if (sendGa4 && !serverPurchaseTracking && typeof window.gtag === 'function') {
+              window.gtag('event', 'purchase', Object.assign({}, gaParams, {
+                event_callback: function () { try { localStorage.setItem(gaKey, 'true'); } catch (e) {} finish(); },
+                event_timeout: 3000
+              }));
+              setTimeout(finish, 3200);
             } else {
-              setTimeout(finish, 500);
+              setTimeout(finish, 300);
             }
 
             // (c) Resilience: GTM did not load -> fire Pixel + gtag directly.
@@ -871,7 +880,7 @@ const unifiedSchemaGraph = {
               var gtmAlive = !!(window.google_tag_manager && window.google_tag_manager['GTM-5BCC6JL8']);
               if (gtmAlive) return;
               try {
-                if (!serverPurchaseTracking) {
+                if (sendGa4 && !serverPurchaseTracking) {
                   var g = document.createElement('script');
                   g.async = true;
                   g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleTagId);
@@ -890,7 +899,7 @@ const unifiedSchemaGraph = {
                   })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
                   window.fbq('init', metaPixelId);
                 }
-                window.fbq('track', 'Purchase', {
+                if (!metaDone) window.fbq('track', 'Purchase', {
                   value: value,
                   currency: currency,
                   content_type: 'product',

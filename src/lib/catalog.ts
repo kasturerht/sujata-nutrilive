@@ -61,7 +61,7 @@ const FALLBACK: Record<string, CatalogProduct> = {
     variants: [v('52738358116484', '100g Pouch', 249, 299)]
   },
   'sujata-spirulina-facewash': {
-    handle: 'sujata-spirulina-facewash', title: 'Sujata Spirulina Anti-Acne Face Wash (100ml Pump Bottle)', shortTitle: 'Spirulina Face Wash',
+    handle: 'sujata-spirulina-facewash', title: 'Sujata Spirulina Face Wash (100ml Pump Bottle)', shortTitle: 'Spirulina Face Wash',
     image: 'https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-spirulina-facewash-bottle.jpg', url: '/product/sujata-spirulina-facewash',
     variants: [v('52738358149252', '100ml', 199, 249)]
   },
@@ -76,12 +76,12 @@ const FALLBACK: Record<string, CatalogProduct> = {
     variants: [v('52738358247556', '100g Bar', 60, 60)]
   },
   'sujata-spirulina-korean-cream': {
-    handle: 'sujata-spirulina-korean-cream', title: 'Sujata Spirulina Korean Cream (Glass Skin & Dark Spot Corrector - 25g)', shortTitle: 'Spirulina Korean Cream',
+    handle: 'sujata-spirulina-korean-cream', title: 'Sujata Spirulina Korean Cream (Glass Skin Moisturiser - 25g)', shortTitle: 'Spirulina Korean Cream',
     image: 'https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-spirulina-korean-cream-jar.jpg', url: '/product/sujata-spirulina-korean-cream',
     variants: [v('52738358313092', '25g Luxury Jar', 999, 1200)]
   },
   'sujata-bridal-whitening-cream': {
-    handle: 'sujata-bridal-whitening-cream', title: 'Sujata Bridal Whitening & Brightening Luxury Cream (50g)', shortTitle: 'Bridal Brightening Cream',
+    handle: 'sujata-bridal-whitening-cream', title: 'Sujata Bridal Radiance Luxury Cream (50g)', shortTitle: 'Bridal Radiance Cream',
     image: 'https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-bridal-whitening-cream-jar.jpg', url: '/product/sujata-bridal-whitening-cream',
     variants: [v('52738358345860', '50g Luxury Jar', 1199, 1499)]
   },

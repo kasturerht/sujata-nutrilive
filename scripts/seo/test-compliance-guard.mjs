@@ -21,6 +21,10 @@ const mustFlag = [
   ['mr cure 2', 'हा आजार मुळापासून नष्ट होतो.'],
   ['mr miracle', 'हा एक चमत्कारी उपाय आहे.'],
   ['mr weight', 'नियमित सेवनाने वजन कमी होते.'],
+  ['cosmetic acne', 'Natural Anti-Acne Deep Pore Face Wash.'],
+  ['cosmetic hair', 'Ayurvedic Hair Growth & Anti-Dandruff Oil.'],
+  ['cosmetic thinning', '2-in-1 Anti-Hair Thinning Shampoo.'],
+  ['cosmetic whitening', 'Bridal Whitening & Brightening Cream.'],
 ];
 const mustPass = [
   ['en nutrient claim', 'Iron contributes to normal formation of red blood cells.'],
@@ -29,6 +33,8 @@ const mustPass = [
   ['hi disclaimer', 'यह दवा नहीं है।'],
   ['mr protein', 'स्पिरुलिनामध्ये 62.39% प्रथिने असतात.'],
   ['mr disclaimer', 'हे औषध नाही.'],
+  ['cosmetic handle link', '<a href="/product/sujata-bridal-whitening-cream">Bridal Radiance Cream</a>'],
+  ['cosmetic plain', 'A pH-balanced, sulphate-free daily cleanser with aloe vera.'],
 ];
 
 let failed = 0;

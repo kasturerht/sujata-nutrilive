@@ -26,13 +26,25 @@ const EFFICACY = new RegExp(
 // not in benefit copy. Used for ingredient, timeline, comparison and description text, not FAQs.
 const CONDITION = /\b(diabet\w*|cancer\w*|tumou?r\w*|arthritis|joint pain|sciatica|tingling|myelin|cholesterol|hypertension|blood pressure|an(?:a)?emi\w*|ulcers?)\b/i;
 
+// Cosmetic drug-type claims (Drugs & Cosmetics Act: a cosmetic may cleanse, moisturise or condition, not
+// treat acne/dandruff, regrow hair or lighten skin). Matches the claim, not a bare ingredient mention.
+const COSMETIC_CLAIM = new RegExp(
+  [
+    String.raw`\b(?:hair\s+(?:re)?growth|(?:new|baby)\s+hair|grows?\s+(?:new\s+)?hair|anti[-\s]?dandruff|anti[-\s]?acne|anti[-\s]?pimple)\b`,
+    String.raw`\banti[-\s]?hair[-\s]?(?:fall|loss|thinning)\b|\bhair[-\s]?thinning\b|\bhair[-\s]?fall\s+reduction\b`,
+    String.raw`\b(?:remov|eliminat|cur|fight|stop|reduc|prevent|control|sooth|calm|clear|kill|fad|lighten)\w*\s+(?:\w+[-\s]){0,3}(?:dandruff|acne|pimples?|breakouts?|backne|hair[-\s]?(?:fall|loss)|thinning|dark[-\s]?spots?|pigmentation|sun[-\s]?tan|tan\s+patches|blemish\w*|marks)\b`,
+    String.raw`\bacne(?:[-\s]breakout)?\s+relief\b|\bwhiten\w*|\bskin[-\s]?lighten\w*|\bspot[-\s]?(?:correct\w*|fading)\b|\bspotless\b|\bfairness\b|\bmelanin\b`,
+  ].join('|'),
+  'i'
+);
+
 const splitSentences = (text: string): string[] => text.match(/[^.!?।]+[.!?।]*\s*/g) || [text];
 
 /** Removes sentences with efficacy claims (and, unless `allowConditions`, disease-condition benefit claims). */
 export function scrubClaims(text: unknown, opts: { allowConditions?: boolean } = {}): string {
   if (typeof text !== 'string' || !text) return '';
   return splitSentences(text)
-    .filter((s) => !EFFICACY.test(s) && (opts.allowConditions || !CONDITION.test(s)))
+    .filter((s) => !EFFICACY.test(s) && !COSMETIC_CLAIM.test(s) && (opts.allowConditions || !CONDITION.test(s)))
     .join('')
     .trim();
 }
@@ -40,5 +52,5 @@ export function scrubClaims(text: unknown, opts: { allowConditions?: boolean } =
 /** True when the text carries a claim the guard would remove. */
 export function hasClaim(text: unknown, opts: { allowConditions?: boolean } = {}): boolean {
   if (typeof text !== 'string' || !text) return false;
-  return EFFICACY.test(text) || (!opts.allowConditions && CONDITION.test(text));
+  return EFFICACY.test(text) || COSMETIC_CLAIM.test(text) || (!opts.allowConditions && CONDITION.test(text));
 }

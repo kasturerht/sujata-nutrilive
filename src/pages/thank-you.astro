@@ -240,8 +240,9 @@ const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'l
           trackBtn.setAttribute('href', '/track-order?order=' + encodeURIComponent(resolvedOrderId));
         }
 
-        // 5. Purchase tracking via the shared idempotent tracker (StoreLayout). If the Razorpay handler already
-        //    tracked this order before redirecting, the shared key makes this a no-op.
+        // 5. Purchase tracking via the shared idempotent tracker (StoreLayout). This page is the GA4 purchase
+        //    source (nothing navigates away after it loads); the Razorpay handler already sent the Meta event,
+        //    so the tracker's Meta key makes that part a no-op here.
         var hasRealItems = !!(snapshot && snapshot.items && snapshot.items.length > 0 && snapshot.order_id === realOrderId);
         if (realOrderId && knownValue > 0 && typeof window.sujataTrackPurchase === 'function') {
           window.sujataTrackPurchase({

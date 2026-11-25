@@ -2,6 +2,7 @@
 // Daily check that GA4 sees the website's orders: Shopify web orders vs GA4 purchase events per day,
 // plus whether GA4 purchases carry revenue and a transaction ID. Exit 1 when the 7-day gap > 10%.
 // Usage: node scripts/seo/reconcile-orders.mjs [days=7]
+import fs from 'node:fs';
 import { googleToken, ga4Client, ga4Rows, loadEnv, daysAgo } from './lib/google.mjs';
 
 const days = Number(process.argv[2] || 7);
@@ -25,14 +26,18 @@ for (const o of orders) { const d = new Date(new Date(o.created_at).getTime() + 
 
 const token = await googleToken(['https://www.googleapis.com/auth/analytics.readonly']);
 const ga = ga4Client(token);
-const gaDaily = ga4Rows(await ga({
-  dateRanges: [{ startDate: since, endDate: 'today' }], dimensions: [{ name: 'date' }],
-  dimensionFilter: { filter: { fieldName: 'eventName', stringFilter: { value: 'purchase' } } },
-  metrics: [{ name: 'eventCount' }, { name: 'purchaseRevenue' }],
-}));
-const gaTx = ga4Rows(await ga({ dateRanges: [{ startDate: since, endDate: 'today' }], dimensions: [{ name: 'transactionId' }], metrics: [{ name: 'purchaseRevenue' }], limit: 500 }))
-  .filter((r) => r.d[0] && r.d[0] !== '(not set)');
-const gaByDay = Object.fromEntries(gaDaily.map((r) => [`${r.d[0].slice(0, 4)}-${r.d[0].slice(4, 6)}-${r.d[0].slice(6)}`, { n: r.m[0], rev: r.m[1] }]));
+// QA test orders (cancelled in Shopify) are excluded from GA4 totals.
+const testTx = new Set(JSON.parse(fs.readFileSync('src/config/test-transactions.json', 'utf8')).transactions.map((t) => t.id));
+const gaRows = ga4Rows(await ga({
+  dateRanges: [{ startDate: since, endDate: 'today' }], dimensions: [{ name: 'date' }, { name: 'transactionId' }],
+  metrics: [{ name: 'ecommercePurchases' }, { name: 'purchaseRevenue' }], limit: 1000,
+})).filter((r) => r.m[0] > 0 && !testTx.has(r.d[1]));
+const gaTx = gaRows.filter((r) => r.d[1] && r.d[1] !== '(not set)');
+const gaByDay = {};
+for (const r of gaRows) {
+  const d = `${r.d[0].slice(0, 4)}-${r.d[0].slice(4, 6)}-${r.d[0].slice(6)}`;
+  gaByDay[d] = { n: (gaByDay[d]?.n || 0) + r.m[0], rev: (gaByDay[d]?.rev || 0) + r.m[1] };
+}
 
 let shopTotal = 0, gaTotal = 0, gaRevenue = 0;
 console.log('date        shopify  ga4  ga4_revenue');

@@ -857,7 +857,7 @@ try {
                       coupon: discountCodeToSend || '',
                       payment_mode: selectedMode,
                       items: orderSnapshot.items
-                    }).then(go, go);
+                    }, { skipGa4: true }).then(go, go); // GA4 purchase is sent from /thank-you (survives no redirect)
                   } else {
                     goToThankYou();
                   }

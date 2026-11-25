@@ -131,6 +131,12 @@ const RULES = [
     pattern: /वजन\s+(?:घटा(?:ए|ता|ती|ने)|कम\s+कर(?:ता|ती|ते|ने)|कमी\s+(?:करतो|करते|करण्यास|होते|होतो))/,
     why: 'Hindi/Marathi weight-loss claim — obesity is a DMR Act 1954 scheduled condition.'
   },
+  {
+    id: 'cosmetic-drug-claim',
+    // Not when part of a URL handle or file name (e.g. /product/sujata-bridal-whitening-cream).
+    pattern: /(?<![-\/\w])(?:hair[\s-]growth|anti[\s-]dandruff|anti[\s-]hair[\s-](?:thinning|fall|loss)|hair[\s-]thinning|anti[\s-]acne|whitening|dark[\s-]spot[\s-]correct\w*|spot[\s-]corrector|(?:reduc\w*|stops?|control\w*)\s+hair[\s-]fall)(?![-\w])/i,
+    why: 'Cosmetic drug-type claim (acne, dandruff, hair growth/thinning, whitening): a cosmetic may cleanse, moisturise or condition only (Drugs & Cosmetics Act).'
+  },
   // ---- Schema-field rules (run against raw file, not stripped text) --------
   {
     id: 'schema-medicalcondition',

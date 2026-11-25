@@ -1,0 +1,6 @@
+{
+  "_meta": "Razorpay order IDs of QA test orders (cancelled and deleted in Shopify). scripts/seo/reconcile-orders.mjs excludes them from GA4 totals.",
+  "transactions": [
+    { "id": "order_U4MU2dRvDeA2Jr", "shopify": "#1043", "date": "2026-11-25", "note": "COD test order; GA4 hit lost to the redirect bug fixed the same day" }
+  ]
+}
