@@ -908,9 +908,10 @@ const offerShippingDetails = {
 
 // 90-Day Satisfaction Return (matches sitewide policy post Tier-2 remediation).
 // No outcome guarantee — satisfaction basis only. Full-refund type.
+// No "@id": the same policy is repeated inside every variant offer, and a shared @id makes Google merge
+// the copies into one node with duplicated fields (Merchant listings "Duplicate field" warnings).
 const offerReturnPolicy = {
   "@type": "MerchantReturnPolicy",
-  "@id": `${siteUrl}/#merchant-return-policy`,
   "name": "Sujata 90-Day Satisfaction Return Policy",
   "applicableCountry": "IN",
   "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
@@ -1124,15 +1125,12 @@ const productSchema = {
   ],
   "hasCredential": dynamicPrimaryEntity.hasCredentials,
   "about": dynamicPrimaryEntity.aboutEntities,
+  // Inline brand name only. The full Brand entity (#brand: alternateName, sameAs) is defined once in the
+  // sitewide graph in StoreLayout; redefining it here under the same @id made Google report
+  // "Duplicate field name" on Merchant listings.
   "brand": {
     "@type": "Brand",
-    "@id": `${siteUrl}/#brand`,
-    "name": BRAND_CONFIG.brandName || "Sujata Nutrilive",
-    "alternateName": ["Sujata Nutrilive Agrotech", "SUJATA NUTRITIVE"],
-    "sameAs": [
-      "https://www.wikidata.org/wiki/Q141656957",
-      ...(amazonProduct ? [`https://www.amazon.in/dp/${amazonProduct.asin}`] : [])
-    ]
+    "name": BRAND_CONFIG.brandName || "Sujata Nutrilive"
   },
   "manufacturer": {
     "@type": "Organization",
@@ -1629,8 +1627,69 @@ const productSeoConfigMap: Record<string, {
 
 const currentHandleKey = (handle || '').toLowerCase();
 const seoConfig = productSeoConfigMap[currentHandleKey];
-const finalSeoTitle = seoConfig?.seoTitle || `${productTitle} | Sujata Premium`;
-const finalMetaDescription = seoConfig?.metaDescription || rawCleanDescription;
+// ── Search snippet metadata (Phase 2) ──────────────────────────────────────────────────────────
+// Titles <= 60 chars and descriptions <= 155 chars so Google shows them whole. Prices come from the
+// variants this page actually sells (hidden variants excluded), so the snippet can never quote a price
+// the shopper cannot buy at. Facts quoted are the NABL report values used site-wide.
+const shownPrices = variants.map((v: any) => parseFloat(v.price?.amount || '0')).filter((n: number) => n > 0);
+const priceLabel = shownPrices.length
+  ? `${new Set(shownPrices).size > 1 ? 'from ' : ''}${formatCatalogINR(Math.min(...shownPrices))}`
+  : '';
+const PriceLabel = priceLabel.charAt(0).toUpperCase() + priceLabel.slice(1); // sentence-initial form
+const SNIPPET_META: Record<string, { title: string; description: string }> = {
+  'sujata-spirulina-tablets': {
+    title: `Spirulina Tablets 500mg, No Binders – ${priceLabel} | Sujata`,
+    description: `Pure spirulina tablets (500mg), cold-pressed with no binders or talc. NABL-tested: 62.39% protein, 290.89 mg/kg iron. ${PriceLabel}, free COD.`,
+  },
+  'sujata-spirulina-capsules': {
+    title: `Spirulina Veg Capsules, ${priceLabel} | Sujata Nutrilive`,
+    description: `Pure spirulina in veg capsules, 60 to 180 per pack. NABL-tested: 62.39% protein, 290.89 mg/kg natural iron. ${PriceLabel}, free COD across India.`,
+  },
+  'sujata-sea-buckthorn-capsules': {
+    title: `Sea Buckthorn Capsules – Himalayan Omega-7, ${priceLabel} | Sujata`,
+    description: `60 Himalayan sea buckthorn oil capsules, a plant source of omega-7, 3, 6 and 9. About ${seaBuckthornPerDay} at 2 a day. FSSAI registered. Free COD.`,
+  },
+  'sujata-spirulina-sea-buckthorn-combo-pack': {
+    title: `Spirulina + Sea Buckthorn Capsules, ${priceLabel} | Sujata`,
+    description: `Spirulina veg capsules + Himalayan sea buckthorn capsules in 1, 2 or 3-month packs. NABL-tested spirulina: 62.39% protein. ${PriceLabel}, free COD.`,
+  },
+  // Shopify copy for moringa opens with an emoji header and a liver-detox claim; replaced with plain facts.
+  'sujata-moringa-powder': {
+    title: `Moringa Leaf Powder 100g, ${priceLabel} | Sujata Nutrilive`,
+    description: `Natural moringa leaf powder in a 100g pouch, ${priceLabel}. A plant-based leafy-green powder to add to water, smoothies or food. FSSAI registered. Free COD.`,
+  },
+  'sujata-spirulina-sea-buckthorn-combo': {
+    title: `Spirulina Tablets + Sea Buckthorn Combo, ${priceLabel} | Sujata`,
+    description: `Spirulina tablets (no binders) + Himalayan sea buckthorn capsules in one pack. NABL-tested spirulina: 62.39% protein. ${PriceLabel}, free COD.`,
+  },
+};
+
+/** Shortens text to `max` chars at a sentence end if one fits, else at a word boundary + "…". */
+function clampSnippet(text: string, max: number): string {
+  // Shopify copy arrives HTML-encoded (sometimes twice: "&#38;amp;"); decode so the snippet shows "&"
+  // and the length check counts what the reader sees. Astro re-escapes the attribute on output.
+  let clean = (text || '');
+  for (let i = 0; i < 3; i++) clean = clean.replace(/&(?:amp|#38);/g, '&');
+  clean = clean.replace(/&quot;|&#34;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&nbsp;|&#160;/g, ' ')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('। '));
+  if (sentenceEnd > max * 0.6) return cut.slice(0, sentenceEnd + 1);
+  return cut.slice(0, cut.lastIndexOf(' ', max - 1)).replace(/[,;:–-]\s*$/, '') + '…';
+}
+
+/** "Sujata Spirulina Anti-Acne Face Wash (100ml Pump Bottle)" -> "Spirulina Anti-Acne Face Wash | Sujata Nutrilive" */
+function fallbackTitle(name: string): string {
+  const core = name.replace(/^Sujata\s+/i, '').replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim();
+  for (const suffix of [' | Sujata Nutrilive', ' | Sujata']) if (core.length + suffix.length <= 60) return core + suffix;
+  return clampSnippet(core, 60 - ' | Sujata'.length).replace(/…$/, '') + ' | Sujata';
+}
+
+const canonicalHandleKey = (product?.handle || currentHandleKey).toLowerCase();
+const snippetMeta = SNIPPET_META[canonicalHandleKey];
+const finalSeoTitle = snippetMeta?.title && snippetMeta.title.length <= 60 ? snippetMeta.title : fallbackTitle(productTitle);
+const finalMetaDescription = clampSnippet(snippetMeta?.description || seoConfig?.metaDescription || rawCleanDescription, 155);
 let resolvedFaqs = seoConfig?.faqs || [];
 try {
   if (product?.faqs?.value && product.faqs.value.trim().length > 2) {
@@ -3654,8 +3713,11 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
 
         const id = productState.variantId || btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
         const baseTitle = document.querySelector('h1')?.innerText?.trim() || btn.getAttribute('data-title') || 'Sujata Formulation';
-        const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
-          ? `${baseTitle} - ${productState.variantTitle}`
+        // Append the variant only when it adds information: single-variant pages fall back to the product
+        // title as variantTitle, which produced "Name - Name" in the cart and in GA4 item names.
+        const vt = (productState.variantTitle || '').trim();
+        const title = (vt && vt !== 'Default Title' && !baseTitle.toLowerCase().includes(vt.toLowerCase()))
+          ? `${baseTitle} - ${vt}`
           : baseTitle;
         const isUpi = productState.paymentMode === 'upi';
         const subtitle = isUpi ? '⚡ 10% Instant UPI Discount' : '📦 Standard Cash on Delivery';
@@ -3710,8 +3772,11 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
 
         const id = productState.variantId || btn.getAttribute('data-variant-id') || `prod_${Date.now()}`;
         const baseTitle = document.querySelector('h1')?.innerText?.trim() || btn.getAttribute('data-title') || 'Sujata Formulation';
-        const title = (productState.variantTitle && productState.variantTitle !== 'Default Title')
-          ? `${baseTitle} - ${productState.variantTitle}`
+        // Append the variant only when it adds information: single-variant pages fall back to the product
+        // title as variantTitle, which produced "Name - Name" in the cart and in GA4 item names.
+        const vt = (productState.variantTitle || '').trim();
+        const title = (vt && vt !== 'Default Title' && !baseTitle.toLowerCase().includes(vt.toLowerCase()))
+          ? `${baseTitle} - ${vt}`
           : baseTitle;
 
         const isNoCodTag = document.getElementById('payment-option-tabs')?.getAttribute('data-no-cod') === 'true';

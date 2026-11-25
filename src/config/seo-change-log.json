@@ -1,0 +1,52 @@
+{
+  "_meta": {
+    "purpose": "Every search-snippet change with its baseline, so CTR is judged 28 days later at a comparable position. Change a page once, then wait 28 days.",
+    "baselineWindow": "2026-10-26..2026-11-23 (GSC, www property)",
+    "measureOn": "2026-12-23"
+  },
+  "changes": [
+    {
+      "date": "2026-11-25", "url": "/learn/sea-buckthorn-in-hindi",
+      "before": { "title": "सी बकथॉर्न क्या है? फायदे, उपयोग, खुराक और नुकसान (2026)" },
+      "after": { "title": "Sea Buckthorn in Hindi: सी बकथॉर्न क्या है? फायदे, खुराक" },
+      "baseline": { "impressions": 3978, "clicks": 19, "ctr": 0.0048, "position": 7.5 },
+      "reason": "Searchers type the topic in Latin script (\"sea buckthorn in hindi\", \"buckthorn in hindi name\" ranks #1 with 0 clicks); title had no Latin-script match. Hindi words reused from the existing native title."
+    },
+    {
+      "date": "2026-11-25", "url": "/",
+      "before": { "title": "Buy Pure Spirulina & Sea Buckthorn | Lab-Tested | Sujata Nutrilive", "description": "... free COD across India, 90-day guarantee. (169 chars)" },
+      "after": { "title": "Sujata Nutrilive: Lab-Tested Spirulina & Sea Buckthorn", "description": "NABL lab-tested spirulina (62.39% protein, no binders) and Himalayan sea buckthorn capsules. FSSAI registered. Free COD across India." },
+      "baseline": { "impressions": 379, "clicks": 39, "ctr": 0.103, "position": 4.0 },
+      "reason": "Home ranks for brand searches (\"sujata nutrilive\", \"sujata spirulina\"): brand first, 54 chars (was 70). Description 133 chars (was 169), guarantee wording removed."
+    },
+    {
+      "date": "2026-11-25", "url": "/product/sujata-spirulina-tablets",
+      "before": { "title": "Spirulina Tablets 500mg (Zero Binders) — 60/120 Tabs | Sujata", "description": "... ₹350 | Free COD. (181 chars)" },
+      "after": { "title": "Spirulina Tablets 500mg, No Binders – ₹550 | Sujata (live price)" },
+      "baseline": { "impressions": 295, "clicks": 0, "ctr": 0, "position": 7.4 },
+      "reason": "Description quoted ₹350 for the 60-tablet variant the site hides since 2026-11-23; price now comes from the variants the page sells. Title 51 chars (was 61)."
+    },
+    {
+      "date": "2026-11-25", "url": "/product/sujata-sea-buckthorn-capsules",
+      "before": { "title": "Sea Buckthorn Capsules (60 Veg Caps) — Pure Himalayan Omega 7, 3, 6, 9 | ₹22/day • Sujata Nutrilive" },
+      "after": { "title": "Sea Buckthorn Capsules – Himalayan Omega-7, ₹649 | Sujata (live price)" },
+      "baseline": { "impressions": 191, "clicks": 4, "ctr": 0.021, "position": 3.2 },
+      "reason": "Title 57 chars (was 99) so it is not cut off. Most impressions are the competitor-brand search \"himalaya sea buckthorn capsules\", which this change does not target."
+    },
+    {
+      "date": "2026-11-25", "url": "/product/sujata-spirulina-sea-buckthorn-combo-pack",
+      "after": { "title": "Spirulina + Sea Buckthorn Capsules, from ₹1,050 | Sujata (live price)" },
+      "baseline": { "impressions": 89, "clicks": 0, "ctr": 0, "position": 6.1 },
+      "reason": "Title 55 chars (was 92), description 145 (was 198)."
+    },
+    {
+      "date": "2026-11-25", "url": "/product/* (all other products)",
+      "after": { "title": "<product name without brand prefix or pack size> | Sujata Nutrilive (or | Sujata), max 60", "description": "existing copy clamped to 155 chars at a sentence or word boundary" },
+      "reason": "Fallback was \"<full Shopify title> | Sujata Premium\" (71-91 chars) with 300-char descriptions."
+    },
+    {
+      "date": "2026-11-25", "url": "/product/* (structured data)",
+      "reason": "Google URL Inspection reported Merchant listings 'Duplicate field \"name\"' on 7 products: Product.brand redefined the sitewide #brand entity and every offer repeated #merchant-return-policy under one @id. Brand is now an inline name; the return policy has no @id."
+    }
+  ]
+}
