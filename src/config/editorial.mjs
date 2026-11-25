@@ -9,7 +9,8 @@ export const SITE_URL = 'https://www.sujatanutrilive.com';
 export const EDITORIAL_TEAM = {
   name: 'Sujata Nutrilive Quality & Editorial Team',
   description: 'In-house team responsible for product facts, lab-report data and compliance review of every guide.',
-  fssaiRegistration: '21526027000179',
+  fssaiRegistration: '11526999001381', // FSSAI Central License (valid to 21-11-2027)
+  fssaiLabel: 'FSSAI Central License',
   url: `${SITE_URL}/science`,
 };
 

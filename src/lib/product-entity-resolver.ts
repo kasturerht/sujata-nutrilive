@@ -179,14 +179,14 @@ export function resolveDynamicProductEntity(
   const hasCredentials = [
     {
       '@type': 'EducationalOccupationalCredential',
-      name: 'FSSAI Statutory Food Safety & Dietary Supplement Registration (Category 13)',
-      credentialCategory: 'Government Regulatory Registration',
+      name: 'FSSAI Central License (Categories 12, 13 and 102)',
+      credentialCategory: 'Government Regulatory License',
       recognizedBy: {
         '@type': 'GovernmentOrganization',
         name: 'Food Safety and Standards Authority of India (FSSAI)',
         url: 'https://www.fssai.gov.in'
       },
-      identifier: BRAND_CONFIG.fssaiNumber || '21526027000179'
+      identifier: BRAND_CONFIG.fssaiNumber || '11526999001381'
     },
     {
       '@type': 'EducationalOccupationalCredential',

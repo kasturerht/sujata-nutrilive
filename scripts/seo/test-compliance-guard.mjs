@@ -25,6 +25,7 @@ const mustFlag = [
   ['cosmetic hair', 'Ayurvedic Hair Growth & Anti-Dandruff Oil.'],
   ['cosmetic thinning', '2-in-1 Anti-Hair Thinning Shampoo.'],
   ['cosmetic hair fall', 'Key Hair Care Benefits 100% Hair Fall & Thinning Control.'],
+  ['superseded fssai', 'FSSAI Reg. #' + '2152602' + '7000179'],
   ['cosmetic whitening', 'Bridal Whitening & Brightening Cream.'],
 ];
 const mustPass = [

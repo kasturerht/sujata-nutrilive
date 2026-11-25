@@ -24,7 +24,7 @@ Google classifies health supplements under **YMYL (Your Money Your Life)**. Foll
   * ❌ *"In today's fast-paced world...", "In conclusion...", "It is important to remember...", "Delve into..."*
   * ✅ Provide direct data, NABL lab test numbers, dosages, and clinical facts immediately.
 * **Authoritative Proof Badges**:
-  * **FSSAI License**: `#21526027000179`
+  * **FSSAI Central License**: `#11526999001381` (valid to 21-11-2027). Manufacturer FSSAI: `#10723998000433`
   * **Spirulina Protein Standard**: `62.39% plant protein` (IS 7219 Certified, NABL Lab Tested).
   * **Heavy Metals**: `0.00% Lead & Mercury` (Pure Hydro-dome cultivated).
   * **Manufacturing / Location**: Nashik, Maharashtra, India.

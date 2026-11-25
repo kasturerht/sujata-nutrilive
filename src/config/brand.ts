@@ -9,7 +9,13 @@ export const BRAND_CONFIG = {
   supportWhatsAppNumber: import.meta.env.PUBLIC_SUPPORT_WHATSAPP || "919834783503",
   supportEmail: import.meta.env.PUBLIC_SUPPORT_EMAIL || "support@sujatanutrilive.com",
   operatingHours: "10:00 AM - 7:00 PM IST (Mon-Sat)",
-  fssaiNumber: "21526027000179",
+  // FSSAI Central License (issued 22-11-2026, valid to 21-11-2027): Sujata Nutrilive Agrotech, Nashik,
+  // Wholesaler & Retailer; categories 13 (nutritional uses), 102 (Ayurveda Aahara), 12 (protein products).
+  // Replaced the earlier FSSAI registration (superseded 22-11-2026). The contract manufacturer's own licence is manufacturerFssai.
+  fssaiNumber: "11526999001381",
+  fssaiLicenseType: "FSSAI Central License",
+  fssaiValidUntil: "2027-11-21",
+  manufacturerFssai: "10723998000433",
   address: "Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik, Maharashtra 422008, India",
   googleMapsUrl: "https://share.google/R7aB2MCG9AN5l3RF1",
   // ✅ VERIFIED FACTS ONLY — single source of truth for every trust claim on the site.

@@ -15,7 +15,7 @@ export interface HomeFaq {
 export const homeFaqs: HomeFaq[] = [
   {
     question: "How do I know Sujata Spirulina is genuine and lab tested?",
-    answer: `We publish our full lab report. ${lab.lab} report #${lab.number} (batch ${lab.batch}, issued ${lab.issueDate}) measured ${lab.proteinPct}% protein and ${lab.ironMgPerKg} mg/kg iron in our spirulina powder. Sujata Nutrilive is registered with FSSAI under licence #${BRAND_CONFIG.fssaiNumber}. You can download the complete report from our homepage.`
+    answer: `We publish our full lab report. ${lab.lab} report #${lab.number} (batch ${lab.batch}, issued ${lab.issueDate}) measured ${lab.proteinPct}% protein and ${lab.ironMgPerKg} mg/kg iron in our spirulina powder. Sujata Nutrilive Agrotech holds FSSAI Central License #${BRAND_CONFIG.fssaiNumber}. You can download the complete report from our homepage.`
   },
   {
     question: "Will it smell fishy or swampy like other spirulina?",

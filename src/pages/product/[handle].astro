@@ -1074,8 +1074,8 @@ const productNutritionMap: Record<string, any> = {
 
 const productAdditionalProperties: Record<string, Array<{ name: string; value: string }>> = {
   'sujata-spirulina-tablets': [
-    { name: "FSSAI Brand License", value: "10723998000433" },
-    { name: "FSSAI Manufacturer License", value: "21526027000179" },
+    { name: "FSSAI Central License (marketed by Sujata Nutrilive Agrotech)", value: "11526999001381" },
+    { name: "Manufacturer FSSAI License", value: "10723998000433" },
     { name: "Protein Concentration", value: "62.39% (NABL IS 7219 Certified)" },
     { name: "Natural Plant Iron", value: "290.89 mg/kg" },
     { name: "Heavy Metals Safety", value: "Lead < 0.5 ppm, Arsenic < 0.1 ppm, Mercury < 0.01 ppm (100% Safe)" },
@@ -1083,8 +1083,8 @@ const productAdditionalProperties: Record<string, Array<{ name: string; value: s
     { name: "Country of Origin", value: "India" }
   ],
   'spirulina-tablets': [
-    { name: "FSSAI Brand License", value: "10723998000433" },
-    { name: "FSSAI Manufacturer License", value: "21526027000179" },
+    { name: "FSSAI Central License (marketed by Sujata Nutrilive Agrotech)", value: "11526999001381" },
+    { name: "Manufacturer FSSAI License", value: "10723998000433" },
     { name: "Protein Concentration", value: "62.39% (NABL IS 7219 Certified)" },
     { name: "Natural Plant Iron", value: "290.89 mg/kg" },
     { name: "Heavy Metals Safety", value: "Lead < 0.5 ppm, Arsenic < 0.1 ppm, Mercury < 0.01 ppm (100% Safe)" },
@@ -1101,7 +1101,8 @@ const productProperties = (handle && productAdditionalProperties[handle])
       "value": p.value
     }))
   : [
-      { "@type": "PropertyValue", "name": "FSSAI Brand License", "value": "10723998000433" },
+      // Brand-level licence for food products; cosmetics are not FSSAI-regulated, so they carry none.
+      ...(/(facewash|facepack|soap|cream|hair-oil|shampoo)/.test(handle || '') ? [] : [{ "@type": "PropertyValue", "name": "FSSAI Central License (marketed by Sujata Nutrilive Agrotech)", "value": "11526999001381" }]),
       { "@type": "PropertyValue", "name": "Country of Origin", "value": "India" }
     ];
 
@@ -1148,7 +1149,7 @@ const productSchema = {
   "manufacturer": {
     "@type": "Organization",
     "name": "Spiru Swastha India Pvt Ltd",
-    "description": "Licensed Contract Manufacturer (FSSAI Lic. #21526027000179). Formulation and brand owned exclusively by Sujata Nutrilive Agrotech."
+    "description": "Contract manufacturer (Manufacturer FSSAI Lic. 10723998000433). Marketed by Sujata Nutrilive Agrotech, Nashik (FSSAI Central License 11526999001381)."
   },
   ...(realProductRating ? {
     "aggregateRating": {
@@ -1333,7 +1334,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "सुजाता स्पिरुलिना गोळ्यांची लॅब चाचणी आणि शुद्धतेचे निकष काय आहेत?",
-        answer: "सुजाताची प्रत्येक बॅच FSSAI परवानाधारक (#10723998000433) असून NABL मान्यताप्राप्त प्रयोगशाळेत (Lilaba Report #LAL-NN-131125023) IS 7219 मानकांनुसार तपासली जाते. यात ६२.३९% संपूर्ण प्रोटिन, २९०.८९ mg/kg नैसर्गिक लोह, सुरक्षित हेवी मेटल प्रमाण (Lead < 0.01 ppm, Arsenic < 0.05 ppm) आणि ०.००% केमिकल बाईंडर्स प्रमाणित आहेत.",
+        answer: "सुजाताची प्रत्येक बॅच FSSAI परवानाधारक उत्पादक (#10723998000433) असून NABL मान्यताप्राप्त प्रयोगशाळेत (Lilaba Report #LAL-NN-131125023) IS 7219 मानकांनुसार तपासली जाते. यात ६२.३९% संपूर्ण प्रोटिन, २९०.८९ mg/kg नैसर्गिक लोह, सुरक्षित हेवी मेटल प्रमाण (Lead < 0.01 ppm, Arsenic < 0.05 ppm) आणि ०.००% केमिकल बाईंडर्स प्रमाणित आहेत.",
         tag: "NABL Lab Verification"
       }
     ],
@@ -1420,7 +1421,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "सुजाता स्पिरुलिना गोळ्यांची लॅब चाचणी आणि शुद्धतेचे निकष काय आहेत?",
-        answer: "सुजाताची प्रत्येक बॅच FSSAI परवानाधारक (#10723998000433) असून NABL मान्यताप्राप्त प्रयोगशाळेत (Lilaba Report #LAL-NN-131125023) IS 7219 मानकांनुसार तपासली जाते. यात ६२.३९% संपूर्ण प्रोटिन, २९०.८९ mg/kg नैसर्गिक लोह, सुरक्षित हेवी मेटल प्रमाण (Lead < 0.01 ppm, Arsenic < 0.05 ppm) आणि ०.००% केमिकल बाईंडर्स प्रमाणित आहेत.",
+        answer: "सुजाताची प्रत्येक बॅच FSSAI परवानाधारक उत्पादक (#10723998000433) असून NABL मान्यताप्राप्त प्रयोगशाळेत (Lilaba Report #LAL-NN-131125023) IS 7219 मानकांनुसार तपासली जाते. यात ६२.३९% संपूर्ण प्रोटिन, २९०.८९ mg/kg नैसर्गिक लोह, सुरक्षित हेवी मेटल प्रमाण (Lead < 0.01 ppm, Arsenic < 0.05 ppm) आणि ०.००% केमिकल बाईंडर्स प्रमाणित आहेत.",
         tag: "NABL Lab Verification"
       }
     ],
@@ -1523,7 +1524,7 @@ const productSeoConfigMap: Record<string, {
         },
         {
           feature: "सुरक्षा व लॅब टेस्ट (NABL & FSSAI)",
-          sujata: "NABL प्रमाणित (IS 7219), FSSAI Lic #10723998000433",
+          sujata: "NABL प्रमाणित (IS 7219), FSSAI Central Lic #11526999001381",
           generic: "अनियमित चाचण्या, भेसळीचा संशय",
           competitors: "कोणताही लॅब रिपोर्ट उपलब्ध नसतो"
         },
@@ -1563,7 +1564,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "Are these certified by NABL labs and FSSAI?",
-        answer: "Yes. Both products are manufactured under central FSSAI license #10723998000433. Tested in NABL accredited laboratories (Lilaba Report #LAL-NN-131125023) verifying Lead < 0.01 ppm, Mercury undetected, zero talc, zero synthetic binders, and 100% active botanical purity.",
+        answer: "Yes. Both products are marketed by Sujata Nutrilive Agrotech under FSSAI Central License #11526999001381 and made by the contract manufacturer under FSSAI licence #10723998000433. Tested in NABL accredited laboratories (Lilaba Report #LAL-NN-131125023) verifying Lead < 0.01 ppm, Mercury undetected, zero talc, zero synthetic binders, and 100% active botanical purity.",
         tag: "NABL Purity Verification"
       }
     ],
@@ -1660,7 +1661,7 @@ const SNIPPET_META: Record<string, { title: string; description: string }> = {
   },
   'sujata-sea-buckthorn-capsules': {
     title: `Sea Buckthorn Capsules – Himalayan Omega-7, ${priceLabel} | Sujata`,
-    description: `60 Himalayan sea buckthorn oil capsules, a plant source of omega-7, 3, 6 and 9. About ${seaBuckthornPerDay} at 2 a day. FSSAI registered. Free COD.`,
+    description: `60 Himalayan sea buckthorn oil capsules, a plant source of omega-7, 3, 6 and 9. About ${seaBuckthornPerDay} at 2 a day. FSSAI licensed. Free COD.`,
   },
   'sujata-spirulina-sea-buckthorn-combo-pack': {
     title: `Spirulina + Sea Buckthorn Capsules, ${priceLabel} | Sujata`,
@@ -1691,7 +1692,7 @@ const SNIPPET_META: Record<string, { title: string; description: string }> = {
   // Shopify copy for moringa opens with an emoji header and a liver-detox claim; replaced with plain facts.
   'sujata-moringa-powder': {
     title: `Moringa Leaf Powder 100g, ${priceLabel} | Sujata Nutrilive`,
-    description: `Natural moringa leaf powder in a 100g pouch, ${priceLabel}. A plant-based leafy-green powder to add to water, smoothies or food. FSSAI registered. Free COD.`,
+    description: `Natural moringa leaf powder in a 100g pouch, ${priceLabel}. A plant-based leafy-green powder to add to water, smoothies or food. FSSAI licensed. Free COD.`,
   },
   'sujata-spirulina-sea-buckthorn-combo': {
     title: `Spirulina Tablets + Sea Buckthorn Combo, ${priceLabel} | Sujata`,

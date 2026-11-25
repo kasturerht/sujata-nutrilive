@@ -20,7 +20,7 @@ Welcome, Antigravity Agent! This repository powers **Sujata Nutrilive** (`sujata
 Whenever handling SEO tasks, content generation, or organic ranking strategies:
 * Adhere strictly to `.agent/skills/sujata-seo-engine/SKILL.md`.
 * Ensure zero AI fluff in blog/learn content (Google HCU & Navboost optimization).
-* Always inject valid JSON-LD (`Article`, `FAQPage`, `Product`, `Organization`) with FSSAI Reg `#21526027000179` and NABL test figures (62.39% protein).
+* Always inject valid JSON-LD (`Article`, `FAQPage`, `Product`, `Organization`) with FSSAI Central License `#11526999001381` (manufacturer licence `#10723998000433`, always labelled as such) and NABL test figures (62.39% protein).
 * High-intent internal links must route to product checkout or WhatsApp concierge.
 
 ---
