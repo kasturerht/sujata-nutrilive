@@ -201,6 +201,12 @@ export function resolveDynamicProductEntity(
     }
   ];
 
+  // The FSSAI licence covers food products only (cosmetics are not FSSAI-regulated), and NABL report
+  // LAL-NN-131125023 covers spirulina only: no other product may carry it.
+  const isCosmeticHandle = /(soap|facewash|facepack|cream|hair-oil|shampoo)/.test(handle);
+  const credentialsForProduct = hasCredentials.filter((c) =>
+    c.name.startsWith('FSSAI') ? !isCosmeticHandle : (!isCosmeticHandle && handle.includes('spirulina')));
+
   // 6. Dynamic Google Merchant Center Categorization & Custom Labels
   let productType = 'Health & Wellness > Vitamins & Supplements > Cellular Superfoods';
   let label0 = 'Cold-Pressed Sub-40C';
@@ -234,7 +240,7 @@ export function resolveDynamicProductEntity(
       label2: 'FSSAI Statutory Certified',
       label3: 'Direct D2C Manufacturer'
     },
-    hasCredentials,
+    hasCredentials: credentialsForProduct,
     aboutEntities
   };
 }

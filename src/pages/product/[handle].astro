@@ -1146,11 +1146,14 @@ const productSchema = {
     "@type": "Brand",
     "name": BRAND_CONFIG.brandName || "Sujata Nutrilive"
   },
-  "manufacturer": {
-    "@type": "Organization",
-    "name": "Spiru Swastha India Pvt Ltd",
-    "description": "Contract manufacturer (Manufacturer FSSAI Lic. 10723998000433). Marketed by Sujata Nutrilive Agrotech, Nashik (FSSAI Central License 11526999001381)."
-  },
+  // Spiru Swastha is the documented contract manufacturer for the spirulina formats only (lab dossier).
+  ...(/spirulina-(tablets|capsules|powder)/.test(handle || '') ? {
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Spiru Swastha India Pvt Ltd",
+      "description": "Contract manufacturer (Manufacturer FSSAI Lic. 10723998000433). Marketed by Sujata Nutrilive Agrotech, Nashik (FSSAI Central License 11526999001381)."
+    }
+  } : {}),
   ...(realProductRating ? {
     "aggregateRating": {
       "@type": "AggregateRating",
