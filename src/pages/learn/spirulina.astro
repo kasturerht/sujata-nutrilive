@@ -1,0 +1,171 @@
+---
+// /learn/spirulina — English ingredient hub. Every number on this page comes from one of three sources:
+// the NABL lab report (src/config/lab-reports.mjs), the product label (LABEL_FACTS), or live Shopify prices.
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import LearnBuyCard from '../../components/LearnBuyCard.astro';
+import { getCatalogProducts, formatINR } from '../../lib/catalog';
+import { reportFor, LABEL_FACTS } from '../../config/lab-reports.mjs';
+import { EDITORIAL_TEAM, SITE_URL, editorialAuthorSchema } from '../../config/editorial.mjs';
+import { guidesFor } from '../../config/learn-registry.mjs';
+import { alternatesFor } from '../../config/hreflang.mjs';
+
+const pageTitle = 'Spirulina: Lab Report, How to Take It & Price per Day';
+const pageDescription = 'Spirulina explained with our NABL lab report (62.39% protein, 290.89 mg/kg iron), label dosage for tablets and capsules, and live cost per day.';
+const reviewedOn = '2026-11-25';
+
+const report = reportFor('spirulina');
+const r = Object.fromEntries(report.results.map((x) => [x.name, x]));
+// Per 1 g of spirulina (2 tablets or 2 capsules of 500 mg), derived from the report's per-100 g / per-kg values.
+const perGram = [
+  { label: 'Protein', value: `${(r['Protein'].value / 100).toFixed(2)} g` },
+  { label: 'Iron', value: `${(r['Iron (as Fe)'].value / 1000).toFixed(2)} mg` },
+  { label: 'Calcium', value: `${(r['Calcium (as Ca)'].value / 1000).toFixed(1)} mg` },
+  { label: 'Energy', value: `${(r['Energy'].value / 100).toFixed(1)} kcal` },
+];
+
+const catalog = await getCatalogProducts(['sujata-spirulina-tablets', 'sujata-spirulina-capsules']);
+// The 60-tablet pack is not sold on the website; skip it so prices match what the shopper can buy.
+const shown = (handle) => catalog[handle].variants.filter((v) => !/60\s*tablets/i.test(v.title));
+const rows = [];
+for (const handle of ['sujata-spirulina-tablets', 'sujata-spirulina-capsules']) {
+  const label = LABEL_FACTS[handle];
+  for (const v of shown(handle)) {
+    const count = Number((v.title.match(/(\d+)/) || [])[1] || 0);
+    if (!count) continue;
+    const low = v.price / (count / label.unitsPerDayMin);
+    const high = v.price / (count / label.unitsPerDayMax);
+    rows.push({
+      product: handle.includes('tablets') ? 'Tablets (500 mg)' : 'Veg capsules (500 mg)',
+      pack: `${count} ${label.unit}s`,
+      price: formatINR(v.price),
+      days: label.unitsPerDayMin === label.unitsPerDayMax ? `${Math.round(count / label.unitsPerDayMin)} days` : `${Math.round(count / label.unitsPerDayMax)}-${Math.round(count / label.unitsPerDayMin)} days`,
+      perDay: low === high ? formatINR(low) : `${formatINR(low)}-${formatINR(high)}`,
+    });
+  }
+}
+
+const guides = guidesFor('spirulina');
+const languageLinks = alternatesFor('/learn/spirulina').filter((a) => a.lang === 'hi-IN' || a.lang === 'mr-IN');
+
+const url = `${SITE_URL}/learn/spirulina`;
+const schema = [
+  {
+    '@type': 'Article',
+    '@id': `${url}#article`,
+    headline: pageTitle,
+    description: pageDescription,
+    inLanguage: 'en-IN',
+    dateModified: reviewedOn,
+    author: editorialAuthorSchema(),
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    mainEntityOfPage: url,
+    citation: { '@type': 'CreativeWork', name: `${report.lab} test report ${report.id}`, url: `${SITE_URL}${report.pdf}` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn` },
+      { '@type': 'ListItem', position: 3, name: 'Spirulina', item: url },
+    ],
+  },
+  {
+    '@type': 'ItemList',
+    name: 'Spirulina guides',
+    itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE_URL}${g.path}`, name: g.title })),
+  },
+];
+---
+<StoreLayout title={pageTitle} description={pageDescription} image="/products/sujata-spirulina-tablets-bottle.jpg" extraSchema={schema}>
+  <StoreHeader />
+  <main class="bg-[#FAF9F6] text-[#1F2937] py-12 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+      <nav class="text-xs text-gray-500 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:underline">Home</a> › <a href="/learn" class="hover:underline">Learn</a> › <span>Spirulina</span>
+      </nav>
+
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 font-serif leading-tight">Spirulina: our lab report, how to take it and what it costs per day</h1>
+      <p class="mt-4 text-gray-700 leading-relaxed">
+        Spirulina is a blue-green microalga (<em>Arthrospira platensis</em>) that is grown in water, dried and sold as powder, tablets or capsules.
+        This page puts our own numbers in one place: what an accredited lab measured in our spirulina, the dose printed on our labels, and what a day of it costs at today's prices.
+      </p>
+      {languageLinks.length > 0 && (
+        <p class="mt-3 text-sm">
+          Read in:
+          {languageLinks.map((a, i) => (
+            <>{i > 0 && ' · '}<a href={a.path} hreflang={a.lang.slice(0, 2)} lang={a.lang.slice(0, 2)} class="text-emerald-800 underline">{a.lang === 'hi-IN' ? 'हिंदी' : 'मराठी'}</a></>
+          ))}
+        </p>
+      )}
+      <p class="mt-3 text-xs text-gray-500">Prepared by the {EDITORIAL_TEAM.name} · FSSAI Reg. {EDITORIAL_TEAM.fssaiRegistration} · Last reviewed 25 Nov 2026</p>
+
+      <h2 class="mt-10 text-2xl font-bold text-gray-900">What the lab measured</h2>
+      <p class="mt-3 text-gray-700 leading-relaxed">
+        {report.lab} tested a sample of our spirulina powder ({report.sample}) and issued report <a href={report.pdf} class="text-emerald-800 underline">{report.id}</a> on 17 November 2025.
+        The tablets and capsules are made from the same spirulina biomass. Values are per 100 g unless shown otherwise.
+      </p>
+      <div class="mt-5 overflow-x-auto">
+        <table class="w-full text-sm border border-gray-200 bg-white">
+          <thead class="bg-gray-50 text-left"><tr><th class="p-3">Parameter</th><th class="p-3">Result</th></tr></thead>
+          <tbody>
+            {report.results.map((x) => (
+              <tr class="border-t border-gray-100"><td class="p-3">{x.name}</td><td class="p-3 font-semibold">{x.value.toLocaleString('en-IN')} {x.unit}</td></tr>
+            ))}
+            <tr class="border-t border-gray-100"><td class="p-3">Below the lab's limit of quantification</td><td class="p-3">{report.belowQuantification.join(', ')}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-gray-700">In a 1 g serving (two 500 mg tablets or capsules) that works out to:</p>
+      <ul class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {perGram.map((x) => (
+          <li class="rounded-lg border border-gray-200 bg-white p-3 text-center"><span class="block text-lg font-bold text-emerald-800">{x.value}</span><span class="text-xs text-gray-600">{x.label}</span></li>
+        ))}
+      </ul>
+      <p class="mt-3 text-xs text-gray-500">Spirulina also contains sodium ({r['Sodium (as Na)'].value.toLocaleString('en-IN')} mg/kg in this report, about 11 mg per gram); keep this in mind if you are watching your salt intake.</p>
+
+      <h2 class="mt-10 text-2xl font-bold text-gray-900">How to take it</h2>
+      <ul class="mt-3 list-disc pl-6 text-gray-700 space-y-2">
+        <li><strong>Tablets:</strong> {LABEL_FACTS['sujata-spirulina-tablets'].dose} (500 mg each).</li>
+        <li><strong>Capsules:</strong> {LABEL_FACTS['sujata-spirulina-capsules'].dose} (500 mg each).</li>
+        <li>Swallow with water. More detail on timing in <a href="/learn/how-to-take-spirulina" class="text-emerald-800 underline">how to take spirulina</a>.</li>
+      </ul>
+
+      <h2 class="mt-10 text-2xl font-bold text-gray-900">What a day costs</h2>
+      <p class="mt-3 text-gray-700">Live website prices, divided by the number of days a pack lasts at the label dose.</p>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-sm border border-gray-200 bg-white">
+          <thead class="bg-gray-50 text-left"><tr><th class="p-3">Format</th><th class="p-3">Pack</th><th class="p-3">Price</th><th class="p-3">Lasts</th><th class="p-3">Per day</th></tr></thead>
+          <tbody>
+            {rows.map((x) => (
+              <tr class="border-t border-gray-100"><td class="p-3">{x.product}</td><td class="p-3">{x.pack}</td><td class="p-3">{x.price}</td><td class="p-3">{x.days}</td><td class="p-3 font-semibold">{x.perDay}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <LearnBuyCard handle="sujata-spirulina-tablets" placement="hub-spirulina-tablets" compact={true} />
+        <LearnBuyCard handle="sujata-spirulina-capsules" placement="hub-spirulina-capsules" compact={true} />
+      </div>
+
+      <h2 class="mt-10 text-2xl font-bold text-gray-900">Check with your doctor first if</h2>
+      <ul class="mt-3 list-disc pl-6 text-gray-700 space-y-2">
+        <li>you are pregnant or breastfeeding, or buying for a child;</li>
+        <li>you take regular medication or are under treatment for a medical condition;</li>
+        <li>you have phenylketonuria (spirulina contains the amino acid phenylalanine) or a known allergy to algae.</li>
+      </ul>
+
+      <h2 class="mt-10 text-2xl font-bold text-gray-900">Spirulina guides</h2>
+      <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+        {guides.map((g) => (
+          <li><a href={g.path} lang={g.lang} class="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-emerald-900 hover:bg-emerald-50">{g.title}</a></li>
+        ))}
+      </ul>
+
+      <p class="mt-10 text-xs text-gray-500">This product is not intended to diagnose, treat, cure or prevent any disease. Lab values describe the tested sample and batch named above.</p>
+    </div>
+  </main>
+  <StoreFooter />
+</StoreLayout>

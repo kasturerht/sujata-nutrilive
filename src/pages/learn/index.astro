@@ -1,0 +1,69 @@
+---
+// /learn — hub for every guide. Links each ingredient hub and every live guide (src/config/learn-registry.mjs).
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import StoreHeader from '../../components/StoreHeader.astro';
+import StoreFooter from '../../components/StoreFooter.astro';
+import { INGREDIENT_HUBS, LEARN_GUIDES, guidesFor } from '../../config/learn-registry.mjs';
+import { EDITORIAL_TEAM, SITE_URL } from '../../config/editorial.mjs';
+
+const pageTitle = 'Spirulina & Sea Buckthorn Guides | Sujata Nutrilive';
+const pageDescription = 'Plain-language guides to spirulina and sea buckthorn in English, Hindi and Marathi, built on our NABL lab report, product labels and live prices.';
+const langName = { en: 'English', hi: 'हिंदी', mr: 'मराठी' };
+const general = LEARN_GUIDES.filter((g) => g.ingredient === 'general');
+
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${SITE_URL}/learn#page`,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: 'en-IN',
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    hasPart: [...INGREDIENT_HUBS.map((h) => ({ '@type': 'WebPage', url: `${SITE_URL}${h.path}`, name: h.name })), ...LEARN_GUIDES.map((g) => ({ '@type': 'Article', url: `${SITE_URL}${g.path}`, name: g.title }))],
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn` },
+    ],
+  },
+];
+---
+<StoreLayout title={pageTitle} description={pageDescription} extraSchema={schema}>
+  <StoreHeader />
+  <main class="bg-[#FAF9F6] text-[#1F2937] py-12 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <nav class="text-xs text-gray-500 mb-6" aria-label="Breadcrumb"><a href="/" class="hover:underline">Home</a> › <span>Learn</span></nav>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 font-serif">Spirulina and sea buckthorn guides</h1>
+      <p class="mt-4 text-gray-700 leading-relaxed max-w-2xl">
+        Guides in English, Hindi and Marathi. Each one uses our own facts: the NABL lab report for our spirulina, the dose on our labels, and today's prices.
+      </p>
+      <p class="mt-2 text-xs text-gray-500">Prepared by the {EDITORIAL_TEAM.name} · FSSAI Reg. {EDITORIAL_TEAM.fssaiRegistration}</p>
+
+      {INGREDIENT_HUBS.map((hub) => (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-gray-900"><a href={hub.path} class="hover:underline">{hub.name}</a></h2>
+          <p class="mt-1 text-sm"><a href={hub.path} class="text-emerald-800 underline">Start here: {hub.name.toLowerCase()} overview, lab facts and price per day →</a></p>
+          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+            {guidesFor(hub.id).map((g) => (
+              <li><a href={g.path} lang={g.lang} class="flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 text-emerald-900 hover:bg-emerald-50"><span>{g.title}</span><span class="text-[10px] uppercase tracking-wide text-gray-500">{langName[g.lang]}</span></a></li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      {general.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-gray-900">Buying supplements in India</h2>
+          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+            {general.map((g) => (<li><a href={g.path} class="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-emerald-900 hover:bg-emerald-50">{g.title}</a></li>))}
+          </ul>
+        </section>
+      )}
+
+      <p class="mt-12 text-sm"><a href="/science" class="text-emerald-800 underline">See our lab reports and FSSAI registration →</a></p>
+    </div>
+  </main>
+  <StoreFooter />
+</StoreLayout>

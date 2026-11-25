@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import viteComplianceGuard from './plugins/vite-compliance-guard.mjs';
+import { alternatesFor } from './src/config/hreflang.mjs';
 
 const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.sujatanutrilive.com';
 
@@ -54,6 +55,9 @@ export default defineConfig({
         // No lastmod: stamping every URL with the build time told Google nothing changed-when.
         // Re-add per URL only from a real change date (Shopify updatedAt / content reviewedAt).
         delete item.lastmod;
+        // hreflang alternates for /learn language clusters (same source as the <head> links).
+        const alts = alternatesFor(new URL(item.url).pathname);
+        if (alts.length) item.links = alts.map((a) => ({ lang: a.lang, url: new URL(a.path, siteUrl).toString() }));
         if (item.url.includes('/product/')) {
           item.priority = 0.9;
           item.changefreq = 'daily';

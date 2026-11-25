@@ -1,0 +1,54 @@
+---
+// Native Hindi / Marathi guides from src/content/learn-native (schema + guards in src/content.config.ts).
+// Prerendered: only entries that pass the schema become pages; with no entries, no pages exist.
+import { getCollection, render } from 'astro:content';
+import StoreLayout from '../../../layouts/StoreLayout.astro';
+import StoreHeader from '../../../components/StoreHeader.astro';
+import StoreFooter from '../../../components/StoreFooter.astro';
+import { EDITORIAL_TEAM, SITE_URL, editorialAuthorSchema, reviewerSchema } from '../../../config/editorial.mjs';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('learnNative');
+  return entries.map((entry) => ({ params: { lang: entry.data.lang, slug: entry.data.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const url = `${SITE_URL}/${d.lang}/learn/${d.slug}`;
+const reviewedBy = reviewerSchema(d.externalReviewer);
+const ui = d.lang === 'hi'
+  ? { by: 'तैयारकर्ता', writer: 'लेखक', reviewed: 'अंतिम समीक्षा', disclaimer: 'यह उत्पाद किसी रोग का निदान, उपचार या रोकथाम करने के लिए नहीं है।' }
+  : { by: 'तयारकर्ते', writer: 'लेखक', reviewed: 'शेवटचे पुनरावलोकन', disclaimer: 'हे उत्पादन कोणत्याही आजाराचे निदान, उपचार किंवा प्रतिबंध करण्यासाठी नाही.' };
+
+const schema = [
+  {
+    '@type': 'Article',
+    '@id': `${url}#article`,
+    headline: d.title,
+    description: d.description,
+    inLanguage: d.lang === 'hi' ? 'hi-IN' : 'mr-IN',
+    dateModified: d.reviewedAt.toISOString().slice(0, 10),
+    author: [{ '@type': 'Person', name: d.writer.name }, editorialAuthorSchema()],
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    mainEntityOfPage: url,
+    ...(reviewedBy ? { reviewedBy } : {}),
+  },
+];
+---
+<StoreLayout lang={d.lang} title={d.title} description={d.description} extraSchema={schema}>
+  <StoreHeader />
+  <main class="bg-[#FAF9F6] text-[#1F2937] py-12 px-4 sm:px-6">
+    <article class="max-w-3xl mx-auto prose prose-emerald">
+      <h1>{d.title}</h1>
+      <p class="text-sm text-gray-600">
+        {ui.writer}: {d.writer.name} · {ui.by}: {EDITORIAL_TEAM.name} (FSSAI {EDITORIAL_TEAM.fssaiRegistration}) · {ui.reviewed}: {d.reviewedAt.toISOString().slice(0, 10)}
+      </p>
+      <Content />
+      <p class="text-xs text-gray-500 mt-10">{ui.disclaimer}</p>
+    </article>
+  </main>
+  <StoreFooter />
+</StoreLayout>

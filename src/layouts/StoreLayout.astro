@@ -1,5 +1,6 @@
 ---
 // src/layouts/StoreLayout.astro
+import { alternatesFor } from '../config/hreflang.mjs';
 import CartDrawer from '../components/CartDrawer.astro';
 import StoreSearchModal from '../components/StoreSearchModal.astro';
 import StoreBottomNav from '../components/StoreBottomNav.astro';
@@ -33,6 +34,8 @@ const {
 
 const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
+// hreflang alternates for /learn language clusters (src/config/hreflang.mjs); empty for other pages.
+const hreflangAlternates = alternatesFor(Astro.url.pathname).map((a) => ({ lang: a.lang, href: new URL(a.path, siteUrl).toString() }));
 const ogImageURL = new URL(image, siteUrl).toString();
 
 const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID || "1314112957191765";
@@ -376,6 +379,7 @@ const unifiedSchemaGraph = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {hreflangAlternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
     
     {/* Generative Engine Optimization (GEO) & Machine Readability Declarations */}
     <meta name="author" content="Sujata Nutrilive" />
