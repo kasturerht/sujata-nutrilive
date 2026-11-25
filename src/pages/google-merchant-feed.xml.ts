@@ -151,7 +151,7 @@ export const GET: APIRoute = async () => {
     const rawCleanDesc = cleanText(p.description) || `Buy authentic ${p.title} from Sujata Nutrilive. 100% natural, NABL laboratory tested with zero detectable heavy metals and fast express shipping.`;
     const { title: compliantTitle, desc: sanitizedDesc } = sanitizeForGoogleCompliance(p.title, rawCleanDesc);
     // Same claims guard as the storefront: drops sentences with disease, efficacy or cosmetic drug-type claims
-    // (anti-acne, hair fall, whitening ...). If too little survives, fall back to a plain factual line.
+    // (see COSMETIC_CLAIM in claims-guard). If too little survives, fall back to a plain factual line.
     const scrubbedDesc = scrubClaims(sanitizedDesc);
     const compliantDesc = scrubbedDesc.length >= 60
       ? scrubbedDesc
