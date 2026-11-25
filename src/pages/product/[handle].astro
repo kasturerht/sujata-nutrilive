@@ -22,9 +22,10 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
 const { handle: rawHandle } = Astro.params;
 const handle = rawHandle === 'sujata-daily-super-immunity-combo' ? 'sujata-spirulina-sea-buckthorn-combo-pack' : rawHandle;
 
-// 🚫 Temporarily Hidden Listings: redirect Spirulina Powder to Spirulina Tablets
+// Unlisted: Spirulina Powder (return date unconfirmed) -> permanent redirect to Tablets. vercel.json does
+// this at the edge too (src/config/legacy-redirects.json); this is the fallback. Relist = remove both.
 if (handle === 'sujata-spirulina-powder' || handle === 'spirulin-powder') {
-  return Astro.redirect('/product/sujata-spirulina-tablets', 302);
+  return Astro.redirect('/product/sujata-spirulina-tablets', 301);
 }
 
 // 🌟 Updated Metafield Keys based on your Shopify Admin

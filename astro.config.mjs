@@ -8,7 +8,7 @@ import viteComplianceGuard from './plugins/vite-compliance-guard.mjs';
 const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.sujatanutrilive.com';
 
 // URLs that currently redirect, so they must stay out of the sitemap.
-// Spirulina powder: listing temporarily hidden, 302 to tablets (src/pages/product/[handle].astro).
+// Spirulina powder: unlisted, 301 to tablets (src/config/legacy-redirects.json).
 const SITEMAP_EXCLUDE = new Set(['/product/sujata-spirulina-powder']);
 
 export default defineConfig({

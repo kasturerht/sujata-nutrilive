@@ -4,7 +4,7 @@ import StoreLayout from '../layouts/StoreLayout.astro';
 import StoreHeader from '../components/StoreHeader.astro';
 import StoreFooter from '../components/StoreFooter.astro';
 import { BRAND_CONFIG } from '../config/brand';
-import { getCatalogProducts, formatINR } from '../lib/catalog';
+import { getCatalogProducts, formatINR, isListed } from '../lib/catalog';
 
 const shopifyDomain = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_DOMAIN || "tvczdq-nu.myshopify.com";
 
@@ -1092,6 +1092,7 @@ const scienceSchemas = [
               </div>
             </div>
 
+{isListed('sujata-spirulina-powder') && (<Fragment>
             {/* Card 2: Spirulina Powder */}
             <div class="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1 shadow-xl">
               <div>
@@ -1175,6 +1176,7 @@ const scienceSchemas = [
                 </div>
               </div>
             </div>
+</Fragment>)}
 
             {/* Card 3: Plant B12 */}
             <div class="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-emerald-400/40 rounded-3xl p-6 sm:p-7 flex flex-col justify-between backdrop-blur-md transition-all duration-300 group hover:-translate-y-1 shadow-xl">

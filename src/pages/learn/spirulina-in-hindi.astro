@@ -1,4 +1,5 @@
 ---
+import { isListed } from '../../lib/catalog';
 // src/pages/learn/spirulina-in-hindi.astro
 import StoreLayout from '../../layouts/StoreLayout.astro';
 import StoreHeader from '../../components/StoreHeader.astro';
@@ -296,6 +297,7 @@ const articleAndFaqSchema = [
         <p class="text-xs sm:text-sm text-gray-300 mb-6 leading-relaxed">तीनों में 62.39% प्रोटीन समान है। अंतर है सुविधा, गंध और डोज़-फ्लेक्सिबिलिटी का:</p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+{isListed('sujata-spirulina-powder') && (<Fragment>
           <div class="bg-black/40 border border-emerald-500/20 rounded-xl p-5 flex flex-col justify-between">
             <div>
               <h3 class="font-bold text-white text-base mb-1">🌿 ऑर्गैनिक पाउडर (100g)</h3>
@@ -306,6 +308,7 @@ const articleAndFaqSchema = [
             </div>
             <a href="/product/sujata-spirulina-powder" class="w-full bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-200 text-xs font-bold py-2.5 px-3 rounded-lg text-center transition-all block">पाउडर देखें →</a>
           </div>
+</Fragment>)}
           <div class="bg-black/40 border border-amber-500/20 rounded-xl p-5 flex flex-col justify-between">
             <div>
               <h3 class="font-bold text-white text-base mb-1">🟢 शुद्ध टैबलेट्स (500mg)</h3>

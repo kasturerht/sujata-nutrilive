@@ -180,6 +180,16 @@
       "source": "/learn/sea-buckthorn-for-dry-eyes",
       "destination": "/learn/sea-buckthorn-capsules-buyers-guide",
       "permanent": true
+    },
+    {
+      "source": "/product/sujata-spirulina-powder",
+      "destination": "/product/sujata-spirulina-tablets",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulin-powder",
+      "destination": "/product/sujata-spirulina-tablets",
+      "permanent": true
     }
   ],
   "headers": [

@@ -6,7 +6,7 @@
 //  - "Buy now": window.directCheckoutItem -> Razorpay Magic 1-click checkout (Storefront fallback)
 //  - "Buy on Amazon →": Amazon Attribution-tagged outbound link for the Brand Referral Bonus
 //    flywheel. Shoppers who prefer Prime get routed to the matching ASIN with proper tracking.
-import { getCatalogProducts, formatINR, type CatalogHandle } from '../lib/catalog';
+import { getCatalogProducts, formatINR, isListed, type CatalogHandle } from '../lib/catalog';
 
 interface Props {
   handle: CatalogHandle;
@@ -61,6 +61,7 @@ const amazonUrl = amazonAsin
   ? `https://www.amazon.in/dp/${amazonAsin}?tag=${encodeURIComponent(amazonTag)}&ref_=${encodeURIComponent(amazonCtaRef)}`
   : null;
 ---
+{isListed(handle) && (<Fragment>
 
 <aside
   id={cardId}
@@ -160,6 +161,7 @@ const amazonUrl = amazonAsin
   </div>
 </aside>
 
+</Fragment>)}
 <script>
   // Bundled once per page by Astro, however many cards render.
   const inr = (n: number) => '₹' + new Intl.NumberFormat('en-IN').format(Math.round(n));

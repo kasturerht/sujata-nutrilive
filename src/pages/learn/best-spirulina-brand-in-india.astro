@@ -6,7 +6,7 @@ import StoreFooter from '../../components/StoreFooter.astro';
 import LearnRelatedGuides from '../../components/LearnRelatedGuides.astro';
 import { BRAND_CONFIG } from '../../config/brand';
 import LearnBuyCard from '../../components/LearnBuyCard.astro';
-import { getCatalogProducts, formatINR } from '../../lib/catalog';
+import { getCatalogProducts, formatINR, isListed } from '../../lib/catalog';
 
 const guideCatalog = await getCatalogProducts(['sujata-spirulina-powder', 'sujata-spirulina-tablets', 'sujata-spirulina-capsules']);
 const fromPrice = (h: 'sujata-spirulina-powder' | 'sujata-spirulina-tablets' | 'sujata-spirulina-capsules') => formatINR(Math.min(...guideCatalog[h].variants.map((v) => v.price)));
@@ -454,6 +454,7 @@ const articleAndFaqSchema = [
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+{isListed('sujata-spirulina-powder') && (<Fragment>
           <!-- Powder Card -->
           <div class="bg-black/40 border border-emerald-900/40 rounded-xl p-5 flex flex-col justify-between">
             <div>
@@ -471,6 +472,7 @@ const articleAndFaqSchema = [
               View Spirulina Powder (from {fromPrice('sujata-spirulina-powder')})
             </a>
           </div>
+</Fragment>)}
 
           <!-- Tablets Card -->
           <div class="bg-black/40 border border-emerald-900/40 rounded-xl p-5 flex flex-col justify-between">

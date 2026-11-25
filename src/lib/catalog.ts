@@ -158,4 +158,10 @@ export async function getCatalogProducts(handles: CatalogHandle[]): Promise<Reco
   return result;
 }
 
+// Products hidden from the storefront (out of stock, return date unknown). Their URLs 301 to a live
+// product, so every card, buy box and link that names them is skipped. Relist = remove from this set
+// AND delete the matching redirect in src/config/legacy-redirects.json + src/pages/product/[handle].astro.
+export const UNLISTED_HANDLES = new Set<string>(['sujata-spirulina-powder']);
+export const isListed = (handle: string): boolean => !UNLISTED_HANDLES.has(handle);
+
 export const formatINR = (n: number) => '₹' + new Intl.NumberFormat('en-IN').format(Math.round(n));
