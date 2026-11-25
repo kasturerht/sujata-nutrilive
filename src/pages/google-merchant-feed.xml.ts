@@ -5,6 +5,7 @@
 import type { APIRoute } from 'astro';
 import { BRAND_CONFIG } from '../config/brand';
 import { resolveDynamicProductEntity } from '../lib/product-entity-resolver';
+import { scrubClaims } from '../lib/claims-guard';
 
 export const prerender = false;
 
@@ -148,7 +149,13 @@ export const GET: APIRoute = async () => {
     const defaultImageUrl = rawDefaultImg.startsWith('http') ? rawDefaultImg : `${siteUrl}${rawDefaultImg}`;
 
     const rawCleanDesc = cleanText(p.description) || `Buy authentic ${p.title} from Sujata Nutrilive. 100% natural, NABL laboratory tested with zero detectable heavy metals and fast express shipping.`;
-    const { title: compliantTitle, desc: compliantDesc } = sanitizeForGoogleCompliance(p.title, rawCleanDesc);
+    const { title: compliantTitle, desc: sanitizedDesc } = sanitizeForGoogleCompliance(p.title, rawCleanDesc);
+    // Same claims guard as the storefront: drops sentences with disease, efficacy or cosmetic drug-type claims
+    // (anti-acne, hair fall, whitening ...). If too little survives, fall back to a plain factual line.
+    const scrubbedDesc = scrubClaims(sanitizedDesc);
+    const compliantDesc = scrubbedDesc.length >= 60
+      ? scrubbedDesc
+      : `${compliantTitle} by Sujata Nutrilive, made in India. Free shipping and cash on delivery across India.`;
 
     for (const vEdge of variantEdges) {
       const variant = vEdge.node;

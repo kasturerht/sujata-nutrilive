@@ -1,0 +1,33 @@
+{
+  "_meta": "Shopify product titles renamed 2026-11-25 to remove cosmetic drug-type claims. Handles unchanged. Rollback: PUT the before titles.",
+  "renames": [
+    {
+      "id": 10465847443588,
+      "handle": "sujata-spirulina-facewash",
+      "before": "Sujata Spirulina Anti-Acne Face Wash (100ml Pump Bottle)",
+      "after": "Sujata Spirulina Face Wash (100ml Pump Bottle)",
+      "handleAfter": "sujata-spirulina-facewash"
+    },
+    {
+      "id": 10465847607428,
+      "handle": "sujata-bridal-whitening-cream",
+      "before": "Sujata Bridal Whitening & Brightening Luxury Cream (50g)",
+      "after": "Sujata Bridal Radiance Luxury Cream (50g)",
+      "handleAfter": "sujata-bridal-whitening-cream"
+    },
+    {
+      "id": 10465847574660,
+      "handle": "sujata-spirulina-korean-cream",
+      "before": "Sujata Spirulina Korean Cream (Glass Skin & Dark Spot Corrector - 25g)",
+      "after": "Sujata Spirulina Korean Cream (Glass Skin Moisturiser - 25g)",
+      "handleAfter": "sujata-spirulina-korean-cream"
+    },
+    {
+      "id": 10465847640196,
+      "handle": "sujata-spirulina-coconut-hair-oil",
+      "before": "Sujata Spirulina & Coconut Herbal Hair Oil (50ml - Hair Fall & Scalp Care)",
+      "after": "Sujata Spirulina & Coconut Herbal Hair Oil (50ml)",
+      "handleAfter": "sujata-spirulina-coconut-hair-oil"
+    }
+  ]
+}

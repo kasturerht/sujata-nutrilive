@@ -113,7 +113,8 @@ if (!product) {
 
 // Site display names for products whose Shopify title carries a cosmetic drug-type claim (anti-acne,
 // whitening, dark-spot correction). Applied once here so the H1, breadcrumb, image alt, cart data and
-// Product JSON-LD all match. Shopify/Amazon titles are unchanged; rename them there to retire these.
+// Product JSON-LD all match. Shopify titles were renamed to the same names on 2026-11-25
+// (src/config/shopify-title-renames.json); this map stays as a guard in case a title is edited back.
 const DISPLAY_TITLES: Record<string, string> = {
   'sujata-spirulina-facewash': 'Sujata Spirulina Face Wash (100ml Pump Bottle)',
   'sujata-bridal-whitening-cream': 'Sujata Bridal Radiance Luxury Cream (50g)',
