@@ -24,6 +24,7 @@ const mustFlag = [
   ['cosmetic acne', 'Natural Anti-Acne Deep Pore Face Wash.'],
   ['cosmetic hair', 'Ayurvedic Hair Growth & Anti-Dandruff Oil.'],
   ['cosmetic thinning', '2-in-1 Anti-Hair Thinning Shampoo.'],
+  ['cosmetic hair fall', 'Key Hair Care Benefits 100% Hair Fall & Thinning Control.'],
   ['cosmetic whitening', 'Bridal Whitening & Brightening Cream.'],
 ];
 const mustPass = [

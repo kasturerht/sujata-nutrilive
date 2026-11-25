@@ -31,7 +31,7 @@ const CONDITION = /\b(diabet\w*|cancer\w*|tumou?r\w*|arthritis|joint pain|sciati
 const COSMETIC_CLAIM = new RegExp(
   [
     String.raw`\b(?:hair\s+(?:re)?growth|(?:new|baby)\s+hair|grows?\s+(?:new\s+)?hair|anti[-\s]?dandruff|anti[-\s]?acne|anti[-\s]?pimple)\b`,
-    String.raw`\banti[-\s]?hair[-\s]?(?:fall|loss|thinning)\b|\bhair[-\s]?thinning\b|\bhair[-\s]?fall\s+reduction\b`,
+    String.raw`\banti[-\s]?hair[-\s]?(?:fall|loss|thinning)\b|\bhair[-\s]?thinning\b|\bhair[-\s]?fall\s+reduction\b|\bhair[-\s]?fall\s*(?:&|and)\s*thinning\b|\b(?:hair[-\s]?fall|thinning)\s+control\b`,
     String.raw`\b(?:remov|eliminat|cur|fight|stop|reduc|prevent|control|sooth|calm|clear|kill|fad|lighten)\w*\s+(?:\w+[-\s]){0,3}(?:dandruff|acne|pimples?|breakouts?|backne|hair[-\s]?(?:fall|loss)|thinning|dark[-\s]?spots?|pigmentation|sun[-\s]?tan|tan\s+patches|blemish\w*|marks)\b`,
     String.raw`\bacne(?:[-\s]breakout)?\s+relief\b|\bwhiten\w*|\bskin[-\s]?lighten\w*|\bspot[-\s]?(?:correct\w*|fading)\b|\bspotless\b|\bfairness\b|\bmelanin\b`,
   ].join('|'),

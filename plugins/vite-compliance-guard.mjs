@@ -134,7 +134,7 @@ const RULES = [
   {
     id: 'cosmetic-drug-claim',
     // Not when part of a URL handle or file name (e.g. /product/sujata-bridal-whitening-cream).
-    pattern: /(?<![-\/\w])(?:hair[\s-]growth|anti[\s-]dandruff|anti[\s-]hair[\s-](?:thinning|fall|loss)|hair[\s-]thinning|anti[\s-]acne|whitening|dark[\s-]spot[\s-]correct\w*|spot[\s-]corrector|(?:reduc\w*|stops?|control\w*)\s+hair[\s-]fall)(?![-\w])/i,
+    pattern: /(?<![-\/\w])(?:hair[\s-]growth|anti[\s-]dandruff|anti[\s-]hair[\s-](?:thinning|fall|loss)|hair[\s-]thinning|anti[\s-]acne|whitening|dark[\s-]spot[\s-]correct\w*|spot[\s-]corrector|(?:reduc\w*|stops?|control\w*)\s+hair[\s-]fall|hair[\s-]fall\s*(?:&|and)\s*thinning|(?:hair[\s-]fall|thinning)\s+control)(?![-\w])/i,
     why: 'Cosmetic drug-type claim (acne, dandruff, hair growth/thinning, whitening): a cosmetic may cleanse, moisturise or condition only (Drugs & Cosmetics Act).'
   },
   // ---- Schema-field rules (run against raw file, not stripped text) --------
