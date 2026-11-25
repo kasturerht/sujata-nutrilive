@@ -7,6 +7,10 @@ import viteComplianceGuard from './plugins/vite-compliance-guard.mjs';
 
 const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.sujatanutrilive.com';
 
+// URLs that currently redirect, so they must stay out of the sitemap.
+// Spirulina powder: listing temporarily hidden, 302 to tablets (src/pages/product/[handle].astro).
+const SITEMAP_EXCLUDE = new Set(['/product/sujata-spirulina-powder']);
+
 export default defineConfig({
   site: siteUrl,
   trailingSlash: 'never',
@@ -38,13 +42,18 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         if (page.includes('/api/') || page.includes('/thank-you')) return false;
+        // Never list error pages or URLs that redirect (sitemaps must hold only 200, self-canonical URLs).
+        if (/\/404\/?$/.test(page)) return false;
+        if (SITEMAP_EXCLUDE.has(page.replace(siteUrl, '').replace(/\/$/, ''))) return false;
         // Strictly filter out any trailing slash URL except the root homepage
         if (page.endsWith('/') && page !== `${siteUrl}/`) return false;
         return true;
       },
       serialize: (item) => {
         if (item.url.endsWith('/') && item.url !== `${siteUrl}/`) return undefined;
-        item.lastmod = new Date().toISOString();
+        // No lastmod: stamping every URL with the build time told Google nothing changed-when.
+        // Re-add per URL only from a real change date (Shopify updatedAt / content reviewedAt).
+        delete item.lastmod;
         if (item.url.includes('/product/')) {
           item.priority = 0.9;
           item.changefreq = 'daily';
@@ -81,7 +90,6 @@ export default defineConfig({
         `${siteUrl}/learn/pure-himalayan-sea-buckthorn-buying-guide`,
         `${siteUrl}/learn/how-to-choose-supplement-brand-india-2026`,
         // 🌟 All 16 Active Shopify Products for Google Shopping & GSC Indexing
-        `${siteUrl}/product/sujata-spirulina-powder`,
         `${siteUrl}/product/sujata-spirulina-tablets`,
         `${siteUrl}/product/sujata-spirulina-capsules`,
         `${siteUrl}/product/sujata-sea-buckthorn-capsules`,

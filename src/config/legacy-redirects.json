@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "purpose": "Single source for permanent (301) redirects from URLs Google knew before the Astro site: the ShopDeck catalogue site, the WooCommerce site, and retired learn pages. scripts/seo/build-redirects.mjs writes these into vercel.json.",
+    "source": "GSC page export of both properties (sujatanutrilive.com + www, 2024-01 to 2026-11-24) and Wayback CDX, checked live on 2026-11-25.",
+    "rule": "Every destination must return 200 directly (single hop). Discontinued products with no successor (spirulina cookies, beetroot powder, ashwagandha tablets) intentionally stay 404.",
+    "pending": "Spirulina powder URLs point to tablets while the powder listing is hidden; switch them to /product/sujata-spirulina-powder when it is relisted."
+  },
+  "redirects": [
+    { "source": "/Organic-Spirulina-Tablets-Packs/catalogue/_J9Hoc0t/DWfZkcRd", "destination": "/product/sujata-spirulina-tablets", "reason": "ShopDeck product (6 clicks, 119 impressions)" },
+    { "source": "/Sea-Buckthorn-Capsule-For-Unisex/catalogue/poYFT1_L/64JpOlVh", "destination": "/product/sujata-sea-buckthorn-capsules", "reason": "ShopDeck product (10 clicks, 101 impressions)" },
+    { "source": "/Organic-Spirulina-Shampoo-With-Conditioner--And-Spirulina-Hair-Oil/catalogue/xivbNd7M/zp9Ebg_6", "destination": "/product/sujata-spirushine-shampoo-conditioner", "reason": "ShopDeck product" },
+    { "source": "/Organic-Moringa-Tablets--60--For-Adults/catalogue/sUTjmeM6/MmZqMwuL", "destination": "/product/sujata-moringa-powder", "reason": "ShopDeck moringa tablets; moringa powder is the live moringa product" },
+    { "source": "/Organic-Spirulina-Powder-For-Adults/catalogue/48HpD00X/KWpTy-zr", "destination": "/product/sujata-spirulina-tablets", "reason": "ShopDeck spirulina powder; powder listing hidden (see _meta.pending)" },
+    { "source": "/Organic-Bridal-Cream--For-Adults/catalogue/-vSlUV8_/nu8EopNu", "destination": "/product/sujata-bridal-whitening-cream", "reason": "ShopDeck product" },
+    { "source": "/Organic-Moringa-Powder-For-Adults/catalogue/ekcfUwGS/sdEzNb-P", "destination": "/product/sujata-moringa-powder", "reason": "ShopDeck product" },
+    { "source": "/Organic-Spirulina-Capsules-/catalogue/5JawixhL/sgbMlH3e", "destination": "/product/sujata-spirulina-capsules", "reason": "ShopDeck product" },
+    { "source": "/Organic-Spirulina-Face-Wash--And-Spirulina-Face-Pack-For/catalogue/8gAQ-nPy/viiOiX6M", "destination": "/product/sujata-spirulina-facewash", "reason": "ShopDeck product" },
+    { "source": "/collection/:id*", "destination": "/", "reason": "ShopDeck collections (all-products: 5 clicks); home lists the catalogue" },
+    { "source": "/SKIN-CARE/collection/:id*", "destination": "/", "reason": "ShopDeck category" },
+    { "source": "/AMAZING-DEALS/collection/:id*", "destination": "/", "reason": "ShopDeck category" },
+    { "source": "/about-us", "destination": "/science", "reason": "ShopDeck about page (98 impressions); /science is the brand and lab-proof page" },
+    { "source": "/about", "destination": "/science", "reason": "WooCommerce about page" },
+    { "source": "/testimonials", "destination": "/", "reason": "ShopDeck testimonials" },
+    { "source": "/search", "destination": "/", "reason": "ShopDeck search page" },
+    { "source": "/return-policy", "destination": "/refund-policy", "reason": "Old policy URL" },
+    { "source": "/terms-and-conditions", "destination": "/terms-of-service", "reason": "Old policy URL" },
+    { "source": "/product/bride-cream", "destination": "/product/sujata-bridal-whitening-cream", "reason": "WooCommerce product (135 impressions)" },
+    { "source": "/product/spirulina-shampoo", "destination": "/product/sujata-spirushine-shampoo-conditioner", "reason": "WooCommerce product" },
+    { "source": "/product/spirulina-shampoo-hair-oil-combo", "destination": "/product/sujata-spirushine-shampoo-conditioner", "reason": "WooCommerce product" },
+    { "source": "/product/spirulina-product-kit", "destination": "/product/sujata-spirulina-sea-buckthorn-combo-pack", "reason": "WooCommerce kit; combo pack is the live bundle" },
+    { "source": "/product/spirulina-weight-loss-tablets", "destination": "/product/sujata-spirulina-tablets", "reason": "WooCommerce product (weight-loss naming retired)" },
+    { "source": "/product/spirulina-face-wash", "destination": "/product/sujata-spirulina-facewash", "reason": "WooCommerce product" },
+    { "source": "/product/spirulina-tablets", "destination": "/product/sujata-spirulina-tablets", "reason": "WooCommerce product" },
+    { "source": "/product-category/:slug*", "destination": "/", "reason": "WooCommerce categories" },
+    { "source": "/shop", "destination": "/", "reason": "WooCommerce shop page" },
+    { "source": "/cart", "destination": "/", "reason": "WooCommerce/ShopDeck cart page (the cart is a drawer on every page)" },
+    { "source": "/my-account", "destination": "/", "reason": "WooCommerce account page" },
+    { "source": "/learn/sea-buckthorn-for-fatty-liver-and-diabetes", "destination": "/learn/pure-himalayan-sea-buckthorn-buying-guide", "reason": "Disease-named slug retired (never indexed); compliance" },
+    { "source": "/learn/spirulina-for-weight-loss", "destination": "/learn/how-to-take-spirulina", "reason": "Weight-loss slug retired (never indexed); compliance" },
+    { "source": "/learn/sea-buckthorn-for-dry-eyes", "destination": "/learn/sea-buckthorn-capsules-buyers-guide", "reason": "Condition-named slug retired (never indexed); compliance" }
+  ]
+}

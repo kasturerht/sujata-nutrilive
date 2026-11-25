@@ -389,12 +389,12 @@ const quizSchemas = [
                 
                 <div class="flex items-center gap-4">
                   <div class="w-16 h-16 rounded-xl bg-emerald-50 p-2 border border-emerald-100 shrink-0 flex items-center justify-center">
-                    <img id="result-product-image" src="/spirulina-powder.png" alt="Recommended Product" class="w-full h-full object-contain" />
+                    <img id="result-product-image" src={tabletsProduct.image} alt="Recommended Product" class="w-full h-full object-contain" />
                   </div>
                   <div class="flex flex-col">
-                    <span class="text-sm font-black text-[#111827]" id="result-product-title">Raw Spirulina Powder (100g)</span>
+                    <span class="text-sm font-black text-[#111827]" id="result-product-title">{tabletsProduct.title}</span>
                     <span class="text-xs text-gray-500 font-light">Sub-40°C Cold-Pressed • 30-Day Protocol</span>
-                    <span class="text-base font-black text-emerald-800 mt-1" id="result-product-price">₹{powderProduct.price}</span>
+                    <span class="text-base font-black text-emerald-800 mt-1" id="result-product-price">₹{tabletsProduct.price}</span>
                   </div>
                 </div>
 

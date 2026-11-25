@@ -2,7 +2,9 @@
   "framework": "astro",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "regions": ["bom1"],
+  "regions": [
+    "bom1"
+  ],
   "redirects": [
     {
       "source": "/products/sujata-daily-super-immunity-combo",
@@ -15,12 +17,187 @@
       "permanent": true
     },
     {
-      "source": "/products/:slug([^.]+)",
+      "source": "/products/:slug([a-z0-9-]+)",
       "destination": "/product/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Spirulina-Tablets-Packs/catalogue/_J9Hoc0t/DWfZkcRd",
+      "destination": "/product/sujata-spirulina-tablets",
+      "permanent": true
+    },
+    {
+      "source": "/Sea-Buckthorn-Capsule-For-Unisex/catalogue/poYFT1_L/64JpOlVh",
+      "destination": "/product/sujata-sea-buckthorn-capsules",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Spirulina-Shampoo-With-Conditioner--And-Spirulina-Hair-Oil/catalogue/xivbNd7M/zp9Ebg_6",
+      "destination": "/product/sujata-spirushine-shampoo-conditioner",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Moringa-Tablets--60--For-Adults/catalogue/sUTjmeM6/MmZqMwuL",
+      "destination": "/product/sujata-moringa-powder",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Spirulina-Powder-For-Adults/catalogue/48HpD00X/KWpTy-zr",
+      "destination": "/product/sujata-spirulina-tablets",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Bridal-Cream--For-Adults/catalogue/-vSlUV8_/nu8EopNu",
+      "destination": "/product/sujata-bridal-whitening-cream",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Moringa-Powder-For-Adults/catalogue/ekcfUwGS/sdEzNb-P",
+      "destination": "/product/sujata-moringa-powder",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Spirulina-Capsules-/catalogue/5JawixhL/sgbMlH3e",
+      "destination": "/product/sujata-spirulina-capsules",
+      "permanent": true
+    },
+    {
+      "source": "/Organic-Spirulina-Face-Wash--And-Spirulina-Face-Pack-For/catalogue/8gAQ-nPy/viiOiX6M",
+      "destination": "/product/sujata-spirulina-facewash",
+      "permanent": true
+    },
+    {
+      "source": "/collection/:id*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/SKIN-CARE/collection/:id*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/AMAZING-DEALS/collection/:id*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/science",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/science",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/search",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/return-policy",
+      "destination": "/refund-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/terms-of-service",
+      "permanent": true
+    },
+    {
+      "source": "/product/bride-cream",
+      "destination": "/product/sujata-bridal-whitening-cream",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulina-shampoo",
+      "destination": "/product/sujata-spirushine-shampoo-conditioner",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulina-shampoo-hair-oil-combo",
+      "destination": "/product/sujata-spirushine-shampoo-conditioner",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulina-product-kit",
+      "destination": "/product/sujata-spirulina-sea-buckthorn-combo-pack",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulina-weight-loss-tablets",
+      "destination": "/product/sujata-spirulina-tablets",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulina-face-wash",
+      "destination": "/product/sujata-spirulina-facewash",
+      "permanent": true
+    },
+    {
+      "source": "/product/spirulina-tablets",
+      "destination": "/product/sujata-spirulina-tablets",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/:slug*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/shop",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cart",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/my-account",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/learn/sea-buckthorn-for-fatty-liver-and-diabetes",
+      "destination": "/learn/pure-himalayan-sea-buckthorn-buying-guide",
+      "permanent": true
+    },
+    {
+      "source": "/learn/spirulina-for-weight-loss",
+      "destination": "/learn/how-to-take-spirulina",
+      "permanent": true
+    },
+    {
+      "source": "/learn/sea-buckthorn-for-dry-eyes",
+      "destination": "/learn/sea-buckthorn-capsules-buyers-guide",
       "permanent": true
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<sub>.*)\\.vercel\\.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/(product|learn|science|quiz|contact|track-order|refund-policy|privacy-policy|terms-of-service|shipping-policy)(.*)",
       "headers": [

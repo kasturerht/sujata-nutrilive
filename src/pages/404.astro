@@ -1,0 +1,36 @@
+---
+// src/pages/404.astro
+// Served with HTTP 404 for unknown routes and for product handles Shopify does not return.
+// Uses no Shopify data, so it renders even when the Storefront API is down.
+import StoreLayout from '../layouts/StoreLayout.astro';
+import StoreHeader from '../components/StoreHeader.astro';
+import StoreFooter from '../components/StoreFooter.astro';
+
+// Server-rendered (not prerendered): Astro only allows on-demand routes such as /product/[handle] to
+// rewrite to an on-demand 404. The status is set explicitly so a rewrite can never return 200.
+Astro.response.status = 404;
+
+const links = [
+  { href: '/product/sujata-spirulina-tablets', label: 'Spirulina Tablets' },
+  { href: '/product/sujata-spirulina-capsules', label: 'Spirulina Capsules' },
+  { href: '/product/sujata-sea-buckthorn-capsules', label: 'Sea Buckthorn Capsules' },
+  { href: '/product/sujata-spirulina-sea-buckthorn-combo-pack', label: 'Spirulina + Sea Buckthorn Combo' },
+  { href: '/science', label: 'NABL lab reports' },
+  { href: '/track-order', label: 'Track your order' },
+];
+---
+<StoreLayout title="Page not found | Sujata Nutrilive" description="This page does not exist. Browse Sujata Nutrilive products or view our lab reports." noindex={true}>
+  <StoreHeader />
+  <main class="max-w-2xl mx-auto px-5 py-20 text-center">
+    <p class="text-sm font-semibold text-emerald-700">404</p>
+    <h1 class="mt-2 text-3xl font-bold text-gray-900">This page doesn't exist</h1>
+    <p class="mt-4 text-gray-600">The link may be old or mistyped. These pages are live:</p>
+    <ul class="mt-8 grid gap-3 sm:grid-cols-2 text-left">
+      {links.map((l) => (
+        <li><a href={l.href} class="block rounded-lg border border-gray-200 px-4 py-3 font-medium text-emerald-800 hover:bg-emerald-50">{l.label}</a></li>
+      ))}
+    </ul>
+    <a href="/" class="mt-10 inline-block rounded-lg bg-emerald-700 px-6 py-3 font-semibold text-white hover:bg-emerald-600">Go to the home page</a>
+  </main>
+  <StoreFooter />
+</StoreLayout>

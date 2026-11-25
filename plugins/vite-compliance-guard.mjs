@@ -27,7 +27,7 @@ import path from 'node:path';
 const RULES = [
   {
     id: 'disease-cure',
-    pattern: /\b(cures?|curing|treats?|treating|reverses?|heals?)\s+(an[ae]mia|diabet\w*|pcos|nafld|hba1c|hypertension|arthritis|cancer\w*|ulcer\w*|thyroid|kidney|liver)\b/i,
+    pattern: /\b(cures?|curing|treats?|treating|reverses?|heals?)\s+(an(?:ae|e|a)mia|diabet\w*|pcos|nafld|hba1c|hypertension|arthritis|cancer\w*|ulcer\w*|thyroid|kidney|liver)\b/i,
     why: 'Claims to cure, treat or reverse a named disease (FSS 2018 Reg 4(5) + Nutra 2022).'
   },
   {
@@ -110,6 +110,27 @@ const RULES = [
     pattern: /रक्तातील\s+साखर.*(?:स्थिर|नियंत्रित|कमी)/,
     why: 'Marathi "stabilises/controls blood sugar" framing.'
   },
+  // ---- Hindi / Marathi (Devanagari) equivalents — high-precision phrasing only ----
+  {
+    id: 'cure-disease-hindi',
+    pattern: /(?:रोग|बीमारी|मधुमेह|डायबिटीज|शुगर|कैंसर|थायराइड|बवासीर|गठिया)\s*(?:को\s+)?(?:जड़\s+से\s+(?:खत्म|मिटा)|(?:पूरी\s+तरह\s+)?ठीक\s+कर(?:ता|ती|ते|ेगा|ेगी))/,
+    why: 'Hindi claim that a supplement cures or eliminates a disease (FSS 2018 Reg 4(5); DMR Act 1954).'
+  },
+  {
+    id: 'cure-disease-marathi',
+    pattern: /(?:रोग|आजार|मधुमेह|डायबिटीज|शुगर|कर्करोग|थायरॉईड|मूळव्याध|संधिवात)\s*(?:पूर्णपणे\s+|कायमचा\s+)?(?:बरा\s+(?:करतो|करते|होतो|होते)|मुळापासून\s+(?:नष्ट|बरा))/,
+    why: 'Marathi claim that a supplement cures a disease (FSS 2018 Reg 4(5); DMR Act 1954).'
+  },
+  {
+    id: 'miracle-devanagari',
+    pattern: /चमत्कार|रामबाण/,
+    why: '"Miracle / panacea" in Hindi or Marathi — drug-equivalent efficacy framing (CCPA + FSSAI).'
+  },
+  {
+    id: 'weight-loss-devanagari',
+    pattern: /वजन\s+(?:घटा(?:ए|ता|ती|ने)|कम\s+कर(?:ता|ती|ते|ने)|कमी\s+(?:करतो|करते|करण्यास|होते|होतो))/,
+    why: 'Hindi/Marathi weight-loss claim — obesity is a DMR Act 1954 scheduled condition.'
+  },
   // ---- Schema-field rules (run against raw file, not stripped text) --------
   {
     id: 'schema-medicalcondition',
@@ -134,7 +155,7 @@ const RULES = [
 
 // Sentences that match this pattern are exempt — the FSSAI-mandated statutory
 // disclaimer itself legitimately uses words like "treat", "cure", "diagnose".
-const DISCLAIMER_WHITELIST = /(?:not\s+intended\s+to\s+diagnose|not\s+a\s+substitute\s+for|not\s+(?:meant|a\s+medicine)\s+to\s+(?:treat|cure)|is\s+not\s+a\s+cure\s+for|किसी.*रोग.*इलाज\s+नहीं|दवा\s+नहीं|किसी\s+रोग\s+का\s+(?:निदान|उपचार|इलाज)\s+नहीं|not\s+a\s+medicine)/i;
+const DISCLAIMER_WHITELIST = /(?:not\s+intended\s+to\s+diagnose|not\s+a\s+substitute\s+for|not\s+(?:meant|a\s+medicine)\s+to\s+(?:treat|cure)|is\s+not\s+a\s+cure\s+for|किसी.*रोग.*इलाज\s+नहीं|दवा\s+नहीं|किसी\s+रोग\s+का\s+(?:निदान|उपचार|इलाज)\s+नहीं|not\s+a\s+medicine|औषध\s+नाही|कोणत्याही\s+(?:आजाराचे|रोगाचे).*(?:निदान|उपचार).*नाही)/i;
 
 function stripFrontmatter(src) {
   return src.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, '');
@@ -154,8 +175,12 @@ function sentenceList(text) {
 }
 
 const SKIP_FILE_RE = /(claims-guard\.ts|vite-compliance-guard\.mjs)$/;
-const SCAN_FILE_RE = /\.(astro|ts|tsx|js|jsx|mjs)$/i;
-const SCAN_DIRS = ['src/pages', 'src/components', 'src/layouts', 'src/lib'];
+const SCAN_FILE_RE = /\.(astro|ts|tsx|js|jsx|mjs|md|mdx|json)$/i;
+const SCAN_DIRS = ['src/pages', 'src/components', 'src/layouts', 'src/lib', 'src/content', 'src/data', 'src/config'];
+
+// A page whose URL names a disease or a weight-loss outcome is a claim by itself, whatever the copy says
+// (DMR Act 1954 schedule: diabetes, obesity, cancer, arthritis ...). Checked on route file paths under src/pages.
+const DISEASE_ROUTE_RE = /(diabet|obesity|weight-?loss|fat-?loss|fatty-?liver|cancer|arthritis|thyroid|dry-?eyes|an(?:a)?emia|pcos|hypertension|\bcures?\b)/i;
 
 function walkCollect(dir, out) {
   if (!fs.existsSync(dir)) return;
@@ -166,8 +191,18 @@ function walkCollect(dir, out) {
   }
 }
 
-function scanOne(file) {
-  const raw = fs.readFileSync(file, 'utf8');
+export function scanRoute(file, root = process.cwd()) {
+  const rel = path.relative(root, file).replace(/\\/g, '/');
+  if (!rel.startsWith('src/pages/')) return [];
+  const m = rel.match(DISEASE_ROUTE_RE);
+  return m ? [{ rule: 'disease-route', why: 'Route names a disease or weight-loss outcome (DMR Act 1954 / FSSAI).', excerpt: rel }] : [];
+}
+
+export function scanOne(file) {
+  return scanSource(file, fs.readFileSync(file, 'utf8'));
+}
+
+export function scanSource(file, raw) {
   const visible = extractVisibleText(raw);
   const violations = [];
   for (const rule of RULES) {
@@ -223,7 +258,7 @@ export default function viteComplianceGuard() {
 
       const violationsByFile = {};
       for (const f of files) {
-        const v = scanOne(f);
+        const v = [...scanRoute(f, root), ...scanOne(f)];
         if (v.length) violationsByFile[f] = v;
       }
 

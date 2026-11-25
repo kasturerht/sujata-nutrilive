@@ -16,6 +16,8 @@ interface Props {
   noindex?: boolean;
   hideBottomNav?: boolean;
   extraSchema?: any[];
+  /** BCP-47 language of the page content: 'en' | 'hi' | 'mr'. Sets <html lang>. */
+  lang?: 'en' | 'hi' | 'mr';
 }
 
 const { 
@@ -25,7 +27,8 @@ const {
   isHomePage = false,
   noindex = false,
   hideBottomNav = false,
-  extraSchema = []
+  extraSchema = [],
+  lang = 'en'
 } = Astro.props;
 
 const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
@@ -274,7 +277,7 @@ const unifiedSchemaGraph = {
   "@graph": schemaGraphItems
 };
 ---
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />

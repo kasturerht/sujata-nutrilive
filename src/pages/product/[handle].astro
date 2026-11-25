@@ -64,6 +64,8 @@ const productQuery = `
 `;
 
 let product = null;
+// True when Shopify itself failed (network error, non-2xx, GraphQL errors) as opposed to "no such product".
+let storefrontFailed = false;
 try {
   if (shopifyDomain && storefrontToken) {
     const res = await fetch(`https://${shopifyDomain}/api/2024-01/graphql.json`, {
@@ -73,6 +75,7 @@ try {
     });
 
     const data = await res.json();
+    if (!res.ok || data.errors) storefrontFailed = true;
     product = data.data?.product;
 
     // 🌟 Resilient Smart Alias Fallback (handles -pack / combo suffixes automatically)
@@ -92,7 +95,20 @@ try {
     console.warn("⚠️ Shopify credentials missing! Please configure PUBLIC_SHOPIFY_STOREFRONT_DOMAIN and PUBLIC_SHOPIFY_STOREFRONT_TOKEN.");
   }
 } catch (error) {
+  storefrontFailed = true;
   console.error("❌ Failed to fetch product details from Shopify:", error);
+}
+
+// Unknown handle -> real 404 (never render a broken page, which used to throw a 500).
+// Shopify outage -> 503 + Retry-After, so crawlers retry instead of treating the URL as broken.
+if (!product) {
+  if (storefrontFailed) {
+    return new Response('Product temporarily unavailable. Please retry shortly.', {
+      status: 503,
+      headers: { 'Retry-After': '120', 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+    });
+  }
+  return Astro.rewrite('/404');
 }
 
 // 🌟 Official Judge.me SSR Widget & Preview Badge Pre-fetch Engine with SWR & Timeout Guard
