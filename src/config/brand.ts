@@ -43,7 +43,7 @@ export const BRAND_CONFIG = {
   },
   announcementTickers: [
     "🌿 100% Pure, Chemical-Free Hydro-Cultivated Spirulina",
-    "🧪 Lab Tested: 62.39% Plant Protein",
+    "🧪 Spirulina NABL Report: 62.39% Plant Protein",
     "💵 Free Cash on Delivery (COD) Pan-India",
     "⚡ Dispatches in 24 Hours"
   ],
