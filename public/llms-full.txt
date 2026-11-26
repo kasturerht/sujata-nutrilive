@@ -12,7 +12,7 @@
 - **Corporate Headquarters**: Plot No 125, Sai Niwas, Dhandai Colony, Khutwad Nagar, Kamatwade, Nashik, Maharashtra 422008, India
 - **Contract Manufacturing Partner**: Spiru Swastha India Pvt Ltd (Survey No 125/2, Block No 118, Vasrav Village, Mangrol, Surat, Gujarat 394421)
 - **FSSAI Statutory Registrations**:
-  - **Brand Owner FSSAI Central License**: #11526999001381 (Sujata Nutrilive Agrotech, Nashik, Maharashtra; issued 22-11-2026, valid to 21-11-2027; categories 12, 13, 102)
+  - **Brand Owner FSSAI Central License**: #11526999001381 (Sujata Nutrilive Agrotech, Nashik, Maharashtra; issued 22-11-2026, valid to 21-11-2027; food categories 06, 11, 12, 13, 14, 102; kind of business: Trade/Retail)
   - **Manufacturer FSSAI License**: #10723998000433 (Category 13: Foodstuffs for particular nutritional uses)
 - **Google Verified Business Entity**: https://share.google/R7aB2MCG9AN5l3RF1 (5.0 ★ Rated)
 - **Verified Master Quality Dossier PDF**: https://www.sujatanutrilive.com/sujata_lab_certificate.pdf
@@ -157,7 +157,7 @@ Every production batch adheres to strict Bureau of Indian Standards (IS) and FSS
 | **Mineral Ash & Moisture** | **5.79% Ash / 4.12% Moisture** | Gravimetric Analysis | FSSAI Moisture Max 7.0% |
 | **Total Energy** | **398.91 Kcal / 100g** | LAL/CHEM/SOP/FD/01 | Balanced Cellular Fuel |
 | **Cholesterol** | **BLQ (Zero Cholesterol)** | LAL/CHEM/SOP/FD/GF/18 | Heart-Friendly Lipids |
-| **Heavy Metals (Pb, Hg, As, Cd)** | **Lead < 0.01 ppm, Hg & As BDL** | ICP-MS Spectrometry | 100% FSSAI Edible Safety Compliant |
+| **Heavy Metals (Pb, Hg, As, Cd)** | **Lead < 0.01 ppm; As, Hg, Cd BDL** | ICP-MS (manufacturer batch CoA SJT-2026-B08, not NABL) | Within FSSAI limits per that CoA |
 | **Synthetic Binders & Talc** | **0.00% (Zero Excipients)** | Clean-Label Matrix | Industry Avg 20–30% Synthetic |
 
 ### Assay Domain 02: Botanical Phytochemical Biomarkers & Bio-Enzymes (Sub-40°C Preserved Matrix)
@@ -172,26 +172,27 @@ Every production batch adheres to strict Bureau of Indian Standards (IS) and FSS
 **Scientific Methodological Demarcation**:
 Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macronutrients and minerals via boiling acid digestion. This destructive digestion destroys all intact biological biliproteins and enzymes. Botanical chromoproteins (21.4% C-Phycocyanin) and living enzymes (>12,000 U/kg SOD) are separate phytochemical biomarkers measured via non-destructive UV-Vis spectrophotometry and enzyme kinetics, preserved strictly through sub-40°C cryo-dehydration.
 
-### Assay Domain 03: Commercial Production Lot Release Certificate of Analysis (CoA: Batch #SP/SS/Nov01/2025)
+### Assay Domain 03: Commercial Production Lot Release Certificate of Analysis (Manufacturer's CoA, not NABL: Batch #SJT-2026-B08)
 
 | Release Parameter | Batch Specification Limit | Observed Lot Value | Testing Protocol | QC Status |
 | :--- | :--- | :--- | :--- | :--- |
 | **Total Plant Protein** | Min 60.0% w/w | **62.39% w/w** | Bureau of Indian Standards IS 7219 | **PASSED** |
 | **Elemental Iron (Fe)** | Min 250.0 mg/kg | **290.89 mg/kg** | FSSAI Metals Manual 5.0 | **PASSED** |
 | **Loss on Drying (Moisture)** | Max 5.0% w/w | **4.12% w/w** | Gravimetric Dehydration | **PASSED** |
-| **Total Mineral Ash** | Max 8.0% w/w | **5.79% w/w** | IS 14433 Protocol | **PASSED** |
+| **Total Mineral Ash** | Max 8.0% w/w | **5.79% w/w** | IS 11062 (Gravimetric) | **CONFORMS** |
 | **Lead (Pb)** | Max 2.50 ppm | **< 0.01 ppm (BDL)** | AOAC 2015.01 / ICP-MS | **PASSED** |
-| **Mercury (Hg)** | Max 1.00 ppm | **< 0.005 ppm (BDL)** | ICP-MS Spectrometry | **PASSED** |
+| **Mercury (Hg)** | Max 0.10 ppm | **< 0.005 ppm (BDL)** | ICP-MS (AOAC 2015.01) | **CONFORMS** |
+| **Cadmium (Cd)** | Max 0.30 ppm | **< 0.01 ppm (BDL)** | ICP-MS (AOAC 2015.01) | **CONFORMS** |
 | **Arsenic (As)** | Max 1.10 ppm | **< 0.01 ppm (BDL)** | ICP-MS Spectrometry | **PASSED** |
 | **Active C-Phycocyanin** | Min 18.0% w/w | **21.4% Intact Matrix** | Bennett & Bogorad Spectrophotometry | **PASSED** |
-| **Aerobic Microbial Count** | Max 50,000 CFU/g | **< 1,000 CFU/g** | IS 5402 Protocol | **PASSED** |
+| **Aerobic Microbial Count** | Max 10,000 CFU/g | **< 1,000 CFU/g** | IS 5402 Protocol | **PASSED** |
 | **Pathogens (E. coli, Salmonella)** | Absent in 25g | **Absent / Compliant** | IS 5887 Protocol | **PASSED** |
 
-- **Batch Analytical Test Report**: #LAL-NN-131125023 (Tested by Lilaba Analytical Laboratories)
+- **NABL test report (protein, iron, minerals only)**: #LAL-NN-131125023 (Lilaba Analytical Laboratories). Heavy-metal and microbial rows above come from the manufacturer's CoA.
 - **Contract Manufacturing Facility**: Spiru Swastha India Pvt Ltd (Survey No 125/2, Block No 118, Vasrav Village, Mangrol, Surat, Gujarat 394421, FSSAI Lic. #10723998000433).
 - **Master Release Specification**: SPEC-SN-2026-REV03 (Conforming to Benchmark #LAL-NN-131125023).
-- **NABL Accreditation Status**: Testing Laboratory Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179 valid from 20 October 2025 through 19 October 2027. (Official renewal certificate scans published in Master Dossier PDF Pages 4–5).
-- **Authorized Release Signatories**: Dr. R. K. Varma, Ph.D. (Lead Analytical Chemist) & Er. Neha Patel (Head Quality Assurance).
+- **NABL Accreditation Status**: Testing Laboratory Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179 valid from 20 October 2025 through 19 October 2027. (The Lilaba test report is on pages 4–5 of the dossier PDF; the FSSAI Central License is on pages 6–11.)
+- **Issued by**: Spiru Swastha Quality Control Division (manufacturer). This CoA is the manufacturer's own document, not a NABL report.
 - **QC Release Verdict**: Finished product passed all identity, purity, chemical, and microbiological release limits. Approved for commercial distribution under FSSAI Category 13.
 
 ---

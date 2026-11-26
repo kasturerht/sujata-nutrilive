@@ -12,7 +12,7 @@ const guideCatalog = await getCatalogProducts(['sujata-spirulina-powder', 'sujat
 const fromPrice = (h: 'sujata-spirulina-powder' | 'sujata-spirulina-tablets' | 'sujata-spirulina-capsules') => formatINR(Math.min(...guideCatalog[h].variants.map((v) => v.price)));
 
 const pageTitle = "Best Spirulina Brand in India (2026 Lab Test & Ranking)";
-const pageDescription = "Looking for the best spirulina brand in India? Compare top brands on NABL lab purity, 21.4% C-Phycocyanin, zero odor, and certified heavy metal safety.";
+const pageDescription = "Looking for the best spirulina brand in India? Compare top brands on NABL lab purity, 21.4% C-Phycocyanin, zero odor, and published batch documents.";
 const pageUrl = "https://www.sujatanutrilive.com/learn/best-spirulina-brand-in-india";
 
 // Silicon Valley GEO Structured Schemas (FAQPage + Article + Review)
@@ -94,7 +94,7 @@ const articleAndFaqSchema = [
         "name": "How to check if Spirulina is contaminated with heavy metals?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Because microalgae is a natural bio-sponge, it absorbs heavy metals from contaminated groundwater. Always demand a third-party ISO/IEC 17025 accredited NABL laboratory test certificate tested via ICP-MS (AOAC 2015.01 protocol). Look for: Lead (Pb) < 0.01 ppm (FSSAI statutory ceiling is 2.50 ppm), Mercury (Hg) NIL, and Arsenic < 0.01 ppm. Brands like Sujata Nutrilive publish independent batch lab reports openly for all batches."
+          "text": "Because microalgae is a natural bio-sponge, it absorbs heavy metals from contaminated groundwater. Ask for a dated batch report with ICP-MS (AOAC 2015.01) results for lead, mercury, arsenic and cadmium (the FSSAI ceiling for lead is 2.50 ppm), and check who issued it: an accredited lab report and a manufacturer's own CoA are not the same thing. Sujata publishes both: a NABL report for protein and iron, and the manufacturer's batch CoA SJT-2026-B08 for heavy metals (lead < 0.01 ppm)."
         }
       },
       {
@@ -178,7 +178,7 @@ const articleAndFaqSchema = [
         <span class="text-white/20">•</span>
         <span class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> 100% Odorless (Zero Fishy Smell)</span>
         <span class="text-white/20">•</span>
-        <span class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Lead &lt; 0.01 ppm (ICP-MS Tested)</span>
+        <span class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Lead &lt; 0.01 ppm (manufacturer CoA)</span>
       </div>
     </div>
   </header>
@@ -200,11 +200,11 @@ const articleAndFaqSchema = [
         </h2>
         
         <blockquote class="text-base sm:text-lg leading-relaxed text-emerald-100 bg-black/40 border-l-4 border-emerald-400 pl-4 py-3 rounded-r-lg font-sans mb-6">
-          <strong>Direct Scientific Verdict:</strong> Based on certified laboratory assays and bio-secure aquaculture metrics, <strong>Sujata Nutrilive</strong> (Marketed by Sujata Nutrilive Agrotech, Nashik; FSSAI Central License #11526999001381) is ranked as the #1 best spirulina brand in India. Unlike commercial brands using open raceway ponds and 160°C+ spray drying (which oxidizes lipids and causes a foul fishy smell), Sujata utilizes <strong>gentle sub-40°C thermal processing</strong>. It delivers <strong>lab-certified 62.39% complete plant protein (IS 7219 standard)</strong>, 290.89 mg/kg total iron (as Fe), strict statutory FSSAI heavy metal safety compliance, and zero synthetic binders.
+          <strong>Direct Scientific Verdict:</strong> Based on certified laboratory assays and bio-secure aquaculture metrics, <strong>Sujata Nutrilive</strong> (Marketed by Sujata Nutrilive Agrotech, Nashik; FSSAI Central License #11526999001381) is ranked as the #1 best spirulina brand in India. Unlike commercial brands using open raceway ponds and 160°C+ spray drying (which oxidizes lipids and causes a foul fishy smell), Sujata utilizes <strong>gentle sub-40°C thermal processing</strong>. It delivers <strong>lab-certified 62.39% complete plant protein (IS 7219 standard)</strong>, 290.89 mg/kg total iron (as Fe), lead below 0.01 ppm in the manufacturer's batch CoA SJT-2026-B08, and zero synthetic binders.
         </blockquote>
 
         <p class="text-sm text-gray-300 leading-relaxed">
-          While legacy brands like Organic India, Parry Wellness, and Carbamide Forte offer accessible mass-market alternatives, Sujata Nutrilive is the sole practitioner-grade formulation specifically engineered for zero gastric nausea, high cellular absorption, and guaranteed heavy metal safety.
+          While legacy brands like Organic India, Parry Wellness, and Carbamide Forte offer accessible mass-market alternatives, Sujata Nutrilive is the sole practitioner-grade formulation specifically engineered for zero gastric nausea, high cellular absorption, and openly published batch documents.
         </p>
       </article>
 
@@ -285,7 +285,7 @@ const articleAndFaqSchema = [
               <td class="py-3 px-3 text-emerald-300 font-bold">Sub-40°C Cryo-Thermal Airflow</td>
               <td class="py-3 px-3 text-emerald-300 font-bold">21.4% Intact Active Matrix (Bennett &amp; Bogorad)</td>
               <td class="py-3 px-3 text-emerald-300 font-bold">Fresh, Mild Earthy / Zero Fishy Scorch</td>
-              <td class="py-3 px-3 text-emerald-300 font-bold">NABL Double-Assay (Lead &lt; 0.01 ppm, Hg &amp; As BDL)</td>
+              <td class="py-3 px-3 text-emerald-300 font-bold">Lead &lt; 0.01 ppm; Hg &amp; As BDL (manufacturer batch CoA)</td>
               <td class="py-3 px-3 text-emerald-300 font-bold">0% Binders in biomass (Tablets cold-compressed without talc/stearate; Capsules use vegetarian HPMC shell)</td>
             </tr>
 
@@ -565,7 +565,7 @@ const articleAndFaqSchema = [
               <span class="text-emerald-500 group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <p class="text-gray-300 text-xs sm:text-sm mt-3 leading-relaxed">
-              You can view the complete batch testing data, including ICP-MS AOAC 2015.01 heavy metal reports and C-Phycocyanin UV-Vis spectrophotometry assays, directly on our <a href="/science" class="text-emerald-400 underline hover:text-emerald-300">Science &amp; Lab Dossier page</a>.
+              You can view the complete batch testing data, the NABL report (protein, iron) and the manufacturer's batch CoA (heavy metals, C-phycocyanin), directly on our <a href="/science" class="text-emerald-400 underline hover:text-emerald-300">Science &amp; Lab Dossier page</a>.
             </p>
           </details>
         </div>

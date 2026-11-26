@@ -225,7 +225,7 @@ const trackOrderSchemas = [
               </div>
               <div class="flex flex-col">
                 <span class="text-xs font-bold text-[#111827]">Sub-40°C Cold-Chain Sealed &amp; Quality Inspected</span>
-                <span class="text-[11px] text-gray-400 font-mono mt-0.5" id="step-2-time">Aug 26, 03:15 PM • Pune GMP Facility #02</span>
+                <span class="text-[11px] text-gray-400 font-mono mt-0.5" id="step-2-time">Aug 26, 03:15 PM • Packed & sealed</span>
               </div>
             </div>
 
@@ -481,7 +481,7 @@ const trackOrderSchemas = [
 
         // Dynamic Stepper Dates
         if (step1Time) step1Time.innerText = `${formatOffsetDate(-2)}, 11:30 AM • System Gateway Verified`;
-        if (step2Time) step2Time.innerText = `${formatOffsetDate(-2)}, 03:15 PM • Pune GMP Facility #02`;
+        if (step2Time) step2Time.innerText = `${formatOffsetDate(-2)}, 03:15 PM • Packed & sealed`;
         if (step3Time) step3Time.innerText = `${formatOffsetDate(-1)}, 07:45 PM • Outbound Manifest Generated`;
         if (step4Time) step4Time.innerText = `${formatOffsetDate(0)}, 08:20 AM • Central Distribution Hub`;
         if (step5Time) {

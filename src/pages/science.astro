@@ -21,33 +21,6 @@ const vCompare = (id: string) => (VP[id]?.compareAt && VP[id]!.compareAt! > vPri
 const vSave = (id: string) => (vCompare(id) ? vCompare(id)! - vPrice(id) : 0);
 const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a0176aede63ce4c6b199e18684018";
 
-// Scientific Advisory Board Data
-const advisoryBoard = [
-  {
-    name: "Dr. Rajesh Joshi",
-    degrees: "BAMS, MD (Ayurveda), Ph.D.",
-    role: "Chief of Integrative Formulations",
-    experience: "32+ Years Clinical Practice",
-    quote: "Commercial brands destroy spirulina's active therapeutic enzymes through violent high-heat spray drying. Sujata's sub-40°C cryo-extraction preserves the live cellular integrity, making it 4x more bio-available to human digestion.",
-    avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop"
-  },
-  {
-    name: "Dr. Ananya Sharma",
-    degrees: "Ph.D. in Nutritional Bio-Chemistry",
-    role: "Head of Cellular Bioavailability Studies",
-    experience: "Ex-AIIMS Research Fellow",
-    quote: "Phycocyanin is one of the most fragile biliproteins in nature. When exposed to heat above 45°C, its antioxidant efficacy drops by 80%. Sujata's laboratory testing guarantees pristine, intact Phycocyanin in every single batch.",
-    avatar: "https://images.unsplash.com/photo-1594824813580-e37452d3a3d5?q=80&w=400&auto=format&fit=crop"
-  },
-  {
-    name: "Dr. Vikramaditya Patil",
-    degrees: "MBBS, MS (Sports Medicine)",
-    role: "Peak Performance & Recovery Consultant",
-    experience: "Elite Athlete Physician",
-    quote: "For professional endurance and cellular recovery, pure iron and chlorophyll must be absorbed without causing gastric distress. Sujata delivers organic non-heme iron with zero synthetic additives, eliminating gut irritation completely.",
-    avatar: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=400&auto=format&fit=crop"
-  }
-];
 
 // Active Molecular Compounds
 const activeCompounds = [
@@ -229,30 +202,32 @@ const botanicalBiomarkers = [
 
 // Commercial Production Batch Release & Certificate of Analysis (CoA) — Batch #SP/SS/Nov01/2025
 const currentBatchCoA = {
-  batchNumber: "SP/SS/Nov01/2025",
+  batchNumber: "SJT-2026-B08",
   labReportNumber: "LAL-NN-131125023",
-  mfgDate: "November 2025",
-  expDate: "October 2027 (24 Months)",
+  mfgDate: "August 2026",
+  expDate: "July 2028 (24 Months)",
   mfgPartner: "Spiru Swastha India Pvt Ltd, Mangrol, Surat, Gujarat",
-  fssaiLicense: BRAND_CONFIG.fssaiNumber,
+  fssaiLicense: BRAND_CONFIG.manufacturerFssai,
   masterSpecCode: "SPEC-SN-2026-REV03",
   baselineAssayRef: "LAL-NN-131125023",
   nablCertificateNo: "TC-7179",
   nablValidity: "20 October 2025 through 19 October 2027",
   releaseStatus: "PASSED & APPROVED FOR COMMERCIAL DISTRIBUTION",
-  authorizedSignatories: "Dr. R. K. Varma, Ph.D. (Lead Analytical Chemist) & Er. Neha Patel (Head Quality Assurance)",
+  authorizedSignatories: "Spiru Swastha Quality Control Division (manufacturer)",
   qaVerificationDesk: "care@sujatanutrilive.com | Phone: +91 98347 83503",
   parameters: [
-    { test: "Total Plant Protein", spec: "Min 60.0% w/w", observed: "62.39% w/w", method: "IS 7219 (Kjeldahl)", status: "PASSED" },
-    { test: "Total Iron (as Fe)", spec: "Min 250.0 mg/kg", observed: "290.89 mg/kg", method: "FSSAI Manual Metals 5.0", status: "PASSED" },
-    { test: "Loss on Drying (Moisture)", spec: "Max 5.0% w/w", observed: "4.12% w/w", method: "Gravimetric Dehydration", status: "PASSED" },
-    { test: "Total Mineral Ash", spec: "Max 8.0% w/w", observed: "5.79% w/w", method: "IS 14433 Protocol", status: "PASSED" },
-    { test: "Lead (Pb)", spec: "Max 2.50 ppm", observed: "< 0.01 ppm (BDL)", method: "AOAC 2015.01 / ICP-MS", status: "PASSED" },
-    { test: "Mercury (Hg)", spec: "Max 1.00 ppm", observed: "< 0.005 ppm (BDL)", method: "ICP-MS Spectrometry", status: "PASSED" },
-    { test: "Arsenic (As)", spec: "Max 1.10 ppm", observed: "< 0.01 ppm (BDL)", method: "ICP-MS Spectrometry", status: "PASSED" },
-    { test: "Active C-Phycocyanin", spec: "Min 18.0% w/w", observed: "21.4% Intact Matrix", method: "Bennett & Bogorad Spectrophotometry", status: "PASSED" },
-    { test: "Total Aerobic Microbial Count", spec: "Max 50,000 CFU/g", observed: "< 1,000 CFU/g", method: "IS 5402 Protocol", status: "PASSED" },
-    { test: "Coliforms & Salmonella", spec: "Absent / 25g", observed: "Absent / Compliant", method: "IS 5887 Protocol", status: "PASSED" }
+    { test: "Total Plant Protein", spec: "Min 60.0% w/w", observed: "62.39% w/w", method: "IS 7219 (Kjeldahl)", status: "CONFORMS" },
+    { test: "Total Iron (as Fe)", spec: "Min 250.0 mg/kg", observed: "290.89 mg/kg", method: "FSSAI Manual Metals 5.0", status: "CONFORMS" },
+    { test: "Active C-Phycocyanin", spec: "Min 18.0% w/w", observed: "21.4% w/w", method: "Bennett & Bogorad (UV-Vis 620 nm)", status: "CONFORMS" },
+    { test: "Residual Moisture / LOD", spec: "Max 5.0% w/w", observed: "4.12% w/w", method: "Oven @ 105 °C", status: "CONFORMS" },
+    { test: "Total Mineral Ash", spec: "Max 8.0% w/w", observed: "5.79% w/w", method: "IS 11062 (Gravimetric)", status: "CONFORMS" },
+    { test: "Lead (Pb)", spec: "Max 2.50 ppm (FSSAI)", observed: "< 0.01 ppm", method: "ICP-MS (AOAC 2015.01)", status: "CONFORMS" },
+    { test: "Arsenic (As)", spec: "Max 1.10 ppm (FSSAI)", observed: "BDL (< 0.01 ppm)", method: "ICP-MS (AOAC 2015.01)", status: "CONFORMS" },
+    { test: "Mercury (Hg)", spec: "Max 0.10 ppm (FSSAI)", observed: "BDL (< 0.005 ppm)", method: "ICP-MS (AOAC 2015.01)", status: "CONFORMS" },
+    { test: "Cadmium (Cd)", spec: "Max 0.30 ppm (FSSAI)", observed: "BDL (< 0.01 ppm)", method: "ICP-MS (AOAC 2015.01)", status: "CONFORMS" },
+    { test: "Total Aerobic Plate Count", spec: "Max 10,000 CFU/g", observed: "< 1,000 CFU/g", method: "IS 5402", status: "CONFORMS" },
+    { test: "Yeast & Mould", spec: "Max 500 CFU/g", observed: "< 100 CFU/g", method: "IS 5403", status: "CONFORMS" },
+    { test: "E. coli / Salmonella", spec: "Absent in 25 g", observed: "Absent", method: "IS 5887 (Parts 1 & 3)", status: "CONFORMS" }
   ]
 };
 
@@ -275,8 +250,8 @@ const comparisonMatrix = [
   {
     parameter: "Heavy Metal Concentration (Lead / Mercury)",
     sunDried: "High Risk (Open Pond / Dust Infiltration)",
-    sprayDried: "0.80 – 2.20 ppm (Near Limit)",
-    sujataCryo: "Below Detectable Limits (Lead < 0.01 ppm, ICP-MS)",
+    sprayDried: "Varies by source; ask for the batch CoA",
+    sujataCryo: "Lead < 0.01 ppm; As, Hg, Cd below detection (manufacturer batch CoA SJT-2026-B08)",
     highlight: true
   },
   {
@@ -308,15 +283,8 @@ const scienceSchemas = [
     "@type": "WebPage",
     "@id": "https://www.sujatanutrilive.com/science/#science-webpage",
     "name": "The Science & Sourcing Dossier | Sujata Nutrilive",
-    "description": "Comprehensive scientific dossier on sub-40°C cryo-milled spirulina, 21.4% intact C-phycocyanin, natural plant non-heme iron, plant-based methylcobalamin B12, and ICP-MS heavy-metal-free Himalayan Shilajit.",
+    "description": "Comprehensive scientific dossier on sub-40°C cryo-milled spirulina, 21.4% intact C-phycocyanin, natural plant non-heme iron, plant-based B12 and Himalayan shilajit, with the NABL report and manufacturer batch CoA cited separately.",
     "url": "https://www.sujatanutrilive.com/science",
-    "reviewedBy": advisoryBoard.map(doc => ({
-      "@type": "Person",
-      "name": doc.name,
-      "jobTitle": doc.role,
-      "honorificSuffix": doc.degrees,
-      "description": `${doc.experience}. Clinical assessment: "${doc.quote}"`
-    })),
     "about": [
       {
         "@type": "MedicalEntity",
@@ -439,7 +407,7 @@ const scienceSchemas = [
 
 <StoreLayout 
   title="The Science of Purity: NABL Lab Reports | Sujata Nutrilive"
-  description="Explore the clinical science and certified NABL lab reports behind Sujata Nutrilive: 62.39% bio-protein, zero heavy metals, and sub-40°C cold extraction."
+  description="Explore the clinical science and certified NABL lab reports behind Sujata Nutrilive: 62.39% protein (NABL report), the manufacturer's batch CoA and our FSSAI Central License."
   image="/products/sujata-combo-spirulina-sea-buckthorn.jpg"
   extraSchema={scienceSchemas}
 >
@@ -575,13 +543,13 @@ const scienceSchemas = [
 
         <div class="shrink-0 flex lg:flex-col items-center lg:items-end gap-2.5 w-full lg:w-auto justify-between border-t lg:border-t-0 pt-4 lg:pt-0 border-emerald-800/60">
           <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950/80 px-3.5 py-1.5 rounded-full border border-emerald-500/30 shadow-sm">
-            FSSAI #{BRAND_CONFIG.fssaiNumber}
+            FSSAI Central License #{BRAND_CONFIG.fssaiNumber}
           </span>
           <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950/80 px-3.5 py-1.5 rounded-full border border-emerald-500/30 shadow-sm">
-            ISO/IEC 17025 Certified
+            Tested by NABL lab (ISO/IEC 17025)
           </span>
           <a href={BRAND_CONFIG.googleMapsUrl || "https://share.google/R7aB2MCG9AN5l3RF1"} target="_blank" rel="noopener noreferrer" class="text-[10px] font-mono text-amber-300 hover:text-white transition-colors flex items-center gap-1">
-            <span>Nashik Facility</span>
+            <span>Nashik Office</span>
             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
         </div>
@@ -645,7 +613,7 @@ const scienceSchemas = [
           </div>
 
           <div class="mt-8 pt-4 border-t border-emerald-900/10 flex items-center justify-between text-xs font-bold text-emerald-900">
-            <span>Heavy Metal Level: <strong>FSSAI Safe / BDL</strong></span>
+            <span>Lead: <strong>&lt; 0.01 ppm (manufacturer CoA)</strong></span>
             <span>Microbial Status: <strong>Compliant</strong></span>
           </div>
         </div>
@@ -834,8 +802,7 @@ const scienceSchemas = [
           </table>
         </div>
         <div class="bg-gray-50 px-6 py-3.5 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4 text-[11px] text-gray-500">
-          <span>Analytical Methodology: <strong>ICP-MS Spectrometry &amp; UV-Vis Biliprotein Assay</strong></span>
-          <span class="text-emerald-700 font-bold">Tested at NABL Accredited Laboratory</span>
+          <span>Sujata column sources: <strong>NABL report LAL-NN-131125023</strong> (protein, iron) and <strong>manufacturer batch CoA SJT-2026-B08</strong> (heavy metals, phycocyanin)</span>
         </div>
       </div>
 
@@ -924,13 +891,13 @@ const scienceSchemas = [
             <div class="w-full aspect-video rounded-xl overflow-hidden mb-4 bg-gray-100">
               <img src="/sujata_laboratory_purity.png" alt="NABL Assay" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
             </div>
-            <h3 class="text-base font-bold text-[#111827] mb-2">NABL Dual-Assay</h3>
+            <h3 class="text-base font-bold text-[#111827] mb-2">Lab Report + Batch CoA</h3>
             <p class="text-xs text-gray-500 font-light leading-relaxed">
-              ICP-MS spectrometry testing for heavy metals (Lead, Mercury, Arsenic) and microbial pathogens prior to packaging.
+              A NABL lab report for protein and iron, plus the manufacturer's batch CoA for heavy metals (ICP-MS) and microbial counts.
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
-            ✓ Heavy Metal Safety Verified
+            ✓ Both documents in the dossier PDF
           </div>
         </div>
 
@@ -1046,7 +1013,7 @@ const scienceSchemas = [
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="text-emerald-400 font-bold">✓</span>
-                    <span>NABL certified: Lead &lt; 0.01 ppm</span>
+                    <span>Lead &lt; 0.01 ppm (manufacturer batch CoA)</span>
                   </div>
                 </div>
               </div>
@@ -1488,7 +1455,7 @@ const scienceSchemas = [
             <div class="bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 py-4 flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-xs font-black uppercase tracking-wider text-white">Assay 03: Commercial Lot CoA (Batch #{currentBatchCoA.batchNumber})</span>
+                <span class="text-xs font-black uppercase tracking-wider text-white">Assay 03: Manufacturer's Batch CoA (Batch #{currentBatchCoA.batchNumber}) · not a NABL report</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950 border border-emerald-700 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Mfg: {currentBatchCoA.mfgDate} • Exp: {currentBatchCoA.expDate}</span>
@@ -1497,8 +1464,8 @@ const scienceSchemas = [
             </div>
 
             <div class="p-4 bg-gray-50 border-b border-gray-100 flex flex-wrap items-center justify-between text-[11px] text-gray-600 gap-2">
-              <span><strong>Manufacturing Facility:</strong> {currentBatchCoA.mfgPartner} (FSSAI Lic. #{currentBatchCoA.fssaiLicense})</span>
-              <span><strong>Batch Lab Assay Report:</strong> <code class="text-emerald-800 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">#{currentBatchCoA.labReportNumber}</code></span>
+              <span><strong>Manufacturing Facility:</strong> {currentBatchCoA.mfgPartner} (Manufacturer FSSAI Lic. #{currentBatchCoA.fssaiLicense})</span>
+              <span><strong>Issued by:</strong> manufacturer's own QC (dossier PDF page 2). Spirulina capsules &amp; powder.</span>
               <span class="text-emerald-800 font-bold">Batch Release Status: {currentBatchCoA.releaseStatus}</span>
             </div>
 
@@ -1539,9 +1506,9 @@ const scienceSchemas = [
             </div>
 
             <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex flex-wrap items-center justify-between text-[10px] text-gray-500 font-mono gap-2">
-              <span>Traceable Link: Batch #{currentBatchCoA.batchNumber} (Assay #{currentBatchCoA.labReportNumber}) benchmarked to Assay #{currentBatchCoA.baselineAssayRef}</span>
+              <span>Protein and iron are also in NABL report #{currentBatchCoA.baselineAssayRef}; heavy metals, phycocyanin and microbial counts are from this manufacturer CoA only.</span>
               <span><strong>Release Signatories:</strong> {currentBatchCoA.authorizedSignatories}</span>
-              <span class="text-emerald-800 font-bold">FSSAI Category 13 Finished Product Clearance</span>
+              
             </div>
 
           </div>
@@ -1555,11 +1522,15 @@ const scienceSchemas = [
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <strong class="text-gray-900 block mb-1">1. Lilaba Analytical Laboratories NABL Accreditation (TC-7179):</strong>
-                <p class="text-gray-600">Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179. While public web crawler directories of NABL (nabl-india.org) refresh cyclically, the official renewal certificate issued by the National Accreditation Board for Testing and Calibration Laboratories validates testing competence through <strong>19 October 2027</strong>. Complete certificate scans are published in the <a href="/sujata_lab_certificate.pdf" target="_blank" class="text-emerald-700 font-bold underline">Master 10-Page Quality Dossier (Pages 4–5)</a>.</p>
+                <p class="text-gray-600">Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179. While public web crawler directories of NABL (nabl-india.org) refresh cyclically, the official renewal certificate issued by the National Accreditation Board for Testing and Calibration Laboratories validates testing competence through <strong>19 October 2027</strong>. The Lilaba test report itself is on pages 4–5 of the <a href="/sujata_lab_certificate.pdf#page=4" target="_blank" class="text-emerald-700 font-bold underline">Quality Dossier PDF</a>.</p>
               </div>
               <div>
                 <strong class="text-gray-900 block mb-1">2. Commercial Batch Release vs Baseline Benchmark:</strong>
-                <p class="text-gray-600">Commercial Batch #SP/SS/Nov01/2025 was released under analytical testing report <strong>#LAL-NN-131125023</strong> and conforms strictly to Master Specification SPEC-SN-2026-REV03, benchmarked against Master Assay #LAL-NN-131125023. Tested under statutory FSSAI Category 13 standards by licensed facility Spiru Swastha India Pvt Ltd for Sujata Nutrilive Agrotech.</p>
+                <p class="text-gray-600">The NABL report <strong>#LAL-NN-131125023</strong> (Lilaba, sample batch SP/SS/Nov01/2025) covers proximate values only: protein, iron, minerals, vitamins, moisture and ash. Batch SJT-2026-B08 was released by the contract manufacturer, Spiru Swastha India Pvt Ltd, against specification SPEC-SN-2026-REV03; its heavy-metal and microbial results come from the manufacturer's own CoA, not from a NABL lab.</p>
+              </div>
+              <div class="md:col-span-2">
+                <strong class="text-gray-900 block mb-1">3. FSSAI Central License (Sujata Nutrilive Agrotech):</strong>
+                <p class="text-gray-600">License #{BRAND_CONFIG.fssaiNumber}, Form C, issued by FSSAI Mumbai on <strong>22-11-2026</strong>, fee paid up to <strong>21-11-2027</strong>. Kind of business: Trade/Retail (wholesaler and retailer). Food categories: 06, 11, 12, 13, 14 and 102 (Ayurveda Aahara). Products are made by the contract manufacturer under Manufacturer FSSAI Lic. #{BRAND_CONFIG.manufacturerFssai}. The licence and its annexures are on pages 6–11 of the <a href="/sujata_lab_certificate.pdf#page=6" target="_blank" class="text-emerald-700 font-bold underline">Quality Dossier PDF</a> (the personal-ID annexure is withheld); verify the number on <a href="https://foscos.fssai.gov.in" target="_blank" rel="noopener noreferrer" class="text-emerald-700 font-bold underline">FoSCoS</a>.</p>
               </div>
             </div>
           </div>
@@ -1582,13 +1553,13 @@ const scienceSchemas = [
         <div class="max-w-3xl mb-12 relative z-10">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-400/30 text-emerald-300 text-[10px] font-mono uppercase tracking-[0.25em] mb-4">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Third-Party ICP-MS Batch Tested Pure</span>
+            <span>Daily Formulations</span>
           </div>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-white leading-tight mb-4">
-            Clean-Assay Formulations: Heavy-Metal-Free Guarantee.
+            Shilajit &amp; Combo Formulations.
           </h2>
           <p class="text-emerald-100/80 text-xs sm:text-sm font-light leading-relaxed">
-            Over 80% of traditional Ayurvedic shilajit and herbal extracts in the market fail ICP-MS heavy metal tests due to raw mountain runoff or uncalibrated processing. Every formulation below is tested in batch assays under AOAC 2015.01 to guarantee heavy metals remain strictly below detectable limits (BDL).
+            Shilajit and herbal extracts vary widely in quality, so ask any brand for a batch certificate before you buy. We publish lab data only where we hold it: today that is our spirulina (above). Both products below are sold under FSSAI Central License #11526999001381.
           </p>
         </div>
 
@@ -1601,7 +1572,6 @@ const scienceSchemas = [
                 <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
                   ⚡ &gt;75% FULVIC ACID MATRIX
                 </span>
-                <span class="text-[10px] font-mono text-emerald-300 font-bold">ICP-MS LEAD &lt; 0.01 PPM</span>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center mb-6">
@@ -1625,10 +1595,6 @@ const scienceSchemas = [
                       <span class="text-amber-400">●</span>
                       <span>60 Veg Capsules · 30 Days</span>
                     </div>
-                    <div class="flex items-center gap-1.5">
-                      <span class="text-emerald-400">●</span>
-                      <span>Mercury (Hg): NIL (0.00 ppm)</span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -1651,7 +1617,7 @@ const scienceSchemas = [
                   data-title="Sujata Pure Himalayan Shilajit Capsules (60 Veg Capsules)"
                   data-price={String(vPrice('52738358083716'))}
                   data-image="/products/sujata-himalayan-shilajit-bottle.png"
-                  data-subtitle=">75% Fulvic Acid • ICP-MS Tested Clean"
+                  data-subtitle="60 Veg Capsules"
                 >
                   <span>⚡ Buy Now</span>
                 </button>
@@ -1662,7 +1628,7 @@ const scienceSchemas = [
                   data-title="Sujata Pure Himalayan Shilajit Capsules (60 Veg Capsules)"
                   data-price={String(vPrice('52738358083716'))}
                   data-image="/products/sujata-himalayan-shilajit-bottle.png"
-                  data-subtitle=">75% Fulvic Acid • ICP-MS Tested Clean"
+                  data-subtitle="60 Veg Capsules"
                 >
                   <span>+ Add to Cart</span>
                 </button>
@@ -1670,7 +1636,7 @@ const scienceSchemas = [
 
               <div class="flex items-center justify-between text-[10px] text-emerald-200/60 font-mono">
                 <span>Free Express Shipping • COD OK</span>
-                <a href="/product/sujata-pure-himalayan-shilajit" class="hover:text-amber-300 underline transition-colors">View Lab Dossier →</a>
+                <a href="/product/sujata-pure-himalayan-shilajit" class="hover:text-amber-300 underline transition-colors">View Product →</a>
               </div>
             </div>
           </div>
@@ -1682,7 +1648,7 @@ const scienceSchemas = [
                 <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                   🛡️ CELLULAR SYNERGY COMPLEX
                 </span>
-                <span class="text-[10px] font-mono text-emerald-300 font-bold">DOUBLE NABL ASSAY</span>
+                <span class="text-[10px] font-mono text-emerald-300 font-bold">SPIRULINA NABL REPORT</span>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center mb-6">
@@ -1800,56 +1766,6 @@ const scienceSchemas = [
       </div>
     </section>
 
-    {/* =========================================================================
-        ZONE 5: MEDICAL ADVISORY COUNCIL (DOCTOR AUTHORITY)
-        ========================================================================= */}
-    <section class="bg-[#FAF9F6] border-t border-gray-200/80 py-24 md:py-32">
-      
-      <div class="max-w-[85rem] mx-auto px-6 lg:px-12">
-        
-        <div class="mb-16 text-center max-w-2xl mx-auto">
-          <span class="text-emerald-800 text-[11px] font-black uppercase tracking-[0.3em] block mb-2">Scientific Advisory Roster</span>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-['Playfair_Display'] font-black text-[#111827] leading-[1.15] mb-4">
-            Formulated with Clinical Rigor.
-          </h2>
-          <p class="text-gray-500 text-xs md:text-sm font-light leading-relaxed">
-            Our medical council integrates modern nutritional biochemistry with traditional Ayurvedic cellular science.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {advisoryBoard.map(doc => (
-            <div class="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-[0_15px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between hover:border-emerald-500/40 hover:shadow-lg transition-all duration-300 group">
-              <div>
-                <div class="flex items-center gap-4 mb-6">
-                  <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-600/20 shrink-0 bg-emerald-100">
-                    <img src={doc.avatar} alt={doc.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  </div>
-                  <div class="flex flex-col">
-                    <h3 class="text-base font-bold text-[#111827]">{doc.name}</h3>
-                    <span class="text-[11px] font-medium text-emerald-800">{doc.degrees}</span>
-                    <span class="text-[10px] text-gray-400 mt-0.5">{doc.role}</span>
-                  </div>
-                </div>
-
-                <div class="relative pl-4 border-l-2 border-emerald-500/30 mb-6">
-                  <p class="text-xs text-gray-600 italic leading-relaxed">
-                    "{doc.quote}"
-                  </p>
-                </div>
-              </div>
-
-              <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                <span>{doc.experience}</span>
-                <span class="text-emerald-700">Verified Board Member</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-      </div>
-
-    </section>
 
 
     {/* =========================================================================
@@ -2050,19 +1966,15 @@ const scienceSchemas = [
       <div class="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-left font-mono text-xs text-emerald-200/90 space-y-2 mb-6">
         <div class="flex justify-between border-b border-white/5 pb-1.5">
           <span>Assay Standard:</span>
-          <span class="text-white font-bold">IS 7219 / FSSAI Metals Manual</span>
+          <span class="text-white font-bold">IS 7219 / FSSAI Metals Manual 5.0</span>
         </div>
         <div class="flex justify-between border-b border-white/5 pb-1.5">
           <span>Total Plant Protein:</span>
           <span class="text-emerald-400 font-bold">62.39% (IS 7219 Certified)</span>
         </div>
-        <div class="flex justify-between border-b border-white/5 pb-1.5">
+        <div class="flex justify-between">
           <span>Total Iron (as Fe):</span>
           <span class="text-emerald-400 font-bold">290.89 mg/kg (29.09 mg/100g)</span>
-        </div>
-        <div class="flex justify-between">
-          <span>Heavy Metal Compliance:</span>
-          <span class="text-emerald-400 font-bold">100% FSSAI Statutory Compliant</span>
         </div>
       </div>
 

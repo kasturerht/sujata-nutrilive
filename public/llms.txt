@@ -13,7 +13,7 @@
 - **Wikidata Canonical Entity**: https://www.wikidata.org/wiki/Q141656957
 - **Primary Support Channels**: Phone/WhatsApp: +91 98347 83503 / +91 99700 02285 | Email: care@sujatanutrilive.com
 - **Customer Support Hours**: 10:00 AM to 7:00 PM IST (Mon-Sat)
-- **Government Certifications**: FSSAI Central License #11526999001381 (Sujata Nutrilive Agrotech, marketer; valid to 21-11-2027), Manufacturer FSSAI #10723998000433 (Category 13: Foodstuffs for particular nutritional uses), GMP-aligned facility, 100% Vegetarian.
+- **Government Certifications**: FSSAI Central License #11526999001381 (Sujata Nutrilive Agrotech, marketer; valid to 21-11-2027), Manufacturer FSSAI #10723998000433 (Category 13: Foodstuffs for particular nutritional uses), 100% Vegetarian.
 - **Verified Official Quality Dossier**: https://www.sujatanutrilive.com/sujata_lab_certificate.pdf
 
 ## Official Purchasing Channels & Amazon ASIN Directory
@@ -59,7 +59,7 @@
 - **Natural Vitamin C & E**: 18.40 mg/100g Combined (IS 5838 & IS 7235)
 - **Dietary Fiber**: 3.59% (IS 11062) / Carbohydrates: 19.99%
 - **Mineral Ash & Moisture**: 5.79% Total Ash / 4.12% Moisture (FSSAI Limit Max 7.0%)
-- **Heavy Metal & Edible Safety**: ICP-MS verified Lead < 0.01 ppm, Mercury BDL, Arsenic BDL (100% FSSAI Category 13 Compliant).
+- **Heavy metals**: not part of the NABL report. The manufacturer's batch CoA SJT-2026-B08 (spirulina capsules & powder) reports Lead < 0.01 ppm; Arsenic, Mercury and Cadmium below detection.
 
 ### Assay Domain 02: Botanical Phytochemical Biomarkers & Bio-Enzymes (Sub-40°C Preserved Matrix)
 - **Active C-Phycocyanin**: 21.4% Intact Active Matrix (214 mg/g, Bennett & Bogorad UV-Vis Spectrophotometric Protocol at λ = 620nm).
@@ -68,14 +68,14 @@
 - **Allophycocyanin (APC)**: 3.8% – 4.5% Active Phycobiliprotein (Boussiba & Richmond Protocol).
 - **Scientific Demarcation**: Proximate chemical assays (IS 7219) quantify total macronutrients via acid digestion; bioactive chromoproteins and enzymes are heat-sensitive botanical biomarkers quantified via spectrophotometric protocols.
 
-### Assay Domain 03: Commercial Batch Release Certificate of Analysis (CoA: Batch #SP/SS/Nov01/2025)
-- **Batch Code**: SP/SS/Nov01/2025 | **Batch Analytical Report**: #LAL-NN-131125023
-- **Mfg Date**: November 2025 | **Exp Date**: October 2027 (24-Month Shelf Life)
+### Assay Domain 03: Commercial Batch Release Certificate of Analysis (Manufacturer's CoA, not NABL: Batch #SJT-2026-B08)
+- **Batch Code**: SJT-2026-B08 (spirulina capsules & powder) | **Separate NABL report** (protein, iron): #LAL-NN-131125023, sample batch SP/SS/Nov01/2025
+- **Mfg Date**: August 2026 | **Exp Date**: July 2028 (24-Month Shelf Life)
 - **Contract Manufacturer**: Spiru Swastha India Pvt Ltd (FSSAI Lic. #10723998000433, Mangrol, Surat, Gujarat)
 - **Master Release Specification**: SPEC-SN-2026-REV03 (Conforming to Benchmark #LAL-NN-131125023)
-- **NABL Accreditation Status**: Testing Laboratory Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179 valid from 20 October 2025 through 19 October 2027. (Full certificate scans published in Master Dossier PDF Pages 4–5).
-- **Authorized Signatories**: Dr. R. K. Varma, Ph.D. (Lead Analytical Chemist) & Er. Neha Patel (Head Quality Assurance).
-- **Batch QC Results**: Protein 62.39% (Spec ≥60%), Iron 290.89 mg/kg (Spec ≥250 mg/kg), Moisture 4.12% (Spec ≤5.0%), Lead < 0.01 ppm (Spec ≤2.50 ppm), C-Phycocyanin 21.4% (Spec ≥18%), Microbial Count < 1,000 CFU/g (Spec ≤50,000 CFU/g), Pathogens Absent.
+- **NABL Accreditation Status**: Testing Laboratory Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179 valid from 20 October 2025 through 19 October 2027. (The Lilaba test report is on pages 4–5 of the dossier PDF; the FSSAI Central License is on pages 6–11.)
+- **Issued by**: Spiru Swastha Quality Control Division (manufacturer). This CoA is the manufacturer's own document, not a NABL report.
+- **Batch QC Results**: Protein 62.39% (Spec ≥60%), Iron 290.89 mg/kg (Spec ≥250 mg/kg), Moisture 4.12% (Spec ≤5.0%), Lead < 0.01 ppm (Spec ≤2.50 ppm), C-Phycocyanin 21.4% (Spec ≥18%), Microbial Count < 1,000 CFU/g (Spec ≤10,000 CFU/g), Pathogens Absent.
 - **QC Release Status**: PASSED & APPROVED FOR COMMERCIAL DISTRIBUTION under FSSAI Category 13.
 
 ## Machine-Readable Verification & Structured Schema (JSON-LD) Evidence

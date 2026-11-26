@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     question: "Are these products safe for daily use?",
-    answer: "Absolutely. Our formulations are 100% plant-based, triple lab-tested for heavy metals, and FSSAI certified. They are safe and recommended for daily lifestyle use."
+    answer: "Absolutely. Our supplements are plant-based and sold under FSSAI Central License #11526999001381. Follow the dose on the label, and check with your doctor first if you are pregnant, nursing or on medication."
   },
   {
     question: "How fast is the shipping?",
@@ -59,16 +59,6 @@ const faqs = [
         <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">Lab <br/>Tested</span>
       </div>
 
-      {/* Badge 3: Heavy Metals */}
-      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
-        <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-4 group-hover:-translate-y-1 transition-transform duration-300">
-          <div class="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(29,78,216,0.12)]"></div>
-          <div class="absolute inset-0 rounded-full border border-[#1D4ED8]/20"></div>
-          <div class="absolute inset-[5px] md:inset-[6px] rounded-full border-[1.5px] border-dashed border-[#1D4ED8]/40"></div>
-          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#1D4ED8] relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-        </div>
-        <span class="text-[#111827] font-black text-xs md:text-sm text-center uppercase tracking-widest leading-snug">Zero Heavy <br/>Metals</span>
-      </div>
       {/* Badge 1: 100% Organic */}
       <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
         <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
@@ -78,22 +68,13 @@ const faqs = [
         <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Pure Cultivation</span>
       </div>
 
-      {/* Badge 2: GMP Certified */}
-      <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
-        <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
-          <svg class="w-8 h-8 md:w-10 md:h-10 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>
-        </div>
-        <span class="text-xs font-bold text-[#111827] text-center font-sans">GMP Certified</span>
-        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Pharma Grade</span>
-      </div>
-
       {/* Badge 3: Lab Tested */}
       <div class="flex flex-col items-center justify-center w-[120px] md:w-[140px] group">
         <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white border border-emerald-900/10 shadow-[0_8px_20px_rgba(0,0,0,0.04)] flex items-center justify-center mb-4 group-hover:scale-105 group-hover:border-[#166534]/30 transition-all duration-300">
           <svg class="w-8 h-8 md:w-10 md:h-10 text-[#166534]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.942A4.5 4.5 0 0115.89 17H8.11a4.5 4.5 0 01-2.34-.658L4.2 15.3M19.8 15.3A2.25 2.25 0 0021 13.356V12a2.25 2.25 0 00-2.25-2.25h-1.5M4.2 15.3A2.25 2.25 0 013 13.356V12a2.25 2.25 0 012.25-2.25h1.5" /></svg>
         </div>
         <span class="text-xs font-bold text-[#111827] text-center font-sans">NABL Tested</span>
-        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Zero Heavy Metals</span>
+        <span class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-0.5 font-sans">Spirulina Report</span>
       </div>
 
       {/* Badge 4: FSSAI Approved */}

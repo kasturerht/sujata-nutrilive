@@ -27,6 +27,12 @@ const mustFlag = [
   ['cosmetic hair fall', 'Key Hair Care Benefits 100% Hair Fall & Thinning Control.'],
   ['superseded fssai', 'FSSAI Reg. #' + '2152602' + '7000179'],
   ['cosmetic whitening', 'Bridal Whitening & Brightening Cream.'],
+  ['gmp claim', 'GMP Certified Facility'],
+  ['iso claim', 'ISO 9001:2015 certified'],
+  ['heavy metal free', 'Spirulina Capsules: 100% Vegan, Heavy-Metal Free.'],
+  ['toxin free', '100% HEAVY METAL & TOXIN FREE'],
+  ['mr heavy metal', 'NABL प्रमाणित • ०.००% जड धातू आणि १००% जड धातूमुक्त'],
+  ['hi heavy metal', 'भारी धातुओं से 100% मुक्त प्रमाणित हैं।'],
 ];
 const mustPass = [
   ['en nutrient claim', 'Iron contributes to normal formation of red blood cells.'],
@@ -37,6 +43,7 @@ const mustPass = [
   ['mr disclaimer', 'हे औषध नाही.'],
   ['cosmetic handle link', '<a href="/product/sujata-bridal-whitening-cream">Bridal Radiance Cream</a>'],
   ['cosmetic plain', 'A pH-balanced, sulphate-free daily cleanser with aloe vera.'],
+  ['coa attributed', "Lead < 0.01 ppm (manufacturer's batch CoA SJT-2026-B08, not a NABL report)."],
 ];
 
 let failed = 0;

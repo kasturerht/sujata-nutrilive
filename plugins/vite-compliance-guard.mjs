@@ -144,6 +144,19 @@ const RULES = [
     why: 'Superseded FSSAI registration number: use the Central License (BRAND_CONFIG.fssaiNumber).',
     scanRaw: true
   },
+  {
+    id: 'unverified-certification',
+    // No GMP or ISO 9001 certificate is on file (owner decision 26-11-2026). Re-allow only with a copy on file,
+    // attributed to the contract manufacturer's facility.
+    pattern: /(?<![A-Za-z])(?:GMP[\s-]*(?:certified|certificate|facility|grade)|ISO\s*9001|ISO[\s-]+certified)(?![A-Za-z])/i,
+    why: 'GMP / ISO 9001 claim without a certificate on file. Remove it, or attribute it to the contract manufacturer once a copy is on file.'
+  },
+  {
+    id: 'absolute-heavy-metal-claim',
+    // We hold no report that supports an absolute claim. Quote the manufacturer's CoA figures with attribution instead.
+    pattern: /heavy[\s-]*metals?[\s-]*free|toxins?[\s-]*free|zero[\s-]+heavy[\s-]*metals?|0\.00\s*%\s*(?:heavy|जड|भारी)|जड\s*धातूमुक्त|भारी\s*धातु\S*\s*(?:से\s*)?(?:100%\s*)?मुक्त/i,
+    why: 'Absolute heavy-metal / toxin-free claim: no report supports it. Quote the manufacturer batch CoA figures and name the source.'
+  },
   // ---- Schema-field rules (run against raw file, not stripped text) --------
   {
     id: 'schema-medicalcondition',

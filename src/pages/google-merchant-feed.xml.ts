@@ -148,7 +148,7 @@ export const GET: APIRoute = async () => {
     const rawDefaultImg = p.featuredImage?.url || `${siteUrl}/products/sujata-spirulina-powder-pouch.jpg`;
     const defaultImageUrl = rawDefaultImg.startsWith('http') ? rawDefaultImg : `${siteUrl}${rawDefaultImg}`;
 
-    const rawCleanDesc = cleanText(p.description) || `Buy authentic ${p.title} from Sujata Nutrilive. 100% natural, NABL laboratory tested with zero detectable heavy metals and fast express shipping.`;
+    const rawCleanDesc = cleanText(p.description) || `Buy authentic ${p.title} from Sujata Nutrilive. Sold under FSSAI Central License 11526999001381, with cash on delivery and fast shipping across India.`;
     const { title: compliantTitle, desc: sanitizedDesc } = sanitizeForGoogleCompliance(p.title, rawCleanDesc);
     // Same claims guard as the storefront: drops sentences with disease, efficacy or cosmetic drug-type claims
     // (see COSMETIC_CLAIM in claims-guard). If too little survives, fall back to a plain factual line.
