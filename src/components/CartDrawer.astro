@@ -272,10 +272,11 @@ try {
         overlay.classList.add('opacity-100');
         drawer.classList.remove('translate-x-full');
         document.body.style.overflow = 'hidden';
+        if (window.sujataOverlay) window.sujataOverlay.opened('cart', hideCartDrawer);
       }
     };
 
-    window.closeSujataCart = function() {
+    function hideCartDrawer() {
       const drawer = document.getElementById('cart-drawer');
       const overlay = document.getElementById('cart-overlay');
       if (drawer && overlay) {
@@ -284,6 +285,12 @@ try {
         drawer.classList.add('translate-x-full');
         document.body.style.overflow = '';
       }
+    }
+
+    // On-screen close (X, backdrop, "continue shopping"): also pops the drawer's history entry.
+    window.closeSujataCart = function() {
+      hideCartDrawer();
+      if (window.sujataOverlay) window.sujataOverlay.closed('cart');
     };
 
     // Render Cart HTML

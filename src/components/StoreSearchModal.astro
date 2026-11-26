@@ -215,13 +215,19 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       document.body.style.overflow = 'hidden';
       loadRecentSearches();
       setTimeout(() => input.focus(), 100);
+      if (window.sujataOverlay) window.sujataOverlay.opened('search', hideModal);
     }
 
-    function closeModal() {
+    function hideModal() {
       backdrop.classList.add('opacity-0', 'pointer-events-none');
       dialog.classList.add('scale-95');
       dialog.classList.remove('scale-100');
       document.body.style.overflow = '';
+    }
+
+    function closeModal() {
+      hideModal();
+      if (window.sujataOverlay) window.sujataOverlay.closed('search');
     }
 
     // Global Triggers (Desktop search bar, mobile icon, keyboard shortcuts)

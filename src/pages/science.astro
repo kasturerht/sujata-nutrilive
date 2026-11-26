@@ -1870,14 +1870,16 @@ const scienceSchemas = [
       const closeBtn = document.getElementById('close-science-lab-modal');
 
       if (modal && openBtn) {
-        const closeModal = () => {
+        const hideModal = () => {
           modal.classList.add('opacity-0', 'pointer-events-none');
           document.body.style.overflow = '';
         };
+        const closeModal = () => { hideModal(); window.sujataOverlay?.closed('science-lab'); };
 
         openBtn.addEventListener('click', () => {
           modal.classList.remove('opacity-0', 'pointer-events-none');
           document.body.style.overflow = 'hidden';
+          window.sujataOverlay?.opened('science-lab', hideModal);
         });
 
         closeBtn?.addEventListener('click', closeModal);

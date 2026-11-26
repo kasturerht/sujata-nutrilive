@@ -503,9 +503,10 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
       menuDrawer.classList.remove('-translate-x-full');
       menuDrawer.classList.add('translate-x-0');
       document.body.style.overflow = 'hidden';
+      (window as any).sujataOverlay?.opened('menu', hideMenu);
     };
 
-    const closeMenu = () => {
+    const hideMenu = () => {
       if (!menuDrawer || !menuOverlay) return;
       menuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
       menuOverlay.classList.add('opacity-0', 'pointer-events-none');
@@ -514,12 +515,18 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
       document.body.style.overflow = '';
     };
 
+    // navigating: a link is taking the user away or scrolling the page, so don't call history.back().
+    const closeMenu = (navigating?: boolean | Event) => {
+      hideMenu();
+      (window as any).sujataOverlay?.closed('menu', navigating === true ? { navigating: true } : undefined);
+    };
+
     const desktopSearchTrigger = document.getElementById('desktop-search-trigger');
     const drawerSearchTrigger = document.getElementById('drawer-search-trigger');
 
     menuTrigger?.addEventListener('click', openMenu);
-    closeMenuBtn?.addEventListener('click', closeMenu);
-    menuOverlay?.addEventListener('click', closeMenu);
+    closeMenuBtn?.addEventListener('click', () => closeMenu());
+    menuOverlay?.addEventListener('click', () => closeMenu());
 
     desktopSearchTrigger?.addEventListener('click', () => {
       if (typeof window.openSearchModal === 'function') {
@@ -543,14 +550,14 @@ import { BRAND_CONFIG, getWhatsAppLink } from '../config/brand';
     });
 
     navLinks.forEach(link => {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', () => closeMenu(true));
     });
 
     const categoryLinks = document.querySelectorAll('.mobile-category-link');
     categoryLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         const cat = link.getAttribute('data-category');
-        closeMenu();
+        closeMenu(true);
         if (window.location.pathname === '/' || window.location.pathname === '') {
           e.preventDefault();
           // Secondary categories live in the Explore rail; core lives at the section top.

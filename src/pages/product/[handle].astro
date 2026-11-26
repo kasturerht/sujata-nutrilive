@@ -3258,13 +3258,15 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       const closeLabBtn = document.getElementById('close-lab-modal');
 
       if(labModal && openLabBtn) {
-        const closeModal = () => {
+        const hideLab = () => {
           labModal.classList.add('opacity-0', 'pointer-events-none');
           document.body.style.overflow = '';
         };
+        const closeModal = () => { hideLab(); window.sujataOverlay?.closed('lab-report'); };
         openLabBtn.addEventListener('click', () => {
           labModal.classList.remove('opacity-0', 'pointer-events-none');
           document.body.style.overflow = 'hidden'; 
+          window.sujataOverlay?.opened('lab-report', hideLab);
         });
         if (closeLabBtn) {
             closeLabBtn.addEventListener('click', closeModal);
@@ -3281,11 +3283,12 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       const videoCards = document.querySelectorAll('.video-testimonial-card');
 
       if (videoLightbox && lightboxVideoContainer && closeLightboxBtn) {
-        const closeLightbox = () => {
+        const hideLightbox = () => {
           videoLightbox.classList.add('opacity-0', 'pointer-events-none');
           document.body.style.overflow = '';
           lightboxVideoContainer.innerHTML = '';
         };
+        const closeLightbox = () => { hideLightbox(); window.sujataOverlay?.closed('video'); };
 
         videoCards.forEach(card => {
           card.addEventListener('click', () => {
@@ -3299,6 +3302,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
               `;
               videoLightbox.classList.remove('opacity-0', 'pointer-events-none');
               document.body.style.overflow = 'hidden';
+              window.sujataOverlay?.opened('video', hideLightbox);
             }
           });
         });
@@ -3315,11 +3319,13 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           if (labModal && !labModal.classList.contains('opacity-0')) {
             labModal.classList.add('opacity-0', 'pointer-events-none');
             document.body.style.overflow = '';
+            window.sujataOverlay?.closed('lab-report');
           }
           if (videoLightbox && !videoLightbox.classList.contains('opacity-0')) {
             videoLightbox.classList.add('opacity-0', 'pointer-events-none');
             document.body.style.overflow = '';
             if (lightboxVideoContainer) lightboxVideoContainer.innerHTML = '';
+            window.sujataOverlay?.closed('video');
           }
         }
       });

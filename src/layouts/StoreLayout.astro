@@ -375,6 +375,55 @@ const unifiedSchemaGraph = {
       }
     </script>
     <!-- End Google Tag Manager -->
+    <!-- Overlay history: drawers/modals push one history entry so the phone Back gesture closes them
+         instead of leaving the site. Used by CartDrawer, StoreSearchModal, the mobile menu and page modals. -->
+    <script is:inline>
+      (function () {
+        var stack = [];   // open overlays, oldest first: { name, close }
+        var skip = 0;     // popstate events caused by our own history.back()
+        function isRazorpayOpen() {
+          var el = document.querySelector('.razorpay-container');
+          return !!(el && el.offsetParent !== null && getComputedStyle(el).display !== 'none');
+        }
+        window.sujataOverlay = {
+          // call after the overlay is shown; close() must only hide it (no history work)
+          opened: function (name, close) {
+            for (var i = 0; i < stack.length; i++) if (stack[i].name === name) return;
+            try { history.pushState({ sujataOverlay: name }, ''); } catch (e) { return; }
+            stack.push({ name: name, close: close });
+          },
+          // call when the user closed it on screen (X, backdrop, Esc). opts.navigating: a link is
+          // taking the user elsewhere, so leave history alone (history.back() would cancel it).
+          closed: function (name, opts) {
+            var idx = -1;
+            for (var i = stack.length - 1; i >= 0; i--) if (stack[i].name === name) { idx = i; break; }
+            if (idx < 0) return;
+            stack.splice(idx, 1);
+            if (opts && opts.navigating) return;
+            if (history.state && history.state.sujataOverlay === name) { skip++; history.back(); }
+          },
+          isOpen: function (name) { for (var i = 0; i < stack.length; i++) if (stack[i].name === name) return true; return false; }
+        };
+        window.addEventListener('popstate', function () {
+          if (skip > 0) { skip--; return; }
+          var top = stack.pop();
+          if (!top) return;
+          // Razorpay sheet is on top of the cart: Back must not close the cart underneath it.
+          if (top.name === 'cart' && isRazorpayOpen()) {
+            try { history.pushState({ sujataOverlay: top.name }, ''); } catch (e) {}
+            stack.push(top);
+            return;
+          }
+          try { top.close(); } catch (e) {}
+        });
+        window.addEventListener('pageshow', function (ev) {
+          if (ev.persisted) { stack.length = 0; skip = 0; }
+          if (!stack.length && history.state && history.state.sujataOverlay) {
+            try { history.replaceState(null, ''); } catch (e) {}
+          }
+        });
+      })();
+    </script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
