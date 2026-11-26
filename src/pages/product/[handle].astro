@@ -520,9 +520,10 @@ const resolvedDossier = (handle && productClinicalDossierMap[handle.toLowerCase(
 let ingredientsData = resolvedDossier?.ingredients || [];
 let timelineData = resolvedDossier?.timeline || [];
 
-// 🌟 Direct Shopify Metafield JSON Parsing
+// Shopify metafields are a fallback only: the reviewed copy in this file wins, because older metafield
+// copies still carry claims that were removed here (26-11-2026).
 try {
-  if (product?.ingredients?.value && product.ingredients.value.trim().length > 2) {
+  if (!ingredientsData.length && product?.ingredients?.value && product.ingredients.value.trim().length > 2) {
     const parsed = JSON.parse(product.ingredients.value);
     if (Array.isArray(parsed) && parsed.length > 0) ingredientsData = parsed;
   }
@@ -531,7 +532,7 @@ try {
 }
 
 try {
-  if (product?.timeline?.value && product.timeline.value.trim().length > 2) {
+  if (!timelineData.length && product?.timeline?.value && product.timeline.value.trim().length > 2) {
     const parsed = JSON.parse(product.timeline.value);
     if (Array.isArray(parsed) && parsed.length > 0) timelineData = parsed;
   }
@@ -1719,7 +1720,7 @@ const finalSeoTitle = snippetMeta?.title && snippetMeta.title.length <= 60 ? sni
 const finalMetaDescription = clampSnippet(snippetMeta?.description || seoConfig?.metaDescription || rawCleanDescription, 155);
 let resolvedFaqs = seoConfig?.faqs || [];
 try {
-  if (product?.faqs?.value && product.faqs.value.trim().length > 2) {
+  if (!resolvedFaqs.length && product?.faqs?.value && product.faqs.value.trim().length > 2) {
     const parsedFaqs = JSON.parse(product.faqs.value);
     if (Array.isArray(parsedFaqs) && parsedFaqs.length > 0) {
       resolvedFaqs = parsedFaqs;
@@ -1737,7 +1738,7 @@ resolvedFaqs = resolvedFaqs
 
 let comparisonData = seoConfig?.comparisonTable || null;
 try {
-  if (product?.comparisonTable?.value && product.comparisonTable.value.trim().length > 2) {
+  if (!comparisonData && product?.comparisonTable?.value && product.comparisonTable.value.trim().length > 2) {
     const parsedComp = JSON.parse(product.comparisonTable.value);
     if (parsedComp && Array.isArray(parsedComp.rows) && parsedComp.rows.length > 0) {
       comparisonData = parsedComp;
