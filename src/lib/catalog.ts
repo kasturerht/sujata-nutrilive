@@ -26,7 +26,7 @@ const v = (id: string, title: string, price: number, compareAt: number | null): 
 
 const FALLBACK: Record<string, CatalogProduct> = {
   'sujata-spirulina-powder': {
-    handle: 'sujata-spirulina-powder', title: 'Sujata Pure Organic Spirulina Powder (100g)', shortTitle: 'Spirulina Powder',
+    handle: 'sujata-spirulina-powder', title: 'Sujata Pure Spirulina Powder (100g)', shortTitle: 'Spirulina Powder',
     image: '/products/sujata-spirulina-powder-pouch.jpg', url: '/product/sujata-spirulina-powder',
     variants: [v('52738357854340', '100g Pouch', 350, 499)]
   },
@@ -66,12 +66,12 @@ const FALLBACK: Record<string, CatalogProduct> = {
     variants: [v('52738358149252', '100ml', 199, 249)]
   },
   'sujata-spirulina-facepack-powder': {
-    handle: 'sujata-spirulina-facepack-powder', title: 'Sujata Organic Spirulina Face Pack Powder (50g Pouch - Detox & Glow)', shortTitle: 'Spirulina Face Pack',
+    handle: 'sujata-spirulina-facepack-powder', title: 'Sujata Spirulina Face Pack Powder (50g Pouch - Detox & Glow)', shortTitle: 'Spirulina Face Pack',
     image: 'https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-spirulina-facepack-pouch.jpg', url: '/product/sujata-spirulina-facepack-powder',
     variants: [v('52738358182020', '50g Pouch', 199, 249)]
   },
   'sujata-spiruglow-bath-soap': {
-    handle: 'sujata-spiruglow-bath-soap', title: 'Sujata SpiruGlow Handmade Organic Bath Soap (100g Bar)', shortTitle: 'SpiruGlow Bath Soap',
+    handle: 'sujata-spiruglow-bath-soap', title: 'Sujata SpiruGlow Handmade Natural Bath Soap (100g Bar)', shortTitle: 'SpiruGlow Bath Soap',
     image: 'https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-spiruglow-bath-soap-box.jpg', url: '/product/sujata-spiruglow-bath-soap',
     variants: [v('52738358247556', '100g Bar', 60, 60)]
   },

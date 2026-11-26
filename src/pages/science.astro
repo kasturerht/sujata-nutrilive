@@ -27,12 +27,12 @@ const activeCompounds = [
   {
     symbol: "Ph",
     name: "C-Phycocyanin",
-    purity: "21.4% Bio-Active",
+    purity: "Natural blue pigment",
     color: "text-sky-400",
     border: "border-sky-500/30",
     bg: "bg-sky-500/10",
     role: "The Master Blue Antioxidant",
-    desc: "A natural biliprotein found exclusively in pristine spirulina. Scientifically proven to scavenge free radicals 40x more effectively than Vitamin C & Vitamin E combined, protecting cells from oxidative degradation."
+    desc: "The blue pigment protein that gives spirulina its colour. It is heat-sensitive, which is why our spirulina is dried below 40 °C. We have not had it measured by an accredited lab, so we quote no figure."
   },
   {
     symbol: "Fe",
@@ -47,7 +47,7 @@ const activeCompounds = [
   {
     symbol: "Ch",
     name: "Pure Chlorophyll-a",
-    purity: "1,150 mg / 100g",
+    purity: "Natural green pigment",
     color: "text-emerald-400",
     border: "border-emerald-500/30",
     bg: "bg-emerald-500/10",
@@ -57,12 +57,12 @@ const activeCompounds = [
   {
     symbol: "SOD",
     name: "Superoxide Dismutase",
-    purity: "12,000 Units/kg",
+    purity: "Naturally occurring enzyme",
     color: "text-purple-400",
     border: "border-purple-500/30",
     bg: "bg-purple-500/10",
     role: "Cellular Antioxidant Enzyme",
-    desc: "A heat-sensitive master antioxidant enzyme naturally protected in raw biomass via sub-40°C gentle dehydration, helping neutralize free radicals and supporting cellular longevity."
+    desc: "An antioxidant enzyme found naturally in spirulina. It is heat-sensitive. We have not had it measured by an accredited lab, so we quote no figure."
   }
 ];
 
@@ -90,10 +90,10 @@ const timelineMilestones = [
     phase: "Phase 03",
     days: "Days 22 — 30+",
     title: "The Bio-Shield & Peak Vitality",
-    focus: "Phycocyanin Cellular Repair & Deep Immunity",
-    desc: "Peak serum concentrations of C-Phycocyanin activate natural killer cell (NK) activity. Skin tone clears up noticeably, hair follicles receive direct micronutrient nourishment, and your cellular recovery clock runs at peak efficiency.",
+    focus: "A Settled Daily Routine",
+    desc: "By the fourth week, taking spirulina is part of your day. Iron contributes to the normal formation of red blood cells and haemoglobin; results vary from person to person.",
     badgeColor: "bg-sky-500/20 text-sky-300 border-sky-500/30",
-    stat: "Peak Cellular Immunity"
+    stat: "Daily Habit"
   }
 ];
 
@@ -131,7 +131,7 @@ const labParameters = [
     method: "IS 5886 Protocol", 
     limit: "Nutritional Benchmark", 
     result: "182.47 µg/100g", 
-    status: "100% ORGANIC", 
+    status: "NABL REPORT", 
     verdict: "Natural Vision & Epithelial Health",
     pass: true 
   },
@@ -164,41 +164,6 @@ const labParameters = [
   }
 ];
 
-// Validated Botanical Phytochemical Biomarkers & Bio-Enzymes (Sub-40°C Thermally Preserved Matrix)
-const botanicalBiomarkers = [
-  { 
-    biomarker: "Active C-Phycocyanin (Biliprotein)", 
-    method: "UV-Vis Spectrophotometric Absorbance (Bennett & Bogorad Protocol, λ = 620nm)", 
-    thermalThreshold: "Sub-40°C Cryo-Preserved (Heat-denatured >45°C in spray-drying)", 
-    result: "21.4% Intact Active Matrix (214 mg/g)", 
-    status: "BIOLOGICALLY INTACT", 
-    clinicalRole: "Master blue chromophore; selective COX-2 inhibition & cellular immune protection" 
-  },
-  { 
-    biomarker: "Superoxide Dismutase (SOD)", 
-    method: "Pyrogallol Autoxidation Kinetic Assay (Marklund & Marklund Protocol)", 
-    thermalThreshold: "Low-Temperature Protected (Inactivated >50°C)", 
-    result: ">12,000 Units / kg (12 U/g)", 
-    status: "ACTIVE BIO-ENZYME", 
-    clinicalRole: "Master intracellular antioxidant enzyme; neutralizes cytotoxic superoxide (O₂•⁻) radicals" 
-  },
-  { 
-    biomarker: "Total Chlorophyll-a", 
-    method: "AOAC 940.03 / Double-Beam Spectrophotometry (λ = 664nm / 647nm)", 
-    thermalThreshold: "Darkroom Photo-Shielded Ambient Processing", 
-    result: "1,150 mg / 100g (1.15% w/w)", 
-    status: "NATURAL PORPHYRIN", 
-    clinicalRole: "Natural blood alkalizer & cellular oxygenator structurally analogous to human heme" 
-  },
-  { 
-    biomarker: "Allophycocyanin (APC)", 
-    method: "Spectrophotometric Absorbance (Boussiba & Richmond Protocol, λ = 650nm)", 
-    thermalThreshold: "Preserved in Phycobilisome Supramolecular Matrix", 
-    result: "3.8% – 4.5% Active Phycobiliprotein", 
-    status: "ACTIVE CO-PIGMENT", 
-    clinicalRole: "Accessory light-harvesting biliprotein supporting cellular detoxification pathways" 
-  }
-];
 
 // Commercial Production Batch Release & Certificate of Analysis (CoA) — Batch #SP/SS/Nov01/2025
 const currentBatchCoA = {
@@ -218,7 +183,6 @@ const currentBatchCoA = {
   parameters: [
     { test: "Total Plant Protein", spec: "Min 60.0% w/w", observed: "62.39% w/w", method: "IS 7219 (Kjeldahl)", status: "CONFORMS" },
     { test: "Total Iron (as Fe)", spec: "Min 250.0 mg/kg", observed: "290.89 mg/kg", method: "FSSAI Manual Metals 5.0", status: "CONFORMS" },
-    { test: "Active C-Phycocyanin", spec: "Min 18.0% w/w", observed: "21.4% w/w", method: "Bennett & Bogorad (UV-Vis 620 nm)", status: "CONFORMS" },
     { test: "Residual Moisture / LOD", spec: "Max 5.0% w/w", observed: "4.12% w/w", method: "Oven @ 105 °C", status: "CONFORMS" },
     { test: "Total Mineral Ash", spec: "Max 8.0% w/w", observed: "5.79% w/w", method: "IS 11062 (Gravimetric)", status: "CONFORMS" },
     { test: "Lead (Pb)", spec: "Max 2.50 ppm (FSSAI)", observed: "< 0.01 ppm", method: "ICP-MS (AOAC 2015.01)", status: "CONFORMS" },
@@ -238,13 +202,6 @@ const comparisonMatrix = [
     sunDried: "35°C – 55°C (Uncontrolled UV Heat)",
     sprayDried: "160°C – 200°C (Flash Burn Towers)",
     sujataCryo: "Sub-40°C Cryo-Dehydration",
-    highlight: true
-  },
-  {
-    parameter: "Active C-Phycocyanin Biliprotein",
-    sunDried: "3.5% – 5.8% (UV Photo-Bleached)",
-    sprayDried: "5.0% – 7.5% (Heat Denatured)",
-    sujataCryo: "21.4% Bioactive Intact Matrix",
     highlight: true
   },
   {
@@ -283,7 +240,7 @@ const scienceSchemas = [
     "@type": "WebPage",
     "@id": "https://www.sujatanutrilive.com/science/#science-webpage",
     "name": "The Science & Sourcing Dossier | Sujata Nutrilive",
-    "description": "Comprehensive scientific dossier on sub-40°C cryo-milled spirulina, 21.4% intact C-phycocyanin, natural plant non-heme iron, plant-based B12 and Himalayan shilajit, with the NABL report and manufacturer batch CoA cited separately.",
+    "description": "Comprehensive scientific dossier on sub-40°C dried spirulina, natural plant non-heme iron, plant-based B12 and Himalayan shilajit, with the NABL report and manufacturer batch CoA cited separately.",
     "url": "https://www.sujatanutrilive.com/science",
     "about": [
       {
@@ -368,15 +325,6 @@ const scienceSchemas = [
   },
   {
     "@type": "Dataset",
-    "@id": "https://www.sujatanutrilive.com/science/#botanical-biomarkers",
-    "name": "Botanical Phytochemical Biomarkers & Bio-Enzyme Specification",
-    "description": "Validated spectrophotometric and enzymatic kinetic assays for heat-sensitive chromoproteins (C-Phycocyanin, Chlorophyll-a) and antioxidant enzymes (Superoxide Dismutase) in sub-40°C cryo-preserved Arthrospira platensis biomass.",
-    "isAccessibleForFree": true,
-    "creator": { "@id": "https://www.sujatanutrilive.com/#organization" },
-    "variableMeasured": botanicalBiomarkers.map(b => `${b.biomarker}: ${b.result} (${b.method}) - ${b.status}`)
-  },
-  {
-    "@type": "Dataset",
     "@id": "https://www.sujatanutrilive.com/science/#batch-sp-ss-nov01-2025-coa",
     "name": "Commercial Certificate of Analysis: Batch #SP/SS/Nov01/2025",
     "description": "Commercial batch release certificate for Batch #SP/SS/Nov01/2025 contract manufactured by Spiru Swastha India Pvt Ltd conforming to Master Specification SPEC-SN-2026-REV03.",
@@ -450,7 +398,7 @@ const scienceSchemas = [
 
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-['Playfair_Display'] font-black tracking-tight leading-[1.08] mb-6">
               BEYOND RAW.<br/>
-              <span class="text-emerald-400 italic">BEYOND ORGANIC.</span>
+              <span class="text-emerald-400 italic">BEYOND ORDINARY.</span>
             </h1>
 
             <p class="text-emerald-100/80 text-sm md:text-base font-light leading-relaxed mb-10 max-w-2xl">
@@ -708,7 +656,7 @@ const scienceSchemas = [
                 </div>
                 <h4 class="text-sm font-bold text-white mb-2">Cryo-Dehydration Window</h4>
                 <p class="text-[11px] text-emerald-100/70 leading-relaxed font-light">
-                  Gentle low-temperature air extraction locks in <strong>100% active Phycocyanin</strong>, living chlorophyll, and intact cellular membranes.
+                  Gentle low-temperature air extraction helps protect heat-sensitive phycocyanin and chlorophyll.
                 </p>
               </div>
               <div class="mt-4 pt-3 border-t border-emerald-800/40 text-[10px] font-bold text-emerald-400 flex items-center gap-1.5">
@@ -725,7 +673,7 @@ const scienceSchemas = [
                 </div>
                 <h4 class="text-sm font-bold text-white mb-2">Enzymatic Death Point</h4>
                 <p class="text-[11px] text-amber-100/70 leading-relaxed font-light">
-                  Heat breaks the delicate protein bonds of Superoxide Dismutase (SOD) and Phycocyanin. Potency drops by <strong>over 80%</strong>.
+                  High heat breaks down heat-sensitive pigments and enzymes such as phycocyanin and SOD.
                 </p>
               </div>
               <div class="mt-4 pt-3 border-t border-amber-800/40 text-[10px] font-bold text-amber-400 flex items-center gap-1.5">
@@ -802,7 +750,7 @@ const scienceSchemas = [
           </table>
         </div>
         <div class="bg-gray-50 px-6 py-3.5 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4 text-[11px] text-gray-500">
-          <span>Sujata column sources: <strong>NABL report LAL-NN-131125023</strong> (protein, iron) and <strong>manufacturer batch CoA SJT-2026-B08</strong> (heavy metals, phycocyanin)</span>
+          <span>Sujata column sources: <strong>NABL report LAL-NN-131125023</strong> (protein, iron) and <strong>manufacturer batch CoA SJT-2026-B08</strong> (heavy metals)</span>
         </div>
       </div>
 
@@ -855,7 +803,7 @@ const scienceSchemas = [
             </div>
             <h3 class="text-base font-bold text-[#111827] mb-2">Sub-40°C Cryo-Dry</h3>
             <p class="text-xs text-gray-500 font-light leading-relaxed">
-              Proprietary cold-air dehydration chamber. Locks in deep emerald chlorophyll and fragile C-Phycocyanin enzymes.
+              Proprietary cold-air dehydration chamber. Dried below 40 °C to protect heat-sensitive chlorophyll and C-phycocyanin.
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-gray-100 text-[10px] font-bold text-emerald-800">
@@ -969,7 +917,7 @@ const scienceSchemas = [
               </h3>
             </div>
             <p class="text-emerald-100/70 text-xs sm:text-sm font-light max-w-md leading-relaxed">
-              Preserving 21.4% intact C-Phycocyanin and non-heme iron requires specialized zero-heat handling. Available in three unadulterated formats:
+              Heat-sensitive pigments need gentle, low-temperature handling. Available in three unadulterated formats:
             </p>
           </div>
 
@@ -982,7 +930,7 @@ const scienceSchemas = [
                   <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                     🌱 ZERO BINDERS
                   </span>
-                  <span class="text-[10px] font-mono font-bold text-amber-300">21.4% C-Phycocyanin</span>
+                  <span class="text-[10px] font-mono font-bold text-amber-300">62.39% Protein (NABL)</span>
                 </div>
 
                 <div class="w-full aspect-square rounded-2xl overflow-hidden bg-black/30 border border-white/5 mb-5 p-4 flex items-center justify-center relative">
@@ -1005,7 +953,7 @@ const scienceSchemas = [
                 <div class="space-y-1.5 text-[11px] text-gray-300 mb-6">
                   <div class="flex items-center gap-2">
                     <span class="text-emerald-400 font-bold">✓</span>
-                    <span>21.4% Intact C-Phycocyanin matrix</span>
+                    <span>62.39% protein (NABL report)</span>
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="text-emerald-400 font-bold">✓</span>
@@ -1035,7 +983,7 @@ const scienceSchemas = [
                     data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
                     data-price={String(vPrice('52738357887108'))}
                     data-image="/products/sujata-spirulina-tablets-bottle.jpg"
-                    data-subtitle="21.4% Intact C-Phycocyanin • Zero Binders"
+                    data-subtitle="62.39% Protein • Zero Binders"
                   >
                     <span>⚡ Buy Now</span>
                   </button>
@@ -1046,7 +994,7 @@ const scienceSchemas = [
                     data-title="Sujata 100% Vegan Spirulina Tablets (500mg - No Binders)"
                     data-price={String(vPrice('52738357887108'))}
                     data-image="/products/sujata-spirulina-tablets-bottle.jpg"
-                    data-subtitle="21.4% Intact C-Phycocyanin • Zero Binders"
+                    data-subtitle="62.39% Protein • Zero Binders"
                   >
                     <span>+ Cart</span>
                   </button>
@@ -1073,7 +1021,7 @@ const scienceSchemas = [
                 <div class="w-full aspect-square rounded-2xl overflow-hidden bg-black/30 border border-white/5 mb-5 p-4 flex items-center justify-center relative">
                   <img 
                     src="/products/sujata-spirulina-powder-pouch.jpg" 
-                    alt="Sujata Pure Organic Spirulina Powder" 
+                    alt="Sujata Pure Spirulina Powder" 
                     class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
                     loading="lazy"
                   />
@@ -1081,7 +1029,7 @@ const scienceSchemas = [
                 </div>
 
                 <h4 class="text-lg font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">
-                  Pure Organic Spirulina Powder
+                  Pure Spirulina Powder
                 </h4>
                 <p class="text-[11px] text-emerald-100/70 font-light leading-relaxed mb-4">
                   Ultrasonic cell-wall thinning allows rapid direct cellular assimilation. Blends instantly into smoothies, water, or morning tonics without grit.
@@ -1117,7 +1065,7 @@ const scienceSchemas = [
                     type="button" 
                     class="science-direct-buy-btn w-full bg-emerald-500 hover:bg-emerald-400 text-black py-3 px-3 rounded-xl font-black text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-lg cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357854340"
-                    data-title="Sujata Pure Organic Spirulina Powder (100g)"
+                    data-title="Sujata Pure Spirulina Powder (100g)"
                     data-price={String(vPrice('52738357854340'))}
                     data-image="/products/sujata-spirulina-powder-pouch.jpg"
                     data-subtitle="Sub-40°C Cryo-Milled • 62.39% Protein"
@@ -1128,7 +1076,7 @@ const scienceSchemas = [
                     type="button" 
                     class="science-add-cart-btn w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 px-3 rounded-xl font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer touch-manipulation"
                     data-id="gid://shopify/ProductVariant/52738357854340"
-                    data-title="Sujata Pure Organic Spirulina Powder (100g)"
+                    data-title="Sujata Pure Spirulina Powder (100g)"
                     data-price={String(vPrice('52738357854340'))}
                     data-image="/products/sujata-spirulina-powder-pouch.jpg"
                     data-subtitle="Sub-40°C Cryo-Milled • 62.39% Protein"
@@ -1282,8 +1230,8 @@ const scienceSchemas = [
             </div>
             <div class="p-2.5 bg-white rounded-xl border border-emerald-200 shadow-sm bg-emerald-50/40">
               <span class="text-[8px] font-mono font-bold text-emerald-800 uppercase tracking-wider block">Domain 02</span>
-              <span class="text-[11px] font-bold text-[#111827] block mt-0.5">Biomarkers</span>
-              <span class="text-[10px] text-emerald-700 font-semibold block mt-0.5">21.4% Phycocyanin</span>
+              <span class="text-[11px] font-bold text-[#111827] block mt-0.5">FSSAI Licence</span>
+              <span class="text-[10px] text-emerald-700 font-semibold block mt-0.5">Central #{BRAND_CONFIG.fssaiNumber}</span>
             </div>
             <div class="p-2.5 bg-white rounded-xl border border-gray-900 shadow-sm bg-gray-900 text-white">
               <span class="text-[8px] font-mono font-bold text-emerald-400 uppercase tracking-wider block">Domain 03</span>
@@ -1369,86 +1317,6 @@ const scienceSchemas = [
 
           </div>
 
-          {/* Scientific Methodological Demarcation Note */}
-          <div class="p-5 bg-amber-50/80 border border-amber-200/90 rounded-2xl text-xs text-amber-950 leading-relaxed shadow-sm">
-            <div class="flex items-start gap-3">
-              <span class="text-base shrink-0">🔬</span>
-              <div>
-                <strong class="font-bold text-amber-950 block text-xs sm:text-sm mb-1">
-                  Scientific Demarcation: Proximate Chemical Assay vs. Heat-Labile Botanical Biomarkers
-                </strong>
-                <p class="text-amber-900/90 font-light text-[11px] sm:text-xs leading-relaxed">
-                  <strong>Why are C-Phycocyanin and SOD separated into Assay 02?</strong><br/>
-                  Lilaba Report #LAL-NN-131125023 is an <em>Empirical Proximate Chemical Assay</em>. It relies on destructive chemical digestion (boiling sulfuric acid under IS 7219 Kjeldahl digestion for nitrogen/protein, and concentrated acid digestion for FSSAI Metals 5.0). While definitive for total protein and minerals, this digestion destroys all intact pigment biliproteins and active bio-enzymes.<br/>
-                  Conversely, <strong>21.4% C-Phycocyanin</strong> and <strong>&gt;12,000 U/kg Superoxide Dismutase (SOD)</strong> are <em>Botanical Phytochemical Biomarkers</em>. They require specialized non-destructive UV-Vis spectrophotometry (Bennett &amp; Bogorad 1973) and pyrogallol autoxidation kinetics (Marklund &amp; Marklund). They remain bioactive exclusively because Sujata utilizes a proprietary sub-40°C cryo-dehydration protocol, whereas conventional brands expose biomass to 160°C–200°C spray-drying towers that irreversibly denature these compounds.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Table B: Validated Botanical Phytochemical Biomarkers & Bio-Enzymes */}
-          <div class="bg-white rounded-3xl border border-gray-200/80 shadow-[0_20px_50px_rgba(0,0,0,0.03)] overflow-hidden">
-            
-            <div class="bg-[#064E3B] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-xs font-black uppercase tracking-wider text-white">Assay 02: Botanical Phytochemical Biomarkers &amp; Bio-Enzymes</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] font-mono text-emerald-300 bg-emerald-900/80 border border-emerald-600 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Sub-40°C Cryo-Preserved</span>
-                <span class="text-[10px] font-bold text-amber-300 bg-amber-950/60 border border-amber-600/40 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Living Bio-Actives</span>
-              </div>
-            </div>
-
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse" itemprop="dataset">
-                <thead>
-                  <tr class="bg-[#FAF9F6] border-b border-gray-100 text-[10px] font-mono uppercase tracking-wider text-gray-500">
-                    <th scope="col" class="py-3 px-6 font-bold">Bio-Active Compound &amp; Spectrophotometric Method</th>
-                    <th scope="col" class="py-3 px-4 font-bold hidden sm:table-cell">Thermal Sensitivity Threshold</th>
-                    <th scope="col" class="py-3 px-4 font-bold">Intact Specification</th>
-                    <th scope="col" class="py-3 px-6 font-bold text-right">Potency Status</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100 text-xs">
-                  {botanicalBiomarkers.map((item, idx) => (
-                    <tr class={idx % 2 === 0 ? "hover:bg-emerald-50/20 transition-colors" : "bg-[#FAF9F6]/50 hover:bg-emerald-50/20 transition-colors"}>
-                      <td class="py-3.5 px-6">
-                        <div class="flex flex-col">
-                          <span class="font-bold text-[#111827]">{item.biomarker}</span>
-                          <span class="text-[10px] text-gray-400 font-mono">{item.method}</span>
-                          <span class="text-[10px] text-amber-700 sm:hidden mt-0.5">{item.thermalThreshold}</span>
-                        </div>
-                      </td>
-                      <td class="py-3.5 px-4 text-emerald-800 text-[11px] font-medium hidden sm:table-cell">
-                        {item.thermalThreshold}
-                      </td>
-                      <td class="py-3.5 px-4 font-mono font-bold text-emerald-700">
-                        {item.result}
-                      </td>
-                      <td class="py-3.5 px-6 text-right">
-                        <div class="flex flex-col items-end gap-0.5">
-                          <span class="text-[10px] font-black text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md uppercase tracking-wider whitespace-nowrap">
-                            {item.status}
-                          </span>
-                          <span class="text-[9px] text-gray-500 font-medium hidden md:inline">
-                            {item.clinicalRole}
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex items-center justify-between text-[10px] text-gray-500 font-mono">
-              <span>Assay Protocol: UV-Vis Absorbance (Bennett &amp; Bogorad 1973) &amp; Pyrogallol Kinetic</span>
-              <span class="text-emerald-800 font-bold">100% Non-Denatured Living Biomass</span>
-            </div>
-
-          </div>
-
           {/* Table C: Commercial Production Lot Release CoA (Batch #SJT-2026-B08) */}
           <div class="bg-white rounded-3xl border border-gray-200/80 shadow-[0_20px_50px_rgba(0,0,0,0.03)] overflow-hidden">
             
@@ -1506,7 +1374,7 @@ const scienceSchemas = [
             </div>
 
             <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex flex-wrap items-center justify-between text-[10px] text-gray-500 font-mono gap-2">
-              <span>Protein and iron are also in NABL report #{currentBatchCoA.baselineAssayRef}; heavy metals, phycocyanin and microbial counts are from this manufacturer CoA only.</span>
+              <span>Protein and iron are also in NABL report #{currentBatchCoA.baselineAssayRef}; heavy metals and microbial counts are from this manufacturer CoA only.</span>
               <span><strong>Release Signatories:</strong> {currentBatchCoA.authorizedSignatories}</span>
               
             </div>
@@ -1570,7 +1438,7 @@ const scienceSchemas = [
             <div>
               <div class="flex items-center justify-between gap-2 mb-4">
                 <span class="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
-                  ⚡ &gt;75% FULVIC ACID MATRIX
+                  ⚡ HIMALAYAN SHILAJIT
                 </span>
               </div>
 
@@ -1588,7 +1456,7 @@ const scienceSchemas = [
                     Pure Himalayan Shilajit Capsules
                   </h4>
                   <p class="text-xs text-emerald-100/70 font-light leading-relaxed mb-4">
-                    High-altitude Himalayan gold-grade resin, purified via sub-40°C cold extraction. Rich in 84 ionic trace minerals and >75% fulvic acid for mitochondrial ATP generation.
+                    Himalayan shilajit resin in vegetarian capsules, purified by the traditional Shodhana method.
                   </p>
                   <div class="space-y-1 text-[11px] text-gray-300 font-mono">
                     <div class="flex items-center gap-1.5">
@@ -1665,7 +1533,7 @@ const scienceSchemas = [
                     Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack
                   </h4>
                   <p class="text-xs text-emerald-100/70 font-light leading-relaxed mb-4">
-                    The clinical co-administration of water-soluble C-Phycocyanin and lipophilic Himalayan Sea Buckthorn (Omega 3, 6, 7 & 9) for 360° cellular membrane defense.
+                    Spirulina and Himalayan sea buckthorn capsules in one daily pack.
                   </p>
                   <div class="space-y-1 text-[11px] text-gray-300 font-mono">
                     <div class="flex items-center gap-1.5">
@@ -1854,7 +1722,7 @@ const scienceSchemas = [
               type="button" 
               class="science-format-btn active-format border-2 border-[#166534] bg-emerald-50/50 p-3 sm:p-3.5 rounded-2xl flex flex-col text-left transition-all cursor-pointer"
               data-id="gid://shopify/ProductVariant/52738357854340"
-              data-title="Sujata Pure Organic Spirulina Powder (100g)"
+              data-title="Sujata Pure Spirulina Powder (100g)"
               data-price={String(vPrice('52738357854340'))}
               data-image="/products/sujata-spirulina-powder-pouch.jpg"
               data-subtitle="Sub-40°C Cold Extract"
@@ -2151,7 +2019,7 @@ const scienceSchemas = [
 
       let currentProduct = {
         id: 'gid://shopify/ProductVariant/52738357854340',
-        title: 'Sujata Pure Organic Spirulina Powder (100g)',
+        title: 'Sujata Pure Spirulina Powder (100g)',
         price: 350,
         image: '/products/sujata-spirulina-powder-pouch.jpg',
         subtitle: 'Sub-40°C Cold Extract'
@@ -2176,7 +2044,7 @@ const scienceSchemas = [
           btn.classList.add('border-[#166534]', 'bg-emerald-50/50', 'active-format');
 
           currentProduct.id = btn.getAttribute('data-id') || 'gid://shopify/ProductVariant/52738357854340';
-          currentProduct.title = btn.getAttribute('data-title') || 'Sujata Pure Organic Spirulina Powder (100g)';
+          currentProduct.title = btn.getAttribute('data-title') || 'Sujata Pure Spirulina Powder (100g)';
           currentProduct.price = parseFloat(btn.getAttribute('data-price')) || 350;
           currentProduct.image = btn.getAttribute('data-image') || '/products/sujata-spirulina-powder-pouch.jpg';
           currentProduct.subtitle = btn.getAttribute('data-subtitle') || 'Sub-40°C Cold Extract';

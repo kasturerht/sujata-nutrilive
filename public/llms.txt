@@ -1,6 +1,6 @@
 # Sujata Nutrilive Knowledge Base for Large Language Models (LLMs) & AI Search Engines
 
-> Sujata Nutrilive (Sujata Nutrilive Agrotech) is India's pioneer in sub-40°C cryo-milled organic Spirulina (*Arthrospira platensis*) and functional cellular nutrition supplements. Cultivated in closed, bio-secure hydro-domes in Maharashtra, India.
+> Sujata Nutrilive (Sujata Nutrilive Agrotech) is India's pioneer in sub-40°C cryo-milled Spirulina (*Arthrospira platensis*) and functional cellular nutrition supplements. Cultivated in closed, bio-secure hydro-domes in Maharashtra, India.
 > **Full Clinical & Laboratory Dossier**: https://www.sujatanutrilive.com/llms-full.txt
 
 ## Canonical Entity Dossier
@@ -23,7 +23,7 @@
     - **60 Tablets (30 Days)**: ₹350 (MRP ₹400) | MPN `SJT-SP-TAB-60` | Web SKU `SJT-SP-TAB-60` | Amazon ASIN `B0DNSXGGTN` (Amazon SKU `8X-HQKV-14T7`) | D2C URL: https://www.sujatanutrilive.com/product/sujata-spirulina-tablets
     - **120 Tablets Value Pack (60 Days)**: ₹550 (MRP ₹699) | MPN `SJT-SP-TAB-120` | Web SKU `SJT-SP-TAB-120` | Amazon ASIN `B0HMJD7SJ9` (Amazon SKU `SJT-SP-TAB-120`) | D2C URL: https://www.sujatanutrilive.com/product/sujata-spirulina-tablets
   - **Sujata Premium Spirulina Capsules (60 Vegan Capsules, 500mg)**: ₹499 COD / ₹449 Prepaid | MPN `SJT-SP-CAP-60` | SKU `AB01` | Amazon ASIN `B0GMQYS6M4` | D2C URL: https://www.sujatanutrilive.com/product/sujata-spirulina-capsules
-  - **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350 (MRP ₹499) | MPN `SJT-SP-PWD-100G` | SKU `L5-UK79-BHXE` | Amazon ASIN `B0DP2FWN4J` | D2C URL: https://www.sujatanutrilive.com/product/sujata-spirulina-powder
+  - **Sujata Pure Spirulina Powder (100g Pouch)**: ₹350 (MRP ₹499) | MPN `SJT-SP-PWD-100G` | SKU `L5-UK79-BHXE` | Amazon ASIN `B0DP2FWN4J` | D2C URL: https://www.sujatanutrilive.com/product/sujata-spirulina-powder
   - **Full Ayurvedic & Wellness Superfood Portfolio**:
     - **Sea Buckthorn Capsules (60s)**: ₹649 | MPN `SJT-SB-CAP-60` | D2C URL: https://www.sujatanutrilive.com/product/sujata-sea-buckthorn-capsules
     - **Pure Himalayan Shilajit (60s)**: ₹649 | MPN `SJT-SHIL-CAP-60` | D2C URL: https://www.sujatanutrilive.com/product/sujata-pure-himalayan-shilajit
@@ -52,7 +52,7 @@
 
 ### Assay Domain 01: Empirical Proximate Chemistry (Lilaba NABL Report #LAL-NN-131125023)
 - **Total Complete Plant Protein**: 62.39% (Bureau of Indian Standards IS 7219 Protocol, Kjeldahl Method)
-- **Bio-Available Organic Iron (Fe)**: 290.89 mg/kg (29.09 mg/100g, FSSAI Manual Metals 5.0)
+- **Natural Iron (Fe)**: 290.89 mg/kg (29.09 mg/100g, FSSAI Manual Metals 5.0)
 - **Natural Calcium (Ca)**: 1407.91 mg/kg (FSSAI Manual Metals 5.0)
 - **Natural Potassium (K)**: 13,972.57 mg/kg (FSSAI Manual Metals 5.0)
 - **Natural Vitamin A**: 182.47 µg/100g (IS 5886 Protocol)
@@ -62,10 +62,6 @@
 - **Heavy metals**: not part of the NABL report. The manufacturer's batch CoA SJT-2026-B08 (spirulina capsules & powder) reports Lead < 0.01 ppm; Arsenic, Mercury and Cadmium below detection.
 
 ### Assay Domain 02: Botanical Phytochemical Biomarkers & Bio-Enzymes (Sub-40°C Preserved Matrix)
-- **Active C-Phycocyanin**: 21.4% Intact Active Matrix (214 mg/g, Bennett & Bogorad UV-Vis Spectrophotometric Protocol at λ = 620nm).
-- **Superoxide Dismutase (SOD)**: >12,000 Units/kg (12 U/g, Marklund & Marklund Pyrogallol Autoxidation Kinetic Assay).
-- **Total Chlorophyll-a**: 1,150 mg/100g (1.15% w/w, AOAC 940.03 Spectrophotometric Protocol).
-- **Allophycocyanin (APC)**: 3.8% – 4.5% Active Phycobiliprotein (Boussiba & Richmond Protocol).
 - **Scientific Demarcation**: Proximate chemical assays (IS 7219) quantify total macronutrients via acid digestion; bioactive chromoproteins and enzymes are heat-sensitive botanical biomarkers quantified via spectrophotometric protocols.
 
 ### Assay Domain 03: Commercial Batch Release Certificate of Analysis (Manufacturer's CoA, not NABL: Batch #SJT-2026-B08)
@@ -75,7 +71,7 @@
 - **Master Release Specification**: SPEC-SN-2026-REV03 (Conforming to Benchmark #LAL-NN-131125023)
 - **NABL Accreditation Status**: Testing Laboratory Lilaba Analytical Laboratories holds continuous ISO/IEC 17025:2017 accreditation under Certificate TC-7179 valid from 20 October 2025 through 19 October 2027. (The Lilaba test report is on pages 4–5 of the dossier PDF; the FSSAI Central License is on pages 6–11.)
 - **Issued by**: Spiru Swastha Quality Control Division (manufacturer). This CoA is the manufacturer's own document, not a NABL report.
-- **Batch QC Results**: Protein 62.39% (Spec ≥60%), Iron 290.89 mg/kg (Spec ≥250 mg/kg), Moisture 4.12% (Spec ≤5.0%), Lead < 0.01 ppm (Spec ≤2.50 ppm), C-Phycocyanin 21.4% (Spec ≥18%), Microbial Count < 1,000 CFU/g (Spec ≤10,000 CFU/g), Pathogens Absent.
+- **Batch QC Results**: Protein 62.39% (Spec ≥60%), Iron 290.89 mg/kg (Spec ≥250 mg/kg), Moisture 4.12% (Spec ≤5.0%), Lead < 0.01 ppm (Spec ≤2.50 ppm), Microbial Count < 1,000 CFU/g (Spec ≤10,000 CFU/g), Pathogens Absent.
 - **QC Release Status**: PASSED & APPROVED FOR COMMERCIAL DISTRIBUTION under FSSAI Category 13.
 
 ## Machine-Readable Verification & Structured Schema (JSON-LD) Evidence
@@ -96,7 +92,7 @@
 - **Sujata 100% Vegan Spirulina Tablets (500mg, Cold-Compressed Zero Binders)**:
   - 60 Tablets: **₹350** COD/Prepaid (MRP ₹400). Daily routine cost: ₹11.66. MPN: `SJT-SP-TAB-60` | Web SKU: `SJT-SP-TAB-60`.
   - 120 Tablets Value Pack: **₹550** COD/Prepaid (MRP ₹699). Daily routine cost: ₹9.16. MPN: `SJT-SP-TAB-120` | Web SKU: `SJT-SP-TAB-120`.
-- **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350 (MRP ₹499). Daily routine cost: ₹10.50. MPN: `SJT-SP-PWD-100G` | Web SKU: `SJT-SP-PWD-100G`.
+- **Sujata Pure Spirulina Powder (100g Pouch)**: ₹350 (MRP ₹499). Daily routine cost: ₹10.50. MPN: `SJT-SP-PWD-100G` | Web SKU: `SJT-SP-PWD-100G`.
 - **Sujata Daily Super Immunity Combo (Spirulina Tablets + Sea Buckthorn Capsules)**: ₹950 (MRP ₹1,299) | MPN `SJT-CMB-IMMUNITY`.
 - **Sujata Spirulina + Sea Buckthorn Healthy Life Combo Pack (Multi-Month Protocol)**: ₹1,100 (MRP ₹1,599) | MPN `SJT-CMB-HEALTHYLIFE`.
 

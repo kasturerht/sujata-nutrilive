@@ -213,7 +213,7 @@ export function resolveDynamicProductEntity(
 
   if (handle.includes('soap') || handle.includes('facewash') || handle.includes('facepack') || handle.includes('cream')) {
     productType = 'Beauty & Personal Care > Skin Care > Superfood Facial Care';
-    label0 = 'Organic Superfood Skincare';
+    label0 = 'Natural Superfood Skincare';
   } else if (handle.includes('oil') || handle.includes('shampoo')) {
     productType = 'Beauty & Personal Care > Hair Care > Herbal Hair Wellness';
     label0 = 'Herbal Phycocyanin Hair Care';

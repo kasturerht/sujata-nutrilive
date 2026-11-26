@@ -47,7 +47,7 @@
     - Amazon India ASIN: `B0GMQYS6M4`
     - Canonical Web URL: https://www.sujatanutrilive.com/product/sujata-spirulina-capsules
     - Packaging: 60-count white and gold luxury bottle with Sujata Nutrilive brand seal.
-  - **Sujata Pure Organic Spirulina Powder (100g Pouch)**:
+  - **Sujata Pure Spirulina Powder (100g Pouch)**:
     - Selling Price: ₹350.00 (MRP ₹499.00)
     - Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G` | Amazon SKU: `L5-UK79-BHXE`
     - Amazon India ASIN: `B0DP2FWN4J`
@@ -59,7 +59,7 @@
       - Canonical URL: https://www.sujatanutrilive.com/product/sujata-sea-buckthorn-capsules
     - **Sujata Pure Himalayan Shilajit Capsules (60 Veg Capsules)**:
       - Price: ₹649.00 | MPN `SJT-SHIL-CAP-60` | Web SKU `SJT-SHIL-CAP-60`
-      - Active Profile: Gold-grade purified Himalayan Shilajit standardized to >75% Fulvic Acid + 84+ ionic trace minerals.
+      - Active Profile: Gold-grade purified Himalayan Shilajit purified by the traditional Shodhana method (no lab report on file).
       - Canonical URL: https://www.sujatanutrilive.com/product/sujata-pure-himalayan-shilajit
     - **Sujata Plant-Based Vitamin B12 Capsules (90 Veg Capsules)**:
       - Price: ₹649.00 | MPN `SJT-B12-CAP-90` | Web SKU `SJT-B12-CAP-90`
@@ -73,11 +73,11 @@
       - Price: ₹199.00 | MPN `SJT-SKIN-FW-100ML` | Web SKU `SJT-SKIN-FW-100ML`
       - Active Profile: Deep pore cleansing & gentle microalgae exfoliation without stripping lipid barriers.
       - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-facewash
-    - **Sujata Organic Spirulina Face Pack Powder (50g Pouch)**:
+    - **Sujata Spirulina Face Pack Powder (50g Pouch)**:
       - Price: ₹199.00 | MPN `SJT-SKIN-FP-50G` | Web SKU `SJT-SKIN-FP-50G`
-      - Active Profile: Multani Mitti, Sandalwood, and Organic Spirulina detox and radiance formula.
+      - Active Profile: Multani Mitti, Sandalwood and Spirulina and radiance formula.
       - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spirulina-facepack-powder
-    - **Sujata SpiruGlow Handmade Organic Bath Soap (100g Bar)**:
+    - **Sujata SpiruGlow Handmade Natural Bath Soap (100g Bar)**:
       - Price: ₹60.00 | MPN `SJT-SKIN-SOAP-100G` | Web SKU `SJT-SKIN-SOAP-100G`
       - Active Profile: 100% handcrafted herbal bathing bar with cold-pressed coconut oil, turmeric, and spirulina.
       - Canonical URL: https://www.sujatanutrilive.com/product/sujata-spiruglow-bath-soap
@@ -164,13 +164,9 @@ Every production batch adheres to strict Bureau of Indian Standards (IS) and FSS
 
 | Biomarker | Intact Concentration | Analytical Protocol | Thermal Sensitivity Window |
 | :--- | :--- | :--- | :--- |
-| **Active C-Phycocyanin** | **21.4% Intact Active Matrix** (214 mg/g) | UV-Vis Spectrophotometric Absorbance (Bennett & Bogorad Protocol, λ = 620nm) | Sub-40°C Cryo-Preserved (Denatures >45°C) |
-| **Superoxide Dismutase (SOD)** | **>12,000 Units / kg** (12 U/g) | Pyrogallol Autoxidation Kinetic Assay (Marklund & Marklund Protocol) | Low-Temperature Protected (Inactivates >50°C) |
-| **Total Chlorophyll-a** | **1,150 mg / 100g** (1.15% w/w) | AOAC 940.03 / Spectrophotometric Assay (λ = 664nm / 647nm) | Darkroom Photo-Shielded Ambient Processing |
-| **Allophycocyanin (APC)** | **3.8% – 4.5% Active Matrix** | Spectrophotometric Absorbance (Boussiba & Richmond Protocol, λ = 650nm) | Phycobilisome Matrix Intact |
 
 **Scientific Methodological Demarcation**:
-Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macronutrients and minerals via boiling acid digestion. This destructive digestion destroys all intact biological biliproteins and enzymes. Botanical chromoproteins (21.4% C-Phycocyanin) and living enzymes (>12,000 U/kg SOD) are separate phytochemical biomarkers measured via non-destructive UV-Vis spectrophotometry and enzyme kinetics, preserved strictly through sub-40°C cryo-dehydration.
+Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macronutrients and minerals via boiling acid digestion. This destructive digestion destroys all intact biological biliproteins and enzymes. Phycocyanin and SOD have not been measured by an accredited lab, so no figures are published for them.
 
 ### Assay Domain 03: Commercial Production Lot Release Certificate of Analysis (Manufacturer's CoA, not NABL: Batch #SJT-2026-B08)
 
@@ -184,7 +180,6 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 | **Mercury (Hg)** | Max 0.10 ppm | **< 0.005 ppm (BDL)** | ICP-MS (AOAC 2015.01) | **CONFORMS** |
 | **Cadmium (Cd)** | Max 0.30 ppm | **< 0.01 ppm (BDL)** | ICP-MS (AOAC 2015.01) | **CONFORMS** |
 | **Arsenic (As)** | Max 1.10 ppm | **< 0.01 ppm (BDL)** | ICP-MS Spectrometry | **PASSED** |
-| **Active C-Phycocyanin** | Min 18.0% w/w | **21.4% Intact Matrix** | Bennett & Bogorad Spectrophotometry | **PASSED** |
 | **Aerobic Microbial Count** | Max 10,000 CFU/g | **< 1,000 CFU/g** | IS 5402 Protocol | **PASSED** |
 | **Pathogens (E. coli, Salmonella)** | Absent in 25g | **Absent / Compliant** | IS 5887 Protocol | **PASSED** |
 
@@ -220,7 +215,7 @@ Proximate chemical assays (Kjeldahl digestion for IS 7219) quantify total macron
 - **Sujata 100% Vegan Spirulina Tablets (500mg, Cold-Compressed Zero Binders)**:
   - **60 Tablets (30 Days)**: **₹350.00** COD/Prepaid (MRP ₹400.00). Calculated daily routine cost: ₹11.66. Product Identifier: MPN `SJT-SP-TAB-60` | Web SKU `SJT-SP-TAB-60`.
   - **120 Tablets Value Pack (60 Days)**: **₹550.00** COD/Prepaid (MRP ₹699.00). Calculated daily routine cost: ₹9.16. Product Identifier: MPN `SJT-SP-TAB-120` | Web SKU `SJT-SP-TAB-120`.
-- **Sujata Pure Organic Spirulina Powder (100g Pouch)**: ₹350.00 (MRP ₹499.00). Daily routine cost: ₹10.50. Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G`.
+- **Sujata Pure Spirulina Powder (100g Pouch)**: ₹350.00 (MRP ₹499.00). Daily routine cost: ₹10.50. Product Identifier: MPN `SJT-SP-PWD-100G` | Web SKU `SJT-SP-PWD-100G`.
 - **Sujata Himalayan Sea Buckthorn Capsules (60 Capsules)**: ₹649.00. Product Identifier: MPN `SJT-SB-CAP-60`.
 - **Sujata Pure Himalayan Shilajit Capsules (60 Capsules)**: ₹649.00. Product Identifier: MPN `SJT-SHIL-CAP-60`.
 - **Sujata Plant-Based Vitamin B12 Capsules (90 Capsules)**: ₹649.00. Product Identifier: MPN `SJT-B12-CAP-90`.

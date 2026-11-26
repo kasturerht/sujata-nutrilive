@@ -33,6 +33,9 @@ const mustFlag = [
   ['toxin free', '100% HEAVY METAL & TOXIN FREE'],
   ['mr heavy metal', 'NABL प्रमाणित • ०.००% जड धातू आणि १००% जड धातूमुक्त'],
   ['hi heavy metal', 'भारी धातुओं से 100% मुक्त प्रमाणित हैं।'],
+  ['phycocyanin figure', '21.4% Intact C-Phycocyanin'],
+  ['sod figure', 'Superoxide Dismutase >12,000 Units/kg'],
+  ['fulvic figure', 'Shilajit with 75%+ active Fulvic Acid and 84+ ionic trace minerals'],
 ];
 const mustPass = [
   ['en nutrient claim', 'Iron contributes to normal formation of red blood cells.'],
@@ -43,6 +46,7 @@ const mustPass = [
   ['mr disclaimer', 'हे औषध नाही.'],
   ['cosmetic handle link', '<a href="/product/sujata-bridal-whitening-cream">Bridal Radiance Cream</a>'],
   ['cosmetic plain', 'A pH-balanced, sulphate-free daily cleanser with aloe vera.'],
+  ['phycocyanin generic', 'Heat damages the natural blue phycocyanin pigment, so dry spirulina below 40 °C.'],
   ['coa attributed', "Lead < 0.01 ppm (manufacturer's batch CoA SJT-2026-B08, not a NABL report)."],
 ];
 

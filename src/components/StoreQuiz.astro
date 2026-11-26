@@ -548,7 +548,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       // If user chooses powder specifically or combo
       if (quizData.style === 'powder' || (quizData.concern === 'energy' && quizData.style !== 'tablets')) {
         variantId = "gid://shopify/ProductVariant/52738357854340"; // Powder
-        title = "Sujata Pure Organic Spirulina Powder";
+        title = "Sujata Pure Spirulina Powder";
         price = "₹599";
         imgPath = "/products/sujata-spirulina-powder-pouch.jpg";
         pName = "Spirulina Powder";
@@ -559,7 +559,7 @@ const storefrontToken = import.meta.env.PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "7e0a
       // Generate personalized copy based on Q1
       if (quizData.concern === 'energy') {
         concernLabel = "Sustained Energy & Focus";
-        desc1 = "Based on your goal to combat fatigue, your biological profile indicates high efficiency response to cold-pressed phycocyanin compounds. This batch maximizes immediate cognitive oxygenation and sustained ATP mitochondrial release.";
+        desc1 = "Based on your goal to combat fatigue, we suggest spirulina for its plant protein and natural iron; iron contributes to the reduction of tiredness and fatigue.";
         desc2 = "Recommended usage: Consume in the morning or early afternoon. Avoid consuming within 3 hours of sleep to preserve natural melatonin pathways.";
       } else if (quizData.concern === 'immunity') {
         concernLabel = "Gut Health & Cellular Immunity";

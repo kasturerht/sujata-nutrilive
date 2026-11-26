@@ -157,6 +157,12 @@ const RULES = [
     pattern: /heavy[\s-]*metals?[\s-]*free|toxins?[\s-]*free|zero[\s-]+heavy[\s-]*metals?|0\.00\s*%\s*(?:heavy|जड|भारी)|जड\s*धातूमुक्त|भारी\s*धातु\S*\s*(?:से\s*)?(?:100%\s*)?मुक्त/i,
     why: 'Absolute heavy-metal / toxin-free claim: no report supports it. Quote the manufacturer batch CoA figures and name the source.'
   },
+  {
+    id: 'unmeasured-biomarker-figure',
+    // Phycocyanin, SOD and shilajit fulvic/mineral figures have no lab report on file (owner decision 26-11-2026).
+    pattern: /21\.4\s*%|२१\.४\s*%|\d[\d,]*\s*(?:units?|U)\s*\/\s*kg|\d+\s*%\+?\s*(?:active\s+|natural\s+|purified\s+)?fulvic|fulvic\s+acid\s*\(?\s*(?:standardi[sz]ed\s+to\s*)?(?:&gt;|>)?\s*\d+\s*%|84\+?\s*(?:ionic|trace)/i,
+    why: 'Phycocyanin / SOD / fulvic-acid / trace-mineral figure without a lab report on file. Remove the number.'
+  },
   // ---- Schema-field rules (run against raw file, not stripped text) --------
   {
     id: 'schema-medicalcondition',

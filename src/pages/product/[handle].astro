@@ -141,14 +141,12 @@ const {
 
 const productLocalGalleryMap: Record<string, Array<{ url: string; altText: string }>> = {
   'sujata-spirulina-powder': [
-    { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Organic Spirulina Powder Pouch' },
-    { url: '/products/sujata-spirulina-powder-nutrition-powerhouse.jpg', altText: 'Powerhouse of Nutrition Infographic' },
+    { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Spirulina Powder Pouch' },
     { url: '/products/sujata-spirulina-powder-energy-vitality.jpg', altText: 'Energy Stamina Mental Clarity' },
     { url: '/products/sujata-spirulina-powder-how-to-use.jpg', altText: 'How to Use Spirulina Powder' }
   ],
   'spirulin-powder': [
-    { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Organic Spirulina Powder Pouch' },
-    { url: '/products/sujata-spirulina-powder-nutrition-powerhouse.jpg', altText: 'Powerhouse of Nutrition Infographic' },
+    { url: '/products/sujata-spirulina-powder-pouch.jpg', altText: 'Sujata Pure Spirulina Powder Pouch' },
     { url: '/products/sujata-spirulina-powder-energy-vitality.jpg', altText: 'Energy Stamina Mental Clarity' },
     { url: '/products/sujata-spirulina-powder-how-to-use.jpg', altText: 'How to Use Spirulina Powder' }
   ],
@@ -176,21 +174,17 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
   ],
   'sujata-plant-based-vitamin-b12': [
     { url: '/products/sujata-plant-based-b12-bottle.png', altText: 'Sujata Plant-Based Vitamin B12 90 Vegetarian Capsules' },
-    { url: '/products/sujata-b12-plant-vs-synthetic.png', altText: 'Plant Methylcobalamin vs Synthetic B12 Co-Enzyme Comparison' },
     { url: '/products/sujata-b12-benefits-target-systems.png', altText: 'Full Nervous System & Energy Restoration Health Targets' },
   ],
   'plant-based-vitamin-b12': [
     { url: '/products/sujata-plant-based-b12-bottle.png', altText: 'Sujata Plant-Based Vitamin B12 90 Vegetarian Capsules' },
-    { url: '/products/sujata-b12-plant-vs-synthetic.png', altText: 'Plant Methylcobalamin vs Synthetic B12 Co-Enzyme Comparison' },
     { url: '/products/sujata-b12-benefits-target-systems.png', altText: 'Full Nervous System & Energy Restoration Health Targets' },
   ],
   'sujata-pure-himalayan-shilajit': [
     { url: '/products/sujata-himalayan-shilajit-bottle.png', altText: 'Sujata Pure Himalayan Shilajit 15000mg 60 Capsules' },
-    { url: '/products/sujata-shilajit-benefits-stamina.png', altText: 'Mitochondrial ATP Energy & Physical Strength Peak Vitality' },
   ],
   'pure-himalayan-shilajit': [
     { url: '/products/sujata-himalayan-shilajit-bottle.png', altText: 'Sujata Pure Himalayan Shilajit 15000mg 60 Capsules' },
-    { url: '/products/sujata-shilajit-benefits-stamina.png', altText: 'Mitochondrial ATP Energy & Physical Strength Peak Vitality' },
   ],
   'sujata-moringa-powder': [
     { url: '/products/sujata-moringa-powder-pouch.jpg', altText: 'Sujata Moringa Powder 100g' },
@@ -238,13 +232,11 @@ const productLocalGalleryMap: Record<string, Array<{ url: string; altText: strin
     { url: '/products/sujata-combo-spirulina-tablets-sea-buckthorn.jpg', altText: 'Sujata Spirulina Tablets + Sea Buckthorn Capsules Dual Synergy Protocol' },
     { url: '/products/sujata-spirulina-tablets-main-3d.jpg', altText: 'Sujata Spirulina Tablets 60 Count' },
     { url: '/products/sujata-sea-buckthorn-capsules-bottle.jpg', altText: 'Sujata Sea Buckthorn Capsules 60 Count' },
-    { url: '/products/sujata-combo-synergy-infographic-hindi.webp', altText: 'Ayurvedic Synergy Infographic' }
   ],
   'sujata-spirulina-sea-buckthorn-combo-pack': [
     { url: '/products/sujata-combo-spirulina-sea-buckthorn-transparent.webp', altText: 'Sujata Spirulina Capsules + Sea Buckthorn Capsules Vitality Protocol' },
     { url: '/products/sujata-spirulina-capsules-bottle.jpg', altText: 'Sujata Spirulina 100% Veg Capsules' },
     { url: '/products/sujata-sea-buckthorn-capsules-bottle.jpg', altText: 'Sujata Sea Buckthorn Capsules' },
-    { url: '/products/sujata-combo-synergy-infographic-hindi.webp', altText: 'Dual Cellular Synergy Infographic' }
   ]
 };
 
@@ -297,7 +289,7 @@ const isNoCodProduct = (product?.tags || []).some((t: string) => {
 const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: any[] }> = {
   'sujata-spirulina-powder': {
     ingredients: [
-      { symbol: "Ph", name: "Phycocyanin (20%+)", desc: "Master blue antioxidant bio-pigment. Neutralizes free radicals and activates cellular defense pathways.", color: "text-blue-400", border: "border-blue-500/30" },
+      { symbol: "Ph", name: "Phycocyanin", desc: "The natural blue pigment of spirulina. Heat-sensitive, so our spirulina is dried below 40 °C.", color: "text-blue-400", border: "border-blue-500/30" },
       { symbol: "Fe", name: "Natural Plant Iron (Fe)", desc: "Natural plant iron. Iron contributes to normal haemoglobin formation and normal oxygen transport in the body.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "Ch", name: "Active Chlorophyll", desc: "The green pigment that gives spirulina its colour.", color: "text-emerald-400", border: "border-emerald-500/30" },
       { symbol: "EAA", name: "18 Amino Acid Matrix", desc: "62.39% complete plant protein (IS 7219). Repairs muscle tissue, rebuilds connective fibers, and sustains energy.", color: "text-amber-400", border: "border-amber-500/30" }
@@ -311,7 +303,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   'sujata-spirulina-tablets': {
     ingredients: [
       { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Rare anti-inflammatory fatty acid. Regulates hormonal equilibrium and eases joint stiffness.", color: "text-amber-400", border: "border-amber-500/30" },
-      { symbol: "SOD", name: "Superoxide Dismutase", desc: "Master antioxidant enzyme preserved under cold press. Protects mitochondria from oxidative wear.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "SOD", name: "Superoxide Dismutase", desc: "An antioxidant enzyme found naturally in spirulina. Heat-sensitive; not measured by an accredited lab.", color: "text-cyan-400", border: "border-cyan-500/30" },
       { symbol: "Fe", name: "Natural Plant Iron (Fe)", desc: "Non-heme algal iron. Iron contributes to normal haemoglobin formation and to the reduction of tiredness.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "EAA", name: "Pure Microalgae Protein", desc: "100% pure compressed spirulina without talc or chemical binders. Delivers all essential amino acids.", color: "text-emerald-400", border: "border-emerald-500/30" }
     ],
@@ -324,7 +316,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   'sujata-spirulina-capsules': {
     ingredients: [
       { symbol: "GLA", name: "Gamma-Linolenic Acid", desc: "Essential lipid compound for nerve calmness, cellular elasticity, and hormonal balance.", color: "text-amber-400", border: "border-amber-500/30" },
-      { symbol: "Ph", name: "Phycocyanin Bio-Shield", desc: "Shields cells against urban pollution and oxidative stress with potent free-radical scavenging.", color: "text-blue-400", border: "border-blue-500/30" },
+      { symbol: "Ph", name: "Phycocyanin", desc: "The natural blue pigment of spirulina.", color: "text-blue-400", border: "border-blue-500/30" },
       { symbol: "B-Cx", name: "B-Complex Vitamins", desc: "Fuels cellular ATP energy production and enhances mental focus without caffeine.", color: "text-purple-400", border: "border-purple-500/30" },
       { symbol: "Veg", name: "Plant Cellulose Shell", desc: "100% vegetarian HPMC shell ensuring zero odor, gentle digestion, and rapid absorption.", color: "text-emerald-400", border: "border-emerald-500/30" }
     ],
@@ -362,8 +354,8 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   },
   'sujata-pure-himalayan-shilajit': {
     ingredients: [
-      { symbol: "FA", name: "75%+ Fulvic Acid Matrix", desc: "Ultra-purified bio-carrier that transports minerals directly into mitochondrial cell membranes.", color: "text-amber-400", border: "border-amber-500/30" },
-      { symbol: "Min", name: "84+ Ionic Trace Minerals", desc: "Replenishes vital micronutrients, electrolytes, zinc, and magnesium in ionic colloidal form.", color: "text-yellow-400", border: "border-yellow-500/30" },
+      { symbol: "Sh", name: "Himalayan Shilajit Resin", desc: "A mineral-rich resin from the Himalayas, purified by the traditional Shodhana method.", color: "text-amber-400", border: "border-amber-500/30" },
+      { symbol: "Cap", name: "Vegetarian Capsules", desc: "60 veg capsules per bottle, for a simple daily routine.", color: "text-yellow-400", border: "border-yellow-500/30" },
       { symbol: "ATP", name: "Mitochondrial Energy Catalyst", desc: "Supercharges cellular ATP production, increasing endurance and post-exercise recovery.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "Ras", name: "Purified Shodhana Extract", desc: "Traditional Ayurvedic Rasayana that enhances vitality, vigor, and physical power naturally.", color: "text-emerald-400", border: "border-emerald-500/30" }
     ],
@@ -389,7 +381,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   'sujata-spirulina-facewash': {
     ingredients: [
       { symbol: "Spi", name: "Spirulina Bio-Extract", desc: "Spirulina extract in a gentle daily cleanser that lifts dirt and excess oil from pores.", color: "text-emerald-400", border: "border-emerald-500/30" },
-      { symbol: "Alo", name: "Organic Aloe Vera Juice", desc: "Aloe vera juice helps skin feel hydrated and comfortable after washing.", color: "text-cyan-400", border: "border-cyan-500/30" },
+      { symbol: "Alo", name: "Aloe Vera Juice", desc: "Aloe vera juice helps skin feel hydrated and comfortable after washing.", color: "text-cyan-400", border: "border-cyan-500/30" },
       { symbol: "GT", name: "Green Tea Polyphenols", desc: "Green tea extract in a fresh, light formula suited to oily and combination skin.", color: "text-green-400", border: "border-green-500/30" },
       { symbol: "pH", name: "pH 5.5 Balanced Cleanser", desc: "100% sulphate-free and paraben-free formula that cleanses without stripping skin barrier lipids.", color: "text-blue-400", border: "border-blue-500/30" }
     ],
@@ -479,7 +471,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   },
   'sujata-spirulina-sea-buckthorn-combo': {
     ingredients: [
-      { symbol: "Spi", name: "Pure Spirulina (Tablets)", desc: "Delivers 62.39% complete vegan protein (IS 7219), organic iron, and all-day physical stamina.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Spi", name: "Pure Spirulina (Tablets)", desc: "Delivers 62.39% complete vegan protein (IS 7219) and natural plant iron.", color: "text-emerald-400", border: "border-emerald-500/30" },
       { symbol: "SBT", name: "Himalayan Sea Buckthorn", desc: "Provides rare Omega 7, 3, 6, 9 and natural Vitamin C for skin glow and heart health.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "Ph-Fla", name: "Dual Bio-Shield", desc: "Synergy of Phycocyanin and Flavonoids creates a 360° antioxidant defense against aging.", color: "text-cyan-400", border: "border-cyan-500/30" },
       { symbol: "Syn", name: "360° Ayurvedic Synergy", desc: "Comprehensive superfood combination that addresses energy, immunity, skin, and vitality.", color: "text-amber-400", border: "border-amber-500/30" }
@@ -492,7 +484,7 @@ const productClinicalDossierMap: Record<string, { ingredients: any[]; timeline: 
   },
   'sujata-spirulina-sea-buckthorn-combo-pack': {
     ingredients: [
-      { symbol: "Spi", name: "Pure Spirulina (Veg Capsules)", desc: "Delivers 62.39% complete vegan protein (IS 7219), organic iron, and all-day physical stamina in odorless plant capsules.", color: "text-emerald-400", border: "border-emerald-500/30" },
+      { symbol: "Spi", name: "Pure Spirulina (Veg Capsules)", desc: "Delivers 62.39% complete vegan protein (IS 7219) and natural plant iron in odorless plant capsules.", color: "text-emerald-400", border: "border-emerald-500/30" },
       { symbol: "SBT", name: "Himalayan Sea Buckthorn (Capsules)", desc: "Provides rare Omega 7, 3, 6, 9 and natural Vitamin C for radiant skin glow, gut mucosal hydration, and heart health.", color: "text-orange-400", border: "border-orange-500/30" },
       { symbol: "Ph-Fla", name: "Dual Bio-Shield", desc: "Synergy of Phycocyanin and Flavonoids creates a 360° antioxidant defense against cellular aging.", color: "text-cyan-400", border: "border-cyan-500/30" },
       { symbol: "Syn", name: "360° Cellular Synergy", desc: "100% Vegetarian Capsules combo delivering sustained energy, deep hydration, and immune protection with zero bitter aftertaste.", color: "text-amber-400", border: "border-amber-500/30" }
@@ -566,7 +558,7 @@ const customHowToUse = scrubClaims(product?.howToUse?.value || "", { allowCondit
 
 const siteUrl = BRAND_CONFIG.siteUrl || "https://www.sujatanutrilive.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).toString();
-const productTitle = product?.title || "Sujata Pure Organic Spirulina";
+const productTitle = product?.title || "Sujata Pure Spirulina";
 const rawDescSource = typeof product?.subtitle?.value === 'string' 
   ? product.subtitle.value 
   : (typeof product?.subtitle === 'string' ? product.subtitle : (typeof product?.descriptionHtml === 'string' ? product.descriptionHtml : ''));
@@ -1266,7 +1258,7 @@ const productSeoConfigMap: Record<string, {
     faqs: [
       {
         question: "What is Spirulina and what are its primary health benefits?",
-        answer: "Spirulina (Arthrospira platensis) is an ancient blue-green microalgae recognized by the WHO as the most nutrient-dense superfood on the planet. Sujata Cold-Pressed Spirulina delivers 62.39% complete plant protein (IS 7219), 290.89 mg/kg natural iron (as Fe), and active Phycocyanin to support daily energy: iron contributes to normal haemoglobin formation and to the reduction of tiredness.",
+        answer: "Spirulina (Arthrospira platensis) is an ancient blue-green microalgae recognized by the WHO as the most nutrient-dense superfood on the planet. Sujata Cold-Pressed Spirulina delivers 62.39% complete plant protein (IS 7219), 290.89 mg/kg natural iron (as Fe): iron contributes to normal haemoglobin formation and to the reduction of tiredness.",
         tag: "WHO Nutrient Powerhouse"
       },
       {
@@ -1291,7 +1283,7 @@ const productSeoConfigMap: Record<string, {
       },
       {
         question: "Can people with thyroid, diabetes, or blood pressure consume Spirulina?",
-        answer: "Yes, absolutely. Pure cold-pressed spirulina is an organic whole-food microalgae with zero synthetic stimulants, zero sugar, and zero synthetic hormones. Simply maintain a 1-hour gap between your prescribed morning allopathic medication and your spirulina intake.",
+        answer: "Yes, absolutely. Pure cold-pressed spirulina is a natural whole-food microalgae with zero synthetic stimulants, zero sugar, and zero synthetic hormones. Simply maintain a 1-hour gap between your prescribed morning allopathic medication and your spirulina intake.",
         tag: "Safety & Medication Gap"
       }
     ]
@@ -1800,7 +1792,7 @@ interface ProductVideoDefinition {
 const seaBuckthornVideoDef: ProductVideoDefinition = {
   videoId: 'bQ-wflWzQ_0',
   title: 'PM Modi Explains Ladakh Sea Buckthorn Benefits (सीबकथॉर्न) | Sujata Nutrilive',
-  description: 'Why did Prime Minister Narendra Modi highlight Ladakh Sea Buckthorn as a miraculous natural superfood? Discover the science of Ladakh wild harvest Sea Buckthorn and organic Spirulina by Sujata Nutrilive.',
+  description: 'Why did Prime Minister Narendra Modi highlight Ladakh Sea Buckthorn as a miraculous natural superfood? Discover the science of Ladakh wild harvest Sea Buckthorn and pure Spirulina by Sujata Nutrilive.',
   uploadDate: '2026-08-20T01:43:42Z',
   duration: 'PT59S',
   clips: [
@@ -3037,7 +3029,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           },
           men_stamina: {
             badge: '🏔️ Himalayan Shilajit & Peak Vitality Protocol',
-            subtitle: '75%+ purified fulvic acid to optimize physical endurance, muscle recovery, and sustained vigor throughout the day.',
+            subtitle: 'Himalayan shilajit resin, purified by the traditional Shodhana method, in 60 vegetarian capsules.',
             trustProof: '9,200+ Men Experiencing Peak Physical Stamina',
             stickyTag: '🏔️ Peak Physical Endurance',
             keywords: ['stamina', 'shilajit', 'power', 'gym', 'workout', 'muscle', 'cellular_vigor', 'vigor', 'strength', 'takad', 'endurance']
