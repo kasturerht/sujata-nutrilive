@@ -36,6 +36,8 @@ const mustFlag = [
   ['phycocyanin figure', '21.4% Intact C-Phycocyanin'],
   ['sod figure', 'Superoxide Dismutase >12,000 Units/kg'],
   ['fulvic figure', 'Shilajit with 75%+ active Fulvic Acid and 84+ ionic trace minerals'],
+  ['omega7 figure', 'Sea Buckthorn capsules supply 32-38% Palmitoleic acid (Omega-7).'],
+  ['mr omega7 figure', 'ओमेगा ७ (३२-३८%), नैसर्गिक आयर्न'],
 ];
 const mustPass = [
   ['en nutrient claim', 'Iron contributes to normal formation of red blood cells.'],

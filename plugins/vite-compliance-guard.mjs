@@ -160,7 +160,7 @@ const RULES = [
   {
     id: 'unmeasured-biomarker-figure',
     // Phycocyanin, SOD and shilajit fulvic/mineral figures have no lab report on file (owner decision 26-11-2026).
-    pattern: /21\.4\s*%|२१\.४\s*%|\d[\d,]*\s*(?:units?|U)\s*\/\s*kg|\d+\s*%\+?\s*(?:active\s+|natural\s+|purified\s+)?fulvic|fulvic\s+acid\s*\(?\s*(?:standardi[sz]ed\s+to\s*)?(?:&gt;|>)?\s*\d+\s*%|84\+?\s*(?:ionic|trace)/i,
+    pattern: /21\.4\s*%|२१\.४\s*%|\d[\d,]*\s*(?:units?|U)\s*\/\s*kg|\d+\s*%\+?\s*(?:active\s+|natural\s+|purified\s+)?fulvic|fulvic\s+acid\s*\(?\s*(?:standardi[sz]ed\s+to\s*)?(?:&gt;|>)?\s*\d+\s*%|84\+?\s*(?:ionic|trace)|(?:palmitoleic|omega[\s-]*7|ओमेगा\s*७)[^.]{0,25}?[\d०-९]+\s*[-–]\s*[\d०-९]+\s*%|[\d०-९]+\s*[-–]\s*[\d०-९]+\s*%\s*(?:palmitoleic|omega[\s-]*7)/i,
     why: 'Phycocyanin / SOD / fulvic-acid / trace-mineral figure without a lab report on file. Remove the number.'
   },
   // ---- Schema-field rules (run against raw file, not stripped text) --------

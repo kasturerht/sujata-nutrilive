@@ -127,6 +127,38 @@
       "src": "https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-combo-synergy-infographic-hindi.jpg?v=1792913901",
       "alt": "Ayurvedic Synergy Infographic",
       "position": 4
+    },
+    {
+      "product_id": 10465847312516,
+      "handle": "sujata-sea-buckthorn-capsules",
+      "image_id": 63114983080068,
+      "src": "https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-sea-buckthorn-capsules-benefits.jpg?v=1787998219",
+      "alt": "Omega 3 6 7 9 Benefits Infographic",
+      "position": 2
+    },
+    {
+      "product_id": 10465847312516,
+      "handle": "sujata-sea-buckthorn-capsules",
+      "image_id": 63114983145604,
+      "src": "https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-sea-buckthorn-capsules-poster.jpg?v=1787998218",
+      "alt": "Sea Buckthorn Superfruit Poster",
+      "position": 4
+    },
+    {
+      "product_id": 10465847410820,
+      "handle": "sujata-moringa-powder",
+      "image_id": 63114983440516,
+      "src": "https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-moringa-powder-label-nutrition.jpg?v=1787998220",
+      "alt": "Moringa Nutrition Facts & Minerals",
+      "position": 3
+    },
+    {
+      "product_id": 10473731162244,
+      "handle": "sujata-spirulina-sea-buckthorn-combo-pack",
+      "image_id": 63114983080068,
+      "src": "https://cdn.shopify.com/s/files/1/1025/6151/3604/files/sujata-sea-buckthorn-capsules-benefits.jpg?v=1787998219",
+      "alt": "Omega 3 6 7 9 Benefits Infographic",
+      "position": 7
     }
   ]
 }
