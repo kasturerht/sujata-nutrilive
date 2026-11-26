@@ -665,19 +665,15 @@ function getProductBadgeAndBenefit(product: any, currentPrice: number) {
   }
 
   function updateDeliveryEstimators() {
-    const savedPincode = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || '411001';
-    const badges = document.querySelectorAll('.product-delivery-badge .delivery-date-text');
-    
-    // Calculate delivery date (+3 business days)
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 3);
-    if (targetDate.getDay() === 0) targetDate.setDate(targetDate.getDate() + 1); // skip Sunday
-    
-    const options = { weekday: 'short', month: 'short', day: 'numeric' };
-    const dateStr = targetDate.toLocaleDateString('en-IN', options);
-
-    badges.forEach(badge => {
-      badge.innerHTML = `Get it by <strong>${dateStr}</strong> (to ${savedPincode})`;
+    // Generic All-India estimate until the shopper sets a pincode (tiers as in /shipping-policy).
+    let pin = '';
+    try { pin = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || ''; } catch (e) {}
+    const valid = /^[1-9][0-9]{5}$/.test(pin);
+    const p3 = pin.slice(0, 3), p2 = pin.slice(0, 2);
+    const range = ['400', '110', '560', '600', '700', '500', '411', '380'].includes(p3) ? '2–3 days'
+      : (['78', '79', '18', '19'].includes(p2) || p3 === '744' || p3 === '682') ? '4–6 days' : '3–4 days';
+    document.querySelectorAll('.product-delivery-badge .delivery-date-text').forEach(badge => {
+      badge.innerHTML = valid ? `Estimated delivery to <strong>${pin}</strong>: ${range}` : 'Delivery in 2–6 days across India';
     });
   }
 

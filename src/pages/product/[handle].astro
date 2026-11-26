@@ -254,6 +254,11 @@ if (images.length === 0) {
   }
 }
 const primaryImage = images[0];
+// Shopify CDN serves resized images via ?width=; originals are up to 2000px / 600 KB.
+const sizedImg = (url: string | undefined, w: number) => {
+  if (!url || !/cdn\.shopify\.com/.test(url)) return url;
+  try { const u = new URL(url); u.searchParams.set('width', String(w)); return u.toString(); } catch { return url; }
+};
 const rawVariants = product?.variants?.edges ? product.variants.edges.map((e: any) => e.node) : [];
 // Temporarily hide Spirulina 60 Tablets variant
 const variants = rawVariants.filter((v: any) => v.sku !== 'SJT-SP-TAB-60' && !/60\s*tablets/i.test(v.title || ''));
@@ -1785,32 +1790,6 @@ interface ProductVideoDefinition {
   assurances: string[];
 }
 
-const seaBuckthornVideoDef: ProductVideoDefinition = {
-  videoId: 'bQ-wflWzQ_0',
-  title: 'PM Modi Explains Ladakh Sea Buckthorn Benefits (सीबकथॉर्न) | Sujata Nutrilive',
-  description: 'Why did Prime Minister Narendra Modi highlight Ladakh Sea Buckthorn as a miraculous natural superfood? Discover the science of Ladakh wild harvest Sea Buckthorn and pure Spirulina by Sujata Nutrilive.',
-  uploadDate: '2026-08-20T01:43:42Z',
-  duration: 'PT59S',
-  clips: [
-    { name: 'PM Modi on Ladakh Sea Buckthorn (-40°C to +40°C Extreme Survival)', start: 0, end: 10 },
-    { name: '8th Century Tibetan Literature & Global Research Evidence', start: 10, end: 21 },
-    { name: 'Ancient Medicinal Value Recognized by Modern Science', start: 21, end: 33 },
-    { name: 'Health Benefits: Blood Pressure, Ulcers & Immunity', start: 33, end: 47 },
-    { name: 'The World\'s Richest Natural Vitamin C Superfood', start: 47, end: 59 }
-  ],
-  badgeText: 'National Clinical Recognition',
-  headline: 'National Recognition: PM Modi on Ladakh Sea Buckthorn',
-  subheadline: 'Watch the historic address explaining the extreme -40°C survival power, 8th-century Tibetan literature, and natural Vitamin C density of Himalayan Sea Buckthorn.',
-  speechAuthor: 'Hon. Prime Minister Narendra Modi',
-  speechQuote: 'लद्दाख क्षेत्र में पाए जाने वाला यह प्लांट -40 से +40 डिग्री सेंटीग्रेड में कठोरतम तापमान को सहन करने की ताकत रखता है... ब्लड प्रेशर, अल्सर या सर्दी-खांसी हो, सीबकथोन से बनी दवाइयां इनमें लाभ देती हैं। दुनिया में उपलब्ध सीबकथोन में पूरी मानव जाति की विटामिन सी की जरूरत अकेले ही पूरी करने की क्षमता है।',
-  posterImage: '/pm_modi_sea_buckthorn_cover.webp',
-  endSecond: 51,
-  assurances: [
-    '100% Wild Ladakh Harvest (12,000+ ft)',
-    'Rare Omega-7 Palmitoleic Acid',
-    'Sold under FSSAI Central License'
-  ]
-};
 
 const moringaVideoDef: ProductVideoDefinition = {
   videoId: 'qRtGC6BnHh8',
@@ -1873,12 +1852,6 @@ const productVideoMap: Record<string, ProductVideoDefinition> = {
   'spirulina-powder': spirulinaTabletsVideoDef,
   'sujata-spirulina-capsules': spirulinaTabletsVideoDef,
   'spirulina-capsules': spirulinaTabletsVideoDef,
-  'sujata-spirulina-sea-buckthorn-combo-pack': seaBuckthornVideoDef,
-  'sujata-spirulina-sea-buckthorn-combo': seaBuckthornVideoDef,
-  'spirulina-sea-buckthorn-combo-pack': seaBuckthornVideoDef,
-  'spirulina-sea-buckthorn-combo': seaBuckthornVideoDef,
-  'sujata-sea-buckthorn-capsules': seaBuckthornVideoDef,
-  'sea-buckthorn-capsules': seaBuckthornVideoDef,
   'sujata-moringa-powder': moringaVideoDef,
   'moringa-powder': moringaVideoDef,
   'sujata-organic-moringa-powder': moringaVideoDef,
@@ -2006,7 +1979,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
               <div class="w-8 h-8 border-2 border-[#166534]/20 border-t-[#166534] rounded-full animate-spin"></div>
             </div>
             <div id="bottle-3d-wrapper" class="relative z-20 w-[72%] h-[72%] flex items-center justify-center transition-transform duration-300 ease-out will-change-transform">
-                <img id="main-pdp-image" src={primaryImage?.url || '/spirulina-bottle.png'} alt={product.title} class="relative z-20 w-full h-full object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out" onload="document.getElementById('image-skeleton').style.opacity='0'; document.getElementById('image-skeleton').style.pointerEvents='none';" />
+                <img id="main-pdp-image" src={sizedImg(primaryImage?.url, 800) || '/spirulina-bottle.png'} alt={product.title} width="800" height="800" fetchpriority="high" decoding="async" class="relative z-20 w-full h-full object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out" onload="document.getElementById('image-skeleton').style.opacity='0'; document.getElementById('image-skeleton').style.pointerEvents='none';" />
                 <div id="bottle-glare" class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent opacity-0 mix-blend-overlay pointer-events-none rounded-full transition-opacity duration-300 transform -translate-x-[100%]"></div>
             </div>
             <div class="absolute top-4 left-4 z-30 pointer-events-none">
@@ -2019,8 +1992,8 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
           {images.length > 1 && (
             <div class="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
               {images.map((img: any, i: number) => (
-                <button class={`thumb-btn flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden border transition-all duration-300 ${i === 0 ? 'border-[#166534] shadow-md opacity-100' : 'border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30'}`} data-src={img.url}>
-                  <img src={img.url} alt="Thumbnail" class="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
+                <button class={`thumb-btn flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden border transition-all duration-300 ${i === 0 ? 'border-[#166534] shadow-md opacity-100' : 'border-transparent opacity-50 hover:opacity-100 hover:border-[#166534]/30'}`} data-src={sizedImg(img.url, 800)}>
+                  <img src={sizedImg(img.url, 160)} alt={img.altText || "Thumbnail"} width="64" height="64" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </button>
               ))}
             </div>
@@ -2228,11 +2201,15 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
               <div class="flex items-center gap-2 min-w-0">
                 <span class="text-sm">🚚</span>
                 <span class="truncate">
-                  <span class="delivery-date-text font-medium text-gray-700">Dispatch in 24h</span>
+                  <span class="delivery-date-text font-medium text-gray-700">Delivery in 2–6 days across India</span>
                 </span>
               </div>
-              <span class="text-[9px] font-bold bg-[#166534] text-white px-2 py-0.5 rounded uppercase tracking-wider shrink-0">Express</span>
+              <button type="button" class="pdp-pin-toggle text-[10px] font-bold text-[#166534] underline underline-offset-2 shrink-0 touch-manipulation">Check pincode</button>
             </div>
+            <form class="pdp-pin-form hidden -mt-2 mb-4 flex gap-2" novalidate>
+              <input type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="Enter 6-digit pincode" aria-label="Delivery pincode" class="pdp-pin-input flex-1 min-w-0 bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-600/30" />
+              <button type="submit" class="bg-[#166534] text-white text-xs font-bold px-4 rounded-xl touch-manipulation">Check</button>
+            </form>
 
             <div class="flex flex-col gap-3 w-full" id="magnetic-btn-wrapper">
               <!-- ⚡ High-Conversion 1-Click Buy Now Button -->
@@ -2289,8 +2266,11 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
             {/* 🌟 Refined Trust & Payment Security Strip */}
             <div class="mt-4 pt-3.5 border-t border-gray-100 flex flex-col gap-3">
               <div class="flex items-center justify-center gap-2 text-xs text-gray-500 font-semibold flex-wrap text-center">
-                <span class="text-amber-500">★★★★★</span>
-                <span id="pdp-trust-customer-count" class="font-bold text-gray-800">10,000+ Happy Customers</span>
+                {realProductRating ? (
+                  <span id="pdp-trust-customer-count" class="font-bold text-gray-800"><span class="text-amber-500">★</span> {realProductRating.ratingValue} from {realProductRating.reviewCount} verified reviews</span>
+                ) : (
+                  <span id="pdp-trust-customer-count" class="font-bold text-gray-800">Cash on Delivery across India</span>
+                )}
                 <span class="text-gray-300">•</span>
                 <span class="text-emerald-800 font-bold flex items-center gap-1">
                   <svg class="w-3.5 h-3.5 text-emerald-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
@@ -2842,7 +2822,7 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
       title="Click to select duration"
     >
       <div class="w-9 h-9 rounded-xl bg-white/10 p-0.5 flex-shrink-0 flex items-center justify-center border border-white/10">
-        <img src={images[0]?.url || "/spirulina-bottle.png"} alt={product.title} class="w-full h-full object-contain" />
+        <img src={sizedImg(images[0]?.url, 160) || "/spirulina-bottle.png"} alt={product.title} width="48" height="48" loading="lazy" decoding="async" class="w-full h-full object-contain" />
       </div>
       <div class="flex flex-col min-w-0">
         <span class="text-xs font-bold text-white truncate max-w-[70px] min-[380px]:max-w-[95px] sm:max-w-[130px] font-['Playfair_Display'] leading-tight">{product.title}</span>
@@ -2989,45 +2969,39 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         // 2. Ultra-Luxury Apothecary Intent Buckets (Silicon Valley & Premium D2C Grade)
         const intentDictionary = {
           fatigue: {
-            badge: '⚡ 3 PM Fatigue & Cellular Energy Protocol',
-            subtitle: 'Clinically formulated to eliminate afternoon fatigue and brain fog with sustained plant energy — zero caffeine crash.',
-            trustProof: '14,200+ Verified Customers Fighting Chronic Fatigue',
-            stickyTag: '⚡ Sustained All-Day Energy',
+            badge: '⚡ Daily Energy Routine',
+            subtitle: 'Plant protein and natural iron in a simple daily routine. Iron contributes to the reduction of tiredness and fatigue.',
+            stickyTag: '⚡ Daily Energy Routine',
             keywords: ['energy', 'fatigue', 'tired', 'slump', 'thakva', 'sust', 'alas', '3pm', 'weakness', 'ashaktpana', 'lethargy', 'exhaust', 'burnout']
           },
           hairfall: {
-            badge: '🌿 Follicle Nourishment & Anti-Hair Fall Protocol',
-            subtitle: 'Targets hair fall at the root to visibly strengthen strands and restore natural fullness within 21 days.',
-            trustProof: '9,800+ Verified Customers Reported Reduced Hair Fall',
-            stickyTag: '🌿 Reduced Hair Fall in 21 Days',
+            badge: '🌿 Daily Hair-Care Routine',
+            subtitle: 'A simple daily routine with natural ingredients.',
+            stickyTag: '🌿 Daily Hair-Care Routine',
             keywords: ['hair', 'hairfall', 'kes', 'scalp', 'dandruff', 'thinning', 'bald', 'comb', 'kangva', 'shampoo', 'oil', 'biotin']
           },
           gut_acidity: {
-            badge: '🍃 Gut Alkalizing & Acidity Defense Protocol',
-            subtitle: 'Pure chlorophyll and alkaline superfoods to soothe stomach acidity, relieve bloating, and support easy daily digestion.',
-            trustProof: '11,500+ Happy Customers with Smoother Digestion',
-            stickyTag: '🍃 Gas & Acidity Relief',
+            badge: '🍃 Daily Green Nutrition',
+            subtitle: 'Plant-based daily nutrition that is easy to add to your routine.',
+            stickyTag: '🍃 Daily Green Nutrition',
             keywords: ['gut', 'digestion', 'acidity', 'gas', 'bloat', 'constipation', 'pachan', 'pot', 'kabz', 'jaljal', 'stomach', 'acid', 'gerd']
           },
           skin_glow: {
-            badge: '✨ Antioxidant Cellular Radiance & Glow Protocol',
-            subtitle: 'Protects skin against oxidative damage and active breakouts to reveal a clear, luminous, natural glow.',
-            trustProof: '12,800+ Customers with Radiant, Clearer Skin',
-            stickyTag: '✨ Natural Skin Radiance',
+            badge: '✨ Daily Skin-Care Routine',
+            subtitle: 'Natural, antioxidant-rich ingredients for your daily routine.',
+            stickyTag: '✨ Daily Skin-Care Routine',
             keywords: ['skin', 'glow', 'acne', 'pimple', 'tan', 'spots', 'pigment', 'chehra', 'twacha', 'radiance', 'bridal', 'facewash', 'korean', 'fairness']
           },
           b12_nerve: {
-            badge: '🌱 100% Plant-Based Methylcobalamin B12 Protocol',
-            subtitle: 'Essential active B12 designed specifically for Indian vegetarians to combat exhaustion, nerve tingling, and brain fog.',
-            trustProof: '8,600+ Vegetarians Overcoming B12 Deficiency',
+            badge: '🌱 Plant-Based Vitamin B12',
+            subtitle: 'Plant-based vitamin B12 for vegetarians. Vitamin B12 contributes to the reduction of tiredness and fatigue.',
             stickyTag: '🌱 100% Plant-Based B12',
             keywords: ['b12', 'nerve', 'tingling', 'mungya', 'numbness', 'veg', 'vegetarian', 'shakahari', 'brain_fog', 'deficiency', 'methylcobalamin']
           },
           men_stamina: {
-            badge: '🏔️ Himalayan Shilajit & Peak Vitality Protocol',
+            badge: '🏔️ Himalayan Shilajit',
             subtitle: 'Himalayan shilajit resin, purified by the traditional Shodhana method, in 60 vegetarian capsules.',
-            trustProof: '9,200+ Men Experiencing Peak Physical Stamina',
-            stickyTag: '🏔️ Peak Physical Endurance',
+            stickyTag: '🏔️ Himalayan Shilajit',
             keywords: ['stamina', 'shilajit', 'power', 'gym', 'workout', 'muscle', 'cellular_vigor', 'vigor', 'strength', 'takad', 'endurance']
           }
         };
@@ -3087,11 +3061,6 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
             subtitleEl.classList.remove('hidden');
           }
 
-          // Update Trust Proof Text
-          const trustCountSpan = document.getElementById('pdp-trust-customer-count');
-          if (trustCountSpan && activeIntent.trustProof) {
-            trustCountSpan.textContent = activeIntent.trustProof;
-          }
 
           // Update Mobile Sticky Pill
           const stickyPillEl = document.getElementById('sticky-benefit-pill');
@@ -3382,22 +3351,36 @@ function getVariantDetails(title: string, numericPrice: number, productTitleStr:
         odometerElements.forEach(el => observerOdometer.observe(el));
       }
 
-      // 1. Dynamic Delivery Date Estimator (Linked to sujata_pincode)
+      // 1. Delivery estimate: a generic All-India range until the shopper enters a pincode (tiers as in /shipping-policy).
+      function deliveryRangeFor(pin) {
+        const p2 = pin.slice(0, 2), p3 = pin.slice(0, 3);
+        if (['400', '110', '560', '600', '700', '500', '411', '380'].includes(p3)) return '2–3 days';
+        if (['78', '79', '18', '19'].includes(p2) || p3 === '744' || p3 === '682') return '4–6 days';
+        return '3–4 days';
+      }
       function updatePdpDeliveryEstimator() {
-        const savedPincode = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || '411001';
-        const badges = document.querySelectorAll('.product-delivery-badge .delivery-date-text');
-        
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 3);
-        if (targetDate.getDay() === 0) targetDate.setDate(targetDate.getDate() + 1); // skip Sunday
-        
-        const options = { weekday: 'short', month: 'short', day: 'numeric' };
-        const dateStr = targetDate.toLocaleDateString('en-IN', options);
-
-        badges.forEach(badge => {
-          badge.innerHTML = `Get it by <strong>${dateStr}</strong> (to ${savedPincode})`;
+        let pin = '';
+        try { pin = localStorage.getItem('sujata_pincode') || localStorage.getItem('user_pincode') || ''; } catch (e) {}
+        const valid = /^[1-9][0-9]{5}$/.test(pin);
+        document.querySelectorAll('.product-delivery-badge .delivery-date-text').forEach(badge => {
+          badge.innerHTML = valid ? `Estimated delivery to <strong>${pin}</strong>: ${deliveryRangeFor(pin)}` : 'Delivery in 2–6 days across India';
         });
       }
+      document.querySelectorAll('.pdp-pin-toggle').forEach(btn => btn.addEventListener('click', () => {
+        const form = btn.closest('.product-delivery-badge')?.nextElementSibling;
+        if (form && form.classList.contains('pdp-pin-form')) { form.classList.toggle('hidden'); form.querySelector('input')?.focus(); }
+      }));
+      document.querySelectorAll('.pdp-pin-form').forEach(form => form.addEventListener('submit', ev => {
+        ev.preventDefault();
+        const input = form.querySelector('input');
+        const pin = (input?.value || '').replace(/\D/g, '');
+        if (!/^[1-9][0-9]{5}$/.test(pin)) { input?.setCustomValidity('Enter a valid 6-digit pincode'); input?.reportValidity(); return; }
+        input.setCustomValidity('');
+        try { localStorage.setItem('sujata_pincode', pin); } catch (e) {}
+        form.classList.add('hidden');
+        updatePdpDeliveryEstimator();
+        window.dispatchEvent(new Event('pincode-updated'));
+      }));
       updatePdpDeliveryEstimator();
       window.addEventListener('pincode-updated', updatePdpDeliveryEstimator);
 

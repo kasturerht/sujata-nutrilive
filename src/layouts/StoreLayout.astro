@@ -665,9 +665,11 @@ const unifiedSchemaGraph = {
           content_ids: cleanId ? [cleanId, String(data.id || '')] : [String(data.id || '')]
         });
 
-        // 1. Dual-Compatibility: Push custom event for GTM custom event triggers
+        // 1. Custom event for GTM triggers. ViewContent / AddToCart / InitiateCheckout are NOT pushed here:
+        // the GTM Meta tags also match view_item / add_to_cart / begin_checkout, so pushing both names sent
+        // every Meta event twice. Those three are pushed once below with both the GA4 and Meta fields.
         // (Purchase is pushed once, with its ecommerce payload, in the Purchase branch below.)
-        if (eventName !== 'Purchase') window.dataLayer.push({
+        if (['Purchase', 'ViewContent', 'AddToCart', 'InitiateCheckout'].indexOf(eventName) === -1) window.dataLayer.push({
           event: eventName,
           event_id: eventId,
           user_data: userData,
@@ -685,6 +687,10 @@ const unifiedSchemaGraph = {
             event: 'view_item',
             event_id: eventId,
             user_data: userData,
+            order_total: data.total || data.price || 0,
+            quantity: Number(data.quantity || 1),
+            clean_id: cleanId,
+            event_data: enrichedData,
             ecommerce: {
               currency: data.currency || 'INR',
               value: Number(data.price || 0),
@@ -704,6 +710,10 @@ const unifiedSchemaGraph = {
             event: 'add_to_cart',
             event_id: eventId,
             user_data: userData,
+            order_total: data.total || data.price || 0,
+            quantity: Number(data.quantity || 1),
+            clean_id: cleanId,
+            event_data: enrichedData,
             ecommerce: {
               currency: data.currency || 'INR',
               value: atcTotalVal,
@@ -723,6 +733,10 @@ const unifiedSchemaGraph = {
             event: 'begin_checkout',
             event_id: eventId,
             user_data: userData,
+            order_total: data.total || data.price || 0,
+            quantity: Number(data.quantity || 1),
+            clean_id: cleanId,
+            event_data: enrichedData,
             num_items: totalNumItems,
             ecommerce: {
               currency: data.currency || 'INR',

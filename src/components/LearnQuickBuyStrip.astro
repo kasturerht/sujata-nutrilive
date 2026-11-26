@@ -1,0 +1,70 @@
+---
+// src/components/LearnQuickBuyStrip.astro
+// Compact above-the-fold buy strip for the Hindi / Marathi guides: product, live price, a 1-click
+// order button (window.directCheckoutItem -> Razorpay) and a WhatsApp order link (no OTP).
+// Regional readers almost never reached a product page from these guides (GA4, Nov 2026).
+import { getCatalogProducts, formatINR, type CatalogHandle } from '../lib/catalog';
+import { getWhatsAppLink } from '../config/brand';
+
+interface Props {
+  handle: CatalogHandle;
+  lang: 'hi' | 'mr';
+  placement: string;
+}
+
+const { handle, lang, placement } = Astro.props;
+const product = (await getCatalogProducts([handle]))[handle];
+const variant = product.variants.find((v) => v.available) || product.variants[0];
+const upiPrice = Math.round(variant.price * 0.9);
+const image = /cdn\.shopify\.com/.test(product.image) ? `${product.image}${product.image.includes('?') ? '&' : '?'}width=160` : product.image;
+
+const T = {
+  hi: { buy: 'अभी ऑर्डर करें', wa: 'WhatsApp पर ऑर्डर', cod: 'कैश ऑन डिलीवरी', note: 'फ्री डिलीवरी · OTP की ज़रूरत नहीं (WhatsApp)', msg: `नमस्ते सुजाता न्यूट्रीलाइव, मुझे ${product.title} ऑर्डर करना है।` },
+  mr: { buy: 'आत्ता ऑर्डर करा', wa: 'WhatsApp वर ऑर्डर', cod: 'कॅश ऑन डिलिव्हरी', note: 'मोफत डिलिव्हरी · OTP ची गरज नाही (WhatsApp)', msg: `नमस्कार सुजाता न्यूट्रीलाइव, मला ${product.title} ऑर्डर करायचे आहे.` },
+}[lang];
+---
+<aside class="learn-quick-buy my-4 rounded-2xl border border-emerald-400/40 bg-white text-[#111827] p-3 shadow-xl flex items-center gap-3 font-sans" data-placement={placement}>
+  <a href={product.url} class="shrink-0" aria-label={product.title}>
+    <img src={image} alt={product.title} width="64" height="64" decoding="async" class="w-16 h-16 object-contain rounded-xl bg-emerald-50" />
+  </a>
+  <div class="min-w-0 flex-1">
+    <a href={product.url} class="block text-[13px] font-bold leading-snug line-clamp-2 hover:text-[#166534]">{product.title}</a>
+    <p class="text-[11px] text-gray-600 mt-0.5">
+      <span class="font-black text-emerald-700 text-[13px]">{formatINR(upiPrice)}</span> UPI · {formatINR(variant.price)} {T.cod}
+    </p>
+    <div class="mt-2 grid grid-cols-2 gap-2">
+      <button
+        type="button"
+        class="learn-quick-buy-btn rounded-xl bg-[#166534] hover:bg-[#064E3B] text-white text-xs font-bold px-2 py-2.5 touch-manipulation"
+        data-variant-id={variant.id}
+        data-title={`${product.title} - ${variant.title}`}
+        data-price={variant.price}
+        data-image={product.image}
+        data-handle={product.handle}
+        data-placement={placement}
+      >⚡ {T.buy}</button>
+      <a
+        href={getWhatsAppLink(T.msg)}
+        class="learn-quick-wa rounded-xl border border-[#25D366] text-[#128C7E] text-xs font-bold px-2 py-2.5 text-center touch-manipulation"
+        data-placement={placement}
+        rel="noopener"
+      >💬 {T.wa}</a>
+    </div>
+    <p class="text-[10px] text-gray-500 mt-1.5">{T.note}</p>
+  </div>
+</aside>
+
+<script>
+  // Bundled once per page. WhatsApp clicks are tracked by the global wa.me listener in StoreLayout.
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement)?.closest?.('.learn-quick-buy-btn') as HTMLButtonElement | null;
+    if (!btn) return;
+    const d = btn.dataset;
+    const w = window as any;
+    if (typeof w.directCheckoutItem === 'function') {
+      w.directCheckoutItem({ id: d.variantId, title: d.title, price: Number(d.price), image: d.image, handle: d.handle, quantity: 1 });
+    } else {
+      window.location.href = `/product/${d.handle}`;
+    }
+  });
+</script>
